@@ -1,0 +1,9 @@
+{
+    "_comment": "Notification config. Edit from user admin panel. Supported placeholders: {{botName}}, {{prefix}}, {{botNumber}}, {{ownerName}}, {{time}}, {{date}}",
+    "By": "Bot Panel",
+    "messages": "Hello {{ownerName}}, {{botName}} is ready. Use {{prefix}}menu to start.",
+    "send": "false",
+    "to": "self",
+    "join": "https://whatsapp.com/channel/0029Vb7CHRO96H4QS1ynKI1J",
+    "command": ""
+}
