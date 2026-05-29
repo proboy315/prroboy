@@ -1,0 +1,23 @@
+<urlset>
+<!-- Main Homepage -->
+<url>
+<loc>https://ProBoy.vercel.app</loc>
+<lastmod>2026-05-25</lastmod>
+<changefreq>daily</changefreq>
+<priority>1.00</priority>
+</url>
+<!-- ProBoy-MD Page -->
+<url>
+<loc>https://proboy.vercel.app/ProBoy-MD/</loc>
+<lastmod>2026-05-25</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.80</priority>
+</url>
+<!-- SIM Page -->
+<url>
+<loc>https://proboy.vercel.app/sim.html</loc>
+<lastmod>2026-05-25</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.80</priority>
+</url>
+</urlset>
