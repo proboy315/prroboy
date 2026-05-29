@@ -556,7 +556,7 @@ export default function App() {
                 className="w-full sm:w-auto flex-1 btn bg-gradient-to-r from-cyan-400 to-emerald-400 text-slate-950 hover:shadow-lg hover:shadow-cyan-400/20 hover:-translate-y-0.5 active:translate-y-0 transition-all font-bold rounded-xl text-center flex items-center justify-center gap-2"
               >
                 <Rocket size={18} />
-                <span>My Creations</span>
+                <span>My Projects</span>
               </a>
               <a
                 href="https://github.com/ProBoy315"
