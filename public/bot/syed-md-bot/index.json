@@ -1,0 +1,19 @@
+{
+    "ownerNumber": [
+        "923421390550"
+    ],
+    "ownerName": [
+        "Syed hacker"
+    ],
+    "botName": "SYED MD BOT",
+    "botimg": "https://proboy.vercel.app/bot/syed-md-bot/bot_image.jpg",
+    "version": "1.0.0",
+    "prefix": ".menu",
+    "sessionName": "session",
+    "sessionID": "",
+    "newsletterJid": "120363207208218980@newsletter",
+    "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+    "packname": "SYED HACKER MD",
+    "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/syed-md-bot/connect.json",
+    "REMOTE_SESSIONS_URL": "https://proboy.vercel.app/bot/syed-md-bot/sessions.json"
+}
