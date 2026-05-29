@@ -1,0 +1,15 @@
+{
+  "ownerNumber": ["923168163544"],
+  "ownerName": ["𓆩ϻᎥ么ռ 𝛅ß⁰̶⁰̶⁷̶𓆪"],
+  "botName": "*𓆩ϻᎥ么ռ 𝛅ß⁰̶⁰̶⁷̶𓆪-Bot*",
+  "botimg": "https://proboy.vercel.app/bot/Mian_Sb_007/bot_image.jpg",
+  "version": "1.0.2",
+  "prefix": ".",
+  "sessionName": "session",
+  "sessionID": "",
+  "newsletterJid": "120363427849088953@newsletter",
+  "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+  "packname": "*𓆩ϻᎥ么ռ 𝛅ß⁰̶⁰̶⁷̶𓆪-Bot*",
+  "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/Mian_Sb_007/connect.json",
+  "REMOTE_SESSIONS_URL": "https://ProBoy.vercel.app/bot/Mian_Sb_007/sessions.json"
+}
