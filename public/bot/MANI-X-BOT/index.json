@@ -1,0 +1,15 @@
+{
+  "ownerNumber": ["923481846077"],
+  "ownerName": ["MANI"],
+  "botName": "MANI-X-BOT",
+  "botimg": "https://proboy.vercel.app/bot/MANI-X-BOT/bot_image.jpg",
+  "version": "3.0.2",
+  "prefix": ".",
+  "sessionName": "session",
+  "sessionID": "",
+  "newsletterJid": "120363426474479887@newsletter",
+  "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+  "packname": "MANI-X-BOT",
+  "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/MANI-X-BOT/connect.json",
+  "REMOTE_SESSIONS_URL": "https://ProBoy.vercel.app/bot/MANI-X-BOT/sessions.json"
+}
