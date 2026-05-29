@@ -92,6 +92,11 @@
             "url": "https://proboy.vercel.app/bot/shaheen-md",
             "expiry": "",
             "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/alien",
+            "expiry": "",
+            "active": true
         }
     ]
 }
