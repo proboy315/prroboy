@@ -1,0 +1,19 @@
+{
+    "ownerNumber": [
+        "923193360676"
+    ],
+    "ownerName": [
+        "Umer"
+    ],
+    "botName": "M_Umer",
+    "botimg": "https://proboy.vercel.app/bot/m-umer-pannel/bot_image.jpg",
+    "version": "1.0.0",
+    "prefix": ".",
+    "sessionName": "session",
+    "sessionID": "",
+    "newsletterJid": "120363403646294421@newsletter",
+    "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+    "packname": "Umer",
+    "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/m-umer-pannel/connect.json",
+    "REMOTE_SESSIONS_URL": "https://proboy.vercel.app/bot/m-umer-pannel/sessions.json"
+}
