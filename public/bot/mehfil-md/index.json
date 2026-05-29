@@ -1,0 +1,19 @@
+{
+    "ownerNumber": [
+        "923234884315"
+    ],
+    "ownerName": [
+        "Mehfil"
+    ],
+    "botName": "mehfil-md",
+    "botimg": "https://proboy.vercel.app/bot/mehfil-md/bot_image.jpg",
+    "version": "1.0.0",
+    "prefix": ".",
+    "sessionName": "session",
+    "sessionID": "",
+    "newsletterJid": "222@newsletter",
+    "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+    "packname": "Mehfil",
+    "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/mehfil-md/connect.json",
+    "REMOTE_SESSIONS_URL": "https://proboy.vercel.app/bot/mehfil-md/sessions.json"
+}
