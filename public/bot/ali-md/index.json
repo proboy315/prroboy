@@ -1,0 +1,19 @@
+{
+    "ownerNumber": [
+        "923278698791"
+    ],
+    "ownerName": [
+        "Syed Ali Hassan Gillani"
+    ],
+    "botName": "ALI-MD",
+    "botimg": "https://proboy.vercel.app/bot/ali-md/bot_image.jpg",
+    "version": "1.0.0",
+    "prefix": ".",
+    "sessionName": "session",
+    "sessionID": "",
+    "newsletterJid": "120363407354818366@newsletter",
+    "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+    "packname": "ALI-XMD",
+    "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/ali-md/connect.json",
+    "REMOTE_SESSIONS_URL": "https://proboy.vercel.app/bot/ali-md/sessions.json"
+}
