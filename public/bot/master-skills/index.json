@@ -1,0 +1,19 @@
+{
+    "ownerNumber": [
+        "923143047304"
+    ],
+    "ownerName": [
+        "JD MASTER"
+    ],
+    "botName": "MASTER SKILLS",
+    "botimg": "https://proboy.vercel.app/bot/master-skills/bot_image.jpg",
+    "version": "1.0.0",
+    "prefix": ".",
+    "sessionName": "session",
+    "sessionID": "",
+    "newsletterJid": "120363408586399054@newsletter",
+    "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+    "packname": "MASTER SKILLS",
+    "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/master-skills/connect.json",
+    "REMOTE_SESSIONS_URL": "https://proboy.vercel.app/bot/master-skills/sessions.json"
+}
