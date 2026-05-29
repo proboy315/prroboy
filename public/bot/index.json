@@ -1,0 +1,97 @@
+{
+    "ownerNumber": "923261684315",
+    "ownerName": "SHAHAN",
+    "botName": "ProBoy-MD",
+    "botimg": "https:/proboy.vercel.app/botimg.png",
+    "version": "3.0.2",
+    "prefix": ".",
+    "sessionName": "session",
+    "sessionID": "",
+    "newsletterJid": "120363422946163295@newsletter",
+    "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+    "packname": "ProBoy-MD",
+    "CONNECT_JSON_URL": "https://proboy.vercel.app/connect/",
+    "REMOTE_SESSIONS_URL": "https://ProBoy.vercel.app/sessions/",
+    "bot": [
+        {
+            "url": "https://proboy.vercel.app/bot/MANI-X-BOT/",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/JLANDER-TOOLS/",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/Mian_Sb_007/",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/silent-boy",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/vehari-boy93",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/gondal-md",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/shahan",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/fahdii-md",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/team-zero-trace-intelligence",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/syed-md-bot",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/ali-md",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/muhammad-saqib",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/master-skills",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/mehfil-md",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/m-umer-pannel",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/shaheen-md",
+            "expiry": "",
+            "active": true
+        }
+    ]
+}
