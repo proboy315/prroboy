@@ -92,11 +92,55 @@
     </script>
     <style>
       .seo-hidden { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none; }
+      /* subtle ad container spacing - keeps layout clean */
+      .ad-section { text-align: center; margin: 1rem auto; max-width: 100%; overflow-x: auto; background: transparent; }
+      .ad-container { display: inline-block; margin: 0 auto; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950">
 
     <div id="root"></div>
+    
+    <!-- ========== AD CODES ADDED CAREFULLY (ehtiyat se) ========== -->
+    <!-- Ad Block 1: AtOptions + highperformanceformat iframe ad -->
+    <div class="ad-section">
+        <div class="ad-container">
+            <script>
+                atOptions = {
+                    'key' : 'f5f96524f1d727a4af1abc9352c44df5',
+                    'format' : 'iframe',
+                    'height' : 60,
+                    'width' : 468,
+                    'params' : {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/f5f96524f1d727a4af1abc9352c44df5/invoke.js"></script>
+        </div>
+    </div>
+    
+    <!-- Ad Block 2: effectivecpmnetwork script (direct) -->
+    <div class="ad-section">
+        <div class="ad-container">
+            <script src="https://pl29588704.effectivecpmnetwork.com/19/c8/73/19c8736edfa0b38cb1b3581f5687f321.js"></script>
+        </div>
+    </div>
+    
+    <!-- Ad Block 3: additional effectivecpmnetwork URL (converted to script src) -->
+    <div class="ad-section">
+        <div class="ad-container">
+            <script src="https://www.effectivecpmnetwork.com/qh0tdzrqqs?key=68481c323c3954a976890daaff7d7e7f"></script>
+        </div>
+    </div>
+    
+    <!-- Ad Block 4: async script with dedicated container div (ehtiyat with container ID) -->
+    <div class="ad-section">
+        <div class="ad-container">
+            <script async="async" data-cfasync="false" src="https://pl29588706.effectivecpmnetwork.com/5e5e3d1ed4a14a5cee3f81159a362567/invoke.js"></script>
+            <div id="container-5e5e3d1ed4a14a5cee3f81159a362567"></div>
+        </div>
+    </div>
+    <!-- ========== END AD CODES ========== -->
+    
     <script type="module" src="/src/main.tsx"></script>
 
     <!-- 1000+ keywords block (unchanged for Google Indexing) -->
