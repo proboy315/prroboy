@@ -16,4 +16,13 @@
                     "github": "https://proboy.vercel.app/sim.html",
                     "tags": ["sim-database"]
                   }
+  
+                  {
+                    "title": "ProBoy-Camera",
+                    "description": " This Tool Helps You To Capture Image Via Link And Add More Security To Your Link",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXMUm6-k4TnrKIBHeP0LKiAb-qY4GCO8jvVGR_YEUX9w&s=10",
+                    "link": "https://proboy.vercel.app/camera.html",
+                    "github": "https://proboy.vercel.app/camera.html",
+                    "tags": ["camera", "linkshortner"]
+                  }
 ]
