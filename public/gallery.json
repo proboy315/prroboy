@@ -1,0 +1,38 @@
+[
+  {
+    "title": "My Workspace Setup",
+    "description": "Custom high-performance workspace engineered for fast compilation, deployment, and continuous testing of automation scripts in Burewala.",
+    "url": "https://images.unsplash.com/photo-161841471353-b98aedd07871?auto=format&fit=crop&w=1200&q=80",
+    "alt": "Shahan Ali local workstation, Burewala Pakistan, best pakistani developer workspace setup"
+  },
+  {
+    "title": "ProBot Command Center",
+    "description": "Cloud hosting status console demonstrating real-time websocket connections and active multi-device socket handles.",
+    "url": "https://images.unsplash.com/phoo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
+    "alt": "ProBoy-MD WhatsApp Bot cloud architecture dashboard by ProBoy315"
+  },
+  {
+    "title": "Education Hub - Govt Graduate College Burewala",
+    "description": "My academic institution where I study ICS. Balancing deep core code architectures with Computer Science foundations.",
+    "url": "https://images.unplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80",
+    "alt": "Govt Graduate College Burewala student life and campus computer science hub"
+  },
+  {
+    "title": "UI Conversion Optimization",
+    "description": "A close-up view of liquid theme design patterns, testing lightweight, high conversion layouts on responsive viewports.",
+    "url": "https://images.usplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80",
+    "alt": "Shopify Premium Liquid designs and high speed e-commerce metrics"
+  },
+  {
+    "title": "Advanced Python & Node Automations",
+    "description": "Interactive servers executing socket-level notifications, routing webhooks, and powering crypto and deal trackers.",
+    "url": "https://images.unsplash.om/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80",
+    "alt": "Automated scripts terminal view by best Pakistani developer Shahan Ali"
+  },
+  {
+    "title": "Global Cloud Architecture",
+    "description": "Server instances configured across global nodes to guarantee 99.9% uptime for WhatsApp bot automation instances.",
+    "url": "https://imagesunsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
+    "alt": "Global proxy server networks managed by ProBoy315"
+  }
+]
