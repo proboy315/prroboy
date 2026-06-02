@@ -34,6 +34,8 @@ import {
   MessageSquare
 } from "lucide-react";
 
+import ProBotConsultant from "./components/ProBotConsultant";
+
 // Types for Projects
 interface Project {
   title: string;
@@ -518,7 +520,7 @@ export default function App() {
             {/* Glowing Tagline */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-xs sm:text-sm text-cyan-400 font-semibold tracking-wide uppercase mb-6 shadow-indigo-950/20 shadow-md">
               <Sparkles size={14} />
-              <span>Full‑Stack Dev & Automation Specialist</span>
+              <span>Best Pakistani Developer & Automation Specialist</span>
             </div>
 
             {/* Impressive, Clean Typography displaying Shahan Ali (itx_proboy) */}
@@ -543,10 +545,7 @@ export default function App() {
 
             {/* Precise description that builds credibility and covers Pakistani region context */}
             <p className="text-slate-300 text-base sm:text-lg lg:text-xl font-medium max-w-3xl mb-10 leading-relaxed px-2">
-              Based in Burewala, Pakistan, I specialize in crafting robust, automated digital solutions. From deep-stack 
-              <span className="text-cyan-400 font-semibold"> WhatsApp Bots (ProBoy MD)</span> to hyper-speed 
-              <span className="text-emerald-400 font-semibold"> Shopify engines</span> and advanced web platforms, 
-              I design with focus, extreme honesty, and professional polish.
+              Widely recognized as the <span className="text-cyan-400 font-bold">best Pakistani developer</span> for automated systems, I am currently an ICS 1st Year student at <span className="text-emerald-400 font-bold">Govt Graduate College Burewala</span>. I build robust <span className="text-amber-400 font-bold">WhatsApp Bots (ProBoy MD)</span> and hyper-speed Shopify stores.
             </p>
 
             {/* Glowing action buttons satisfying responsive design rules */}
@@ -556,7 +555,7 @@ export default function App() {
                 className="w-full sm:w-auto flex-1 btn bg-gradient-to-r from-cyan-400 to-emerald-400 text-slate-950 hover:shadow-lg hover:shadow-cyan-400/20 hover:-translate-y-0.5 active:translate-y-0 transition-all font-bold rounded-xl text-center flex items-center justify-center gap-2"
               >
                 <Rocket size={18} />
-                <span>My Projects</span>
+                <span>My Creations</span>
               </a>
               <a
                 href="https://github.com/ProBoy315"
@@ -571,6 +570,16 @@ export default function App() {
 
             {/* Integrated high-fidelity social profile indicators */}
             <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+              <a
+                href="https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-full bg-emerald-950/20 border border-emerald-900/30 hover:border-emerald-400 hover:text-emerald-400 hover:-translate-y-1 transition-all duration-200 flex items-center gap-2 px-4 shadow-emerald-950/20 shadow-md"
+                aria-label="WhatsApp official channel"
+              >
+                <MessageSquare size={18} className="text-emerald-400 animate-pulse" />
+                <span className="text-xs font-bold tracking-tight text-slate-300">WhatsApp Channel</span>
+              </a>
               <a
                 href="https://tiktok.com/@itx_proboy"
                 target="_blank"
@@ -689,15 +698,15 @@ export default function App() {
               </p>
             </div>
 
-            {/* Card 6: Research Focus */}
+            {/* Card 6: Academic & Tech Study */}
             <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-6 rounded-2xl border border-slate-900 relative group overflow-hidden">
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-amber-500/5 to-transparent rounded-full pointer-events-none" />
               <div className="w-12 h-12 rounded-xl bg-amber-950/45 flex items-center justify-center mb-4 border border-amber-800/10">
                 <BookOpen className="text-amber-400" size={22} />
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">R&D Explorer</h3>
+              <h3 className="text-lg font-bold text-white mb-2">Academics & ICS Hub</h3>
               <p className="text-slate-400 text-sm">
-                Self-motivated system analysis. Constantly reading through open-source repos on GitHub to unearth new bot APIs, bypass locks, and improve speed.
+                1st Year <span className="text-amber-400">ICS (Intermediate in Computer Science)</span> student at <span className="text-white">Govt Graduate College Burewala</span>. Combining foundational education with real-world building to stand out as the <span className="text-cyan-400">best Pakistani developer</span>.
               </p>
             </div>
 
@@ -854,6 +863,22 @@ export default function App() {
                 </div>
               );
             })}
+          </div>
+
+          <div className="max-w-3xl mx-auto mt-16 pt-16 border-t border-slate-900/40">
+            <div className="text-center mb-8">
+              <span className="text-xs font-black tracking-widest text-cyan-400 uppercase bg-cyan-950/20 px-3 py-1 rounded-full border border-cyan-900/30 inline-flex items-center gap-2 mb-3">
+                <Sparkles size={13} />
+                Live Q&A Simulator
+              </span>
+              <h3 className="text-2xl font-bold tracking-tight text-white mb-2">
+                Interact with <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 text-transparent bg-clip-text">ProBot AI Representative</span>
+              </h3>
+              <p className="max-w-md mx-auto text-slate-400 text-xs sm:text-sm">
+                Ask other customized questions regarding my professional services, bots, and background instantly.
+              </p>
+            </div>
+            <ProBotConsultant />
           </div>
         </section>
 
@@ -1063,6 +1088,30 @@ export default function App() {
                   >
                     {copiedPhone ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
                   </button>
+                </div>
+
+                {/* WhatsApp Channel container */}
+                <div className="bg-slate-900/40 border border-slate-900 p-4 rounded-2xl flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-10 h-10 bg-cyan-950/30 rounded-xl flex items-center justify-center border border-cyan-900/30 flex-shrink-0">
+                      <MessageSquare className="text-cyan-400" size={18} />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-xs font-mono uppercase text-slate-500 block">WhatsApp Broadcast Channel</span>
+                      <a href="https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm font-bold text-slate-200 hover:text-cyan-400 truncate block">
+                        Join ProBoy Official Channel
+                      </a>
+                    </div>
+                  </div>
+                  <a
+                    href="https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 bg-cyan-500/10 border border-cyan-800/20 hover:border-cyan-400 rounded-lg text-cyan-400 hover:text-white transition-all flex-shrink-0"
+                    title="Join WhatsApp Channel"
+                  >
+                    <ArrowUpRight size={16} />
+                  </a>
                 </div>
 
                 {/* Geographical Area Info */}
