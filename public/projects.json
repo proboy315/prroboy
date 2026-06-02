@@ -18,29 +18,12 @@
     "category": "fullstack"
   },
   {
-    "title": "ProAutomations Telegram Client",
-    "description": "Automated alert script for Telegram channels forwarding real-time crypto triggers, hot deals, and stock fluctuations. Utilizes asynchronous Python frameworks.",
-    "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
-    "link": "https://t.me/itx_proboy",
-    "github": "https://github.com/ProBoy315",
-    "tags": ["Python", "Telethon", "Custom Webhooks"],
-    "category": "bots"
-  },
-  {
-    "title": "Shopify Premium Theme Shell",
-    "description": "Custom lightweight, conversion-maximizing Shopify theme framework. Boasts LCP scores under 0.8 seconds and full compliance with dynamic checkout standards.",
-    "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80",
-    "link": "https://wa.me/923261684315",
-    "github": "https://github.com/ProBoy315",
-    "tags": ["Liquid", "Tailwind CSS", "Shopify OS 2.0"],
-    "category": "shopify"
-  },
-  {
-    "title": "Social Monetization Tracker",
-    "description": "Analytical dashboard designed for creators looking to maximize YouTube, TikTok, and Facebook creator fund revenues. Features RPM analysis and projections.",
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-    "github": "https://github.com/ProBoy315",
-    "tags": ["React.js", "Data Visualization", "Creator Fund Tools"],
-    "category": "monetization"
+    "title": "ProBoy-Camera",
+    "description": "Capture Image Via Link ",
+    "image": "https://proboy.vercel.app/camera.jpg",
+    "link": "https://proboy.vercel.app/camera.html",
+    "github": "https://proboy.vercel.app/camera.html",
+    "tags": ["Python", "shortner", "Camera"],
+    "category": "web"
   }
-]
+  ]
