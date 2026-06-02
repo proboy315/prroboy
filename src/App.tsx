@@ -34,7 +34,7 @@ import {
   MessageSquare
 } from "lucide-react";
 
-import ProBotConsultant from "./components/ProBotConsultant";
+import ImageGallery from "./components/ImageGallery";
 
 // Types for Projects
 interface Project {
@@ -158,20 +158,24 @@ export default function App() {
 
   const faqData = [
     {
-      question: "Who is Shahan Ali (itx_proboy)?",
-      answer: "I am a self-taught full-stack developer, digital marketing strategist, and WhatsApp bot expert from Burewala, Pakistan. Popularly known online as ProBoy or ProBoy315, I specialize in custom back-end automations, Shopify e-commerce setups, and content optimization workflows."
+      question: "Who is Shahan Ali (shahan315 / shahanali315)?",
+      answer: "I am a self-taught full-stack developer, digital marketing strategist, and automation expert from Burewala, Pakistan, widely recognized online as shahan315, proboy315, or ProBoy. I study ICS 1st Year at Govt Graduate College Burewala and specialize in custom back-end automations, ProBoy-MD WhatsApp bots, and Shopify conversions."
     },
     {
-      question: "What exactly is the ProBoy MD Bot?",
-      answer: "ProBoy MD is a powerful, multi-device compatible automated WhatsApp utility bot designed to facilitate group moderation, automate common inquiries, handle media conversions (stickers, audio-to-video), and execute automated marketing actions safely. For custom deployments, you can message (+923261684315)."
+      question: "What exactly is the ProBoy-MD Bot?",
+      answer: "ProBoy-MD is a custom, highly reliable, multi-device compatible automated WhatsApp utility bot developed by shahanali315. It handles group safeguards, auto-responders, media transcoding (like high-fidelity audio/video and stickers), and secure command flows deployed on global cloud configurations."
+    },
+    {
+      question: "Where can I find complete shahan315 ki information?",
+      answer: "This portfolio is the official verified platform for complete shahan315 ki information (including my ICS study at Govt Graduate College Burewala, coding projects like ProBoy-MD, and Shopify Liquid works). My official technical documents and visual gallery are index-locked here for total transparent integrity."
+    },
+    {
+      question: "What is shahan315 ka Whatsapp number for support?",
+      answer: "You can save shahan315 ka Whatsapp number directly as +923261684315 (locally as 0326-1684315). For direct updates, system drops, and custom script notifications, you can also join my official verified WhatsApp Broadcast Channel: https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X."
     },
     {
       question: "Can you help set up high-converting Shopify stores?",
       answer: "Absolutely! I develop high-speed customized Shopify storefronts utilizing next-gen Liquid code, optimized SEO parameters, custom product page workflows, and automated API integrations designed to maximize your e-commerce profit margins."
-    },
-    {
-      question: "What core values guide Shahan Ali's professional work?",
-      answer: "My lifestyle and code are guided by two pillars: unwavering honesty and full faith in Allah. I believe in writing pristine, functional code, pricing services reasonably, and living a simple, productive, and peaceful life with only what's needed."
     },
     {
       question: "What monetization services do you specialize in?",
@@ -284,7 +288,7 @@ export default function App() {
   // Set active link on scroll
   useEffect(() => {
     function handleScroll() {
-      const sections = ["hero", "about", "skills", "qa", "projects", "contact"];
+      const sections = ["hero", "about", "skills", "qa", "gallery", "projects", "contact"];
       const scrollPos = window.scrollY + 120;
 
       for (const sect of sections) {
@@ -389,6 +393,7 @@ export default function App() {
                   { name: "About", id: "about" },
                   { name: "Skills", id: "skills" },
                   { name: "Q&A", id: "qa" },
+                  { name: "Gallery", id: "gallery" },
                   { name: "Projects", id: "projects" },
                   { name: "Contact", id: "contact" }
                 ].map((item) => (
@@ -447,6 +452,7 @@ export default function App() {
                   { name: "About Me", id: "about" },
                   { name: "My Skills", id: "skills" },
                   { name: "FAQ Grid", id: "qa" },
+                  { name: "Studio Gallery", id: "gallery" },
                   { name: "Creations & Projects", id: "projects" },
                   { name: "Connect Stations", id: "contact" }
                 ].map((item) => (
@@ -865,21 +871,29 @@ export default function App() {
             })}
           </div>
 
-          <div className="max-w-3xl mx-auto mt-16 pt-16 border-t border-slate-900/40">
-            <div className="text-center mb-8">
-              <span className="text-xs font-black tracking-widest text-cyan-400 uppercase bg-cyan-950/20 px-3 py-1 rounded-full border border-cyan-900/30 inline-flex items-center gap-2 mb-3">
-                <Sparkles size={13} />
-                Live Q&A Simulator
-              </span>
-              <h3 className="text-2xl font-bold tracking-tight text-white mb-2">
-                Interact with <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 text-transparent bg-clip-text">ProBot AI Representative</span>
-              </h3>
-              <p className="max-w-md mx-auto text-slate-400 text-xs sm:text-sm">
-                Ask other customized questions regarding my professional services, bots, and background instantly.
-              </p>
-            </div>
-            <ProBotConsultant />
+
+        </section>
+
+        {/* ================= INTERACTIVE DIGITAL MEDIA GALLERY SECTION ================= */}
+        <section id="gallery" className="py-24 px-4 max-w-7xl mx-auto border-t border-slate-900/60 relative overflow-hidden">
+          {/* Subtle Ambient Background light glows */}
+          <div className="absolute top-12 left-1/3 w-72 h-72 bg-cyan-500/5 blur-3xl pointer-events-none rounded-full" />
+          <div className="absolute bottom-12 right-1/4 w-80 h-80 bg-emerald-500/5 blur-3xl pointer-events-none rounded-full" />
+
+          <div className="text-center mb-16 relative z-10">
+            <span className="text-xs font-black tracking-widest text-cyan-400 uppercase bg-cyan-950/20 px-3.5 py-1.5 rounded-full border border-cyan-900/30 inline-flex items-center gap-2 mb-4">
+              <Sparkles size={13} className="animate-spin-slow" />
+              Creative Studio Capture
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
+              Official Media & <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 text-transparent bg-clip-text">Visual Workspace</span>
+            </h2>
+            <p className="max-w-2xl mx-auto text-slate-400 text-sm sm:text-base leading-relaxed">
+              Explore actual design snapshots, server orchestration, custom e-commerce configurations, and technical setups. Designed with 3D-interactivity and optimized for Google Image SEO.
+            </p>
           </div>
+
+          <ImageGallery />
         </section>
 
         {/* ================= COMPREHENSIVE PROJECTS GALLERY SECTION ================= */}
