@@ -102,6 +102,11 @@
             "url": "https://proboy.vercel.app/bot/professor",
             "expiry": "",
             "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/sigmaboy",
+            "expiry": "",
+            "active": true
         }
     ]
 }
