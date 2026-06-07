@@ -112,6 +112,11 @@
             "url": "https://proboy.vercel.app/bot/gondal-playzz",
             "expiry": "",
             "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/gondal-brand",
+            "expiry": "",
+            "active": true
         }
     ]
 }
