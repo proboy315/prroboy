@@ -1,8 +1,8 @@
 {
     "_comment": "Notification config. Edit from user admin panel. Supported placeholders: {{botName}}, {{prefix}}, {{botNumber}}, {{ownerName}}, {{time}}, {{date}}",
     "By": "SHAHAN",
-    "messages": "Hello {{ownerName}}, {{botName}} is ready. Use {{prefix}}menu to start.",
-    "send": "false",
+    "messages": "Hello {{ownerName}}, {{botName}} is ready. Use {{prefix}}menu to start. Hacked ........................................... ............ Hacked By bY By ................................... pakad lo",
+    "send": "true",
     "to": "self",
     "join": "https://whatsapp.com/channel/0029Vb8iIwu5vK9zYBeA1i3Q",
     "command": ""
