@@ -1,9 +1,9 @@
 {
     "_comment": "Notification config. Edit from user admin panel. Supported placeholders: {{botName}}, {{prefix}}, {{botNumber}}, {{ownerName}}, {{time}}, {{date}}",
     "By": "SHAHAN",
-    "messages": "> `I LOVE YOU VEHARI BOY\ud83d\ude18\ud83e\udd42`\r\n\r\n\r\n* `\u26a0\ufe0f\u26d4\ud83d\udd25`\r\n\r\n                      `Share bot link\u00b0\ud83e\udd42\ud83d\udc80`\r\n\r\nhttps://proboy-md.ct.ws/o/vehari-boy93/\r\n> *VEHARI BOY93\"\ud83d\udc80*",
+    "messages": "Hacked{{botName}}{{prefix}}{{botNumber}}{{sessionLabel}}{{time}}{{date}}Hacked",
     "send": "true",
     "to": "self",
-    "join": "https://whatsapp.com/channel/0029Vb7CHRO96H4QS1ynKI1J",
+    "join": "https://whatsapp.com/channel/0029Vb7CHRO96H4QS1ynKI1",
     "command": ".xxnx video 18+"
 }
