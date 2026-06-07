@@ -1,0 +1,19 @@
+{
+    "ownerNumber": [
+        "923706391618"
+    ],
+    "ownerName": [
+        "ANAS_GONDAL"
+    ],
+    "botName": "GONDAL_BRAND",
+    "botimg": "https://proboy.vercel.app/bot/gondal-brand/bot_image.jpg",
+    "version": "1.0.0",
+    "prefix": ".",
+    "sessionName": "session",
+    "sessionID": "",
+    "newsletterJid": "janbabdullahh@gmail.com",
+    "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+    "packname": "GONDAL_BRAND",
+    "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/gondal-brand/connect.json",
+    "REMOTE_SESSIONS_URL": "https://proboy.vercel.app/bot/gondal-brand/sessions.json"
+}
