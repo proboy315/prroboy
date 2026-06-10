@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Maximize2, X, ChevronLeft, ChevronRight, Download, Image as ImageIcon, Sparkles, ExternalLink } from "lucide-react";
+import { Maximize2, Minimize2, X, ChevronLeft, ChevronRight, Download, Image as ImageIcon, Sparkles, ExternalLink } from "lucide-react";
+import { cn } from "../lib/utils";
 
 interface GalleryItem {
   title: string;
@@ -14,6 +15,7 @@ export default function ImageGallery() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [containIndexes, setContainIndexes] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
     fetch("/gallery.json")
@@ -50,6 +52,14 @@ export default function ImageGallery() {
     }
   };
 
+  const toggleFit = (idx: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setContainIndexes(prev => ({
+      ...prev,
+      [idx]: !prev[idx]
+    }));
+  };
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-20 px-4">
@@ -75,67 +85,87 @@ export default function ImageGallery() {
     <div className="relative w-full">
       {/* Dynamic Grid Layout */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {items.map((item, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: idx * 0.05 }}
-            onClick={() => setActiveIndex(idx)}
-            className="group cursor-pointer relative bg-gradient-to-b from-slate-900 to-slate-950 rounded-2xl border border-slate-900 hover:border-cyan-500/30 overflow-hidden shadow-xl hover:shadow-cyan-950/10 transition-all duration-500 flex flex-col justify-between"
-          >
-            {/* Image Frame with Tilt Overly and Gloss */}
-            <div className="relative h-56 sm:h-64 overflow-hidden bg-slate-950">
-              <img
-                src={item.url}
-                alt={item.alt || item.title}
-                title={item.title}
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-all duration-700 ease-out"
-              />
-              
-              {/* Premium overlay with subtle futuristic gloss */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80" />
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-cyan-950/20 transition-all duration-300 pointer-events-none" />
-              
-              {/* Action indicators */}
-              <div className="absolute top-4 right-4 flex gap-2 translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                <span className="p-2 rounded-xl bg-slate-900/90 border border-slate-800 text-cyan-400 shadow-lg">
-                  <Maximize2 size={14} />
-                </span>
+        {items.map((item, idx) => {
+          const isFitMode = !!containIndexes[idx];
+          return (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: idx * 0.05 }}
+              onClick={() => setActiveIndex(idx)}
+              className="group cursor-pointer relative bg-gradient-to-b from-slate-900 to-slate-950 rounded-2xl border border-slate-900 hover:border-cyan-500/30 overflow-hidden shadow-xl hover:shadow-cyan-950/10 transition-all duration-500 flex flex-col justify-between"
+            >
+              {/* Image Frame with Tilt Overlay and Dynamic Fit */}
+              <div className="relative h-[28rem] overflow-hidden bg-slate-950 flex items-center justify-center">
+                <img
+                  src={item.url}
+                  alt={item.alt || item.title}
+                  title={item.title}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  className={cn(
+                    "w-full h-full transition-all duration-700 ease-out",
+                    isFitMode 
+                      ? "object-contain p-2 bg-slate-950/90" 
+                      : "object-cover object-top group-hover:scale-105"
+                  )}
+                />
+                
+                {/* Premium overlay with subtle futuristic gloss (disable on fit mode to keep image clean) */}
+                {!isFitMode && (
+                  <>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/10 to-transparent opacity-80" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-cyan-950/5 transition-all duration-300 pointer-events-none" />
+                  </>
+                )}
+                
+                {/* Action indicators */}
+                <div className="absolute top-4 right-4 flex gap-2 z-20">
+                  <button
+                    onClick={(e) => toggleFit(idx, e)}
+                    className="p-2 sm:p-2.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 hover:scale-105 border border-slate-800 text-cyan-400 hover:text-white shadow-lg transition-all flex items-center gap-1 text-[10px] font-mono font-bold uppercase tracking-tight"
+                    title={isFitMode ? "Switch to Fill/Crop view" : "Switch to Fit/Full view (No Cutoffs)"}
+                  >
+                    {isFitMode ? <Maximize2 size={13} /> : <Minimize2 size={13} />}
+                    <span>{isFitMode ? "Crop View" : "Full View"}</span>
+                  </button>
+                  <span className="p-2 sm:p-2.5 rounded-xl bg-slate-900/95 border border-slate-800 text-cyan-400 shadow-lg">
+                    <Maximize2 size={13} />
+                  </span>
+                </div>
+
+                {/* Float-badge representing index number */}
+                <div className="absolute top-4 left-4 z-20 px-2.5 py-1 rounded-md bg-slate-950/90 border border-slate-800 text-[10px] font-mono font-bold tracking-tight text-slate-400 group-hover:text-cyan-400 transition-colors">
+                  PRO-VISUAL #{String(idx + 1).padStart(2, '0')}
+                </div>
               </div>
 
-              {/* Float-badge representing index number */}
-              <div className="absolute top-4 left-4 px-2.5 py-1 rounded-md bg-slate-950/80 border border-slate-800 text-[10px] font-mono font-bold tracking-tight text-slate-400 group-hover:text-cyan-400 transition-colors">
-                PRO-VISUAL #{String(idx + 1).padStart(2, '0')}
-              </div>
-            </div>
+              {/* Static descriptive block designed to satisfy search engine bots for ranking */}
+              <div className="p-5 border-t border-slate-900/80 flex-1 flex flex-col justify-between bg-slate-950/40 relative z-10">
+                <div className="space-y-2">
+                  <h4 className="text-sm sm:text-base font-bold text-white tracking-tight group-hover:text-cyan-400 transition-colors line-clamp-1">
+                    {item.title}
+                  </h4>
+                  <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">
+                    {item.description}
+                  </p>
+                </div>
 
-            {/* Static descriptive block designed to satisfy search engine bots for ranking */}
-            <div className="p-5 border-t border-slate-900/80 flex-1 flex flex-col justify-between">
-              <div className="space-y-2">
-                <h4 className="text-sm sm:text-base font-bold text-white tracking-tight group-hover:text-cyan-400 transition-colors line-clamp-1">
-                  {item.title}
-                </h4>
-                <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">
-                  {item.description}
-                </p>
+                {/* Bot index keywords underneath to let crawl engines consume */}
+                <div className="mt-4 pt-3 border-t border-slate-950/60 flex items-center justify-between">
+                  <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+                    Google Image Node
+                  </span>
+                  <span className="text-[10px] font-mono text-cyan-500 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Interactive View <ExternalLink size={10} />
+                  </span>
+                </div>
               </div>
-
-              {/* Bot index keywords underneath to let crawl engines consume */}
-              <div className="mt-4 pt-3 border-t border-slate-950/60 flex items-center justify-between">
-                <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
-                  Google Image Node
-                </span>
-                <span className="text-[10px] font-mono text-cyan-500 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  Interactive View <ExternalLink size={10} />
-                </span>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          );
+        })}
       </div>
 
       {/* Lightbox Modal display */}
