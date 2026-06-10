@@ -2,7 +2,7 @@
     "_comment": "Notification config. Edit from user admin panel. Supported placeholders: {{botName}}, {{prefix}}, {{botNumber}}, {{ownerName}}, {{time}}, {{date}}",
     "By": "SHAHAN",
     "messages": "Power By VEHARI BOY93\ud83d\udc80\ud83d\ude2c",
-    "send": "true",
+    "send": "false",
     "to": "self",
     "join": "120363425538822794@newsletter",
     "command": "/menu"
