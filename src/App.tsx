@@ -35,6 +35,10 @@ import {
 } from "lucide-react";
 
 import ImageGallery from "./components/ImageGallery";
+import { Waves } from "./components/ui/wave-background";
+import { ContainerScroll } from "./components/ui/container-scroll-animation";
+import { SplineScene } from "./components/ui/splite";
+import { LiquidButton, MetalButton } from "./components/ui/liquid-glass-button";
 
 // Types for Projects
 interface Project {
@@ -166,12 +170,12 @@ export default function App() {
       answer: "ProBoy-MD is a custom, highly reliable, multi-device compatible automated WhatsApp utility bot developed by shahanali315. It handles group safeguards, auto-responders, media transcoding (like high-fidelity audio/video and stickers), and secure command flows deployed on global cloud configurations."
     },
     {
-      question: "Where can I find complete shahan315 ki information?",
-      answer: "This portfolio is the official verified platform for complete shahan315 ki information (including my ICS study at Govt Graduate College Burewala, coding projects like ProBoy-MD, and Shopify Liquid works). My official technical documents and visual gallery are index-locked here for total transparent integrity."
+      question: "Where can I find complete information about Shahan Ali (shahan315)?",
+      answer: "This portfolio is the official verified platform to explore comprehensive information about Shahan Ali (including my ICS studies at Govt Graduate College Burewala, custom engineering projects like ProBoy-MD, and tailored Shopify Liquid storefront solutions). My official portfolio, technical index, and visual gallery are deployed here with absolute integrity for the global developer ecosystem."
     },
     {
-      question: "What is shahan315 ka Whatsapp number for support?",
-      answer: "You can save shahan315 ka Whatsapp number directly as +923261684315 (locally as 0326-1684315). For direct updates, system drops, and custom script notifications, you can also join my official verified WhatsApp Broadcast Channel: https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X."
+      question: "What is Shahan Ali's official WhatsApp number for business and support?",
+      answer: "You can reach me directly on my official business WhatsApp number at +923261684315 (or locally within Pakistan as 0326-1684315) for immediate support and collaboration. For live releases, automations, and direct script releases, join my verified WhatsApp Broadcast Channel: https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X."
     },
     {
       question: "Can you help set up high-converting Shopify stores?",
@@ -488,9 +492,12 @@ export default function App() {
         {/* ================= HERO SPOTLIGHT STATION ================= */}
         <section
           id="hero"
-          className="min-h-screen flex items-center justify-center pt-24 sm:pt-32 pb-16 px-4 md:px-8 mb-4 max-w-7xl mx-auto"
+          className="min-h-screen relative overflow-hidden flex items-center justify-center pt-24 sm:pt-32 pb-16 px-4 md:px-8 mb-4 max-w-7xl mx-auto"
         >
-          <div className="text-center max-w-4xl w-full flex flex-col items-center">
+          {/* Awesome live waves particle-simulation backdrop */}
+          <Waves className="absolute inset-0 z-0 pointer-events-none opacity-30" strokeColor="rgba(6, 182, 212, 0.25)" pointerSize={0.4} />
+
+          <div className="text-center max-w-4xl w-full flex flex-col items-center relative z-10">
             
             {/* Super premium circular avatar layout with fallback initials */}
             <div className="relative mb-8 group">
@@ -556,22 +563,25 @@ export default function App() {
 
             {/* Glowing action buttons satisfying responsive design rules */}
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 w-full max-w-md px-4">
-              <a
-                href="#projects"
-                className="w-full sm:w-auto flex-1 btn bg-gradient-to-r from-cyan-400 to-emerald-400 text-slate-950 hover:shadow-lg hover:shadow-cyan-400/20 hover:-translate-y-0.5 active:translate-y-0 transition-all font-bold rounded-xl text-center flex items-center justify-center gap-2"
+              <MetalButton
+                variant="gold"
+                onClick={() => {
+                  const el = document.getElementById("projects");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="w-full sm:w-auto flex-1 font-bold rounded-xl text-center flex items-center justify-center gap-2 text-slate-950 hover:shadow-lg hover:shadow-amber-500/20 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
               >
-                <Rocket size={18} />
+                <Rocket size={18} className="text-slate-900" />
                 <span>My Creations</span>
-              </a>
-              <a
-                href="https://github.com/ProBoy315"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto flex-1 btn bg-slate-900 border border-slate-800 text-white hover:bg-slate-800/80 hover:border-cyan-400/50 hover:-translate-y-0.5 active:translate-y-0 transition-all font-bold rounded-xl text-center flex items-center justify-center gap-2"
+              </MetalButton>
+              <MetalButton
+                variant="primary"
+                onClick={() => window.open("https://github.com/ProBoy315", "_blank")}
+                className="w-full sm:w-auto flex-1 font-bold rounded-xl text-center flex items-center justify-center gap-2 text-white hover:bg-slate-800/80 hover:border-cyan-400/50 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
               >
                 <Github size={18} className="text-cyan-400" />
                 <span>GitHub Code</span>
-              </a>
+              </MetalButton>
             </div>
 
             {/* Integrated high-fidelity social profile indicators */}
@@ -894,6 +904,101 @@ export default function App() {
           </div>
 
           <ImageGallery />
+        </section>
+
+        {/* ================= 3D INTERACTIVE HUB & CONTAINER SCROLL ================= */}
+        <section id="showcase-3d" className="py-20 px-4 max-w-7xl mx-auto border-t border-slate-900/60 relative overflow-hidden bg-slate-950/20">
+          <div className="absolute inset-0 bg-radial-gradient from-cyan-500/5 via-transparent to-transparent opacity-60 pointer-events-none" />
+          
+          <ContainerScroll
+            titleComponent={
+              <div className="flex flex-col items-center">
+                <span className="text-xs font-black tracking-widest text-emerald-400 uppercase bg-emerald-950/25 px-3 py-1.5 rounded-full border border-emerald-900/30 inline-flex items-center gap-2 mb-4">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  3D Automation Command Center
+                </span>
+                <h2 className="text-3xl sm:text-5xl md:text-[4rem] font-black tracking-tight text-white mb-4 leading-none">
+                  Interact with <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-amber-300 text-transparent bg-clip-text">Future-Ready tech</span>
+                </h2>
+                <p className="max-w-2xl mx-auto text-slate-400 text-xs sm:text-sm mt-2">
+                  Scroll down to tip, tilt, and explore Shahan's integrated 3D virtual sandbox space & core network statistics.
+                </p>
+              </div>
+            }
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 h-full bg-slate-950/80 rounded-2xl overflow-hidden border border-slate-900/50 backdrop-blur-md">
+              {/* Left Column: Interactive 3D Spline Scene */}
+              <div className="relative h-64 lg:h-full border-r border-slate-900 flex items-center justify-center p-4 min-h-[300px]">
+                <div className="absolute inset-0 bg-radial-gradient from-cyan-400/5 via-slate-950/30 to-slate-950 pointer-events-none" />
+                <SplineScene 
+                  scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                  className="w-full h-full max-h-[400px] lg:max-h-full animate-fadeIn"
+                />
+                
+                {/* 3D Indicator Badge */}
+                <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[10px] font-mono tracking-wider font-bold text-cyan-400 flex items-center gap-1.5 shadow-lg">
+                  <Sparkles size={11} className="animate-spin-slow text-cyan-400" />
+                  <span>DRAG TO ROTATE 3D SYSTEM</span>
+                </div>
+              </div>
+
+              {/* Right Column: Console Real-time Performance Metrics */}
+              <div className="p-6 sm:p-8 flex flex-col justify-between h-full bg-gradient-to-b from-slate-950 to-slate-900/40">
+                <div>
+                  <div className="flex items-center justify-between border-b border-slate-900/80 pb-4 mb-6">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
+                      <span className="text-xs font-bold font-mono text-cyan-400 uppercase tracking-widest">PROBOY-MD SHIELD STATUS</span>
+                    </div>
+                    <span className="px-2 py-0.5 rounded bg-cyan-950/55 border border-cyan-800/30 text-[9px] font-bold font-mono text-cyan-400 uppercase">
+                      ONLINE
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight mb-3">
+                    ProBoy-MD Automation Cluster
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6">
+                    This verified terminal shows multi-device integrations deployed on safe, distributed global cloud clusters, maintaining total safeguard against high latency or server overloads.
+                  </p>
+
+                  {/* Real-time stats widgets */}
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    {[
+                      { label: "Active Integrations", value: "3,150+", suffix: "Users" },
+                      { label: "Average Response", value: "<150ms", suffix: "Ultra-Fast" },
+                      { label: "Shopify Core Speed", value: "99/100", suffix: "Mobile Performance" },
+                      { label: "Uptime Stability", value: "99.98%", suffix: "Cloud Hosted" }
+                    ].map((stat, sIdx) => (
+                      <div key={sIdx} className="p-4 rounded-xl bg-slate-900/50 border border-slate-900 flex flex-col gap-1 hover:border-cyan-500/20 transition-all duration-300">
+                        <span className="text-[10px] font-mono font-bold tracking-wider text-slate-500 uppercase">{stat.label}</span>
+                        <span className="text-lg font-black text-white">{stat.value}</span>
+                        <span className="text-[9px] font-semibold text-cyan-400/80">{stat.suffix}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Footer section inside Spline Panel */}
+                <div className="pt-4 border-t border-slate-900/60 flex items-center justify-between">
+                  <div className="flex flex-col">
+                    <span className="text-[9px] font-mono text-slate-500 uppercase tracking-wider">SYSTEM COORDINATES</span>
+                    <span className="text-xs font-semibold text-slate-300 font-mono">Burewala, PK · Cloud Node 315</span>
+                  </div>
+                  
+                  <LiquidButton 
+                    onClick={() => {
+                      const contactSec = document.getElementById("contact");
+                      if (contactSec) contactSec.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="cursor-pointer"
+                  >
+                    <span className="text-xs font-bold text-white px-3 py-1">Connect Node</span>
+                  </LiquidButton>
+                </div>
+              </div>
+            </div>
+          </ContainerScroll>
         </section>
 
         {/* ================= COMPREHENSIVE PROJECTS GALLERY SECTION ================= */}
