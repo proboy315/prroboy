@@ -7,24 +7,19 @@
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://images.unsplash.com/photo-1618401471353-b98aedd07871?auto=format&amp;fit=crop&amp;w=1200&amp;q=80</image:loc>
+      <image:loc>https://proboy.vercel.app/images/me1.png</image:loc>
       <image:title>Shahan Ali Best Pakistani Developer Workspace in Burewala</image:title>
       <image:caption>The high-performance workstation where shahan315 / proboy315 develops custom WhatsApp bots, Shopify scripts, and system setups.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&amp;fit=crop&amp;w=1200&amp;q=80</image:loc>
+      <image:loc>https://proboy.vercel.app/images/me1.png</image:loc>
       <image:title>ProBoy-MD WhatsApp Bot Server Console - shahanali315</image:title>
       <image:caption>Automation analytics dashboard showing cloud infrastructure handles managed by Shahan Ali in Punjab, Pakistan.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&amp;fit=crop&amp;w=1200&amp;q=80</image:loc>
+      <image:loc>https://proboy.vercel.app/images/me1.png</image:loc>
       <image:title>Govt Graduate College Burewala - ICS Tech Hub</image:title>
       <image:caption>Shahan Ali studies ICS 1st Year at Govt Graduate College Burewala, building high-speed scripts on top of high school fundamentals.</image:caption>
     </image:image>
-    <image:image>
-      <image:loc>https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&amp;fit=crop&amp;w=1200&amp;q=80</image:loc>
-      <image:title>Shopify Liquid Performance Optimization by ProBoy315</image:title>
-      <image:caption>Premium design optimization metrics crafted by Shahan Ali, the leading e-commerce conversion specialist in Punjab.</image:caption>
-    </image:image>
-  </url>
+      </url>
 </urlset>
