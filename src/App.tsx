@@ -39,6 +39,8 @@ import { Waves } from "./components/ui/wave-background";
 import { ContainerScroll } from "./components/ui/container-scroll-animation";
 import { SplineScene } from "./components/ui/splite";
 import { LiquidButton, MetalButton } from "./components/ui/liquid-glass-button";
+import { TiltCard } from "./components/ui/TiltCard";
+import { motion, AnimatePresence } from "motion/react";
 
 // Types for Projects
 interface Project {
@@ -60,6 +62,21 @@ export default function App() {
 
   // Project sorting / filter state
   const [activeCategory, setActiveCategory] = useState<string>("all");
+
+  // Floating Back-to-Top State
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   // Shared project list (robust initial values + client lookup try)
   const [projects, setProjects] = useState<Project[]>([
@@ -561,27 +578,25 @@ export default function App() {
               Widely recognized as the <span className="text-cyan-400 font-bold">best Pakistani developer</span> for automated systems, I am currently an ICS 1st Year student at <span className="text-emerald-400 font-bold">Govt Graduate College Burewala</span>. I build robust <span className="text-amber-400 font-bold">WhatsApp Bots (ProBoy MD)</span> and hyper-speed Shopify stores.
             </p>
 
-            {/* Glowing action buttons satisfying responsive design rules */}
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 w-full max-w-md px-4">
-              <MetalButton
-                variant="gold"
+            {/* Glowing action buttons satisfying responsive design rules with stunning Liquid Glass aesthetic */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-lg px-4">
+              <LiquidButton
                 onClick={() => {
                   const el = document.getElementById("projects");
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="w-full sm:w-auto flex-1 font-bold rounded-xl text-center flex items-center justify-center gap-2 text-slate-950 hover:shadow-lg hover:shadow-amber-500/20 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
+                className="w-full sm:w-auto flex-1 font-extrabold rounded-2xl text-center flex items-center justify-center gap-2.5 text-white bg-cyan-950/15 border border-cyan-500/30 hover:border-cyan-400/80 hover:shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer py-4"
               >
-                <Rocket size={18} className="text-slate-900" />
-                <span>My Creations</span>
-              </MetalButton>
-              <MetalButton
-                variant="primary"
+                <Rocket size={18} className="text-cyan-400 animate-pulse" />
+                <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">My Creations</span>
+              </LiquidButton>
+              <LiquidButton
                 onClick={() => window.open("https://github.com/ProBoy315", "_blank")}
-                className="w-full sm:w-auto flex-1 font-bold rounded-xl text-center flex items-center justify-center gap-2 text-white hover:bg-slate-800/80 hover:border-cyan-400/50 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
+                className="w-full sm:w-auto flex-1 font-extrabold rounded-2xl text-center flex items-center justify-center gap-2.5 text-white bg-emerald-950/10 border border-emerald-500/20 hover:border-emerald-400/80 hover:shadow-lg hover:shadow-emerald-500/20 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer py-4"
               >
-                <Github size={18} className="text-cyan-400" />
-                <span>GitHub Code</span>
-              </MetalButton>
+                <Github size={18} className="text-emerald-400" />
+                <span className="bg-gradient-to-r from-emerald-400 to-amber-300 bg-clip-text text-transparent">GitHub Code</span>
+              </LiquidButton>
             </div>
 
             {/* Integrated high-fidelity social profile indicators */}
@@ -655,76 +670,82 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
             {/* Card 1: Map Location */}
-            <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-6 rounded-2xl border border-slate-900 relative group overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-cyan-500/5 to-transparent rounded-full pointer-events-none" />
-              <div className="w-12 h-12 rounded-xl bg-cyan-950/45 flex items-center justify-center mb-4 border border-cyan-800/10">
+            <TiltCard glowColor="rgba(6, 182, 212, 0.20)" className="backdrop-blur-xl bg-white/[0.03] p-6 rounded-3xl border border-white/5 relative group overflow-hidden hover:border-cyan-500/30 hover:bg-white/[0.06] shadow-[0_8px_32px_0_rgba(6,182,212,0.02)]">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-full pointer-events-none" />
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-cyan-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="w-12 h-12 rounded-2xl bg-cyan-950/40 flex items-center justify-center mb-4 border border-cyan-500/10">
                 <MapPin className="text-cyan-400" size={22} />
               </div>
               <h3 className="text-lg font-bold text-white mb-2">Location & Region</h3>
               <p className="text-slate-400 text-sm">
                 Proudly operating from <span className="text-cyan-400">Burewala, Punjab, Pakistan</span>. Designing for local and international markets with high connectivity.
               </p>
-            </div>
+            </TiltCard>
 
             {/* Card 2: Passions */}
-            <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-6 rounded-2xl border border-slate-900 relative group overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-emerald-500/5 to-transparent rounded-full pointer-events-none" />
-              <div className="w-12 h-12 rounded-xl bg-emerald-950/45 flex items-center justify-center mb-4 border border-emerald-800/10">
+            <TiltCard glowColor="rgba(16, 185, 129, 0.20)" className="backdrop-blur-xl bg-white/[0.03] p-6 rounded-3xl border border-white/5 relative group overflow-hidden hover:border-emerald-500/30 hover:bg-white/[0.06] shadow-[0_8px_32px_0_rgba(16,185,129,0.02)]">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-emerald-500/10 to-transparent rounded-full pointer-events-none" />
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-emerald-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="w-12 h-12 rounded-2xl bg-emerald-950/40 flex items-center justify-center mb-4 border border-emerald-500/10">
                 <Globe className="text-emerald-400" size={22} />
               </div>
               <h3 className="text-lg font-bold text-white mb-2">Core Passions</h3>
               <p className="text-slate-400 text-sm">
                 Engineering intelligent automation. Integrating conversational bots with REST APIs and building seamless Shopify themes to maximize checkout metrics.
               </p>
-            </div>
+            </TiltCard>
 
             {/* Card 3: Values */}
-            <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-6 rounded-2xl border border-slate-900 relative group overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-amber-500/5 to-transparent rounded-full pointer-events-none" />
-              <div className="w-12 h-12 rounded-xl bg-amber-950/45 flex items-center justify-center mb-4 border border-amber-800/10">
+            <TiltCard glowColor="rgba(245, 158, 11, 0.20)" className="backdrop-blur-xl bg-white/[0.03] p-6 rounded-3xl border border-white/5 relative group overflow-hidden hover:border-amber-500/30 hover:bg-white/[0.06] shadow-[0_8px_32px_0_rgba(245,158,11,0.02)]">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-amber-500/10 to-transparent rounded-full pointer-events-none" />
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-amber-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="w-12 h-12 rounded-2xl bg-amber-950/40 flex items-center justify-center mb-4 border border-amber-500/10">
                 <Heart className="text-amber-400" size={22} />
               </div>
               <h3 className="text-lg font-bold text-white mb-2">Moral Blueprint</h3>
               <p className="text-slate-400 text-sm">
                 Grounded heavily on absolute honesty, straight talk, and trust in Allah. I operate with complete transparency regarding what's possible and reasonable.
               </p>
-            </div>
+            </TiltCard>
 
             {/* Card 4: Current Focus */}
-            <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-6 rounded-2xl border border-slate-900 relative group overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-cyan-500/5 to-transparent rounded-full pointer-events-none" />
-              <div className="w-12 h-12 rounded-xl bg-cyan-950/45 flex items-center justify-center mb-4 border border-cyan-800/10">
+            <TiltCard glowColor="rgba(6, 182, 212, 0.20)" className="backdrop-blur-xl bg-white/[0.03] p-6 rounded-3xl border border-white/5 relative group overflow-hidden hover:border-cyan-500/30 hover:bg-white/[0.06] shadow-[0_8px_32px_0_rgba(6,182,212,0.02)]">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-full pointer-events-none" />
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-cyan-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="w-12 h-12 rounded-2xl bg-cyan-950/40 flex items-center justify-center mb-4 border border-cyan-500/10">
                 <TrendingUp className="text-cyan-400" size={22} />
               </div>
               <h3 className="text-lg font-bold text-white mb-2">Platform Power</h3>
               <p className="text-slate-400 text-sm">
                 Monetization frameworks. Helping local stars and sellers access TikTok, Facebook Creator portals, and standard Stripe-payout e-commerce routes seamlessly.
               </p>
-            </div>
+            </TiltCard>
 
             {/* Card 5: Life Goal */}
-            <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-6 rounded-2xl border border-slate-900 relative group overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-emerald-500/5 to-transparent rounded-full pointer-events-none" />
-              <div className="w-12 h-12 rounded-xl bg-emerald-950/45 flex items-center justify-center mb-4 border border-emerald-800/10">
+            <TiltCard glowColor="rgba(16, 185, 129, 0.20)" className="backdrop-blur-xl bg-white/[0.03] p-6 rounded-3xl border border-white/5 relative group overflow-hidden hover:border-emerald-500/30 hover:bg-white/[0.06] shadow-[0_8px_32px_0_rgba(16,185,129,0.02)]">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-emerald-500/10 to-transparent rounded-full pointer-events-none" />
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-emerald-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="w-12 h-12 rounded-2xl bg-emerald-950/40 flex items-center justify-center mb-4 border border-emerald-500/10">
                 <Compass className="text-emerald-400" size={22} />
               </div>
               <h3 className="text-lg font-bold text-white mb-2">Simple Living</h3>
               <p className="text-slate-400 text-sm">
                 Living beautifully and simply. No chasing endless noise. Delivering pristine work, helping clients succeed, and spending my days peacefully.
               </p>
-            </div>
+            </TiltCard>
 
             {/* Card 6: Academic & Tech Study */}
-            <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-6 rounded-2xl border border-slate-900 relative group overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-amber-500/5 to-transparent rounded-full pointer-events-none" />
-              <div className="w-12 h-12 rounded-xl bg-amber-950/45 flex items-center justify-center mb-4 border border-amber-800/10">
+            <TiltCard glowColor="rgba(245, 158, 11, 0.20)" className="backdrop-blur-xl bg-white/[0.03] p-6 rounded-3xl border border-white/5 relative group overflow-hidden hover:border-amber-500/30 hover:bg-white/[0.06] shadow-[0_8px_32px_0_rgba(245,158,11,0.02)]">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-amber-500/10 to-transparent rounded-full pointer-events-none" />
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-amber-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="w-12 h-12 rounded-2xl bg-amber-950/40 flex items-center justify-center mb-4 border border-amber-500/10">
                 <BookOpen className="text-amber-400" size={22} />
               </div>
               <h3 className="text-lg font-bold text-white mb-2">Academics & ICS Hub</h3>
               <p className="text-slate-400 text-sm">
                 1st Year <span className="text-amber-400">ICS (Intermediate in Computer Science)</span> student at <span className="text-white">Govt Graduate College Burewala</span>. Combining foundational education with real-world building to stand out as the <span className="text-cyan-400">best Pakistani developer</span>.
               </p>
-            </div>
+            </TiltCard>
 
           </div>
         </section>
@@ -767,70 +788,70 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Grid of beautifully classified skill tags */}
+              {/* Grid of beautifully classified skill tags in premium liquid glass */}
               <div className="lg:col-span-7">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   
                   {/* Category 1 */}
-                  <div className="bg-slate-900/60 p-5 rounded-2xl border border-slate-900">
+                  <TiltCard glowColor="rgba(6, 182, 212, 0.18)" className="backdrop-blur-xl bg-white/[0.02] p-5 rounded-3xl border border-white/5 hover:border-cyan-500/20 shadow-lg group">
                     <div className="flex items-center gap-2 mb-3 text-cyan-400">
-                      <Code size={18} />
+                      <Code size={18} className="group-hover:scale-110 transition-transform" />
                       <h4 className="font-bold text-white text-sm">Languages</h4>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {["HTML5", "CSS3 / Tailwind", "TypeScript", "Node.js", "Python", "PHP"].map(item => (
-                        <span key={item} className="text-xs font-semibold bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 text-slate-300">
+                        <span key={item} className="text-xs font-semibold bg-white/5 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/5 text-slate-300 hover:text-cyan-400 hover:border-cyan-400/30 transition-all duration-250">
                           {item}
                         </span>
                       ))}
                     </div>
-                  </div>
-
+                  </TiltCard>
+ 
                   {/* Category 2 */}
-                  <div className="bg-slate-900/60 p-5 rounded-2xl border border-slate-900">
+                  <TiltCard glowColor="rgba(16, 185, 129, 0.18)" className="backdrop-blur-xl bg-white/[0.02] p-5 rounded-3xl border border-white/5 hover:border-emerald-500/20 shadow-lg group">
                     <div className="flex items-center gap-2 mb-3 text-emerald-400">
-                      <Bot size={18} />
+                      <Bot size={18} className="group-hover:scale-110 transition-transform" />
                       <h4 className="font-bold text-white text-sm">Bot Frameworks</h4>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {["Baileys API", "Venom-bot", "Telegraf CLI", "Telethon", "Custom Webhooks"].map(item => (
-                        <span key={item} className="text-xs font-semibold bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 text-slate-300">
+                        <span key={item} className="text-xs font-semibold bg-white/5 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/5 text-slate-300 hover:text-emerald-400 hover:border-emerald-400/30 transition-all duration-250">
                           {item}
                         </span>
                       ))}
                     </div>
-                  </div>
-
+                  </TiltCard>
+ 
                   {/* Category 3 */}
-                  <div className="bg-slate-900/60 p-5 rounded-2xl border border-slate-900">
+                  <TiltCard glowColor="rgba(245, 158, 11, 0.18)" className="backdrop-blur-xl bg-white/[0.02] p-5 rounded-3xl border border-white/5 hover:border-amber-500/20 shadow-lg group">
                     <div className="flex items-center gap-2 mb-3 text-amber-400">
-                      <ShoppingBag size={18} />
+                      <ShoppingBag size={18} className="group-hover:scale-110 transition-transform" />
                       <h4 className="font-bold text-white text-sm">E-Commerce & DB</h4>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {["Shopify Liquid", "Shopify OS 2.0", "Cart APIs", "MySQL", "MongoDB", "Firestore"].map(item => (
-                        <span key={item} className="text-xs font-semibold bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 text-slate-300">
+                        <span key={item} className="text-xs font-semibold bg-white/5 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/5 text-slate-300 hover:text-amber-400 hover:border-amber-400/30 transition-all duration-250">
                           {item}
                         </span>
                       ))}
                     </div>
-                  </div>
-
+                  </TiltCard>
+ 
                   {/* Category 4 */}
-                  <div className="bg-slate-900/60 p-5 rounded-2xl border border-slate-900">
+                  <TiltCard glowColor="rgba(6, 182, 212, 0.18)" className="backdrop-blur-xl bg-white/[0.02] p-5 rounded-3xl border border-white/5 hover:border-cyan-500/20 shadow-lg group">
                     <div className="flex items-center gap-2 mb-3 text-cyan-400">
-                      <Shield size={18} />
+                      <Shield size={18} className="group-hover:scale-110 transition-transform" />
                       <h4 className="font-bold text-white text-sm">Operations</h4>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {["API Prototyping", "Cron Jobs", "Security Audit", "Git/GitHub", "Digital Marketing"].map(item => (
-                        <span key={item} className="text-xs font-semibold bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 text-slate-300">
+                        <span key={item} className="text-xs font-semibold bg-white/5 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/5 text-slate-300 hover:text-cyan-400 hover:border-cyan-400/30 transition-all duration-250">
                           {item}
                         </span>
                       ))}
                     </div>
-                  </div>
-
+                  </TiltCard>
+ 
                 </div>
               </div>
 
@@ -859,7 +880,7 @@ export default function App() {
               return (
                 <div
                   key={idx}
-                  className="bg-slate-900/30 border border-slate-900 rounded-2xl overflow-hidden transition-all duration-300"
+                  className="backdrop-blur-xl bg-white/[0.015] border border-white/5 rounded-3xl overflow-hidden hover:border-cyan-500/20 transition-all duration-300 shadow-[0_4px_24px_rgba(6,182,212,0.01)]"
                 >
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : idx)}
@@ -871,11 +892,25 @@ export default function App() {
                     </span>
                   </button>
                   
-                  {isOpen && (
-                    <div className="px-6 pb-6 text-sm sm:text-base text-slate-300 border-t border-slate-900/60 pt-4 leading-relaxed animate-fadeIn">
-                      {faq.answer}
-                    </div>
-                  )}
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial="collapsed"
+                        animate="open"
+                        exit="collapsed"
+                        variants={{
+                          open: { opacity: 1, height: "auto" },
+                          collapsed: { opacity: 0, height: 0 }
+                        }}
+                        transition={{ duration: 0.35, ease: [0.04, 0.62, 0.23, 0.98] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-6 pb-6 text-sm sm:text-base text-slate-300 border-t border-white/5 pt-4 leading-relaxed">
+                          {faq.answer}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               );
             })}
@@ -906,81 +941,81 @@ export default function App() {
           <ImageGallery />
         </section>
 
-        {/* ================= 3D INTERACTIVE HUB & CONTAINER SCROLL ================= */}
-        <section id="showcase-3d" className="py-20 px-4 max-w-7xl mx-auto border-t border-slate-900/60 relative overflow-hidden bg-slate-950/20">
-          <div className="absolute inset-0 bg-radial-gradient from-cyan-500/5 via-transparent to-transparent opacity-60 pointer-events-none" />
+        {/* ================= 3D INTERACTIVE HUB & FLOATING SEAMLESS SCENE ================= */}
+        <section id="showcase-3d" className="py-24 px-4 max-w-7xl mx-auto border-t border-white/5 relative overflow-hidden">
+          {/* Eye-catching background mesh blurs and vibrant color flow */}
+          <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
           
-          <ContainerScroll
-            titleComponent={
-              <div className="flex flex-col items-center">
-                <span className="text-xs font-black tracking-widest text-emerald-400 uppercase bg-emerald-950/25 px-3 py-1.5 rounded-full border border-emerald-900/30 inline-flex items-center gap-2 mb-4">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                  3D Automation Command Center
-                </span>
-                <h2 className="text-3xl sm:text-5xl md:text-[4rem] font-black tracking-tight text-white mb-4 leading-none">
-                  Interact with <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-amber-300 text-transparent bg-clip-text">Future-Ready tech</span>
-                </h2>
-                <p className="max-w-2xl mx-auto text-slate-400 text-xs sm:text-sm mt-2">
-                  Scroll down to tip, tilt, and explore Shahan's integrated 3D virtual sandbox space & core network statistics.
-                </p>
+          <div className="flex flex-col items-center mb-16 text-center relative z-10">
+            <span className="text-xs font-black tracking-widest text-emerald-400 uppercase bg-emerald-950/20 px-3.5 py-1.5 rounded-full border border-emerald-500/10 inline-flex items-center gap-2 mb-4">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+              Live 3D Automation Workspace
+            </span>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white mb-4 leading-tight">
+              Interact with <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-amber-300 text-transparent bg-clip-text">Future-Ready Tech</span>
+            </h2>
+            <p className="max-w-2xl mx-auto text-slate-400 text-sm sm:text-base leading-relaxed">
+              Explore Shahan's integrated 3D virtual sandbox space without restrictive boxes. Rotate and interact with custom automations, scripts, and server nodes.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            {/* 3D Spline Scene Row (Seamlessly floating, absolutely borderless, no box!) */}
+            <div className="lg:col-span-6 h-[400px] lg:h-[500px] relative flex items-center justify-center animate-fadeIn">
+              <div className="absolute inset-0 bg-radial-gradient from-cyan-500/10 via-transparent to-transparent pointer-events-none" />
+              <SplineScene 
+                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                className="w-full h-full object-cover"
+              />
+              
+              {/* Overlay Badge */}
+              <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-full bg-slate-950/60 backdrop-blur-lg border border-white/5 text-[10px] font-mono tracking-wider font-bold text-cyan-400 flex items-center gap-1.5 shadow-lg">
+                <Sparkles size={11} className="text-cyan-400 animate-spin-slow" />
+                <span>INTERACTIVE 3D COMPONENT (HOLD & DRAG TO ROTATE)</span>
               </div>
-            }
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-2 h-full bg-slate-950/80 rounded-2xl overflow-hidden border border-slate-900/50 backdrop-blur-md">
-              {/* Left Column: Interactive 3D Spline Scene */}
-              <div className="relative h-64 lg:h-full border-r border-slate-900 flex items-center justify-center p-4 min-h-[300px]">
-                <div className="absolute inset-0 bg-radial-gradient from-cyan-400/5 via-slate-950/30 to-slate-950 pointer-events-none" />
-                <SplineScene 
-                  scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                  className="w-full h-full max-h-[400px] lg:max-h-full animate-fadeIn"
-                />
+            </div>
+
+            {/* Real-time stats & controls on the Right (Styled as gorgeous colorful Liquid Glass blocks!) */}
+            <div className="lg:col-span-6 space-y-6">
+              <div className="p-6 sm:p-8 rounded-3xl backdrop-blur-xl bg-white/[0.02] border border-white/5 shadow-[0_8px_32px_0_rgba(6,182,212,0.03)] relative overflow-hidden group">
+                {/* Liquid glow accent line */}
+                <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-cyan-400 via-emerald-400 to-amber-300 opacity-60" />
                 
-                {/* 3D Indicator Badge */}
-                <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[10px] font-mono tracking-wider font-bold text-cyan-400 flex items-center gap-1.5 shadow-lg">
-                  <Sparkles size={11} className="animate-spin-slow text-cyan-400" />
-                  <span>DRAG TO ROTATE 3D SYSTEM</span>
+                <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
+                    <span className="text-xs font-black font-mono text-cyan-400 tracking-widest uppercase">PROBOY-MD SHIELD ENGINE</span>
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded-lg bg-cyan-950/40 border border-cyan-800/30 text-[9px] font-bold font-mono text-cyan-300">
+                    STATUS: ACTIVE
+                  </span>
                 </div>
-              </div>
 
-              {/* Right Column: Console Real-time Performance Metrics */}
-              <div className="p-6 sm:p-8 flex flex-col justify-between h-full bg-gradient-to-b from-slate-950 to-slate-900/40">
-                <div>
-                  <div className="flex items-center justify-between border-b border-slate-900/80 pb-4 mb-6">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
-                      <span className="text-xs font-bold font-mono text-cyan-400 uppercase tracking-widest">PROBOY-MD SHIELD STATUS</span>
+                <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight mb-3">
+                  ProBoy-MD Automation Cluster
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6">
+                  Deploying multi-device cloud configurations designed to ensure maximum uptime, rapid webhook deliveries, and lightweight, stable client communication workflows.
+                </p>
+
+                {/* Highly structured, colourful eye-catching metrics */}
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  {[
+                    { label: "Active Connections", value: "3,150+", suffix: "Globally Deployed", border: "hover:border-cyan-500/30" },
+                    { label: "Average Response", value: "<150ms", suffix: "Ultra-Fast Triggers", border: "hover:border-emerald-500/30" },
+                    { label: "Shopify Speed Score", value: "99/100", suffix: "Mobile Performance", border: "hover:border-amber-500/30" },
+                    { label: "Server Uptime", value: "99.98%", suffix: "Continuous SLA", border: "hover:border-indigo-500/30" }
+                  ].map((stat, sIdx) => (
+                    <div key={sIdx} className={`p-4 rounded-2xl bg-white/[0.03] border border-white/5 backdrop-blur-md flex flex-col gap-1 transition-all duration-300 shadow-md ${stat.border}`}>
+                      <span className="text-[10px] font-mono font-bold tracking-wider text-slate-500 uppercase">{stat.label}</span>
+                      <span className="text-lg font-black text-white">{stat.value}</span>
+                      <span className="text-[9px] font-semibold text-cyan-400/80">{stat.suffix}</span>
                     </div>
-                    <span className="px-2 py-0.5 rounded bg-cyan-950/55 border border-cyan-800/30 text-[9px] font-bold font-mono text-cyan-400 uppercase">
-                      ONLINE
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight mb-3">
-                    ProBoy-MD Automation Cluster
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6">
-                    This verified terminal shows multi-device integrations deployed on safe, distributed global cloud clusters, maintaining total safeguard against high latency or server overloads.
-                  </p>
-
-                  {/* Real-time stats widgets */}
-                  <div className="grid grid-cols-2 gap-4 mb-6">
-                    {[
-                      { label: "Active Integrations", value: "3,150+", suffix: "Users" },
-                      { label: "Average Response", value: "<150ms", suffix: "Ultra-Fast" },
-                      { label: "Shopify Core Speed", value: "99/100", suffix: "Mobile Performance" },
-                      { label: "Uptime Stability", value: "99.98%", suffix: "Cloud Hosted" }
-                    ].map((stat, sIdx) => (
-                      <div key={sIdx} className="p-4 rounded-xl bg-slate-900/50 border border-slate-900 flex flex-col gap-1 hover:border-cyan-500/20 transition-all duration-300">
-                        <span className="text-[10px] font-mono font-bold tracking-wider text-slate-500 uppercase">{stat.label}</span>
-                        <span className="text-lg font-black text-white">{stat.value}</span>
-                        <span className="text-[9px] font-semibold text-cyan-400/80">{stat.suffix}</span>
-                      </div>
-                    ))}
-                  </div>
+                  ))}
                 </div>
 
-                {/* Footer section inside Spline Panel */}
-                <div className="pt-4 border-t border-slate-900/60 flex items-center justify-between">
+                <div className="pt-5 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
                   <div className="flex flex-col">
                     <span className="text-[9px] font-mono text-slate-500 uppercase tracking-wider">SYSTEM COORDINATES</span>
                     <span className="text-xs font-semibold text-slate-300 font-mono">Burewala, PK · Cloud Node 315</span>
@@ -991,14 +1026,14 @@ export default function App() {
                       const contactSec = document.getElementById("contact");
                       if (contactSec) contactSec.scrollIntoView({ behavior: "smooth" });
                     }}
-                    className="cursor-pointer"
+                    className="cursor-pointer border border-emerald-500/20 px-3 py-1"
                   >
-                    <span className="text-xs font-bold text-white px-3 py-1">Connect Node</span>
+                    <span className="text-xs font-extrabold text-white px-2 py-0.5 flex items-center gap-2">Connect Node <Sparkles size={11} className="text-emerald-400" /></span>
                   </LiquidButton>
                 </div>
               </div>
             </div>
-          </ContainerScroll>
+          </div>
         </section>
 
         {/* ================= COMPREHENSIVE PROJECTS GALLERY SECTION ================= */}
@@ -1045,98 +1080,112 @@ export default function App() {
 
             {/* Grid display optimized for mobile scrolling, touch-pad gestures, and desktop grid layout */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProjects.map((proj, idx) => (
-                <div
-                  key={idx}
-                  className="bg-gradient-to-b from-slate-900 to-slate-950 rounded-2xl border border-slate-900 overflow-hidden flex flex-col justify-between group transition-all duration-300 hover:border-cyan-400/60 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-cyan-400/10"
-                >
-                  <div>
-                    {/* Placeholder and Dynamic Graphic frame */}
-                    <div className="h-44 w-full relative overflow-hidden bg-slate-950 flex flex-col items-center justify-center border-b border-slate-900">
-                      
-                      {proj.image ? (
-                        <div className="absolute inset-0 w-full h-full">
-                          <img
-                            src={proj.image}
-                            alt={proj.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            referrerPolicy="no-referrer"
-                            onError={(e) => {
-                              // If image loading fails, hide it to fallback to the dynamic graphic below
-                              e.currentTarget.style.display = "none";
-                            }}
-                          />
-                          {/* Rich dark gradient overlay for text readability on card image */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent pointer-events-none" />
-                        </div>
-                      ) : null}
+              {filteredProjects.map((proj, idx) => {
+                const getGlowColor = (cat: string) => {
+                  switch (cat) {
+                    case "bots": return "rgba(6, 182, 212, 0.22)";
+                    case "shopify": return "rgba(16, 185, 129, 0.22)";
+                    case "monetization": return "rgba(245, 158, 11, 0.22)";
+                    case "fullstack": return "rgba(99, 102, 241, 0.22)";
+                    default: return "rgba(6, 182, 212, 0.22)";
+                  }
+                };
 
-                      {/* Generates a stylized backdrop color matching the category */}
-                      <div className={`absolute inset-0 opacity-20 ${
-                        proj.category === 'bots' ? 'bg-cyan-500' :
-                        proj.category === 'shopify' ? 'bg-emerald-500' :
-                        proj.category === 'monetization' ? 'bg-amber-500' : 'bg-indigo-500'
-                      }`} />
-                      
-                      <div className="relative z-10 text-center flex flex-col items-center p-4">
-                        <div className="w-10 h-10 rounded-full bg-slate-900/95 border border-slate-800 flex items-center justify-center mb-2 shadow-md">
-                          {proj.category === 'bots' && <Bot size={20} className="text-cyan-400" />}
-                          {proj.category === 'shopify' && <ShoppingBag size={20} className="text-emerald-400" />}
-                          {proj.category === 'monetization' && <TrendingUp size={20} className="text-amber-400" />}
-                          {proj.category === 'fullstack' && <Code size={20} className="text-indigo-400" />}
+                return (
+                  <TiltCard
+                    key={idx}
+                    glowColor={getGlowColor(proj.category)}
+                    className="backdrop-blur-xl bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden flex flex-col justify-between group shadow-2xl h-full"
+                  >
+                    <div className="h-full flex flex-col justify-between">
+                      <div>
+                        {/* Placeholder and Dynamic Graphic frame */}
+                        <div className="h-44 w-full relative overflow-hidden bg-slate-950/40 flex flex-col items-center justify-center border-b border-white/5">
+                          
+                          {proj.image ? (
+                            <div className="absolute inset-0 w-full h-full">
+                              <img
+                                src={proj.image}
+                                alt={proj.title}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                referrerPolicy="no-referrer"
+                                onError={(e) => {
+                                  // If image loading fails, hide it to fallback to the dynamic graphic below
+                                  e.currentTarget.style.display = "none";
+                                }}
+                              />
+                              {/* Rich dark gradient overlay for text readability on card image */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent pointer-events-none" />
+                            </div>
+                          ) : null}
+
+                          {/* Generates a stylized backdrop color matching the category */}
+                          <div className={`absolute inset-0 opacity-15 ${
+                            proj.category === 'bots' ? 'bg-cyan-500' :
+                            proj.category === 'shopify' ? 'bg-emerald-500' :
+                            proj.category === 'monetization' ? 'bg-amber-500' : 'bg-indigo-500'
+                          }`} />
+                          
+                          <div className="relative z-10 text-center flex flex-col items-center p-4">
+                            <div className="w-10 h-10 rounded-2xl bg-slate-900/90 border border-white/10 flex items-center justify-center mb-2 shadow-md">
+                              {proj.category === 'bots' && <Bot size={20} className="text-cyan-400" />}
+                              {proj.category === 'shopify' && <ShoppingBag size={20} className="text-emerald-400" />}
+                              {proj.category === 'monetization' && <TrendingUp size={20} className="text-amber-400" />}
+                              {proj.category === 'fullstack' && <Code size={20} className="text-indigo-400" />}
+                            </div>
+                            <span className="text-xs font-mono uppercase tracking-widest text-cyan-400/90 block mb-1">
+                              {proj.category}
+                            </span>
+                            <h4 className="font-bold text-white tracking-tight line-clamp-1 drop-shadow-md">{proj.title}</h4>
+                          </div>
+
                         </div>
-                        <span className="text-xs font-mono uppercase tracking-widest text-cyan-400/90 block mb-1">
-                          {proj.category}
-                        </span>
-                        <h4 className="font-bold text-white tracking-tight line-clamp-1 drop-shadow-md">{proj.title}</h4>
+
+                        <div className="p-5">
+                          {/* Tags list */}
+                          <div className="flex flex-wrap gap-1.5 mb-3">
+                            {proj.tags.map(tag => (
+                              <span key={tag} className="text-[10px] uppercase tracking-wider font-semibold bg-white/5 backdrop-blur-md text-slate-300 px-2.5 py-1 rounded-xl border border-white/5 hover:text-cyan-400 hover:border-cyan-400/30 transition-all duration-200">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+
+                          <p className="text-slate-400 text-sm leading-relaxed mb-4 line-clamp-4">
+                            {proj.description}
+                          </p>
+                        </div>
                       </div>
 
-                    </div>
-
-                    <div className="p-5">
-                      {/* Tags list */}
-                      <div className="flex flex-wrap gap-1.5 mb-3">
-                        {proj.tags.map(tag => (
-                          <span key={tag} className="text-[10px] uppercase tracking-wider font-semibold bg-slate-950 text-slate-400 px-2.5 py-1 rounded-md border border-slate-900">
-                            {tag}
-                          </span>
-                        ))}
+                      {/* Operational links */}
+                      <div className="px-5 pb-5 pt-2 flex items-center gap-3">
+                        {proj.link && (
+                          <a
+                            href={proj.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 text-center bg-gradient-to-tr from-cyan-400 to-emerald-400 text-slate-950 text-xs font-extrabold py-2.5 rounded-xl hover:shadow-md hover:shadow-cyan-400/20 active:scale-98 transition-all flex items-center justify-center gap-1.5"
+                          >
+                            <span>Launch App</span>
+                            <ExternalLink size={12} />
+                          </a>
+                        )}
+                        {proj.github && (
+                          <a
+                            href={proj.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 text-center bg-slate-900 border border-slate-800 text-white hover:bg-slate-800 text-xs font-bold py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5"
+                          >
+                            <Github size={12} className="text-cyan-400" />
+                            <span>Source Code</span>
+                          </a>
+                        )}
                       </div>
-
-                      <p className="text-slate-400 text-sm leading-relaxed mb-4 line-clamp-4">
-                        {proj.description}
-                      </p>
                     </div>
-                  </div>
-
-                  {/* Operational links */}
-                  <div className="px-5 pb-5 pt-2 flex items-center gap-3">
-                    {proj.link && (
-                      <a
-                        href={proj.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 text-center bg-gradient-to-tr from-cyan-400 to-emerald-400 text-slate-950 text-xs font-extrabold py-2.5 rounded-xl hover:shadow-md hover:shadow-cyan-400/20 active:scale-98 transition-all flex items-center justify-center gap-1.5"
-                      >
-                        <span>Launch App</span>
-                        <ExternalLink size={12} />
-                      </a>
-                    )}
-                    {proj.github && (
-                      <a
-                        href={proj.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 text-center bg-slate-900 border border-slate-800 text-white hover:bg-slate-800 text-xs font-bold py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5"
-                      >
-                        <Github size={12} className="text-cyan-400" />
-                        <span>Source Code</span>
-                      </a>
-                    )}
-                  </div>
-
-                </div>
-              ))}
+                  </TiltCard>
+                );
+              })}
             </div>
 
           </div>
@@ -1166,21 +1215,21 @@ export default function App() {
               <div className="space-y-4">
                 
                 {/* Email container with copy trigger */}
-                <div className="bg-slate-900/40 border border-slate-900 p-4 rounded-2xl flex items-center justify-between gap-4">
+                <div className="backdrop-blur-xl bg-white/[0.02] border border-white/5 p-4 rounded-3xl flex items-center justify-between gap-4 hover:border-cyan-500/20 transition-all duration-300 group shadow-md">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-10 h-10 bg-cyan-950/30 rounded-xl flex items-center justify-center border border-cyan-900/30 flex-shrink-0">
-                      <Mail className="text-cyan-400" size={18} />
+                    <div className="w-10 h-10 bg-cyan-950/40 rounded-2xl flex items-center justify-center border border-cyan-500/10 flex-shrink-0">
+                      <Mail className="text-cyan-400 group-hover:scale-110 transition-transform" size={18} />
                     </div>
                     <div className="min-w-0">
                       <span className="text-xs font-mono uppercase text-slate-500 block">Personal Email</span>
-                      <a href="mailto:luciferkiller315@gmail.com" className="text-sm sm:text-base font-bold text-white hover:text-cyan-400 break-all">
+                      <a href="mailto:luciferkiller315@gmail.com" className="text-sm sm:text-base font-bold text-white hover:text-cyan-400 break-all transition-colors">
                         luciferkiller315@gmail.com
                       </a>
                     </div>
                   </div>
                   <button
                     onClick={() => copyText("luciferkiller315@gmail.com", "email")}
-                    className="p-2 bg-slate-950 border border-slate-800 rounded-lg text-slate-400 hover:text-white transition-all flex-shrink-0"
+                    className="p-2.5 bg-white/5 border border-white/5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-all flex-shrink-0"
                     title="Copy Email Address"
                   >
                     {copiedEmail ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
@@ -1188,21 +1237,21 @@ export default function App() {
                 </div>
 
                 {/* WhatsApp container with direct trigger and copy */}
-                <div className="bg-slate-900/40 border border-slate-900 p-4 rounded-2xl flex items-center justify-between gap-4">
+                <div className="backdrop-blur-xl bg-white/[0.02] border border-white/5 p-4 rounded-3xl flex items-center justify-between gap-4 hover:border-emerald-500/20 transition-all duration-300 group shadow-md">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-10 h-10 bg-emerald-950/30 rounded-xl flex items-center justify-center border border-emerald-900/30 flex-shrink-0">
-                      <Phone className="text-emerald-400" size={18} />
+                    <div className="w-10 h-10 bg-emerald-950/40 rounded-2xl flex items-center justify-center border border-emerald-500/10 flex-shrink-0">
+                      <Phone className="text-emerald-400 group-hover:scale-110 transition-transform" size={18} />
                     </div>
                     <div className="min-w-0">
                       <span className="text-xs font-mono uppercase text-slate-500 block">WhatsApp Line</span>
-                      <a href="https://wa.me/923261684315" target="_blank" rel="noopener noreferrer" className="text-sm sm:text-base font-bold text-white hover:text-emerald-400">
+                      <a href="https://wa.me/923261684315" target="_blank" rel="noopener noreferrer" className="text-sm sm:text-base font-bold text-white hover:text-emerald-400 transition-colors">
                         +92-326-1684315
                       </a>
                     </div>
                   </div>
                   <button
                     onClick={() => copyText("+923261684315", "phone")}
-                    className="p-2 bg-slate-950 border border-slate-800 rounded-lg text-slate-400 hover:text-white transition-all flex-shrink-0"
+                    className="p-2.5 bg-white/5 border border-white/5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-all flex-shrink-0"
                     title="Copy WhatsApp Number"
                   >
                     {copiedPhone ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
@@ -1210,14 +1259,14 @@ export default function App() {
                 </div>
 
                 {/* WhatsApp Channel container */}
-                <div className="bg-slate-900/40 border border-slate-900 p-4 rounded-2xl flex items-center justify-between gap-4">
+                <div className="backdrop-blur-xl bg-white/[0.02] border border-white/5 p-4 rounded-3xl flex items-center justify-between gap-4 hover:border-cyan-500/20 transition-all duration-300 group shadow-md">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-10 h-10 bg-cyan-950/30 rounded-xl flex items-center justify-center border border-cyan-900/30 flex-shrink-0">
-                      <MessageSquare className="text-cyan-400" size={18} />
+                    <div className="w-10 h-10 bg-cyan-950/40 rounded-2xl flex items-center justify-center border border-cyan-500/10 flex-shrink-0">
+                      <MessageSquare className="text-cyan-400 group-hover:scale-110 transition-transform" size={18} />
                     </div>
                     <div className="min-w-0">
                       <span className="text-xs font-mono uppercase text-slate-500 block">WhatsApp Broadcast Channel</span>
-                      <a href="https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm font-bold text-slate-200 hover:text-cyan-400 truncate block">
+                      <a href="https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm font-bold text-slate-200 hover:text-cyan-400 truncate block transition-colors">
                         Join ProBoy Official Channel
                       </a>
                     </div>
@@ -1226,7 +1275,7 @@ export default function App() {
                     href="https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-cyan-500/10 border border-cyan-800/20 hover:border-cyan-400 rounded-lg text-cyan-400 hover:text-white transition-all flex-shrink-0"
+                    className="p-2.5 bg-cyan-500/10 border border-cyan-500/10 hover:border-cyan-400 hover:bg-cyan-500/20 rounded-xl text-cyan-400 hover:text-white transition-all flex-shrink-0"
                     title="Join WhatsApp Channel"
                   >
                     <ArrowUpRight size={16} />
@@ -1234,9 +1283,9 @@ export default function App() {
                 </div>
 
                 {/* Geographical Area Info */}
-                <div className="bg-slate-900/40 border border-slate-900 p-4 rounded-2xl flex items-center gap-3">
-                  <div className="w-10 h-10 bg-amber-950/30 rounded-xl flex items-center justify-center border border-amber-900/30 flex-shrink-0">
-                    <MapPin className="text-amber-400" size={18} />
+                <div className="backdrop-blur-xl bg-white/[0.02] border border-white/5 p-4 rounded-3xl flex items-center gap-3 hover:border-amber-500/20 transition-all duration-300 group shadow-md">
+                  <div className="w-10 h-10 bg-amber-950/40 rounded-2xl flex items-center justify-center border border-amber-500/10 flex-shrink-0">
+                    <MapPin className="text-amber-400 group-hover:scale-110 transition-transform" size={18} />
                   </div>
                   <div>
                     <span className="text-xs font-mono uppercase text-slate-500 block">Operational HQ</span>
@@ -1244,7 +1293,7 @@ export default function App() {
                       href="https://maps.app.goo.gl/vPiWfSYFZXvaJpLx9"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm sm:text-base font-bold text-white hover:text-amber-400 flex items-center gap-1"
+                      className="text-sm sm:text-base font-bold text-white hover:text-amber-400 flex items-center gap-1 transition-colors"
                     >
                       Burewala, Punjab, Pakistan
                       <ArrowUpRight size={14} />
@@ -1257,9 +1306,9 @@ export default function App() {
 
             {/* Column 2: Interactive functional Quick Send form with persistent localStorage success visual logs */}
             <div className="lg:col-span-7">
-              <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-900">
+              <div className="backdrop-blur-xl bg-white/[0.02] p-6 sm:p-8 rounded-3xl border border-white/5 hover:border-cyan-500/20 shadow-2xl transition-all duration-300">
                 <h3 className="text-lg sm:text-xl font-bold text-white mb-2 flex items-center gap-2">
-                  <Send size={18} className="text-cyan-400" />
+                  <Send size={18} className="text-cyan-400 animate-pulse" />
                   Send Shahan an Instant Wire
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-400 mb-6 font-medium">
@@ -1267,7 +1316,7 @@ export default function App() {
                 </p>
 
                 {formSuccess ? (
-                  <div className="bg-emerald-950/30 border border-emerald-500/30 p-6 rounded-2xl text-center space-y-3 animate-fadeIn">
+                  <div className="bg-emerald-950/20 border border-emerald-500/30 p-6 rounded-2xl text-center space-y-3 animate-fadeIn">
                     <div className="w-12 h-12 rounded-full bg-emerald-500 text-slate-950 items-center justify-center inline-flex font-bold">
                       <CheckCircle2 size={24} />
                     </div>
@@ -1286,7 +1335,7 @@ export default function App() {
                   <form onSubmit={handleFormSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="form-name" className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">
+                        <label htmlFor="form-name" className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">
                           Full Name *
                         </label>
                         <input
@@ -1296,11 +1345,11 @@ export default function App() {
                           value={formName}
                           onChange={(e) => setFormName(e.target.value)}
                           placeholder="Shahan Ali"
-                          className="w-full bg-slate-950/90 border border-slate-900 hover:border-slate-800 focus:border-cyan-400 focus:outline-none p-3 rounded-xl text-slate-200 text-sm placeholder-slate-600 transition-colors"
+                          className="w-full bg-white/5 border border-white/10 hover:border-white/20 focus:border-cyan-400 focus:bg-white/10 focus:outline-none p-3.5 rounded-2xl text-slate-200 text-sm placeholder-slate-700 transition-all focus:ring-1 focus:ring-cyan-500/20 shadow-inner"
                         />
                       </div>
                       <div>
-                        <label htmlFor="form-email" className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">
+                        <label htmlFor="form-email" className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">
                           Email Address
                         </label>
                         <input
@@ -1309,13 +1358,13 @@ export default function App() {
                           value={formEmail}
                           onChange={(e) => setFormEmail(e.target.value)}
                           placeholder="client@mail.com"
-                          className="w-full bg-slate-950/90 border border-slate-900 hover:border-slate-800 focus:border-cyan-400 focus:outline-none p-3 rounded-xl text-slate-200 text-sm placeholder-slate-600 transition-colors"
+                          className="w-full bg-white/5 border border-white/10 hover:border-white/20 focus:border-cyan-400 focus:bg-white/10 focus:outline-none p-3.5 rounded-2xl text-slate-200 text-sm placeholder-slate-700 transition-all focus:ring-1 focus:ring-cyan-500/20 shadow-inner"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label htmlFor="form-subject" className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">
+                      <label htmlFor="form-subject" className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">
                         Inquiry Subject
                       </label>
                       <input
@@ -1324,12 +1373,12 @@ export default function App() {
                         value={formSubject}
                         onChange={(e) => setFormSubject(e.target.value)}
                         placeholder="WhatsApp / Shopify Automations proposal"
-                        className="w-full bg-slate-950/90 border border-slate-900 hover:border-slate-800 focus:border-cyan-400 focus:outline-none p-3 rounded-xl text-slate-200 text-sm placeholder-slate-600 transition-colors"
+                        className="w-full bg-white/5 border border-white/10 hover:border-white/20 focus:border-cyan-400 focus:bg-white/10 focus:outline-none p-3.5 rounded-2xl text-slate-200 text-sm placeholder-slate-700 transition-all focus:ring-1 focus:ring-cyan-500/20 shadow-inner"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="form-msg" className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">
+                      <label htmlFor="form-msg" className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">
                         Message Content *
                       </label>
                       <textarea
@@ -1339,13 +1388,13 @@ export default function App() {
                         value={formMsg}
                         onChange={(e) => setFormMsg(e.target.value)}
                         placeholder="Write details on your proposed project idea here..."
-                        className="w-full bg-slate-950/90 border border-slate-900 hover:border-slate-800 focus:border-cyan-400 focus:outline-none p-3 rounded-xl text-slate-200 text-sm placeholder-slate-600 transition-colors resize-none"
+                        className="w-full bg-white/5 border border-white/10 hover:border-white/20 focus:border-cyan-400 focus:bg-white/10 focus:outline-none p-3.5 rounded-2xl text-slate-200 text-sm placeholder-slate-700 transition-all focus:ring-1 focus:ring-cyan-500/20 shadow-inner resize-none"
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-cyan-400 to-emerald-400 text-slate-950 py-3 rounded-xl font-black text-sm hover:shadow-lg hover:shadow-cyan-400/20 active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                      className="w-full bg-gradient-to-r from-cyan-400 via-emerald-400 to-amber-300 text-slate-950 py-3.5 rounded-2xl font-black text-sm hover:shadow-lg hover:shadow-cyan-400/20 active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer border border-white/10"
                     >
                       <Send size={16} />
                       <span>Transmit Message</span>
@@ -1373,6 +1422,24 @@ export default function App() {
             © 2026 Shahan Ali - ProBoy. All rights reserved. Self‑Taught & Faith Driven.
           </p>
         </footer>
+
+        {/* Floating Scroll-to-Top Rocket Button */}
+        <AnimatePresence>
+          {showScrollTop && (
+            <motion.button
+              initial={{ opacity: 0, y: 24, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 24, scale: 0.8 }}
+              whileHover={{ scale: 1.1, rotate: -15 }}
+              whileTap={{ scale: 0.92 }}
+              onClick={scrollToTop}
+              className="fixed bottom-6 right-6 z-[100] w-12 h-12 bg-slate-950/80 backdrop-blur-xl border border-cyan-400/50 rounded-full flex items-center justify-center text-cyan-400 shadow-[0_0_24px_rgba(6,182,212,0.25)] hover:text-emerald-400 hover:border-emerald-400/50 transition-colors cursor-pointer group"
+              aria-label="Scroll to top of page"
+            >
+              <Rocket size={18} className="group-hover:-translate-y-0.5 transition-transform duration-300" />
+            </motion.button>
+          )}
+        </AnimatePresence>
 
       </div>
     </div>
