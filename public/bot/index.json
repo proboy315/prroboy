@@ -122,6 +122,11 @@
             "url": "https://proboy.vercel.app/bot/shahan-md",
             "expiry": "",
             "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/abdullah-md",
+            "expiry": "",
+            "active": true
         }
     ]
 }
