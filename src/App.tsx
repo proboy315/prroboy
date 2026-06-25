@@ -63,6 +63,15 @@ export default function App() {
   // Project sorting / filter state
   const [activeCategory, setActiveCategory] = useState<string>("all");
 
+  // Eco Performance Optimization Mode and Spline Lazy-loader
+  const [ecoMode, setEcoMode] = useState(false);
+  const [splineLoaded, setSplineLoaded] = useState(false);
+
+  // Sync ecoMode to global window scope for high-speed module access
+  useEffect(() => {
+    (window as any).__ECO_MODE__ = ecoMode;
+  }, [ecoMode]);
+
   // Floating Back-to-Top State
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -87,6 +96,14 @@ export default function App() {
       tags: ["Node.js", "Baileys API", "TypeScript", "Automation"],
       github: "https://github.com/ProBoy315",
       link: "https://wa.me/923261684315"
+    },
+    {
+      title: "ProBoy MD Pairing Portal",
+      description: "Instant secure multi-device pairing code generator for ProBoy MD WhatsApp bots. Connects directly to server-side webhook systems to deliver dynamic links without scanning QR codes.",
+      category: "bots",
+      tags: ["WhatsApp Linker", "Webhooks", "Render API", "Secure Handshake"],
+      github: "https://github.com/ProBoy315",
+      link: "/pair/"
     },
     {
       title: "Shopify Custom Automation Flow",
@@ -214,6 +231,11 @@ export default function App() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    if (ecoMode) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+
     let animationFrameId: number;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
@@ -304,7 +326,7 @@ export default function App() {
       window.removeEventListener("resize", resize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [ecoMode]);
 
   // Set active link on scroll
   useEffect(() => {
@@ -432,6 +454,23 @@ export default function App() {
                   </a>
                 ))}
                 
+                {/* Responsive Performance Optimizer Station */}
+                <button
+                  onClick={() => setEcoMode(!ecoMode)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-black tracking-wide border flex items-center gap-1.5 transition-all duration-300 cursor-pointer ${
+                    ecoMode
+                      ? "bg-amber-500/10 border-amber-400/40 text-amber-400 hover:bg-amber-500/25 shadow-[0_0_12px_rgba(245,158,11,0.1)]"
+                      : "bg-cyan-500/10 border-cyan-400/30 text-cyan-400 hover:bg-cyan-500/25 shadow-[0_0_12px_rgba(6,182,212,0.15)]"
+                  }`}
+                  title={ecoMode ? "Click to enable rich 3D animations and particles (Turbo Mode)" : "Click to pause heavy physics and particles (Eco Mode)"}
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${ecoMode ? "bg-amber-400" : "bg-cyan-400"}`}></span>
+                    <span className={`relative inline-flex rounded-full h-2 w-2 ${ecoMode ? "bg-amber-500" : "bg-cyan-500"}`}></span>
+                  </span>
+                  <span>{ecoMode ? "Eco Saved" : "Turbo Mode"}</span>
+                </button>
+
                 {/* Secondary navigation actions */}
                 <a
                   href="https://wa.me/923261684315"
@@ -444,8 +483,20 @@ export default function App() {
                 </a>
               </div>
 
-              {/* Hamburger Button for Mobile View */}
-              <div className="md:hidden">
+              {/* Hamburger Button and Toggle for Mobile View */}
+              <div className="md:hidden flex items-center gap-2">
+                <button
+                  onClick={() => setEcoMode(!ecoMode)}
+                  className={`px-3 py-1.5 rounded-full text-[10px] uppercase font-black tracking-wider border flex items-center gap-1 transition-all cursor-pointer ${
+                    ecoMode
+                      ? "bg-amber-500/10 border-amber-400/30 text-amber-300 shadow-[0_0_8px_rgba(245,158,11,0.06)]"
+                      : "bg-cyan-500/10 border-cyan-400/30 text-cyan-400"
+                  }`}
+                  title={ecoMode ? "Active: Low-lag mode" : "Active: Rich animations"}
+                >
+                  <span>{ecoMode ? "🔋 ECO" : "⚡ TURBO"}</span>
+                </button>
+
                 <button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                   onKeyDown={(e) => {
@@ -512,7 +563,7 @@ export default function App() {
           className="min-h-screen relative overflow-hidden flex items-center justify-center pt-24 sm:pt-32 pb-16 px-4 md:px-8 mb-4 max-w-7xl mx-auto"
         >
           {/* Awesome live waves particle-simulation backdrop */}
-          <Waves className="absolute inset-0 z-0 pointer-events-none opacity-30" strokeColor="rgba(6, 182, 212, 0.25)" pointerSize={0.4} />
+          <Waves className="absolute inset-0 z-0 pointer-events-none opacity-30" strokeColor="rgba(6, 182, 212, 0.25)" pointerSize={0.4} disabled={ecoMode} />
 
           <div className="text-center max-w-4xl w-full flex flex-col items-center relative z-10">
             
@@ -964,16 +1015,92 @@ export default function App() {
             {/* 3D Spline Scene Row (Seamlessly floating, absolutely borderless, no box!) */}
             <div className="lg:col-span-6 h-[400px] lg:h-[500px] relative flex items-center justify-center animate-fadeIn">
               <div className="absolute inset-0 bg-radial-gradient from-cyan-500/10 via-transparent to-transparent pointer-events-none" />
-              <SplineScene 
-                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                className="w-full h-full object-cover"
-              />
               
-              {/* Overlay Badge */}
-              <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-full bg-slate-950/60 backdrop-blur-lg border border-white/5 text-[10px] font-mono tracking-wider font-bold text-cyan-400 flex items-center gap-1.5 shadow-lg">
-                <Sparkles size={11} className="text-cyan-400 animate-spin-slow" />
-                <span>INTERACTIVE 3D COMPONENT (HOLD & DRAG TO ROTATE)</span>
-              </div>
+              {(!splineLoaded || ecoMode) ? (
+                <div className="w-full h-full rounded-3xl bg-slate-950/40 border border-white/5 p-6 flex flex-col justify-between overflow-hidden relative group">
+                  {/* Tech grid backdrop */}
+                  <div className="absolute inset-0 bg-[radial-gradient(#ffffff03_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+                  
+                  <div className="flex items-center justify-between border-b border-white/5 pb-4 relative z-10">
+                    <div className="flex items-center gap-2">
+                      <Workflow className="text-cyan-400 animate-pulse" size={18} />
+                      <span className="font-mono text-xs text-slate-400 font-bold">Node-MD cluster console</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                      <span className="text-[10px] text-emerald-400 font-mono tracking-wider font-bold">ONLINE</span>
+                    </div>
+                  </div>
+
+                  {/* Live Simulated Diagnostics / Terminal style */}
+                  <div className="my-3 space-y-4 font-mono text-xs relative z-10 text-left">
+                    <div className="space-y-1.5 bg-slate-950/80 p-4 rounded-xl border border-white/5 font-mono text-[11px] leading-relaxed">
+                      <p className="text-cyan-400">$ proboy connect --cluster-asia-southeast</p>
+                      <p className="text-slate-400">⚡ Initializing premium multi-device secure bridge...</p>
+                      <p className="text-emerald-400 font-semibold">✔ Connected to Burewala Operational HQ [Active latency: 12ms]</p>
+                      <p className="text-slate-500 text-[10px]">⚡ Memory load: 24.2MB | Webhook Status: Listening on Port 3000</p>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="bg-white/[0.01] border border-white/5 p-3 rounded-xl text-center animate-pulse">
+                        <span className="text-slate-500 text-[9px] block uppercase tracking-wider">Uptime</span>
+                        <span className="text-[11px] sm:text-xs font-black text-white font-mono">99.98%</span>
+                      </div>
+                      <div className="bg-white/[0.01] border border-white/5 p-3 rounded-xl text-center">
+                        <span className="text-slate-500 text-[9px] block uppercase tracking-wider">Requests</span>
+                        <span className="text-[11px] sm:text-xs font-black text-cyan-400 font-mono">248K</span>
+                      </div>
+                      <div className="bg-white/[0.01] border border-white/5 p-3 rounded-xl text-center">
+                        <span className="text-slate-500 text-[9px] block uppercase tracking-wider">Nodes</span>
+                        <span className="text-[11px] sm:text-xs font-black text-emerald-400 font-mono">03 Live</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Activate 3D Button */}
+                  <div className="flex flex-col items-center gap-3 relative z-10 w-full mb-1">
+                    <button
+                      onClick={() => setSplineLoaded(true)}
+                      disabled={ecoMode}
+                      className={`w-full py-3 rounded-2xl font-black text-[11px] uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 border cursor-pointer ${
+                        ecoMode
+                          ? "bg-slate-950/20 border-white/5 text-slate-500 cursor-not-allowed"
+                          : "bg-cyan-500/10 border-cyan-400/20 hover:border-cyan-400 hover:bg-cyan-500 hover:text-slate-950 text-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_25px_rgba(6,182,212,0.3)] active:scale-98"
+                      }`}
+                    >
+                      <Sparkles size={14} />
+                      <span>{ecoMode ? "Interactive 3D Disabled" : "Launch Dynamic 3D Environment"}</span>
+                    </button>
+                    <p className="text-[9px] text-slate-500 font-medium tracking-wide">
+                      {ecoMode 
+                        ? "Switch to Turbo Mode in the header navigation to activate 3D features" 
+                        : "Tap to mount standard multi-axis WebGL viewport (requires modern GPU)"}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="w-full h-full relative">
+                  <SplineScene 
+                    scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                    className="w-full h-full object-cover"
+                  />
+                  
+                  {/* Overlay Badge */}
+                  <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-full bg-slate-950/60 backdrop-blur-lg border border-white/5 text-[10px] font-mono tracking-wider font-bold text-cyan-400 flex items-center gap-1.5 shadow-lg">
+                    <Sparkles size={11} className="text-cyan-400 animate-spin-slow" />
+                    <span>INTERACTIVE 3D (DRAG/HOLD MOUSE OUTSIDE TO ROTATE)</span>
+                  </div>
+
+                  {/* Close 3D Workspace */}
+                  <button
+                    onClick={() => setSplineLoaded(false)}
+                    className="absolute top-4 right-4 p-2 rounded-xl bg-slate-950/60 hover:bg-red-500/10 border border-white/10 hover:border-red-500/30 text-slate-400 hover:text-red-400 transition-all cursor-pointer shadow-lg z-30"
+                    title="Close 3D View"
+                  >
+                    <X size={14} />
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Real-time stats & controls on the Right (Styled as gorgeous colorful Liquid Glass blocks!) */}
