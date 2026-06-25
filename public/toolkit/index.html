@@ -1,0 +1,1422 @@
+<html lang="en" style="--accent: #000000; --accent-light: rgba(0,0,0,0.1); --accent-bg: rgba(0,0,0,0.1); --accent-bg2: rgba(0,0,0,0.18); --accent-border: rgba(0,0,0,0.35); --accent-glow: rgba(0,0,0,0.2); --accent-dot: rgba(0,0,0,0.08); --fn: 'Poppins',sans-serif;"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProBoy-TOOKIT</title>
+<link rel="icon" href="https://proboy.vercel.app/img.png"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&amp;family=DM+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=Audiowide&amp;family=Exo+2:wght@400;600;700&amp;family=Rajdhani:wght@400;600;700&amp;family=Chakra+Petch:wght@400;600;700&amp;family=Russo+One&amp;family=Oxanium:wght@400;600;700&amp;family=Teko:wght@400;600;700&amp;family=Electrolize&amp;family=Syncopate:wght@400;700&amp;family=Michroma&amp;family=Bebas+Neue&amp;family=Jura:wght@400;600;700&amp;family=Saira:wght@400;600;700&amp;family=Titillium+Web:wght@400;600;700&amp;family=Black+Ops+One&amp;family=Poppins:wght@400;600;700&amp;family=Nunito:wght@400;600;700&amp;family=Raleway:wght@400;600;700&amp;family=Oswald:wght@400;600;700&amp;family=Josefin+Sans:wght@400;600;700&amp;family=Quicksand:wght@400;600;700&amp;family=Barlow+Condensed:wght@400;600;700&amp;family=Righteous&amp;family=Bungee&amp;family=Cinzel:wght@400;700;900&amp;family=Playfair+Display:wght@400;700&amp;family=Merriweather:wght@400;700&amp;family=Lora:wght@400;600;700&amp;family=Abril+Fatface&amp;family=Pacifico&amp;family=Dancing+Script:wght@400;600;700&amp;family=Satisfy&amp;family=Great+Vibes&amp;family=Permanent+Marker&amp;family=Inconsolata:wght@400;700&amp;family=Share+Tech+Mono&amp;family=VT323&amp;family=Press+Start+2P&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --accent:#000000;
+  --accent-light:rgba(0,0,0,0.15);
+  --bg:#f5f5f7;
+  --card:#ffffff;
+  --border:#e5e7eb;
+  --text:#0d1b2e;
+  --text2:#9ca3af;
+  --fn:'Poppins',sans-serif;
+  --accent-bg:rgba(0,0,0,0.1);
+  --accent-bg2:rgba(0,0,0,0.18);
+  --accent-border:rgba(0,0,0,0.35);
+  --accent-glow:rgba(0,0,0,0.2);
+  --accent-dot:rgba(0,0,0,0.08);
+  /* Appearance from dashboard */
+  --tk-icon-size:90px;
+  --tk-card-padding:11px;
+  --tk-card-gap:4px;
+  --tk-card-radius:20px;
+  --tk-header-size:28px;
+}
+body.dark{
+  --bg:#0d1117;
+  --card:#141b24;
+  --border:#1e2a38;
+  --text:#cdd9e5;
+  --text2:#4d6070;
+  --bg-sheet:#161d27;
+  --bg-item:#1c2535;
+}
+body:not(.dark){
+  --bg-sheet:#ffffff;
+  --bg-item:#f9fafb;
+  --border:#e5e7eb;
+  --text:#0d1b2e;
+  --text2:#9ca3af;
+}
+body{font-family:var(--fn);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background 0.3s,color 0.3s,border-color 0.3s;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle, var(--accent-dot) 1px, transparent 1px);background-size:36px 36px;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:background 0.3s,border-color 0.3s;}
+body.dark nav{background:rgba(13,17,23,0.96);border-bottom:1px solid #1e2a38;}
+.nbrand{display:flex;align-items:center;gap:10px}
+.nlogo{width:42px;height:42px;border-radius:50%;background:var(--accent-bg);border:2px solid var(--accent-border);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 10px var(--accent-glow);flex-shrink:0;}
+.nlogo img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.nlogo svg{width:20px;height:20px;color:var(--accent)}
+.nlogo-ini{font-size:14px;font-weight:900;color:var(--accent);font-family:'Orbitron',sans-serif;}
+.ntxt h1{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--text)}
+.ntxt p{font-size:8px;letter-spacing:2px;color:var(--text2);font-family:'Rajdhani',sans-serif;text-transform:uppercase}
+.nbtns{display:flex;gap:6px}
+.nb{width:38px;height:38px;border-radius:11px;background:var(--bg-item);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;color:var(--text2);}
+.nb:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+.nb svg{width:16px;height:16px}
+.nb-dot{position:absolute;top:5px;right:5px;width:5px;height:5px;border-radius:50%;background:var(--accent);}
+.pg{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:0 14px 80px}
+.hero{text-align:center;padding:36px 0 28px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 18px;border:1.5px solid var(--accent);border-radius:100px;font-size:9px;font-weight:700;letter-spacing:3px;color:var(--accent);background:var(--accent-glow);margin-bottom:18px;}
+.htitle{font-size:clamp(24px,9vw,28px);font-weight:900;letter-spacing:3px;line-height:1;margin-bottom:10px}
+.htitle .hw{color:var(--text)}
+.htitle .ha{color:var(--accent)}
+.hsub{font-size:11px;letter-spacing:3px;color:var(--text2);font-family:'Rajdhani',sans-serif;text-transform:uppercase}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 10px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:all 0.2s;cursor:default;}
+.stat:hover{border-color:var(--accent-border);transform:translateY(-2px);box-shadow:0 6px 16px var(--accent-glow)}
+.sico{width:32px;height:32px;margin:0 auto 8px;border-radius:8px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;}
+.sico svg{width:16px;height:16px;color:var(--accent)}
+.snum{font-size:22px;font-weight:800;color:var(--text);display:block;font-family:'Orbitron',sans-serif}
+.slbl{font-size:8px;letter-spacing:2.5px;color:var(--text2);font-family:'Rajdhani',sans-serif;text-transform:uppercase;margin-top:3px;display:block}
+.sw{position:relative;margin-bottom:22px}
+.si2{position:absolute;left:14px;top:50%;transform:translateY(-50%);pointer-events:none}
+.si2 svg{width:15px;height:15px;color:var(--text2)}
+.sinput{width:100%;padding:14px 16px 14px 42px;background:var(--card);border:1px solid var(--border);border-radius:14px;font-family:var(--fn);font-size:11px;color:var(--text);outline:none;box-shadow:0 2px 6px rgba(0,0,0,0.04);transition:all 0.2s;letter-spacing:1px;}
+.sinput::placeholder{color:var(--text2)}
+.sinput:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.sh{display:flex;align-items:center;gap:9px;font-size:9px;font-weight:700;letter-spacing:3px;color:var(--text2);text-transform:uppercase;margin-bottom:14px;}
+.shl{flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent)}
+.shl.l{background:linear-gradient(to left,var(--border),transparent)}
+.shico{color:var(--accent);width:12px;height:12px}
+.tgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--tk-card-gap)}
+.tc{background:var(--card);border:1px solid var(--border);border-radius:var(--tk-card-radius);padding:var(--tk-card-padding) 10px calc(var(--tk-card-padding) - 4px);text-align:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:all 0.2s;-webkit-tap-highlight-color:transparent;}
+.tc:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px var(--accent-glow)}
+/* Card Styles */
+.cs-1{background:var(--card);}
+.cs-2{background:rgba(0,0,0,0.04);backdrop-filter:blur(12px);border-color:rgba(0,0,0,0.2);}
+.cs-3{background:linear-gradient(135deg,var(--card),rgba(0,0,0,0.05));}
+.cs-4{background:var(--card);box-shadow:0 0 0 1px var(--accent),0 0 12px var(--accent-glow);}
+.cs-5{background:var(--bg);border:none;box-shadow:none;}
+.cs-6{background:linear-gradient(135deg,rgba(0,0,0,0.12),rgba(0,0,0,0.03));}
+.cs-7{background:var(--card);position:relative;overflow:hidden;}.cs-7::after{content:'';position:absolute;top:-40%;right:-40%;width:80%;height:80%;background:radial-gradient(circle,rgba(0,0,0,0.12),transparent 70%);pointer-events:none;}
+.cs-8{background:transparent;border:2px solid rgba(0,0,0,0.4);}
+.cs-9{background:var(--card);box-shadow:0 8px 32px rgba(0,0,0,0.18);}
+.cs-10{background:var(--card);box-shadow:0 0 18px var(--accent-glow),0 0 36px rgba(0,0,0,0.1);}
+@media(min-width:600px){.tgrid{grid-template-columns:repeat(4,1fr);}}
+.tc:active{transform:scale(0.95)}
+.tiw{width:var(--tk-icon-size);height:var(--tk-icon-size);margin:0 auto 10px;border-radius:14px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;border:1px solid var(--accent-border);transition:all 0.2s;overflow:hidden;}
+.tc:hover .tiw{background:var(--accent-bg2);border-color:var(--accent-border);box-shadow:0 0 14px var(--accent-glow)}
+.tiw svg{width:22px;height:22px;color:var(--accent);transition:transform 0.2s}
+.tiw img{width:100%;height:100%;object-fit:cover;border-radius:14px;}
+.tc:hover .tiw svg{transform:scale(1.1)}
+.tn{font-size:10px;font-weight:600;letter-spacing:1.5px;color:var(--text);font-family:'Rajdhani',sans-serif;text-transform:uppercase;transition:color 0.2s}
+.tc:hover .tn{color:var(--accent)}
+footer{text-align:center;padding:28px 0 10px;font-size:9px;letter-spacing:2px;color:var(--text2);font-family:'Rajdhani',sans-serif;position:relative;z-index:1}
+footer span{color:var(--accent)}
+footer a{color:var(--accent);text-decoration:none;}
+@keyframes floatPulse{0%,100%{transform:scale(1);box-shadow:0 4px 18px var(--accent-glow)}50%{transform:scale(1.08);box-shadow:0 6px 24px var(--accent-glow)}}
+.fab{position:fixed;bottom:20px;right:16px;z-index:500;width:36px;height:36px;border-radius:50%;background:var(--accent);border:none;color:#ffffff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px var(--accent-glow);transition:all 0.2s;font-size:16px;line-height:1;}
+.fab:hover{transform:scale(1.08);box-shadow:0 6px 28px var(--accent-glow)}
+.fab:active{transform:scale(0.93)}
+.ov{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s;}
+.ov.show{opacity:1;pointer-events:all}
+.sheet{width:100%;max-width:640px;background:var(--bg-sheet);border-radius:22px 22px 0 0;border-top:1px solid var(--border);padding:8px 18px 48px;max-height:88vh;overflow-y:auto;transform:translateY(100%);transition:transform 0.32s cubic-bezier(.32,.72,0,1);}
+body.dark .sheet{background:#161d27 !important;}
+body:not(.dark) .sheet{background:#ffffff !important;}
+.ov.show .sheet{transform:translateY(0)}
+.sheet::-webkit-scrollbar{width:3px}
+.sheet::-webkit-scrollbar-thumb{background:#e5e7eb;border-radius:2px}
+.handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:10px auto 18px}
+.shead{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.stitle{font-size:14px;font-weight:700;letter-spacing:1.5px;display:flex;align-items:center;gap:8px}
+.stitle svg{width:15px;height:15px;color:var(--accent)}
+.cbtn{width:28px;height:28px;border-radius:8px;border:1px solid var(--border);background:var(--bg-item);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;color:var(--text2);transition:all 0.2s;}
+.cbtn:hover{border-color:var(--accent);color:var(--accent)}
+.flbl{font-size:8px;letter-spacing:2.5px;color:var(--text2);font-family:'Rajdhani',sans-serif;text-transform:uppercase;margin-bottom:10px;display:block}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
+.mbtn{padding:11px;border:1px solid var(--border);border-radius:11px;font-family:var(--fn);font-size:10px;font-weight:600;letter-spacing:1px;color:var(--text2);cursor:pointer;background:var(--bg-item);display:flex;align-items:center;justify-content:center;gap:7px;transition:all 0.2s;}
+.mbtn svg{width:13px;height:13px}
+.mbtn.on{border-color:var(--accent);color:var(--accent);background:#fff5f5;box-shadow:0 0 12px rgba(239,68,68,0.12)}
+.tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:16px}
+.tbtn{flex:1;padding:9px 10px;background:transparent;border:none;border-bottom:2px solid transparent;font-family:var(--fn);font-size:9.5px;font-weight:600;letter-spacing:1.5px;color:var(--text2);cursor:pointer;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:5px;transition:all 0.2s;}
+.tbtn svg{width:11px;height:11px}
+.tbtn.on{color:var(--accent);border-bottom-color:var(--accent)}
+.tpane{display:none}.tpane.on{display:block}
+.cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.cc{background:var(--bg-item);border:1px solid var(--border);border-radius:11px;padding:11px 5px;text-align:center;cursor:pointer;transition:all 0.2s;}
+.cc:hover{transform:scale(1.05)}
+.cc.on{border-color:var(--accent);box-shadow:0 0 10px rgba(239,68,68,0.2)}
+.ce{font-size:18px;margin-bottom:3px}
+.cn{font-size:8px;color:var(--text2);font-family:'Rajdhani',sans-serif;letter-spacing:0.8px}
+.flist{display:flex;flex-direction:column;gap:7px}
+.fi{padding:13px 15px;border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:14px;color:var(--text);background:var(--bg-item);transition:all 0.2s;}
+.fi:hover{border-color:#fca5a5}
+.fi.on{border-color:var(--accent);color:var(--accent);background:#fff5f5}
+.slist{display:flex;flex-direction:column;gap:8px}
+.si{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;background:var(--bg-item);border:1px solid var(--border);border-radius:11px;}
+.si-l{flex:1}
+.silbl{font-size:10px;letter-spacing:2px;font-family:'Rajdhani',sans-serif;color:var(--text);text-transform:uppercase}
+.si-desc{font-size:8px;color:var(--text2);letter-spacing:0.8px;font-family:'Rajdhani',sans-serif;margin-top:2px}
+.tog{width:44px;height:24px;background:var(--border);border-radius:12px;position:relative;cursor:pointer;transition:all 0.28s;flex-shrink:0;}
+.tog.on{background:var(--accent)}
+.tog::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:transform 0.26s;box-shadow:0 1px 4px rgba(0,0,0,0.2);}
+.tog.on::after{transform:translateX(20px)}
+.mlist{display:flex;flex-direction:column;gap:7px}
+.mli{display:flex;align-items:center;gap:12px;padding:13px 14px;background:var(--bg-item);border:1px solid var(--border);border-radius:11px;cursor:pointer;transition:all 0.2s;}
+.mli:hover{border-color:var(--accent);background:rgba(239,68,68,0.07)}
+.mli svg{width:16px;height:16px;color:var(--accent);flex-shrink:0}
+.mli-t{flex:1}
+.mli-title{font-size:10.5px;font-weight:600;letter-spacing:1.5px;font-family:'Rajdhani',sans-serif;text-transform:uppercase}
+.mli-sub{font-size:8.5px;color:var(--text2);letter-spacing:0.8px;font-family:'Rajdhani',sans-serif;margin-top:1px}
+.mli-arr{color:var(--text2);font-size:14px}
+.pcard{display:flex;flex-direction:column;align-items:center;padding:16px 0 12px;text-align:center;gap:10px}
+.avatar{width:68px;height:68px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff;font-weight:900;font-family:'Orbitron',sans-serif;box-shadow:0 4px 18px var(--accent-glow);overflow:hidden;}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.pname{font-size:15px;font-weight:700;letter-spacing:2.5px}
+.pbadge{padding:4px 14px;border-radius:100px;border:1px solid var(--accent);font-size:8.5px;letter-spacing:2.5px;color:var(--accent);font-family:'Rajdhani',sans-serif;background:#fff5f5;}
+.pstats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;width:100%;margin-top:6px}
+.pst{background:var(--bg-item);border:1px solid var(--border);border-radius:10px;padding:10px 6px;text-align:center}
+.pst-n{font-size:16px;font-weight:800;font-family:'Orbitron',sans-serif;color:var(--accent)}
+.pst-l{font-size:7.5px;letter-spacing:2px;color:var(--text2);font-family:'Rajdhani',sans-serif}
+.sdiv{height:1px;background:var(--border);margin:14px 0}
+.tdw{text-align:center;padding:10px 0}
+.tdico{width:76px;height:76px;margin:0 auto 14px;border-radius:20px;background:var(--accent-bg);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px var(--accent-glow);animation:ipop 0.4s cubic-bezier(.175,.885,.32,1.275) both;overflow:hidden;}
+.tdico svg{width:32px;height:32px;color:var(--accent)}
+.tdico img{width:100%;height:100%;object-fit:cover;border-radius:20px;}
+@keyframes ipop{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}
+.tdname{font-size:16px;font-weight:700;letter-spacing:2px;margin-bottom:7px}
+.tddesc{font-size:11px;color:var(--text2);font-family:'Rajdhani',sans-serif;letter-spacing:1px;margin-bottom:20px;line-height:1.7}
+.tdbtn{width:100%;padding:13px;background:var(--accent);border:none;border-radius:12px;font-family:var(--fn);font-size:10px;font-weight:700;letter-spacing:2.5px;color:#fff;cursor:pointer;box-shadow:0 4px 16px var(--accent-glow);transition:all 0.2s;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:7px;}
+.tdbtn:hover{transform:translateY(-2px);box-shadow:0 8px 24px var(--accent-glow)}
+.share-link{display:flex;align-items:center;gap:8px;padding:13px 15px;background:var(--bg-item);border:1px solid var(--border);border-radius:11px;margin-bottom:14px;cursor:pointer;transition:all 0.2s;}
+.share-link:hover{border-color:#fca5a5}
+.share-url{flex:1;font-size:10.5px;color:var(--text2);font-family:'Rajdhani',sans-serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:1px}
+.share-link svg{width:14px;height:14px;color:var(--accent);flex-shrink:0}
+.abar-wrap{margin-bottom:12px}
+.abar-label{display:flex;justify-content:space-between;font-size:9px;letter-spacing:2px;color:var(--text2);font-family:'Rajdhani',sans-serif;margin-bottom:5px}
+.abar-track{height:5px;border-radius:3px;background:var(--border);overflow:hidden}
+.abar-fill{height:100%;border-radius:3px;background:linear-gradient(to right,var(--accent),#f87171);transform-origin:left;animation:barIn 0.8s ease both}
+@keyframes barIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.toast{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-12px) scale(0.94);z-index:2000;padding:10px 22px;border-radius:100px;background:var(--bg-sheet);border:1px solid var(--accent-border);color:var(--accent);font-size:10.5px;font-weight:700;letter-spacing:1.5px;font-family:'Rajdhani',sans-serif;opacity:0;transition:all 0.28s cubic-bezier(.2,.8,.2,1);pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px var(--accent-glow);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
+.ripple{position:absolute;border-radius:50%;background:var(--accent-glow);transform:scale(0);animation:rpl 0.5s ease forwards;pointer-events:none;z-index:10;}
+@keyframes rpl{to{transform:scale(4);opacity:0}}
+/* ── LOCK SCREEN (Password Gate) ── */
+.lock-root{
+  --lk-accent:#000000;
+  --lk-ar:0;--lk-ag:0;--lk-ab:0;
+  --lk-c15:rgba(0,0,0,.15);
+  --lk-c22:rgba(0,0,0,.22);
+  --lk-c28:rgba(0,0,0,.28);
+  --lk-c45:rgba(0,0,0,.45);
+  --lk-c55:rgba(0,0,0,.55);
+  --lk-bg:#ffffff;
+  --lk-card:rgba(255,255,255,0.98);
+  --lk-text:#0d1b2e;
+  --lk-muted:rgba(13,27,46,0.42);
+  --lk-border:rgba(0,0,0,0.10);
+  --lk-input-bg:rgba(0,0,0,0.03);
+  --lk-red:#e05555;--lk-green:#2a9e60;
+}
+.lock-root *{box-sizing:border-box;margin:0;padding:0;}
+.lock-root{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--lk-bg);font-family:'DM Sans',sans-serif;}
+.lock-canvas{position:fixed;inset:0;z-index:0;}
+.lock-bg-glow{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 25% 50%,rgba(0,0,0,.10) 0%,transparent 70%),
+             radial-gradient(ellipse 50% 60% at 78% 55%,rgba(0,0,0,.06) 0%,transparent 70%);}
+.lock-noise{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;}
+.lock-card{
+  position:relative;z-index:10;width:430px;max-width:calc(100vw - 32px);
+  background:var(--lk-card);
+  border:1px solid var(--lk-c28);border-radius:26px;
+  padding:54px 46px 46px;
+  backdrop-filter:blur(48px);-webkit-backdrop-filter:blur(48px);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.06) inset,0 20px 60px rgba(0,0,0,.12),0 4px 24px rgba(0,0,0,0.15);
+  animation:lkCardIn .9s cubic-bezier(.16,1,.3,1) both;}
+@keyframes lkCardIn{from{opacity:0;transform:translateY(28px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+.lock-card::before{content:'';position:absolute;top:0;left:18%;right:18%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--lk-accent),transparent);
+  animation:lkTl .9s ease .3s both;}
+@keyframes lkTl{from{opacity:0;left:50%;right:50%}to{opacity:1;left:18%;right:18%}}
+.lk-icon-wrap{width:68px;height:68px;margin:0 auto 30px;position:relative;display:flex;align-items:center;justify-content:center;animation:lkIconIn .7s ease .2s both;}
+@keyframes lkIconIn{from{opacity:0;transform:scale(.5) rotate(-20deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+.lk-ring{position:absolute;inset:0;border-radius:50%;border:1px solid var(--lk-c28);animation:lkRp 3.2s ease-in-out infinite;}
+.lk-ring2{inset:-9px;border-color:var(--lk-c15);animation-delay:.6s;}
+@keyframes lkRp{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.07);opacity:.45}}
+.lk-icon-bg{width:68px;height:68px;border-radius:50%;
+  background:radial-gradient(circle at 36% 34%,var(--lk-c22),var(--lk-c15));
+  border:1px solid var(--lk-c28);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;box-shadow:0 0 36px var(--lk-c15);}
+.lk-icon-bg svg{width:27px;height:27px;color:var(--lk-accent);}
+.lk-eyebrow{text-align:center;font-size:10px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--lk-accent);opacity:.8;margin-bottom:10px;animation:lkFu .6s ease .4s both;}
+.lk-h1{text-align:center;font-family:var(--fn,'DM Sans'),sans-serif;font-size:28px;font-weight:700;color:var(--lk-text);letter-spacing:2px;line-height:1.1;margin-bottom:7px;animation:lkFu .6s ease .5s both;}
+.lk-sub{text-align:center;font-size:13px;font-weight:300;color:var(--lk-muted);margin-bottom:38px;animation:lkFu .6s ease .55s both;}
+@keyframes lkFu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.lk-div{display:flex;align-items:center;gap:12px;margin-bottom:32px;animation:lkFu .6s ease .6s both;}
+.lk-dl{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--lk-c22));}
+.lk-dl:last-child{background:linear-gradient(90deg,var(--lk-c22),transparent);}
+.lk-dd{width:5px;height:5px;transform:rotate(45deg);background:var(--lk-accent);opacity:.6;}
+.lk-field{margin-bottom:18px;animation:lkFu .6s ease .65s both;}
+.lk-flabel{display:block;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--lk-muted);margin-bottom:9px;}
+.lk-iw{position:relative;}
+.lk-pwinput{
+  width:100%;background:var(--lk-input-bg);border:1px solid var(--lk-border);
+  border-radius:14px;padding:16px 52px 16px 20px;color:var(--lk-text);
+  font-family:'DM Sans',sans-serif;font-size:15px;letter-spacing:3px;outline:none;
+  transition:all .3s ease;caret-color:var(--lk-accent);}
+.lk-pwinput::placeholder{letter-spacing:1px;font-size:14px;color:var(--lk-muted);}
+.lk-pwinput:focus{border-color:var(--lk-c45);background:var(--lk-c15);box-shadow:0 0 0 4px var(--lk-c15),0 4px 20px rgba(0,0,0,.1);}
+@property --lk-ang{syntax:'<angle>';initial-value:0deg;inherits:false;}
+.lk-iglow{position:absolute;inset:0;border-radius:14px;pointer-events:none;opacity:0;
+  background:conic-gradient(from var(--lk-ang,0deg),transparent 70%,var(--lk-c55) 80%,transparent 90%);
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:destination-out;mask-composite:exclude;padding:1px;transition:opacity .4s;}
+.lk-pwinput:focus~.lk-iglow{opacity:1;animation:lkSg 3s linear infinite;}
+@keyframes lkSg{to{--lk-ang:360deg}}
+.lk-eyebtn{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--lk-muted);padding:4px;transition:color .2s;display:flex;align-items:center;}
+.lk-eyebtn:hover{color:var(--lk-accent);}
+.lk-eyebtn svg{width:17px;height:17px;}
+.lk-dots{display:flex;justify-content:center;gap:9px;margin-bottom:28px;animation:lkFu .6s ease .7s both;}
+.lk-dot{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--lk-border);transition:all .25s ease;background:transparent;}
+.lk-dot.filled{background:var(--lk-accent);border-color:var(--lk-accent);box-shadow:0 0 11px var(--lk-c45);}
+.lk-dot.err{background:var(--lk-red);border-color:var(--lk-red);box-shadow:0 0 11px rgba(224,85,85,.65);}
+.lk-dot.ok{background:var(--lk-green);border-color:var(--lk-green);box-shadow:0 0 11px rgba(42,158,96,.65);}
+.lk-errmsg{margin-top:9px;font-size:12px;color:var(--lk-red);letter-spacing:.3px;display:none;align-items:center;gap:6px;animation:lkShake .4s ease;}
+.lk-errmsg.show{display:flex;}
+@keyframes lkShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.lk-btnp{
+  width:100%;padding:17px;
+  background:var(--lk-accent);
+  border:none;border-radius:14px;color:#fff;
+  font-family:var(--fn,'DM Sans'),sans-serif;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  cursor:pointer;position:relative;overflow:hidden;transition:all .3s ease;
+  margin-bottom:12px;animation:lkFu .6s ease .75s both;
+  box-shadow:0 4px 28px var(--lk-c28);}
+.lk-btnp::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.22) 0%,transparent 55%);opacity:0;transition:opacity .3s;}
+.lk-btnp:hover{transform:translateY(-2px);box-shadow:0 10px 44px var(--lk-c45);}
+.lk-btnp:hover::before{opacity:1;}
+.lk-btnp:active{transform:translateY(0);}
+.lk-btnp::after{content:'';position:absolute;top:-50%;left:-80%;width:50%;height:200%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+  transform:skewX(-20deg);animation:lkSw 3.5s infinite 1.8s;}
+@keyframes lkSw{0%{left:-80%}30%,100%{left:160%}}
+.lk-btns{
+  width:100%;padding:16px;background:transparent;
+  border:1px solid var(--lk-border);border-radius:14px;
+  color:var(--lk-muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:1.2px;
+  cursor:pointer;position:relative;overflow:hidden;transition:all .3s ease;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  animation:lkFu .6s ease .82s both;}
+.lk-btns:hover{border-color:var(--lk-c45);color:var(--lk-accent);background:var(--lk-c15);box-shadow:0 0 24px var(--lk-c15);}
+.lk-btns svg{width:16px;height:16px;transition:transform .3s;}
+.lk-btns:hover svg{transform:scale(1.12);}
+.lk-cfooter{margin-top:26px;display:flex;align-items:center;justify-content:center;gap:6px;animation:lkFu .6s ease .9s both;}
+.lk-cfooter svg{width:11px;height:11px;color:var(--lk-muted);}
+.lk-cfooter span{font-size:11px;color:var(--lk-muted);letter-spacing:1px;}
+.lk-soverlay{
+  position:absolute;inset:0;border-radius:26px;
+  background:linear-gradient(158deg,rgba(42,158,96,.08),rgba(42,158,96,.02));
+  border:1px solid rgba(42,158,96,.25);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  opacity:0;pointer-events:none;transition:opacity .5s ease;
+  backdrop-filter:blur(8px);z-index:20;}
+.lk-soverlay.show{opacity:1;pointer-events:all;}
+.lk-scheck{width:76px;height:76px;border-radius:50%;
+  background:radial-gradient(circle,rgba(42,158,96,.18),transparent);
+  border:1.5px solid rgba(42,158,96,.3);
+  display:flex;align-items:center;justify-content:center;}
+.lk-scheck svg{width:34px;height:34px;color:var(--lk-green);}
+.lk-stxt{font-family:var(--fn,'DM Sans'),sans-serif;font-size:20px;font-weight:700;color:var(--lk-text);letter-spacing:2px;}
+.lk-ssub{font-size:12px;color:var(--lk-muted);letter-spacing:1px;}
+/* Modal */
+.lk-mbg{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s ease;}
+.lk-mbg.open{opacity:1;pointer-events:all;}
+.lk-modal{background:var(--lk-card);border-radius:28px 28px 0 0;width:100%;max-width:430px;padding:32px 28px 40px;position:relative;transform:translateY(30px);transition:transform .35s cubic-bezier(.32,.72,0,1);border-top:1px solid var(--lk-c28);}
+.lk-mbg.open .lk-modal{transform:translateY(0);}
+.lk-mclosebtn{position:absolute;top:20px;right:20px;background:var(--lk-c15);border:none;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--lk-muted);transition:background .2s;}
+.lk-mclosebtn:hover{background:var(--lk-c28);}
+.lk-mclosebtn svg{width:15px;height:15px;}
+.lk-micon{width:58px;height:58px;border-radius:18px;background:var(--lk-c15);border:1px solid var(--lk-c28);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.lk-micon svg{width:26px;height:26px;color:var(--lk-accent);}
+.lk-modal h2{text-align:center;font-family:var(--fn,'DM Sans'),sans-serif;font-size:22px;font-weight:700;color:var(--lk-text);margin-bottom:10px;letter-spacing:1.5px;}
+.lk-modal p{text-align:center;font-size:13px;color:var(--lk-muted);line-height:1.7;margin-bottom:24px;}
+.lk-contacts{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.lk-crow{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--lk-c15);border:1px solid var(--lk-c22);border-radius:16px;text-decoration:none;transition:all .25s ease;cursor:pointer;}
+.lk-crow:hover{border-color:var(--lk-c45);background:var(--lk-c22);}
+.lk-cav{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.lk-cname{font-size:13px;font-weight:500;color:var(--lk-text);margin-bottom:2px;}
+.lk-cval{font-size:12px;color:var(--lk-muted);}
+.lk-carr{margin-left:auto;color:var(--lk-muted);}
+.lk-carr svg{width:16px;height:16px;}
+.lk-mdismiss{width:100%;padding:15px;background:var(--lk-accent);border:none;border-radius:14px;color:#fff;font-family:var(--fn,'DM Sans'),sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:.3s;box-shadow:0 4px 20px var(--lk-c28);}
+.lk-mdismiss:hover{transform:translateY(-1px);box-shadow:0 8px 30px var(--lk-c45);}
+
+/* ── ENTRY POPUP ── */
+.pop-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.75);z-index:5000;
+  align-items:center;justify-content:center;padding:20px;
+  backdrop-filter:blur(6px);
+}
+.pop-overlay.show{display:flex;}
+.pop-card{
+  background:var(--card);border-radius:22px;
+  width:100%;max-width:340px;padding:0;
+  position:relative;overflow:hidden;
+  animation:popIn .4s cubic-bezier(.175,.885,.32,1.275) both;
+}
+@keyframes popIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+.pop-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),transparent,var(--accent));
+  background-size:200% 100%;animation:shimmer 2s linear infinite;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.pop-header{
+  padding:20px 20px 0;text-align:center;
+}
+.pop-emoji{font-size:2.2rem;margin-bottom:8px;}
+.pop-title{font-size:13px;font-weight:800;letter-spacing:2px;color:var(--accent);margin-bottom:6px;}
+.pop-msg{
+  font-size:12px;color:var(--text);
+  font-family:'Rajdhani',sans-serif;
+  line-height:1.7;letter-spacing:.5px;padding:0 20px 18px;
+}
+.pop-footer{padding:0 16px 20px;display:flex;flex-direction:column;gap:8px;}
+.pop-btn-main{
+  padding:13px;background:var(--accent);border:none;border-radius:12px;
+  font-family:var(--fn);font-size:10px;font-weight:700;letter-spacing:2px;
+  color:#fff;cursor:pointer;box-shadow:0 4px 16px var(--accent-glow);transition:.2s;
+}
+.pop-btn-main:hover{transform:translateY(-1px);}
+.pop-btn-close{
+  padding:10px;background:transparent;border:1px solid var(--border);
+  border-radius:12px;font-family:'Rajdhani',sans-serif;
+  font-size:10px;font-weight:600;letter-spacing:1.5px;
+  color:var(--text);cursor:pointer;transition:.2s;text-transform:uppercase;
+}
+.pop-btn-close:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ── CHANNEL FOLLOW POPUP ── */
+.ch-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.8);z-index:5001;
+  align-items:flex-end;justify-content:center;
+  backdrop-filter:blur(8px);
+}
+.ch-overlay.show{display:flex;}
+.ch-sheet{
+  background:var(--card);
+  border-radius:24px 24px 0 0;
+  width:100%;max-width:640px;
+  padding:8px 0 40px;
+  position:relative;overflow:hidden;
+  animation:sheetUp .35s cubic-bezier(.32,.72,0,1) both;
+}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.ch-sheet::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  background-size:200%;animation:shimmer 1.8s linear infinite;
+}
+.ch-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:10px auto 16px;}
+.ch-body{padding:0 20px;text-align:center;}
+.ch-icon{
+  width:60px;height:60px;border-radius:18px;
+  background:var(--accent-bg);border:1.5px solid var(--accent-border);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 12px;font-size:1.6rem;
+  box-shadow:0 0 18px var(--accent-glow);
+}
+.ch-title{font-size:14px;font-weight:800;letter-spacing:2px;color:var(--text);margin-bottom:6px;}
+.ch-msg{font-size:12px;color:var(--text);font-family:'Rajdhani',sans-serif;line-height:1.7;margin-bottom:20px;letter-spacing:.5px;}
+.ch-btn-follow{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:14px;background:var(--accent);
+  border:none;border-radius:14px;font-family:var(--fn);
+  font-size:11px;font-weight:700;letter-spacing:2px;color:#fff;
+  cursor:pointer;text-decoration:none;
+  box-shadow:0 6px 24px var(--accent-glow);
+  transition:.2s;margin-bottom:8px;
+}
+.ch-btn-follow:hover{transform:translateY(-2px);}
+.ch-btn-cancel{
+  width:100%;padding:12px;background:transparent;
+  border:1px solid var(--border);border-radius:14px;
+  font-family:'Rajdhani',sans-serif;font-size:10px;
+  font-weight:600;letter-spacing:1.5px;color:var(--text);
+  cursor:pointer;transition:.2s;text-transform:uppercase;
+}
+.ch-btn-cancel:hover{border-color:var(--accent);color:var(--accent);}
+.ch-timer{
+  font-size:9px;color:var(--text);letter-spacing:1.5px;
+  font-family:'Rajdhani',sans-serif;margin-bottom:14px;
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;" width="413" height="545"></canvas>
+<div class="toast" id="toast"></div>
+
+
+
+<!-- ── CHANNEL FOLLOW POPUP ── -->
+<div class="ch-overlay" id="ch-pop">
+  <div class="ch-sheet">
+    <div class="ch-handle"></div>
+    <div class="ch-body">
+      <div class="ch-icon">📢</div>
+      <div class="ch-title">JOIN OUR OFFICIAL CHANNEL</div>
+            <div class="ch-msg">THIS ONLY FOR EDUCATIONAL PURPOSE</div>
+            <div class="ch-timer" id="ch-timer"></div>
+      <a href="https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X" target="_blank" class="ch-btn-follow" onclick="closeChannel()">
+        <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+        FOLLOW NOW ?      </a>
+      <button class="ch-btn-cancel" onclick="closeChannel()">LATER ?</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── ENTRY POPUP ── -->
+<div class="pop-overlay" id="entry-pop">
+  <div class="pop-card">
+    <div class="pop-header">
+      <div class="pop-emoji">👋</div>
+      <div class="pop-title">WELCOME</div>
+    </div>
+    <div class="pop-msg">MY PREMIUM ALL TOOLKIT</div>
+    <div class="pop-footer">
+      <button class="pop-btn-main" onclick="closeEntryPop()">GOT IT ✓</button>
+      <button class="pop-btn-close" onclick="closeEntryPop()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nbrand">
+    <div class="nlogo">
+            <img src="https://proboy.vercel.app/img.png" alt="A" onerror="this.outerHTML='&lt;span class=nlogo-ini&gt;A&lt;/span&gt;'">
+          </div>
+    <div class="ntxt">
+      <h1>ProBoy-TOOKIT</h1>
+      <p>PREMIUM-HAKCS-AND-TOOLS</p>
+    </div>
+  </div>
+  <div class="nbtns">
+    <button class="nb" id="btnTheme" title="Theme" style="position:relative">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"></path><circle cx="12" cy="12" r="10"></circle></svg>
+    </button>
+    <button class="nb" id="btnThemeSettings" title="Theme Settings" style="position:relative">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+      <div class="nb-dot"></div>
+    </button>
+    <button class="nb" id="btnMenu" title="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="16" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="pg">
+  <div class="hero">
+    <div class="pill">✦ PREMIUM</div>
+    <h2 class="htitle"><span class="hw">ProBoy-TOOKIT </span><span class="ha"></span></h2>
+    <p class="hsub">PREMIUM-HAKCS-AND-TOOLS</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+      <span class="snum" id="sOn">—</span><span class="slbl">Online</span>
+    </div>
+    <div class="stat">
+      <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></div>
+      <span class="snum" id="sVw">324</span><span class="slbl">Views</span>
+    </div>
+    <div class="stat">
+      <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
+      <span class="snum" id="sTl">132</span><span class="slbl">Tools</span>
+    </div>
+  </div>
+
+  <div class="sw">
+    <span class="si2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+    <input id="search" class="sinput" type="text" placeholder="Search tools...">
+  </div>
+
+  <div class="sh">
+    <div class="shl l"></div>
+    <svg class="shico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+    <span>Premium Tools</span>
+    <div class="shl"></div>
+  </div>
+
+  <div class="tgrid" id="tgrid"><div class="tc cs-10" onclick="clickTool(2886,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYGFuu-0dKmjAdZfufczzfcJEBeIHFhjcdUfpS6mwNow&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">BAN &amp; UNBAN REPORTER</div></div><div class="tc cs-10" onclick="clickTool(2908,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR19aKYFkoP9g16BCdIsQJr7zyZdMs-Bm-jdL_SV9nizA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">IP INFORMATION HACK</div></div><div class="tc cs-10" onclick="clickTool(2909,event)"><div class="tiw"><img src="https://immense-teal-ep3xdqkh.edgeone.dev/images-2.jpeg" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WINK PRO ?</div></div><div class="tc cs-10" onclick="clickTool(2910,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp--lYKMyTV-6bJX0PzPM3HI-NrfoARzG5bB2-NnvGqg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">NETFLIX PREMIUM</div></div><div class="tc cs-10" onclick="clickTool(2911,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiG75nE97wmF-dUQPQZrVvKoCPlw4vnS2_OfuXeYxezg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">INSTAGRAM HACKING</div></div><div class="tc cs-10" onclick="clickTool(2912,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2R1vpcjm-R2SvecG4g4cGmmv0BqK4-3ZQfbwN8abDDA&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">UNLIMITED GMAIL MAKING</div></div><div class="tc cs-10" onclick="clickTool(2913,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX7fgxhTimQTji0WC8osbM-HuQDNpo7yM5xbQVhIFs9A&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">GALLERY CRASH APK [NOT INSTALL OWN PHONE]</div></div><div class="tc cs-10" onclick="clickTool(2914,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKb1jhGJbQxeoMxpR3ghuV1GFdFo0tNcYgyrDLNh0SFQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">TIKTOK HACK</div></div><div class="tc cs-10" onclick="clickTool(2915,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjiWApD0pr7Ik6kWKkAM7jSWRXZc01y4PCZm_EMTxF4A&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">HOW TO CREATE PAYPAL ACCOUNT</div></div><div class="tc cs-10" onclick="clickTool(2917,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7TThON_BoNIM-aQxEFHyqweKs0OeBJo40KEiIzWUYGQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">MOBILE DEID VIRUS</div></div><div class="tc cs-10" onclick="clickTool(2918,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSey-EjQ2ETLS9HfXzOjPiWNlVLJKUEnBjBGuPF9HhLjQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">MOBILE RESET APK</div></div><div class="tc cs-10" onclick="clickTool(2919,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyC52d4JvyDZjb5H6AzwvWyZ06VBj0-rNmjM651DRvGw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">MOBILE LOCK APK</div></div><div class="tc cs-10" onclick="clickTool(2920,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKtyx96OUEVa9pCacWxk9BkNiYoC6gqEdvPDF0oFvScQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WHATSAPP CHANNEL BAN METHOD</div></div><div class="tc cs-10" onclick="clickTool(2921,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhHGbEz3jTBlw_QlHnNwKcqs30b3UPk-Mt9SPzbU2Pgg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">POWERFUL SMS BOMBER</div></div><div class="tc cs-10" onclick="clickTool(2922,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw1KTxGBZ87R8iWeBZXfyNM91vup_ry6e6LRCh-yb-fA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">FAKE HACKING PRANK</div></div><div class="tc cs-10" onclick="clickTool(2923,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLx1eRudBCqS0agbJedrUSpCRsj19IndKNsr039mGzpg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">EASYPAISA FAKE SCREENSHOT REAL</div></div><div class="tc cs-10" onclick="clickTool(2924,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLx1eRudBCqS0agbJedrUSpCRsj19IndKNsr039mGzpg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">FAKE EASYPAISA ANIMATION</div></div><div class="tc cs-10" onclick="clickTool(2925,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLx1eRudBCqS0agbJedrUSpCRsj19IndKNsr039mGzpg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">FAKE EASYPAISA HISTORY GENERATOR</div></div><div class="tc cs-10" onclick="clickTool(2926,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSzLy5ORCRRAvxY-SRlJqU1eneZHYkE8FmjarXqsvdMw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">JAZZ CASH ANIMATION</div></div><div class="tc cs-10" onclick="clickTool(2927,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLx1eRudBCqS0agbJedrUSpCRsj19IndKNsr039mGzpg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">LOGIN EASYPAISA ACCOUNT WITHOUT BIOMETRIC</div></div><div class="tc cs-10" onclick="clickTool(2928,event)"><div class="tiw"><img src="https://i.postimg.cc/50b9CjFS/IMG-20260619-WA0017.jpg" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">CAMERA + LOCATION + MIC HACK TELEGRAM BOT</div></div><div class="tc cs-10" onclick="clickTool(2929,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIqvbBf7E7GtQ9R1sY0IZ8sTy02xnWqxI9vcuSxxg09w&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">50+ HACKING COURSES</div></div><div class="tc cs-10" onclick="clickTool(3068,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBr97DK_UwSSxBrJlmN0l2Ze99TvTZCX7ZnTq1z4dwbA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">YOUTUBE WATCHTIME APK</div></div><div class="tc cs-10" onclick="clickTool(3071,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_XCh2jBfAKKI3RvZq8voelhjowCLue9K0Se15XVI3XA&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WIFI HACK METHOD</div></div><div class="tc cs-10" onclick="clickTool(3075,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvdm3bAFnXfT8V36umXH_r1qkZxqQ3wGj2_raBiEIN3A&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">APP CLONER MOD APK</div></div><div class="tc cs-10" onclick="clickTool(3088,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReUYIlFEl_6DTb2JXs7f_ZiHCiUa8DrqXcW0rKRWNrRw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">MOBILE HACK</div></div><div class="tc cs-10" onclick="clickTool(3092,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP1yXDWRFub0mQeHhhvIAmlcWh5T5gzY0XvMBAoMTfeA&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">SPOTIFY PREMIUM</div></div><div class="tc cs-10" onclick="clickTool(3097,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiz8igTWWTfV9qxMirnCLjNVohx2JGceE4YrzhGYykwA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">YOUTUBE PREMIUM</div></div><div class="tc cs-10" onclick="clickTool(3098,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlbwI10SHhzWh5pFPbaW5pXHYYFe10crYmXlLZ47ivKg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">LIVE WALLPAPER</div></div><div class="tc cs-10" onclick="clickTool(3100,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-gOHotGC9eHgWLO9-ZBQDnc8JETnnghrCMSHPl-5XKQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">TELEGRAM PREMIUM</div></div><div class="tc cs-10" onclick="clickTool(3102,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS83BzT79rNeuaYqENTniENwQgf_yyBl-UdThUumEZfYA&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">SNAPCHAT PREMIUM</div></div><div class="tc cs-10" onclick="clickTool(3103,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1MqCNsezK0h6lxjj6KQY6Og4WFoHXS-WLnH5ne8kZgA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">CAPCUT PRO</div></div><div class="tc cs-10" onclick="clickTool(3104,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQupp7L0iAQ4UZLsPISQ4gm3namqnXZamtZEa9MjAIDw&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">PICSART PREMIUM</div></div><div class="tc cs-10" onclick="clickTool(3105,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXREpOIqwPT4nY1M7WHb-9-m8CymTGOS2qO-h9YaKd2g&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WHATSAPP META VERIFY METHOD</div></div><div class="tc cs-10" onclick="clickTool(3107,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFYxdjMP6FHpNML7J6xaP2Nwkw3nMjFr6yNYBl-087gA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">800+ LIGHTROOM PRESET</div></div><div class="tc cs-10" onclick="clickTool(3108,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT78AFyxDMcQREhHUBLPLv2N5OrYmEdn9O59rwWceip9A&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">SOCIAL MEDIA PREMIUM BUNDLE PACK 1</div></div><div class="tc cs-10" onclick="clickTool(3109,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkl3LrOdqBPkslxizdyDXjgMqQ7YSIyJY_is3newhyg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">ALL TYPES OF COURSES IN ONE PACK</div></div><div class="tc cs-10" onclick="clickTool(3110,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzmzHtHqcusGmXgyskrY4Ss_A1X4umFu-eLKQWdMk6ow&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">HOW TO MAKE CAMERA HACK BOT</div></div><div class="tc cs-10" onclick="clickTool(3111,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpiXkuPKOTVEbh4gffr-fZtAALr2l7y2jsnYa1ZjWaZw&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">GTA VC</div></div><div class="tc cs-10" onclick="clickTool(3115,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVoI2BQrglP-RcKGS52SGTk9rjs5OfaJzZJVL1E5CIhQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">GEMINI JAILBREAK SCRIPT</div></div><div class="tc cs-10" onclick="clickTool(3116,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4Hz4fc9buS4-jy8ZyxGTQH_qBP7Xz8yojDTIqnWMcKA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">HACKER GPT</div></div><div class="tc cs-10" onclick="clickTool(3117,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpXUIasG69kkGpzUJOyGt8usip_KKySKFGyX80kaXLlQ&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">HACKER AI FOR CODING</div></div><div class="tc cs-10" onclick="clickTool(3118,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtCU0NAwdGttImRgfN1HQMeIFnKFKuiSWd4-Y5OznYCw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">HOW TO CREATE WHATSAPP OTP CHANNEL</div></div><div class="tc cs-10" onclick="clickTool(3119,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKVCyWGGB35TDQsE4MEhQAPNDTODyJzCMRGwiAONEHJA&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">CARDING COURSE</div></div><div class="tc cs-10" onclick="clickTool(3120,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiecGygYhfqAD3U81cGTieo8Zdnp7Rf4BGVw8Tyoo6HA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">GALLERY HACK</div></div><div class="tc cs-10" onclick="clickTool(3121,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlSFjiTNlGjU8QBJyPzoXHtcI0i3_BgBwcYU6alcmuQA&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">SNAPTUBE PREMIUM</div></div><div class="tc cs-10" onclick="clickTool(3123,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxLhdlx-k5BCxmtivZAaoUMl9oEhhigu9n_iW0nKVLIA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">UNLIMITED FACEBOOK LIKES</div></div><div class="tc cs-10" onclick="clickTool(3124,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0hTNxvldfondCuVYL-2-bVie2SEeL6dcyDpP6YCFMkg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WEBIATE BUILDER</div></div><div class="tc cs-10" onclick="clickTool(3125,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAHk3Ao-gkxXkWlSI4B6sVwBUXszNS9M1j23ddEwz3hA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">PROFESSIONAL CV MAKER</div></div><div class="tc cs-10" onclick="clickTool(3126,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp65wwAy_6ov20s_LOY2oEjMUZkl5SVtLqkmCJU0BXQw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WINGO LIVE PREDICTER</div></div><div class="tc cs-10" onclick="clickTool(3127,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA1n9nLOIWcFmBW0mZhsinMumLR6Yfk_jyaD8tIo_WXA&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">777 PREDICTOR</div></div><div class="tc cs-10" onclick="clickTool(3128,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF2kYu6_O6Vo9Xid86Qxn4CSafcUrTBy4eXZK85F_QXg&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WEBSITE SOURCE CODE EXTRACTER</div></div><div class="tc cs-10" onclick="clickTool(3129,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfYfmqfZQFE4tl8rN-EsVRpOQp0TXTlh5RjNiu3Gj8kw&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">TRUE CALLER SEARCH TOOL</div></div><div class="tc cs-10" onclick="clickTool(3130,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRda2DIvG5V7nrdeStV_EoC9GeB_NQzIDmLZcgecSMfsg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">CARD BUILDER</div></div><div class="tc cs-10" onclick="clickTool(3131,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeKCPToDZvJUCfQvvnSpXpQ73RjBL7po318fljcyXnoQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">AUTO REACTS FOR WHATSAPP CHANNEL</div></div><div class="tc cs-10" onclick="clickTool(3132,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAxI5mhHBGcTNXV-7rJlYc9t4NBghWqUOT2xPqtovV6A&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">HOW RO CREATE OWN MOBILE APP</div></div><div class="tc cs-10" onclick="clickTool(3133,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8dFA_US2Fjv-2TcheUAUwKOayF7nZpq2k0-6jIX4l0w&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">HOW TO CREATE UNLIMITED USA NUMBER</div></div><div class="tc cs-10" onclick="clickTool(3134,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhpD9wnTO2uM8D2HkTO5792MmaclbgzZveiSt3wcjthA&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WHATSAPP OTP LOCK</div></div><div class="tc cs-10" onclick="clickTool(3135,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhVJ7Wpdk_HGBPTI75yzlcNHU8J8WHNjjEkTe7DC7Ybg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">IMAGE TO LINK GENERATOR</div></div><div class="tc cs-10" onclick="clickTool(3136,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgt2i_s0xRzUTliEjVHIdcXLvs8_v06QDEigVPZy0GfQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">CHAT GPT PRO</div></div><div class="tc cs-10" onclick="clickTool(3137,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScn99G463hcKJUMiE-jJ-ws0OhMqXW12DFUpbz3fs07g&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">QR CODE GENERATOR</div></div><div class="tc cs-10" onclick="clickTool(3138,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQne10MDYJfSy3dsa9qjPay1ElzGKDKc2cAlyCOvPDhog&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">RANSOMWARE_PYTHON COURSE</div></div><div class="tc cs-10" onclick="clickTool(3139,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1vDGKIvPZmmS7_kM6ySKqWlXZwRWThYHqDKzs7wgtvw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WIFI HACKING COURSE PART 1</div></div><div class="tc cs-10" onclick="clickTool(3140,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1vDGKIvPZmmS7_kM6ySKqWlXZwRWThYHqDKzs7wgtvw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WIFI HACKING COURSE PART 2</div></div><div class="tc cs-10" onclick="clickTool(3141,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1vDGKIvPZmmS7_kM6ySKqWlXZwRWThYHqDKzs7wgtvw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WIFI HACKING COURSE PART 3</div></div><div class="tc cs-10" onclick="clickTool(3142,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1vDGKIvPZmmS7_kM6ySKqWlXZwRWThYHqDKzs7wgtvw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WIFI HACKING COURSE PART 4</div></div><div class="tc cs-10" onclick="clickTool(3143,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5j-HFwrhKxofFo8mXn_LpOtEJVZgH_kP-Ue4JYAY36w&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">PYTHON COURSES</div></div><div class="tc cs-10" onclick="clickTool(3144,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT__BYZ78k16d5949gTd7MHht36qWsTxeZsJ51ocUxRKA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WEB DESIGNING COURSES</div></div><div class="tc cs-10" onclick="clickTool(3145,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRby-uByPQAi6_Lr5dz651C_hRejaMlf7QlYzRJ5kdUNQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">PUBG HACK MAKING COURSE</div></div><div class="tc cs-10" onclick="clickTool(3154,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRozOwuGD7yTXhNqf3-vH8QXW4nnU_0RBVKokPdCihYzQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">ALL HACKING RATS</div></div><div class="tc cs-10" onclick="clickTool(3155,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwwouQXHKuZBQom46-x53y8DZoYPMuIDfz_7skV-yCLQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">AHMED TOOLKIT</div></div><div class="tc cs-10" onclick="clickTool(3156,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwwouQXHKuZBQom46-x53y8DZoYPMuIDfz_7skV-yCLQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">LORD HACKER TOOLKIT</div></div><div class="tc cs-10" onclick="clickTool(3157,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKjJKf_A-7driN_m6I1uG3vWOALhp-G2HshffL8ZShXQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">FREE FIRE INTRO SOURCE CODE</div></div><div class="tc cs-10" onclick="clickTool(3158,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3BUMgSHH1ytciK32isbKxHHg28Q-uGex4zTuMolzIYQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">HOW TO CREATE BOT &amp; OWN BOT HOSTING</div></div><div class="tc cs-10" onclick="clickTool(3195,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStuYedh-MT5j0QfhsFrnKOeTNYuhBscXHFPu3KfaT7Og&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">INSTAGRAM+ FACEBOOK HACK</div></div><div class="tc cs-10" onclick="clickTool(3196,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOXbx4KJAc-2U4HTluJf_FeHFCz4FZeKQ6GQ83FhadMg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">DDOS ATTACK</div></div><div class="tc cs-10" onclick="clickTool(3197,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQixCpebQIt9_dvMPF-E5q4xaHAeX0ov8f8mJaihZtp-w&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">INATA BRUTE FORCE</div></div><div class="tc cs-10" onclick="clickTool(3198,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL2vAoahc4CE_9Qfkzy40uSTrNeiUaRWAeBGF-i8h-Iw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">500+ TOOLS IN ONE PACK</div></div><div class="tc cs-10" onclick="clickTool(3199,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpWo8lMKO2PMVpb2_m-Gw_KIIniqowsquP0Og4WrJGow&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">FILE MANAGER HACK USING LINK</div></div><div class="tc cs-10" onclick="clickTool(3200,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXm6iRt1Vhy5VYFdd9BsTOHhv1omP75_DWiKAzF3ZLdQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">EASYPAISA TO ALL BANK FAKE SS</div></div><div class="tc cs-10" onclick="clickTool(3201,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmmJYH3GQF6TVrUbvqQOjIU1l_SK6b2jERupxi1Scyrg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">CREDIT CARD GENERATOR</div></div><div class="tc cs-10" onclick="clickTool(3202,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcmu25B5dC-j0DcF-jIeCfoPmfgWKZ7QUJot6fonf4vQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WEBSITE TO APP CONVERTER</div></div><div class="tc cs-10" onclick="clickTool(3204,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuYe2FYmmkwNm9wrkeiJk9tjDXpppWfkXrLN1AoIWQug&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">GAME PHISHING METHOD</div></div><div class="tc cs-10" onclick="clickTool(3205,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_9yM3lTj8AMmdzZWKE6DBEGAYehPVhDBW57rLxvGzUA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">X HUNTER RAT</div></div><div class="tc cs-10" onclick="clickTool(3206,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_9yM3lTj8AMmdzZWKE6DBEGAYehPVhDBW57rLxvGzUA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">SEE PRIVATE INSTAGRAM ACCOUNT</div></div><div class="tc cs-10" onclick="clickTool(3207,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqSxbTL9BA_Ks03rGsXyZaWrTOWDKhfKY_fOuKsCP8xA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WHATSAPP SPAM</div></div><div class="tc cs-10" onclick="clickTool(3214,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE5ZlzSEgS1KzDs8n_i8r1OXg5KnxQwukZo-8aHgE0LQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">YOUTUBE TITLE AND DISCRIMINATION COPY</div></div><div class="tc cs-10" onclick="clickTool(3302,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmjVEQf8UCkZ7DFxU8b54Eymqjb_gFgEopSU7lxX-fMg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WIFI HACK [ROOT]</div></div><div class="tc cs-10" onclick="clickTool(3319,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTshkGJNZzGK3w9ZLEPlMgX0UwJV62vplp0jeus4iodlw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">PUBG UC CARD</div></div><div class="tc cs-10" onclick="clickTool(3322,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5wppAzjcpHc6r-KrLGKmCobccAZbyrfJaMVcMYX3Z6g&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">TIKTOK LIKES</div></div><div class="tc cs-10" onclick="clickTool(3324,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7PF2j3iksOgh39_a3mZTX0CvwLLRhb1LQAFtdtu8L9Q&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">TIKTOK LIVE APK</div></div><div class="tc cs-10" onclick="clickTool(3344,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxHfKPSAiugXUWWwrnytAI0utw6TwMsZJQgYVEPD7riQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">SIM DATABASE</div></div><div class="tc cs-10" onclick="clickTool(3345,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaBjfBg98wGTjKXRp_YO5iBcQ1AapraJ72ZwXNgAJ-vA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">CLONE ANY WEBSITE</div></div><div class="tc cs-10" onclick="clickTool(3346,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT36AIQdHc7bumnS_E1iGayLc4WLwKBSa5yeDds7kQiyA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">INSTAGRAM BAN</div></div><div class="tc cs-10" onclick="clickTool(3350,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPqX8wniMVR16ZOl9E41QzQ70AfXw0qsTWX6BaUs88Uw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WHATSAPP JAMMER</div></div><div class="tc cs-10" onclick="clickTool(3352,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkfFkVIsTc4sZQYWp5YqkSC0s2WzizfziQeCG44PMcKw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">BUG BOT FOR BAN NUMBER &amp; GROUP</div></div><div class="tc cs-10" onclick="clickTool(3359,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ5IQ1Z9-ujBXqsVUPOXXk3ni1lxRpXdAv2-UiKnvPvg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">HOW TO CALL ANY PERSON WITHOUT SHOWING YOUR NUNBER</div></div><div class="tc cs-10" onclick="clickTool(3487,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLZfbA1kVHAxMc5chcDOXBgEc5tt4jOJpXXzHki4NrFg&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">MD BOT SCRIP</div></div><div class="tc cs-10" onclick="clickTool(3513,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT8JnEg7fsY1IWPLqDNRnLc4W62Q7RhzqODpeW-k1T_g&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">ProBoy API CRASHER</div></div><div class="tc cs-10" onclick="clickTool(3753,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKAQNdHtlBYGuZB4EXKC77o0fgeec0rAU1--9aa9Mgug&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">101 PYTHON PROJECT</div></div><div class="tc cs-10" onclick="clickTool(3754,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTlmwzKNcbIwH_WRUmBLTtROeXy_HAe77iaiIVXXs24w&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">PROCESS DEATH RAT</div></div><div class="tc cs-10" onclick="clickTool(3755,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYjkOY46pAw6GXtcV75e9fTXq5jwdgxq7A-T0snLATLg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">GMAIL PHISHING METHOD</div></div><div class="tc cs-10" onclick="clickTool(3910,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrkO4z2Mwn3BMk-PzZ_Q1MwqKhMY2l2k3DXDW54WBCbA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">SMM PANEL SOURCE CODE</div></div><div class="tc cs-10" onclick="clickTool(3911,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtM6XUDXI_8J2KR-5eFOjiGFv-XDLzWugMXteKoxPOiA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">HOW TO CREATE YOUR OWN OTP PANEL WEBSITE</div></div><div class="tc cs-10" onclick="clickTool(3912,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPvcUWSryBHQVnsHSUyworWESfnNGf22-Cs6ZQpL2TAg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">FOREX TRADING COURSE</div></div><div class="tc cs-10" onclick="clickTool(3913,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNK2N-xu0twLLCUf_D4fYV_hElOrb5O891cklVzcoiuw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">FACELESS YOUTUBE AUTOMATION COURSE</div></div><div class="tc cs-10" onclick="clickTool(3914,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKWnF7dfOHFfeT6prSPXmIuUjJ2sQJ2mCqcFI53yyF2w&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">FIVVER COMPLETE COURSE</div></div><div class="tc cs-10" onclick="clickTool(3915,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1J00diYpFL_6cc8hlaHYrlwPEcgaTqzV1OoXqImaJfQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">DARK WEB COMPLETE COURSE PART 1</div></div><div class="tc cs-10" onclick="clickTool(3916,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1J00diYpFL_6cc8hlaHYrlwPEcgaTqzV1OoXqImaJfQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">DARK WEB COMPLETE COURSE PART 2</div></div><div class="tc cs-10" onclick="clickTool(3917,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1J00diYpFL_6cc8hlaHYrlwPEcgaTqzV1OoXqImaJfQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">DARK WEB COMPLETE COURSE PART 3</div></div><div class="tc cs-10" onclick="clickTool(3918,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1J00diYpFL_6cc8hlaHYrlwPEcgaTqzV1OoXqImaJfQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">DARK WEB COMPLETE COURSE PART 4</div></div><div class="tc cs-10" onclick="clickTool(3919,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1J00diYpFL_6cc8hlaHYrlwPEcgaTqzV1OoXqImaJfQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">DARK WEB COMPLETE COURSE PART 5</div></div><div class="tc cs-10" onclick="clickTool(3920,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1J00diYpFL_6cc8hlaHYrlwPEcgaTqzV1OoXqImaJfQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">DARK WEB COMPLETE COURSE PART 6</div></div><div class="tc cs-10" onclick="clickTool(3921,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1J00diYpFL_6cc8hlaHYrlwPEcgaTqzV1OoXqImaJfQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">DARK WEB COMPLETE COURSE PART 7</div></div><div class="tc cs-10" onclick="clickTool(3922,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP_2uz43oh-1W4KQsXsxGEQS8c2vVhShDtE5o_cy4sQw&amp;s" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">AMAZON FBA MASTERY COURSE</div></div><div class="tc cs-10" onclick="clickTool(3923,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAiTH8PbyOqu0pm7DzkZu-ChPgRBi6VA1x0RRJ-0pfAQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">AI PROFIT BLUEPRINT COURSE</div></div><div class="tc cs-10" onclick="clickTool(3924,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3QGcnAsNGdroWKv33QiJOspl3XG5oAZDEa8_ZzKUyHA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">TEMP MAIL GANERATER</div></div><div class="tc cs-10" onclick="clickTool(3925,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaEnvdGlW1GOIAAQuUDvQVY-21fXOcn8VthqRa87ehgQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">HACK ANY DEVICE VIA PDF</div></div><div class="tc cs-10" onclick="clickTool(3926,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAljWiofyK-wTSGmcaI0J7fhO_brMYlinFu-8e0uZ8ng&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">GMAIL HACK</div></div><div class="tc cs-10" onclick="clickTool(3927,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvsehh3MSw2BIt_us7DXLgkc5XynaoLwVXWvyqcOpjwA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">HOW TO GET ANYONE IP WITH SNAPCHAT</div></div><div class="tc cs-10" onclick="clickTool(3928,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEyUgnzlkIV35Ip25nXJU4KfNMkuUrALBSmLyneH1z2w&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">GALLERY HACK METHOD PART 1 [APK GALLERY HACK]</div></div><div class="tc cs-10" onclick="clickTool(3929,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEyUgnzlkIV35Ip25nXJU4KfNMkuUrALBSmLyneH1z2w&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">GALLERY HACK METHOD PART 2 [TOTURIAL]</div></div><div class="tc cs-10" onclick="clickTool(3930,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfgKBQmaQbnvLg5KfxJ_pwc9NlPfUpEBrhafncF02QGQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">FULL MOBILE HACK RAT PART 1</div></div><div class="tc cs-10" onclick="clickTool(3931,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfgKBQmaQbnvLg5KfxJ_pwc9NlPfUpEBrhafncF02QGQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">FULL MOBILE HACK RAT PART 2</div></div><div class="tc cs-10" onclick="clickTool(3932,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqSxbTL9BA_Ks03rGsXyZaWrTOWDKhfKY_fOuKsCP8xA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">WHATSAPP HACK</div></div><div class="tc cs-10" onclick="clickTool(3970,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9s83MJkkS89d8yZi7MIp-pGPs9KKvCZzQCwXmhDr4aQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">SMS HACK</div></div><div class="tc cs-10" onclick="clickTool(3984,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT8sS20ZNbvDaY3_PpZXrm7m0Q5hvtVRLMK5Bfu4K0tw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">INSTAGRAM HACK</div></div><div class="tc cs-10" onclick="clickTool(3988,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbL1es1dX3cGmAhbg87UzINBULm0Z15UFsiW5pMCF-XQ&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">TELEGRAM HACK</div></div><div class="tc cs-10" onclick="clickTool(3992,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEFApozoHbXZv3-qG_rBCsDEbQTTxGJFXMWVWhZ2-zXg&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">CCTV CAMERA HACK</div></div><div class="tc cs-10" onclick="clickTool(3999,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjcL5rNNLB63QPg3YNa2LhE69Wx5jocqBhoKoLFVHpDA&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">FREE FIRE ID HACK</div></div><div class="tc cs-10" onclick="clickTool(4000,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHZOmf39YX4enuklq3jQkXcCShtmGaRWU4urUBFNe6rw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">PUBG ID HACK</div></div><div class="tc cs-10" onclick="clickTool(4002,event)"><div class="tiw"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZVrOSyFFg1peHmeMdxwICE_Dr1lCOYHGsB9-L-wkSDw&amp;s=10" onerror="this.parentNode.innerHTML=BOLT"></div><div class="tn">TIKTOK BAN METHOD</div></div></div>
+</div>
+
+<footer>
+    <div style="font-size:9px;letter-spacing:2px;margin-bottom:8px">&lt; MADE BY ProBoy &gt;</div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px 14px;margin-bottom:6px">
+        <a href="https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X" target="_blank" style="font-size:9px;letter-spacing:1.5px;color:var(--accent);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase">
+       OFFICIAL CHANNEL ?    </a>
+        <a href="https://whatsapp.com/channel/0029Vb8P42bC1FuEd4WLdW0h" target="_blank" style="font-size:9px;letter-spacing:1.5px;color:var(--accent);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase">
+       BACKUP CHANNEL ?    </a>
+        <a href="https://whatsapp.com/channel/0029Vb6h6fyDjiOkGtl8lz3N" target="_blank" style="font-size:9px;letter-spacing:1.5px;color:var(--accent);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase">
+       OFFICIAL CHANNEL    </a>
+      </div>
+  </footer>
+
+<!-- WA Channel Float Button (shown if channel link is set) -->
+<a href="https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X" target="_blank" id="wa-float" style="position:fixed;bottom:64px;right:16px;z-index:499;
+          width:36px;height:36px;border-radius:50%;
+          background:var(--accent);color:#fff;
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 18px var(--accent-glow);
+          text-decoration:none;transition:.2s;">
+  <svg style="width:16px;height:16px;fill:#fff" viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
+  </svg>
+</a>
+
+<!-- FAB -->
+<button class="fab" id="fab"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;display:block;flex-shrink:0"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></button>
+
+<!-- THEME OVERLAY -->
+<div class="ov" id="thOv">
+  <div class="sheet">
+    <div class="handle"></div>
+    <div class="shead">
+      <div class="stitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><line x1="2" y1="12" x2="22" y2="12"></line></svg> Theme Settings</div>
+      <div class="cbtn" onclick="hide('thOv')">✕</div>
+    </div>
+    <span class="flbl">Mode</span>
+    <div class="mrow" style="margin-bottom:18px">
+      <button class="mbtn on" id="mLight">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:13px;height:13px"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line></svg>
+        Light
+      </button>
+      <button class="mbtn" id="mDark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:13px;height:13px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        Dark
+      </button>
+    </div>
+    <div class="tabs">
+      <button class="tbtn on" data-tab="colors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.477-1.125-.288-.29-.46-.686-.46-1.097a1.618 1.618 0 0 1 1.618-1.618h1.93c3.073 0 5.741-2.51 5.741-5.582C22 6.966 17.499 2 12 2z"></path></svg> Colors</button>
+      <button class="tbtn" data-tab="fonts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg> Fonts</button>
+    </div>
+    <div class="tpane on" id="pane-colors">
+      <span class="flbl">Accent Color</span>
+      <div class="cgrid" id="cgrid"><div class="cc" data-v="#a855f7" onclick="setAccent(0)"><div class="ce">💜</div><div class="cn">Purple</div></div><div class="cc" data-v="#3b82f6" onclick="setAccent(1)"><div class="ce">💙</div><div class="cn">Blue</div></div><div class="cc" data-v="#22c55e" onclick="setAccent(2)"><div class="ce">💚</div><div class="cn">Green</div></div><div class="cc" data-v="#ef4444" onclick="setAccent(3)"><div class="ce">❤️</div><div class="cn">Red</div></div><div class="cc" data-v="#f97316" onclick="setAccent(4)"><div class="ce">🧡</div><div class="cn">Orange</div></div><div class="cc" data-v="#ec4899" onclick="setAccent(5)"><div class="ce">💗</div><div class="cn">Pink</div></div><div class="cc" data-v="#06b6d4" onclick="setAccent(6)"><div class="ce">💎</div><div class="cn">Cyan</div></div><div class="cc" data-v="#eab308" onclick="setAccent(7)"><div class="ce">💛</div><div class="cn">Yellow</div></div><div class="cc" data-v="#14b8a6" onclick="setAccent(8)"><div class="ce">🩵</div><div class="cn">Teal</div></div><div class="cc" data-v="#6366f1" onclick="setAccent(9)"><div class="ce">🔵</div><div class="cn">Indigo</div></div><div class="cc" data-v="#f43f5e" onclick="setAccent(10)"><div class="ce">🌹</div><div class="cn">Rose</div></div><div class="cc" data-v="#f59e0b" onclick="setAccent(11)"><div class="ce">🔶</div><div class="cn">Amber</div></div><div class="cc" data-v="#8b5cf6" onclick="setAccent(12)"><div class="ce">💜</div><div class="cn">Violet</div></div><div class="cc" data-v="#c084fc" onclick="setAccent(13)"><div class="ce">💐</div><div class="cn">Lavender</div></div><div class="cc" data-v="#0ea5e9" onclick="setAccent(14)"><div class="ce">⛅</div><div class="cn">Sky</div></div><div class="cc" data-v="#1e40af" onclick="setAccent(15)"><div class="ce">🌊</div><div class="cn">Navy</div></div><div class="cc" data-v="#fbbf24" onclick="setAccent(16)"><div class="ce">👑</div><div class="cn">Royal</div></div><div class="cc" data-v="#2563eb" onclick="setAccent(17)"><div class="ce">✴️</div><div class="cn">Cobalt</div></div><div class="cc" data-v="#818cf8" onclick="setAccent(18)"><div class="ce">🫐</div><div class="cn">Periwinkle</div></div><div class="cc" data-v="#f9a8d4" onclick="setAccent(19)"><div class="ce">🌸</div><div class="cn">Cornflower</div></div></div>
+    </div>
+    <div class="tpane" id="pane-fonts">
+      <div class="flist" id="flist"><div class="fi" onclick="setFont(0)"><span style="font-family:'Orbitron',sans-serif;font-size:15px">Orbitron</span></div><div class="fi" onclick="setFont(1)"><span style="font-family:'Audiowide',sans-serif;font-size:15px">Audiowide</span></div><div class="fi" onclick="setFont(2)"><span style="font-family:'Exo 2',sans-serif;font-size:15px">Exo 2</span></div><div class="fi" onclick="setFont(3)"><span style="font-family:'Rajdhani',sans-serif;font-size:15px">Rajdhani</span></div><div class="fi" onclick="setFont(4)"><span style="font-family:'Chakra Petch',sans-serif;font-size:15px">Chakra Petch</span></div><div class="fi" onclick="setFont(5)"><span style="font-family:'Russo One',sans-serif;font-size:15px">Russo One</span></div><div class="fi" onclick="setFont(6)"><span style="font-family:'Oxanium',sans-serif;font-size:15px">Oxanium</span></div><div class="fi" onclick="setFont(7)"><span style="font-family:'Teko',sans-serif;font-size:15px">Teko</span></div><div class="fi" onclick="setFont(8)"><span style="font-family:'Electrolize',sans-serif;font-size:15px">Electrolize</span></div><div class="fi" onclick="setFont(9)"><span style="font-family:'Syncopate',sans-serif;font-size:15px">Syncopate</span></div><div class="fi" onclick="setFont(10)"><span style="font-family:'Michroma',sans-serif;font-size:15px">Michroma</span></div><div class="fi" onclick="setFont(11)"><span style="font-family:'Bebas Neue',sans-serif;font-size:15px">Bebas Neue</span></div><div class="fi" onclick="setFont(12)"><span style="font-family:'Jura',sans-serif;font-size:15px">Jura</span></div><div class="fi" onclick="setFont(13)"><span style="font-family:'Saira',sans-serif;font-size:15px">Saira</span></div><div class="fi" onclick="setFont(14)"><span style="font-family:'Titillium Web',sans-serif;font-size:15px">Titillium Web</span></div><div class="fi" onclick="setFont(15)"><span style="font-family:'Black Ops One',sans-serif;font-size:15px">Black Ops One</span></div><div class="fi on" onclick="setFont(16)"><span style="font-family:'Poppins',sans-serif;font-size:15px">Poppins</span></div><div class="fi" onclick="setFont(17)"><span style="font-family:'Nunito',sans-serif;font-size:15px">Nunito</span></div><div class="fi" onclick="setFont(18)"><span style="font-family:'Raleway',sans-serif;font-size:15px">Raleway</span></div><div class="fi" onclick="setFont(19)"><span style="font-family:'Oswald',sans-serif;font-size:15px">Oswald</span></div><div class="fi" onclick="setFont(20)"><span style="font-family:'Josefin Sans',sans-serif;font-size:15px">Josefin Sans</span></div><div class="fi" onclick="setFont(21)"><span style="font-family:'Quicksand',sans-serif;font-size:15px">Quicksand</span></div><div class="fi" onclick="setFont(22)"><span style="font-family:'Barlow Condensed',sans-serif;font-size:15px">Barlow Condensed</span></div><div class="fi" onclick="setFont(23)"><span style="font-family:'Righteous',sans-serif;font-size:15px">Righteous</span></div><div class="fi" onclick="setFont(24)"><span style="font-family:'Bungee',sans-serif;font-size:15px">Bungee</span></div><div class="fi" onclick="setFont(25)"><span style="font-family:'Cinzel',serif;font-size:15px">Cinzel</span></div><div class="fi" onclick="setFont(26)"><span style="font-family:'Playfair Display',serif;font-size:15px">Playfair Display</span></div><div class="fi" onclick="setFont(27)"><span style="font-family:'Merriweather',serif;font-size:15px">Merriweather</span></div><div class="fi" onclick="setFont(28)"><span style="font-family:'Lora',serif;font-size:15px">Lora</span></div><div class="fi" onclick="setFont(29)"><span style="font-family:'Abril Fatface',serif;font-size:15px">Abril Fatface</span></div><div class="fi" onclick="setFont(30)"><span style="font-family:'Pacifico',cursive;font-size:15px">Pacifico</span></div><div class="fi" onclick="setFont(31)"><span style="font-family:'Dancing Script',cursive;font-size:15px">Dancing Script</span></div><div class="fi" onclick="setFont(32)"><span style="font-family:'Satisfy',cursive;font-size:15px">Satisfy</span></div><div class="fi" onclick="setFont(33)"><span style="font-family:'Great Vibes',cursive;font-size:15px">Great Vibes</span></div><div class="fi" onclick="setFont(34)"><span style="font-family:'Permanent Marker',cursive;font-size:15px">Permanent Marker</span></div><div class="fi" onclick="setFont(35)"><span style="font-family:'Inconsolata',monospace;font-size:15px">Inconsolata</span></div><div class="fi" onclick="setFont(36)"><span style="font-family:'Share Tech Mono',monospace;font-size:15px">Share Tech Mono</span></div><div class="fi" onclick="setFont(37)"><span style="font-family:'VT323',monospace;font-size:15px">VT323</span></div><div class="fi" onclick="setFont(38)"><span style="font-family:'Press Start 2P',cursive;font-size:15px">Press Start 2P</span></div><div class="fi" onclick="setFont(39)"><span style="font-family:'Courier Prime',monospace;font-size:15px">Courier Prime</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MENU OVERLAY -->
+<div class="ov" id="menuOv">
+  <div class="sheet">
+    <div class="handle"></div>
+    <div class="shead">
+      <div class="stitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="16" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg> Menu</div>
+      <div class="cbtn" onclick="hide('menuOv')">✕</div>
+    </div>
+    <div class="mlist">
+      <div class="mli" onclick="show('profileOv');hide('menuOv')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><div class="mli-t"><div class="mli-title">Profile</div><div class="mli-sub">Account &amp; premium status</div></div><span class="mli-arr">›</span></div>
+      <div class="mli" onclick="show('thOv');hide('menuOv')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><line x1="2" y1="12" x2="22" y2="12"></line></svg><div class="mli-t"><div class="mli-title">Theme Settings</div><div class="mli-sub">Colors, fonts</div></div><span class="mli-arr">›</span></div>
+      <div class="mli" onclick="show('stOv');hide('menuOv')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"></path><circle cx="12" cy="12" r="10"></circle></svg><div class="mli-t"><div class="mli-title">Settings</div><div class="mli-sub">Preferences</div></div><span class="mli-arr">›</span></div>
+      <div class="mli" onclick="show('statsOv');hide('menuOv')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg><div class="mli-t"><div class="mli-title">Analytics</div><div class="mli-sub">Live stats</div></div><span class="mli-arr">›</span></div>
+      <div class="mli" onclick="show('shareOv');hide('menuOv')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><div class="mli-t"><div class="mli-title">Share</div><div class="mli-sub">Share toolkit link</div></div><span class="mli-arr">›</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS OVERLAY -->
+<div class="ov" id="stOv">
+  <div class="sheet">
+    <div class="handle"></div>
+    <div class="shead">
+      <div class="stitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"></path><circle cx="12" cy="12" r="10"></circle></svg> Settings</div>
+      <div class="cbtn" onclick="hide('stOv')">✕</div>
+    </div>
+    <div class="slist">
+      <div class="si"><div class="si-l"><div class="silbl">Auto Refresh Stats</div><div class="si-desc">Live counter updates</div></div><div class="tog on" id="tgStats"></div></div>
+      <div class="si"><div class="si-l"><div class="silbl">Animations</div><div class="si-desc">Card hover effects</div></div><div class="tog on" id="tgAnim"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE OVERLAY -->
+<div class="ov" id="profileOv">
+  <div class="sheet">
+    <div class="handle"></div>
+    <div class="shead">
+      <div class="stitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Profile</div>
+      <div class="cbtn" onclick="hide('profileOv')">✕</div>
+    </div>
+    <div class="pcard">
+      <div class="avatar" id="profile-avatar">
+                <img src="https://toolkit.page.gd/uploads/avatars/av_355_1781690304.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.style.display='none';document.getElementById('profile-avatar').innerHTML='A'">
+              </div>
+      <div class="pname">ProBoy-TOOKIT</div>
+      <div style="font-size:9px;letter-spacing:2px;color:var(--text2);font-family:'Rajdhani',sans-serif;">PREMIUM-HAKCS-AND-TOOLS</div>      <div class="pbadge">⚡ PREMIUM MEMBER</div>
+      <div class="pstats">
+        <div class="pst"><div class="pst-n" id="ps1">132</div><div class="pst-l">Tools</div></div>
+        <div class="pst"><div class="pst-n" id="ps2">—</div><div class="pst-l">Online</div></div>
+        <div class="pst"><div class="pst-n" id="ps3">324</div><div class="pst-l">Views</div></div>
+      </div>
+    </div>
+    <div class="sdiv"></div>
+    <div class="slist">
+      <div class="si"><div class="si-l"><div class="silbl">Premium Status</div><div class="si-desc">Unlimited access</div></div><span style="color:var(--accent);font-size:9px;font-family:'Rajdhani';letter-spacing:1.5px">ACTIVE</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ANALYTICS OVERLAY -->
+<div class="ov" id="statsOv">
+  <div class="sheet">
+    <div class="handle"></div>
+    <div class="shead">
+      <div class="stitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> Analytics</div>
+      <div class="cbtn" onclick="hide('statsOv')">✕</div>
+    </div>
+    <div id="abars"><div class="abar-wrap"><div class="abar-label"><span>Views Today</span><span>65%</span></div><div class="abar-track"><div class="abar-fill" style="width:65%"></div></div></div><div class="abar-wrap"><div class="abar-label"><span>Online Rate</span><span>0%</span></div><div class="abar-track"><div class="abar-fill" style="width:0%"></div></div></div><div class="abar-wrap"><div class="abar-label"><span>Tool Usage</span><span>100%</span></div><div class="abar-track"><div class="abar-fill" style="width:100%"></div></div></div><div class="abar-wrap"><div class="abar-label"><span>Performance</span><span>99%</span></div><div class="abar-track"><div class="abar-fill" style="width:99%"></div></div></div></div>
+    <div class="slist">
+      <div class="si"><div class="si-l"><div class="silbl">Total Views</div></div><span style="color:var(--accent);font-family:'Orbitron';font-size:14px;font-weight:700" id="anVw">324</span></div>
+      <div class="si"><div class="si-l"><div class="silbl">Online Now</div></div><span style="color:var(--accent);font-family:'Orbitron';font-size:14px;font-weight:700" id="anOn">—</span></div>
+      <div class="si"><div class="si-l"><div class="silbl">Total Tools</div></div><span style="color:var(--accent);font-family:'Orbitron';font-size:14px;font-weight:700" id="anTl">132</span></div>
+      <div class="si"><div class="si-l"><div class="silbl">Uptime</div></div><span style="color:var(--accent);font-family:'Orbitron';font-size:13px;font-weight:700">99.9%</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SHARE OVERLAY -->
+<div class="ov" id="shareOv">
+  <div class="sheet">
+    <div class="handle"></div>
+    <div class="shead">
+      <div class="stitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg> Share</div>
+      <div class="cbtn" onclick="hide('shareOv')">✕</div>
+    </div>
+    <div class="share-link" onclick="copyLink()">
+      <span class="share-url">https://toolkit.page.gd/t/--</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+    </div>
+    <div class="mlist">
+            <a class="mli" href="https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X" target="_blank" style="text-decoration:none;color:inherit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><div class="mli-t"><div class="mli-title">WhatsApp Channel</div></div><span class="mli-arr">›</span></a>
+            <div class="mli" onclick="shareNative()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg><div class="mli-t"><div class="mli-title">Share</div></div><span class="mli-arr">›</span></div>
+      <div class="mli" onclick="copyLink()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><div class="mli-t"><div class="mli-title">Copy Link</div></div><span class="mli-arr">›</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL DETAIL OVERLAY -->
+<div class="ov" id="tdOv">
+  <div class="sheet">
+    <div class="handle"></div>
+    <div class="shead">
+      <div class="stitle" id="tdTitle">Tool</div>
+      <div class="cbtn" onclick="hide('tdOv')">✕</div>
+    </div>
+    <div id="tdBody"></div>
+  </div>
+</div>
+
+<script>
+const COLS=[
+  {n:'Purple',e:'💜',v:'#a855f7'},{n:'Blue',e:'💙',v:'#3b82f6'},
+  {n:'Green',e:'💚',v:'#22c55e'},{n:'Red',e:'❤️',v:'#ef4444'},
+  {n:'Orange',e:'🧡',v:'#f97316'},{n:'Pink',e:'💗',v:'#ec4899'},
+  {n:'Cyan',e:'💎',v:'#06b6d4'},{n:'Yellow',e:'💛',v:'#eab308'},
+  {n:'Teal',e:'🩵',v:'#14b8a6'},{n:'Indigo',e:'🔵',v:'#6366f1'},
+  {n:'Rose',e:'🌹',v:'#f43f5e'},{n:'Amber',e:'🔶',v:'#f59e0b'},
+  {n:'Violet',e:'💜',v:'#8b5cf6'},{n:'Lavender',e:'💐',v:'#c084fc'},
+  {n:'Sky',e:'⛅',v:'#0ea5e9'},{n:'Navy',e:'🌊',v:'#1e40af'},
+  {n:'Royal',e:'👑',v:'#fbbf24'},{n:'Cobalt',e:'✴️',v:'#2563eb'},
+  {n:'Periwinkle',e:'🫐',v:'#818cf8'},{n:'Cornflower',e:'🌸',v:'#f9a8d4'},
+];
+const FONTS=[
+  {n:'Orbitron',f:"'Orbitron',sans-serif"},
+  {n:'Audiowide',f:"'Audiowide',sans-serif"},
+  {n:'Exo 2',f:"'Exo 2',sans-serif"},
+  {n:'Rajdhani',f:"'Rajdhani',sans-serif"},
+  {n:'Chakra Petch',f:"'Chakra Petch',sans-serif"},
+  {n:'Russo One',f:"'Russo One',sans-serif"},
+  {n:'Oxanium',f:"'Oxanium',sans-serif"},
+  {n:'Teko',f:"'Teko',sans-serif"},
+  {n:'Electrolize',f:"'Electrolize',sans-serif"},
+  {n:'Syncopate',f:"'Syncopate',sans-serif"},
+  {n:'Michroma',f:"'Michroma',sans-serif"},
+  {n:'Bebas Neue',f:"'Bebas Neue',sans-serif"},
+  {n:'Jura',f:"'Jura',sans-serif"},
+  {n:'Saira',f:"'Saira',sans-serif"},
+  {n:'Titillium Web',f:"'Titillium Web',sans-serif"},
+  {n:'Black Ops One',f:"'Black Ops One',sans-serif"},
+  {n:'Poppins',f:"'Poppins',sans-serif"},
+  {n:'Nunito',f:"'Nunito',sans-serif"},
+  {n:'Raleway',f:"'Raleway',sans-serif"},
+  {n:'Oswald',f:"'Oswald',sans-serif"},
+  {n:'Josefin Sans',f:"'Josefin Sans',sans-serif"},
+  {n:'Quicksand',f:"'Quicksand',sans-serif"},
+  {n:'Barlow Condensed',f:"'Barlow Condensed',sans-serif"},
+  {n:'Righteous',f:"'Righteous',sans-serif"},
+  {n:'Bungee',f:"'Bungee',sans-serif"},
+  {n:'Cinzel',f:"'Cinzel',serif"},
+  {n:'Playfair Display',f:"'Playfair Display',serif"},
+  {n:'Merriweather',f:"'Merriweather',serif"},
+  {n:'Lora',f:"'Lora',serif"},
+  {n:'Abril Fatface',f:"'Abril Fatface',serif"},
+  {n:'Pacifico',f:"'Pacifico',cursive"},
+  {n:'Dancing Script',f:"'Dancing Script',cursive"},
+  {n:'Satisfy',f:"'Satisfy',cursive"},
+  {n:'Great Vibes',f:"'Great Vibes',cursive"},
+  {n:'Permanent Marker',f:"'Permanent Marker',cursive"},
+  {n:'Inconsolata',f:"'Inconsolata',monospace"},
+  {n:'Share Tech Mono',f:"'Share Tech Mono',monospace"},
+  {n:'VT323',f:"'VT323',monospace"},
+  {n:'Press Start 2P',f:"'Press Start 2P',cursive"},
+  {n:'Courier Prime',f:"'Courier Prime',monospace"},
+];
+const BOLT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>';
+
+// ── DB TOOLS injected from PHP ──
+var DB_TOOLS = [{"id":2886,"name":"BAN & UNBAN REPORTER","desc":"Premium tool","url":"https:\/\/nobless-rapport-wa.netlify.app","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQYGFuu-0dKmjAdZfufczzfcJEBeIHFhjcdUfpS6mwNow&s"},{"id":2908,"name":"IP INFORMATION HACK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/z7vec1oo1u3ngtj\/Ip+Information.zip\/file3","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcR19aKYFkoP9g16BCdIsQJr7zyZdMs-Bm-jdL_SV9nizA&s=10"},{"id":2909,"name":"WINK PRO ?","desc":"Premium tool","url":"https:\/\/liteapks.com\/wink-video-2.html","img":"https:\/\/immense-teal-ep3xdqkh.edgeone.dev\/images-2.jpeg"},{"id":2910,"name":"NETFLIX PREMIUM","desc":"Premium tool","url":"https:\/\/liteapks.com\/netflix-2.html","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRp--lYKMyTV-6bJX0PzPM3HI-NrfoARzG5bB2-NnvGqg&s=10"},{"id":2911,"name":"INSTAGRAM HACKING","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/c4alrbf986kjatj\/INSTAGRAMHACKINGOWNWEBMAKINGBYTEAMWORLDKING.7z\/file*~","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTiG75nE97wmF-dUQPQZrVvKoCPlw4vnS2_OfuXeYxezg&s=10"},{"id":2912,"name":"UNLIMITED GMAIL MAKING","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/folder\/921nxjn2uirrq\/UNLIMITED_GMAIL_METHOD_BY_TEAM_WORLD_KING","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcS2R1vpcjm-R2SvecG4g4cGmmv0BqK4-3ZQfbwN8abDDA&s"},{"id":2913,"name":"GALLERY CRASH APK [NOT INSTALL OWN PHONE]","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/mld0phjx0o84bn8\/team-black-hat-app-v1_0_6.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSX7fgxhTimQTji0WC8osbM-HuQDNpo7yM5xbQVhIFs9A&s=10"},{"id":2914,"name":"TIKTOK HACK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/ppezg901kv3yq0v\/TikTok_Hack.7z\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRKb1jhGJbQxeoMxpR3ghuV1GFdFo0tNcYgyrDLNh0SFQ&s=10"},{"id":2915,"name":"HOW TO CREATE PAYPAL ACCOUNT","desc":"Premium tool","url":"https:\/\/sub4unlock.com\/S\/i3ejl","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQjiWApD0pr7Ik6kWKkAM7jSWRXZc01y4PCZm_EMTxF4A&s=10"},{"id":2917,"name":"MOBILE DEID VIRUS","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/in413nyxxyhq1ob\/car_collication.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcR7TThON_BoNIM-aQxEFHyqweKs0OeBJo40KEiIzWUYGQ&s=10"},{"id":2918,"name":"MOBILE RESET APK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/gwge84zllqnn13w\/Android_reset_.7z\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSey-EjQ2ETLS9HfXzOjPiWNlVLJKUEnBjBGuPF9HhLjQ&s=10"},{"id":2919,"name":"MOBILE LOCK APK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/vwuevrqyfcvw0yi\/TEAM_BLACK_HAT_MEMBERS.7z\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSyC52d4JvyDZjb5H6AzwvWyZ06VBj0-rNmjM651DRvGw&s=10"},{"id":2920,"name":"WHATSAPP CHANNEL BAN METHOD","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/mzs8j592ia7onym\/Ban_Any_WhatsApp_Channel_With_One_Report_Using_links.zip\/file*~","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRKtyx96OUEVa9pCacWxk9BkNiYoC6gqEdvPDF0oFvScQ&s=10"},{"id":2921,"name":"POWERFUL SMS BOMBER","desc":"Premium tool","url":"https:\/\/h4k3r-bomber.vercel.app\/","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQhHGbEz3jTBlw_QlHnNwKcqs30b3UPk-Mt9SPzbU2Pgg&s=10"},{"id":2922,"name":"FAKE HACKING PRANK","desc":"Premium tool","url":"https:\/\/web-hosting.xo.je\/view_site.php?user=206&site=realhackingwebsite&i=1","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQw1KTxGBZ87R8iWeBZXfyNM91vup_ry6e6LRCh-yb-fA&s=10"},{"id":2923,"name":"EASYPAISA FAKE SCREENSHOT REAL","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/mp674dg7n6mgh2d\/EasyPaisa_screenshot_real_signed.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSLx1eRudBCqS0agbJedrUSpCRsj19IndKNsr039mGzpg&s=10"},{"id":2924,"name":"FAKE EASYPAISA ANIMATION","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/bzhfr3a3ckb2hyh\/EasyPaisa_Animation.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSLx1eRudBCqS0agbJedrUSpCRsj19IndKNsr039mGzpg&s=10"},{"id":2925,"name":"FAKE EASYPAISA HISTORY GENERATOR","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/4r7hmincpq9uydf\/1_Easypaisa_SS.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSLx1eRudBCqS0agbJedrUSpCRsj19IndKNsr039mGzpg&s=10"},{"id":2926,"name":"JAZZ CASH ANIMATION","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/7koezrtx8zfm945\/JazzCash_receipt__signed.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRSzLy5ORCRRAvxY-SRlJqU1eneZHYkE8FmjarXqsvdMw&s=10"},{"id":2927,"name":"LOGIN EASYPAISA ACCOUNT WITHOUT BIOMETRIC","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/v4p2h77egj93tdq\/easypaisa-2-9-66.xapk_%25281%2529\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSLx1eRudBCqS0agbJedrUSpCRsj19IndKNsr039mGzpg&s=10"},{"id":2928,"name":"CAMERA + LOCATION + MIC HACK TELEGRAM BOT","desc":"Premium tool","url":"https:\/\/t.me\/Ammar_camerahack_bot","img":"https:\/\/i.postimg.cc\/50b9CjFS\/IMG-20260619-WA0017.jpg"},{"id":2929,"name":"50+ HACKING COURSES","desc":"Premium tool","url":"https:\/\/drive.google.com\/drive\/folders\/18qsUryradnfrCS9eUOBDwkfxJPpYCqFe","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQIqvbBf7E7GtQ9R1sY0IZ8sTy02xnWqxI9vcuSxxg09w&s"},{"id":3068,"name":"YOUTUBE WATCHTIME APK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/uoiimanlu0v2zfh\/Youtube_Watch_Time_and_Views_1.0.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSBr97DK_UwSSxBrJlmN0l2Ze99TvTZCX7ZnTq1z4dwbA&s=10"},{"id":3071,"name":"WIFI HACK METHOD","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/yf1l23iudtqphbd\/WIFI_SECRET_HACK_METHOD_BY_HAMID_SHAH.zip\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcT_XCh2jBfAKKI3RvZq8voelhjowCLue9K0Se15XVI3XA&s"},{"id":3075,"name":"APP CLONER MOD APK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/fg5c6qd9qceg9zn\/%25F0%259D%2597%25A5%25F0%259D%2597%25B2%25F0%259D%2598%2580%25F0%259D%2597%25B2%25F0%259D%2598%2581_%25F0%259D%2597%25A9%25F0%259D%2597%25B2%25F0%259D%2597%25B4%25F0%259D%2597%25BC%25F0%259D%2597%25A7%25F0%259D%2597%25B2%25F0%259D%2597%25B9_.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRvdm3bAFnXfT8V36umXH_r1qkZxqQ3wGj2_raBiEIN3A&s=10"},{"id":3088,"name":"MOBILE HACK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/9mmxeb4elxvek5q\/Mobile_Hack.7z\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcReUYIlFEl_6DTb2JXs7f_ZiHCiUa8DrqXcW0rKRWNrRw&s=10"},{"id":3092,"name":"SPOTIFY PREMIUM","desc":"Premium tool","url":"https:\/\/liteapks.com\/download\/spotify-x-gold-519765","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTP1yXDWRFub0mQeHhhvIAmlcWh5T5gzY0XvMBAoMTfeA&s"},{"id":3097,"name":"YOUTUBE PREMIUM","desc":"Premium tool","url":"https:\/\/liteapks.com\/download\/youtube-vanced-134","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTiz8igTWWTfV9qxMirnCLjNVohx2JGceE4YrzhGYykwA&s=10"},{"id":3098,"name":"LIVE WALLPAPER","desc":"Premium tool","url":"https:\/\/liteapks.com\/download\/live-wallpapers-115214","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSlbwI10SHhzWh5pFPbaW5pXHYYFe10crYmXlLZ47ivKg&s=10"},{"id":3100,"name":"TELEGRAM PREMIUM","desc":"Premium tool","url":"https:\/\/liteapks.com\/download\/telegram-810","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcR-gOHotGC9eHgWLO9-ZBQDnc8JETnnghrCMSHPl-5XKQ&s=10"},{"id":3102,"name":"SNAPCHAT PREMIUM","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/oh7l94iwhl04q8q\/SnapPro+11.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcS83BzT79rNeuaYqENTniENwQgf_yyBl-UdThUumEZfYA&s"},{"id":3103,"name":"CAPCUT PRO","desc":"Premium tool","url":"https:\/\/liteapks.com\/download\/capcut-311","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcR1MqCNsezK0h6lxjj6KQY6Og4WFoHXS-WLnH5ne8kZgA&s=10"},{"id":3104,"name":"PICSART PREMIUM","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/2iz4slqmk41jioo\/Picsart_29.0.8.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSQupp7L0iAQ4UZLsPISQ4gm3namqnXZamtZEa9MjAIDw&s"},{"id":3105,"name":"WHATSAPP META VERIFY METHOD","desc":"Premium tool","url":"https:\/\/drive.google.com\/drive\/folders\/1IgkZsi_yYnxvIROTJv2t_sKXbd3SpIR3","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQXREpOIqwPT4nY1M7WHb-9-m8CymTGOS2qO-h9YaKd2g&s=10"},{"id":3107,"name":"800+ LIGHTROOM PRESET","desc":"Premium tool","url":"https:\/\/drive.google.com\/file\/d\/1cT5iiFpRi9htbAfCFdhbw1-S8oR0YtQq\/view?usp=sharing","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSFYxdjMP6FHpNML7J6xaP2Nwkw3nMjFr6yNYBl-087gA&s=10"},{"id":3108,"name":"SOCIAL MEDIA PREMIUM BUNDLE PACK 1","desc":"Premium tool","url":"https:\/\/drive.google.com\/file\/d\/1ZzUxO3MdLLBdgYsSteR_xkNLZZOyyVB4\/view?usp=sharing","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcT78AFyxDMcQREhHUBLPLv2N5OrYmEdn9O59rwWceip9A&s=10"},{"id":3109,"name":"ALL TYPES OF COURSES IN ONE PACK","desc":"Premium tool","url":"https:\/\/drive.google.com\/drive\/folders\/1TP6TxzhlevH6gsgreW8_r9DTWJxivC4g","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRGkl3LrOdqBPkslxizdyDXjgMqQ7YSIyJY_is3newhyg&s=10"},{"id":3110,"name":"HOW TO MAKE CAMERA HACK BOT","desc":"Premium tool","url":"https:\/\/sub4unlock.com\/S\/F36bx","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSzmzHtHqcusGmXgyskrY4Ss_A1X4umFu-eLKQWdMk6ow&s=10"},{"id":3111,"name":"GTA VC","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file_premium\/y8zw457s99r7hj5\/GTA_VC_v1.72.42919648_-_espacioapk.com.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTpiXkuPKOTVEbh4gffr-fZtAALr2l7y2jsnYa1ZjWaZw&s"},{"id":3115,"name":"GEMINI JAILBREAK SCRIPT","desc":"Premium tool","url":"https:\/\/drive.google.com\/drive\/folders\/1ZambB4vx-0hHH1HnuepDJwyyxVqIGs8D","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQVoI2BQrglP-RcKGS52SGTk9rjs5OfaJzZJVL1E5CIhQ&s=10"},{"id":3116,"name":"HACKER GPT","desc":"Premium tool","url":"https:\/\/hackergpt.app\/auth\/login","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcR4Hz4fc9buS4-jy8ZyxGTQH_qBP7Xz8yojDTIqnWMcKA&s=10"},{"id":3117,"name":"HACKER AI FOR CODING","desc":"Premium tool","url":"https:\/\/www.deephat.ai\/","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRpXUIasG69kkGpzUJOyGt8usip_KKySKFGyX80kaXLlQ&s"},{"id":3118,"name":"HOW TO CREATE WHATSAPP OTP CHANNEL","desc":"Premium tool","url":"https:\/\/docs.google.com\/document\/d\/1_BJgkxkXFAKikzZB1DnANpzh1rYvPXyDRoaa3dPsZMo\/edit","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRtCU0NAwdGttImRgfN1HQMeIFnKFKuiSWd4-Y5OznYCw&s=10"},{"id":3119,"name":"CARDING COURSE","desc":"Premium tool","url":"https:\/\/drive.google.com\/file\/d\/1gWRObTVeflfIn5T4JJz_QyeXkmGISoIP\/view?usp=drivesdk","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSKVCyWGGB35TDQsE4MEhQAPNDTODyJzCMRGwiAONEHJA&s"},{"id":3120,"name":"GALLERY HACK","desc":"Premium tool","url":"https:\/\/h4k3r-gallery.vercel.app\/login?callbackUrl=https%3A%2F%2Fh4k3r-gallery.vercel.app%2F","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRiecGygYhfqAD3U81cGTieo8Zdnp7Rf4BGVw8Tyoo6HA&s=10"},{"id":3121,"name":"SNAPTUBE PREMIUM","desc":"Premium tool","url":"https:\/\/modyolo.com\/download\/snaptube-14322","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTlSFjiTNlGjU8QBJyPzoXHtcI0i3_BgBwcYU6alcmuQA&s"},{"id":3123,"name":"UNLIMITED FACEBOOK LIKES","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/1gmzw0qizkqdlec\/Zayan+khan_2.1.zip\/file?????","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRxLhdlx-k5BCxmtivZAaoUMl9oEhhigu9n_iW0nKVLIA&s=10"},{"id":3124,"name":"WEBIATE BUILDER","desc":"Premium tool","url":"https:\/\/10web.io\/","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcS0hTNxvldfondCuVYL-2-bVie2SEeL6dcyDpP6YCFMkg&s=10"},{"id":3125,"name":"PROFESSIONAL CV MAKER","desc":"Premium tool","url":"https:\/\/shaheen-tv.xo.je\/view.php?site=cv-builder-5","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTAHk3Ao-gkxXkWlSI4B6sVwBUXszNS9M1j23ddEwz3hA&s=10"},{"id":3126,"name":"WINGO LIVE PREDICTER","desc":"Premium tool","url":"https:\/\/shaheen-tv.xo.je\/view.php?site=aziz30secwingogameaipredictor2026","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRp65wwAy_6ov20s_LOY2oEjMUZkl5SVtLqkmCJU0BXQw&s=10"},{"id":3127,"name":"777 PREDICTOR","desc":"Premium tool","url":"https:\/\/shaheen-tv.xo.je\/view.php?site=7777","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQA1n9nLOIWcFmBW0mZhsinMumLR6Yfk_jyaD8tIo_WXA&s"},{"id":3128,"name":"WEBSITE SOURCE CODE EXTRACTER","desc":"Premium tool","url":"https:\/\/full-website-extractor-ab.zya.me\/?i=1","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTF2kYu6_O6Vo9Xid86Qxn4CSafcUrTBy4eXZK85F_QXg&s"},{"id":3129,"name":"TRUE CALLER SEARCH TOOL","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/cdoknd97e3mv4qk\/app4022998-yh8c5b+(1).apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTfYfmqfZQFE4tl8rN-EsVRpOQp0TXTlh5RjNiu3Gj8kw&s"},{"id":3130,"name":"CARD BUILDER","desc":"Premium tool","url":"https:\/\/cardbuilder.zya.me\/?i=1","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRda2DIvG5V7nrdeStV_EoC9GeB_NQzIDmLZcgecSMfsg&s=10"},{"id":3131,"name":"AUTO REACTS FOR WHATSAPP CHANNEL","desc":"Premium tool","url":"https:\/\/asitha.top\/login?ref=famousdr6228","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTeKCPToDZvJUCfQvvnSpXpQ73RjBL7po318fljcyXnoQ&s=10"},{"id":3132,"name":"HOW RO CREATE OWN MOBILE APP","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/18nyrd8khvre4mu\/Tutorial.mp4\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSAxI5mhHBGcTNXV-7rJlYc9t4NBghWqUOT2xPqtovV6A&s=10"},{"id":3133,"name":"HOW TO CREATE UNLIMITED USA NUMBER","desc":"Premium tool","url":"https:\/\/drive.google.com\/drive\/folders\/14MPYtLkWRTrikQmVwnnXf5b-n8PtIuce","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcT8dFA_US2Fjv-2TcheUAUwKOayF7nZpq2k0-6jIX4l0w&s=10"},{"id":3134,"name":"WHATSAPP OTP LOCK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/folder\/k3ondbax51eus\/WHATSAPP+OTP+LOCK","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRhpD9wnTO2uM8D2HkTO5792MmaclbgzZveiSt3wcjthA&s"},{"id":3135,"name":"IMAGE TO LINK GENERATOR","desc":"Premium tool","url":"https:\/\/jlander-tools.gt.tc\/view.php?file=Image-to-link.html&owner=jlander","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRhVJ7Wpdk_HGBPTI75yzlcNHU8J8WHNjjEkTe7DC7Ybg&s=10"},{"id":3136,"name":"CHAT GPT PRO","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/rh4ityx61nu9dby\/ChatGPT_1.2026.097.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTgt2i_s0xRzUTliEjVHIdcXLvs8_v06QDEigVPZy0GfQ&s=10"},{"id":3137,"name":"QR CODE GENERATOR","desc":"Premium tool","url":"https:\/\/jlander-tools.gt.tc\/view.php?file=QR.html&owner=jlander","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcScn99G463hcKJUMiE-jJ-ws0OhMqXW12DFUpbz3fs07g&s=10"},{"id":3138,"name":"RANSOMWARE_PYTHON COURSE","desc":"Premium tool","url":"https:\/\/mega.nz\/file\/cKxGzLpY#O7jylruvctZ5LaYhoyJHUkmlsXEwHqMEFwYFIhq6neM","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQne10MDYJfSy3dsa9qjPay1ElzGKDKc2cAlyCOvPDhog&s=10"},{"id":3139,"name":"WIFI HACKING COURSE PART 1","desc":"Premium tool","url":"https:\/\/shareus.in\/?i=CC3KfK","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQ1vDGKIvPZmmS7_kM6ySKqWlXZwRWThYHqDKzs7wgtvw&s=10"},{"id":3140,"name":"WIFI HACKING COURSE PART 2","desc":"Premium tool","url":"https:\/\/shareus.in\/?i=Hv1Fif","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQ1vDGKIvPZmmS7_kM6ySKqWlXZwRWThYHqDKzs7wgtvw&s=10"},{"id":3141,"name":"WIFI HACKING COURSE PART 3","desc":"Premium tool","url":"https:\/\/shareus.in\/?i=erRpDr","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQ1vDGKIvPZmmS7_kM6ySKqWlXZwRWThYHqDKzs7wgtvw&s=10"},{"id":3142,"name":"WIFI HACKING COURSE PART 4","desc":"Premium tool","url":"https:\/\/shareus.in\/?i=M9EfIr","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQ1vDGKIvPZmmS7_kM6ySKqWlXZwRWThYHqDKzs7wgtvw&s=10"},{"id":3143,"name":"PYTHON COURSES","desc":"Premium tool","url":"https:\/\/drive.google.com\/drive\/u\/0\/mobile\/folders\/1jiOmPP2yXF2MhTAUAkIvufs6e682ONM-?usp=sharing","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcS5j-HFwrhKxofFo8mXn_LpOtEJVZgH_kP-Ue4JYAY36w&s=10"},{"id":3144,"name":"WEB DESIGNING COURSES","desc":"Premium tool","url":"https:\/\/drive.google.com\/drive\/u\/0\/mobile\/folders\/1xHoZqYlT_Mx8DGASlqI94rOAJ0pHSqfA?usp=sharing","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcT__BYZ78k16d5949gTd7MHht36qWsTxeZsJ51ocUxRKA&s=10"},{"id":3145,"name":"PUBG HACK MAKING COURSE","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/y78pzecdr5bmj7y\/Pubg_Hack_Making_Course.rar\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRby-uByPQAi6_Lr5dz651C_hRejaMlf7QlYzRJ5kdUNQ&s=10"},{"id":3154,"name":"ALL HACKING RATS","desc":"Premium tool","url":"https:\/\/t.me\/Android_hacker_ing_bot","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRozOwuGD7yTXhNqf3-vH8QXW4nnU_0RBVKokPdCihYzQ&s=10"},{"id":3155,"name":"AHMED TOOLKIT","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/i013ruif8sohv7q\/Ahmad.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQwwouQXHKuZBQom46-x53y8DZoYPMuIDfz_7skV-yCLQ&s=10"},{"id":3156,"name":"LORD HACKER TOOLKIT","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/ogfdresozxgip3b\/Loard_Hackers_Tool_%25F0%259F%2592%2580_1.0.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQwwouQXHKuZBQom46-x53y8DZoYPMuIDfz_7skV-yCLQ&s=10"},{"id":3157,"name":"FREE FIRE INTRO SOURCE CODE","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/h3q2vgp5lix3s4w\/freefireintro.html\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTKjJKf_A-7driN_m6I1uG3vWOALhp-G2HshffL8ZShXQ&s=10"},{"id":3158,"name":"HOW TO CREATE BOT & OWN BOT HOSTING","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/nl28bn62at5hliu\/HOSTING_BOT.zip\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcT3BUMgSHH1ytciK32isbKxHHg28Q-uGex4zTuMolzIYQ&s=10"},{"id":3195,"name":"INSTAGRAM+ FACEBOOK HACK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/q8w5nvccw5xi78i\/INSTA_FB_CRACKER_WITH_TERMUX.TXT\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcStuYedh-MT5j0QfhsFrnKOeTNYuhBscXHFPu3KfaT7Og&s=10"},{"id":3196,"name":"DDOS ATTACK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/ojkh58m9nr3r417\/DDos_Attack.txt\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSOXbx4KJAc-2U4HTluJf_FeHFCz4FZeKQ6GQ83FhadMg&s=10"},{"id":3197,"name":"INATA BRUTE FORCE","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/ufrc75tpcnc7yei\/INSTA_BRUTE_FORCE_TOOL.TXT\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQixCpebQIt9_dvMPF-E5q4xaHAeX0ov8f8mJaihZtp-w&s=10"},{"id":3198,"name":"500+ TOOLS IN ONE PACK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/662nzq5i3pu7wbn\/500%252B_TOOLS_BY_RAJA_X_HACKER.zip\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTL2vAoahc4CE_9Qfkzy40uSTrNeiUaRWAeBGF-i8h-Iw&s=10"},{"id":3199,"name":"FILE MANAGER HACK USING LINK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/m26qeojskma5q2c\/FILE_MANAGER_H%2540CK_USE_LINK_BY_IK_KING.zip\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTpWo8lMKO2PMVpb2_m-Gw_KIIniqowsquP0Og4WrJGow&s=10"},{"id":3200,"name":"EASYPAISA TO ALL BANK FAKE SS","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/n7mwjbx5lvqjgvt\/EasyPaisa+to+Bank_3.0.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSXm6iRt1Vhy5VYFdd9BsTOHhv1omP75_DWiKAzF3ZLdQ&s=10"},{"id":3201,"name":"CREDIT CARD GENERATOR","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/xe67xy9qgqulpvv\/CREDIT+CARD+GENERATOR_1.0.0.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTmmJYH3GQF6TVrUbvqQOjIU1l_SK6b2jERupxi1Scyrg&s=10"},{"id":3202,"name":"WEBSITE TO APP CONVERTER","desc":"Premium tool","url":"https:\/\/www.webintoapp.com\/","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTcmu25B5dC-j0DcF-jIeCfoPmfgWKZ7QUJot6fonf4vQ&s=10"},{"id":3204,"name":"GAME PHISHING METHOD","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/ggd6xnqo4lu2bf0\/MAKE_GAMES_PHISING_LINK_IN_FREE_FROM_ABHEEBHAI_MODS.zip\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRuYe2FYmmkwNm9wrkeiJk9tjDXpppWfkXrLN1AoIWQug&s=10"},{"id":3205,"name":"X HUNTER RAT","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/r6nsozylav0uyqu\/xhunter_Modded_Mobile_Hack_%2540InsightX_By_Hamza.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcT_9yM3lTj8AMmdzZWKE6DBEGAYehPVhDBW57rLxvGzUA&s=10"},{"id":3206,"name":"SEE PRIVATE INSTAGRAM ACCOUNT","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file_premium\/vfsmk9dnxvbwneg\/See_private.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcT_9yM3lTj8AMmdzZWKE6DBEGAYehPVhDBW57rLxvGzUA&s=10"},{"id":3207,"name":"WHATSAPP SPAM","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/36kzhdantt1i1x4\/WHITE-DEVIL_SPAM_APK_%25F0%259F%2592%2580%25E2%259A%2594_1.2.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRqSxbTL9BA_Ks03rGsXyZaWrTOWDKhfKY_fOuKsCP8xA&s=10"},{"id":3214,"name":"YOUTUBE TITLE AND DISCRIMINATION COPY","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/giqvag6hg4e9l3l\/%25F0%259D%2597%25AC%25F0%259D%2597%25A7_%25F0%259D%2597%25A7%25F0%259D%2597%259C%25F0%259D%2597%25A7%25F0%259D%2597%259F%25F0%259D%2597%2598%2526%25F0%259D%2597%2597%25F0%259D%2597%259C%25F0%259D%2597%25A6_%25F0%259D%2597%2596%25F0%259D%2597%25A2%25F0%259D%2597%25A3%25F0%259D%2597%25AC%25F0%259D%2597%2598%25F0%259D%2597%25A5_%25F0%259D%2597%25A7%25F0%259D%2597%25A2%25F0%259D%2597%25A2%25F0%259D%2597%259F_1.0.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRE5ZlzSEgS1KzDs8n_i8r1OXg5KnxQwukZo-8aHgE0LQ&s=10"},{"id":3302,"name":"WIFI HACK [ROOT]","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/w2t9z9q4vf1qnj0\/WI-FI_H4CK_%255BNON_ROOT.txt\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSmjVEQf8UCkZ7DFxU8b54Eymqjb_gFgEopSU7lxX-fMg&s=10"},{"id":3319,"name":"PUBG UC CARD","desc":"Premium tool","url":"https:\/\/drive.google.com\/drive\/u\/0\/mobile\/folders\/1KLrx1JkBGuP-X3-V3e7UBvRrqoe41aqn","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTshkGJNZzGK3w9ZLEPlMgX0UwJV62vplp0jeus4iodlw&s=10"},{"id":3322,"name":"TIKTOK LIKES","desc":"Premium tool","url":"https:\/\/zefoy.com\/","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcS5wppAzjcpHc6r-KrLGKmCobccAZbyrfJaMVcMYX3Z6g&s=10"},{"id":3324,"name":"TIKTOK LIVE APK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/np7xp5d0nrnpf19\/base.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcS7PF2j3iksOgh39_a3mZTX0CvwLLRhb1LQAFtdtu8L9Q&s=10"},{"id":3344,"name":"SIM DATABASE","desc":"Premium tool","url":"https:\/\/romanhost.gt.tc\/view.php?site=romansimdb&i=1","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTxHfKPSAiugXUWWwrnytAI0utw6TwMsZJQgYVEPD7riQ&s=10"},{"id":3345,"name":"CLONE ANY WEBSITE","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/4uilo0jt8s3oart\/Clone_Any_Website_Trick_By_AbheBhai.rar\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQaBjfBg98wGTjKXRp_YO5iBcQ1AapraJ72ZwXNgAJ-vA&s=10"},{"id":3346,"name":"INSTAGRAM BAN","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/o83fu9y9q3056e5\/HOW_TO_BAN_INSTAGRAM_ID_PERMANENT_BAN_BY_MRISBRAND_.7z.zip\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcT36AIQdHc7bumnS_E1iGayLc4WLwKBSa5yeDds7kQiyA&s=10"},{"id":3350,"name":"WHATSAPP JAMMER","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/qtf5f92y5hxh5hs\/%25C6%2592%25C5%2597z_w%25D1%2592%25C4%2581%25C5%25A3%25C5%259F%25C4%2581pp_2.24.16.76.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTPqX8wniMVR16ZOl9E41QzQ70AfXw0qsTWX6BaUs88Uw&s=10"},{"id":3352,"name":"BUG BOT FOR BAN NUMBER & GROUP","desc":"Premium tool","url":"https:\/\/t.me\/LEADERBANBOT","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQkfFkVIsTc4sZQYWp5YqkSC0s2WzizfziQeCG44PMcKw&s=10"},{"id":3359,"name":"HOW TO CALL ANY PERSON WITHOUT SHOWING YOUR NUNBER","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/221ur4doa2ol837\/Call_Without_Show_Your_Number_Method.mp4\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSJ5IQ1Z9-ujBXqsVUPOXXk3ni1lxRpXdAv2-UiKnvPvg&s=10"},{"id":3487,"name":"MD BOT SCRIP","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/zau6i8lrbs1l2vj\/MD+BOT+SCRIPT.zip\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTLZfbA1kVHAxMc5chcDOXBgEc5tt4jOJpXXzHki4NrFg&s"},{"id":3513,"name":"AMMAR API CRASHER","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/8lbrfwub4thsnfi\/%25F0%259D%2597%2594%25F0%259D%2597%25A0%25F0%259D%2597%25A0%25F0%259D%2597%2594%25F0%259D%2597%25A5_API_CRASHER_.zip\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQT8JnEg7fsY1IWPLqDNRnLc4W62Q7RhzqODpeW-k1T_g&s=10"},{"id":3753,"name":"101 PYTHON PROJECT","desc":"Premium tool","url":"https:\/\/drive.google.com\/drive\/u\/0\/mobile\/folders\/1f7Bfa2uGdiEtWrp1ttx0c64Cl5E-bl7O","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRKAQNdHtlBYGuZB4EXKC77o0fgeec0rAU1--9aa9Mgug&s=10"},{"id":3754,"name":"PROCESS DEATH RAT","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/n2k6m967jdmw4m2\/PROFESSOR+DEATH.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQTlmwzKNcbIwH_WRUmBLTtROeXy_HAe77iaiIVXXs24w&s=10"},{"id":3755,"name":"GMAIL PHISHING METHOD","desc":"Premium tool","url":"https:\/\/m.youtube.com\/watch?v=Debhn1SiFaw&pp=iggCQAE%3D","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQYjkOY46pAw6GXtcV75e9fTXq5jwdgxq7A-T0snLATLg&s=10"},{"id":3910,"name":"SMM PANEL SOURCE CODE","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/ofi4ovocz869p8g\/SMM_PANEL_SOURCE_CODE_%25E2%259A%25A202620202620IK202620IKIK.zip\/file?dkey=b32v0d5yvtp&r=471","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQrkO4z2Mwn3BMk-PzZ_Q1MwqKhMY2l2k3DXDW54WBCbA&s=10"},{"id":3911,"name":"HOW TO CREATE YOUR OWN OTP PANEL WEBSITE","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/ojmme54kiskgtd5\/I_Made_an_OTP_Panel_%E2%80%94_You_Won%E2%80%99t_Believe_How_EASY!_2026(360p).mp4\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRtM6XUDXI_8J2KR-5eFOjiGFv-XDLzWugMXteKoxPOiA&s=10"},{"id":3912,"name":"FOREX TRADING COURSE","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/f9yiethl8arl9cy\/(360p).mp4\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRPvcUWSryBHQVnsHSUyworWESfnNGf22-Cs6ZQpL2TAg&s=10"},{"id":3913,"name":"FACELESS YOUTUBE AUTOMATION COURSE","desc":"Premium tool","url":"https:\/\/drive.google.com\/drive\/u\/0\/mobile\/folders\/11OGUlOkkEo3tIGNQs5tAewLdp0v7bhh9","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQNK2N-xu0twLLCUf_D4fYV_hElOrb5O891cklVzcoiuw&s=10"},{"id":3914,"name":"FIVVER COMPLETE COURSE","desc":"Premium tool","url":"https:\/\/drive.google.com\/drive\/u\/0\/mobile\/folders\/1uuVL8NNzvRSRLPlDlYAcLDKb75kqm4a6","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTKWnF7dfOHFfeT6prSPXmIuUjJ2sQJ2mCqcFI53yyF2w&s=10"},{"id":3915,"name":"DARK WEB COMPLETE COURSE PART 1","desc":"Premium tool","url":"https:\/\/www.udemy.com\/course\/introduction-to-dark-web-anonymity-and-cryptocurrency\/","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcS1J00diYpFL_6cc8hlaHYrlwPEcgaTqzV1OoXqImaJfQ&s=10"},{"id":3916,"name":"DARK WEB COMPLETE COURSE PART 2","desc":"Premium tool","url":"https:\/\/www.udemy.com\/course\/ethical-hacking-for-beginners-beginner-to-advance\/","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcS1J00diYpFL_6cc8hlaHYrlwPEcgaTqzV1OoXqImaJfQ&s=10"},{"id":3917,"name":"DARK WEB COMPLETE COURSE PART 3","desc":"Premium tool","url":"https:\/\/www.udemy.com\/course\/ethical-hacking-with-parrot-security-os\/","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcS1J00diYpFL_6cc8hlaHYrlwPEcgaTqzV1OoXqImaJfQ&s=10"},{"id":3918,"name":"DARK WEB COMPLETE COURSE PART 4","desc":"Premium tool","url":"https:\/\/www.udemy.com\/course\/lees-web-hacking-cross-site-scripting-sql-injection\/","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcS1J00diYpFL_6cc8hlaHYrlwPEcgaTqzV1OoXqImaJfQ&s=10"},{"id":3919,"name":"DARK WEB COMPLETE COURSE PART 5","desc":"Premium tool","url":"https:\/\/www.udemy.com\/course\/ethical-hacking-for-beginners-in-hindi\/","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcS1J00diYpFL_6cc8hlaHYrlwPEcgaTqzV1OoXqImaJfQ&s=10"},{"id":3920,"name":"DARK WEB COMPLETE COURSE PART 6","desc":"Premium tool","url":"https:\/\/www.udemy.com\/course\/foundations-of-hacking-and-pentesting-android-apps\/","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcS1J00diYpFL_6cc8hlaHYrlwPEcgaTqzV1OoXqImaJfQ&s=10"},{"id":3921,"name":"DARK WEB COMPLETE COURSE PART 7","desc":"Premium tool","url":"https:\/\/www.udemy.com\/course\/burp-suite\/","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcS1J00diYpFL_6cc8hlaHYrlwPEcgaTqzV1OoXqImaJfQ&s=10"},{"id":3922,"name":"AMAZON FBA MASTERY COURSE","desc":"Premium tool","url":"https:\/\/drive.google.com\/drive\/folders\/1zQx1KaNVC6JJPgnpGgaQSBs8brKpBlfJ","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSP_2uz43oh-1W4KQsXsxGEQS8c2vVhShDtE5o_cy4sQw&s"},{"id":3923,"name":"AI PROFIT BLUEPRINT COURSE","desc":"Premium tool","url":"https:\/\/drive.google.com\/drive\/folders\/13uvb45U1w0SAOesX_KsrPcMv_Yk5B36a","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTAiTH8PbyOqu0pm7DzkZu-ChPgRBi6VA1x0RRJ-0pfAQ&s=10"},{"id":3924,"name":"TEMP MAIL GANERATER","desc":"Premium tool","url":"https:\/\/t.me\/fakemailbot","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQ3QGcnAsNGdroWKv33QiJOspl3XG5oAZDEa8_ZzKUyHA&s=10"},{"id":3925,"name":"HACK ANY DEVICE VIA PDF","desc":"Premium tool","url":"https:\/\/drive.google.com\/file\/d\/1-2YePhC76-YBrl85USpzihRo3G8vCQbl\/view?usp=drivesdk","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSaEnvdGlW1GOIAAQuUDvQVY-21fXOcn8VthqRa87ehgQ&s=10"},{"id":3926,"name":"GMAIL HACK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/jd375inmdi1z8lb\/GMAIL_HACKS\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTAljWiofyK-wTSGmcaI0J7fhO_brMYlinFu-8e0uZ8ng&s=10"},{"id":3927,"name":"HOW TO GET ANYONE IP WITH SNAPCHAT","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/ejtsgqvgyn9wou8\/%255BAMMAR%255DHOW_TO_GET_ANYONE_IP_IN_SNAPCHAT\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSvsehh3MSw2BIt_us7DXLgkc5XynaoLwVXWvyqcOpjwA&s=10"},{"id":3928,"name":"GALLERY HACK METHOD PART 1 [APK GALLERY HACK]","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/hgjruma2hj1z5mn\/Free_Number.apk\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQEyUgnzlkIV35Ip25nXJU4KfNMkuUrALBSmLyneH1z2w&s=10"},{"id":3929,"name":"GALLERY HACK METHOD PART 2 [TOTURIAL]","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/p15txpascc1k0k4\/InShot_20240510_160211700.mp4\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQEyUgnzlkIV35Ip25nXJU4KfNMkuUrALBSmLyneH1z2w&s=10"},{"id":3930,"name":"FULL MOBILE HACK RAT PART 1","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/lznmof243rcsk4a\/AIRAVAT-main.zip\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQfgKBQmaQbnvLg5KfxJ_pwc9NlPfUpEBrhafncF02QGQ&s=10"},{"id":3931,"name":"FULL MOBILE HACK RAT PART 2","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/bwcf8jsl9qr32vv\/Airavat_RAT_full_setup.mp4\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQfgKBQmaQbnvLg5KfxJ_pwc9NlPfUpEBrhafncF02QGQ&s=10"},{"id":3932,"name":"WHATSAPP HACK","desc":"Premium tool","url":"http:\/\/www.mediafire.com\/file\/3gu5vlpcjf3n0k8\/WHATSAPP_HACK_BY_AMMAR","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRqSxbTL9BA_Ks03rGsXyZaWrTOWDKhfKY_fOuKsCP8xA&s=10"},{"id":3970,"name":"SMS HACK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/2f21q74cb5j0qu1\/SMS_HACK_BY_AMMAR\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcR9s83MJkkS89d8yZi7MIp-pGPs9KKvCZzQCwXmhDr4aQ&s=10"},{"id":3984,"name":"INSTAGRAM HACK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/2smu99gx8g0z6oy\/INSTAGRAM_HACK_BY_AMMAR\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQT8sS20ZNbvDaY3_PpZXrm7m0Q5hvtVRLMK5Bfu4K0tw&s=10"},{"id":3988,"name":"TELEGRAM HACK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/3ywqg0v7y04hvev\/TELEGRAM_HACK_BY_AMMAR\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTbL1es1dX3cGmAhbg87UzINBULm0Z15UFsiW5pMCF-XQ&s=10"},{"id":3992,"name":"CCTV CAMERA HACK","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/j41ln5qhmaw95bd\/CAMERA_HACK_BY_AMMAR\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTEFApozoHbXZv3-qG_rBCsDEbQTTxGJFXMWVWhZ2-zXg&s=10"},{"id":3999,"name":"FREE FIRE ID HACK","desc":"Premium tool","url":"http:\/\/www.mediafire.com\/file\/6mpwruar7kkg5nd\/FREE_FIRE_ID_HACK_BY_AMMAR","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRjcL5rNNLB63QPg3YNa2LhE69Wx5jocqBhoKoLFVHpDA&s=10"},{"id":4000,"name":"PUBG ID HACK","desc":"Premium tool","url":"http:\/\/www.mediafire.com\/file\/8mjicmpnyw2uhuo\/PUBG_ID_HACK_BY_AMMAR","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSHZOmf39YX4enuklq3jQkXcCShtmGaRWU4urUBFNe6rw&s=10"},{"id":4002,"name":"TIKTOK BAN METHOD","desc":"Premium tool","url":"https:\/\/www.mediafire.com\/file\/y81qs14mstek0br\/TIKTOK_BAN_METHOD.zip\/file","img":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTZVrOSyFFg1peHmeMdxwICE_Dr1lCOYHGsB9-L-wkSDw&s=10"}];
+var DB_VIEWS = 324;
+
+var S = {
+  ci: -1,
+  savedAccent: '#000000',
+  fi: 16,
+  statsRef: true,
+  tools: DB_TOOLS,
+  q: '',
+  on: 0,
+  vw: DB_VIEWS
+};
+
+function h2rgb(h){return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]}
+
+function setAccent(i){
+  S.ci=i;
+  var v=COLS[i].v;
+  S.savedAccent=v;
+  var rgb=h2rgb(v); var r=rgb[0],g=rgb[1],b=rgb[2];
+  var d=document.documentElement;
+  d.style.setProperty('--accent',v);
+  d.style.setProperty('--accent-light','rgba('+r+','+g+','+b+',0.1)');
+  d.style.setProperty('--accent-bg','rgba('+r+','+g+','+b+',0.1)');
+  d.style.setProperty('--accent-bg2','rgba('+r+','+g+','+b+',0.18)');
+  d.style.setProperty('--accent-border','rgba('+r+','+g+','+b+',0.35)');
+  d.style.setProperty('--accent-glow','rgba('+r+','+g+','+b+',0.2)');
+  d.style.setProperty('--accent-dot','rgba('+r+','+g+','+b+',0.08)');
+  // Update canvas animation colors live
+  window._cAR=r; window._cAG=g; window._cAB=b;
+  window._canvasAR=r; window._canvasAG=g; window._canvasAB=b;
+  rColors();
+}
+function setFont(i){
+  S.fi=i;
+  document.documentElement.style.setProperty('--fn',FONTS[i].f);
+  rFonts();
+}
+function rColors(){
+  var saved = S.savedAccent.toLowerCase();
+  document.getElementById('cgrid').innerHTML=COLS.map(function(c,i){
+    var on = c.v.toLowerCase()===saved ? ' on' : '';
+    return '<div class="cc'+on+'" data-v="'+c.v+'" onclick="setAccent('+i+')"><div class="ce">'+c.e+'</div><div class="cn">'+c.n+'</div></div>';
+  }).join('');
+}
+function rFonts(){
+  document.getElementById('flist').innerHTML=FONTS.map(function(f,i){
+    return '<div class="fi'+(i===S.fi?' on':'')+'" onclick="setFont('+i+')"><span style="font-family:'+f.f+';font-size:15px">'+f.n+'</span></div>';
+  }).join('');
+}
+function rTools(){
+  var fl=S.tools.filter(function(t){return t.name.toLowerCase().indexOf(S.q.toLowerCase())>-1;});
+  document.getElementById('sTl').textContent=S.tools.length;
+  document.getElementById('anTl').textContent=S.tools.length;
+  document.getElementById('ps1').textContent=S.tools.length;
+  document.getElementById('tgrid').innerHTML=fl.map(function(t){
+    var ico=t.img
+      ?'<img src="'+t.img+'" onerror="this.parentNode.innerHTML=BOLT">'
+      :BOLT;
+    return '<div class="tc cs-10" onclick="clickTool('+t.id+',event)"><div class="tiw">'+ico+'</div><div class="tn">'+t.name+'</div></div>';
+  }).join('');
+}
+function rAnalytics(){
+  var bars=[
+    {l:'Views Today',val:Math.min(100,Math.round(S.vw/5))},
+    {l:'Online Rate',val:Math.min(100,S.on*2)},
+    {l:'Tool Usage',val:Math.min(100,S.tools.length*10)},
+    {l:'Performance',val:99},
+  ];
+  document.getElementById('abars').innerHTML=bars.map(function(b){
+    return '<div class="abar-wrap"><div class="abar-label"><span>'+b.l+'</span><span>'+b.val+'%</span></div><div class="abar-track"><div class="abar-fill" style="width:'+b.val+'%"></div></div></div>';
+  }).join('');
+}
+
+function clickTool(id, e){
+  doRipple(e, e.currentTarget);
+  var t=S.tools.find(function(x){return x.id===id;});
+  if(!t) return;
+  // Track click
+  fetch(window.location.href,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'tc='+id});
+  if(t.url && t.url.trim()!==''){
+    window.open(t.url,'_blank');
+  } else {
+    openToolDetail(id);
+  }
+}
+function openToolDetail(id){
+  var t=S.tools.find(function(x){return x.id===id;});if(!t)return;
+  var ico=t.img?'<img src="'+t.img+'" onerror="this.src=\'\'">':BOLT;
+  document.getElementById('tdTitle').innerHTML=BOLT+' '+t.name;
+  document.getElementById('tdBody').innerHTML='<div class="tdw"><div class="tdico">'+ico+'</div><div class="tdname">'+t.name+'</div><div class="tddesc">'+(t.desc||'Premium tool')+'</div><button class="tdbtn" onclick="window.open(\''+t.url+'\',\'_blank\')">'+BOLT+' OPEN TOOL</button></div>';
+  show('tdOv');
+}
+function doRipple(e,el){
+  var r=document.createElement('div');r.className='ripple';
+  var rc=el.getBoundingClientRect();var s=Math.max(rc.width,rc.height)*1.5;
+  r.style.cssText='width:'+s+'px;height:'+s+'px;left:'+(e.clientX-rc.left-s/2)+'px;top:'+(e.clientY-rc.top-s/2)+'px';
+  el.appendChild(r);setTimeout(function(){r.remove()},500);
+}
+function show(id){document.getElementById(id).classList.add('show')}
+function hide(id){document.getElementById(id).classList.remove('show')}
+
+document.getElementById('btnTheme').onclick=function(){show('stOv')};
+document.getElementById('btnThemeSettings').onclick=function(){show('thOv')};
+document.getElementById('btnMenu').onclick=function(){show('menuOv')};
+document.getElementById('fab').onclick=function(){show('stOv')};
+
+['thOv','menuOv','stOv','profileOv','statsOv','shareOv','tdOv'].forEach(function(id){
+  var el=document.getElementById(id);
+  if(el)el.addEventListener('click',function(e){if(e.target===el)hide(id)});
+});
+
+document.querySelectorAll('.tbtn').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.tbtn').forEach(function(x){x.classList.remove('on')});
+    document.querySelectorAll('.tpane').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    document.getElementById('pane-'+b.dataset.tab).classList.add('on');
+  });
+});
+
+document.getElementById('tgStats').onclick=function(){this.classList.toggle('on');S.statsRef=this.classList.contains('on')};
+document.getElementById('tgAnim').onclick=function(){this.classList.toggle('on')};
+document.getElementById('search').addEventListener('input',function(e){S.q=e.target.value;rTools()});
+document.getElementById('statsOv').addEventListener('transitionend',rAnalytics);
+
+var toastT;
+function showToast(msg){
+  var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show')},2200);
+}
+
+function copyLink(){
+  var url='https://toolkit.page.gd/t/--';
+  if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){showToast('Link copied!');});}
+  else{var ta=document.createElement('textarea');ta.value=url;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('Link copied!');}
+}
+function shareNative(){
+  if(navigator.share){navigator.share({title:'ProBoy-Toolkit',url:'https://proboy.vercel.app--'});}
+  else{copyLink();}
+}
+
+function updStats(){
+  // Real-time views/tools from DB
+  fetch(window.location.href,{
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:'ajax=stats'
+  }).then(function(r){return r.json();}).then(function(d){
+    if(!d) return;
+    // Views
+    document.getElementById('sVw').textContent=d.views.toLocaleString();
+    document.getElementById('ps3').textContent=d.views.toLocaleString();
+    document.getElementById('anVw').textContent=d.views.toLocaleString();
+    S.vw = d.views;
+    // Tools
+    document.getElementById('sTl').textContent=d.tools;
+    document.getElementById('ps1').textContent=d.tools;
+    document.getElementById('anTl').textContent=d.tools;
+    // Simulated online (realistic random)
+    S.on = Math.floor(Math.random()*12)+1;
+    document.getElementById('sOn').textContent=S.on;
+    document.getElementById('ps2').textContent=S.on;
+    document.getElementById('anOn').textContent=S.on;
+  }).catch(function(){
+    // Fallback if fetch fails
+    S.on=Math.floor(Math.random()*12)+1;
+    document.getElementById('sOn').textContent=S.on;
+  });
+}
+// ── APPLY DB VALUES DIRECTLY TO CSS ──────────────────────────────────
+// accent, font, accent-vars all set from PHP before anything else
+(function(){
+  var hex='#000000';
+  var r=0,g=0,b=0;
+  var d=document.documentElement;
+  d.style.setProperty('--accent',hex);
+  d.style.setProperty('--accent-light','rgba('+r+','+g+','+b+',0.1)');
+  d.style.setProperty('--accent-bg','rgba('+r+','+g+','+b+',0.1)');
+  d.style.setProperty('--accent-bg2','rgba('+r+','+g+','+b+',0.18)');
+  d.style.setProperty('--accent-border','rgba('+r+','+g+','+b+',0.35)');
+  d.style.setProperty('--accent-glow','rgba('+r+','+g+','+b+',0.2)');
+  d.style.setProperty('--accent-dot','rgba('+r+','+g+','+b+',0.08)');
+  d.style.setProperty('--fn',"'Poppins',sans-serif");
+  S.savedAccent=hex;
+})();
+
+// ── RENDER COLOR GRID, FONT LIST, TOOLS ──────────────────────────────
+rColors();   // fills #cgrid — now savedAccent is set, correct item highlighted
+rFonts();    // fills #flist — S.fi already set from DB font index
+rTools();    // fills #tgrid with real DB tools
+rAnalytics();
+
+// ── REAL-TIME STATS ───────────────────────────────────────────────────
+updStats();
+setInterval(updStats,10000);
+
+// ── BACKGROUND ANIMATION ──────────────────────────────────────────────
+(function(){
+  var ANIM='crown_rain';
+  var cv=document.getElementById('bg-canvas');
+  if(!cv)return;
+  var ctx=cv.getContext('2d');
+
+  // Live color — updates instantly when theme panel color changes
+  window._cAR=0;
+  window._cAG=0;
+  window._cAB=0;
+  function R(){return window._cAR;}
+  function G(){return window._cAG;}
+  function B(){return window._cAB;}
+  function c(a){return 'rgba('+R()+','+G()+','+B()+','+a+')';}
+
+  function resize(){cv.width=window.innerWidth;cv.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+
+  if(ANIM==='none')return;
+
+  // ── PARTICLES / NEURAL / FIREFLIES / STARDUST / BUBBLES / EMBERS / GLITTER ──
+  var FALL_ANIMS=['particles','fireflies','stardust','bubbles','embers','glitter','confetti_dot'];
+  var FALL2_ANIMS=['snow','confetti','petals','leaves','rain','money','hearts','stars_fall'];
+  var STAR_ANIMS=['galaxy','nebula','aurora','warp','solar','meteor','moon_orbit','black_hole','supernova'];
+  var RING_ANIMS=['pulse_rings','sparkle','neon_trails','laser_grid','holo','wifi_waves','circles','data_stream'];
+  var GEO_ANIMS=['triangles','cubes','diamonds','squares','spirals','kaleidoscope','maze','zigzag','hexgrid'];
+  var FIRE_ANIMS=['fire','lava','lightning','glitch','scan_lines'];
+  var PART2_ANIMS=['neural','circuit'];
+
+  // Make particles
+  function mkPts(n,fall){
+    var arr=[];
+    for(var i=0;i<n;i++) arr.push({
+      x:Math.random()*cv.width,
+      y:fall?Math.random()*cv.height*-1:Math.random()*cv.height,
+      vx:(Math.random()-.5)*.55,vy:(Math.random()-.5)*.55,
+      r:Math.random()*2.8+.7
+    });
+    return arr;
+  }
+
+  // Make polygons (crystal/3D shapes)
+  function mkPolys(n){
+    var arr=[];
+    for(var i=0;i<n;i++) arr.push({
+      x:Math.random()*cv.width,y:Math.random()*cv.height,
+      vx:(Math.random()-.5)*.38,vy:(Math.random()-.5)*.38,
+      r:22+Math.random()*65,
+      rot:Math.random()*Math.PI*2,
+      vrot:(Math.random()-.5)*.008,
+      sides:3+Math.floor(Math.random()*5),
+      al:Math.random()*.28+.04,
+      fill:Math.random()>.6
+    });
+    return arr;
+  }
+
+  function drawPoly(p){
+    ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);
+    ctx.beginPath();
+    for(var i=0;i<p.sides;i++){
+      var a=i/p.sides*Math.PI*2;
+      i?ctx.lineTo(Math.cos(a)*p.r,Math.sin(a)*p.r):ctx.moveTo(Math.cos(a)*p.r,Math.sin(a)*p.r);
+    }
+    ctx.closePath();
+    if(p.fill){ctx.fillStyle=c(p.al*.55);ctx.fill();}
+    ctx.strokeStyle=c(p.al);ctx.lineWidth=1;ctx.stroke();
+    ctx.restore();
+  }
+
+  // ── DISPATCH ──────────────────────────────────────────────────────────
+  var pts=[], polys=[], drops=[], rings=[];
+
+  // NEURAL / PARTICLES (dots + lines)
+  if(ANIM==='neural'||ANIM==='particles'||PART2_ANIMS.indexOf(ANIM)>-1){
+    pts=mkPts(75,false);
+    (function loop(){
+      ctx.clearRect(0,0,cv.width,cv.height);
+      for(var i=0;i<pts.length;i++){
+        var p=pts[i];p.x+=p.vx;p.y+=p.vy;
+        if(p.x<0)p.x=cv.width;if(p.x>cv.width)p.x=0;
+        if(p.y<0)p.y=cv.height;if(p.y>cv.height)p.y=0;
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=c(.38);ctx.fill();
+        for(var j=i+1;j<pts.length;j++){
+          var q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
+          if(d<120){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=c(.13*(1-d/120));ctx.lineWidth=.7;ctx.stroke();}
+        }
+      }
+      requestAnimationFrame(loop);
+    })();
+  }
+  // FLOATING DOTS (fireflies etc)
+  else if(FALL_ANIMS.indexOf(ANIM)>-1){
+    pts=mkPts(80,false);
+    (function loop(){
+      ctx.clearRect(0,0,cv.width,cv.height);
+      var t=Date.now();
+      for(var i=0;i<pts.length;i++){
+        var p=pts[i];p.x+=p.vx;p.y+=p.vy;
+        if(p.x<0)p.x=cv.width;if(p.x>cv.width)p.x=0;
+        if(p.y<0)p.y=cv.height;if(p.y>cv.height)p.y=0;
+        var tw=ANIM==='fireflies'?.2+.5*Math.abs(Math.sin(t/600+i)):.38;
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=c(tw);ctx.fill();
+      }
+      requestAnimationFrame(loop);
+    })();
+  }
+  // ORBS / BLOBS
+  else if(ANIM==='orbs'||ANIM==='soft_bokeh'||ANIM==='morphing_blobs'){
+    (function loop(){
+      var t=Date.now()/3000;
+      ctx.clearRect(0,0,cv.width,cv.height);
+      var OB=[
+        {x:.22+.08*Math.sin(t),   y:.18+.08*Math.cos(t),    r:.38},
+        {x:.78+.08*Math.cos(t*.7),y:.72+.08*Math.sin(t*.7), r:.42},
+        {x:.5+.04*Math.sin(t*1.3),y:.45+.06*Math.cos(t*1.3),r:.3}
+      ];
+      OB.forEach(function(o){
+        var gx=o.x*cv.width,gy=o.y*cv.height,gr=o.r*cv.width;
+        var g=ctx.createRadialGradient(gx,gy,0,gx,gy,gr);
+        g.addColorStop(0,c(.2));g.addColorStop(.5,c(.07));g.addColorStop(1,c(0));
+        ctx.fillStyle=g;ctx.beginPath();ctx.arc(gx,gy,gr,0,Math.PI*2);ctx.fill();
+      });
+      requestAnimationFrame(loop);
+    })();
+  }
+  // GRID / CIRCUIT / HEX
+  else if(ANIM==='grid'||ANIM==='circuit'||ANIM==='hexgrid'){
+    (function loop(){
+      ctx.clearRect(0,0,cv.width,cv.height);
+      ctx.strokeStyle=c(.09);ctx.lineWidth=1;
+      var sz=ANIM==='hexgrid'?50:42;
+      for(var x=0;x<cv.width;x+=sz){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,cv.height);ctx.stroke();}
+      for(var y=0;y<cv.height;y+=sz){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(cv.width,y);ctx.stroke();}
+      if(ANIM==='circuit'){
+        ctx.fillStyle=c(.55);
+        for(var x=sz;x<cv.width;x+=sz*2) for(var y=sz;y<cv.height;y+=sz*2){ctx.beginPath();ctx.arc(x,y,2.5,0,Math.PI*2);ctx.fill();}
+      }
+      requestAnimationFrame(loop);
+    })();
+  }
+  // MATRIX / BINARY / CODE
+  else if(ANIM==='matrix'||ANIM==='binary'||ANIM==='code_scroll'||ANIM==='qr_rain'){
+    var sz=14,cols=Math.floor(cv.width/sz);
+    for(var i=0;i<cols;i++) drops[i]=Math.random()*-cv.height;
+    (function loop(){
+      ctx.fillStyle='rgba(0,0,0,.055)';ctx.fillRect(0,0,cv.width,cv.height);
+      ctx.fillStyle=c(.82);ctx.font=sz+'px monospace';
+      for(var i=0;i<drops.length;i++){
+        var ch=ANIM==='binary'?(Math.random()>.5?'1':'0'):String.fromCharCode(33+Math.floor(Math.random()*93));
+        ctx.fillText(ch,i*sz,drops[i]);
+        if(drops[i]>cv.height&&Math.random()>.975) drops[i]=0;
+        drops[i]+=sz;
+      }
+      requestAnimationFrame(loop);
+    })();
+  }
+  // SNOW / FALL / RAIN
+  else if(FALL2_ANIMS.indexOf(ANIM)>-1){
+    pts=mkPts(95,true);
+    (function loop(){
+      ctx.clearRect(0,0,cv.width,cv.height);
+      for(var i=0;i<pts.length;i++){
+        var p=pts[i];
+        p.y+=ANIM==='rain'?5.5:1.4;
+        p.x+=Math.sin(Date.now()/800+i)*(ANIM==='rain'?.08:.45);
+        if(p.y>cv.height){p.y=-10;p.x=Math.random()*cv.width;}
+        if(ANIM==='rain'){ctx.beginPath();ctx.rect(p.x,p.y,1.5,9);ctx.fillStyle=c(.42);ctx.fill();}
+        else{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=c(.44);ctx.fill();}
+      }
+      requestAnimationFrame(loop);
+    })();
+  }
+  // STARS / GALAXY / CONSTELLATION
+  else if(STAR_ANIMS.indexOf(ANIM)>-1){
+    pts=mkPts(130,false);
+    (function loop(){
+      ctx.clearRect(0,0,cv.width,cv.height);
+      var t=Date.now();
+      for(var i=0;i<pts.length;i++){
+        var p=pts[i];
+        var tw=.12+.55*Math.abs(Math.sin(t/650+i));
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r*.65,0,Math.PI*2);ctx.fillStyle=c(tw);ctx.fill();
+        if(ANIM==='constellation'&&i%4===0){
+          var q=pts[(i+7)%pts.length];
+          var dd=Math.sqrt(Math.pow(p.x-q.x,2)+Math.pow(p.y-q.y,2));
+          if(dd<170){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=c(.07);ctx.lineWidth=.6;ctx.stroke();}
+        }
+        if(ANIM==='warp'){p.x+=p.vx*3;p.y+=p.vy*3;if(p.x<0||p.x>cv.width||p.y<0||p.y>cv.height){p.x=cv.width/2;p.y=cv.height/2;}}
+      }
+      requestAnimationFrame(loop);
+    })();
+  }
+  // PULSE RINGS / SPARKLE
+  else if(RING_ANIMS.indexOf(ANIM)>-1){
+    (function loop(){
+      ctx.clearRect(0,0,cv.width,cv.height);
+      if(Math.random()>.968) rings.push({x:Math.random()*cv.width,y:Math.random()*cv.height,r:0,max:50+Math.random()*150});
+      rings=rings.filter(function(rg){return rg.r<rg.max;});
+      rings.forEach(function(rg){
+        rg.r+=1.5;
+        var al=.5*(1-rg.r/rg.max);
+        ctx.beginPath();ctx.arc(rg.x,rg.y,rg.r,0,Math.PI*2);
+        ctx.strokeStyle=c(al);ctx.lineWidth=1.5;ctx.stroke();
+      });
+      requestAnimationFrame(loop);
+    })();
+  }
+  // FIRE / LAVA / LIGHTNING
+  else if(FIRE_ANIMS.indexOf(ANIM)>-1){
+    pts=mkPts(70,false);
+    (function loop(){
+      ctx.clearRect(0,0,cv.width,cv.height);
+      for(var i=0;i<pts.length;i++){
+        var p=pts[i];
+        p.y-=2+Math.random()*1.5;
+        p.x+=Math.sin(Date.now()/350+i)*.95;
+        p.r*=.983;
+        if(p.y<0||p.r<.35){p.y=cv.height+8;p.x=Math.random()*cv.width;p.r=Math.random()*4+1.5;}
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=c(.22+.38*(1-p.y/cv.height));ctx.fill();
+      }
+      requestAnimationFrame(loop);
+    })();
+  }
+  // GEO POLYGONS / TRIANGLES / CUBES / SPIRALS
+  else if(GEO_ANIMS.indexOf(ANIM)>-1||ANIM==='crystal'||ANIM==='diamonds'){
+    polys=mkPolys(20);
+    (function loop(){
+      ctx.clearRect(0,0,cv.width,cv.height);
+      for(var i=0;i<polys.length;i++){
+        var p=polys[i];p.x+=p.vx;p.y+=p.vy;p.rot+=p.vrot;
+        if(p.x<-p.r)p.x=cv.width+p.r;if(p.x>cv.width+p.r)p.x=-p.r;
+        if(p.y<-p.r)p.y=cv.height+p.r;if(p.y>cv.height+p.r)p.y=-p.r;
+        drawPoly(p);
+      }
+      requestAnimationFrame(loop);
+    })();
+  }
+  // DEFAULT → Beautiful crystal polygons (same as screenshot)
+  else {
+    polys=mkPolys(20);
+    (function loop(){
+      ctx.clearRect(0,0,cv.width,cv.height);
+      for(var i=0;i<polys.length;i++){
+        var p=polys[i];p.x+=p.vx;p.y+=p.vy;p.rot+=p.vrot;
+        if(p.x<-p.r)p.x=cv.width+p.r;if(p.x>cv.width+p.r)p.x=-p.r;
+        if(p.y<-p.r)p.y=cv.height+p.r;if(p.y>cv.height+p.r)p.y=-p.r;
+        drawPoly(p);
+      }
+      requestAnimationFrame(loop);
+    })();
+  }
+})()
+
+
+// ── POPUP & CHANNEL SYSTEM ───────────────────────────────────────────
+var CH_DELAY   = 1;
+var SHOW_CH    = true;
+var CH_SHOW    = 'before';
+var SHOW_ENTRY = true;
+
+function closeChannel(){
+  var el=document.getElementById('ch-pop');
+  if(el) el.classList.remove('show');
+  // After channel popup, show entry popup if needed
+  if(SHOW_ENTRY && CH_SHOW==='before'){
+    setTimeout(function(){
+      var ep=document.getElementById('entry-pop');
+      if(ep) ep.classList.add('show');
+    },400);
+  }
+}
+
+function closeEntryPop(){
+  var el=document.getElementById('entry-pop');
+  if(el) el.classList.remove('show');
+}
+
+function startPopupSequence(){
+  if(!SHOW_CH && !SHOW_ENTRY) return;
+  if(SHOW_CH && (CH_SHOW==='before'||CH_SHOW==='only')){
+    // Show channel popup after delay
+    var remaining = CH_DELAY;
+    var timerEl = document.getElementById('ch-timer');
+    function tick(){
+      if(remaining > 0){
+        if(timerEl) timerEl.textContent = 'Auto-closing in '+remaining+'s';
+        remaining--;
+        setTimeout(tick, 1000);
+      } else {
+        if(timerEl) timerEl.textContent = '';
+      }
+    }
+    setTimeout(function(){
+      var el=document.getElementById('ch-pop');
+      if(el){ el.classList.add('show'); tick(); }
+      // If no entry popup after, auto close channel after 30s
+      if(CH_SHOW==='only'){ setTimeout(function(){closeChannel();},30000); }
+    }, CH_DELAY * 1000);
+  } else if(SHOW_ENTRY && !SHOW_CH){
+    // Show entry popup only
+    var ep=document.getElementById('entry-pop');
+    if(ep) ep.classList.add('show');
+  } else if(SHOW_CH && CH_SHOW==='after' && SHOW_ENTRY){
+    // Show entry popup first, then channel after user closes
+    var ep=document.getElementById('entry-pop');
+    if(ep) ep.classList.add('show');
+    // Channel shown after entry is closed (handled in closeEntryPop)
+  } else if(SHOW_CH && CH_SHOW==='after' && !SHOW_ENTRY){
+    // Show channel after delay
+    setTimeout(function(){
+      var el=document.getElementById('ch-pop');
+      if(el) el.classList.add('show');
+    }, CH_DELAY * 1000);
+  }
+}
+
+// Override closeEntryPop to show channel after if needed
+function closeEntryPop(){
+  var el=document.getElementById('entry-pop');
+  if(el) el.classList.remove('show');
+  if(SHOW_CH && CH_SHOW==='after'){
+    setTimeout(function(){
+      var ch=document.getElementById('ch-pop');
+      if(ch) ch.classList.add('show');
+    },400);
+  }
+}
+
+// Start sequence on page load
+window.addEventListener('load', startPopupSequence);
+
+// Dark mode default
+function setMode(dark){
+  document.body.classList.toggle('dark',dark);
+  document.getElementById('mDark').classList.toggle('on',dark);
+  document.getElementById('mLight').classList.toggle('on',!dark);
+}
+document.getElementById('mDark').onclick=function(){setMode(true)};
+document.getElementById('mLight').onclick=function(){setMode(false)};
+setMode(false);
+
+// ── ANTI-EXTRACTION / ANTI-DEVTOOLS PROTECTION ────────────────────────
+(function(){
+  // 1) Disable right-click context menu
+  document.addEventListener('contextmenu',function(e){e.preventDefault();return false;});
+
+  // 2) Block F12, Ctrl+Shift+I/J/C, Ctrl+U, Ctrl+S, Ctrl+A, Ctrl+C
+  document.addEventListener('keydown',function(e){
+    var k=e.keyCode||e.which;
+    if(k===123){e.preventDefault();e.stopPropagation();return false;}
+    if(e.ctrlKey&&e.shiftKey&&(k===73||k===74||k===67)){e.preventDefault();e.stopPropagation();return false;}
+    if(e.ctrlKey&&(k===85||k===83||k===65||k===67)){e.preventDefault();e.stopPropagation();return false;}
+  });
+
+  // 3) Override outerHTML on <html> element to return garbage
+  try{
+    Object.defineProperty(document.querySelector('html'),'outerHTML',{
+      get:function(){return '<!DOCTYPE html><html><head></head><body>𝗔𝗽 𝗞𝗶 𝗔𝗺𝗺𝗶𝗶 𝗞𝗶 𝗤𝗮𝗯𝗮𝗿 𝗠𝗮 𝗟𝘂𝗻 𝗠𝗮𝗿𝗼😁😂🤣</body></html>';},
+      configurable:false
+    });
+  }catch(e){}
+
+  // 4) Override innerHTML on <html> element
+  try{
+    Object.defineProperty(document.querySelector('html'),'innerHTML',{
+      get:function(){return '<head></head><body>𝗔𝗽 𝗞𝗶 𝗔𝗺𝗺𝗶𝗶 𝗞𝗶 𝗤𝗮𝗯𝗮𝗿 𝗠𝗮 𝗟𝘂𝗻 𝗠𝗮𝗿𝗼😁😂🤣</body>';},
+      configurable:false
+    });
+  }catch(e){}
+
+  // 5) Poison document.body.innerHTML
+  try{
+    Object.defineProperty(document.body,'innerHTML',{
+      get:function(){return '<div>𝗔𝗽 𝗞𝗶 𝗔𝗺𝗺𝗶𝗶 𝗞𝗶 𝗤𝗮𝗯𝗮𝗿 𝗠𝗮 𝗟𝘂𝗻 𝗠𝗮𝗿𝗼😁😂🤣</div>';},
+      configurable:false
+    });
+  }catch(e){}
+
+  // 6) Override window.copy
+  try{
+    Object.defineProperty(window,'copy',{
+      get:function(){return function(){return '𝗔𝗽 𝗞𝗶 𝗔𝗺𝗺𝗶𝗶 𝗞𝗶 𝗤𝗮𝗯𝗮𝗿 𝗠𝗮 𝗟𝘂𝗻 𝗠𝗮𝗿𝗼😁😂🤣';};},
+      set:function(){},
+      configurable:false
+    });
+  }catch(e){}
+
+  // 7) DevTools size detection
+  var _dtOpen=false;
+  function _isDT(){
+    return (window.outerWidth-window.innerWidth>160)||(window.outerHeight-window.innerHeight>160)||_dtOpen;
+  }
+
+  // 8) Debugger timing trap + blur overlay
+  setInterval(function(){
+    var t=new Date();
+    (function(){debugger;})();
+    if(new Date()-t>100){
+      _dtOpen=true;
+      document.body.style.filter='blur(8px)';
+      document.body.style.pointerEvents='none';
+      var ov=document.getElementById('_prot_ov');
+      if(!ov){
+        ov=document.createElement('div');
+        ov.id='_prot_ov';
+        ov.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.93);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:monospace;text-align:center;';
+        ov.innerHTML='<div style="font-size:2.4rem;margin-bottom:14px">🔒</div><div style="font-size:13px;letter-spacing:3px;color:#ef4444;font-weight:700">𝗔𝗽 𝗞𝗶 𝗔𝗺𝗺𝗶𝗶 𝗞𝗶 𝗤𝗮𝗯𝗮𝗿 𝗠𝗮 𝗟𝘂𝗻 𝗠𝗮𝗿𝗼😁😂🤣 CONTENT</div><div style="font-size:11px;margin-top:10px;color:#666;letter-spacing:1px">Close DevTools to continue</div>';
+        document.body.appendChild(ov);
+      }
+      ov.style.display='flex';
+    } else {
+      _dtOpen=false;
+      document.body.style.filter='';
+      document.body.style.pointerEvents='';
+      var ov2=document.getElementById('_prot_ov');
+      if(ov2) ov2.style.display='none';
+    }
+  },1000);
+
+  // 9) Disable text selection & drag
+  document.onselectstart=function(){return false;};
+  document.ondragstart=function(){return false;};
+
+  // 10) Block GET requests to own page (prevents fetch-based source grabbing)
+  var _origOpen=XMLHttpRequest.prototype.open;
+  XMLHttpRequest.prototype.open=function(m,u){
+    if(u&&u.toString().indexOf(window.location.pathname)>-1&&m.toUpperCase()==='GET') return;
+    return _origOpen.apply(this,arguments);
+  };
+
+})();
+</script>
+
+
+</body></html>
