@@ -30,7 +30,6 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   
   <style>
-    /* Premium glow animations and scrollbars */
     @keyframes pulse-slow {
       0%, 100% { opacity: 0.2; transform: scale(1); }
       50% { opacity: 0.4; transform: scale(1.1); }
@@ -44,20 +43,10 @@
         linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
     }
-    /* Hide scrollbar on modern browsers */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: rgba(2, 6, 23, 0.5);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(6, 182, 212, 0.3);
-      border-radius: 99px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(16, 185, 129, 0.5);
-    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(2, 6, 23, 0.5); }
+    ::-webkit-scrollbar-thumb { background: rgba(6, 182, 212, 0.3); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(16, 185, 129, 0.5); }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between overflow-x-hidden relative bg-grid-pattern selection:bg-cyan-500/30 selection:text-white">
@@ -107,7 +96,6 @@
 
       <!-- Main Interaction Card -->
       <div class="backdrop-blur-xl bg-white/[0.02] border border-white/5 rounded-3xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)] shadow-cyan-950/10 relative overflow-hidden group">
-        <!-- Top neon horizontal accent line -->
         <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-cyan-500 via-emerald-500 to-transparent"></div>
 
         <!-- Input State -->
@@ -128,15 +116,12 @@
                 autocomplete="off"
               >
             </div>
-            
-            <!-- Contextual Help / Live Formatter feedback -->
             <div class="flex items-center justify-between text-[10px] font-mono px-1">
               <span class="text-slate-500">Format: CountryCode + Number</span>
               <span id="format-preview" class="text-cyan-400 font-semibold">Ready to parse</span>
             </div>
           </div>
 
-          <!-- Pakistan automatic quick fix tip -->
           <div class="bg-slate-900/40 border border-white/5 rounded-xl p-3 flex items-start gap-2.5 text-[11px] text-slate-400 leading-relaxed">
             <i data-lucide="info" class="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5"></i>
             <div>
@@ -144,7 +129,6 @@
             </div>
           </div>
 
-          <!-- Submit Trigger Button -->
           <button 
             id="btn-generate"
             class="w-full py-4 rounded-2xl bg-gradient-to-tr from-cyan-400 to-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider hover:shadow-lg hover:shadow-cyan-400/20 active:scale-98 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 group-hover:scale-[1.01]"
@@ -157,20 +141,16 @@
         <!-- Loading State -->
         <div id="loading-state" class="hidden py-8 flex flex-col items-center justify-center text-center space-y-6">
           <div class="relative w-16 h-16">
-            <!-- Interlocking glowing rings -->
             <div class="absolute inset-0 rounded-full border-4 border-cyan-400/10 border-t-cyan-400 animate-spin"></div>
             <div class="absolute inset-1.5 rounded-full border-4 border-emerald-400/10 border-b-emerald-400 animate-spin" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
             <div class="absolute inset-4 rounded-full bg-slate-900 flex items-center justify-center">
               <i data-lucide="cpu" class="w-5 h-5 text-cyan-400 animate-pulse"></i>
             </div>
           </div>
-
           <div class="space-y-1.5">
             <h4 id="loading-title" class="text-sm font-black text-white tracking-wide font-mono uppercase">Initializing Handshake</h4>
             <p id="loading-desc" class="text-[11px] text-slate-400 max-w-xs leading-relaxed">Securing connection channel to proboy-pair servers...</p>
           </div>
-
-          <!-- Terminal Logs visualizer during request -->
           <div class="w-full bg-slate-950 rounded-xl p-3 text-left font-mono text-[9px] text-slate-500 border border-white/5 h-20 overflow-hidden flex flex-col justify-end">
             <div id="terminal-log-1">> system_handshake: active</div>
             <div id="terminal-log-2">> request_ip: authorized</div>
@@ -187,18 +167,12 @@
             <h3 class="text-lg font-black text-white tracking-tight">Code Generated Successfully</h3>
             <p class="text-xs text-slate-400">Your secure multi-device verification pairing code is active</p>
           </div>
-
-          <!-- Large Styled Code Container -->
           <div class="relative bg-slate-950 rounded-2xl border border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.05)] p-6 text-center group/code">
-            <div class="absolute top-2 right-2 text-[8px] font-mono uppercase tracking-widest text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-500/20 px-2 py-0.5 rounded-md">
-              Secure
-            </div>
+            <div class="absolute top-2 right-2 text-[8px] font-mono uppercase tracking-widest text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-500/20 px-2 py-0.5 rounded-md">Secure</div>
             <div id="code-display" class="font-mono text-2xl sm:text-3xl font-extrabold tracking-widest text-cyan-400 select-all my-2">
               PG19-QHA4
             </div>
           </div>
-
-          <!-- Quick Copy Trigger -->
           <button 
             id="btn-copy"
             class="w-full py-3.5 rounded-2xl bg-slate-900 border border-white/10 hover:border-cyan-400/40 text-white font-bold text-xs uppercase tracking-wider hover:bg-slate-800 active:scale-98 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 group/copy"
@@ -206,11 +180,8 @@
             <i data-lucide="copy" class="w-4 h-4 text-cyan-400 group-hover/copy:scale-110 transition-transform" id="copy-icon"></i>
             <span id="copy-text">Copy Pairing Code</span>
           </button>
-
-          <!-- Simple Visual Setup Guide -->
           <div class="border-t border-white/5 pt-5 space-y-3.5 text-xs">
             <span class="block text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold">How to use this code:</span>
-            
             <div class="space-y-3 font-medium">
               <div class="flex items-start gap-3 text-slate-300">
                 <span class="w-5 h-5 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-[10px] text-cyan-400 font-bold flex-shrink-0 mt-0.5">1</span>
@@ -226,8 +197,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Restart portal trigger -->
           <button 
             id="btn-retry"
             class="w-full text-center text-[11px] font-mono text-slate-500 hover:text-cyan-400 hover:underline transition-all cursor-pointer block mt-2"
@@ -245,8 +214,6 @@
             <h3 class="text-lg font-black text-white tracking-tight">Handshake Failed</h3>
             <p id="error-message" class="text-xs text-slate-400 leading-relaxed px-4">An error occurred while communicating with the pairing gateway server.</p>
           </div>
-
-          <!-- Restart portal trigger -->
           <button 
             id="btn-error-retry"
             class="w-full py-3.5 rounded-2xl bg-slate-900 border border-white/5 hover:border-cyan-400/30 text-white font-bold text-xs uppercase tracking-wider hover:bg-slate-800 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2"
@@ -255,10 +222,8 @@
             <span>Try Again</span>
           </button>
         </div>
-
       </div>
 
-      <!-- Quick backlink and verified badges -->
       <div class="mt-8 flex items-center justify-between text-[11px] text-slate-500 font-mono">
         <a href="https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-1">
           <i data-lucide="message-square" class="w-3.5 h-3.5 text-emerald-500"></i> Join Broadcast Channel
@@ -267,12 +232,9 @@
           <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> SSL SECURED
         </span>
       </div>
-
     </div>
-
   </main>
 
-  <!-- Footer -->
   <footer class="w-full py-6 border-t border-white/5 text-center text-slate-500 text-[11px] font-mono z-20">
     <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
       <p>© 2026 ProBoy MD. Engineered in Burewala, Pakistan by Shahan Ali.</p>
@@ -285,10 +247,10 @@
   </footer>
 
   <script>
-    // Initialize Lucide icons on page load
+    // Initialize Lucide icons
     lucide.createIcons();
 
-    // DOM Elements selection
+    // DOM Elements
     const inputState = document.getElementById('input-state');
     const loadingState = document.getElementById('loading-state');
     const successState = document.getElementById('success-state');
@@ -313,19 +275,16 @@
     const errorMessage = document.getElementById('error-message');
     const btnErrorRetry = document.getElementById('btn-error-retry');
 
-    // Sanitization and helper utility function
+    // Phone number cleaning
     function cleanPhoneNumber(numStr) {
-      // Strips spaces, parenthesis, dashes and leading + sign
       let cleaned = numStr.replace(/[^0-9]/g, '');
-      
-      // Auto-correct leading Pakistan national standard 03xx to 923xx
       if (cleaned.startsWith('03')) {
         cleaned = '92' + cleaned.slice(1);
       }
       return cleaned;
     }
 
-    // Dynamic typing preview handler
+    // Live formatting preview
     phoneNumberInput.addEventListener('input', (e) => {
       const val = e.target.value.trim();
       if (!val) {
@@ -343,7 +302,25 @@
       }
     });
 
-    // Main API Request Dispatcher
+    // Show error
+    function showError(msg) {
+      loadingState.classList.add('hidden');
+      errorMessage.innerText = msg;
+      errorState.classList.remove('hidden');
+    }
+
+    // Reset to input view
+    function resetPortal() {
+      successState.classList.add('hidden');
+      errorState.classList.add('hidden');
+      loadingState.classList.add('hidden');
+      phoneNumberInput.value = '';
+      formatPreview.innerText = 'Ready to parse';
+      formatPreview.className = 'text-cyan-400 font-semibold';
+      inputState.classList.remove('hidden');
+    }
+
+    // Main pairing request
     async function triggerPairing() {
       const inputVal = phoneNumberInput.value.trim();
       if (!inputVal) {
@@ -357,13 +334,13 @@
         return;
       }
 
-      // Progress animation steps
+      // Switch to loading state
       inputState.classList.add('hidden');
       errorState.classList.add('hidden');
       successState.classList.add('hidden');
       loadingState.classList.remove('hidden');
 
-      // Step-by-step UI loading texts mimicking real cluster execution
+      // Loading animation steps (cosmetic)
       loadingTitle.innerText = "Initializing connection";
       loadingDesc.innerText = "Securing socket channel to Render production node...";
       log1.innerText = "> ws://handshake_initiated: true";
@@ -371,7 +348,7 @@
       log3.innerText = "> status_pending: awaiting_response...";
       log3.className = "text-cyan-400 font-semibold";
 
-      let timer1 = setTimeout(() => {
+      const timer1 = setTimeout(() => {
         loadingTitle.innerText = "Handshaking server";
         loadingDesc.innerText = "Bypassing proxy security layers & routing parameters...";
         log1.innerText = `> routing: https://proboy-pair.onrender.com/auto-connect?num=${targetNumber}`;
@@ -380,7 +357,7 @@
         log3.className = "text-amber-400 font-semibold";
       }, 1200);
 
-      let timer2 = setTimeout(() => {
+      const timer2 = setTimeout(() => {
         loadingTitle.innerText = "Generating multi-device code";
         loadingDesc.innerText = "Whispering encrypted session keys to Baileys central cluster...";
         log2.innerText = "> signature: verified_handshake_ok";
@@ -394,67 +371,39 @@
         clearTimeout(timer2);
 
         if (!response.ok) {
-          throw new Error(`HTTP network response code error: ${response.status}`);
+          throw new Error(`HTTP error ${response.status}`);
         }
 
         const data = await response.json();
         
-        // Wait a slight buffer for premium flow pacing
-        setTimeout(() => {
-          if (data && data.code) {
-            codeDisplay.innerText = data.code;
-            loadingState.classList.add('hidden');
-            successState.classList.remove('hidden');
-          } else {
-            showError("The gateway server processed the request but returned an empty authorization buffer. Please confirm that your WhatsApp is active and try again.");
-          }
-        }, 3400);
-
+        // ✅ Success: show code immediately – no artificial delay
+        if (data && data.code) {
+          codeDisplay.innerText = data.code;
+          loadingState.classList.add('hidden');
+          successState.classList.remove('hidden');
+        } else {
+          showError("The gateway server processed the request but returned an empty authorization buffer. Please confirm that your WhatsApp is active and try again.");
+        }
       } catch (err) {
         clearTimeout(timer1);
         clearTimeout(timer2);
         console.error(err);
-        setTimeout(() => {
-          showError(`Could not negotiate secure connection with proboy-pair cluster server: ${err.message}. Please verify your internet connection and try again.`);
-        }, 1500);
+        // ✅ Show error right away
+        showError(`Could not negotiate secure connection with proboy-pair cluster server: ${err.message}. Please verify your internet connection and try again.`);
       }
     }
 
-    // Standard Error Handler
-    function showError(msg) {
-      loadingState.classList.add('hidden');
-      errorMessage.innerText = msg;
-      errorState.classList.remove('hidden');
-    }
-
-    // Reset workflow
-    function resetPortal() {
-      successState.classList.add('hidden');
-      errorState.classList.add('hidden');
-      loadingState.classList.add('hidden');
-      
-      phoneNumberInput.value = '';
-      formatPreview.innerText = 'Ready to parse';
-      formatPreview.className = 'text-cyan-400 font-semibold';
-      
-      inputState.classList.remove('hidden');
-    }
-
-    // Dynamic Clipboard copier with immediate visual cues
+    // Copy functionality
     btnCopy.addEventListener('click', async () => {
       const code = codeDisplay.innerText.trim();
       try {
         await navigator.clipboard.writeText(code);
-        
-        // Trigger visual success feedbacks
         btnCopy.classList.add('bg-emerald-950', 'border-emerald-500/40');
         btnCopy.classList.remove('bg-slate-900', 'border-white/10');
         copyText.innerText = "Copied to clipboard!";
         copyText.className = "text-emerald-400 font-bold";
         copyIcon.setAttribute('data-lucide', 'check');
         lucide.createIcons();
-        
-        // Revert feedback after short timer
         setTimeout(() => {
           btnCopy.classList.remove('bg-emerald-950', 'border-emerald-500/40');
           btnCopy.classList.add('bg-slate-900', 'border-white/10');
@@ -463,23 +412,18 @@
           copyIcon.setAttribute('data-lucide', 'copy');
           lucide.createIcons();
         }, 2200);
-
       } catch (e) {
-        // Fallback standard selection highlight
-        console.warn('Fallback selection trigger');
         alert(`Pairing Code: ${code} (Please copy manually)`);
       }
     });
 
-    // Event hooks configuration
+    // Event listeners
     btnGenerate.addEventListener('click', triggerPairing);
     phoneNumberInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') triggerPairing();
     });
-
     btnRetry.addEventListener('click', resetPortal);
     btnErrorRetry.addEventListener('click', resetPortal);
-
   </script>
 </body>
 </html>
