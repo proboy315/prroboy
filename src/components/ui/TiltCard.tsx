@@ -5,16 +5,31 @@ interface TiltCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
   glowColor?: string; // radial highlight color
+  disabled?: boolean;
 }
 
 export const TiltCard: React.FC<TiltCardProps> = ({
   children,
   className = "",
   glowColor = "rgba(6, 182, 212, 0.15)",
+  disabled = false,
   ...props
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const isGlobalEco = typeof window !== "undefined" && (window as any).__ECO_MODE__ === true;
+  const shouldDisable = disabled || isMobile || isGlobalEco;
 
   // Position of query inside the bounds representing -0.5 to 0.5
   const x = useMotionValue(0);
@@ -36,7 +51,7 @@ export const TiltCard: React.FC<TiltCardProps> = ({
   const smoothGlowY = useSpring(glowY, springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
+    if (shouldDisable || !cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -52,10 +67,12 @@ export const TiltCard: React.FC<TiltCardProps> = ({
   };
 
   const handleMouseEnter = () => {
+    if (shouldDisable) return;
     setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
+    if (shouldDisable) return;
     setIsHovered(false);
     x.set(0);
     y.set(0);
@@ -74,10 +91,10 @@ export const TiltCard: React.FC<TiltCardProps> = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
-        transformStyle: "preserve-3d",
-        rotateX: smoothRotateX,
-        rotateY: smoothRotateY,
-        perspective: 1200,
+        transformStyle: shouldDisable ? "flat" : "preserve-3d",
+        rotateX: shouldDisable ? 0 : smoothRotateX,
+        rotateY: shouldDisable ? 0 : smoothRotateY,
+        perspective: shouldDisable ? "none" : 1200,
       }}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -90,17 +107,19 @@ export const TiltCard: React.FC<TiltCardProps> = ({
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
       {/* Magnetic spotlight gradient overlay mapping to mouse movement */}
-      <motion.div
-        className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-300 z-10"
-        style={{
-          opacity: isHovered ? 1 : 0,
-          background: gradientBG,
-        }}
-      />
+      {!shouldDisable && (
+        <motion.div
+          className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-300 z-10"
+          style={{
+            opacity: isHovered ? 1 : 0,
+            background: gradientBG,
+          }}
+        />
+      )}
 
       {/* Inner offset with slight elevation */}
       <div 
-        style={{ transform: "translateZ(12px)" }} 
+        style={{ transform: shouldDisable ? "none" : "translateZ(12px)" }} 
         className="w-full h-full relative z-20"
       >
         {children}

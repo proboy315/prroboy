@@ -19,13 +19,15 @@ interface WavesProps {
     strokeColor?: string
     backgroundColor?: string
     pointerSize?: number
+    disabled?: boolean
 }
 
 export function Waves({
     className = "",
     strokeColor = "rgba(6, 182, 212, 0.25)",  // Soft cyan lines
     backgroundColor = "transparent",           // Transparent background to fit into any container
-    pointerSize = 0.5
+    pointerSize = 0.5,
+    disabled = false
 }: WavesProps) {
     const containerRef = useRef<HTMLDivElement>(null)
     const svgRef = useRef<SVGSVGElement>(null)
@@ -51,6 +53,18 @@ export function Waves({
     useEffect(() => {
         if (!containerRef.current || !svgRef.current) return
 
+        if (disabled) {
+            // Safely clear references and stop animation loop
+            if (rafRef.current) {
+                cancelAnimationFrame(rafRef.current)
+                rafRef.current = null
+            }
+            pathsRef.current.forEach(path => path.remove())
+            pathsRef.current = []
+            linesRef.current = []
+            return
+        }
+
         // Initialize noise generator
         noiseRef.current = createNoise2D()
 
@@ -67,12 +81,15 @@ export function Waves({
         rafRef.current = requestAnimationFrame(tick)
 
         return () => {
-            if (rafRef.current) cancelAnimationFrame(rafRef.current)
+            if (rafRef.current) {
+                cancelAnimationFrame(rafRef.current)
+                rafRef.current = null
+            }
             window.removeEventListener('resize', onResize)
             window.removeEventListener('mousemove', onMouseMove)
             containerRef.current?.removeEventListener('touchmove', onTouchMove)
         }
-    }, [])
+    }, [disabled])
 
     // Set SVG size
     const setSize = () => {
@@ -98,9 +115,9 @@ export function Waves({
         })
         pathsRef.current = []
 
-        // Use smaller spacing to generate more lines and points for smoother results
-        const xGap = 16  // Balance spacing for gorgeous curves without hitting performance bottlenecks
-        const yGap = 16  
+        // Use wider spacing to generate custom balanced lines without hitting performance bottlenecks
+        const xGap = 36  // High-performance balance
+        const yGap = 36  
 
         const oWidth = width + 200
         const oHeight = height + 30
