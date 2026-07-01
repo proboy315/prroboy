@@ -137,6 +137,11 @@
             "url": "https://proboy.vercel.app/bot/testauto",
             "expiry": "",
             "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/ragnarok",
+            "expiry": "",
+            "active": true
         }
     ]
 }
