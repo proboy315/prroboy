@@ -1,0 +1,19 @@
+{
+    "ownerNumber": [
+        "92341579966"
+    ],
+    "ownerName": [
+        "UXMANI"
+    ],
+    "botName": "Ragnarok",
+    "botimg": "https://proboy.vercel.app/bot/ragnarok/bot_image.jpg",
+    "version": "1.0.0",
+    "prefix": "_",
+    "sessionName": "session",
+    "sessionID": "",
+    "newsletterJid": "120363404464610426@newsletter",
+    "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+    "packname": "X REQOO",
+    "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/ragnarok/connect.json",
+    "REMOTE_SESSIONS_URL": "https://proboy.vercel.app/bot/ragnarok/sessions.json"
+}
