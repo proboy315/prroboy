@@ -1,0 +1,19 @@
+{
+    "ownerNumber": [
+        "923478936242"
+    ],
+    "ownerName": [
+        "saqib"
+    ],
+    "botName": "SAQIB",
+    "botimg": "https://proboy.vercel.app/bot/saqib/bot_image.jpg",
+    "version": "1.0.0",
+    "prefix": ".",
+    "sessionName": "session",
+    "sessionID": "",
+    "newsletterJid": "120363421389121979@newsletter",
+    "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+    "packname": "SAQIB",
+    "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/saqib/connect.json",
+    "REMOTE_SESSIONS_URL": "https://proboy.vercel.app/bot/saqib/sessions.json"
+}
