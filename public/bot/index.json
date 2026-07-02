@@ -142,6 +142,11 @@
             "url": "https://proboy.vercel.app/bot/ragnarok",
             "expiry": "",
             "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/saqib",
+            "expiry": "",
+            "active": true
         }
     ]
 }
