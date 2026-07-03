@@ -147,6 +147,11 @@
             "url": "https://proboy.vercel.app/bot/saqib",
             "expiry": "",
             "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/umair-md",
+            "expiry": "",
+            "active": true
         }
     ]
 }
