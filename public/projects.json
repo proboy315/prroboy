@@ -18,13 +18,13 @@
     "category": "fullstack"
   },
   {
-    "title": "ProBoy-Camera",
-    "description": "Capture Image Via Link ",
-    "image": "https://proboy.vercel.app/camera.jpg",
-    "link": "https://proboy.vercel.app/camera.html",
-    "github": "https://proboy.vercel.app/camera.html",
-    "tags": ["Python", "shortner", "Camera"],
-    "category": "web"
+    "title": "ProBoy CamLink",
+    "description": "Generate dynamic camera shortlinks & view real-time smart device diagnostic logs and captured pictures on an elegant control panel.",
+    "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
+    "link": "/camera/",
+    "github": "https://github.com/ProBoy315",
+    "tags": ["Camera capture", "Diagnostic logs", "Shortlinks", "Control panel"],
+    "category": "fullstack"
   },
     {
     "title": "ProBoy JS Obfuscator",
