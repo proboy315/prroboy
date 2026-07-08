@@ -148,7 +148,7 @@
             </div>
 
             <!-- Input Tabs Selector -->
-            <div class="flex gap-2 p-1 bg-slate-950 rounded-2xl border border-white/5 mb-6">
+            <div id="tabsSelector" class="flex gap-2 p-1 bg-slate-950 rounded-2xl border border-white/5 mb-6">
                 <button class="tab-btn flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer text-amber-400 bg-white/[0.03] border border-white/5" id="tab-upload" data-mode="upload">
                     <i class="fas fa-file-code mr-1.5 text-[11px]"></i> Upload File
                 </button>
@@ -187,7 +187,7 @@
             </div>
 
             <!-- Output Filename & Top Header Comment Input Group -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+            <div id="metaInputs" class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
                 <div class="space-y-1.5">
                     <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">📄 Output File Name</label>
                     <input 
@@ -210,7 +210,7 @@
             </div>
 
             <!-- Options Toggles Settings -->
-            <div class="bg-slate-950/60 border border-white/5 rounded-2xl p-5 mb-6 space-y-4">
+            <div id="optionsSection" class="bg-slate-950/60 border border-white/5 rounded-2xl p-5 mb-6 space-y-4">
                 <h3 class="text-xs font-mono uppercase tracking-wider text-amber-400 font-black flex items-center gap-2">
                     <i class="fas fa-sliders-h text-[11px]"></i> Custom Obfuscation Options
                 </h3>
@@ -263,6 +263,34 @@
                 </div>
             </div>
 
+            <!-- Panel 3: Success Results (Hidden by default) -->
+            <div class="hidden space-y-4 fade-in" id="panel-result">
+                <div class="bg-slate-950/80 border border-emerald-500/30 rounded-2xl p-5 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-3 text-[10px] text-emerald-400 font-mono flex items-center gap-1.5 bg-emerald-950/60 border-l border-b border-emerald-800/40 rounded-bl-xl uppercase tracking-wider font-extrabold">
+                        <i class="fas fa-check-circle"></i> Securely Compiled
+                    </div>
+                    <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 font-bold mb-2">⚡ Secured Output Preview</label>
+                    <textarea 
+                        id="resultPreview" 
+                        readonly 
+                        class="w-full h-40 bg-slate-950/90 border border-white/5 rounded-xl p-4 text-emerald-400 font-mono text-[11px] focus:outline-none resize-none leading-relaxed"
+                    ></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button id="btnCopyCode" class="w-full py-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 border border-white/5 hover:border-white/10 cursor-pointer">
+                        <i class="fas fa-copy text-amber-400"></i> Copy Secured Code
+                    </button>
+                    <button id="btnDownloadCode" class="w-full py-4 rounded-xl bg-gradient-to-tr from-amber-500 to-purple-500 text-slate-950 font-black text-xs uppercase tracking-wider hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fas fa-download"></i> Download Script File
+                    </button>
+                </div>
+
+                <button id="btnResetObf" class="w-full py-3.5 rounded-xl bg-slate-950 hover:bg-slate-900 text-slate-400 hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 border border-white/5 cursor-pointer">
+                    <i class="fas fa-undo text-amber-400"></i> Secure Another Script
+                </button>
+            </div>
+
             <!-- Action obfuscate Trigger button -->
             <button id="obfuscateBtn" class="btn-shimmer w-full py-4 rounded-2xl bg-gradient-to-tr from-amber-500 to-purple-500 text-slate-950 font-black text-xs uppercase tracking-wider hover:shadow-lg hover:shadow-amber-500/20 active:scale-98 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2">
                 <i class="fas fa-lock"></i> Obfuscate & Download Script
@@ -297,6 +325,7 @@
         const API_URL = 'https://proboy-obf.vercel.app';
 
         // Fetch DOM references
+        const tabsSelector = document.getElementById('tabsSelector');
         const tabUpload = document.getElementById('tab-upload');
         const tabPaste = document.getElementById('tab-paste');
         const panelUpload = document.getElementById('panel-upload');
@@ -305,13 +334,24 @@
         const fileInput = document.getElementById('fileInput');
         const fileNameDisplay = document.getElementById('fileNameDisplay');
         const codeTextarea = document.getElementById('codeTextarea');
+        const metaInputs = document.getElementById('metaInputs');
         const outputFileName = document.getElementById('outputFileName');
         const topCommentInput = document.getElementById('topComment');
+        const optionsSection = document.getElementById('optionsSection');
         const obfuscateBtn = document.getElementById('obfuscateBtn');
         const statusDiv = document.getElementById('statusMessage');
 
+        // Results elements
+        const panelResult = document.getElementById('panel-result');
+        const resultPreview = document.getElementById('resultPreview');
+        const btnCopyCode = document.getElementById('btnCopyCode');
+        const btnDownloadCode = document.getElementById('btnDownloadCode');
+        const btnResetObf = document.getElementById('btnResetObf');
+
         let activeMode = 'upload';
         let selectedFile = null;
+        let obfuscatedOutputResult = '';
+        let obfuscatedFilename = '';
 
         // Tabs switching controller
         tabUpload.addEventListener('click', () => switchTab('upload'));
@@ -415,6 +455,22 @@
             URL.revokeObjectURL(url);
         }
 
+        // Clipboard copier
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                return true;
+            } catch (e) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                const successful = document.execCommand('copy');
+                document.body.removeChild(textarea);
+                return successful;
+            }
+        }
+
         // Clean feedback status lines
         function showStatus(message, type) {
             statusDiv.textContent = message;
@@ -507,11 +563,31 @@
                     finalCodeResult = `// ${topComment}\n${finalCodeResult}`;
                 }
 
-                // Trigger direct file downloading
                 const downloadName = outputFileName.value.trim() || 'obfuscated.js';
+
+                // Save to state
+                obfuscatedOutputResult = finalCodeResult;
+                obfuscatedFilename = downloadName;
+
+                // Show in preview
+                resultPreview.value = finalCodeResult;
+
+                // Trigger direct file downloading
                 downloadFile(finalCodeResult, downloadName);
 
                 showStatus('🎉 Obfuscation successful! Secured code file has been dispatched for download.', 'success');
+
+                // HIDE INPUT VIEWS & BUTTONS AS REQUESTED
+                tabsSelector.classList.add('hidden');
+                panelUpload.classList.add('hidden');
+                panelPaste.classList.add('hidden');
+                metaInputs.classList.add('hidden');
+                optionsSection.classList.add('hidden');
+                obfuscateBtn.classList.add('hidden');
+
+                // SHOW RESULTS
+                panelResult.classList.remove('hidden');
+
             } catch (err) {
                 console.error(err);
                 let displayMsg = err.message;
@@ -523,6 +599,48 @@
                 obfuscateBtn.disabled = false;
                 obfuscateBtn.innerHTML = '<i class="fas fa-lock"></i> Obfuscate & Download Script';
             }
+        });
+
+        // Copy button handler inside success view
+        btnCopyCode.addEventListener('click', async () => {
+            if (!obfuscatedOutputResult) return;
+            const copied = await copyToClipboard(obfuscatedOutputResult);
+            if (copied) {
+                const originalText = btnCopyCode.innerHTML;
+                btnCopyCode.innerHTML = '<i class="fas fa-check text-emerald-400"></i> Copied to Clipboard!';
+                setTimeout(() => {
+                    btnCopyCode.innerHTML = originalText;
+                }, 3000);
+            }
+        });
+
+        // Download button handler inside success view
+        btnDownloadCode.addEventListener('click', () => {
+            if (!obfuscatedOutputResult || !obfuscatedFilename) return;
+            downloadFile(obfuscatedOutputResult, obfuscatedFilename);
+        });
+
+        // Reset button handler to obfuscate another file
+        btnResetObf.addEventListener('click', () => {
+            // Reset state
+            obfuscatedOutputResult = '';
+            obfuscatedFilename = '';
+            resultPreview.value = '';
+
+            // Reset UI components back to default
+            tabsSelector.classList.remove('hidden');
+            if (activeMode === 'upload') {
+                panelUpload.classList.remove('hidden');
+            } else {
+                panelPaste.classList.remove('hidden');
+            }
+            metaInputs.classList.remove('hidden');
+            optionsSection.classList.remove('hidden');
+            obfuscateBtn.classList.remove('hidden');
+            
+            panelResult.classList.add('hidden');
+
+            clearStatus();
         });
     </script>
 </body>
