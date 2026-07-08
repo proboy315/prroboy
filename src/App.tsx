@@ -136,6 +136,14 @@ export default function App() {
       link: "/obfuscator/"
     },
     {
+      title: "ProBoy CamLink",
+      description: "Generate dynamic camera shortlinks & view real-time smart device diagnostic logs and captured pictures on an elegant control panel.",
+      category: "fullstack",
+      tags: ["Camera capture", "Diagnostic logs", "Shortlinks", "Control panel"],
+      github: "https://github.com/ProBoy315",
+      link: "/camera/"
+    },
+    {
       title: "ProAutomations Telegram Client",
       description: "Automated alert script for Telegram channels forwarding real-time crypto triggers, hot deals, and stock fluctuations. Utilizes asynchronous Python frameworks with integrated webhook logs.",
       category: "bots",
