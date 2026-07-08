@@ -128,6 +128,14 @@ export default function App() {
       link: "https://proboy.vercel.app/"
     },
     {
+      title: "ProBoy JS Obfuscator",
+      description: "Secure, high-performance client-side JavaScript obfuscator tool to compile, safeguard, and optimize your production source files.",
+      category: "fullstack",
+      tags: ["JavaScript", "Obfuscation", "Security", "Utility"],
+      github: "https://github.com/ProBoy315",
+      link: "/obfuscator/"
+    },
+    {
       title: "ProAutomations Telegram Client",
       description: "Automated alert script for Telegram channels forwarding real-time crypto triggers, hot deals, and stock fluctuations. Utilizes asynchronous Python frameworks with integrated webhook logs.",
       category: "bots",
