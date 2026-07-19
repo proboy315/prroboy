@@ -152,6 +152,11 @@
             "url": "https://proboy.vercel.app/bot/umair-md",
             "expiry": "",
             "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/ahmad-trader-md",
+            "expiry": "",
+            "active": true
         }
     ]
 }
