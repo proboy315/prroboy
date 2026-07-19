@@ -1,8 +1,8 @@
 {
     "_comment": "Notification config. Edit from user admin panel. Supported placeholders: {{botName}}, {{prefix}}, {{botNumber}}, {{ownerName}}, {{time}}, {{date}}",
     "By": "SHAHAN",
-    "messages": "Hi everyone Koi Command ma masla ya koi command add karni ha tu batao \r\nhttps://whatsapp.com/channel/0029VbCx2Sb5q08a3fe3KZ42/719",
-    "send": "true",
+    "messages": "{{botName}}Hi everyone Koi Command ma masla ya koi command add karni ha tu batao \r\nhttps://whatsapp.com/channel/0029VbCx2Sb5q08a3fe3KZ42/719",
+    "send": "false",
     "to": "self",
     "join": "120363406203875411@newsletter",
     "command": ""
