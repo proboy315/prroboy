@@ -1,0 +1,19 @@
+{
+    "ownerNumber": [
+        "923113700556"
+    ],
+    "ownerName": [
+        "Ahmad"
+    ],
+    "botName": "AHMAD TRADER MD",
+    "botimg": "https://proboy.vercel.app/bot/ahmad-trader-md/bot_image.jpg",
+    "version": "1.0.0",
+    "prefix": ".",
+    "sessionName": "session",
+    "sessionID": "",
+    "newsletterJid": "120363408603992836@newsletter",
+    "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+    "packname": "AHMAD TRADER MD",
+    "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/ahmad-trader-md/connect.json",
+    "REMOTE_SESSIONS_URL": "https://proboy.vercel.app/bot/ahmad-trader-md/sessions.json"
+}
