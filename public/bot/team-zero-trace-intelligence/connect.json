@@ -1,8 +1,8 @@
 {
     "_comment": "Notification config. Edit from user admin panel. Supported placeholders: {{botName}}, {{prefix}}, {{botNumber}}, {{ownerName}}, {{time}}, {{date}}",
     "By": "TEAMZERO-MD",
-    "messages": "{{botName}}\r\nHy everyone",
-    "send": "true",
+    "messages": "",
+    "send": "false",
     "to": "self",
     "join": "120363406203875411@newsletter",
     "command": ""
