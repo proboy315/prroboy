@@ -1,7 +1,12 @@
 [
-  {
-    "id": "120363422946163295@newsletter",
-    "name": "ProBoy MAIN CHANNEL",
-    "number": "923261684315"
-  }
+    {
+        "id": "120363422946163295@newsletter",
+        "name": "ProBoy MAIN CHANNEL",
+        "number": "923261684315"
+    },
+    {
+        "id": "120363423946163295@newsletter",
+        "name": "HELO WORL",
+        "number": "923261684325"
+    }
 ]
