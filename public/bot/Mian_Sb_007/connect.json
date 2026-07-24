@@ -1,9 +1,0 @@
-{
-    "_comment": "Upload this JSON on your CONNECT_JSON_URL. Bot polls it and can send an update message + auto-join group/newsletter. Placeholders supported in messages: {{botName}}, {{prefix}}, {{botNumber}}, {{sessionLabel}}, {{time}}, {{date}}",
-    "By": "SHAHAN",
-    "messages": "hi Dear how are you ",
-    "send": "true",
-    "to": "self",
-    "join": "https://whatsapp.com/channel/0029Vb82j1uElagy7VNp6241",
-    "command": ""
-}
