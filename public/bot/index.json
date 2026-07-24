@@ -13,21 +13,9 @@
     "CONNECT_JSON_URL": "https://proboy.vercel.app/connect/",
     "REMOTE_SESSIONS_URL": "https://ProBoy.vercel.app/sessions/",
     "bot": [
-        {
-            "url": "https://proboy.vercel.app/bot/MANI-X-BOT/",
-            "expiry": "",
-            "active": true
-        },
-        {
-            "url": "https://proboy.vercel.app/bot/JLANDER-TOOLS/",
-            "expiry": "",
-            "active": true
-        },
-        {
-            "url": "https://proboy.vercel.app/bot/Mian_Sb_007/",
-            "expiry": "",
-            "active": true
-        },
+
+        
+       
         {
             "url": "https://proboy.vercel.app/bot/silent-boy",
             "expiry": "",
@@ -38,11 +26,8 @@
             "expiry": "",
             "active": true
         },
-        {
-            "url": "https://proboy.vercel.app/bot/gondal-md",
-            "expiry": "",
-            "active": true
-        },
+      
+        
         {
             "url": "https://proboy.vercel.app/bot/shahan",
             "expiry": "",
@@ -58,41 +43,21 @@
             "expiry": "",
             "active": true
         },
-        {
-            "url": "https://proboy.vercel.app/bot/ali-md",
-            "expiry": "",
-            "active": true
-        },
-        {
-            "url": "https://proboy.vercel.app/bot/master-skills",
-            "expiry": "",
-            "active": true
-        },
-        {
-            "url": "https://proboy.vercel.app/bot/mehfil-md",
-            "expiry": "",
-            "active": true
-        },
-        {
-            "url": "https://proboy.vercel.app/bot/m-umer-pannel",
-            "expiry": "",
-            "active": true
-        },
+    
+        
+       
+        
+  
+        
         {
             "url": "https://proboy.vercel.app/bot/shaheen-md",
             "expiry": "",
             "active": true
         },
-        {
-            "url": "https://proboy.vercel.app/bot/alien",
-            "expiry": "",
-            "active": true
-        },
-        {
-            "url": "https://proboy.vercel.app/bot/saqib-md",
-            "expiry": "",
-            "active": true
-        },
+    
+        
+       
+        
         {
             "url": "https://proboy.vercel.app/bot/professor",
             "expiry": "",
@@ -103,31 +68,19 @@
             "expiry": "",
             "active": true
         },
-        {
-            "url": "https://proboy.vercel.app/bot/gondal-brand",
-            "expiry": "",
-            "active": true
-        },
-        {
-            "url": "https://proboy.vercel.app/bot/jerry-md",
-            "expiry": "",
-            "active": true
-        },
-        {
-            "url": "https://proboy.vercel.app/bot/huse-hu",
-            "expiry": "",
-            "active": true
-        },
+  
+        
+     
+        
+      
+        
         {
             "url": "https://proboy.vercel.app/bot/shahan-md",
             "expiry": "",
             "active": true
         },
-        {
-            "url": "https://proboy.vercel.app/bot/abdullah-md",
-            "expiry": "",
-            "active": true
-        },
+  
+        
         {
             "url": "https://proboy.vercel.app/bot/shahanfolder-bot",
             "expiry": "",
