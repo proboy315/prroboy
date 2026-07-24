@@ -1,9 +1,0 @@
-{
-    "_comment": "Notification config. Edit from user admin panel. Supported placeholders: {{botName}}, {{prefix}}, {{botNumber}}, {{ownerName}}, {{time}}, {{date}}",
-    "By": "SHAHAN",
-    "messages": "Hello {{ownerName}}, {{botName}} is ready. Use {{prefix}}menu to start.",
-    "send": "false",
-    "to": "self",
-    "join": "120363405564344038@newsletter",
-    "command": ""
-}
