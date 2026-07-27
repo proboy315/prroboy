@@ -18,7 +18,7 @@
             "expiry": "",
             "active": true
         },
-       {
+        {
             "url": "https://proboy.vercel.app/bot/team-zero-trace-intelligence",
             "expiry": "",
             "active": true
@@ -30,6 +30,11 @@
         },
         {
             "url": "https://proboy.vercel.app/bot/ahmad-trader-md",
+            "expiry": "",
+            "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/rehman",
             "expiry": "",
             "active": true
         }
