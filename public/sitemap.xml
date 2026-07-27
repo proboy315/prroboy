@@ -13,7 +13,7 @@
     </image:image>
     <image:image>
       <image:loc>https://proboy.vercel.app/images/me1.png</image:loc>
-      <image:title>ProBoy-MD WhatsApp Bot Server Console - shahanali315</image:title>
+      <image:title></image:title>
       <image:caption>Automation analytics dashboard showing cloud infrastructure handles managed by Shahan Ali in Punjab, Pakistan.</image:caption>
     </image:image>
     <image:image>
@@ -21,5 +21,5 @@
       <image:title>Govt Graduate College Burewala - ICS Tech Hub</image:title>
       <image:caption>Shahan Ali studies ICS 1st Year at Govt Graduate College Burewala, building high-speed scripts on top of high school fundamentals.</image:caption>
     </image:image>
-      </url>
+  </url>
 </urlset>
