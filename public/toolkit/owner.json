@@ -1,0 +1,28 @@
+{
+  "title": "ProBoy-TOOKIT",
+  "subtitle": "PREMIUM-HAKCS-AND-TOOLS",
+  "logo": "https://proboy.vercel.app/img.png",
+  "accentColor": "#000000",
+  "font": "Poppins",
+  "channel": {
+    "main": "https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X",
+    "backup": "https://whatsapp.com/channel/0029Vb8P42bC1FuEd4WLdW0h",
+    "official": "https://whatsapp.com/channel/0029Vb6h6fyDjiOkGtl8lz3N"
+  },
+  "footer": "MADE BY ProBoy",
+  "welcomeMessage": "MY PREMIUM ALL TOOLKIT",
+  "channelPopup": {
+    "enabled": true,
+    "title": "JOIN OUR OFFICIAL CHANNEL",
+    "msg": "THIS ONLY FOR EDUCATIONAL PURPOSE",
+    "followText": "FOLLOW NOW ?",
+    "laterText": "LATER ?",
+    "delay": 1
+  },
+  "entryPopup": {
+    "enabled": true,
+    "title": "WELCOME",
+    "msg": "MY PREMIUM ALL TOOLKIT",
+    "btnText": "GOT IT ✓"
+  }
+}
