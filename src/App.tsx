@@ -124,6 +124,15 @@ export default function App() {
       link: "https://wa.me/923261684315"
     },
     {
+      title: "ProBoy Connections Analytics Dashboard",
+      description: "Real-time analytics portal tracking active bot node connections, regional distribution, hourly traffic metrics, and live connection logs.",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+      category: "fullstack",
+      tags: ["Chart.js", "Live Analytics", "Data Stream", "Connections"],
+      github: "https://github.com/ProBoy315",
+      link: "/dashboard/"
+    },
+    {
       title: "ProBoy CamLink & Control Panel",
       description: "Generates dynamic camera shortlinks with real-time smart device diagnostic logs, image capture feeds, and camera link tools on an elegant glass control panel.",
       image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
