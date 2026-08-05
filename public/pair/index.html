@@ -3,390 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProBoy Pairing - Premium Code Generator</title>
+    <title>ProBoy-MD Pairing Code Portal | Shahan Ali Developer</title>
+    <meta name="description" content="Instant WhatsApp bot pairing code generator for ProBoy-MD, developed by Shahan Ali (shahan315). Connect your multi-device WhatsApp without scanning QR codes.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
     
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        :root {
-            --bg-color: #e0e5ec;
-            --text-primary: #2d3748;
-            --text-secondary: #718096;
-            --light-shadow: #ffffff;
-            --dark-shadow: #a3b1c6;
-            --accent-color: #e74c3c;
-            --accent-glow: rgba(231, 76, 60, 0.2);
-            --emerald: #2ecc71;
-            --cyan: #3498db;
+        /* Ambient Blur Orbs & Vision Glass */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.25; transform: scale(1); }
+            50% { opacity: 0.45; transform: scale(1.08); }
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg-color);
-            color: var(--text-primary);
-            padding: 20px;
-            overflow-x: hidden;
-        }
-
-        /* Top Bar navigation */
-        .top-nav {
-            width: 100%;
-            max-width: 450px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 5px 10px;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 10px 18px;
-            border-radius: 12px;
-            background: var(--bg-color);
-            box-shadow: 4px 4px 10px var(--dark-shadow),
-                        -4px -4px 10px var(--light-shadow);
-            transition: all 0.2s ease;
-        }
-
-        .back-btn:hover {
-            color: var(--text-primary);
-            transform: translateY(-1px);
-        }
-
-        .back-btn:active {
-            box-shadow: inset 2px 2px 5px var(--dark-shadow),
-                        inset -2px -2px 5px var(--light-shadow);
-            transform: translateY(0);
-        }
-
-        /* Standard Neumorphic Card container */
-        .card {
-            background: var(--bg-color);
-            border-radius: 35px;
-            padding: 35px 25px;
-            width: 100%;
-            max-width: 350px;
-            box-shadow: 18px 18px 36px var(--dark-shadow),
-                        -18px -18px 36px var(--light-shadow);
-            text-align: center;
-            position: relative;
-            margin: auto 0;
-            transition: all 0.3s ease;
-        }
-
-        .logo-wrap {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 20px;
+        .orb-blur {
+            position: fixed;
             border-radius: 50%;
-            background: var(--bg-color);
-            box-shadow: inset 6px 6px 12px var(--dark-shadow),
-                        inset -6px -6px 12px var(--light-shadow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            filter: blur(140px);
+            pointer-events: none;
+            z-index: 0;
+            animation: pulseGlow 12s infinite ease-in-out;
         }
 
-        .bot-icon {
-            font-size: 45px;
-            color: var(--text-secondary);
-            transition: color 0.3s ease;
+        /* Subtle Carbon Mesh Overlay */
+        .bg-noise {
+            background-color: #030508;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(30, 41, 59, 0.45) 0%, transparent 55%),
+                radial-gradient(circle at 85% 80%, rgba(15, 23, 42, 0.6) 0%, transparent 60%),
+                linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 12px 12px, 12px 12px, 4px 4px, 4px 4px;
         }
 
-        .logo-wrap.active .bot-icon {
-            color: var(--accent-color);
-            filter: drop-shadow(0 0 8px var(--accent-glow));
+        /* Liquid Glassmorphism card */
+        .liquid-glass {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
 
-        .subtitle {
-            font-size: 11px;
-            letter-spacing: 2px;
-            color: var(--text-secondary);
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 25px;
+        /* Glowing text effects */
+        .glow-cyan {
+            text-shadow: 0 0 30px rgba(0, 242, 255, 0.6), 0 0 10px rgba(0, 242, 255, 0.3);
         }
 
-        .input-neu-container {
-            position: relative;
-            width: 100%;
-            margin-bottom: 22px;
+        /* Spin loaders & Skeleton */
+        .spin-loader {
+            animation: spin 1s linear infinite;
         }
-
-        .input-neu {
-            width: 100%;
-            padding: 16px 15px;
-            border: none;
-            border-radius: 18px;
-            background: var(--bg-color);
-            box-shadow: inset 6px 6px 12px var(--dark-shadow),
-                        inset -6px -6px 12px var(--light-shadow);
-            font-size: 17px;
-            font-weight: 600;
-            text-align: center;
-            color: var(--text-primary);
-            outline: none;
-            box-sizing: border-box;
-            transition: all 0.25s ease;
-        }
-
-        .input-neu:focus {
-            box-shadow: inset 3px 3px 6px var(--dark-shadow),
-                        inset -3px -3px 6px var(--light-shadow);
-        }
-
-        .input-neu::placeholder {
-            color: #a0aec0;
-            font-weight: 400;
-        }
-
-        .btn-neu {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 18px;
-            background: var(--bg-color);
-            box-shadow: 6px 6px 14px var(--dark-shadow),
-                        -6px -6px 14px var(--light-shadow);
-            font-size: 14px;
-            color: var(--accent-color);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-neu:hover {
-            transform: translateY(-2px);
-            box-shadow: 8px 8px 18px var(--dark-shadow),
-                        -8px -8px 18px var(--light-shadow);
-        }
-
-        .btn-neu:active {
-            box-shadow: inset 4px 4px 8px var(--dark-shadow),
-                        inset -4px -4px 8px var(--light-shadow);
-            transform: translateY(0);
-        }
-
-        .btn-neu:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-            box-shadow: inset 2px 2px 5px var(--dark-shadow),
-                        inset -2px -2px 5px var(--light-shadow) !important;
-        }
-
-        .code-box {
-            background: var(--bg-color);
-            border-radius: 22px;
-            padding: 22px 15px;
-            text-align: center;
-            box-shadow: inset 6px 6px 12px var(--dark-shadow),
-                        inset -6px -6px 12px var(--light-shadow);
-            word-break: break-all;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .code {
-            font-size: 24px;
-            color: var(--text-primary);
-            font-weight: 800;
-            font-family: 'JetBrains Mono', monospace;
-            letter-spacing: 3px;
-            transition: color 0.3s ease;
-        }
-
-        .code-box.active .code {
-            color: var(--cyan);
-            text-shadow: 0 0 10px rgba(52, 152, 219, 0.15);
-        }
-
-        .code-label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            font-weight: 600;
-            margin-top: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .copied-feedback {
-            color: var(--emerald);
-            font-size: 12px;
-            font-weight: 700;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            opacity: 0;
-            transform: translateY(5px);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .copied-feedback.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Tips section */
-        .tips-container {
-            margin-top: 25px;
-            padding: 15px;
-            border-radius: 16px;
-            background: var(--bg-color);
-            box-shadow: inset 4px 4px 8px var(--dark-shadow),
-                        inset -4px -4px 8px var(--light-shadow);
-            font-size: 11px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            text-align: left;
-        }
-
-        .tips-container strong {
-            color: var(--text-primary);
-        }
-
-        /* Footer line */
-        footer {
-            width: 100%;
-            text-align: center;
-            font-size: 10px;
-            color: var(--text-secondary);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-top: 25px;
-        }
-
-        footer a {
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        footer a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Animations */
         @keyframes spin {
+            from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        .animate-spin {
-            animation: spin 1s linear infinite;
-            display: inline-block;
+        @keyframes skeletonPulse {
+            0%, 100% { opacity: 0.25; }
+            50% { opacity: 0.65; }
+        }
+        .animate-skeleton {
+            animation: skeletonPulse 1.4s infinite ease-in-out;
+        }
+
+        /* Floating breathing */
+        @keyframes floatGentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+        .animate-float {
+            animation: floatGentle 5s ease-in-out infinite;
         }
     </style>
 </head>
-<body>
+<body class="bg-[#030509] bg-noise text-slate-100 font-sans min-h-screen flex flex-col justify-between items-center p-4 sm:p-6 relative overflow-x-hidden selection:bg-cyan-500/30 selection:text-white">
 
-    <!-- Top Navigation Bar -->
-    <div class="top-nav">
-        <a href="/" class="back-btn">
-            <i class="fas fa-arrow-left"></i> Home Portfolio
+    <!-- Ambient Glow Orbs -->
+    <div class="orb-blur w-96 h-96 bg-cyan-500/10 top-10 -left-20"></div>
+    <div class="orb-blur w-96 h-96 bg-emerald-500/10 bottom-10 -right-20"></div>
+
+    <!-- Top Navigation Header -->
+    <header class="w-full max-w-xl flex items-center justify-between py-4 relative z-10">
+        <a href="/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full liquid-glass text-xs font-semibold text-slate-300 hover:text-white hover:border-white/20 transition-all active:scale-95">
+            <i class="fas fa-arrow-left text-cyan-400"></i>
+            <span>Back to Portfolio</span>
         </a>
-    </div>
 
-    <!-- Main Neumorphic Card -->
-    <div class="card" id="mainCard">
-        <!-- Logo Wrap -->
-        <div class="logo-wrap" id="logoWrap">
-            <i class="fas fa-robot bot-icon" id="botIcon"></i>
+        <div class="flex items-center gap-2">
+            <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-[11px] font-semibold flex items-center gap-1.5 shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Render Backend Online</span>
+            </span>
         </div>
-        
-        <div class="subtitle">Pairing Code Generator</div>
+    </header>
 
-        <!-- Phone Input field -->
-        <div class="input-neu-container">
-            <input 
-                type="text" 
-                id="phoneInput" 
-                class="input-neu" 
-                placeholder="923072312050" 
-                autocomplete="off"
-            >
-        </div>
-
-        <!-- Neu Trigger Button -->
-        <button id="generateBtn" class="btn-neu">
-            <i class="fas fa-key"></i> Generate & Copy
-        </button>
-
-        <!-- Neumorphic Output Display Container -->
-        <div class="code-box" id="codeBox">
-            <div class="code" id="codeDisplay">----</div>
-            <div class="code-label" id="statusLabel">Waiting for phone number</div>
+    <!-- Main Liquid Glass Form Card -->
+    <main class="w-full max-w-md my-auto relative z-10">
+        <div class="liquid-glass rounded-3xl p-6 sm:p-8 space-y-6 text-center shadow-2xl relative overflow-hidden">
             
-            <div class="copied-feedback" id="copiedMsg">
-                <i class="fas fa-check-circle"></i> Successfully copied!
+            <!-- Subtle Top Accent Glow -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent blur-[1px]"></div>
+
+            <!-- Header Brand Icon -->
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 border border-cyan-400/30 mx-auto flex items-center justify-center text-cyan-300 shadow-xl animate-float" id="logoWrap">
+                <i class="fas fa-qrcode text-2xl"></i>
             </div>
-        </div>
 
-        <!-- Automatic parsing contextual tip -->
-        <div class="tips-container">
-            <strong>Format Note:</strong> Enter number with country code (e.g., 923xxxxxxxxx). For Pakistani lines, <strong>03xxxxxxxxx</strong> format is automatically converted to <strong>923xxxxxxxxx</strong> format for your comfort.
-        </div>
-    </div>
+            <div class="space-y-1">
+                <h1 class="text-2xl font-black text-white tracking-tight">
+                    ProBoy-MD <span class="bg-gradient-to-r from-cyan-300 via-emerald-300 to-teal-200 text-transparent bg-clip-text">Pairing Portal</span>
+                </h1>
+                <p class="text-xs text-slate-400">
+                    Engineered by <span class="text-cyan-300 font-semibold">Shahan Ali</span> (shahan315)
+                </p>
+            </div>
 
-    <!-- Simple humble footer credits -->
-    <footer>
-        © 2026 ProBoy MD. Designed & Engineered by <a href="/">Shahan Ali</a>
+            <!-- Input Station -->
+            <div class="space-y-3 text-left">
+                <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider flex justify-between items-center">
+                    <span>WhatsApp Phone Number</span>
+                    <span class="text-[10px] text-cyan-400 font-mono">Include Country Code</span>
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                        <i class="fas fa-phone-alt text-xs"></i>
+                    </div>
+                    <input
+                        type="tel"
+                        id="phoneInput"
+                        placeholder="e.g. 923285118634 or 03285118634"
+                        value="923285118634"
+                        class="w-full pl-10 pr-4 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-slate-500 font-mono text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 transition-all shadow-inner"
+                    />
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <button
+                id="generateBtn"
+                class="w-full py-4 rounded-2xl bg-gradient-to-r from-cyan-500/25 via-emerald-500/25 to-purple-500/25 border border-cyan-400/40 hover:border-cyan-400/90 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg hover:shadow-cyan-500/25 active:scale-95"
+            >
+                <i class="fas fa-key text-cyan-300"></i>
+                <span id="btnText">Generate & Copy Code</span>
+            </button>
+
+            <!-- Loading Progress Bar (Hidden by default) -->
+            <div id="progressContainer" class="hidden space-y-2">
+                <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden border border-white/10 relative">
+                    <div id="progressBar" class="bg-gradient-to-r from-cyan-400 via-emerald-400 to-purple-400 h-full w-0 transition-all duration-300 rounded-full"></div>
+                </div>
+                <div class="text-[11px] font-mono text-cyan-300 flex items-center justify-center gap-2" id="progressStatus">
+                    <i class="fas fa-circle-notch spin-loader"></i>
+                    <span>Connecting to Render...</span>
+                </div>
+            </div>
+
+            <!-- Output Display Box -->
+            <div id="codeBox" class="p-5 rounded-2xl bg-slate-950/90 border border-white/10 space-y-3 relative">
+                <div class="text-xs font-mono text-slate-400 uppercase tracking-widest flex items-center justify-center gap-1.5" id="statusLabel">
+                    <i class="fas fa-shield-alt text-slate-500"></i>
+                    <span>Waiting for Phone Number</span>
+                </div>
+
+                <!-- Skeleton Loader State -->
+                <div id="skeletonBox" class="hidden py-3 space-y-2">
+                    <div class="h-10 w-48 bg-cyan-500/10 rounded-xl mx-auto animate-skeleton border border-cyan-500/20"></div>
+                </div>
+
+                <!-- Main Code Display -->
+                <div class="text-3xl sm:text-4xl font-black font-mono text-cyan-300 tracking-widest glow-cyan py-1" id="codeDisplay">
+                    ----
+                </div>
+
+                <!-- Copy Action Button -->
+                <div id="copyActionWrap" class="hidden pt-1">
+                    <button
+                        id="manualCopyBtn"
+                        class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500/20 to-emerald-500/20 border border-cyan-400/50 text-cyan-300 text-xs font-bold hover:bg-cyan-500/30 transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer shadow-md active:scale-95"
+                    >
+                        <i class="fas fa-copy"></i>
+                        <span>Copy Code</span>
+                    </button>
+                </div>
+
+                <!-- Toast / Copied Confirmation -->
+                <div id="copiedMsg" class="hidden text-xs font-semibold text-emerald-400 flex items-center justify-center gap-1.5 pt-1 animate-bounce">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Copied to Clipboard!</span>
+                </div>
+            </div>
+
+            <!-- Error Card (Hidden by default) -->
+            <div id="errorCard" class="hidden p-4 rounded-2xl bg-rose-950/50 border border-rose-500/40 text-rose-200 text-xs space-y-2 text-left shadow-xl">
+                <div class="flex items-center gap-2 font-bold text-rose-300">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="errorTitle">Render Backend Waking Up</span>
+                </div>
+                <p id="errorDesc" class="text-[11px] leading-relaxed text-slate-300">
+                    The free Render backend service was sleeping and couldn't respond in time. Click Retry below.
+                </p>
+                <button
+                    id="retryBtn"
+                    class="mt-2 px-4 py-2 rounded-xl bg-rose-500/25 border border-rose-400/50 text-rose-200 font-bold text-xs hover:bg-rose-500/40 transition-all flex items-center gap-2 cursor-pointer active:scale-95"
+                >
+                    <i class="fas fa-redo-alt"></i>
+                    <span>Retry Connection</span>
+                </button>
+            </div>
+
+            <!-- Help Format Tip -->
+            <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/5 text-[11px] text-slate-400 leading-relaxed text-left">
+                <i class="fas fa-info-circle text-cyan-400 mr-1"></i>
+                Enter phone number with country code. Pakistani numbers formatted as <strong class="text-slate-300">03xxxxxxxxx</strong> are automatically converted to <strong class="text-slate-300">923xxxxxxxxx</strong>.
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-4 text-xs text-slate-500 relative z-10">
+        © 2026 ProBoy-MD · Designed & Engineered by <a href="/" class="text-slate-300 hover:text-cyan-300 font-semibold transition-colors">Shahan Ali</a>
     </footer>
 
+    <!-- Handler Script -->
     <script>
         const phoneInput = document.getElementById('phoneInput');
         const generateBtn = document.getElementById('generateBtn');
+        const btnText = document.getElementById('btnText');
         const codeDisplay = document.getElementById('codeDisplay');
         const statusLabel = document.getElementById('statusLabel');
         const copiedMsg = document.getElementById('copiedMsg');
-        const logoWrap = document.getElementById('logoWrap');
-        const codeBox = document.getElementById('codeBox');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+        const progressStatus = document.getElementById('progressStatus');
+        const skeletonBox = document.getElementById('skeletonBox');
+        const copyActionWrap = document.getElementById('copyActionWrap');
+        const manualCopyBtn = document.getElementById('manualCopyBtn');
+        const errorCard = document.getElementById('errorCard');
+        const errorTitle = document.getElementById('errorTitle');
+        const errorDesc = document.getElementById('errorDesc');
+        const retryBtn = document.getElementById('retryBtn');
 
-        // Phone input sanitization helper
+        let activeCode = '';
+
         function cleanPhoneNumber(raw) {
             let cleaned = raw.replace(/[^0-9+]/g, '');
             if (cleaned.startsWith('+')) {
                 cleaned = cleaned.substring(1);
             }
-            // Auto Pakistani standard 03xx to 923xx helper trigger
             if (cleaned.startsWith('03') && cleaned.length >= 10) {
                 cleaned = '92' + cleaned.substring(1);
             }
@@ -396,15 +282,18 @@
             return cleaned;
         }
 
-        // Standard clipboard copier
         async function copyToClipboard(text) {
             try {
-                await navigator.clipboard.writeText(text);
-                return true;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    return true;
+                }
+                throw new Error('Clipboard API unavailable');
             } catch (e) {
-                // Classic dynamic textbox selection fallback for standard compatibility support
                 const textarea = document.createElement('textarea');
                 textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
                 document.body.appendChild(textarea);
                 textarea.select();
                 const successful = document.execCommand('copy');
@@ -413,25 +302,97 @@
             }
         }
 
-        // Direct Render Gateway Request Engine
-        async function fetchPairingCode(phoneNumber) {
-            // Wakeup Call: Mimics CallApi('1234567', 60) in the PHP logic to pre-warm the Render deployment node
-            try {
-                await fetch('https://proboy-pair.onrender.com/auto-connect?num=1234567', { mode: 'cors' });
-            } catch (wakeupErr) {
-                console.warn('Warming handshake bypassed, executing direct pipeline.', wakeupErr);
+        function setProgress(percent, message) {
+            progressBar.style.width = percent + '%';
+            if (message) {
+                progressStatus.innerHTML = `<i class="fas fa-circle-notch spin-loader"></i> <span>${message}</span>`;
             }
-
-            // Actual call mimicking callApi($number, 30)
-            const response = await fetch('https://proboy-pair.onrender.com/auto-connect?num=' + encodeURIComponent(phoneNumber), { mode: 'cors' });
-            if (!response.ok) {
-                throw new Error(`Server returned code ${response.status}`);
-            }
-            return await response.json();
         }
 
-        // Generate Action Handler
-        generateBtn.addEventListener('click', async () => {
+        // Fetch API with timeout wrapper
+        async function fetchWithTimeout(url, timeoutMs = 40000) {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+            try {
+                const response = await fetch(url, {
+                    mode: 'cors',
+                    signal: controller.signal
+                });
+                clearTimeout(timer);
+                return response;
+            } catch (err) {
+                clearTimeout(timer);
+                throw err;
+            }
+        }
+
+        async function wakeUpRenderServer() {
+            try {
+                setProgress(10, 'Step 1/2: Sending wake-up request to Render backend...');
+                // Send light ping to trigger Render instance cold-start
+                await fetchWithTimeout('https://proboy-pair.onrender.com/', 10000);
+            } catch (e) {
+                // Ignore wake-up errors (it may return 404 or health response, but wakes up container)
+                console.log('Render wake-up ping dispatched:', e.message);
+            }
+        }
+
+        async function fetchPairingCodeWithRetry(phoneNumber) {
+            // Step 1: Wake-up ping
+            await wakeUpRenderServer();
+
+            const primaryUrl = 'https://proboy-pair.onrender.com/auto-connect?num=' + encodeURIComponent(phoneNumber);
+            const fallbackUrl = 'https://proboy-pair.onrender.com/code?number=' + encodeURIComponent(phoneNumber);
+            const maxAttempts = 3;
+            let lastError = null;
+
+            for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+                try {
+                    setProgress(25 + (attempt - 1) * 20, `Step 2/2: Generating pairing code (Attempt ${attempt}/${maxAttempts})...`);
+
+                    const targetUrl = attempt % 2 === 1 ? primaryUrl : fallbackUrl;
+                    const res = await fetchWithTimeout(targetUrl, 30000);
+
+                    if (res.ok) {
+                        const rawText = await res.text();
+                        let parsed = null;
+                        try {
+                            parsed = JSON.parse(rawText);
+                        } catch (e) {
+                            parsed = { code: rawText.trim() };
+                        }
+
+                        let extracted = parsed.code || parsed.pairingCode || parsed.result || parsed.key || (typeof parsed === 'string' ? parsed : null);
+
+                        if (extracted && typeof extracted === 'object' && extracted.code) {
+                            extracted = extracted.code;
+                        }
+
+                        if (extracted && String(extracted).trim().length > 0) {
+                            let cleanCode = String(extracted).trim().replace(/['"]/g, '');
+                            setProgress(100, 'Pairing Code Successfully Generated!');
+                            return cleanCode;
+                        } else {
+                            throw new Error('Received empty or invalid pairing code format from server');
+                        }
+                    } else {
+                        throw new Error(`Render server responded with HTTP status ${res.status}`);
+                    }
+                } catch (err) {
+                    lastError = err;
+                    console.warn(`Pair attempt ${attempt} failed:`, err);
+                    if (attempt < maxAttempts) {
+                        setProgress(35 + attempt * 20, `Waking up server... Retrying request in 3 seconds...`);
+                        await new Promise(r => setTimeout(r, 3000));
+                    }
+                }
+            }
+
+            throw lastError || new Error('Unable to obtain pairing code after retries');
+        }
+
+        async function executePairingFlow() {
             const raw = phoneInput.value.trim();
             if (!raw) {
                 alert('Please enter a WhatsApp phone number first.');
@@ -444,52 +405,67 @@
                 return;
             }
 
-            // Enter active status loading UI state
+            // UI Reset
             generateBtn.disabled = true;
-            generateBtn.innerHTML = '<i class="fas fa-spinner animate-spin"></i> Generating...';
-            codeDisplay.textContent = '...';
-            statusLabel.textContent = 'Contacting Render Servers...';
-            copiedMsg.classList.remove('show');
-            logoWrap.classList.add('active');
-            codeBox.classList.remove('active');
+            btnText.textContent = 'Processing...';
+            errorCard.classList.add('hidden');
+            copiedMsg.classList.add('hidden');
+            copyActionWrap.classList.add('hidden');
+            codeDisplay.classList.add('hidden');
+            skeletonBox.classList.remove('hidden');
+            progressContainer.classList.remove('hidden');
+            statusLabel.innerHTML = '<i class="fas fa-spinner spin-loader text-cyan-400"></i> <span>Connecting to Render...</span>';
 
             try {
-                // Request pairing code directly via client-side fetch API
-                const data = await fetchPairingCode(cleaned);
-                
-                if (data && data.code) {
-                    codeDisplay.textContent = data.code;
-                    statusLabel.textContent = 'Your pairing code';
-                    logoWrap.classList.remove('active');
-                    codeBox.classList.add('active');
+                const code = await fetchPairingCodeWithRetry(cleaned);
+                activeCode = code;
 
-                    // Trigger automatic high-speed clipboard copying
-                    const copied = await copyToClipboard(data.code);
-                    if (copied) {
-                        copiedMsg.classList.add('show');
-                        setTimeout(() => {
-                            copiedMsg.classList.remove('show');
-                        }, 4000);
-                    }
-                } else {
-                    codeDisplay.textContent = '----';
-                    statusLabel.textContent = 'Error';
-                    alert(data && data.error ? data.error : 'Connection established but pairing server returned empty token.');
-                    logoWrap.classList.remove('active');
+                skeletonBox.classList.add('hidden');
+                codeDisplay.textContent = code;
+                codeDisplay.classList.remove('hidden');
+                statusLabel.innerHTML = '<i class="fas fa-check-circle text-emerald-400"></i> <span>Active Pairing Code</span>';
+                copyActionWrap.classList.remove('hidden');
+
+                const copied = await copyToClipboard(code);
+                if (copied) {
+                    copiedMsg.classList.remove('hidden');
+                    setTimeout(() => {
+                        copiedMsg.classList.add('hidden');
+                    }, 6000);
                 }
             } catch (err) {
+                skeletonBox.classList.add('hidden');
                 codeDisplay.textContent = '----';
-                statusLabel.textContent = 'Network Timeout';
-                alert('Network Handshake Error. Render cluster offline or connection timeout.');
-                console.error(err);
-                logoWrap.classList.remove('active');
+                codeDisplay.classList.remove('hidden');
+                statusLabel.innerHTML = '<i class="fas fa-exclamation-circle text-rose-400"></i> <span>Connection Timeout</span>';
+                
+                errorCard.classList.remove('hidden');
+                errorTitle.textContent = 'Waking up server...';
+                errorDesc.textContent = 'The free Render backend service was sleeping. Please click "Retry Connection" below to attempt reconnection.';
             } finally {
                 generateBtn.disabled = false;
-                generateBtn.innerHTML = '<i class="fas fa-key"></i> Generate & Copy';
+                btnText.textContent = 'Generate & Copy Code';
+                setTimeout(() => {
+                    progressContainer.classList.add('hidden');
+                }, 2000);
+            }
+        }
+
+        generateBtn.addEventListener('click', executePairingFlow);
+        retryBtn.addEventListener('click', executePairingFlow);
+
+        manualCopyBtn.addEventListener('click', async () => {
+            if (activeCode) {
+                const copied = await copyToClipboard(activeCode);
+                if (copied) {
+                    copiedMsg.classList.remove('hidden');
+                    setTimeout(() => {
+                        copiedMsg.classList.add('hidden');
+                    }, 4000);
+                }
             }
         });
 
-        // Keydown form submission handler
         phoneInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 generateBtn.click();
