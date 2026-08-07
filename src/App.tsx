@@ -746,10 +746,14 @@ export default function App() {
             <div className="lg:col-span-5 relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/30 via-blue-500/30 to-emerald-500/30 rounded-3xl blur-xl opacity-50 group-hover:opacity-100 transition duration-500"></div>
               
-              <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-slate-900/90 shadow-2xl">
-                <div className="relative aspect-[4/3] bg-slate-950 overflow-hidden cursor-pointer" onClick={() => setCertModalOpen(true)}>
+              <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-slate-900/90 shadow-2xl cursor-pointer" onClick={() => setCertModalOpen(true)}>
+                <div className="relative aspect-[4/3] bg-slate-950 overflow-hidden">
                   <img
-                    src="/google-gemini-quizoff-certificate.jpg"
+                    src="https://proboy.vercel.app/images/quizoff_certificate_1786079838704.png"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = "/images/quizoff_certificate_1786079838704.png";
+                    }}
                     alt="Google Gemini QuizOff Official Certificate - Shahan Ali"
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                   />
@@ -763,15 +767,12 @@ export default function App() {
                     </span>
                   </div>
 
-                  {/* Hover view trigger */}
+                  {/* Hover view hint */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-950/60 backdrop-blur-xs">
-                    <button
-                      onClick={() => setCertModalOpen(true)}
-                      className="px-5 py-2.5 rounded-full bg-cyan-500 text-slate-950 font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-2xl hover:bg-cyan-400 transition-all transform hover:scale-105"
-                    >
+                    <span className="px-5 py-2.5 rounded-full bg-cyan-500 text-slate-950 font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-2xl">
                       <Eye size={15} />
-                      View Full Certificate
-                    </button>
+                      Click to View Large
+                    </span>
                   </div>
                 </div>
 
@@ -834,40 +835,6 @@ export default function App() {
                   <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Countries</span>
                   <span className="text-xs font-bold text-purple-300 block truncate">35+ Nations</span>
                 </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <button
-                  onClick={() => setCertModalOpen(true)}
-                  className="px-6 py-3 rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all cursor-pointer transform hover:scale-105 active:scale-95"
-                >
-                  <Eye size={16} />
-                  <span>Inspect Certificate</span>
-                </button>
-
-                <a
-                  href="/google-gemini-quizoff-certificate.jpg"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-5 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-semibold text-xs flex items-center gap-2 transition-all hover:border-cyan-400/50"
-                >
-                  <ExternalLink size={15} className="text-cyan-400" />
-                  <span>Open HD File</span>
-                </a>
-
-                <button
-                  onClick={() => {
-                    const text = "I officially received certificate from Google Gemini QuizOff 2026: India's Biggest AI Quiz! Check it out on Shahan Ali's Official Portfolio: https://proboy.vercel.app/";
-                    navigator.clipboard.writeText(text);
-                    setCertCopied(true);
-                    setTimeout(() => setCertCopied(false), 3000);
-                  }}
-                  className="px-5 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-300 hover:text-white font-semibold text-xs flex items-center gap-2 transition-all cursor-pointer"
-                >
-                  {certCopied ? <Check size={15} className="text-emerald-400" /> : <Share2 size={15} className="text-purple-400" />}
-                  <span>{certCopied ? "Copied Link!" : "Share Link"}</span>
-                </button>
               </div>
 
             </div>
@@ -1441,7 +1408,11 @@ export default function App() {
             {/* Modal Body with Full Certificate Image */}
             <div className="p-4 sm:p-6 overflow-y-auto flex-1 flex flex-col items-center justify-center bg-slate-950/50">
               <img
-                src="/google-gemini-quizoff-certificate.jpg"
+                src="https://proboy.vercel.app/images/quizoff_certificate_1786079838704.png"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = "/images/quizoff_certificate_1786079838704.png";
+                }}
                 alt="Google Gemini QuizOff Official Certificate - Shahan Ali"
                 className="w-full h-auto max-h-[70vh] object-contain rounded-2xl border border-white/10 shadow-2xl"
               />
