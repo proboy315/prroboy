@@ -35,7 +35,10 @@ import {
   Zap,
   Layers,
   Star,
-  UserCheck
+  UserCheck,
+  Eye,
+  Download,
+  Share2
 } from "lucide-react";
 
 import ImageGallery from "./components/ImageGallery";
@@ -85,6 +88,10 @@ const SpatialSection: React.FC<SpatialSectionProps> = ({ id, children, className
 };
 
 export default function App() {
+  // Certificate modal state
+  const [certModalOpen, setCertModalOpen] = useState(false);
+  const [certCopied, setCertCopied] = useState(false);
+
   // Mobile menu state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -249,6 +256,10 @@ export default function App() {
       answer: "ProBoy-MD is an automated WhatsApp helper engine built by Shahan Ali using Node.js and the Baileys API. It features multi-device support, auto-responses, group management filters, media transcoding, and high uptime cloud hosting."
     },
     {
+      question: "Did Shahan Ali receive an official certificate from Google Gemini QuizOff?",
+      answer: "Yes! Shahan Ali (Shahan) officially received a verified Certificate of Recognition for competing in QuizOff 2026: India's Biggest AI Quiz, organised by CampusCrew and hosted on Unstop in collaboration with Google Gemini AI initiatives, competing among 5,25,000+ students from 48,500+ institutions across 35+ countries."
+    },
+    {
       question: "How can I contact Shahan Ali directly?",
       answer: "You can contact Shahan Ali directly on WhatsApp at +923261684315 (locally 0326-1684315) or email luciferkiller315@gmail.com. You can also join his official WhatsApp Broadcast Channel: https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X."
     },
@@ -261,7 +272,7 @@ export default function App() {
   // Set active link on scroll
   useEffect(() => {
     function handleScroll() {
-      const sections = ["hero", "about", "services", "projects", "skills", "gallery", "qa", "contact"];
+      const sections = ["hero", "about", "certificates", "services", "projects", "skills", "gallery", "qa", "contact"];
       const scrollPos = window.scrollY + 140;
 
       for (const sect of sections) {
@@ -374,6 +385,7 @@ export default function App() {
             <div className="hidden md:flex items-center space-x-6 text-xs font-medium">
               {[
                 { name: "About", id: "about" },
+                { name: "Certificates", id: "certificates" },
                 { name: "Services", id: "services" },
                 { name: "Projects", id: "projects" },
                 { name: "Skills", id: "skills" },
@@ -440,6 +452,7 @@ export default function App() {
             <div className="md:hidden max-w-6xl mx-auto mt-2 backdrop-blur-2xl bg-slate-950/90 border border-white/10 rounded-3xl p-4 shadow-2xl pointer-events-auto space-y-2">
               {[
                 { name: "About Shahan Ali", id: "about" },
+                { name: "Official Certificates", id: "certificates" },
                 { name: "Services", id: "services" },
                 { name: "Projects & Tools", id: "projects" },
                 { name: "Skills & Stack", id: "skills" },
@@ -708,6 +721,156 @@ export default function App() {
                 Building fast, lightweight, and scalable software with clean modular architecture and high performance.
               </p>
             </TiltCard>
+
+          </div>
+        </SpatialSection>
+
+        {/* ================= CERTIFICATES & RECOGNITIONS ================= */}
+        <SpatialSection id="certificates" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-white/5">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+            <span className="text-xs font-bold uppercase tracking-widest text-cyan-400 bg-cyan-950/30 px-3.5 py-1.5 rounded-full border border-cyan-500/20 inline-flex items-center gap-2">
+              <Award size={13} className="text-cyan-400" />
+              Verified Recognitions & Credentials
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              Official Certificates & <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-emerald-300 text-transparent bg-clip-text">Honors</span>
+            </h2>
+            <p className="text-slate-400 text-sm sm:text-base">
+              Verified global milestone credentials, AI competition recognitions, and official certificates.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            {/* Certificate High-Res Visual Preview Box */}
+            <div className="lg:col-span-5 relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/30 via-blue-500/30 to-emerald-500/30 rounded-3xl blur-xl opacity-50 group-hover:opacity-100 transition duration-500"></div>
+              
+              <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-slate-900/90 shadow-2xl">
+                <div className="relative aspect-[4/3] bg-slate-950 overflow-hidden cursor-pointer" onClick={() => setCertModalOpen(true)}>
+                  <img
+                    src="/google-gemini-quizoff-certificate.jpg"
+                    alt="Google Gemini QuizOff Official Certificate - Shahan Ali"
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                  
+                  {/* Badge overlay */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+                      <Sparkles size={12} className="text-cyan-400 animate-pulse" />
+                      Google Gemini AI & CampusCrew
+                    </span>
+                  </div>
+
+                  {/* Hover view trigger */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-950/60 backdrop-blur-xs">
+                    <button
+                      onClick={() => setCertModalOpen(true)}
+                      className="px-5 py-2.5 rounded-full bg-cyan-500 text-slate-950 font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-2xl hover:bg-cyan-400 transition-all transform hover:scale-105"
+                    >
+                      <Eye size={15} />
+                      View Full Certificate
+                    </button>
+                  </div>
+                </div>
+
+                <div className="p-4 bg-slate-900/80 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+                  <span className="flex items-center gap-1.5 text-cyan-300 font-semibold">
+                    <CheckCircle2 size={14} className="text-emerald-400" />
+                    Verified Credential
+                  </span>
+                  <span className="font-mono text-slate-400">Date: 19-JULY-2026</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Certificate Details & Caption Content */}
+            <div className="lg:col-span-7 space-y-6">
+              
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-semibold">
+                  <Shield size={13} />
+                  Official Google Gemini AI Quiz Off Achievement
+                </div>
+                
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+                  I officially received certificate from Google Gemini QuizOff
+                </h3>
+
+                <blockquote className="p-4 rounded-2xl bg-cyan-950/20 border-l-4 border-cyan-400 text-slate-300 text-sm leading-relaxed italic backdrop-blur-md">
+                  "I officially received certificate from Google Gemini QuizOff 2026: India's Biggest AI Quiz, organised by CampusCrew and hosted on Unstop where 5,25,000+ students from 48,500+ institutions across 35+ countries brought their sharpest minds to one platform."
+                </blockquote>
+              </div>
+
+              {/* Spec Cards Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Awarded To</span>
+                  <span className="text-xs font-bold text-cyan-300 block truncate">Shahan (Shahan Ali)</span>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Competition</span>
+                  <span className="text-xs font-bold text-white block truncate">QuizOff 2026 AI</span>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Platform</span>
+                  <span className="text-xs font-bold text-emerald-300 block truncate">Unstop & CampusCrew</span>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Participants</span>
+                  <span className="text-xs font-bold text-white block truncate">5,25,000+ Global</span>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Institutions</span>
+                  <span className="text-xs font-bold text-white block truncate">48,500+ Colleges</span>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-1">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Countries</span>
+                  <span className="text-xs font-bold text-purple-300 block truncate">35+ Nations</span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <button
+                  onClick={() => setCertModalOpen(true)}
+                  className="px-6 py-3 rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all cursor-pointer transform hover:scale-105 active:scale-95"
+                >
+                  <Eye size={16} />
+                  <span>Inspect Certificate</span>
+                </button>
+
+                <a
+                  href="/google-gemini-quizoff-certificate.jpg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-semibold text-xs flex items-center gap-2 transition-all hover:border-cyan-400/50"
+                >
+                  <ExternalLink size={15} className="text-cyan-400" />
+                  <span>Open HD File</span>
+                </a>
+
+                <button
+                  onClick={() => {
+                    const text = "I officially received certificate from Google Gemini QuizOff 2026: India's Biggest AI Quiz! Check it out on Shahan Ali's Official Portfolio: https://proboy.vercel.app/";
+                    navigator.clipboard.writeText(text);
+                    setCertCopied(true);
+                    setTimeout(() => setCertCopied(false), 3000);
+                  }}
+                  className="px-5 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-300 hover:text-white font-semibold text-xs flex items-center gap-2 transition-all cursor-pointer"
+                >
+                  {certCopied ? <Check size={15} className="text-emerald-400" /> : <Share2 size={15} className="text-purple-400" />}
+                  <span>{certCopied ? "Copied Link!" : "Share Link"}</span>
+                </button>
+              </div>
+
+            </div>
 
           </div>
         </SpatialSection>
@@ -1236,6 +1399,72 @@ export default function App() {
         >
           <ChevronDown size={18} className="rotate-180 text-cyan-300" />
         </button>
+      )}
+
+      {/* Full-Screen Certificate Modal View */}
+      {certModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-950/90 backdrop-blur-2xl animate-fade-in">
+          <div className="relative w-full max-w-4xl max-h-[90vh] bg-slate-900 border border-white/20 rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+            
+            {/* Modal Header */}
+            <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between bg-slate-950/80">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center text-cyan-300">
+                  <Award size={18} />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-white">Google Gemini QuizOff 2026 Certificate</h4>
+                  <p className="text-[11px] text-slate-400">Awarded to Shahan (Shahan Ali) · CampusCrew & Unstop</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <a
+                  href="/google-gemini-quizoff-certificate.jpg"
+                  target="_blank"
+                  download="Shahan_Ali_Google_Gemini_QuizOff_Certificate.jpg"
+                  className="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors"
+                  title="Download Certificate"
+                >
+                  <Download size={18} />
+                </a>
+                <button
+                  onClick={() => setCertModalOpen(false)}
+                  className="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  title="Close"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Body with Full Certificate Image */}
+            <div className="p-4 sm:p-6 overflow-y-auto flex-1 flex flex-col items-center justify-center bg-slate-950/50">
+              <img
+                src="/google-gemini-quizoff-certificate.jpg"
+                alt="Google Gemini QuizOff Official Certificate - Shahan Ali"
+                className="w-full h-auto max-h-[70vh] object-contain rounded-2xl border border-white/10 shadow-2xl"
+              />
+              <p className="mt-4 text-xs text-center text-slate-400 max-w-2xl">
+                "I officially received certificate from Google Gemini QuizOff 2026: India's Biggest AI Quiz, organised by CampusCrew and hosted on Unstop where 5,25,000+ students from 48,500+ institutions across 35+ countries brought their sharpest minds to one platform."
+              </p>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 border-t border-white/10 bg-slate-950/80 flex items-center justify-between text-xs text-slate-400 flex-wrap gap-2">
+              <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
+                <CheckCircle2 size={14} /> Officially Verified Credential
+              </span>
+              <button
+                onClick={() => setCertModalOpen(false)}
+                className="px-5 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs uppercase tracking-wider hover:bg-cyan-400 transition-colors cursor-pointer"
+              >
+                Close View
+              </button>
+            </div>
+
+          </div>
+        </div>
       )}
 
     </div>
