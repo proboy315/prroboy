@@ -13,7 +13,7 @@
     "description": "This advanced lookup tool helps you securely find simulation database files and cellular activation reports inside structured portals on an interactive table interface.",
     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXMUm6-k4TnrKIBHeP0LKiAb-qY4GCO8jvVGR_YEUX9w&s=10",
     "link": "https://proboy.vercel.app/sim.html",
-    "github": "https://github.com/ProBoy315",
+    "github": "",
     "tags": ["sim-database", "API Sync", "MySQL", "Information Portal"],
     "category": "fullstack"
   },
@@ -22,7 +22,7 @@
     "description": "Generate dynamic camera shortlinks & view real-time smart device diagnostic logs and captured pictures on an elegant control panel.",
     "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
     "link": "/camera/",
-    "github": "https://github.com/ProBoy315",
+    "github": "",
     "tags": ["Camera capture", "Diagnostic logs", "Shortlinks", "Control panel"],
     "category": "fullstack"
   },
@@ -31,7 +31,7 @@
     "description": "Secure, high-performance client-side JavaScript obfuscator tool to compile, safeguard, and optimize your production source files.",
     "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
     "link": "/obfuscator/",
-    "github": "https://github.com/ProBoy315",
+    "github": "",
     "tags": ["JavaScript", "Obfuscation", "Security", "Utility"],
     "category": "fullstack"
   }
