@@ -3,113 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevMarket | Digital Developer Marketplace & Boilerplates</title>
+    <title>DevMarket | Marketplace for Verified SaaS Boilerplates</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0A0C10; color: #F8FAFC; }
-        .font-mono { font-family: 'Fira Code', monospace; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #F3F4F6; overflow-x: hidden; }
+        .code-font { font-family: 'Fira Code', monospace; }
+        .blue-gradient { background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #1D4ED8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-panel { background: rgba(17, 24, 39, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(59, 130, 246, 0.25); }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased min-h-screen">
+<body class="bg-[#030712] text-gray-100 min-h-screen antialiased selection:bg-blue-500 selection:text-white">
 
-    <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-xl border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-xl bg-purple-500 flex items-center justify-center text-white font-mono font-bold">&lt;/&gt;</div>
-                <span class="font-extrabold text-xl tracking-tight text-white">Dev<span class="text-purple-400">Market</span></span>
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#030712]/90 backdrop-blur-xl border-b border-blue-500/20">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" onclick="showTab('home')" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-500/30 code-font">&lt;/&gt;</div>
+                <span class="font-black text-2xl tracking-tight text-white">Dev<span class="text-blue-500">Market</span></span>
             </a>
 
-            <div class="flex items-center gap-4 text-xs font-bold">
-                <button onclick="toggleSellerDashboard()" class="px-3.5 py-1.5 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-300 hover:bg-purple-500/20">
-                    Seller Portal ($14.2k)
+            <nav class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-wider text-gray-300">
+                <button onclick="showTab('home')" class="hover:text-blue-400 transition-colors cursor-pointer text-blue-400">Products</button>
+                <button onclick="showTab('sandbox')" class="hover:text-blue-400 transition-colors cursor-pointer">Code Preview</button>
+                <button onclick="showTab('analytics')" class="hover:text-blue-400 transition-colors cursor-pointer">Seller Analytics</button>
+                <button onclick="showTab('contact')" class="hover:text-blue-400 transition-colors cursor-pointer">Support</button>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <button onclick="showTab('sandbox')" class="px-5 py-2.5 rounded-xl bg-blue-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-blue-400 transition-all cursor-pointer">
+                    Inspect Code
                 </button>
-                <a href="/#projects" class="text-slate-400 hover:text-white flex items-center gap-1">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
+                <a href="/#showcase" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 hidden sm:flex">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Showcase
                 </a>
             </div>
         </div>
     </header>
 
-    <section class="py-16 bg-slate-900/50 border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-6 text-center space-y-4 max-w-2xl">
-            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-xs font-mono font-bold">
-                PRO-LEVEL DEVELOPER ASSETS
-            </span>
-            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
-                Build Faster. <span class="bg-gradient-to-r from-purple-400 to-indigo-400 text-transparent bg-clip-text">Ship Better.</span>
-            </h1>
-            <p class="text-slate-400 text-xs sm:text-sm">Verified SaaS boilerplates, UI kits, API wrappers, and developer tools built by senior engineers.</p>
+    <main class="pt-20">
+
+        <!-- TAB: HOME -->
+        <div id="tab-home" class="tab-content">
+            <section class="relative min-h-[85vh] flex items-center justify-center border-b border-blue-500/20 py-16 overflow-hidden">
+                <div id="three-matrix" class="absolute inset-0 pointer-events-none opacity-60 z-0"></div>
+                <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-widest code-font">
+                            ⚡ Production-Ready SaaS Starters & APIs
+                        </span>
+                        <h1 class="text-4xl sm:text-7xl font-black text-white tracking-tight leading-tight">
+                            SHIP SAAS IN <br/><span class="blue-gradient">HOURS, NOT WEEKS.</span>
+                        </h1>
+                        <p class="text-gray-300 text-sm sm:text-base max-w-xl leading-relaxed">
+                            Verified React, Next.js, Express, and Node.js codebases complete with OAuth, Stripe billing, and database migrations.
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="glass-panel p-6 rounded-3xl space-y-4 max-w-md w-full border border-blue-500/30">
+                            <div class="flex items-center justify-between text-xs code-font">
+                                <span class="text-blue-400 font-bold">package.json</span>
+                                <span class="text-emerald-400 font-bold">Verified ✅</span>
+                            </div>
+                            <div class="bg-gray-950 p-4 rounded-2xl border border-gray-800 text-xs code-font text-blue-300 space-y-1">
+                                <p><span class="text-purple-400">"name"</span>: <span class="text-emerald-300">"saas-ultra-starter"</span>,</p>
+                                <p><span class="text-purple-400">"stack"</span>: [<span class="text-emerald-300">"React 18"</span>, <span class="text-emerald-300">"Tailwind"</span>, <span class="text-emerald-300">"Stripe"</span>],</p>
+                                <p><span class="text-purple-400">"rating"</span>: <span class="text-amber-400">4.98</span></p>
+                            </div>
+                            <button onclick="alert('Downloading source boilerplate zip...')" class="w-full py-3.5 rounded-xl bg-blue-500 hover:bg-blue-400 text-white font-extrabold text-xs uppercase tracking-wider">
+                                Purchase Source Code ($49)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-    </section>
 
-    <main class="max-w-7xl mx-auto px-6 py-12 space-y-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4 hover:border-purple-500/40 transition-all flex flex-col justify-between">
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between">
-                        <span class="px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-400 font-mono text-[10px] font-bold">React + Next.js 14</span>
-                        <span class="text-xs font-bold text-emerald-400">$49.00</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-white">NextSaaS Ultra Boilerplate</h3>
-                    <p class="text-xs text-slate-400">Complete SaaS starter kit with Stripe Billing, Supabase Auth, Tailwind, and OpenAI integrations pre-configured.</p>
+        <!-- TAB: SANDBOX CODE PREVIEW -->
+        <div id="tab-sandbox" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 space-y-6">
+            <h2 class="text-3xl font-black text-white code-font text-center">Live Code AST Inspector</h2>
+            <div class="glass-panel p-6 rounded-3xl border border-blue-500/30 space-y-4">
+                <div class="flex justify-between items-center text-xs code-font text-gray-400 border-b border-gray-800 pb-3">
+                    <span>server.ts (TypeScript CJS Bundle)</span>
+                    <button onclick="alert('Code copied to clipboard!')" class="text-blue-400 hover:text-white">Copy Code</button>
                 </div>
-                <button onclick="alert('Purchased NextSaaS Ultra! Repository invite sent.')" class="w-full py-3 rounded-xl bg-purple-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-purple-600 transition-colors">Buy & Clone Repo</button>
-            </div>
+                <pre class="bg-gray-950 p-4 rounded-xl text-xs code-font text-blue-200 overflow-x-auto leading-relaxed">
+import express from "express";
+import { GoogleGenAI } from "@google/genai";
 
-            <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4 hover:border-purple-500/40 transition-all flex flex-col justify-between">
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between">
-                        <span class="px-2.5 py-1 rounded-md bg-cyan-500/10 text-cyan-400 font-mono text-[10px] font-bold">TypeScript API</span>
-                        <span class="text-xs font-bold text-emerald-400">$29.00</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-white">WhatsApp Baileys Pro Core</h3>
-                    <p class="text-xs text-slate-400">Production-ready Express & Node.js webhook wrapper for automated WhatsApp message routing.</p>
-                </div>
-                <button onclick="alert('Purchased Baileys Pro Core! NPM package key issued.')" class="w-full py-3 rounded-xl bg-purple-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-purple-600 transition-colors">Buy & Clone Repo</button>
-            </div>
+const app = express();
+app.use(express.json());
 
-            <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4 hover:border-purple-500/40 transition-all flex flex-col justify-between">
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between">
-                        <span class="px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-400 font-mono text-[10px] font-bold">Tailwind CSS</span>
-                        <span class="text-xs font-bold text-emerald-400">$35.00</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-white">CyberUI Glassmorphism Kit</h3>
-                    <p class="text-xs text-slate-400">Over 120+ dark mode dashboard components, charts, widgets, and form controls built in React.</p>
-                </div>
-                <button onclick="alert('Purchased CyberUI Kit!')" class="w-full py-3 rounded-xl bg-purple-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-purple-600 transition-colors">Buy & Clone Repo</button>
+app.post("/api/generate", async (req, res) => {
+  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+  const response = await ai.models.generateContent({
+    model: "gemini-1.5-pro",
+    contents: req.body.prompt,
+  });
+  res.json({ output: response.text });
+});
+                </pre>
             </div>
-
         </div>
+
+        <!-- TAB: ANALYTICS -->
+        <div id="tab-analytics" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 text-center space-y-6">
+            <h2 class="text-3xl font-black text-white code-font">Seller Revenue Portal</h2>
+            <div class="glass-panel p-8 rounded-3xl border border-blue-500/30">
+                <span class="text-xs text-gray-400 uppercase tracking-widest font-bold">Total Creator Payouts</span>
+                <div class="text-4xl font-black text-emerald-400 mt-2">$1,428,500.00</div>
+            </div>
+        </div>
+
+        <!-- TAB: SUPPORT / CONTACT -->
+        <div id="tab-contact" class="tab-content hidden py-16 max-w-3xl mx-auto px-6">
+            <div class="glass-panel p-8 rounded-3xl border border-blue-500/30 space-y-6 text-center">
+                <h2 class="text-3xl font-black text-white">Developer Support</h2>
+                <p class="text-xs text-gray-400">Facing integration questions? Submit a developer ticket.</p>
+                <button onclick="alert('Support ticket created.')" class="px-8 py-4 rounded-xl bg-blue-500 text-white font-extrabold text-xs uppercase tracking-wider">Open Ticket</button>
+            </div>
+        </div>
+
     </main>
 
-    <!-- Seller Dashboard Modal -->
-    <div id="seller-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 relative space-y-6">
-            <button onclick="toggleSellerDashboard()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
-            <h3 class="text-lg font-bold text-white font-mono">Seller Analytics Dashboard</h3>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800">
-                    <span class="text-[10px] text-slate-500 font-mono uppercase">Gross Revenue</span>
-                    <span class="text-xl font-bold text-emerald-400 block">$14,280.00</span>
-                </div>
-                <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800">
-                    <span class="text-[10px] text-slate-500 font-mono uppercase">Total Sales</span>
-                    <span class="text-xl font-bold text-purple-400 block">342 Downloads</span>
-                </div>
-            </div>
-            <p class="text-xs text-slate-400">Payout status: Connected via Stripe Express · Next payout in 2 days.</p>
-        </div>
-    </div
+    <footer class="mt-20 border-t border-blue-500/20 bg-gray-950/90 py-10 text-xs text-center text-gray-400">
+        <p>© 2026 DevMarket Inc. Code Marketplace.</p>
+    </footer>
 
     <script>
         lucide.createIcons();
-        function toggleSellerDashboard() {
-            document.getElementById('seller-modal').classList.toggle('hidden');
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Three.js Code Grid
+        window.addEventListener('load', () => {
+            const container = document.getElementById('three-matrix');
+            if (!container) return;
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            const geo = new THREE.IcosahedronGeometry(2.2, 1);
+            const mat = new THREE.MeshBasicMaterial({ color: 0x3B82F6, wireframe: true });
+            const ico = new THREE.Mesh(geo, mat);
+            scene.add(ico);
+
+            camera.position.z = 5;
+            function animate() {
+                requestAnimationFrame(animate);
+                ico.rotation.x += 0.006;
+                ico.rotation.y += 0.009;
+                renderer.render(scene, camera);
+            }
+            animate();
+        });
     </script>
 </body>
 </html>
