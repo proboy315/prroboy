@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudPanel | High-Speed VPS & Server Infrastructure Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #06090E; color: #F8FAFC; }
+        .font-mono { font-family: 'Fira Code', monospace; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen">
+
+    <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-xl border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white font-mono font-bold">CP</div>
+                <span class="font-extrabold text-xl tracking-tight text-white">Cloud<span class="text-blue-400">Panel</span></span>
+            </a>
+
+            <div class="flex items-center gap-4 text-xs font-bold">
+                <a href="/#projects" class="text-slate-400 hover:text-white flex items-center gap-1">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-8 space-y-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-3">
+                <span class="text-xs text-emerald-400 font-mono">● Online · Frankfurt Region</span>
+                <h3 class="text-lg font-bold text-white">prod-api-cluster-01</h3>
+                <p class="text-xs text-slate-400 font-mono">8 vCPU · 32 GB RAM · Ubuntu 24.04 LTS</p>
+                <div class="text-xs font-mono text-slate-300 space-y-1 pt-2">
+                    <p>CPU Load: <strong class="text-blue-400">18%</strong></p>
+                    <p>RAM Usage: <strong class="text-blue-400">12.4 GB / 32 GB</strong></p>
+                </div>
+            </div>
+            <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-3">
+                <span class="text-xs text-emerald-400 font-mono">● Online · Singapore Region</span>
+                <h3 class="text-lg font-bold text-white">singapore-edge-proxy</h3>
+                <p class="text-xs text-slate-400 font-mono">4 vCPU · 16 GB RAM · Alpine Linux</p>
+                <div class="text-xs font-mono text-slate-300 space-y-1 pt-2">
+                    <p>CPU Load: <strong class="text-blue-400">32%</strong></p>
+                    <p>RAM Usage: <strong class="text-blue-400">6.1 GB / 16 GB</strong></p>
+                </div>
+            </div>
+            <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-3">
+                <span class="text-xs text-emerald-400 font-mono">● Online · US-East Region</span>
+                <h3 class="text-lg font-bold text-white">db-primary-postgres</h3>
+                <p class="text-xs text-slate-400 font-mono">16 vCPU · 64 GB RAM · Debian 12</p>
+                <div class="text-xs font-mono text-slate-300 space-y-1 pt-2">
+                    <p>CPU Load: <strong class="text-blue-400">45%</strong></p>
+                    <p>RAM Usage: <strong class="text-blue-400">48.2 GB / 64 GB</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terminal Log Viewer -->
+        <div class="p-6 rounded-3xl bg-slate-950 border border-slate-800 font-mono text-xs space-y-2">
+            <span class="text-slate-500 block">[SYSTEM REALTIME LOGS]</span>
+            <p class="text-slate-300"><span class="text-emerald-400">[22:45:01]</span> NGINX ingress route /api/v1/health status: 200 OK (1.2ms)</p>
+            <p class="text-slate-300"><span class="text-emerald-400">[22:45:04]</span> Docker container proboy-bot-md re-synced state successfully.</p>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
