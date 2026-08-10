@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevMarket | Digital Developer Marketplace & Boilerplates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0A0C10; color: #F8FAFC; }
+        .font-mono { font-family: 'Fira Code', monospace; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen">
+
+    <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-xl border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-purple-500 flex items-center justify-center text-white font-mono font-bold">&lt;/&gt;</div>
+                <span class="font-extrabold text-xl tracking-tight text-white">Dev<span class="text-purple-400">Market</span></span>
+            </a>
+
+            <div class="flex items-center gap-4 text-xs font-bold">
+                <button onclick="toggleSellerDashboard()" class="px-3.5 py-1.5 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-300 hover:bg-purple-500/20">
+                    Seller Portal ($14.2k)
+                </button>
+                <a href="/#projects" class="text-slate-400 hover:text-white flex items-center gap-1">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-16 bg-slate-900/50 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 text-center space-y-4 max-w-2xl">
+            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-xs font-mono font-bold">
+                PRO-LEVEL DEVELOPER ASSETS
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
+                Build Faster. <span class="bg-gradient-to-r from-purple-400 to-indigo-400 text-transparent bg-clip-text">Ship Better.</span>
+            </h1>
+            <p class="text-slate-400 text-xs sm:text-sm">Verified SaaS boilerplates, UI kits, API wrappers, and developer tools built by senior engineers.</p>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-6 py-12 space-y-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4 hover:border-purple-500/40 transition-all flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-400 font-mono text-[10px] font-bold">React + Next.js 14</span>
+                        <span class="text-xs font-bold text-emerald-400">$49.00</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">NextSaaS Ultra Boilerplate</h3>
+                    <p class="text-xs text-slate-400">Complete SaaS starter kit with Stripe Billing, Supabase Auth, Tailwind, and OpenAI integrations pre-configured.</p>
+                </div>
+                <button onclick="alert('Purchased NextSaaS Ultra! Repository invite sent.')" class="w-full py-3 rounded-xl bg-purple-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-purple-600 transition-colors">Buy & Clone Repo</button>
+            </div>
+
+            <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4 hover:border-purple-500/40 transition-all flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded-md bg-cyan-500/10 text-cyan-400 font-mono text-[10px] font-bold">TypeScript API</span>
+                        <span class="text-xs font-bold text-emerald-400">$29.00</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">WhatsApp Baileys Pro Core</h3>
+                    <p class="text-xs text-slate-400">Production-ready Express & Node.js webhook wrapper for automated WhatsApp message routing.</p>
+                </div>
+                <button onclick="alert('Purchased Baileys Pro Core! NPM package key issued.')" class="w-full py-3 rounded-xl bg-purple-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-purple-600 transition-colors">Buy & Clone Repo</button>
+            </div>
+
+            <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4 hover:border-purple-500/40 transition-all flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-400 font-mono text-[10px] font-bold">Tailwind CSS</span>
+                        <span class="text-xs font-bold text-emerald-400">$35.00</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">CyberUI Glassmorphism Kit</h3>
+                    <p class="text-xs text-slate-400">Over 120+ dark mode dashboard components, charts, widgets, and form controls built in React.</p>
+                </div>
+                <button onclick="alert('Purchased CyberUI Kit!')" class="w-full py-3 rounded-xl bg-purple-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-purple-600 transition-colors">Buy & Clone Repo</button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Seller Dashboard Modal -->
+    <div id="seller-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 relative space-y-6">
+            <button onclick="toggleSellerDashboard()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <h3 class="text-lg font-bold text-white font-mono">Seller Analytics Dashboard</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800">
+                    <span class="text-[10px] text-slate-500 font-mono uppercase">Gross Revenue</span>
+                    <span class="text-xl font-bold text-emerald-400 block">$14,280.00</span>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800">
+                    <span class="text-[10px] text-slate-500 font-mono uppercase">Total Sales</span>
+                    <span class="text-xl font-bold text-purple-400 block">342 Downloads</span>
+                </div>
+            </div>
+            <p class="text-xs text-slate-400">Payout status: Connected via Stripe Express · Next payout in 2 days.</p>
+        </div>
+    </div
+
+    <script>
+        lucide.createIcons();
+        function toggleSellerDashboard() {
+            document.getElementById('seller-modal').classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
