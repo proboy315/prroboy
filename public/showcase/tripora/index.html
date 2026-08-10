@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tripora | Curated Worldwide Expeditions & Journeys</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #080D1A; color: #F8FAFC; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen">
+
+    <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-xl border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center text-slate-950 font-black text-xl">T</div>
+                <span class="font-extrabold text-2xl tracking-tight text-white">Trip<span class="text-sky-400">ora</span></span>
+            </a>
+
+            <div class="flex items-center gap-4">
+                <a href="/#projects" class="text-xs text-slate-400 hover:text-white flex items-center gap-1">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative py-24 bg-slate-900 border-b border-white/10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10 text-center space-y-6 max-w-3xl">
+            <span class="px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-300 text-xs font-semibold uppercase tracking-widest">
+                Inspiring Global Exploration
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
+                Your Next Story <br/><span class="bg-gradient-to-r from-sky-300 via-teal-300 to-indigo-400 text-transparent bg-clip-text">Starts Right Here.</span>
+            </h1>
+
+            <div class="p-4 rounded-3xl bg-slate-950/80 border border-white/15 backdrop-blur-2xl shadow-2xl text-left grid grid-cols-1 sm:grid-cols-4 gap-3">
+                <input type="text" placeholder="Where to? (e.g. Kyoto)" class="p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs text-white outline-none focus:border-sky-400">
+                <input type="text" placeholder="Dates (e.g. Oct 12 - Oct 20)" class="p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs text-white outline-none focus:border-sky-400">
+                <select class="p-3.5 rounded-xl bg-slate-900 border border-white/10 text-xs text-white outline-none">
+                    <option>2 Travelers</option>
+                    <option>Solo Traveler</option>
+                    <option>Family (4+)</option>
+                </select>
+                <button onclick="alert('Searching custom travel packages...')" class="p-3.5 rounded-xl bg-gradient-to-r from-sky-400 to-indigo-500 text-slate-950 font-bold text-xs uppercase tracking-wider hover:opacity-90">
+                    Explore Expeditions
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-6 py-16">
+        <div class="flex items-center justify-between mb-10">
+            <h2 class="text-2xl font-bold text-white">Featured Destinations & Packages</h2>
+            <span class="text-xs text-slate-400">All-Inclusive Luxury Tours</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="bg-slate-900 border border-white/10 rounded-3xl overflow-hidden hover:border-sky-400/40 transition-all group flex flex-col justify-between">
+                <div class="relative aspect-video bg-slate-950">
+                    <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-950/80 text-[10px] font-bold text-sky-300">7 Days Tour</span>
+                </div>
+                <div class="p-6 space-y-3">
+                    <span class="text-2xl font-black text-sky-400">$3,450 <span class="text-xs text-slate-400 font-normal">/ person</span></span>
+                    <h3 class="text-xl font-bold text-white">Kyoto Autumn Zen Expedition</h3>
+                    <p class="text-xs text-slate-400">Private temple passes, traditional ryokan lodging, tea ceremony masterclass.</p>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openItinerary('Kyoto Autumn Zen', '$3,450')" class="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-xs font-bold hover:bg-sky-400 hover:text-slate-950 transition-all">View Day-by-Day Itinerary</button>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 border border-white/10 rounded-3xl overflow-hidden hover:border-sky-400/40 transition-all group flex flex-col justify-between">
+                <div class="relative aspect-video bg-slate-950">
+                    <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-950/80 text-[10px] font-bold text-sky-300">5 Days Tour</span>
+                </div>
+                <div class="p-6 space-y-3">
+                    <span class="text-2xl font-black text-sky-400">$4,100 <span class="text-xs text-slate-400 font-normal">/ person</span></span>
+                    <h3 class="text-xl font-bold text-white">Santorini Sunset Villa Escapes</h3>
+                    <p class="text-xs text-slate-400">Cliffside infinity pool suite, catamaran wine tasting, helicopter island tour.</p>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openItinerary('Santorini Sunset', '$4,100')" class="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-xs font-bold hover:bg-sky-400 hover:text-slate-950 transition-all">View Day-by-Day Itinerary</button>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 border border-white/10 rounded-3xl overflow-hidden hover:border-sky-400/40 transition-all group flex flex-col justify-between">
+                <div class="relative aspect-video bg-slate-950">
+                    <img src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-950/80 text-[10px] font-bold text-sky-300">8 Days Tour</span>
+                </div>
+                <div class="p-6 space-y-3">
+                    <span class="text-2xl font-black text-sky-400">$5,200 <span class="text-xs text-slate-400 font-normal">/ person</span></span>
+                    <h3 class="text-xl font-bold text-white">Swiss Alps Glacier Express</h3>
+                    <p class="text-xs text-slate-400">First-class panoramic train, Zermatt luxury chalet, guided ski slopes.</p>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openItinerary('Swiss Alps Glacier', '$5,200')" class="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-xs font-bold hover:bg-sky-400 hover:text-slate-950 transition-all">View Day-by-Day Itinerary</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modal Package -->
+    <div id="itin-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-white/15 rounded-3xl max-w-lg w-full p-6 relative space-y-6">
+            <button onclick="closeItin()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <div>
+                <span class="text-[10px] text-sky-400 uppercase font-mono tracking-widest">All-Inclusive Tour</span>
+                <h3 id="itin-title" class="text-xl font-bold text-white"></h3>
+                <p id="itin-price" class="text-2xl font-black text-sky-400 mt-1"></p>
+            </div>
+            <div class="space-y-3 text-xs border-y border-white/10 py-4">
+                <div class="flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-sky-500/20 text-sky-300 flex items-center justify-center font-bold">1</span>
+                    <p><strong class="text-white">Day 1: Arrival & Private Transfer:</strong> Met at airport with champagne welcome and private luxury transport to resort.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-sky-500/20 text-sky-300 flex items-center justify-center font-bold">2</span>
+                    <p><strong class="text-white">Day 2: Guided Master Expedition:</strong> Private local historian guided tour & exclusive culinary tasting.</p>
+                </div>
+            </div>
+            <button onclick="alert('Booking request submitted! Our concierge team will reach out.')" class="w-full py-3.5 rounded-xl bg-sky-400 text-slate-950 font-bold uppercase tracking-wider">Book This Expedition</button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function openItinerary(title, price) {
+            document.getElementById('itin-title').innerText = title;
+            document.getElementById('itin-price').innerText = price;
+            document.getElementById('itin-modal').classList.remove('hidden');
+        }
+
+        function closeItin() {
+            document.getElementById('itin-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
