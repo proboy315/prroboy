@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnova | Interactive Online Learning & Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0C0E14; color: #F8FAFC; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen">
+
+    <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-xl border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-indigo-500 flex items-center justify-center text-white font-bold text-lg">L</div>
+                <span class="font-extrabold text-xl tracking-tight text-white">Learn<span class="text-indigo-400">ova</span></span>
+            </a>
+
+            <div class="flex items-center gap-4 text-xs font-bold">
+                <button onclick="toggleStudentDashboard()" class="px-3.5 py-1.5 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-300">
+                    My Learning (85% Completed)
+                </button>
+                <a href="/#projects" class="text-slate-400 hover:text-white flex items-center gap-1">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12 space-y-12">
+        
+        <!-- Course Hero Player -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <div class="lg:col-span-8 space-y-4">
+                <div class="relative aspect-video rounded-3xl bg-slate-900 border border-slate-800 overflow-hidden flex items-center justify-center group cursor-pointer" onclick="playVideo()">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover opacity-60">
+                    <div class="w-16 h-16 rounded-full bg-indigo-500 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
+                        ▶
+                    </div>
+                </div>
+                <div>
+                    <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider">Active Course</span>
+                    <h1 class="text-2xl font-bold text-white">Full Stack React & Node.js Masterclass 2026</h1>
+                    <p class="text-xs text-slate-400 mt-1">Instructor: Dr. Sarah Jenkins · 42 Hours HD Content · 12 Projects</p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 space-y-3 bg-slate-900 border border-slate-800 p-6 rounded-3xl">
+                <h3 class="text-base font-bold text-white">Course Modules</h3>
+                <div class="space-y-2 text-xs">
+                    <div class="p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 flex items-center justify-between">
+                        <span>1. React 18 Core Hooks & Fiber</span>
+                        <span class="font-bold">✓ Done</span>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 flex items-center justify-between">
+                        <span>2. Express REST API & JWT Auth</span>
+                        <span class="font-bold">▶ Playing</span>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-between opacity-60">
+                        <span>3. MongoDB & Firestore Sync</span>
+                        <span>Locked</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Student Dashboard Modal -->
+    <div id="student-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 relative space-y-6">
+            <button onclick="toggleStudentDashboard()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <h3 class="text-lg font-bold text-white">Student Progress Portal</h3>
+            <div class="p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 space-y-2">
+                <span class="text-xs text-indigo-300 font-bold">Verified Certificate Issued</span>
+                <h4 class="text-sm font-bold text-white">Full Stack React & AI Engineering</h4>
+                <p class="text-[11px] text-slate-400">Issued to Alex Turner · Date: August 2026</p>
+            </div>
+            <button onclick="alert('Downloading PDF Certificate...')" class="w-full py-3 rounded-xl bg-indigo-500 text-white font-bold text-xs uppercase">Download Certificate PDF</button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        function toggleStudentDashboard() {
+            document.getElementById('student-modal').classList.toggle('hidden');
+        }
+        function playVideo() {
+            alert('Playing lecture stream...');
+        }
+    </script>
+</body>
+</html>
