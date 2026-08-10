@@ -38,7 +38,8 @@ import {
   UserCheck,
   Eye,
   Download,
-  Share2
+  Share2,
+  Search
 } from "lucide-react";
 
 import ImageGallery from "./components/ImageGallery";
@@ -54,9 +55,24 @@ interface Project {
   description: string;
   image?: string;
   tags: string[];
-  category: "all" | "bots" | "shopify" | "fullstack" | "ai" | "monetization";
+  category: string;
   link?: string;
   github?: string;
+}
+
+// Types for Showcase Projects
+interface ShowcaseProject {
+  name: string;
+  slug: string;
+  category: string;
+  industry: string;
+  description: string;
+  longDescription?: string;
+  thumbnail: string;
+  technologies: string[];
+  demo: string;
+  github?: string;
+  featured?: boolean;
 }
 
 interface SpatialSectionProps {
@@ -98,8 +114,14 @@ export default function App() {
   // Active section tracking for navigation highlight
   const [activeSection, setActiveSection] = useState("hero");
 
-  // Project filter state
+  // Project filter state (Real Works)
   const [activeCategory, setActiveCategory] = useState<string>("all");
+
+  // Client Showcase state
+  const [showcaseProjects, setShowcaseProjects] = useState<ShowcaseProject[]>([]);
+  const [activeShowcaseCategory, setActiveShowcaseCategory] = useState<string>("all");
+  const [showcaseSearch, setShowcaseSearch] = useState<string>("");
+  const [selectedShowcaseModal, setSelectedShowcaseModal] = useState<ShowcaseProject | null>(null);
 
   // Performance Optimization Eco Mode
   const [ecoMode, setEcoMode] = useState(false);
@@ -193,51 +215,59 @@ export default function App() {
     }
   ]);
 
-  // Try loading additional projects if projects.json exists
+  // Load real projects and showcase projects
   useEffect(() => {
-    async function fetchExternalProjects() {
+    async function fetchExternalData() {
       try {
-        const res = await fetch("./projects.json");
-        if (res.ok) {
-          const data = await res.json();
+        const pRes = await fetch("./projects.json");
+        if (pRes.ok) {
+          const data = await pRes.json();
           if (Array.isArray(data) && data.length > 0) {
-            const formatted = data.map((p: any) => {
-              let inferredCategory = p.category || "fullstack";
-              if (!p.category) {
-                const searchStr = `${p.title} ${p.description} ${p.tags?.join(" ")}`.toLowerCase();
-                if (searchStr.includes("bot") || searchStr.includes("whatsapp") || searchStr.includes("telegram")) {
-                  inferredCategory = "bots";
-                } else if (searchStr.includes("shopify") || searchStr.includes("liquid")) {
-                  inferredCategory = "shopify";
-                } else if (searchStr.includes("monetiz") || searchStr.includes("rpm")) {
-                  inferredCategory = "monetization";
-                }
-              }
-              return {
-                title: p.title || "Untitled Creation",
-                description: p.description || "",
-                image: p.image || "",
-                tags: p.tags || [],
-                category: inferredCategory,
-                link: p.link || "",
-                github: p.github || ""
-              };
-            });
-            // Merge unique projects
-            setProjects(formatted);
+            setProjects(data);
           }
         }
       } catch (err) {
-        console.log("Using primary project data.");
+        console.log("Using default real project data.");
+      }
+
+      try {
+        const scRes = await fetch("./showcase.json");
+        if (scRes.ok) {
+          const scData = await scRes.json();
+          if (Array.isArray(scData) && scData.length > 0) {
+            setShowcaseProjects(scData);
+          }
+        }
+      } catch (err) {
+        console.log("Using default showcase data.");
       }
     }
-    fetchExternalProjects();
+    fetchExternalData();
   }, []);
 
-  // Filtered projects
+  // Filtered real projects
   const filteredProjects = activeCategory === "all"
     ? projects
     : projects.filter(p => p.category === activeCategory);
+
+  // Filtered showcase projects
+  const filteredShowcases = showcaseProjects.filter((sc) => {
+    const matchesCategory =
+      activeShowcaseCategory === "all" ||
+      sc.category.toLowerCase().includes(activeShowcaseCategory.toLowerCase()) ||
+      sc.industry.toLowerCase().includes(activeShowcaseCategory.toLowerCase());
+
+    const query = showcaseSearch.toLowerCase().trim();
+    const matchesSearch =
+      query === "" ||
+      sc.name.toLowerCase().includes(query) ||
+      sc.description.toLowerCase().includes(query) ||
+      sc.category.toLowerCase().includes(query) ||
+      sc.industry.toLowerCase().includes(query) ||
+      sc.technologies.some((t) => t.toLowerCase().includes(query));
+
+    return matchesCategory && matchesSearch;
+  });
 
   // Q&A accordion state
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -388,6 +418,7 @@ export default function App() {
                 { name: "Certificates", id: "certificates" },
                 { name: "Services", id: "services" },
                 { name: "Projects", id: "projects" },
+                { name: "Showcase", id: "showcase" },
                 { name: "Skills", id: "skills" },
                 { name: "Gallery", id: "gallery" },
                 { name: "FAQ", id: "qa" },
@@ -455,6 +486,7 @@ export default function App() {
                 { name: "Official Certificates", id: "certificates" },
                 { name: "Services", id: "services" },
                 { name: "Projects & Tools", id: "projects" },
+                { name: "Client Showcase", id: "showcase" },
                 { name: "Skills & Stack", id: "skills" },
                 { name: "Studio Gallery", id: "gallery" },
                 { name: "FAQ", id: "qa" },
@@ -933,31 +965,31 @@ export default function App() {
           <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
             <span className="text-xs font-bold uppercase tracking-widest text-cyan-400 bg-cyan-950/30 px-3.5 py-1.5 rounded-full border border-cyan-500/20 inline-flex items-center gap-2">
               <Rocket size={13} />
-              Selected Portfolio
+              Real Personal Work
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               Featured <span className="bg-gradient-to-r from-cyan-300 via-emerald-300 to-purple-300 text-transparent bg-clip-text">Creations & Tools</span>
             </h2>
             <p className="text-slate-400 text-sm sm:text-base">
-              Explore Shahan Ali's live web tools, automation bots, and full-stack software.
+              Explore Shahan Ali's live web tools, WhatsApp automation bots, and core developer applications.
             </p>
           </div>
 
           {/* Category Filter Pills */}
           <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
             {[
-              { id: "all", label: "All Projects" },
-              { id: "bots", label: "AI & Bots" },
-              { id: "fullstack", label: "Full Stack & Tools" },
-              { id: "shopify", label: "Shopify" },
-              { id: "monetization", label: "Monetization" }
+              { id: "all", label: "All Real Projects" },
+              { id: "bots", label: "WhatsApp & Automation" },
+              { id: "fullstack", label: "Full Stack & Web Tools" },
+              { id: "shopify", label: "Shopify OS 2.0" },
+              { id: "monetization", label: "Monetization & Analytics" }
             ].map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
                 className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer ${
                   activeCategory === cat.id
-                    ? "bg-white/15 text-white border border-white/20 shadow-md"
+                    ? "bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 shadow-lg shadow-cyan-500/10"
                     : "bg-white/[0.02] text-slate-400 border border-white/5 hover:bg-white/[0.06] hover:text-white"
                 }`}
               >
@@ -1056,6 +1088,138 @@ export default function App() {
                       <span>Code</span>
                     </a>
                   )}
+                </div>
+              </TiltCard>
+            ))}
+          </div>
+        </SpatialSection>
+
+        {/* ================= CLIENT SHOWCASE SECTION ================= */}
+        <SpatialSection id="showcase" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
+          <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+            <span className="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-950/30 px-3.5 py-1.5 rounded-full border border-amber-500/20 inline-flex items-center gap-2">
+              <Sparkles size={13} className="text-amber-400" />
+              Interactive Product Showcase
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+              Client Showcase & <span className="bg-gradient-to-r from-amber-300 via-orange-300 to-amber-500 text-transparent bg-clip-text">Live Demos</span>
+            </h2>
+            <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+              Explore 20 interactive, standalone client applications designed and engineered across diverse industries—from luxury horology and AI workspaces to hypercar marketplaces.
+            </p>
+
+            {/* Search Bar */}
+            <div className="pt-2 flex items-center justify-center max-w-md mx-auto">
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  value={showcaseSearch}
+                  onChange={(e) => setShowcaseSearch(e.target.value)}
+                  placeholder="Search 20 client demos (e.g. LuxeCart, FitForge, AI, 3D)..."
+                  className="w-full bg-slate-900/80 border border-white/10 rounded-full py-2.5 pl-10 pr-4 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400/50"
+                />
+                <Search size={14} className="absolute left-3.5 top-3 text-slate-500" />
+              </div>
+            </div>
+          </div>
+
+          {/* Industry Category Filter Tabs */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+            {[
+              { id: "all", label: "All Showcase (20)" },
+              { id: "E-Commerce", label: "E-Commerce" },
+              { id: "SaaS", label: "SaaS & AI" },
+              { id: "Marketplace", label: "Marketplaces" },
+              { id: "Dashboard", label: "Dashboards" },
+              { id: "Travel", label: "Travel & Hotels" },
+              { id: "Healthcare", label: "Healthcare & Security" },
+              { id: "Creative", label: "Creative & 3D" }
+            ].map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveShowcaseCategory(cat.id)}
+                className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer ${
+                  activeShowcaseCategory === cat.id
+                    ? "bg-amber-500/20 text-amber-300 border border-amber-400/40 shadow-lg shadow-amber-500/10"
+                    : "bg-white/[0.02] text-slate-400 border border-white/5 hover:bg-white/[0.06] hover:text-white"
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Showcase Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredShowcases.map((sc) => (
+              <TiltCard
+                key={sc.slug}
+                glowColor="rgba(212, 175, 55, 0.12)"
+                className="backdrop-blur-2xl bg-white/[0.03] p-6 rounded-3xl border border-white/10 flex flex-col justify-between hover:border-amber-400/40 transition-all group relative overflow-hidden"
+              >
+                {sc.featured && (
+                  <div className="absolute top-4 right-4 z-10 px-2.5 py-0.5 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-[10px] font-bold uppercase tracking-wider backdrop-blur-md">
+                    Featured
+                  </div>
+                )}
+
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between text-xs mb-1">
+                    <span className="px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono uppercase tracking-wider text-[10px]">
+                      {sc.category}
+                    </span>
+                    <span className="text-[11px] text-slate-400 font-medium">{sc.industry}</span>
+                  </div>
+
+                  <div className="w-full aspect-[16/9] rounded-2xl overflow-hidden relative bg-slate-950 border border-white/10 group-hover:border-amber-400/30 transition-colors">
+                    <img
+                      src={sc.thumbnail}
+                      alt={sc.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60" />
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-extrabold text-white group-hover:text-amber-300 transition-colors">
+                      {sc.name}
+                    </h3>
+                    <p className="text-slate-400 text-xs sm:text-sm mt-1.5 leading-relaxed">
+                      {sc.description}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {sc.technologies.map((tech, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/5 text-[10px] text-slate-300 font-mono"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-4 mt-5 border-t border-white/5 flex items-center justify-between text-xs font-semibold gap-2">
+                  <a
+                    href={sc.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 text-center py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold hover:shadow-lg hover:shadow-amber-500/20 transition-all flex items-center justify-center gap-1.5"
+                  >
+                    <span>Launch Live Showcase</span>
+                    <ExternalLink size={13} />
+                  </a>
+
+                  <button
+                    onClick={() => setSelectedShowcaseModal(sc)}
+                    className="px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    title="Quick Specs"
+                  >
+                    <Eye size={14} />
+                  </button>
                 </div>
               </TiltCard>
             ))}
@@ -1432,6 +1596,76 @@ export default function App() {
               >
                 Close View
               </button>
+            </div>
+
+          </div>
+        </div>
+      )}
+
+      {/* Showcase Quick Specs Modal View */}
+      {selectedShowcaseModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-950/90 backdrop-blur-2xl animate-fade-in">
+          <div className="relative w-full max-w-2xl bg-slate-900 border border-white/20 rounded-3xl shadow-2xl overflow-hidden flex flex-col p-6 space-y-6">
+            
+            <div className="flex items-start justify-between">
+              <div className="space-y-1">
+                <span className="px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono uppercase tracking-wider text-[10px]">
+                  {selectedShowcaseModal.category} · {selectedShowcaseModal.industry}
+                </span>
+                <h3 className="text-2xl font-extrabold text-white">{selectedShowcaseModal.name}</h3>
+              </div>
+              <button
+                onClick={() => setSelectedShowcaseModal(null)}
+                className="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="w-full h-48 rounded-2xl overflow-hidden border border-white/10 relative">
+              <img
+                src={selectedShowcaseModal.thumbnail}
+                alt={selectedShowcaseModal.name}
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+            </div>
+
+            <div className="space-y-3 text-slate-300 text-xs sm:text-sm leading-relaxed">
+              <p className="font-semibold text-white">{selectedShowcaseModal.description}</p>
+              {selectedShowcaseModal.longDescription && (
+                <p className="text-slate-400">{selectedShowcaseModal.longDescription}</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">Tech Stack & Features</span>
+              <div className="flex flex-wrap gap-2">
+                {selectedShowcaseModal.technologies.map((tech, idx) => (
+                  <span key={idx} className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-200 text-xs font-mono">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-3">
+              <button
+                onClick={() => setSelectedShowcaseModal(null)}
+                className="px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 text-xs font-semibold hover:bg-white/10 transition-colors cursor-pointer"
+              >
+                Close Specs
+              </button>
+              <a
+                href={selectedShowcaseModal.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity flex items-center gap-1.5"
+              >
+                <span>Launch Full App</span>
+                <ExternalLink size={14} />
+              </a>
             </div>
 
           </div>
