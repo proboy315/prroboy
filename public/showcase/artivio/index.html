@@ -3,71 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artivio | Curated Digital Fine Art & Live Auctions</title>
+    <title>Artivio | Fine Art & Web3 Provenance Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #070709; color: #E2E8F0; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #060608; color: #F1F5F9; overflow-x: hidden; }
         .font-cinzel { font-family: 'Cinzel', serif; }
+        .gold-gradient { background: linear-gradient(135deg, #FDE047 0%, #EAB308 50%, #CA8A04 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-panel { background: rgba(18, 18, 24, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(234, 179, 8, 0.25); }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased min-h-screen">
+<body class="bg-[#060608] text-slate-100 min-h-screen antialiased selection:bg-amber-500 selection:text-slate-950">
 
-    <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-xl border-b border-white/10">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#060608]/90 backdrop-blur-xl border-b border-amber-500/20">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3">
-                <span class="font-cinzel text-2xl font-bold tracking-widest text-white">ARTIVIO</span>
+            <a href="#" onclick="showTab('home')" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full border border-amber-500/40 flex items-center justify-center bg-amber-500/10 text-amber-400 font-cinzel font-bold text-xl">A</div>
+                <span class="font-cinzel text-2xl font-black tracking-widest text-white">ARTIVIO</span>
             </a>
 
-            <div class="flex items-center gap-4 text-xs font-bold">
-                <a href="/#projects" class="text-slate-400 hover:text-white flex items-center gap-1">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
+            <nav class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-slate-300">
+                <button onclick="showTab('home')" class="hover:text-amber-400 transition-colors cursor-pointer text-amber-400">Auctions</button>
+                <button onclick="showTab('provenance')" class="hover:text-amber-400 transition-colors cursor-pointer">ETH Provenance</button>
+                <button onclick="showTab('galleries')" class="hover:text-amber-400 transition-colors cursor-pointer">Curated Suites</button>
+                <button onclick="showTab('contact')" class="hover:text-amber-400 transition-colors cursor-pointer">Advisory</button>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <button onclick="alert('Connect Ethereum Wallet...')" class="px-5 py-2.5 rounded-full bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider hover:bg-amber-300 transition-all cursor-pointer">
+                    Connect Wallet
+                </button>
+                <a href="/#showcase" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 hidden sm:flex">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Showcase
                 </a>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-16 space-y-16">
-        
-        <div class="text-center max-w-2xl mx-auto space-y-4">
-            <span class="text-xs text-amber-400 uppercase tracking-widest font-mono">Curated Fine Art Auction</span>
-            <h1 class="text-4xl font-bold text-white font-cinzel">The Digital Gallery</h1>
-            <p class="text-xs text-slate-400">Masterpieces authenticated on the blockchain for private collectors.</p>
-        </div>
+    <main class="pt-20">
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-slate-900/60 p-8 rounded-3xl border border-white/10">
-            <div class="lg:col-span-7">
-                <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80" class="w-full h-96 object-cover rounded-2xl border border-white/10">
-            </div>
-            <div class="lg:col-span-5 space-y-6">
-                <span class="text-xs text-amber-400 font-mono">Lot #082 · Live Auction</span>
-                <h2 class="text-3xl font-bold text-white font-cinzel">Ethereal Symmetry No. 4</h2>
-                <p class="text-xs text-slate-400 leading-relaxed">Artist: Genevieve Laurent · Digital Oil & Generative Shader 1/1 Edition.</p>
-                
-                <div class="p-4 rounded-2xl bg-slate-950 border border-white/10 flex items-center justify-between">
-                    <div>
-                        <span class="text-[10px] text-slate-500 uppercase block font-mono">Current Highest Bid</span>
-                        <span id="bid-price" class="text-2xl font-bold text-amber-400 font-cinzel">14.50 ETH ($38,420)</span>
+        <!-- TAB: HOME -->
+        <div id="tab-home" class="tab-content">
+            <section class="relative min-h-[85vh] flex items-center justify-center border-b border-amber-500/20 py-16 overflow-hidden">
+                <div id="three-art" class="absolute inset-0 pointer-events-none opacity-60 z-0"></div>
+                <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-widest">
+                            🎨 Fine Art & On-Chain Provenance
+                        </span>
+                        <h1 class="text-4xl sm:text-7xl font-black text-white tracking-tight leading-tight font-cinzel">
+                            FINE ART, <br/><span class="gold-gradient">IMMUTABLE.</span>
+                        </h1>
+                        <p class="text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed">
+                            Collect 1/1 digital physicals with physical NFC tags, Ethereum smart contract ownership, and global museum provenance.
+                        </p>
                     </div>
-                    <div class="text-right">
-                        <span class="text-[10px] text-slate-500 uppercase block font-mono">Time Remaining</span>
-                        <span class="text-xs font-bold text-red-400">04h 12m 30s</span>
+
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="glass-panel p-6 rounded-3xl space-y-4 max-w-md w-full border border-amber-500/30">
+                            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80" class="w-full h-72 object-cover rounded-2xl">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-bold text-white text-lg font-cinzel">Cosmic Horizon #04</h3>
+                                    <p class="text-xs text-slate-400">1/1 Edition · On-Chain Smart Contract</p>
+                                </div>
+                                <span class="text-lg font-bold text-amber-400">14.5 ETH</span>
+                            </div>
+                            <button onclick="alert('Bid 15.0 ETH submitted!')" class="w-full py-3.5 rounded-xl bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-widest">
+                                Place ETH Bid
+                            </button>
+                        </div>
                     </div>
                 </div>
+            </section>
+        </div>
 
-                <button onclick="placeBid()" class="w-full py-4 rounded-2xl bg-amber-500 text-slate-950 font-bold text-xs uppercase tracking-widest hover:bg-amber-400 transition-colors">Place ETH Bid</button>
+        <!-- TAB: PROVENANCE -->
+        <div id="tab-provenance" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 space-y-6">
+            <h2 class="text-3xl font-black text-white font-cinzel text-center">On-Chain Provenance Inspector</h2>
+            <div class="glass-panel p-6 rounded-3xl border border-amber-500/30 space-y-3 text-xs font-mono">
+                <p class="text-amber-400">Contract Address: 0x71C...392A</p>
+                <p class="text-slate-300">Creator: Studio Artivio Paris</p>
+                <p class="text-emerald-400 font-bold">Verification: Verified Cryptographic Key Match ✅</p>
+            </div>
+        </div>
+
+        <!-- TAB: GALLERIES -->
+        <div id="tab-galleries" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 text-center space-y-6">
+            <h2 class="text-3xl font-black text-white font-cinzel">Curated Exhibition Suites</h2>
+            <p class="text-xs text-slate-400">Exhibits in Tokyo, Venice Biennale, and NYC Chelsea galleries.</p>
+        </div>
+
+        <!-- TAB: ADVISORY -->
+        <div id="tab-contact" class="tab-content hidden py-16 max-w-3xl mx-auto px-6 text-center">
+            <div class="glass-panel p-8 rounded-3xl border border-amber-500/30 space-y-4">
+                <h2 class="text-3xl font-black text-white font-cinzel">Private Art Advisory</h2>
+                <button onclick="alert('Advisory consultation booked!')" class="px-8 py-4 rounded-xl bg-amber-400 text-slate-950 font-bold text-xs uppercase">Consult Art Curator</button>
             </div>
         </div>
 
     </main>
 
+    <footer class="mt-20 border-t border-amber-500/20 bg-slate-950/90 py-10 text-xs text-center text-slate-400">
+        <p>© 2026 Artivio Fine Art Marketplace SA. All Rights Reserved.</p>
+    </footer>
+
     <script>
         lucide.createIcons();
-        function placeBid() {
-            document.getElementById('bid-price').innerText = '15.00 ETH ($39,750)';
-            alert('Bid placed! You are currently the highest bidder for Lot #082.');
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Three.js Art Frame Cube
+        window.addEventListener('load', () => {
+            const container = document.getElementById('three-art');
+            if (!container) return;
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            const geo = new THREE.BoxGeometry(2.5, 3.2, 0.2);
+            const mat = new THREE.MeshBasicMaterial({ color: 0xEAB308, wireframe: true });
+            const frame = new THREE.Mesh(geo, mat);
+            scene.add(frame);
+
+            camera.position.z = 5;
+            function animate() {
+                requestAnimationFrame(animate);
+                frame.rotation.y += 0.008;
+                renderer.render(scene, camera);
+            }
+            animate();
+        });
     </script>
 </body>
 </html>
