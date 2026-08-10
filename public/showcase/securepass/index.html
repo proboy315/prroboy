@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecurePass | Zero-Knowledge Password Vault & Security</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #06080D; color: #F8FAFC; }
+        .font-mono { font-family: 'Fira Code', monospace; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen">
+
+    <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-xl border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-cyan-500 flex items-center justify-center text-slate-950 font-black">🔒</div>
+                <span class="font-extrabold text-xl tracking-tight text-white">Secure<span class="text-cyan-400">Pass</span></span>
+            </a>
+
+            <div class="flex items-center gap-4 text-xs font-bold">
+                <a href="/#projects" class="text-slate-400 hover:text-white flex items-center gap-1">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-8 space-y-8">
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-lg font-bold text-white">Security Score: 96 / 100</h3>
+                    <p class="text-xs text-slate-400">AES-256 encrypted zero-knowledge vault active</p>
+                </div>
+                <button onclick="genPass()" class="px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs">Generate Password</button>
+            </div>
+            
+            <div id="gen-output" class="p-3 rounded-xl bg-slate-950 border border-slate-800 font-mono text-cyan-300 text-xs hidden">
+                Generated: <span id="pass-str" class="font-bold">x9#kL$89pM2!wQ1Z</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+        function genPass() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+            let pass = "";
+            for (let i = 0; i < 18; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
+            document.getElementById('pass-str').innerText = pass;
+            document.getElementById('gen-output').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
