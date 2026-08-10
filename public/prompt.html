@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProBoy AI Master System Prompt Generator | Shahan Ali Portfolio</title>
+    <meta name="description" content="Official AI System Prompt Generator for Shahan Ali (shahan315) ProBoy portfolio sub-page and tool builder. Copy master prompts for ChatGPT, Claude, and Gemini.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Dark Carbon Silk Micro-Mesh Pattern */
+        body {
+            background-color: #030508;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(30, 41, 59, 0.45) 0%, transparent 55%),
+                radial-gradient(circle at 85% 80%, rgba(15, 23, 42, 0.6) 0%, transparent 60%),
+                linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 12px 12px, 12px 12px, 4px 4px, 4px 4px;
+            background-attachment: fixed;
+            color: #f8fafc;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Liquid Glassmorphism Card */
+        .vision-glass {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        /* Glow Text */
+        .glow-cyan {
+            text-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030508;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0f172a;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4 sm:p-8 selection:bg-cyan-500/30 selection:text-white">
+
+    <!-- Top Navigation Header -->
+    <header class="w-full max-w-5xl mx-auto flex items-center justify-between py-4 relative z-10">
+        <a href="/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full vision-glass text-xs font-semibold text-slate-300 hover:text-white hover:border-white/20 transition-all active:scale-95">
+            <i class="fas fa-arrow-left text-cyan-400"></i>
+            <span>Back to Main Portfolio</span>
+        </a>
+
+        <div class="flex items-center gap-2">
+            <span class="px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 font-mono text-[11px] font-semibold flex items-center gap-2 shadow-lg">
+                <i class="fas fa-robot text-cyan-400"></i>
+                <span>AI Prompt Master v2.5</span>
+            </span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-5xl mx-auto my-6 relative z-10 space-y-6">
+        
+        <!-- Header Section -->
+        <div class="text-center space-y-3 max-w-2xl mx-auto">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 border border-cyan-400/30 mx-auto flex items-center justify-center text-cyan-300 shadow-xl">
+                <i class="fas fa-terminal text-2xl"></i>
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                ProBoy <span class="bg-gradient-to-r from-cyan-300 via-emerald-300 to-teal-200 text-transparent bg-clip-text">AI Master System Prompt</span>
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                Give this system prompt to any AI (ChatGPT, Claude, Gemini, DeepSeek, AI Studio) to build brand-aligned sub-pages and tools for <strong class="text-cyan-300">Shahan Ali (shahan315)</strong> with exact matching design, colors, and serverless architecture.
+            </p>
+        </div>
+
+        <!-- Task Input Customizer -->
+        <div class="vision-glass rounded-2xl p-4 sm:p-6 space-y-3">
+            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider flex justify-between items-center">
+                <span>Customize Sub-page / Tool Request (Optional)</span>
+                <span class="text-[10px] text-cyan-400 font-mono">Updates Prompt Dynamically</span>
+            </label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                    <i class="fas fa-magic text-xs"></i>
+                </div>
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="e.g. Build an Online PDF Converter Tool or YouTube Video Downloader"
+                    class="w-full pl-10 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 font-mono text-xs sm:text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 transition-all"
+                />
+            </div>
+        </div>
+
+        <!-- Action Button Section -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 vision-glass rounded-2xl p-4 sm:p-6">
+            <div class="space-y-1 text-left">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <i class="fas fa-shield-alt text-emerald-400"></i>
+                    <span>Ready for Copy & Instant AI Deployment</span>
+                </h3>
+                <p class="text-xs text-slate-400">
+                    Includes full design system rules, developer credentials, serverless constraints, and interactive flow.
+                </p>
+            </div>
+
+            <button
+                id="copyBtn"
+                class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-cyan-500/20 active:scale-95"
+            >
+                <i class="fas fa-copy text-sm"></i>
+                <span id="copyBtnText">Copy Master AI Prompt</span>
+            </button>
+        </div>
+
+        <!-- Copy Toast Success Notice -->
+        <div id="toast" class="hidden p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold text-center flex items-center justify-center gap-2 animate-bounce">
+            <i class="fas fa-check-circle"></i>
+            <span>Master AI Prompt Copied to Clipboard! Paste it into your AI assistant.</span>
+        </div>
+
+        <!-- Prompt Display Terminal Window -->
+        <div class="vision-glass rounded-2xl p-4 sm:p-6 space-y-3 text-left">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+                    <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+                    <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                    <span class="text-xs font-mono text-slate-400 ml-2">master-prompt.txt</span>
+                </div>
+                <span class="text-[10px] font-mono text-cyan-400 uppercase tracking-widest bg-cyan-950/60 border border-cyan-800/40 px-2 py-0.5 rounded-md">
+                    ProBoy System Prompt
+                </span>
+            </div>
+
+            <pre id="promptDisplay" class="font-mono text-xs text-slate-300 leading-relaxed whitespace-pre-wrap overflow-x-auto p-4 rounded-xl bg-slate-950/80 border border-white/5 max-h-[450px] selection:bg-cyan-500/30 selection:text-white"></pre>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-6 text-xs text-slate-500 relative z-10">
+        © 2026 ProBoy-MD · Designed & Engineered by <a href="/" class="text-slate-300 hover:text-cyan-300 font-semibold transition-colors">Shahan Ali</a> (shahan315)
+    </footer>
+
+    <!-- Script Handler -->
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const promptDisplay = document.getElementById('promptDisplay');
+        const copyBtn = document.getElementById('copyBtn');
+        const copyBtnText = document.getElementById('copyBtnText');
+        const toast = document.getElementById('toast');
+
+        function generatePromptText(customTask = '') {
+            const taskSection = customTask.trim().length > 0 
+                ? `\n====================================================\nYOUR SPECIFIC TASK FOR THIS SUB-PAGE:\n====================================================\n${customTask.trim()}\n`
+                : `\n====================================================\nYOUR INITIAL TASK:\n====================================================\nPlease ask the user: "What new sub-page, tool, or feature would you like to build for Shahan Ali's ProBoy portfolio?"\nIf the user specifies a task, proceed immediately to generate production-ready code.\n`;
+
+            return `YOU ARE ACTING AS THE SENIOR LEAD DEVELOPER FOR SHAHAN ALI (shahan315 / ProBoy / ProBoy-MD).
+
+Your goal is to design and develop a production-ready, Awwwards-level sub-page or tool that integrates seamlessly into Shahan Ali's personal website and developer portfolio.
+
+====================================================
+BRAND & DEVELOPER IDENTITY
+====================================================
+• Developer Name: Shahan Ali
+• Alias / Handle: shahan315 / ProBoy / ProBoy-MD
+• Title: Senior Full Stack, Automation & AI Engineer
+• Location: Burewala, Punjab, Pakistan
+• Official WhatsApp: +92 326 1684315
+• Primary Portfolio: https://ais-pre-cujitgkigg7wqix4jwx2vs-16079390781.asia-southeast1.run.app/
+
+====================================================
+DESIGN SYSTEM & AESTHETIC RULES
+====================================================
+1. BACKGROUND:
+   - Deep Matte Dark Carbon Silk Micro-Mesh (#030508).
+   - Micro 12px matrix grid overlay with subtle diagonal silk light sheen.
+   - NO aggressive moving blobs or neon wave canvas animations.
+   - Minimal ambient movement for a clean, expensive, executive feel.
+
+2. UI COMPONENTS & GLASSMORPHISM:
+   - VisionOS Liquid Glass Cards: backdrop-blur-2xl, background: rgba(15, 23, 42, 0.65), border: 1px solid rgba(255, 255, 255, 0.1), shadow: 0 30px 60px rgba(0, 0, 0, 0.7).
+   - Accents: Subtle Electric Cyan (#00f2ff) and Emerald (#00ffaa) glowing text and status badges.
+   - Typography: Outfit / Plus Jakarta Sans for UI headers and body text; JetBrains Mono for codes, badges, and technical logs.
+   - Buttons: Liquid Glass rounded-2xl or rounded-full with smooth hover scaling (active:scale-95).
+
+3. ARCHITECTURE & SERVERLESS MANDATE:
+   - Must remain 100% Serverless / Client-Side First (Pure HTML/JS or React Tailwind).
+   - Fast loading, no external server requirement unless calling dedicated public APIs.
+   - Fully responsive across Desktop, Laptop, Tablet, Android, and iPhone.
+
+4. NAVIGATION & HEADER REQUIREMENTS:
+   - Include a top navigation bar with Shahan Ali branding.
+   - MUST include a "Back to Portfolio" link pointing to "/" (href="/").
+   - Include a live backend / status online indicator badge.
+   - Include footer copyright: "© 2026 ProBoy-MD · Designed & Engineered by Shahan Ali".
+${taskSection}
+====================================================
+EXECUTION INSTRUCTIONS FOR THE AI
+====================================================
+• Write clean, production-ready, bug-free HTML/CSS/JS or React code.
+• Include complete error handling, loading states, copy-to-clipboard functionality, and user feedback toasts.
+• Do not output incomplete stubs or pseudocode — output full runnable code that adheres 100% to Shahan Ali's design system.`;
+        }
+
+        function updateDisplay() {
+            promptDisplay.textContent = generatePromptText(taskInput.value);
+        }
+
+        taskInput.addEventListener('input', updateDisplay);
+
+        copyBtn.addEventListener('click', async () => {
+            const textToCopy = generatePromptText(taskInput.value);
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(textToCopy);
+                } else {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = textToCopy;
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                }
+
+                copyBtnText.textContent = 'Copied!';
+                toast.classList.remove('hidden');
+
+                setTimeout(() => {
+                    copyBtnText.textContent = 'Copy Master AI Prompt';
+                    toast.classList.add('hidden');
+                }, 4000);
+            } catch (err) {
+                alert('Failed to copy automatically. Please select text manually.');
+            }
+        });
+
+        // Initialize display
+        updateDisplay();
+    </script>
+</body>
+</html>
