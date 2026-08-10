@@ -3,132 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoVault | Exotics & High-Performance Hypercars</title>
+    <title>AutoVault | Exotic & Hypercar Showroom</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050608; color: #F8FAFC; }
-        .font-grotesk { font-family: 'Space Grotesk', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0A0A0E; color: #F8FAFC; overflow-x: hidden; }
+        .red-gradient { background: linear-gradient(135deg, #EF4444 0%, #DC2626 50%, #991B1B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-panel { background: rgba(18, 18, 26, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(239, 68, 68, 0.25); }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased min-h-screen">
+<body class="bg-[#0A0A0E] text-slate-100 min-h-screen antialiased selection:bg-red-500 selection:text-white">
 
-    <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-xl border-b border-white/10">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0E]/90 backdrop-blur-xl border-b border-red-500/20">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center text-slate-950 font-black text-xl font-grotesk">AV</div>
-                <span class="font-black text-2xl tracking-wider text-white font-grotesk">AUTO<span class="text-red-500">VAULT</span></span>
+            <a href="#" onclick="showTab('home')" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-red-500 to-rose-700 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-red-500/30">🏎️</div>
+                <span class="font-black text-2xl tracking-tight text-white">Auto<span class="text-red-500">Vault</span></span>
             </a>
 
-            <div class="flex items-center gap-4 text-xs font-bold">
-                <button onclick="toggleCompare()" class="px-4 py-2 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400">
-                    Compare Matrix (2 Selected)
+            <nav class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-wider text-slate-300">
+                <button onclick="showTab('home')" class="hover:text-red-400 transition-colors cursor-pointer text-red-400">Showroom</button>
+                <button onclick="showTab('specs')" class="hover:text-red-400 transition-colors cursor-pointer">Spec Matrix</button>
+                <button onclick="showTab('finance')" class="hover:text-red-400 transition-colors cursor-pointer">Lease Estimator</button>
+                <button onclick="showTab('contact')" class="hover:text-red-400 transition-colors cursor-pointer">Private Concierge</button>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <button onclick="showTab('contact')" class="px-5 py-2.5 rounded-xl bg-red-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-red-400 transition-all cursor-pointer">
+                    Book Test Drive
                 </button>
-                <a href="/#projects" class="text-slate-400 hover:text-white flex items-center gap-1">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
+                <a href="/#showcase" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 hidden sm:flex">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Showcase
                 </a>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-12 space-y-12">
-        
-        <div class="text-center max-w-3xl mx-auto space-y-4">
-            <span class="px-3.5 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-mono font-bold uppercase tracking-widest">
-                VERIFIED EXOTIC INVENTORY
-            </span>
-            <h1 class="text-4xl sm:text-6xl font-black text-white font-grotesk">PEAK AUTOMOTIVE <span class="text-red-500">PRESTIGE</span></h1>
-            <p class="text-xs sm:text-sm text-slate-400">Curated high-performance supercars and hypercars delivered directly to your climate-controlled garage.</p>
+    <main class="pt-20">
+
+        <!-- TAB: HOME -->
+        <div id="tab-home" class="tab-content">
+            <section class="relative min-h-[85vh] flex items-center justify-center border-b border-red-500/20 py-16 overflow-hidden">
+                <div id="three-car" class="absolute inset-0 pointer-events-none opacity-60 z-0"></div>
+                <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-bold uppercase tracking-widest">
+                            🏎️ Ultra-Exclusive Hypercars & Exotic Engineering
+                        </span>
+                        <h1 class="text-4xl sm:text-7xl font-black text-white tracking-tight leading-tight">
+                            UNLEASH PURE <br/><span class="red-gradient">HORSEPOWER.</span>
+                        </h1>
+                        <p class="text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed">
+                            Bugatti, Koenigsegg, Ferrari, and Pagani inventory curated for discerning collectors.
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="glass-panel p-6 rounded-3xl space-y-4 max-w-md w-full border border-red-500/30">
+                            <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80" class="w-full h-64 object-cover rounded-2xl">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-bold text-white text-base">Ferrari SF90 Stradale</h3>
+                                    <p class="text-xs text-slate-400">986 HP · V8 Twin-Turbo Hybrid</p>
+                                </div>
+                                <span class="text-lg font-bold text-red-400">$625,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <div class="bg-slate-900 border border-white/10 rounded-3xl overflow-hidden hover:border-red-500/50 transition-all group flex flex-col justify-between">
-                <div class="relative aspect-video bg-slate-950">
-                    <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-950/80 text-[10px] font-bold text-red-400 uppercase font-mono">V10 Twin Turbo</span>
+        <!-- TAB: SPEC MATRIX -->
+        <div id="tab-specs" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 space-y-6">
+            <h2 class="text-3xl font-black text-white text-center">Hypercar Performance Comparison</h2>
+            <div class="glass-panel p-6 rounded-3xl border border-red-500/30 space-y-4 text-xs">
+                <div class="grid grid-cols-3 gap-4 font-bold border-b border-slate-800 pb-3 text-red-400">
+                    <span>Vehicle</span>
+                    <span>0-60 mph</span>
+                    <span>Top Speed</span>
                 </div>
-                <div class="p-6 space-y-3">
-                    <span class="text-2xl font-black text-white font-grotesk">$285,000</span>
-                    <h3 class="text-xl font-bold text-white">Audi R8 V10 Performance Spec</h3>
-                    <div class="grid grid-cols-2 gap-2 text-xs text-slate-400 pt-2 font-mono">
-                        <span>🐎 612 HP</span>
-                        <span>⏱️ 0-60: 3.1s</span>
-                    </div>
+                <div class="grid grid-cols-3 gap-4 text-slate-200">
+                    <span>Ferrari SF90 Stradale</span>
+                    <span>2.0 sec</span>
+                    <span>211 mph</span>
                 </div>
-                <div class="p-6 pt-0">
-                    <button onclick="alert('Inquiry initialized for Audi R8 V10.')" class="w-full py-3 rounded-xl bg-red-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-red-500 transition-colors">Inquire Acquisition</button>
-                </div>
-            </div>
-
-            <div class="bg-slate-900 border border-white/10 rounded-3xl overflow-hidden hover:border-red-500/50 transition-all group flex flex-col justify-between">
-                <div class="relative aspect-video bg-slate-950">
-                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-950/80 text-[10px] font-bold text-red-400 uppercase font-mono">Flat-6 Twin Turbo</span>
-                </div>
-                <div class="p-6 space-y-3">
-                    <span class="text-2xl font-black text-white font-grotesk">$340,000</span>
-                    <h3 class="text-xl font-bold text-white">Porsche 911 GT3 RS Touring</h3>
-                    <div class="grid grid-cols-2 gap-2 text-xs text-slate-400 pt-2 font-mono">
-                        <span>🐎 518 HP</span>
-                        <span>⏱️ 0-60: 3.0s</span>
-                    </div>
-                </div>
-                <div class="p-6 pt-0">
-                    <button onclick="alert('Inquiry initialized for Porsche 911 GT3 RS.')" class="w-full py-3 rounded-xl bg-red-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-red-500 transition-colors">Inquire Acquisition</button>
+                <div class="grid grid-cols-3 gap-4 text-slate-200">
+                    <span>Bugatti Chiron Super Sport</span>
+                    <span>2.2 sec</span>
+                    <span>273 mph</span>
                 </div>
             </div>
+        </div>
 
-            <div class="bg-slate-900 border border-white/10 rounded-3xl overflow-hidden hover:border-red-500/50 transition-all group flex flex-col justify-between">
-                <div class="relative aspect-video bg-slate-950">
-                    <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-950/80 text-[10px] font-bold text-red-400 uppercase font-mono">V8 Hybrid</span>
-                </div>
-                <div class="p-6 space-y-3">
-                    <span class="text-2xl font-black text-white font-grotesk">$620,000</span>
-                    <h3 class="text-xl font-bold text-white">Ferrari SF90 Stradale Assetto</h3>
-                    <div class="grid grid-cols-2 gap-2 text-xs text-slate-400 pt-2 font-mono">
-                        <span>🐎 986 HP</span>
-                        <span>⏱️ 0-60: 2.5s</span>
-                    </div>
-                </div>
-                <div class="p-6 pt-0">
-                    <button onclick="alert('Inquiry initialized for Ferrari SF90 Stradale.')" class="w-full py-3 rounded-xl bg-red-600 text-white font-bold text-xs uppercase tracking-wider hover:bg-red-500 transition-colors">Inquire Acquisition</button>
-                </div>
+        <!-- TAB: FINANCING -->
+        <div id="tab-finance" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 text-center space-y-6">
+            <h2 class="text-3xl font-black text-white">Collector Lease Estimator</h2>
+            <div class="glass-panel p-8 rounded-3xl border border-red-500/30">
+                <p class="text-xs text-slate-400">Tailored 36-month closed-end leases with tax structure optimization.</p>
             </div>
+        </div>
 
+        <!-- TAB: CONTACT -->
+        <div id="tab-contact" class="tab-content hidden py-16 max-w-3xl mx-auto px-6 text-center">
+            <div class="glass-panel p-8 rounded-3xl border border-red-500/30 space-y-4">
+                <h2 class="text-3xl font-black text-white">Private Showroom Visit</h2>
+                <button onclick="alert('Viewing scheduled!')" class="px-8 py-4 rounded-xl bg-red-500 text-white font-bold text-xs uppercase">Schedule Private Tour</button>
+            </div>
         </div>
 
     </main>
 
-    <!-- Compare Matrix Modal -->
-    <div id="compare-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-white/15 rounded-3xl max-w-2xl w-full p-6 relative space-y-6">
-            <button onclick="toggleCompare()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
-            <h3 class="text-xl font-bold text-white font-grotesk">Vehicle Side-by-Side Matrix</h3>
-            <div class="grid grid-cols-2 gap-4 text-xs font-mono">
-                <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
-                    <h4 class="text-sm font-bold text-red-400">Audi R8 V10</h4>
-                    <p class="text-slate-300">Price: $285,000</p>
-                    <p class="text-slate-300">Power: 612 HP</p>
-                    <p class="text-slate-300">Top Speed: 205 mph</p>
-                </div>
-                <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
-                    <h4 class="text-sm font-bold text-red-400">Ferrari SF90</h4>
-                    <p class="text-slate-300">Price: $620,000</p>
-                    <p class="text-slate-300">Power: 986 HP</p>
-                    <p class="text-slate-300">Top Speed: 211 mph</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <footer class="mt-20 border-t border-red-500/20 bg-slate-950/90 py-10 text-xs text-center text-slate-400">
+        <p>© 2026 AutoVault Exotic Motors. All Rights Reserved.</p>
+    </footer>
 
     <script>
         lucide.createIcons();
-        function toggleCompare() {
-            document.getElementById('compare-modal').classList.toggle('hidden');
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Three.js Car Wireframe Box
+        window.addEventListener('load', () => {
+            const container = document.getElementById('three-car');
+            if (!container) return;
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            const geo = new THREE.BoxGeometry(3.5, 1.2, 2);
+            const mat = new THREE.MeshBasicMaterial({ color: 0xEF4444, wireframe: true });
+            const box = new THREE.Mesh(geo, mat);
+            scene.add(box);
+
+            camera.position.z = 5;
+            function animate() {
+                requestAnimationFrame(animate);
+                box.rotation.y += 0.008;
+                renderer.render(scene, camera);
+            }
+            animate();
+        });
     </script>
 </body>
 </html>
