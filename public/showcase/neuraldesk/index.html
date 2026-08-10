@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuralDesk | Next-Gen AI Workspace & Agent Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #05070A; color: #F8FAFC; }
+        .font-mono { font-family: 'Fira Code', monospace; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased h-screen flex flex-col overflow-hidden">
+
+    <!-- Top Header -->
+    <header class="h-14 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md px-4 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-3">
+            <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-xs text-slate-950">ND</div>
+            <span class="font-extrabold text-sm tracking-tight text-white">Neural<span class="text-cyan-400">Desk</span> <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">v2.4</span></span>
+        </div>
+
+        <div class="flex items-center gap-4 text-xs">
+            <span class="hidden sm:inline text-slate-400 font-mono">Tokens: <strong class="text-cyan-300">142,500</strong> / 250k</span>
+            <a href="/#projects" class="text-slate-400 hover:text-white flex items-center gap-1">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
+            </a>
+        </div>
+    </header>
+
+    <!-- Workspace Layout -->
+    <div class="flex-1 flex overflow-hidden">
+        
+        <!-- Sidebar -->
+        <aside class="w-64 border-r border-slate-800 bg-slate-900/40 p-3 space-y-4 hidden md:flex flex-col justify-between shrink-0">
+            <div class="space-y-3">
+                <button onclick="newChat()" class="w-full py-2.5 px-3 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center gap-2 hover:bg-cyan-400">
+                    <i data-lucide="plus" class="w-4 h-4"></i> New AI Session
+                </button>
+
+                <div class="space-y-1 text-xs text-slate-400">
+                    <div class="px-2 py-1.5 rounded-lg bg-slate-800/60 text-white font-medium flex items-center gap-2">
+                        <i data-lucide="message-square" class="w-4 h-4 text-cyan-400"></i> Code Refactoring Agent
+                    </div>
+                    <div class="px-2 py-1.5 rounded-lg hover:bg-slate-800/40 cursor-pointer flex items-center gap-2">
+                        <i data-lucide="file-text" class="w-4 h-4 text-slate-500"></i> PDF Document Summarizer
+                    </div>
+                    <div class="px-2 py-1.5 rounded-lg hover:bg-slate-800/40 cursor-pointer flex items-center gap-2">
+                        <i data-lucide="image" class="w-4 h-4 text-slate-500"></i> Imagen 3 Studio
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-3 rounded-2xl bg-slate-900 border border-slate-800 text-[11px] space-y-1">
+                <span class="text-slate-400 font-mono">Active Model:</span>
+                <span class="text-cyan-300 font-bold block">Gemini 1.5 Pro (1M Context)</span>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="flex-1 flex flex-col justify-between p-4 sm:p-6 overflow-hidden bg-slate-950">
+            
+            <!-- Chat Feed -->
+            <div id="chat-feed" class="flex-1 overflow-y-auto space-y-4 pr-2">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center font-bold text-xs shrink-0">AI</div>
+                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-xs text-slate-200 leading-relaxed max-w-2xl space-y-2">
+                        <p>Hello! I am your NeuralDesk AI workspace assistant. How can I assist your engineering pipeline today?</p>
+                        <div class="p-3 rounded-xl bg-slate-950 font-mono text-[11px] text-cyan-300 border border-slate-800">
+                            Available capabilities: Python code generation, Gemini API streaming, multi-file analysis, and JSON schema parsing.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Box -->
+            <div class="pt-4 border-t border-slate-800/80 space-y-2">
+                <div class="p-2 rounded-2xl bg-slate-900 border border-slate-800 flex items-center gap-2">
+                    <input id="prompt-input" type="text" placeholder="Type a prompt for NeuralDesk..." class="bg-transparent border-none outline-none text-xs text-white px-3 w-full placeholder-slate-500">
+                    <button onclick="sendPrompt()" class="px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs hover:bg-cyan-400">Send</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function sendPrompt() {
+            const input = document.getElementById('prompt-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const feed = document.getElementById('chat-feed');
+            feed.innerHTML += `
+                <div class="flex items-start justify-end gap-3">
+                    <div class="p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-xs text-cyan-200 leading-relaxed max-w-xl">${text}</div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center font-bold text-xs shrink-0">AI</div>
+                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-xs text-slate-200 leading-relaxed max-w-2xl">
+                        NeuralDesk processing response for "${text}" using Gemini 1.5 Pro engine... Execution complete.
+                    </div>
+                </div>
+            `;
+            input.value = '';
+            feed.scrollTop = feed.scrollHeight;
+        }
+
+        function newChat() {
+            document.getElementById('chat-feed').innerHTML = `
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center font-bold text-xs shrink-0">AI</div>
+                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-xs text-slate-200 leading-relaxed max-w-2xl">New session started. How can NeuralDesk help you?</div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
