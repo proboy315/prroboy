@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeCart | Haute Horlogerie & Luxury Timepieces</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            400: '#D4AF37',
+                            500: '#AA7C11',
+                            600: '#8A6208',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #08080A; color: #E2E8F0; }
+        h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
+        .gold-gradient { background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #996515 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-border { border-image: linear-gradient(to bottom, #D4AF37, rgba(212, 175, 55, 0.2)) 1; }
+    </style>
+</head>
+<body class="bg-[#090A0F] text-slate-200 antialiased selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-[#090A0F]/80 backdrop-blur-xl border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-full border border-amber-500/40 flex items-center justify-center bg-amber-500/10 text-amber-400 font-cinzel font-bold text-xl">L</span>
+                <span class="font-cinzel text-xl font-bold tracking-widest text-white">LUXECART</span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-widest text-slate-300">
+                <a href="#collection" class="hover:text-amber-400 transition-colors">Timepieces</a>
+                <a href="#craft" class="hover:text-amber-400 transition-colors">Craftsmanship</a>
+                <a href="#signature" class="hover:text-amber-400 transition-colors">Signature Edition</a>
+                <a href="#heritage" class="hover:text-amber-400 transition-colors">Our Heritage</a>
+            </nav>
+
+            <div class="flex items-center gap-5">
+                <button onclick="toggleCart()" class="relative p-2.5 rounded-full border border-white/10 bg-white/5 hover:border-amber-400/50 transition-all text-amber-400 cursor-pointer">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-amber-500 text-slate-950 text-[10px] font-bold flex items-center justify-center">0</span>
+                </button>
+                <a href="/#projects" class="text-xs font-medium text-slate-400 hover:text-white flex items-center gap-1">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Portfolio
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden border-b border-white/10">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-900/20 via-[#090A0F] to-[#090A0F] pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <div class="lg:col-span-6 space-y-6 text-left">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold tracking-wider uppercase">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    Limited Masterpiece Series
+                </span>
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                    TIME, <br/><span class="gold-gradient">REDEFINED.</span>
+                </h1>
+                <p class="text-slate-400 text-sm sm:text-base max-w-lg leading-relaxed">
+                    Hand-assembled in Geneva. Engineered with tourbillon mechanics, sapphire crystal casing, and 18K rose gold bezels. Experience pure horological prestige.
+                </p>
+                <div class="flex flex-wrap items-center gap-4 pt-4">
+                    <a href="#collection" class="px-8 py-4 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-xs uppercase tracking-widest shadow-xl shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-105 transition-all">
+                        Explore Collection
+                    </a>
+                    <button onclick="openModal('Chronos Tourbillon 18K', '$48,500', 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=80')" class="px-8 py-4 rounded-full bg-white/5 border border-white/15 hover:border-amber-400/50 text-white font-semibold text-xs uppercase tracking-widest transition-all">
+                        Quick Preview
+                    </button>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6 relative flex justify-center">
+                <div class="w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-amber-500/10 blur-3xl absolute -z-10"></div>
+                <div class="relative p-6 rounded-3xl bg-slate-900/60 border border-white/10 backdrop-blur-2xl shadow-2xl max-w-md w-full text-center group">
+                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=80" alt="Chronos Tourbillon 18K" class="w-full h-80 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700">
+                    <div class="mt-6 flex items-center justify-between text-left">
+                        <div>
+                            <span class="text-[10px] text-amber-400 font-mono tracking-widest uppercase">Signature Edition</span>
+                            <h3 class="text-lg font-bold text-white font-cinzel">Chronos Tourbillon 18K</h3>
+                        </div>
+                        <span class="text-xl font-bold text-amber-400 font-cinzel">$48,500</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection Grid -->
+    <section id="collection" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Haute Horlogerie</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white font-cinzel">The Curated Collection</h2>
+            <div class="w-16 h-0.5 bg-amber-500/50 mx-auto"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="product-grid">
+            <!-- Rendered dynamically -->
+        </div>
+    </section>
+
+    <!-- Craftsmanship Section -->
+    <section id="craft" class="py-24 bg-slate-950 border-y border-white/10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Unrivaled Precision</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white font-cinzel">Crafted by Master Watchmakers in Geneva</h2>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    Every LuxeCart piece requires over 420 hours of manual assembly by Swiss artisans. From anti-reflective double-domed sapphire crystal to hand-polished movement bridges.
+                </p>
+                <ul class="space-y-3 text-xs text-slate-300">
+                    <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-amber-400"></i> COSC Certified Chronometer Certification</li>
+                    <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-amber-400"></i> 100m Water Resistance & Helium Escape Valve</li>
+                    <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-amber-400"></i> 72-Hour Power Reserve Automatic Mechanical Core</li>
+                </ul>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Horology craftsmanship" class="rounded-2xl border border-white/10 h-64 w-full object-cover">
+                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Watch movement" class="rounded-2xl border border-white/10 h-64 w-full object-cover mt-6">
+            </div>
+        </div>
+    </section>
+
+    <!-- Side Cart Drawer -->
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-[#0D0E15] border-l border-white/15 p-6 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
+        <div>
+            <div class="flex items-center justify-between pb-6 border-b border-white/10">
+                <h3 class="text-lg font-bold text-white font-cinzel flex items-center gap-2">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-amber-400"></i>
+                    Your Shopping Bag
+                </h3>
+                <button onclick="toggleCart()" class="p-2 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div id="cart-items" class="py-6 space-y-4 max-h-[60vh] overflow-y-auto">
+                <p id="empty-cart-msg" class="text-xs text-slate-500 text-center py-8">Your luxury shopping bag is currently empty.</p>
+            </div>
+        </div>
+        <div class="pt-6 border-t border-white/10 space-y-4">
+            <div class="flex justify-between text-sm font-bold text-white">
+                <span>Subtotal</span>
+                <span id="cart-subtotal" class="text-amber-400 font-cinzel">$0</span>
+            </div>
+            <button onclick="alert('Demo Checkout initialized. In production, this connects to Stripe Luxury API.')" class="w-full py-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-xs uppercase tracking-widest hover:opacity-90 transition-opacity">
+                Proceed to Secure Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal Quick View -->
+    <div id="modal-view" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-white/15 rounded-3xl max-w-lg w-full p-6 relative space-y-6">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <img id="modal-img" src="" class="w-full h-64 object-cover rounded-2xl border border-white/10">
+            <div>
+                <span class="text-[10px] text-amber-400 font-mono tracking-widest uppercase">Exclusive Masterpiece</span>
+                <h3 id="modal-title" class="text-xl font-bold text-white font-cinzel"></h3>
+                <p id="modal-price" class="text-2xl font-bold text-amber-400 font-cinzel mt-2"></p>
+                <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+                    Includes official Swiss Chronometer certification, bespoke wooden display box, and global 5-year luxury warranty.
+                </p>
+            </div>
+            <button id="modal-add-btn" class="w-full py-3.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs uppercase tracking-widest hover:bg-amber-400 transition-colors">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const products = [
+            { id: 1, name: "Chronos Tourbillon 18K", price: 48500, img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80", tag: "Tourbillon" },
+            { id: 2, name: "Aethelgard Moonphase", price: 32000, img: "https://images.unsplash.com/photo-1539874754764-5a96559165b0?auto=format&fit=crop&w=800&q=80", tag: "Moonphase" },
+            { id: 3, name: "Vanguard Rose Gold", price: 29400, img: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80", tag: "Chronograph" },
+            { id: 4, name: "Obsidian Skeleton Automatic", price: 54000, img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80", tag: "Skeleton" },
+            { id: 5, name: "Royal Oceanic Diver 300M", price: 18500, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80", tag: "Diver" },
+            { id: 6, name: "Solstice Platinum Limited", price: 62000, img: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=800&q=80", tag: "Limited 1/50" }
+        ];
+
+        let cart = [];
+
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = products.map(p => `
+                <div class="bg-slate-900/60 border border-white/10 rounded-3xl p-5 hover:border-amber-400/40 transition-all flex flex-col justify-between group">
+                    <div class="relative overflow-hidden rounded-2xl mb-4 bg-slate-950 aspect-square">
+                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-slate-950/80 border border-white/10 text-[10px] font-mono text-amber-400 uppercase tracking-widest backdrop-blur-md">${p.tag}</span>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-base font-bold text-white font-cinzel">${p.name}</h3>
+                        <p class="text-sm font-bold text-amber-400 font-cinzel">$${p.price.toLocaleString()}</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 mt-4">
+                        <button onclick="addToCart(${p.id})" class="py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold text-xs hover:bg-amber-500 hover:text-slate-950 transition-all">Add to Cart</button>
+                        <button onclick="openModal('${p.name}', '$${p.price.toLocaleString()}', '${p.img}')" class="py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 font-semibold text-xs hover:bg-white/10 transition-all">Details</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            updateCartUI();
+            toggleCart(true);
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const itemsContainer = document.getElementById('cart-items');
+            const subtotalEl = document.getElementById('cart-subtotal');
+
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = '<p class="text-xs text-slate-500 text-center py-8">Your luxury shopping bag is currently empty.</p>';
+                subtotalEl.innerText = '$0';
+                return;
+            }
+
+            let total = 0;
+            itemsContainer.innerHTML = cart.map((item, index) => {
+                total += item.price;
+                return `
+                    <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-900 border border-white/10">
+                        <div class="flex items-center gap-3">
+                            <img src="${item.img}" class="w-12 h-12 rounded-xl object-cover">
+                            <div>
+                                <h4 class="text-xs font-bold text-white font-cinzel">${item.name}</h4>
+                                <span class="text-xs text-amber-400 font-cinzel">$${item.price.toLocaleString()}</span>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-slate-500 hover:text-red-400 text-xs p-1">Remove</button>
+                    </div>
+                `;
+            }).join('');
+
+            subtotalEl.innerText = '$' + total.toLocaleString();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCart(forceOpen = false) {
+            const drawer = document.getElementById('cart-drawer');
+            if (forceOpen) {
+                drawer.classList.remove('translate-x-full');
+            } else {
+                drawer.classList.toggle('translate-x-full');
+            }
+        }
+
+        function openModal(title, price, img) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-price').innerText = price;
+            document.getElementById('modal-img').src = img;
+            document.getElementById('modal-view').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-view').classList.add('hidden');
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>
