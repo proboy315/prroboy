@@ -3,64 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stayora | Luxury Hospitality & Private Suites</title>
+    <title>Stayora | Boutique Luxury Hotels & Private Sanctuaries</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0B0E14; color: #F8FAFC; }
-        .font-serif { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0E0A08; color: #F8FAFC; overflow-x: hidden; }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        .gold-gradient { background: linear-gradient(135deg, #FDE68A 0%, #D97706 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-panel { background: rgba(26, 18, 14, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(217, 119, 6, 0.25); }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased min-h-screen">
+<body class="bg-[#0E0A08] text-amber-50 min-h-screen antialiased selection:bg-amber-500 selection:text-slate-950">
 
-    <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-xl border-b border-white/10">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#0E0A08]/90 backdrop-blur-xl border-b border-amber-500/20">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3">
-                <span class="font-serif text-2xl font-bold tracking-widest text-white">STAYORA</span>
+            <a href="#" onclick="showTab('home')" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full border border-amber-500/40 flex items-center justify-center bg-amber-500/10 text-amber-400 font-serif font-bold text-xl">S</div>
+                <span class="font-serif text-2xl font-black tracking-widest text-white">STAYORA</span>
             </a>
 
-            <div class="flex items-center gap-4 text-xs font-bold">
-                <a href="/#projects" class="text-slate-400 hover:text-white flex items-center gap-1">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
+            <nav class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-amber-200/80">
+                <button onclick="showTab('home')" class="hover:text-amber-400 transition-colors cursor-pointer text-amber-400">Sanctuaries</button>
+                <button onclick="showTab('suites')" class="hover:text-amber-400 transition-colors cursor-pointer">Luxury Suites</button>
+                <button onclick="showTab('concierge')" class="hover:text-amber-400 transition-colors cursor-pointer">Private Butler</button>
+                <button onclick="showTab('contact')" class="hover:text-amber-400 transition-colors cursor-pointer">Reservations</button>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <button onclick="showTab('contact')" class="px-5 py-2.5 rounded-full bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider hover:bg-amber-300 transition-all cursor-pointer">
+                    Reserve Suite
+                </button>
+                <a href="/#showcase" class="text-xs text-amber-300 hover:text-white flex items-center gap-1 hidden sm:flex">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Showcase
                 </a>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-12 space-y-12">
-        <div class="text-center max-w-2xl mx-auto space-y-4">
-            <span class="text-xs text-amber-400 font-mono uppercase tracking-widest">5-Star Luxury Sanctuaries</span>
-            <h1 class="text-4xl font-bold text-white font-serif">Unparalleled Serenity</h1>
+    <main class="pt-20">
+
+        <!-- TAB: HOME -->
+        <div id="tab-home" class="tab-content">
+            <section class="relative min-h-[85vh] flex items-center justify-center border-b border-amber-500/20 py-16 overflow-hidden">
+                <div id="three-suite" class="absolute inset-0 pointer-events-none opacity-60 z-0"></div>
+                <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-widest">
+                            ✨ Michelin-Starred Boutique Hospitality
+                        </span>
+                        <h1 class="text-4xl sm:text-7xl font-black text-white tracking-tight leading-tight font-serif">
+                            ELEGANCE, <br/><span class="gold-gradient">REDEFINED.</span>
+                        </h1>
+                        <p class="text-amber-100/80 text-sm sm:text-base max-w-xl leading-relaxed">
+                            Overwater bungalows in Bora Bora, Amalfi Coast cliffside villas, and Paris Ritz historic penthouses.
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="glass-panel p-6 rounded-3xl space-y-4 max-w-md w-full border border-amber-500/30">
+                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" class="w-full h-72 object-cover rounded-2xl">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-bold text-white text-lg font-serif">Royal Ocean Bungalow</h3>
+                                    <p class="text-xs text-amber-200/70">Bora Bora · Private Infinity Pool</p>
+                                </div>
+                                <span class="text-lg font-bold text-amber-400">$3,800 / night</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-slate-900 border border-white/10 rounded-3xl overflow-hidden p-6 space-y-4">
-                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded-2xl">
-                <span class="text-xl font-bold text-amber-400 font-serif">$850 / night</span>
-                <h3 class="text-lg font-bold text-white font-serif">Grand Deluxe Ocean Suite</h3>
-                <p class="text-xs text-slate-400">King bed, private plunge pool, 24/7 butler service.</p>
-                <button onclick="alert('Reservation request initiated!')" class="w-full py-3 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs uppercase">Reserve Suite</button>
-            </div>
-            <div class="bg-slate-900 border border-white/10 rounded-3xl overflow-hidden p-6 space-y-4">
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded-2xl">
-                <span class="text-xl font-bold text-amber-400 font-serif">$1,450 / night</span>
-                <h3 class="text-lg font-bold text-white font-serif">Royal Overwater Villa</h3>
-                <p class="text-xs text-slate-400">Glass-bottom floor, private deck, spa included.</p>
-                <button onclick="alert('Reservation request initiated!')" class="w-full py-3 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs uppercase">Reserve Suite</button>
-            </div>
-            <div class="bg-slate-900 border border-white/10 rounded-3xl overflow-hidden p-6 space-y-4">
-                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded-2xl">
-                <span class="text-xl font-bold text-amber-400 font-serif">$2,200 / night</span>
-                <h3 class="text-lg font-bold text-white font-serif">Presidential Penthouse Sanctuary</h3>
-                <p class="text-xs text-slate-400">Panoramas, helipad access, private chef.</p>
-                <button onclick="alert('Reservation request initiated!')" class="w-full py-3 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs uppercase">Reserve Suite</button>
+        <!-- TAB: SUITES -->
+        <div id="tab-suites" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 space-y-6">
+            <h2 class="text-3xl font-extrabold text-white font-serif text-center">Master Suite Collection</h2>
+            <div class="glass-panel p-6 rounded-3xl border border-amber-500/30 space-y-4">
+                <p class="text-xs text-amber-200/80">Every reservation includes 24/7 dedicated butler service and private airport transfer.</p>
             </div>
         </div>
+
+        <!-- TAB: CONCIERGE -->
+        <div id="tab-concierge" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 text-center space-y-6">
+            <h2 class="text-3xl font-extrabold text-white font-serif">Private Butler & Yacht Charters</h2>
+            <p class="text-xs text-amber-200/80">In-suite Michelin dining and helicopter transfers.</p>
+        </div>
+
+        <!-- TAB: RESERVATIONS -->
+        <div id="tab-contact" class="tab-content hidden py-16 max-w-3xl mx-auto px-6 text-center">
+            <div class="glass-panel p-8 rounded-3xl border border-amber-500/30 space-y-4">
+                <h2 class="text-3xl font-extrabold text-white font-serif">Suite Reservation Desk</h2>
+                <button onclick="alert('Reservation inquiry submitted!')" class="px-8 py-4 bg-amber-400 text-slate-950 font-bold text-xs uppercase rounded-xl">Confirm Dates</button>
+            </div>
+        </div>
+
     </main>
+
+    <footer class="mt-20 border-t border-amber-500/20 bg-slate-950/90 py-10 text-xs text-center text-amber-200/60">
+        <p>© 2026 Stayora Luxury Hotels & Resorts SA. All Rights Reserved.</p>
+    </footer>
 
     <script>
         lucide.createIcons();
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Three.js Floorplan Cube
+        window.addEventListener('load', () => {
+            const container = document.getElementById('three-suite');
+            if (!container) return;
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            const geo = new THREE.BoxGeometry(3, 1, 3);
+            const mat = new THREE.MeshBasicMaterial({ color: 0xD97706, wireframe: true });
+            const box = new THREE.Mesh(geo, mat);
+            scene.add(box);
+
+            camera.position.z = 5;
+            function animate() {
+                requestAnimationFrame(animate);
+                box.rotation.y += 0.007;
+                renderer.render(scene, camera);
+            }
+            animate();
+        });
     </script>
 </body>
 </html>
