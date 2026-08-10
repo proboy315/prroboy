@@ -3,185 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitForge | High Performance Fitness & Workout Analytics</title>
+    <title>FitForge | Athletic Performance Intelligence</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #090A0F; color: #F8FAFC; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #080E1A; color: #F1F5F9; overflow-x: hidden; }
+        .cyan-gradient { background: linear-gradient(135deg, #22D3EE 0%, #06B6D4 50%, #3B82F6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(16px); border: 1px solid rgba(6, 182, 212, 0.25); }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased min-h-screen">
+<body class="bg-[#080E1A] text-slate-100 min-h-screen antialiased selection:bg-cyan-500 selection:text-slate-950">
 
-    <!-- Top Header -->
-    <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-xl border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-slate-950 font-black text-lg">FF</div>
-                <span class="font-extrabold text-xl tracking-tight text-white">Fit<span class="text-emerald-400">Forge</span></span>
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#080E1A]/85 backdrop-blur-xl border-b border-cyan-500/20">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" onclick="showTab('home')" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-400 to-blue-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-cyan-500/30">FF</div>
+                <span class="font-black text-2xl tracking-tight text-white">FIT<span class="text-cyan-400">FORGE</span></span>
             </a>
 
-            <div class="flex items-center gap-4 text-xs font-bold">
-                <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5">
-                    🔥 7 Day Streak
-                </span>
-                <a href="/#projects" class="text-slate-400 hover:text-white flex items-center gap-1">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
+            <nav class="hidden md:flex items-center gap-8 text-xs font-extrabold uppercase tracking-widest text-slate-300">
+                <button onclick="showTab('home')" class="hover:text-cyan-400 transition-colors cursor-pointer text-cyan-400">Dashboard</button>
+                <button onclick="showTab('calories')" class="hover:text-cyan-400 transition-colors cursor-pointer">Macro Analytics</button>
+                <button onclick="showTab('routines')" class="hover:text-cyan-400 transition-colors cursor-pointer">Workout Routines</button>
+                <button onclick="showTab('trainers')" class="hover:text-cyan-400 transition-colors cursor-pointer">Pro Trainers</button>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <button onclick="showTab('routines')" class="px-5 py-2.5 rounded-xl bg-cyan-400 text-slate-950 font-black text-xs uppercase tracking-wider hover:bg-cyan-300 transition-all cursor-pointer">
+                    Start Workout
+                </button>
+                <a href="/#showcase" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 hidden sm:flex">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Showcase
                 </a>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-8 space-y-8">
-        
-        <!-- Greeting Banner -->
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-6 rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900 to-emerald-950/40 border border-slate-800">
-            <div>
-                <h1 class="text-2xl sm:text-3xl font-black text-white">Good morning, Alex 👋</h1>
-                <p class="text-xs text-slate-400 mt-1">You are 82% ahead of your weekly athletic training goal!</p>
-            </div>
-            <button onclick="logWorkout()" class="px-6 py-3 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-xs uppercase tracking-wider hover:bg-emerald-400 transition-all cursor-pointer">
-                + Log Workout Session
-            </button>
+    <main class="pt-20">
+
+        <!-- TAB: HOME / DASHBOARD -->
+        <div id="tab-home" class="tab-content">
+            <section class="relative min-h-[85vh] flex items-center justify-center border-b border-cyan-500/20 py-16 overflow-hidden">
+                <div id="three-ring" class="absolute inset-0 pointer-events-none opacity-70 z-0"></div>
+                <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-extrabold uppercase tracking-wider">
+                            ⚡ AI Athletic Telemetry Engine
+                        </span>
+                        <h1 class="text-4xl sm:text-7xl font-black text-white tracking-tight leading-tight">
+                            FORGE YOUR <br/><span class="cyan-gradient">PEAK PERFORMANCE.</span>
+                        </h1>
+                        <p class="text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed">
+                            Monitor daily caloric expenditure, track heart rate velocity, and craft hyper-targeted hypertrophy routines.
+                        </p>
+
+                        <div class="grid grid-cols-3 gap-4 pt-4 max-w-lg">
+                            <div class="glass-panel p-4 rounded-2xl text-center">
+                                <div class="text-2xl font-black text-cyan-400">2,840</div>
+                                <div class="text-[10px] text-slate-400 font-bold uppercase mt-1">Burned kcal</div>
+                            </div>
+                            <div class="glass-panel p-4 rounded-2xl text-center">
+                                <div class="text-2xl font-black text-blue-400">184g</div>
+                                <div class="text-[10px] text-slate-400 font-bold uppercase mt-1">Protein Target</div>
+                            </div>
+                            <div class="glass-panel p-4 rounded-2xl text-center">
+                                <div class="text-2xl font-black text-emerald-400">14 Days</div>
+                                <div class="text-[10px] text-slate-400 font-bold uppercase mt-1">Workout Streak</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="glass-panel p-6 rounded-3xl space-y-6 max-w-md w-full border border-cyan-500/30">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-extrabold text-white text-lg">Daily Activity Ring</h3>
+                                <span class="text-xs font-bold text-cyan-400">88% Goal</span>
+                            </div>
+                            <div class="w-48 h-48 mx-auto relative flex items-center justify-center">
+                                <svg class="w-full h-full transform -rotate-90">
+                                    <circle cx="96" cy="96" r="80" stroke="currentColor" stroke-width="16" class="text-slate-800" fill="transparent" />
+                                    <circle cx="96" cy="96" r="80" stroke="currentColor" stroke-width="16" class="text-cyan-400" stroke-dasharray="502" stroke-dashoffset="60" stroke-linecap="round" fill="transparent" />
+                                </svg>
+                                <div class="absolute text-center">
+                                    <span class="text-3xl font-black text-white">2,840</span>
+                                    <span class="block text-[10px] font-bold text-slate-400 uppercase">Target 3,200</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <!-- Metric Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
-                <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block">Calories Burned</span>
-                <div class="flex items-baseline gap-2">
-                    <span class="text-2xl font-black text-white">680</span>
-                    <span class="text-xs text-slate-500">/ 850 kcal</span>
-                </div>
-                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                    <div class="bg-emerald-400 h-full w-[80%] rounded-full"></div>
-                </div>
-            </div>
-
-            <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
-                <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block">Daily Steps</span>
-                <div class="flex items-baseline gap-2">
-                    <span class="text-2xl font-black text-white">10,420</span>
-                    <span class="text-xs text-slate-500">/ 12,000</span>
-                </div>
-                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                    <div class="bg-cyan-400 h-full w-[86%] rounded-full"></div>
-                </div>
-            </div>
-
-            <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
-                <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block">Active Minutes</span>
-                <div class="flex items-baseline gap-2">
-                    <span class="text-2xl font-black text-white">45</span>
-                    <span class="text-xs text-slate-500">/ 60 mins</span>
-                </div>
-                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                    <div class="bg-purple-400 h-full w-[75%] rounded-full"></div>
-                </div>
-            </div>
-
-            <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
-                <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block">Completed Workouts</span>
-                <div class="flex items-baseline gap-2">
-                    <span class="text-2xl font-black text-white">12</span>
-                    <span class="text-xs text-slate-500">this month</span>
-                </div>
-                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                    <div class="bg-amber-400 h-full w-[100%] rounded-full"></div>
+        <!-- TAB: MACRO ANALYTICS -->
+        <div id="tab-calories" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 space-y-8">
+            <div class="glass-panel p-8 rounded-3xl space-y-6 border border-cyan-500/30">
+                <h2 class="text-3xl font-black text-white text-center">Macro Nutrient Balance</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                    <div class="p-4 rounded-2xl bg-slate-900 border border-cyan-500/20 space-y-1">
+                        <span class="text-xs font-bold text-slate-400 uppercase">Protein</span>
+                        <div class="text-2xl font-black text-cyan-400">184 / 200g</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-slate-900 border border-cyan-500/20 space-y-1">
+                        <span class="text-xs font-bold text-slate-400 uppercase">Carbohydrates</span>
+                        <div class="text-2xl font-black text-blue-400">260 / 300g</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-slate-900 border border-cyan-500/20 space-y-1">
+                        <span class="text-xs font-bold text-slate-400 uppercase">Healthy Fats</span>
+                        <div class="text-2xl font-black text-emerald-400">65 / 75g</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Exercises & Achievements Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
-            <!-- Workout Routine -->
-            <div class="lg:col-span-8 space-y-4">
-                <h2 class="text-lg font-bold text-white">Today's Hypertrophy Routine</h2>
-                
-                <div id="exercise-list" class="space-y-3">
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">🏋️</div>
-                            <div>
-                                <h3 class="text-sm font-bold text-white">Barbell Incline Bench Press</h3>
-                                <p class="text-xs text-slate-400">4 Sets × 8 Reps · 85 kg</p>
-                            </div>
-                        </div>
-                        <button onclick="completeEx(this)" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-emerald-500 hover:text-slate-950 font-bold text-xs transition-all">Mark Complete</button>
+        <!-- TAB: ROUTINES -->
+        <div id="tab-routines" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 space-y-6">
+            <h2 class="text-3xl font-black text-white text-center">Hypertrophy Routine Builder</h2>
+            <div class="space-y-4">
+                <div class="glass-panel p-5 rounded-2xl flex items-center justify-between border border-cyan-500/30">
+                    <div>
+                        <h4 class="font-extrabold text-white">Barbell Bench Press</h4>
+                        <p class="text-xs text-slate-400">4 Sets × 8 Reps · 100 kg</p>
                     </div>
-
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">⚡</div>
-                            <div>
-                                <h3 class="text-sm font-bold text-white">Conventional Deadlift</h3>
-                                <p class="text-xs text-slate-400">5 Sets × 5 Reps · 140 kg</p>
-                            </div>
-                        </div>
-                        <button onclick="completeEx(this)" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-emerald-500 hover:text-slate-950 font-bold text-xs transition-all">Mark Complete</button>
+                    <button onclick="alert('Set logged!')" class="px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-bold text-xs">Log Set</button>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl flex items-center justify-between border border-cyan-500/30">
+                    <div>
+                        <h4 class="font-extrabold text-white">Incline Dumbbell Flyes</h4>
+                        <p class="text-xs text-slate-400">3 Sets × 12 Reps · 32 kg</p>
                     </div>
-
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center font-bold">🏃</div>
-                            <div>
-                                <h3 class="text-sm font-bold text-white">HIIT Sprint Interval</h3>
-                                <p class="text-xs text-slate-400">10 Rounds · 30s Sprint / 30s Rest</p>
-                            </div>
-                        </div>
-                        <button onclick="completeEx(this)" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-emerald-500 hover:text-slate-950 font-bold text-xs transition-all">Mark Complete</button>
-                    </div>
+                    <button onclick="alert('Set logged!')" class="px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-bold text-xs">Log Set</button>
                 </div>
             </div>
+        </div>
 
-            <!-- Achievements Sidebar -->
-            <div class="lg:col-span-4 space-y-4">
-                <h2 class="text-lg font-bold text-white">Earned Badges & Streaks</h2>
-                
-                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-lg">🔥</div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white">7 Day Consistency Streak</h3>
-                            <p class="text-xs text-slate-400">Logged consecutive sessions</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg">🏆</div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white">Century Club</h3>
-                            <p class="text-xs text-slate-400">100+ total workout hours recorded</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-lg">⚡</div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white">PR Crusher</h3>
-                            <p class="text-xs text-slate-400">New personal record on Deadlift</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <!-- TAB: TRAINERS -->
+        <div id="tab-trainers" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 text-center space-y-6">
+            <h2 class="text-3xl font-black text-white">Certified Elite Coaches</h2>
+            <p class="text-xs text-slate-400">Connect with Olympic powerlifters and IFBB masters.</p>
         </div>
 
     </main>
 
+    <footer class="mt-20 border-t border-cyan-500/20 bg-slate-950/90 py-10 text-xs text-center text-slate-400">
+        <p>© 2026 FitForge Athletic Technologies. All Rights Reserved.</p>
+    </footer>
+
     <script>
         lucide.createIcons();
 
-        function logWorkout() {
-            alert('Workout log entry created! Added 450 kcal to your progress.');
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function completeEx(btn) {
-            btn.classList.remove('bg-slate-800', 'text-slate-300');
-            btn.classList.add('bg-emerald-500', 'text-slate-950');
-            btn.innerText = 'Completed ✓';
-        }
+        // Three.js Pulsing Torus
+        window.addEventListener('load', () => {
+            const container = document.getElementById('three-ring');
+            if (!container) return;
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            const geo = new THREE.TorusGeometry(2.5, 0.15, 16, 100);
+            const mat = new THREE.MeshBasicMaterial({ color: 0x22D3EE, wireframe: true });
+            const ring = new THREE.Mesh(geo, mat);
+            scene.add(ring);
+
+            camera.position.z = 5;
+            function animate() {
+                requestAnimationFrame(animate);
+                ring.rotation.x += 0.008;
+                ring.rotation.y += 0.012;
+                renderer.render(scene, camera);
+            }
+            animate();
+        });
     </script>
 </body>
 </html>
