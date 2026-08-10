@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HireFlow | AI-Powered Recruitment & Candidate Match</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0A0D14; color: #F8FAFC; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen">
+
+    <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-xl border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-blue-500 flex items-center justify-center text-white font-bold text-sm">HF</div>
+                <span class="font-extrabold text-xl tracking-tight text-white">Hire<span class="text-blue-400">Flow</span></span>
+            </a>
+
+            <div class="flex items-center gap-4 text-xs font-bold">
+                <a href="/#projects" class="text-slate-400 hover:text-white flex items-center gap-1">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12 space-y-8">
+        <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-7 space-y-3">
+                <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold">Featured Career Opportunity</span>
+                <h1 class="text-2xl font-bold text-white">Senior Staff React & Full-Stack Architect</h1>
+                <p class="text-xs text-slate-400">San Francisco, CA · Remote · $180,000 - $220,000 / year</p>
+            </div>
+            
+            <div class="lg:col-span-5 p-5 rounded-2xl bg-slate-950 border border-blue-500/30 text-center space-y-2">
+                <span class="text-3xl font-black text-blue-400">92% Match</span>
+                <p class="text-xs text-slate-400">Your profile matches 11 out of 12 required tech stack tags for this role!</p>
+                <button onclick="alert('Application submitted via HireFlow Instant Match!')" class="w-full py-3 rounded-xl bg-blue-500 text-slate-950 font-bold text-xs uppercase">1-Click Apply</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
