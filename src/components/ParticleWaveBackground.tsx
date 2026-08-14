@@ -1,10 +1,21 @@
 import React, { useEffect, useRef } from "react";
 
-interface CarbonMeshProps {
+interface ParticleWaveBackgroundProps {
   ecoMode?: boolean;
 }
 
-export const ParticleWaveBackground: React.FC<CarbonMeshProps> = ({ ecoMode = false }) => {
+interface Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  alpha: number;
+  baseAlpha: number;
+  color: string;
+}
+
+export const ParticleWaveBackground: React.FC<ParticleWaveBackgroundProps> = ({ ecoMode = false }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -32,92 +43,157 @@ export const ParticleWaveBackground: React.FC<CarbonMeshProps> = ({ ecoMode = fa
     };
 
     const handleResize = () => {
+      if (!canvas) return;
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-      renderMesh();
+      initParticles();
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     window.addEventListener("resize", handleResize);
 
-    // Static micro-mesh grid rendering matching dark carbon silk reference image
-    const renderMesh = () => {
-      ctx.clearRect(0, 0, width, height);
+    // Color palette for particles and glowing waves
+    const colors = [
+      "rgba(56, 189, 248, ",   // Cyan
+      "rgba(52, 211, 153, ",   // Emerald
+      "rgba(192, 132, 252, ",  // Purple
+      "rgba(251, 191, 36, "    // Amber
+    ];
 
-      // Deep matte dark base
-      ctx.fillStyle = "#030508";
+    let particles: Particle[] = [];
+    const particleCount = Math.min(120, Math.floor((width * height) / 12000));
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        const colorPrefix = colors[Math.floor(Math.random() * colors.length)];
+        const baseAlpha = Math.random() * 0.5 + 0.2;
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.8,
+          vy: (Math.random() - 0.5) * 0.8,
+          size: Math.random() * 2.5 + 1,
+          alpha: baseAlpha,
+          baseAlpha: baseAlpha,
+          color: colorPrefix
+        });
+      }
+    }
+
+    initParticles();
+
+    let step = 0;
+    let animId: number;
+
+    const render = () => {
+      step += 0.015;
+      mouseX += (targetMouseX - mouseX) * 0.08;
+      mouseY += (targetMouseY - mouseY) * 0.08;
+
+      // Dark background with subtle gradient
+      ctx.fillStyle = "#030712";
       ctx.fillRect(0, 0, width, height);
 
-      // Draw subtle diagonal silk sheen gradient
-      const sheenGrad = ctx.createLinearGradient(0, 0, width, height);
-      sheenGrad.addColorStop(0, "rgba(15, 23, 42, 0.8)");
-      sheenGrad.addColorStop(0.35, "rgba(6, 11, 20, 0.95)");
-      sheenGrad.addColorStop(0.7, "rgba(10, 16, 28, 0.85)");
-      sheenGrad.addColorStop(1, "rgba(3, 5, 8, 0.98)");
-      ctx.fillStyle = sheenGrad;
+      // Radial ambient light follow cursor
+      const radGrad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 600);
+      radGrad.addColorStop(0, "rgba(56, 189, 248, 0.08)");
+      radGrad.addColorStop(0.5, "rgba(168, 85, 247, 0.04)");
+      radGrad.addColorStop(1, "rgba(3, 7, 18, 0)");
+      ctx.fillStyle = radGrad;
       ctx.fillRect(0, 0, width, height);
 
-      // Draw micro-mesh 3D grid matrix
-      const gridSize = 12; // 12px carbon matrix squares
-      const cols = Math.ceil(width / gridSize);
-      const rows = Math.ceil(height / gridSize);
+      // Render 3D Flowing Glowing Sine Waves across screen
+      const waveCount = 4;
+      for (let w = 0; w < waveCount; w++) {
+        ctx.beginPath();
+        const waveColor = colors[w % colors.length];
+        ctx.strokeStyle = `${waveColor}0.15)`;
+        ctx.lineWidth = 1.8;
 
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const x = c * gridSize;
-          const y = r * gridSize;
+        for (let x = 0; x < width; x += 15) {
+          const y =
+            height / 2 +
+            Math.sin(x * 0.003 + step + w * 1.5) * 60 * (w + 1) * 0.5 +
+            Math.cos(x * 0.0015 - step * 0.8) * 40 +
+            (mouseY - height / 2) * 0.08 * Math.sin(x / width * Math.PI);
 
-          // Distance from mouse for subtle ambient highlight
-          const dx = mouseX - x;
-          const dy = mouseY - y;
-          const distMouse = Math.sqrt(dx * dx + dy * dy);
-          const mouseHighlight = Math.max(0, 1 - distMouse / 350) * 0.12;
+          if (x === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        ctx.stroke();
+      }
 
-          // Diagonal silk curve highlight factor
-          const silkFactor = Math.sin((x / width) * 2.5 + (y / height) * 2.5) * 0.04 + 0.02;
+      // Render Particles and Particle Constellation Links
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
 
-          const alpha = Math.min(0.18, silkFactor + mouseHighlight);
+        p.x += p.vx;
+        p.y += p.vy;
 
-          // Render micro carbon square cell outline
-          ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.6})`;
-          ctx.lineWidth = 0.5;
-          ctx.strokeRect(x + 1, y + 1, gridSize - 2, gridSize - 2);
+        // Wrap around boundaries
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
 
-          // Tiny center dot on mesh
-          if (c % 2 === 0 && r % 2 === 0) {
-            ctx.fillStyle = `rgba(56, 189, 248, ${alpha * 0.7})`;
-            ctx.fillRect(x + gridSize / 2 - 0.5, y + gridSize / 2 - 0.5, 1, 1);
+        // Mouse proximity boost
+        const dx = mouseX - p.x;
+        const dy = mouseY - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 180) {
+          p.alpha = Math.min(1, p.baseAlpha + (1 - dist / 180) * 0.6);
+        } else {
+          p.alpha = p.baseAlpha;
+        }
+
+        // Draw particle node
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `${p.color}${p.alpha})`;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = `${p.color}0.8)`;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Connect nearby particles with glow lines
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const pdx = p.x - p2.x;
+          const pdy = p.y - p2.y;
+          const pdist = Math.sqrt(pdx * pdx + pdy * pdy);
+
+          if (pdist < 120) {
+            const lineAlpha = (1 - pdist / 120) * 0.2;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `${p.color}${lineAlpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
           }
         }
       }
+
+      animId = requestAnimationFrame(render);
     };
 
-    let animId: number;
-    const animate = () => {
-      // Very slight mouse interpolation without wave animation
-      if (Math.abs(mouseX - targetMouseX) > 0.1 || Math.abs(mouseY - targetMouseY) > 0.1) {
-        mouseX += (targetMouseX - mouseX) * 0.05;
-        mouseY += (targetMouseY - mouseY) * 0.05;
-        renderMesh();
-      }
-      animId = requestAnimationFrame(animate);
-    };
-
-    renderMesh();
-    animate();
+    render();
 
     return () => {
+      cancelAnimationFrame(animId);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", handleResize);
-      cancelAnimationFrame(animId);
     };
   }, [ecoMode]);
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full z-0 pointer-events-none transition-opacity duration-700"
-      style={{ opacity: ecoMode ? 0 : 1 }}
+      className="fixed inset-0 pointer-events-none z-0 w-full h-full"
     />
   );
 };
