@@ -3,7 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LuxeCart | Haute Horlogerie & Luxury Timepieces</title>
+    <title>LuxeCart — Amazon-Class Luxury Watch Marketplace & Horology Vault | Shahan Ali</title>
+    <meta name="description" content="Enhanced Amazon-style luxury watch marketplace with multi-category product catalog, real-time search, deals of the day, bespoke watch configurator, and instant cart checkout. Designed & Developed by Shahan Ali (shahan315 / ProBoy).">
+    <meta name="author" content="Shahan Ali (shahan315 / ProBoy)">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="LuxeCart — Amazon-Class Luxury Watch Marketplace">
+    <meta property="og:description" content="Full-featured e-commerce marketplace with 16+ luxury timepieces, deals of the day, instant cart, and 1-click checkout.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts & Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -11,494 +21,657 @@
             theme: {
                 extend: {
                     colors: {
-                        gold: {
-                            300: '#F3E5AB',
-                            400: '#D4AF37',
-                            500: '#AA7C11',
-                            600: '#8A6208',
+                        amazon: {
+                            navy: '#131921',
+                            lightNavy: '#232F3E',
+                            yellow: '#FEBD69',
+                            orange: '#F08804',
+                            amber: '#D4AF37'
                         }
                     },
                     fontFamily: {
                         serif: ['Cinzel', 'serif'],
                         sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
                     }
                 }
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #060709; color: #E2E8F0; overflow-x: hidden; }
-        h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
-        .gold-gradient { background: linear-gradient(135deg, #FFF0B3 0%, #D4AF37 50%, #996515 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .gold-border { border-image: linear-gradient(to bottom, #D4AF37, rgba(212, 175, 55, 0.2)) 1; }
-        .glass-panel { background: rgba(15, 17, 23, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(212, 175, 55, 0.15); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0A0C10; color: #E2E8F0; }
+        .gold-gradient { background: linear-gradient(135deg, #FFE279 0%, #D4AF37 50%, #996515 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-panel { background: rgba(19, 25, 33, 0.9); backdrop-filter: blur(16px); border: 1px solid rgba(212, 175, 55, 0.25); }
+        .glass-panel:hover { border-color: rgba(212, 175, 55, 0.5); }
+        .amazon-card { background: #131921; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.2s ease; }
+        .amazon-card:hover { border-color: #FEBD69; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .prime-tag { background: linear-gradient(90deg, #00A8E8, #0077C0); color: #FFF; font-weight: 800; }
     </style>
 </head>
-<body class="bg-[#060709] text-slate-200 antialiased selection:bg-amber-500 selection:text-slate-950">
+<body class="bg-[#0A0C10] text-slate-200 antialiased selection:bg-amber-500 selection:text-slate-950">
 
-    <!-- Header / Navigation -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-[#060709]/80 backdrop-blur-2xl border-b border-amber-500/20">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#" onclick="showTab('home')" class="flex items-center gap-3 group">
-                <span class="w-10 h-10 rounded-full border border-amber-500/50 flex items-center justify-center bg-amber-500/10 text-amber-400 font-cinzel font-bold text-xl group-hover:scale-105 transition-transform">L</span>
-                <span class="font-cinzel text-xl font-black tracking-widest text-white group-hover:text-amber-400 transition-colors">LUXECART</span>
+    <!-- ================= AMAZON-STYLE HEADER TOP BAR ================= -->
+    <header class="sticky top-0 z-50 bg-[#131921] border-b border-amber-500/20 shadow-2xl">
+        
+        <!-- Upper Row -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            
+            <!-- Logo -->
+            <a href="#" onclick="filterCategory('All')" class="flex items-center gap-2 group flex-shrink-0">
+                <span class="w-9 h-9 rounded-lg bg-gradient-to-tr from-amber-500 to-amber-300 text-slate-950 font-black flex items-center justify-center font-serif text-xl shadow-lg">L</span>
+                <div>
+                    <span class="font-serif text-lg font-black tracking-widest text-white group-hover:text-amber-400 transition-colors block leading-none">LUXECART</span>
+                    <span class="text-[9px] text-amber-400 font-mono tracking-wider block">AMAZON-CLASS WATCH MARKETPLACE</span>
+                </div>
             </a>
 
-            <nav class="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-widest text-slate-300">
-                <button onclick="showTab('home')" class="nav-btn hover:text-amber-400 transition-colors cursor-pointer text-amber-400">Home</button>
-                <button onclick="showTab('collection')" class="nav-btn hover:text-amber-400 transition-colors cursor-pointer">Timepieces</button>
-                <button onclick="showTab('about')" class="nav-btn hover:text-amber-400 transition-colors cursor-pointer">Heritage & Craft</button>
-                <button onclick="showTab('contact')" class="nav-btn hover:text-amber-400 transition-colors cursor-pointer">Boutique & Concierge</button>
-            </nav>
+            <!-- Delivery Location -->
+            <div class="hidden lg:flex items-center gap-1.5 text-xs text-slate-300 bg-white/5 px-3 py-1.5 rounded-lg border border-white/10 flex-shrink-0 cursor-pointer hover:border-amber-400">
+                <i data-lucide="map-pin" class="w-4 h-4 text-amber-400"></i>
+                <div>
+                    <span class="text-[10px] text-slate-400 block leading-tight">Deliver to</span>
+                    <span class="font-bold text-white text-xs block leading-tight">Burewala, PK 61010</span>
+                </div>
+            </div>
 
-            <div class="flex items-center gap-4">
-                <button onclick="toggleCart()" class="relative p-2.5 rounded-full border border-amber-500/30 bg-amber-500/10 hover:border-amber-400 transition-all text-amber-400 cursor-pointer">
-                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                    <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-amber-500 text-slate-950 text-[10px] font-bold flex items-center justify-center">0</span>
+            <!-- Amazon Interactive Search Bar -->
+            <div class="flex-1 max-w-2xl mx-2 flex items-center rounded-lg bg-slate-950 border border-amber-500/30 overflow-hidden focus-within:border-amber-400 focus-within:ring-2 focus-within:ring-amber-400/30">
+                <select id="search-category" onchange="searchProducts()" class="bg-slate-900 text-xs text-amber-300 font-semibold px-3 py-2.5 border-r border-amber-500/30 focus:outline-none cursor-pointer">
+                    <option value="All">All Departments</option>
+                    <option value="Tourbillon">Swiss Tourbillon</option>
+                    <option value="Skeleton">Skeleton Motors</option>
+                    <option value="Diver">Deep Diver 300M+</option>
+                    <option value="Chronograph">Gold Chronograph</option>
+                    <option value="Accessories">Straps & Winders</option>
+                </select>
+                <input type="text" id="search-input" onkeyup="searchProducts()" placeholder="Search 16+ Swiss watches, tourbillons, straps, winders..." class="w-full bg-transparent px-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none">
+                <button onclick="searchProducts()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-5 py-2.5 font-bold cursor-pointer transition-colors flex items-center justify-center">
+                    <i data-lucide="search" class="w-4 h-4"></i>
                 </button>
-                <a href="/#showcase" class="text-xs font-medium text-slate-400 hover:text-white flex items-center gap-1 hidden sm:flex">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Showcase
+            </div>
+
+            <!-- Header Right Controls -->
+            <div class="flex items-center gap-3 flex-shrink-0">
+                
+                <!-- Account / Orders -->
+                <div class="hidden sm:block text-xs cursor-pointer hover:text-amber-400">
+                    <span class="text-[10px] text-slate-400 block">Hello, Collector</span>
+                    <span class="font-bold text-white">Returns & Orders</span>
+                </div>
+
+                <!-- Cart Button -->
+                <button onclick="toggleCart()" class="relative bg-amber-500/10 border border-amber-500/40 hover:border-amber-400 text-amber-400 px-3.5 py-2 rounded-lg flex items-center gap-2 cursor-pointer transition-all">
+                    <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                    <span class="font-bold text-xs hidden sm:inline">Cart</span>
+                    <span id="cart-badge" class="bg-amber-500 text-slate-950 text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                </button>
+
+                <a href="/" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 hidden md:flex ml-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
                 </a>
             </div>
+
         </div>
+
+        <!-- Amazon Department Ribbon Navigation -->
+        <div class="bg-[#232F3E] text-slate-200 text-xs font-semibold border-t border-white/5 py-2 px-4 sm:px-6 overflow-x-auto flex items-center justify-between gap-6 whitespace-nowrap">
+            <div class="flex items-center gap-6">
+                <button onclick="filterCategory('All')" class="hover:text-amber-400 transition-colors flex items-center gap-1 text-amber-400 font-bold cursor-pointer">
+                    <i data-lucide="menu" class="w-4 h-4"></i> All Marketplace Products
+                </button>
+                <button onclick="filterCategory('Deal')" class="hover:text-amber-400 transition-colors text-amber-300 cursor-pointer">🔥 Today's Lightning Deals</button>
+                <button onclick="filterCategory('Tourbillon')" class="hover:text-amber-400 transition-colors cursor-pointer">Swiss Tourbillons</button>
+                <button onclick="filterCategory('Skeleton')" class="hover:text-amber-400 transition-colors cursor-pointer">Skeleton Movements</button>
+                <button onclick="filterCategory('Diver')" class="hover:text-amber-400 transition-colors cursor-pointer">Deep Sea Divers</button>
+                <button onclick="filterCategory('Accessories')" class="hover:text-amber-400 transition-colors cursor-pointer">Straps & Winder Boxes</button>
+            </div>
+            <div class="text-[11px] text-amber-400/90 font-mono hidden md:block">
+                ⚡ FREE Prime 1-Day Delivery Available on All Orders
+            </div>
+        </div>
+
     </header>
 
-    <!-- Main Container Views -->
-    <main class="pt-20">
+    <!-- ================= MAIN MARKETPLACE CONTAINER ================= -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-8">
 
-        <!-- TAB: HOME -->
-        <div id="tab-home" class="tab-content">
-            <!-- Hero Section with 3D Three.js Tourbillon Scene -->
-            <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden border-b border-amber-500/20 py-16">
-                <!-- Three.js Canvas Container -->
-                <div id="three-container" class="absolute inset-0 z-0 pointer-events-none opacity-80"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-[#060709] via-transparent to-[#060709]/80 z-0 pointer-events-none"></div>
-
-                <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
-                    <div class="lg:col-span-7 space-y-6 text-left">
-                        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-300 text-xs font-semibold tracking-widest uppercase">
-                            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400"></i>
-                            Haute Horlogerie Swiss Manufacture
-                        </span>
-                        <h1 class="text-4xl sm:text-7xl font-extrabold text-white tracking-tight leading-tight">
-                            TIME, <br/><span class="gold-gradient">PERFECTED.</span>
-                        </h1>
-                        <p class="text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed">
-                            Hand-assembled in Geneva. Engineered with precision tourbillon movement, sapphire crystal casing, and 18K rose gold bezels. Experience pure horological prestige.
-                        </p>
-                        <div class="flex flex-wrap items-center gap-4 pt-4">
-                            <button onclick="showTab('collection')" class="px-8 py-4 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 text-slate-950 font-bold text-xs uppercase tracking-widest shadow-xl shadow-amber-500/20 hover:scale-105 transition-transform cursor-pointer">
-                                View Collection
-                            </button>
-                            <button onclick="openWatchModal('Chronos Tourbillon 18K', '$48,500', 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=80')" class="px-8 py-4 rounded-full bg-white/5 border border-amber-500/30 hover:border-amber-400 text-white font-semibold text-xs uppercase tracking-widest transition-all cursor-pointer">
-                                3D Showcase
-                            </button>
-                        </div>
+        <!-- ================= HERO LIGHTNING DEALS BANNER ================= -->
+        <section class="relative rounded-2xl overflow-hidden border border-amber-500/30 bg-gradient-to-r from-slate-950 via-[#131921] to-slate-950 p-6 sm:p-10 shadow-2xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold uppercase tracking-widest">
+                        <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+                        Amazon Prime Lightning Deal · Ends in <span id="deal-timer" class="font-mono text-white ml-1">04:22:18</span>
                     </div>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold text-white font-serif leading-tight">
+                        Swiss Haute Horlogerie <br/><span class="gold-gradient">Full Catalog Showcase</span>
+                    </h1>
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-xl">
+                        Explore all 16+ luxury timepieces, tourbillon movements, titanium divers, and hand-stitched alligator straps right here. Complete with 1-click buy, customer reviews, and instant checkout.
+                    </p>
 
-                    <div class="lg:col-span-5 flex justify-center">
-                        <div class="glass-panel p-6 rounded-3xl shadow-2xl max-w-md w-full text-center group border border-amber-500/30">
-                            <div class="relative overflow-hidden rounded-2xl">
-                                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=80" alt="Chronos Tourbillon 18K" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
-                                <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-amber-500 text-slate-950 text-[10px] font-bold uppercase tracking-wider">Flagship</span>
-                            </div>
-                            <div class="mt-5 flex items-center justify-between text-left">
-                                <div>
-                                    <span class="text-[10px] text-amber-400 font-mono tracking-widest uppercase">Geneva Special Edition</span>
-                                    <h3 class="text-xl font-bold text-white font-cinzel">Chronos Tourbillon 18K</h3>
-                                </div>
-                                <span class="text-lg font-bold text-amber-400">$48,500</span>
-                            </div>
-                            <button onclick="addToCart('Chronos Tourbillon 18K', 48500, 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=80')" class="mt-4 w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-widest transition-colors cursor-pointer">
-                                Acquire Timepiece
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Brand Metrics / Heritage Banner -->
-            <section class="py-16 border-b border-amber-500/20 bg-slate-950/60">
-                <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                    <div>
-                        <div class="text-3xl sm:text-4xl font-extrabold gold-gradient font-cinzel">1888</div>
-                        <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Geneva Founding</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl sm:text-4xl font-extrabold gold-gradient font-cinzel">28,800</div>
-                        <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">VPH Frequency</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl sm:text-4xl font-extrabold gold-gradient font-cinzel">72 Hours</div>
-                        <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Power Reserve</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl sm:text-4xl font-extrabold gold-gradient font-cinzel">100%</div>
-                        <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Swiss Hand-Crafted</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Interactive Watch Configurator -->
-            <section class="py-24 border-b border-amber-500/20 max-w-7xl mx-auto px-6">
-                <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                    <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Bespoke Atelier</span>
-                    <h2 class="text-3xl sm:text-5xl font-black text-white font-cinzel">Custom Watch Configurator</h2>
-                    <p class="text-slate-400 text-sm">Personalize your luxury bezel, movement, strap, and engraved dial.</p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center glass-panel p-8 rounded-3xl">
-                    <div class="lg:col-span-6 space-y-6">
-                        <div id="configurator-preview" class="relative w-full h-96 rounded-2xl overflow-hidden border border-amber-500/30 flex items-center justify-center bg-slate-950">
-                            <img id="config-img" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80" alt="Watch Configurator" class="w-full h-full object-cover transition-all duration-500">
-                            <div class="absolute bottom-4 left-4 right-4 glass-panel p-4 rounded-xl flex items-center justify-between text-xs">
-                                <div>
-                                    <p class="text-amber-400 font-bold font-cinzel" id="config-title">Luxe Custom Edition</p>
-                                    <p class="text-slate-400" id="config-specs">18K Rose Gold · Alligator Strap</p>
-                                </div>
-                                <span class="text-white font-bold text-sm" id="config-price">$52,000</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-6 space-y-6 text-left">
-                        <div>
-                            <label class="text-xs font-bold uppercase tracking-wider text-amber-400 block mb-2">Bezel Material</label>
-                            <div class="grid grid-cols-3 gap-3">
-                                <button onclick="updateConfig('bezel', '18K Rose Gold', 0)" class="p-3 rounded-xl border border-amber-500/40 bg-amber-500/10 text-xs font-semibold text-white hover:border-amber-400">18K Rose Gold</button>
-                                <button onclick="updateConfig('bezel', 'Platinum 950', 6000)" class="p-3 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-slate-300 hover:border-amber-400">Platinum 950</button>
-                                <button onclick="updateConfig('bezel', 'Carbon Matrix', 3500)" class="p-3 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-slate-300 hover:border-amber-400">Carbon Matrix</button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="text-xs font-bold uppercase tracking-wider text-amber-400 block mb-2">Strap Type</label>
-                            <div class="grid grid-cols-3 gap-3">
-                                <button onclick="updateConfig('strap', 'Alligator Leather', 0)" class="p-3 rounded-xl border border-amber-500/40 bg-amber-500/10 text-xs font-semibold text-white hover:border-amber-400">Alligator Leather</button>
-                                <button onclick="updateConfig('strap', 'Gold Link Bracelet', 4500)" class="p-3 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-slate-300 hover:border-amber-400">Gold Bracelet</button>
-                                <button onclick="updateConfig('strap', 'Vulcanized Rubber', 1200)" class="p-3 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-slate-300 hover:border-amber-400">Rubber Sport</button>
-                            </div>
-                        </div>
-
-                        <button onclick="addCustomToCart()" class="w-full py-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 text-slate-950 font-bold text-xs uppercase tracking-widest shadow-xl shadow-amber-500/20 cursor-pointer">
-                            Reserve Custom Timepiece
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                        <button onclick="scrollToGrid()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider px-6 py-3 rounded-xl shadow-lg transition-transform hover:scale-105 cursor-pointer">
+                            Shop All 16 Products
+                        </button>
+                        <button onclick="openConfigurator()" class="bg-white/10 hover:bg-white/20 text-white border border-amber-500/40 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl cursor-pointer">
+                            Custom Watch Configurator
                         </button>
                     </div>
                 </div>
-            </section>
-        </div>
 
-        <!-- TAB: COLLECTION / PRODUCTS -->
-        <div id="tab-collection" class="tab-content hidden py-16 max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Masterpiece Catalog</span>
-                <h2 class="text-3xl sm:text-5xl font-black text-white font-cinzel">The Horology Collection</h2>
-                <p class="text-slate-400 text-sm">Tourbillons, perpetual calendars, and deep diver chronometers.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="product-grid">
-                <!-- Product cards injected by JS -->
-            </div>
-        </div>
-
-        <!-- TAB: ABOUT US -->
-        <div id="tab-about" class="tab-content hidden py-16 max-w-5xl mx-auto px-6 space-y-16">
-            <div class="text-center space-y-4">
-                <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Geneva Heritage</span>
-                <h2 class="text-4xl font-black text-white font-cinzel">135 Years of Mastery</h2>
-                <p class="text-slate-400 text-base max-w-2xl mx-auto leading-relaxed">
-                    Founded in 1888 on the banks of Lake Geneva, LuxeCart represents the pinnacle of high watchmaking. Every single gear, jewel, and balance wheel is hand-polished by master artisans.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-panel p-6 rounded-2xl space-y-3">
-                    <i data-lucide="award" class="w-8 h-8 text-amber-400"></i>
-                    <h3 class="text-lg font-bold text-white font-cinzel">Geneva Seal Certified</h3>
-                    <p class="text-slate-400 text-xs leading-relaxed">Meeting the world's strictest standard of origin, finishing, and rate accuracy.</p>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl space-y-3">
-                    <i data-lucide="shield-check" class="w-8 h-8 text-amber-400"></i>
-                    <h3 class="text-lg font-bold text-white font-cinzel">Lifetime Warranty</h3>
-                    <p class="text-slate-400 text-xs leading-relaxed">Every watch includes a lifetime Geneva maintenance guarantee and certificate of origin.</p>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl space-y-3">
-                    <i data-lucide="gem" class="w-8 h-8 text-amber-400"></i>
-                    <h3 class="text-lg font-bold text-white font-cinzel">Precision Materials</h3>
-                    <p class="text-slate-400 text-xs leading-relaxed">Crafted exclusively from 18K gold, grade 5 titanium, and synthetic sapphire crystals.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB: CONTACT -->
-        <div id="tab-contact" class="tab-content hidden py-16 max-w-4xl mx-auto px-6">
-            <div class="glass-panel p-8 sm:p-12 rounded-3xl space-y-8 border border-amber-500/30">
-                <div class="text-center space-y-2">
-                    <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Private Concierge</span>
-                    <h2 class="text-3xl font-black text-white font-cinzel">Book Boutique Appointment</h2>
-                    <p class="text-slate-400 text-xs">Consult with our Geneva horology specialists in Geneva, London, or Dubai.</p>
-                </div>
-
-                <form onsubmit="handleContactSubmit(event)" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <input type="text" placeholder="Full Name" required class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400">
-                        <input type="email" placeholder="Email Address" required class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400">
+                <!-- Featured Deal Spotlight -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="amazon-card p-5 rounded-2xl max-w-sm w-full space-y-3 relative">
+                        <span class="absolute top-3 left-3 bg-red-600 text-white font-black text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider z-10">Save $9,700 (20% OFF)</span>
+                        <div class="relative h-56 rounded-xl overflow-hidden bg-slate-950">
+                            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80" alt="Chronos Tourbillon 18K" class="w-full h-full object-cover">
+                        </div>
+                        <div class="space-y-1">
+                            <div class="text-[10px] text-amber-400 font-mono">GENEVA SPECIAL EDITION</div>
+                            <h3 class="text-base font-bold text-white font-serif">Chronos Tourbillon 18K Rose Gold</h3>
+                            <div class="flex items-center gap-2 text-xs">
+                                <span class="text-amber-400 font-bold">4.9 ★★★★★</span>
+                                <span class="text-slate-400 text-[11px]">(1,420 ratings)</span>
+                            </div>
+                            <div class="flex items-baseline gap-2 pt-1">
+                                <span class="text-2xl font-black text-amber-400">$38,800</span>
+                                <span class="text-xs text-slate-500 line-through">$48,500</span>
+                            </div>
+                            <div class="text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
+                                <i data-lucide="check" class="w-3.5 h-3.5"></i> In Stock · FREE Prime Overnight Delivery
+                            </div>
+                        </div>
+                        <button onclick="addToCart(1)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer">
+                            Add Deal to Cart
+                        </button>
                     </div>
-                    <select class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-amber-400">
-                        <option>Geneva Flagship Salon</option>
-                        <option>Mayfair Boutique, London</option>
-                        <option>Dubai Mall Private Suite</option>
-                        <option>Virtual Private Appointment</option>
-                    </select>
-                    <textarea placeholder="Specific timepiece requirements or questions..." rows="4" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"></textarea>
-                    <button type="submit" class="w-full py-4 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs uppercase tracking-widest hover:bg-amber-400 transition-colors cursor-pointer">
-                        Confirm Concierge Request
-                    </button>
-                </form>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- ================= AMAZON 4-CATEGORY FEATURE CARDS ================= -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Category Box 1 -->
+            <div class="amazon-card p-5 rounded-2xl flex flex-col justify-between space-y-4">
+                <div>
+                    <h3 class="text-base font-bold text-white font-serif mb-3">Swiss Tourbillons</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div onclick="filterCategory('Tourbillon')" class="bg-slate-950 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-amber-400">
+                            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=400&q=80" class="w-full h-20 object-cover rounded-lg mb-1">
+                            <span class="text-[10px] text-slate-300 font-semibold block truncate">Chronos 18K</span>
+                            <span class="text-[10px] text-amber-400 font-bold">$38,800</span>
+                        </div>
+                        <div onclick="filterCategory('Tourbillon')" class="bg-slate-950 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-amber-400">
+                            <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=400&q=80" class="w-full h-20 object-cover rounded-lg mb-1">
+                            <span class="text-[10px] text-slate-300 font-semibold block truncate">Black Ceramic</span>
+                            <span class="text-[10px] text-amber-400 font-bold">$42,000</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="filterCategory('Tourbillon')" class="text-xs text-amber-400 font-bold hover:underline text-left">Explore All Tourbillons →</button>
+            </div>
+
+            <!-- Category Box 2 -->
+            <div class="amazon-card p-5 rounded-2xl flex flex-col justify-between space-y-4">
+                <div>
+                    <h3 class="text-base font-bold text-white font-serif mb-3">Skeleton Motors</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div onclick="filterCategory('Skeleton')" class="bg-slate-950 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-amber-400">
+                            <img src="https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=400&q=80" class="w-full h-20 object-cover rounded-lg mb-1">
+                            <span class="text-[10px] text-slate-300 font-semibold block truncate">Vortex Carbon</span>
+                            <span class="text-[10px] text-amber-400 font-bold">$24,500</span>
+                        </div>
+                        <div onclick="filterCategory('Skeleton')" class="bg-slate-950 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-amber-400">
+                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80" class="w-full h-20 object-cover rounded-lg mb-1">
+                            <span class="text-[10px] text-slate-300 font-semibold block truncate">White Gold</span>
+                            <span class="text-[10px] text-amber-400 font-bold">$54,000</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="filterCategory('Skeleton')" class="text-xs text-amber-400 font-bold hover:underline text-left">Explore Skeleton Motors →</button>
+            </div>
+
+            <!-- Category Box 3 -->
+            <div class="amazon-card p-5 rounded-2xl flex flex-col justify-between space-y-4">
+                <div>
+                    <h3 class="text-base font-bold text-white font-serif mb-3">Deep Sea Divers</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div onclick="filterCategory('Diver')" class="bg-slate-950 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-amber-400">
+                            <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=400&q=80" class="w-full h-20 object-cover rounded-lg mb-1">
+                            <span class="text-[10px] text-slate-300 font-semibold block truncate">Titanium 300M</span>
+                            <span class="text-[10px] text-amber-400 font-bold">$14,200</span>
+                        </div>
+                        <div onclick="filterCategory('Diver')" class="bg-slate-950 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-amber-400">
+                            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80" class="w-full h-20 object-cover rounded-lg mb-1">
+                            <span class="text-[10px] text-slate-300 font-semibold block truncate">DeepSea 1000M</span>
+                            <span class="text-[10px] text-amber-400 font-bold">$16,400</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="filterCategory('Diver')" class="text-xs text-amber-400 font-bold hover:underline text-left">Explore Diver Watches →</button>
+            </div>
+
+            <!-- Category Box 4 -->
+            <div class="amazon-card p-5 rounded-2xl flex flex-col justify-between space-y-4">
+                <div>
+                    <h3 class="text-base font-bold text-white font-serif mb-3">Straps & Winders</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div onclick="filterCategory('Accessories')" class="bg-slate-950 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-amber-400">
+                            <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=400&q=80" class="w-full h-20 object-cover rounded-lg mb-1">
+                            <span class="text-[10px] text-slate-300 font-semibold block truncate">Auto Winder</span>
+                            <span class="text-[10px] text-amber-400 font-bold">$1,250</span>
+                        </div>
+                        <div onclick="filterCategory('Accessories')" class="bg-slate-950 p-2 rounded-xl border border-white/5 cursor-pointer hover:border-amber-400">
+                            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=400&q=80" class="w-full h-20 object-cover rounded-lg mb-1">
+                            <span class="text-[10px] text-slate-300 font-semibold block truncate">Alligator Strap</span>
+                            <span class="text-[10px] text-amber-400 font-bold">$450</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="filterCategory('Accessories')" class="text-xs text-amber-400 font-bold hover:underline text-left">Explore Accessories →</button>
+            </div>
+
+        </section>
+
+        <!-- ================= MAIN MULTI-PRODUCT MARKETPLACE GRID ================= -->
+        <section id="marketplace-grid-section" class="space-y-6 pt-6">
+            
+            <!-- Controls Bar -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-white/10 pb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-white font-serif flex items-center gap-2">
+                        <span>All Products Catalog</span>
+                        <span id="product-count-badge" class="text-xs bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2.5 py-0.5 rounded-full font-mono">16 Items</span>
+                    </h2>
+                    <p class="text-xs text-slate-400">Browse and filter luxury timepieces, tourbillons, and bespoke accessories.</p>
+                </div>
+
+                <div class="flex items-center gap-3 w-full sm:w-auto overflow-x-auto">
+                    <!-- Filter Pills -->
+                    <div class="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-white/10">
+                        <button onclick="filterCategory('All')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500 text-slate-950 cursor-pointer">All (16)</button>
+                        <button onclick="filterCategory('Tourbillon')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-400 cursor-pointer">Tourbillon</button>
+                        <button onclick="filterCategory('Skeleton')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-400 cursor-pointer">Skeleton</button>
+                        <button onclick="filterCategory('Diver')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-400 cursor-pointer">Diver</button>
+                        <button onclick="filterCategory('Chronograph')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-400 cursor-pointer">Chrono</button>
+                        <button onclick="filterCategory('Accessories')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-400 cursor-pointer">Straps</button>
+                    </div>
+
+                    <!-- Sort Selector -->
+                    <select id="sort-select" onchange="renderProducts()" class="bg-slate-950 text-xs text-slate-200 border border-white/10 rounded-xl px-3 py-2 focus:outline-none focus:border-amber-400 cursor-pointer">
+                        <option value="featured">Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Product Grid Container -->
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Javascript injects all 16 products here -->
+            </div>
+
+        </section>
+
+        <!-- ================= AMAZON "FREQUENTLY BOUGHT TOGETHER" BUNDLE BUILDER ================= -->
+        <section class="amazon-card p-6 rounded-2xl space-y-4">
+            <h3 class="text-lg font-bold text-white font-serif flex items-center gap-2">
+                <i data-lucide="package-check" class="w-5 h-5 text-amber-400"></i>
+                Frequently Bought Together
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                <div class="md:col-span-8 flex flex-wrap items-center gap-4">
+                    <div class="flex items-center gap-3 bg-slate-950 p-3 rounded-xl border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=200&q=80" class="w-14 h-14 object-cover rounded-lg">
+                        <div>
+                            <span class="text-xs font-bold text-white block">Chronos Tourbillon 18K</span>
+                            <span class="text-xs text-amber-400 font-bold">$38,800</span>
+                        </div>
+                    </div>
+                    <span class="text-xl font-bold text-slate-500">+</span>
+                    <div class="flex items-center gap-3 bg-slate-950 p-3 rounded-xl border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=200&q=80" class="w-14 h-14 object-cover rounded-lg">
+                        <div>
+                            <span class="text-xs font-bold text-white block">Atelier Automatic Winder</span>
+                            <span class="text-xs text-amber-400 font-bold">$1,250</span>
+                        </div>
+                    </div>
+                    <span class="text-xl font-bold text-slate-500">+</span>
+                    <div class="flex items-center gap-3 bg-slate-950 p-3 rounded-xl border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=200&q=80" class="w-14 h-14 object-cover rounded-lg">
+                        <div>
+                            <span class="text-xs font-bold text-white block">Alligator Leather Strap</span>
+                            <span class="text-xs text-amber-400 font-bold">$450</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-4 bg-slate-950 p-4 rounded-xl border border-amber-500/30 text-center space-y-2">
+                    <div class="text-xs text-slate-400">Total Bundle Price:</div>
+                    <div class="text-2xl font-black text-amber-400">$40,500 <span class="text-xs text-slate-500 line-through font-normal">$50,200</span></div>
+                    <button onclick="addBundleToCart()" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider cursor-pointer">
+                        Add All 3 to Cart
+                    </button>
+                </div>
+            </div>
+        </section>
 
     </main>
 
-    <!-- FOOTER WITH TERMS & PRIVACY LINKS -->
-    <footer class="mt-20 border-t border-amber-500/20 bg-slate-950/80 py-12">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400">
-            <div class="flex items-center gap-3">
-                <span class="font-cinzel text-lg font-bold text-white">LUXECART</span>
-                <span>© 2026 Haute Horlogerie SA. Geneva, Switzerland.</span>
-            </div>
-            <div class="flex items-center gap-6">
-                <button onclick="openModal('terms')" class="hover:text-amber-400 transition-colors cursor-pointer">Terms of Service</button>
-                <button onclick="openModal('privacy')" class="hover:text-amber-400 transition-colors cursor-pointer">Privacy Policy</button>
+    <!-- ================= QUICK VIEW MODAL ================= -->
+    <div id="quickview-modal" class="fixed inset-0 z-[110] bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-[#131921] border border-amber-500/40 rounded-3xl max-w-2xl w-full p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div id="modal-content">
+                <!-- JS injects product details -->
             </div>
         </div>
-    </footer>
+    </div>
 
-    <!-- CART DRAWER MODAL -->
-    <div id="cart-drawer" class="fixed inset-y-0 right-0 z-[100] w-full max-w-md bg-[#0A0C10] border-l border-amber-500/30 p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 shadow-2xl">
-        <div class="space-y-6">
-            <div class="flex items-center justify-between border-b border-white/10 pb-4">
-                <h3 class="text-lg font-bold text-white font-cinzel">Your Watch Vault</h3>
-                <button onclick="toggleCart()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+    <!-- ================= CART DRAWER ================= -->
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 z-[120] w-full max-w-md bg-[#131921] border-l border-amber-500/40 p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 shadow-2xl">
+        <div class="space-y-4 flex-1 flex flex-col min-h-0">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4 flex-shrink-0">
+                <h3 class="text-lg font-bold text-white font-serif flex items-center gap-2">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-amber-400"></i> Shopping Cart
+                </h3>
+                <button onclick="toggleCart()" class="text-slate-400 hover:text-white cursor-pointer"><i data-lucide="x" class="w-5 h-5"></i></button>
             </div>
-            <div id="cart-items" class="space-y-4 max-h-[60vh] overflow-y-auto">
-                <p class="text-xs text-slate-500 text-center py-8">Your luxury vault is currently empty.</p>
+
+            <div id="cart-items" class="space-y-3 overflow-y-auto flex-1 pr-1">
+                <!-- Cart items injected by JS -->
             </div>
         </div>
 
-        <div class="border-t border-white/10 pt-4 space-y-4">
-            <div class="flex items-center justify-between text-sm">
-                <span class="text-slate-400">Total Investment:</span>
-                <span id="cart-total" class="font-bold text-amber-400">$0</span>
+        <div class="border-t border-white/10 pt-4 space-y-3 flex-shrink-0">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>Subtotal (<span id="cart-total-count">0</span> items):</span>
+                <span id="cart-subtotal" class="text-lg font-black text-amber-400">$0</span>
             </div>
-            <button onclick="alert('Proceeding to Geneva Secure Checkout...')" class="w-full py-4 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs uppercase tracking-widest hover:bg-amber-400 transition-colors cursor-pointer">
-                Checkout & Insure
+            <div class="text-[10px] text-emerald-400 flex items-center gap-1">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> 100% Swiss Origin & Certificate of Authenticity Included
+            </div>
+            <button onclick="processCheckout()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg hover:brightness-110 cursor-pointer">
+                Proceed to Checkout (1-Click)
             </button>
         </div>
     </div>
 
-    <!-- GENERIC INFO MODAL (Terms, Privacy, Quick Spec) -->
-    <div id="info-modal" class="fixed inset-0 z-[110] bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
-        <div class="glass-panel p-8 rounded-3xl max-w-2xl w-full border border-amber-500/40 relative space-y-4 max-h-[85vh] overflow-y-auto">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
-            <h3 id="modal-title" class="text-2xl font-bold text-white font-cinzel">Modal Title</h3>
-            <div id="modal-body" class="text-xs text-slate-300 leading-relaxed space-y-3"></div>
+    <!-- ================= FOOTER ================= -->
+    <footer class="mt-20 bg-[#131921] border-t border-amber-500/20 py-12 text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="space-y-1">
+                <div class="font-serif text-lg font-bold text-white">LUXECART MARKETPLACE</div>
+                <div>© 2026 Designed & Developed by <strong class="text-amber-400">Shahan Ali (shahan315 / ProBoy)</strong>.</div>
+            </div>
+            <div class="flex items-center gap-6">
+                <button onclick="alert('LuxeCart 100% Swiss Guarantee Certified.')" class="hover:text-amber-400 cursor-pointer">Authenticity</button>
+                <button onclick="alert('Free worldwide overnight shipping via DHL Express.')" class="hover:text-amber-400 cursor-pointer">Shipping & Returns</button>
+                <a href="/" class="text-amber-400 font-bold hover:underline">Portfolio Home</a>
+            </div>
         </div>
-    </div>
+    </footer>
 
+    <!-- ================= MARKETPLACE JS DATA & LOGIC ================= -->
     <script>
-        lucide.createIcons();
-
-        // Timepiece products array
-        const watches = [
-            { id: 1, name: "Chronos Tourbillon 18K", price: 48500, category: "Tourbillon", img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80", spec: "Hand-wound 60-second tourbillon, 18K Rose Gold" },
-            { id: 2, name: "Royal Skeleton Flying GMT", price: 62000, category: "Skeleton", img: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80", spec: "Sapphire crystal chassis, dual time zone" },
-            { id: 3, name: "Geneva Deep Sea 1000M", price: 28000, category: "Diver", img: "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=800&q=80", spec: "Grade 5 Titanium, helium release valve" },
-            { id: 4, name: "Perpetual Moonphase Platinum", price: 74000, category: "Complication", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80", spec: "True astronomical moonphase calendar" },
-            { id: 5, name: "Monaco Racing Chrono", price: 34500, category: "Chronograph", img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&w=800&q=80", spec: "Forged carbon bezel, column-wheel stopwatch" },
-            { id: 6, name: "Excalibur Automatic 40mm", price: 21000, category: "Classic", img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80", spec: "Micro-rotor 22K gold movement, enamel dial" }
+        const products = [
+            { id: 1, name: "Chronos Tourbillon 18K Rose Gold", category: "Tourbillon", price: 38800, originalPrice: 48500, rating: 4.9, reviews: 1420, deal: true, tag: "Flagship", img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80", desc: "Geneva special edition tourbillon movement with 72-hour power reserve and sapphire casing." },
+            { id: 2, name: "Vortex Skeleton Carbon Matrix", category: "Skeleton", price: 24500, originalPrice: 29000, rating: 4.8, reviews: 890, deal: true, tag: "Best Seller", img: "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=800&q=80", desc: "Ultra-light grade 5 titanium skeleton chassis with exposed balance wheel oscillation." },
+            { id: 3, name: "SubMariner Titanium Deep Diver 300M", category: "Diver", price: 14200, originalPrice: 16500, rating: 4.9, reviews: 2100, deal: false, tag: "Diver", img: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=800&q=80", desc: "300 meter helium release valve diver chronometer with luminous sapphire bezel." },
+            { id: 4, name: "Royal Oak Perpetual Calendar Platinum", category: "Chronograph", price: 62000, originalPrice: 68000, rating: 5.0, reviews: 450, deal: false, tag: "Rare Vault", img: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80", desc: "Astronomical moonphase perpetual calendar with platinum 950 integrated bracelet." },
+            { id: 5, name: "Monaco Square Chronograph Blue Dial", category: "Chronograph", price: 9800, originalPrice: 12000, rating: 4.7, reviews: 630, deal: true, tag: "Classic", img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80", desc: "Iconic square stainless racing chronograph driven by Calibre 11 automatic motor." },
+            { id: 6, name: "Geneva Moonphase Rose Gold Leather", category: "Tourbillon", price: 18900, originalPrice: 22500, rating: 4.9, reviews: 1150, deal: true, tag: "Popular", img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80", desc: "Hand-finished moonphase complications with hand-stitched alligator strap." },
+            { id: 7, name: "AeroPilot GMT World Time Stainless", category: "Chronograph", price: 11500, originalPrice: 13200, rating: 4.8, reviews: 720, deal: false, tag: "Aviation", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80", desc: "Dual timezone GMT world timer with bidirectional slide rule rotating bezel." },
+            { id: 8, name: "DeepSea Diver 1000M Helium Valve", category: "Diver", price: 16400, originalPrice: 18900, rating: 4.9, reviews: 980, deal: false, tag: "Extreme", img: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=800&q=80", desc: "Tested to 1000m depths in Lake Geneva submersibles. Ceramic rotating bezel." },
+            { id: 9, name: "Atelier Automatic Watch Winder Box", category: "Accessories", price: 1250, originalPrice: 1600, rating: 4.9, reviews: 3400, deal: true, tag: "Accessory", img: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80", desc: "Japanese quiet motor watch winder box with biometric fingerprint lock." },
+            { id: 10, name: "Italian Alligator Leather Strap 22mm", category: "Accessories", price: 450, originalPrice: 550, rating: 4.8, reviews: 2200, deal: false, tag: "Strap", img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80", desc: "Genuine Italian alligator skin strap with quick-release deployment buckle." },
+            { id: 11, name: "Bespoke Diamond Bezel GMT Master", category: "Chronograph", price: 85000, originalPrice: 98000, rating: 5.0, reviews: 120, deal: false, tag: "Bespoke", img: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80", desc: "Custom set with 4.5 carats VVS baguette diamonds on 18K white gold chassis." },
+            { id: 12, name: "Titanium Deployant Buckle Set", category: "Accessories", price: 280, originalPrice: 350, rating: 4.7, reviews: 850, deal: false, tag: "Hardware", img: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80", desc: "Grade 5 titanium micro-adjust deployment buckle for 20mm and 22mm straps." },
+            { id: 13, name: "Chronos Tourbillon Black Ceramic", category: "Tourbillon", price: 42000, originalPrice: 48000, rating: 4.9, reviews: 310, deal: false, tag: "Stealth", img: "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=800&q=80", desc: "Matte black zirconia ceramic casing with exposed tourbillon cage." },
+            { id: 14, name: "Skeleton Tourbillon White Gold", category: "Skeleton", price: 54000, originalPrice: 62000, rating: 5.0, reviews: 190, deal: false, tag: "Masterpiece", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80", desc: "18K white gold skeleton movement with hand-engraved Geneva bridges." },
+            { id: 15, name: "Sapphire Crystal Protection Kit", category: "Accessories", price: 120, originalPrice: 150, rating: 4.9, reviews: 5100, deal: true, tag: "Care", img: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80", desc: "Hydrophobic microfiber cleaning set and AR coating protection buffer." },
+            { id: 16, name: "Vintage Heritage Chrono 1972", category: "Chronograph", price: 21000, originalPrice: 24500, rating: 4.8, reviews: 440, deal: false, tag: "Heritage", img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80", desc: "Authentic reissue of the 1972 Geneva rally racing chronograph." }
         ];
 
-        // State variables
+        let currentCategory = "All";
         let cart = [];
-        let baseConfigPrice = 52000;
-        let configBezelExtra = 0;
-        let configStrapExtra = 0;
 
-        // Tab Switching
-        function showTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById('tab-' + tabName).classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Render Product Grid
         function renderProducts() {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = watches.map(w => `
-                <div class="glass-panel p-6 rounded-3xl border border-white/10 hover:border-amber-400/40 transition-all group flex flex-col justify-between">
-                    <div>
-                        <div class="relative overflow-hidden rounded-2xl mb-4">
-                            <img src="${w.img}" alt="${w.name}" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
-                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-slate-950/80 text-amber-400 text-[10px] font-mono border border-amber-500/30 uppercase">${w.category}</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-white font-cinzel">${w.name}</h3>
-                        <p class="text-slate-400 text-xs mt-1 leading-relaxed">${w.spec}</p>
+            const grid = document.getElementById("product-grid");
+            const countBadge = document.getElementById("product-count-badge");
+            const searchVal = document.getElementById("search-input").value.toLowerCase();
+            const sortVal = document.getElementById("sort-select").value;
+
+            let filtered = products.filter(p => {
+                const matchesCat = (currentCategory === "All") || 
+                                   (currentCategory === "Deal" && p.deal) || 
+                                   (p.category === currentCategory);
+                const matchesSearch = p.name.toLowerCase().includes(searchVal) || p.desc.toLowerCase().includes(searchVal) || p.category.toLowerCase().includes(searchVal);
+                return matchesCat && matchesSearch;
+            });
+
+            if (sortVal === "price-low") filtered.sort((a, b) => a.price - b.price);
+            if (sortVal === "price-high") filtered.sort((a, b) => b.price - a.price);
+            if (sortVal === "rating") filtered.sort((a, b) => b.rating - a.rating);
+
+            if (countBadge) countBadge.innerText = `${filtered.length} Items`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 space-y-2">
+                    <p class="text-base font-bold text-white">No products found for "${searchVal}"</p>
+                    <p class="text-xs">Try selecting 'All Departments' or resetting search filters.</p>
+                </div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => `
+                <div class="amazon-card rounded-2xl p-4 flex flex-col justify-between space-y-3 relative group">
+                    ${p.deal ? `<span class="absolute top-3 left-3 bg-red-600 text-white font-black text-[9px] px-2 py-0.5 rounded uppercase tracking-wider z-10">Lightning Deal</span>` : ''}
+                    
+                    <div class="relative h-48 rounded-xl overflow-hidden bg-slate-950 cursor-pointer" onclick="openQuickView(${p.id})">
+                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     </div>
-                    <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
-                        <span class="text-lg font-bold text-amber-400">$${w.price.toLocaleString()}</span>
-                        <button onclick="addToCart('${w.name}', ${w.price}, '${w.img}')" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer">
-                            Acquire
+
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between text-[10px] text-amber-400 font-mono">
+                            <span>${p.category.toUpperCase()}</span>
+                            <span>${p.tag}</span>
+                        </div>
+                        <h3 onclick="openQuickView(${p.id})" class="text-sm font-bold text-white font-serif hover:text-amber-400 transition-colors cursor-pointer line-clamp-1">${p.name}</h3>
+                        
+                        <div class="flex items-center gap-1 text-[11px]">
+                            <span class="text-amber-400 font-bold">${p.rating} ★★★★★</span>
+                            <span class="text-slate-500">(${p.reviews})</span>
+                        </div>
+
+                        <div class="flex items-baseline gap-2 pt-1">
+                            <span class="text-xl font-black text-amber-400">$${p.price.toLocaleString()}</span>
+                            ${p.originalPrice ? `<span class="text-xs text-slate-500 line-through">$${p.originalPrice.toLocaleString()}</span>` : ''}
+                        </div>
+
+                        <div class="text-[10px] text-emerald-400 font-semibold flex items-center gap-1 pt-0.5">
+                            <span class="px-1.5 py-0.5 rounded bg-blue-600 text-white font-black tracking-wider text-[8px] uppercase">✓prime</span>
+                            <span>FREE Overnight Delivery</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 pt-2">
+                        <button onclick="addToCart(${p.id})" class="py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider cursor-pointer transition-colors">
+                            Add to Cart
+                        </button>
+                        <button onclick="openQuickView(${p.id})" class="py-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 text-xs font-semibold cursor-pointer">
+                            Quick View
                         </button>
                     </div>
                 </div>
-            `).join('');
-        }
-        renderProducts();
-
-        // Cart functionality
-        function toggleCart() {
-            document.getElementById('cart-drawer').classList.toggle('translate-x-full');
+            `).join("");
         }
 
-        function addToCart(name, price, img) {
-            cart.push({ name, price, img });
+        function filterCategory(cat) {
+            currentCategory = cat;
+            const selectEl = document.getElementById("search-category");
+            if (selectEl) selectEl.value = cat === 'Deal' ? 'All' : cat;
+            
+            document.querySelectorAll(".cat-pill").forEach(btn => {
+                if (btn.innerText.includes(cat)) {
+                    btn.className = "cat-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500 text-slate-950 cursor-pointer";
+                } else {
+                    btn.className = "cat-pill px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-amber-400 cursor-pointer";
+                }
+            });
+
+            renderProducts();
+        }
+
+        function searchProducts() {
+            renderProducts();
+        }
+
+        function scrollToGrid() {
+            document.getElementById("marketplace-grid-section").scrollIntoView({ behavior: "smooth" });
+        }
+
+        function addToCart(id) {
+            const prod = products.find(p => p.id === id);
+            if (!prod) return;
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...prod, qty: 1 });
+            }
+            updateCartUI();
+            toggleCart(true);
+        }
+
+        function addBundleToCart() {
+            addToCart(1);
+            addToCart(9);
+            addToCart(10);
+            alert("All 3 items added to your Amazon watch vault cart!");
+        }
+
+        function updateCartUI() {
+            const cartBadge = document.getElementById("cart-badge");
+            const cartItems = document.getElementById("cart-items");
+            const cartSubtotal = document.getElementById("cart-subtotal");
+            const totalCountEl = document.getElementById("cart-total-count");
+
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            if (cartBadge) cartBadge.innerText = totalQty;
+            if (totalCountEl) totalCountEl.innerText = totalQty;
+            if (cartSubtotal) cartSubtotal.innerText = `$${subtotal.toLocaleString()}`;
+
+            if (cartItems) {
+                if (cart.length === 0) {
+                    cartItems.innerHTML = `<div class="py-12 text-center text-slate-500 text-xs">Your watch vault cart is empty.</div>`;
+                } else {
+                    cartItems.innerHTML = cart.map(item => `
+                        <div class="flex items-center justify-between gap-3 bg-slate-950 p-3 rounded-xl border border-white/10">
+                            <img src="${item.img}" class="w-12 h-12 object-cover rounded-lg flex-shrink-0">
+                            <div class="flex-1 min-w-0">
+                                <h4 class="text-xs font-bold text-white truncate">${item.name}</h4>
+                                <div class="text-[11px] text-amber-400 font-bold">$${item.price.toLocaleString()} x ${item.qty}</div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 rounded bg-white/10 text-white font-bold text-xs hover:bg-white/20">-</button>
+                                <span class="text-xs text-white px-1">${item.qty}</span>
+                                <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 rounded bg-white/10 text-white font-bold text-xs hover:bg-white/20">+</button>
+                            </div>
+                        </div>
+                    `).join("");
+                }
+            }
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            updateCartUI();
+        }
+
+        function toggleCart(forceOpen = false) {
+            const drawer = document.getElementById("cart-drawer");
+            if (forceOpen) {
+                drawer.classList.remove("translate-x-full");
+            } else {
+                drawer.classList.toggle("translate-x-full");
+            }
+        }
+
+        function openQuickView(id) {
+            const p = products.find(prod => prod.id === id);
+            if (!p) return;
+            const content = document.getElementById("modal-content");
+            content.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <img src="${p.img}" class="w-full h-64 object-cover rounded-2xl border border-amber-500/30">
+                    <div class="space-y-3">
+                        <span class="text-[10px] text-amber-400 font-mono uppercase tracking-widest">${p.category} · ${p.tag}</span>
+                        <h2 class="text-2xl font-bold text-white font-serif">${p.name}</h2>
+                        <div class="text-xs text-amber-400 font-bold">${p.rating} ★★★★★ (${p.reviews} verified reviews)</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">${p.desc}</p>
+                        <div class="flex items-baseline gap-2 pt-2">
+                            <span class="text-2xl font-black text-amber-400">$${p.price.toLocaleString()}</span>
+                            ${p.originalPrice ? `<span class="text-xs text-slate-500 line-through">$${p.originalPrice.toLocaleString()}</span>` : ''}
+                        </div>
+                        <button onclick="addToCart(${p.id}); closeQuickView();" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider cursor-pointer">
+                            1-Click Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.getElementById("quickview-modal").classList.remove("hidden");
+        }
+
+        function closeQuickView() {
+            document.getElementById("quickview-modal").classList.add("hidden");
+        }
+
+        function processCheckout() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            const orderId = 'AMZ-LX-' + Math.floor(100000 + Math.random() * 900000);
+            alert(`🎉 ORDER CONFIRMED!\n\nOrder ID: ${orderId}\nDelivery: Tomorrow via DHL Express\nRecipient: Shahan Ali Customer\n\nThank you for shopping on LuxeCart Marketplace!`);
+            cart = [];
             updateCartUI();
             toggleCart();
         }
 
-        function updateCartUI() {
-            document.getElementById('cart-count').innerText = cart.length;
-            const container = document.getElementById('cart-items');
-            if (cart.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-500 text-center py-8">Your luxury vault is empty.</p>`;
-                document.getElementById('cart-total').innerText = '$0';
-                return;
-            }
-            let total = 0;
-            container.innerHTML = cart.map((item, idx) => {
-                total += item.price;
-                return `
-                    <div class="flex items-center gap-4 p-3 bg-white/5 rounded-xl border border-white/10">
-                        <img src="${item.img}" class="w-12 h-12 object-cover rounded-lg">
-                        <div class="flex-1">
-                            <p class="text-xs font-bold text-white font-cinzel">${item.name}</p>
-                            <p class="text-amber-400 text-xs font-bold">$${item.price.toLocaleString()}</p>
-                        </div>
-                        <button onclick="removeFromCart(${idx})" class="text-slate-500 hover:text-red-400 text-xs">Remove</button>
-                    </div>
-                `;
-            }).join('');
-            document.getElementById('cart-total').innerText = '$' + total.toLocaleString();
+        function openConfigurator() {
+            alert("Bespoke Custom Configurator: Select your 18K Rose Gold or Platinum case, Alligator strap, and custom engraved movement in the Atelier.");
         }
 
-        function removeFromCart(idx) {
-            cart.splice(idx, 1);
-            updateCartUI();
-        }
+        // Deal Timer Countdown
+        setInterval(() => {
+            const timerEl = document.getElementById("deal-timer");
+            if (!timerEl) return;
+            let parts = timerEl.innerText.split(":").map(Number);
+            let total = parts[0] * 3600 + parts[1] * 60 + parts[2];
+            if (total > 0) total--;
+            const h = String(Math.floor(total / 3600)).padStart(2, '0');
+            const m = String(Math.floor((total % 3600) / 60)).padStart(2, '0');
+            const s = String(total % 60).padStart(2, '0');
+            timerEl.innerText = `${h}:${m}:${s}`;
+        }, 1000);
 
-        // Configurator state
-        function updateConfig(type, value, extraPrice) {
-            if (type === 'bezel') configBezelExtra = extraPrice;
-            if (type === 'strap') configStrapExtra = extraPrice;
-            const total = baseConfigPrice + configBezelExtra + configStrapExtra;
-            document.getElementById('config-price').innerText = '$' + total.toLocaleString();
-            document.getElementById('config-specs').innerText = `${type === 'bezel' ? value : 'Selected Bezel'} · Custom Fit`;
-        }
-
-        function addCustomToCart() {
-            const total = baseConfigPrice + configBezelExtra + configStrapExtra;
-            addToCart("Bespoke Luxe Atelier Timepiece", total, "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80");
-        }
-
-        // Modal Handler
-        function openModal(type) {
-            const modal = document.getElementById('info-modal');
-            const title = document.getElementById('modal-title');
-            const body = document.getElementById('modal-body');
-
-            if (type === 'terms') {
-                title.innerText = "Terms of Service";
-                body.innerHTML = `
-                    <p><strong>1. Geneva Authenticity:</strong> Every LuxeCart timepiece sold is backed by a Geneva Certificate of Authenticity and digital NFC blockchain provenance tag.</p>
-                    <p><strong>2. Insured Global Shipping:</strong> All orders are dispatched via armored courier with full transit insurance value.</p>
-                    <p><strong>3. Atelier Warranty:</strong> Timepieces include a 10-year international mechanical movement guarantee.</p>
-                `;
-            } else if (type === 'privacy') {
-                title.innerText = "Privacy & Data Protection";
-                body.innerHTML = `
-                    <p>LuxeCart respects private collector confidentiality. We use bank-grade AES-256 encryption to protect buyer identity and transaction records.</p>
-                    <p>We strictly never store full credit card data or distribute client portfolio records to external parties.</p>
-                `;
-            }
-            modal.classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('info-modal').classList.add('hidden');
-        }
-
-        function handleContactSubmit(e) {
-            e.preventDefault();
-            alert("Thank you. Our Geneva Concierge will contact you via private telephone within 2 hours.");
-        }
-
-        // Three.js 3D Tourbillon Spinning Ring Scene
-        window.addEventListener('load', () => {
-            const container = document.getElementById('three-container');
-            if (!container) return;
-
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            container.appendChild(renderer.domElement);
-
-            // Create 3D Metallic Tourbillon Rings
-            const ringGeo1 = new THREE.TorusGeometry(3, 0.08, 16, 100);
-            const ringMat1 = new THREE.MeshBasicMaterial({ color: 0xD4AF37, wireframe: true });
-            const ring1 = new THREE.Mesh(ringGeo1, ringMat1);
-
-            const ringGeo2 = new THREE.TorusGeometry(2.2, 0.05, 16, 80);
-            const ringMat2 = new THREE.MeshBasicMaterial({ color: 0xFFF0B3, wireframe: true });
-            const ring2 = new THREE.Mesh(ringGeo2, ringMat2);
-
-            const ringGeo3 = new THREE.TorusGeometry(1.4, 0.04, 16, 60);
-            const ringMat3 = new THREE.MeshBasicMaterial({ color: 0x8A6208, wireframe: true });
-            const ring3 = new THREE.Mesh(ringGeo3, ringMat3);
-
-            scene.add(ring1);
-            scene.add(ring2);
-            scene.add(ring3);
-
-            camera.position.z = 6;
-
-            function animate() {
-                requestAnimationFrame(animate);
-                ring1.rotation.x += 0.005;
-                ring1.rotation.y += 0.008;
-
-                ring2.rotation.x -= 0.007;
-                ring2.rotation.z += 0.006;
-
-                ring3.rotation.y += 0.01;
-                ring3.rotation.x += 0.004;
-
-                renderer.render(scene, camera);
-            }
-            animate();
-
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
+        window.addEventListener("load", () => {
+            lucide.createIcons();
+            renderProducts();
         });
     </script>
 </body>
