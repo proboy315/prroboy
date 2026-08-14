@@ -31,7 +31,10 @@
                 <button onclick="showTab('contact')" class="hover:text-amber-400 transition-colors cursor-pointer">Reservations</button>
             </nav>
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-3">
+                <button onclick="openShowcaseAdmin()" class="px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-all shadow-sm">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Admin
+                </button>
                 <button onclick="showTab('contact')" class="px-5 py-2.5 rounded-full bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider hover:bg-amber-300 transition-all cursor-pointer">
                     Reserve Suite
                 </button>
@@ -138,5 +141,6 @@
             animate();
         });
     </script>
+    <script src="/showcase/admin.js"></script>
 </body>
 </html>
