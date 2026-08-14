@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevMarket — Amazon-Style Developer Software & Boilerplate Marketplace | Shahan Ali</title>
-    <meta name="description" content="Verified SaaS boilerplates, API starter kits, AI models, and full-stack codebases. Designed & Developed by Shahan Ali (shahan315 / ProBoy).">
+    <title>DevMarket — Developer Software & Boilerplate Marketplace | Shahan Ali</title>
+    <meta name="description" content="Verified SaaS boilerplates, API starter kits, AI models, and full-stack codebases. Handcrafted by Shahan Ali.">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -40,7 +40,7 @@
 </head>
 <body class="bg-[#030712] text-gray-100 min-h-screen antialiased selection:bg-blue-500 selection:text-white">
 
-    <!-- Amazon-Style Dev Header -->
+    <!-- Bespoke Developer Marketplace Header -->
     <header class="sticky top-0 z-50 bg-[#0B0F19] border-b border-blue-500/20 shadow-2xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
             
@@ -48,7 +48,7 @@
                 <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center text-white font-black text-lg code-font shadow-lg">&lt;/&gt;</div>
                 <div>
                     <span class="font-black text-xl tracking-tight text-white">Dev<span class="text-blue-500">Market</span></span>
-                    <span class="text-[9px] text-blue-400 font-mono block">AMAZON FOR CODE & SAAS STARTERS</span>
+                    <span class="text-[9px] text-blue-400 font-mono block">SAAS & CODEBASE MARKETPLACE</span>
                 </div>
             </a>
 
@@ -61,6 +61,9 @@
             </div>
 
             <div class="flex items-center gap-3">
+                <button onclick="openShowcaseAdmin()" class="px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-all shadow-sm">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Admin
+                </button>
                 <button onclick="toggleDevCart()" class="relative bg-blue-500/10 border border-blue-500/30 hover:border-blue-400 text-blue-400 px-3.5 py-2 rounded-lg flex items-center gap-2 cursor-pointer">
                     <i data-lucide="shopping-cart" class="w-5 h-5"></i>
                     <span id="dev-cart-badge" class="bg-blue-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
@@ -254,5 +257,6 @@
             renderDevProducts();
         });
     </script>
+    <script src="/showcase/admin.js"></script>
 </body>
 </html>
