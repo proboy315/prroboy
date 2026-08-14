@@ -17,9 +17,14 @@
 
     <header class="p-6 flex items-center justify-between z-20">
         <span class="font-syne text-2xl font-black tracking-widest bg-gradient-to-r from-purple-400 to-cyan-400 text-transparent bg-clip-text">VORTEX</span>
-        <a href="/#projects" class="text-xs text-slate-400 hover:text-white flex items-center gap-1">
-            <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
-        </a>
+        <div class="flex items-center gap-3">
+            <button onclick="openShowcaseAdmin()" class="px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-all shadow-sm">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Admin
+            </button>
+            <a href="/#projects" class="text-xs text-slate-400 hover:text-white flex items-center gap-1">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
+            </a>
+        </div>
     </header>
 
     <main class="relative py-24 flex-1 flex items-center justify-center text-center px-6">
@@ -47,5 +52,6 @@
     <script>
         lucide.createIcons();
     </script>
+    <script src="/showcase/admin.js"></script>
 </body>
 </html>
