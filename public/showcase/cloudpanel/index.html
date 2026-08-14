@@ -21,7 +21,10 @@
                 <span class="font-extrabold text-xl tracking-tight text-white">Cloud<span class="text-blue-400">Panel</span></span>
             </a>
 
-            <div class="flex items-center gap-4 text-xs font-bold">
+            <div class="flex items-center gap-3 text-xs font-bold">
+                <button onclick="openShowcaseAdmin()" class="px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-all shadow-sm">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Admin
+                </button>
                 <a href="/#projects" class="text-slate-400 hover:text-white flex items-center gap-1">
                     <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
                 </a>
@@ -71,5 +74,6 @@
     <script>
         lucide.createIcons();
     </script>
+    <script src="/showcase/admin.js"></script>
 </body>
 </html>
