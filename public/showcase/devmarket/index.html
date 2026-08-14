@@ -1,169 +1,257 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevMarket | Marketplace for Verified SaaS Boilerplates</title>
+    <title>DevMarket — Amazon-Style Developer Software & Boilerplate Marketplace | Shahan Ali</title>
+    <meta name="description" content="Verified SaaS boilerplates, API starter kits, AI models, and full-stack codebases. Designed & Developed by Shahan Ali (shahan315 / ProBoy).">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            500: '#3B82F6',
+                            600: '#2563EB',
+                            900: '#1E3A8A'
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['Fira Code', 'monospace'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #F3F4F6; overflow-x: hidden; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #F3F4F6; }
         .code-font { font-family: 'Fira Code', monospace; }
         .blue-gradient { background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #1D4ED8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glass-panel { background: rgba(17, 24, 39, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(59, 130, 246, 0.25); }
+        .glass-card { background: rgba(17, 24, 39, 0.9); border: 1px solid rgba(59, 130, 246, 0.25); transition: all 0.2s ease; }
+        .glass-card:hover { border-color: rgba(96, 165, 250, 0.6); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2); }
     </style>
 </head>
 <body class="bg-[#030712] text-gray-100 min-h-screen antialiased selection:bg-blue-500 selection:text-white">
 
-    <header class="fixed top-0 left-0 right-0 z-50 bg-[#030712]/90 backdrop-blur-xl border-b border-blue-500/20">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#" onclick="showTab('home')" class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-500/30 code-font">&lt;/&gt;</div>
-                <span class="font-black text-2xl tracking-tight text-white">Dev<span class="text-blue-500">Market</span></span>
+    <!-- Amazon-Style Dev Header -->
+    <header class="sticky top-0 z-50 bg-[#0B0F19] border-b border-blue-500/20 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            
+            <a href="#" onclick="filterCategory('All')" class="flex items-center gap-3 flex-shrink-0">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center text-white font-black text-lg code-font shadow-lg">&lt;/&gt;</div>
+                <div>
+                    <span class="font-black text-xl tracking-tight text-white">Dev<span class="text-blue-500">Market</span></span>
+                    <span class="text-[9px] text-blue-400 font-mono block">AMAZON FOR CODE & SAAS STARTERS</span>
+                </div>
             </a>
 
-            <nav class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-wider text-gray-300">
-                <button onclick="showTab('home')" class="hover:text-blue-400 transition-colors cursor-pointer text-blue-400">Products</button>
-                <button onclick="showTab('sandbox')" class="hover:text-blue-400 transition-colors cursor-pointer">Code Preview</button>
-                <button onclick="showTab('analytics')" class="hover:text-blue-400 transition-colors cursor-pointer">Seller Analytics</button>
-                <button onclick="showTab('contact')" class="hover:text-blue-400 transition-colors cursor-pointer">Support</button>
-            </nav>
-
-            <div class="flex items-center gap-4">
-                <button onclick="showTab('sandbox')" class="px-5 py-2.5 rounded-xl bg-blue-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-blue-400 transition-all cursor-pointer">
-                    Inspect Code
+            <!-- Search Bar -->
+            <div class="flex-1 max-w-2xl mx-2 flex items-center rounded-lg bg-gray-950 border border-blue-500/30 overflow-hidden focus-within:border-blue-400">
+                <input type="text" id="dev-search" onkeyup="renderDevProducts()" placeholder="Search 12+ React starters, Node.js APIs, Baileys bots, Shopify Liquid themes..." class="w-full bg-transparent px-4 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none">
+                <button onclick="renderDevProducts()" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 font-bold cursor-pointer transition-colors">
+                    <i data-lucide="search" class="w-4 h-4"></i>
                 </button>
-                <a href="/#showcase" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 hidden sm:flex">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Showcase
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button onclick="toggleDevCart()" class="relative bg-blue-500/10 border border-blue-500/30 hover:border-blue-400 text-blue-400 px-3.5 py-2 rounded-lg flex items-center gap-2 cursor-pointer">
+                    <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                    <span id="dev-cart-badge" class="bg-blue-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                </button>
+                <a href="/" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 hidden md:flex">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
                 </a>
             </div>
+
         </div>
     </header>
 
-    <main class="pt-20">
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+        
+        <!-- Hero Banner -->
+        <section class="glass-card rounded-2xl p-6 sm:p-10 border border-blue-500/30 relative overflow-hidden bg-gradient-to-r from-[#030712] via-[#0B0F19] to-[#030712]">
+            <div class="max-w-3xl space-y-4">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-wider code-font">
+                    ⚡ Instant Code Downloads & Lifetime License
+                </span>
+                <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight">
+                    Full Marketplace for <br/><span class="blue-gradient">SaaS Starters & Verified APIs</span>
+                </h1>
+                <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                    Browse ready-to-deploy TypeScript codebases, WhatsApp bots, Shopify Liquid templates, and AI micro-services built by Shahan Ali.
+                </p>
+            </div>
+        </section>
 
-        <!-- TAB: HOME -->
-        <div id="tab-home" class="tab-content">
-            <section class="relative min-h-[85vh] flex items-center justify-center border-b border-blue-500/20 py-16 overflow-hidden">
-                <div id="three-matrix" class="absolute inset-0 pointer-events-none opacity-60 z-0"></div>
-                <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
-                    <div class="lg:col-span-7 space-y-6">
-                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-widest code-font">
-                            ⚡ Production-Ready SaaS Starters & APIs
-                        </span>
-                        <h1 class="text-4xl sm:text-7xl font-black text-white tracking-tight leading-tight">
-                            SHIP SAAS IN <br/><span class="blue-gradient">HOURS, NOT WEEKS.</span>
-                        </h1>
-                        <p class="text-gray-300 text-sm sm:text-base max-w-xl leading-relaxed">
-                            Verified React, Next.js, Express, and Node.js codebases complete with OAuth, Stripe billing, and database migrations.
-                        </p>
-                    </div>
+        <!-- Product Grid -->
+        <section class="space-y-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-gray-800 pb-4">
+                <h2 class="text-xl font-bold text-white flex items-center gap-2 code-font">
+                    <span>Developer Catalog</span>
+                    <span id="dev-count" class="text-xs bg-blue-500/20 text-blue-400 border border-blue-500/30 px-2.5 py-0.5 rounded-full">12 Products</span>
+                </h2>
 
-                    <div class="lg:col-span-5 flex justify-center">
-                        <div class="glass-panel p-6 rounded-3xl space-y-4 max-w-md w-full border border-blue-500/30">
-                            <div class="flex items-center justify-between text-xs code-font">
-                                <span class="text-blue-400 font-bold">package.json</span>
-                                <span class="text-emerald-400 font-bold">Verified ✅</span>
-                            </div>
-                            <div class="bg-gray-950 p-4 rounded-2xl border border-gray-800 text-xs code-font text-blue-300 space-y-1">
-                                <p><span class="text-purple-400">"name"</span>: <span class="text-emerald-300">"saas-ultra-starter"</span>,</p>
-                                <p><span class="text-purple-400">"stack"</span>: [<span class="text-emerald-300">"React 18"</span>, <span class="text-emerald-300">"Tailwind"</span>, <span class="text-emerald-300">"Stripe"</span>],</p>
-                                <p><span class="text-purple-400">"rating"</span>: <span class="text-amber-400">4.98</span></p>
-                            </div>
-                            <button onclick="alert('Downloading source boilerplate zip...')" class="w-full py-3.5 rounded-xl bg-blue-500 hover:bg-blue-400 text-white font-extrabold text-xs uppercase tracking-wider">
-                                Purchase Source Code ($49)
-                            </button>
-                        </div>
-                    </div>
+                <div class="flex items-center gap-2 overflow-x-auto w-full sm:w-auto">
+                    <button onclick="filterDevCat('All')" class="dev-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white cursor-pointer">All Code</button>
+                    <button onclick="filterDevCat('SaaS')" class="dev-pill px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-300 hover:text-blue-400 cursor-pointer">SaaS Starters</button>
+                    <button onclick="filterDevCat('Bot')" class="dev-pill px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-300 hover:text-blue-400 cursor-pointer">WhatsApp Bots</button>
+                    <button onclick="filterDevCat('Shopify')" class="dev-pill px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-300 hover:text-blue-400 cursor-pointer">Shopify Themes</button>
+                    <button onclick="filterDevCat('AI')" class="dev-pill px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-300 hover:text-blue-400 cursor-pointer">AI Microservices</button>
                 </div>
-            </section>
-        </div>
-
-        <!-- TAB: SANDBOX CODE PREVIEW -->
-        <div id="tab-sandbox" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 space-y-6">
-            <h2 class="text-3xl font-black text-white code-font text-center">Live Code AST Inspector</h2>
-            <div class="glass-panel p-6 rounded-3xl border border-blue-500/30 space-y-4">
-                <div class="flex justify-between items-center text-xs code-font text-gray-400 border-b border-gray-800 pb-3">
-                    <span>server.ts (TypeScript CJS Bundle)</span>
-                    <button onclick="alert('Code copied to clipboard!')" class="text-blue-400 hover:text-white">Copy Code</button>
-                </div>
-                <pre class="bg-gray-950 p-4 rounded-xl text-xs code-font text-blue-200 overflow-x-auto leading-relaxed">
-import express from "express";
-import { GoogleGenAI } from "@google/genai";
-
-const app = express();
-app.use(express.json());
-
-app.post("/api/generate", async (req, res) => {
-  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-  const response = await ai.models.generateContent({
-    model: "gemini-1.5-pro",
-    contents: req.body.prompt,
-  });
-  res.json({ output: response.text });
-});
-                </pre>
             </div>
-        </div>
 
-        <!-- TAB: ANALYTICS -->
-        <div id="tab-analytics" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 text-center space-y-6">
-            <h2 class="text-3xl font-black text-white code-font">Seller Revenue Portal</h2>
-            <div class="glass-panel p-8 rounded-3xl border border-blue-500/30">
-                <span class="text-xs text-gray-400 uppercase tracking-widest font-bold">Total Creator Payouts</span>
-                <div class="text-4xl font-black text-emerald-400 mt-2">$1,428,500.00</div>
+            <div id="dev-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Injected JS -->
             </div>
-        </div>
-
-        <!-- TAB: SUPPORT / CONTACT -->
-        <div id="tab-contact" class="tab-content hidden py-16 max-w-3xl mx-auto px-6">
-            <div class="glass-panel p-8 rounded-3xl border border-blue-500/30 space-y-6 text-center">
-                <h2 class="text-3xl font-black text-white">Developer Support</h2>
-                <p class="text-xs text-gray-400">Facing integration questions? Submit a developer ticket.</p>
-                <button onclick="alert('Support ticket created.')" class="px-8 py-4 rounded-xl bg-blue-500 text-white font-extrabold text-xs uppercase tracking-wider">Open Ticket</button>
-            </div>
-        </div>
+        </section>
 
     </main>
 
-    <footer class="mt-20 border-t border-blue-500/20 bg-gray-950/90 py-10 text-xs text-center text-gray-400">
-        <p>© 2026 DevMarket Inc. Code Marketplace.</p>
-    </footer>
+    <!-- Dev Cart Drawer -->
+    <div id="dev-cart-drawer" class="fixed inset-y-0 right-0 z-[100] w-full max-w-md bg-[#0B0F19] border-l border-blue-500/30 p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300">
+        <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                <h3 class="text-lg font-bold text-white code-font">Your Code Cart</h3>
+                <button onclick="toggleDevCart()" class="text-gray-400 hover:text-white cursor-pointer"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div id="dev-cart-items" class="space-y-3"></div>
+        </div>
+        <div class="border-t border-gray-800 pt-4 space-y-3">
+            <div class="flex justify-between text-xs text-gray-300">
+                <span>Subtotal:</span>
+                <span id="dev-subtotal" class="text-base font-bold text-blue-400">$0</span>
+            </div>
+            <button onclick="checkoutDevCart()" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider cursor-pointer">
+                Checkout & Download Zip
+            </button>
+        </div>
+    </div>
 
     <script>
-        lucide.createIcons();
+        const devProducts = [
+            { id: 101, name: "SaaS Ultra Starter (React 18 + Stripe)", category: "SaaS", price: 49, rating: 4.98, sales: 1240, stack: "React, Tailwind, Stripe, Express", desc: "Full-stack SaaS boilerplate with authentication, subscription tiers, and dashboard." },
+            { id: 102, name: "ProBoy-MD WhatsApp Bot Multi-Device", category: "Bot", price: 35, rating: 4.95, sales: 2890, stack: "Node.js, Baileys API, Express", desc: "Automated multi-device WhatsApp bot with group admin filters and media downloader." },
+            { id: 103, name: "Shopify OS 2.0 High-Conversion Theme", category: "Shopify", price: 79, rating: 4.90, sales: 840, stack: "Liquid, Tailwind, JS", desc: "Lightweight, ultra-fast Shopify theme optimized for 95+ PageSpeed scores." },
+            { id: 104, name: "Gemini AI Automation Microservice", category: "AI", price: 29, rating: 4.99, sales: 1560, stack: "Node.js, @google/genai, TypeScript", desc: "Server-side REST API wrapper for Gemini API with streaming and function calling." },
+            { id: 105, name: "ProBoy JS Code Obfuscator Compiler", category: "SaaS", price: 39, rating: 4.88, sales: 620, stack: "TypeScript, Esprima, AST", desc: "Protect client-side JavaScript code with dead-code injection and string encryption." },
+            { id: 106, name: "AutoVault Car Rental Booking Portal", category: "SaaS", price: 59, rating: 4.92, sales: 430, stack: "React, Vite, Node.js", desc: "Interactive vehicle reservation platform with live inventory and calendar booking." },
+            { id: 107, name: "StayOra Luxury Resort Booking Suite", category: "SaaS", price: 65, rating: 4.96, sales: 510, stack: "React, Tailwind, Express", desc: "Bespoke hotel & villa reservation portal with virtual 360 room view preview." },
+            { id: 108, name: "BiteRush Food Delivery Dispatch App", category: "SaaS", price: 45, rating: 4.89, sales: 780, stack: "React, Node.js, WebSockets", desc: "Real-time food ordering system with live driver GPS dispatch simulation." },
+            { id: 109, name: "Shopify Product Page Speed Turbo Kit", category: "Shopify", price: 25, rating: 4.94, sales: 1980, stack: "Liquid, Alpine.js", desc: "Preload liquid assets, lazyload images, and strip heavy third-party scripts." },
+            { id: 110, name: "Telegram Auto-Broadcaster Bot", category: "Bot", price: 30, rating: 4.87, sales: 1120, stack: "Python, Telethon", desc: "Automated group announcement broadcast engine with schedule timer." },
+            { id: 111, name: "CloudScale Server Monitor Dashboard", category: "SaaS", price: 55, rating: 4.93, sales: 390, stack: "React, Recharts, Node.js", desc: "Real-time CPU, RAM, and bandwidth analytics dashboard for VPS servers." },
+            { id: 112, name: "SoundPulse Music Streaming Web Portal", category: "SaaS", price: 49, rating: 4.91, sales: 670, stack: "React, Web Audio API, Tailwind", desc: "Interactive audio visualizer and playlist manager web application." }
+        ];
 
-        function showTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById('tab-' + tabName).classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        let devCat = "All";
+        let devCart = [];
+
+        function renderDevProducts() {
+            const grid = document.getElementById("dev-grid");
+            const searchVal = document.getElementById("dev-search").value.toLowerCase();
+            
+            const filtered = devProducts.filter(p => {
+                const matchCat = devCat === "All" || p.category === devCat;
+                const matchSearch = p.name.toLowerCase().includes(searchVal) || p.stack.toLowerCase().includes(searchVal);
+                return matchCat && matchSearch;
+            });
+
+            document.getElementById("dev-count").innerText = `${filtered.length} Products`;
+
+            grid.innerHTML = filtered.map(p => `
+                <div class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-[10px] code-font text-blue-400">
+                            <span>${p.category}</span>
+                            <span>${p.sales} downloads</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-white line-clamp-1">${p.name}</h3>
+                        <p class="text-xs text-gray-400 line-clamp-2">${p.desc}</p>
+                        <div class="bg-gray-950 p-2 rounded-lg border border-gray-800 text-[10px] code-font text-gray-300">
+                            ${p.stack}
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 pt-2 border-t border-gray-800">
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-black text-blue-400">$${p.price}</span>
+                            <span class="text-xs text-amber-400 font-bold">${p.rating} ★★★★★</span>
+                        </div>
+                        <button onclick="addDevCart(${p.id})" class="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider cursor-pointer">
+                            Add Code to Cart
+                        </button>
+                    </div>
+                </div>
+            `).join("");
         }
 
-        // Three.js Code Grid
-        window.addEventListener('load', () => {
-            const container = document.getElementById('three-matrix');
-            if (!container) return;
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            container.appendChild(renderer.domElement);
+        function filterDevCat(cat) {
+            devCat = cat;
+            document.querySelectorAll(".dev-pill").forEach(btn => {
+                if (btn.innerText.includes(cat)) {
+                    btn.className = "dev-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white cursor-pointer";
+                } else {
+                    btn.className = "dev-pill px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-300 hover:text-blue-400 cursor-pointer";
+                }
+            });
+            renderDevProducts();
+        }
 
-            const geo = new THREE.IcosahedronGeometry(2.2, 1);
-            const mat = new THREE.MeshBasicMaterial({ color: 0x3B82F6, wireframe: true });
-            const ico = new THREE.Mesh(geo, mat);
-            scene.add(ico);
-
-            camera.position.z = 5;
-            function animate() {
-                requestAnimationFrame(animate);
-                ico.rotation.x += 0.006;
-                ico.rotation.y += 0.009;
-                renderer.render(scene, camera);
+        function addDevCart(id) {
+            const prod = devProducts.find(p => p.id === id);
+            if (!prod) return;
+            if (!devCart.find(i => i.id === id)) {
+                devCart.push(prod);
             }
-            animate();
+            updateDevCart();
+            toggleDevCart(true);
+        }
+
+        function updateDevCart() {
+            document.getElementById("dev-cart-badge").innerText = devCart.length;
+            const subtotal = devCart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById("dev-subtotal").innerText = `$${subtotal}`;
+            document.getElementById("dev-cart-items").innerHTML = devCart.map(item => `
+                <div class="flex items-center justify-between bg-gray-950 p-3 rounded-xl border border-gray-800 text-xs">
+                    <div>
+                        <div class="font-bold text-white truncate max-w-[200px]">${item.name}</div>
+                        <div class="text-blue-400 font-bold">$${item.price}</div>
+                    </div>
+                    <button onclick="removeDevCart(${item.id})" class="text-red-400 hover:text-white font-bold">Remove</button>
+                </div>
+            `).join("");
+        }
+
+        function removeDevCart(id) {
+            devCart = devCart.filter(i => i.id !== id);
+            updateDevCart();
+        }
+
+        function toggleDevCart(forceOpen = false) {
+            const drawer = document.getElementById("dev-cart-drawer");
+            if (forceOpen) drawer.classList.remove("translate-x-full");
+            else drawer.classList.toggle("translate-x-full");
+        }
+
+        function checkoutDevCart() {
+            if (devCart.length === 0) return alert("Cart is empty!");
+            alert("🎉 CODE DOWNLOAD READY!\n\nYour zip packages with source code, license key, and documentation have been unlocked.");
+            devCart = [];
+            updateDevCart();
+            toggleDevCart();
+        }
+
+        window.addEventListener("load", () => {
+            lucide.createIcons();
+            renderDevProducts();
         });
     </script>
 </body>
