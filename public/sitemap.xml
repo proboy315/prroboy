@@ -2,28 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
-  <!-- ==================== HOME PAGE ==================== -->
+  <!-- ==================== MAIN PORTFOLIO HOME ==================== -->
   <url>
     <loc>https://proboy.vercel.app/</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
 
-    <!-- Image 1: Workspace -->
     <image:image>
       <image:loc>https://proboy.vercel.app/images/me1.png</image:loc>
       <image:title>Shahan Ali Best Pakistani Developer Workspace in Burewala</image:title>
       <image:caption>The high-performance workstation where shahan315 / proboy315 develops custom WhatsApp bots, Shopify scripts, and system setups.</image:caption>
     </image:image>
 
-    <!-- Image 2: Automation Dashboard -->
     <image:image>
       <image:loc>https://proboy.vercel.app/images/me1.png</image:loc>
-      <image:title></image:title>
+      <image:title>Automation Dashboard</image:title>
       <image:caption>Automation analytics dashboard showing cloud infrastructure handles managed by Shahan Ali in Punjab, Pakistan.</image:caption>
     </image:image>
 
-    <!-- Image 3: College -->
     <image:image>
       <image:loc>https://proboy.vercel.app/images/me1.png</image:loc>
       <image:title>Govt Graduate College Burewala - ICS Tech Hub</image:title>
@@ -31,76 +28,105 @@
     </image:image>
   </url>
 
-  <!-- ==================== ABOUT SECTION ==================== -->
+  <!-- ==================== MAIN SECTIONS ==================== -->
   <url>
     <loc>https://proboy.vercel.app/#about</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- ==================== CERTIFICATES SECTION ==================== -->
   <url>
     <loc>https://proboy.vercel.app/#certificates</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- ==================== SERVICES SECTION ==================== -->
   <url>
     <loc>https://proboy.vercel.app/#services</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- ==================== PROJECTS SECTION ==================== -->
   <url>
     <loc>https://proboy.vercel.app/#projects</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- ==================== SHOWCASE SECTION ==================== -->
+  <url>
+    <loc>https://proboy.vercel.app/#reviews</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <url>
     <loc>https://proboy.vercel.app/#showcase</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- ==================== SKILLS SECTION ==================== -->
   <url>
     <loc>https://proboy.vercel.app/#skills</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- ==================== GALLERY SECTION ==================== -->
   <url>
     <loc>https://proboy.vercel.app/#gallery</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- ==================== Q&A SECTION ==================== -->
   <url>
     <loc>https://proboy.vercel.app/#qa</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- ==================== CONTACT SECTION ==================== -->
   <url>
     <loc>https://proboy.vercel.app/#contact</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- ==================== SHOWCASE HUB ==================== -->
+  <url>
+    <loc>https://proboy.vercel.app/showcase/</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ==================== 20 SHOWCASE PROJECTS ==================== -->
+  <url><loc>https://proboy.vercel.app/showcase/luxecart/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/biterush/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/nestora/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/fitforge/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/tripora/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/devmarket/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/neuraldesk/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/learnova/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/medibook/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/autovault/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/artivio/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/hireflow/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/shiptrack/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/stayora/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/finova/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/securepass/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/cloudpanel/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/shopadmin/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/vortex/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://proboy.vercel.app/showcase/prohub/</loc><lastmod>2026-08-12</lastmod><priority>0.8</priority></url>
 
 </urlset>
