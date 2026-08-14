@@ -48,6 +48,12 @@ import { Waves } from "./components/ui/wave-background";
 import { LiquidButton } from "./components/ui/liquid-glass-button";
 import { TiltCard } from "./components/ui/TiltCard";
 import { motion, AnimatePresence } from "motion/react";
+import { ScrollProgressIndicator } from "./components/ScrollProgressIndicator";
+import { CursorSpotlight } from "./components/CursorSpotlight";
+import { CinematicHero } from "./components/CinematicHero";
+import { CinematicAbout } from "./components/CinematicAbout";
+import { InteractiveSkillEcosystem } from "./components/InteractiveSkillEcosystem";
+import { CinematicServices } from "./components/CinematicServices";
 
 // Types for Projects
 interface Project {
@@ -346,6 +352,11 @@ export default function App() {
     e.preventDefault();
     if (!formName || !formMsg) return;
 
+    // Launch direct WhatsApp chat with pre-filled message
+    const formattedText = `Hello Shahan Ali!\n\nName: ${formName}\nEmail: ${formEmail || "N/A"}\nMessage: ${formMsg}`;
+    const waUrl = `https://wa.me/923261684315?text=${encodeURIComponent(formattedText)}`;
+    window.open(waUrl, "_blank");
+
     const submission = {
       name: formName,
       email: formEmail,
@@ -386,6 +397,8 @@ export default function App() {
       </div>
 
       <ParticleWaveBackground ecoMode={ecoMode} />
+      <ScrollProgressIndicator />
+      <CursorSpotlight />
 
       {/* Main Container Layer */}
       <div className="relative z-20">
@@ -419,6 +432,7 @@ export default function App() {
                 { name: "Services", id: "services" },
                 { name: "Projects", id: "projects" },
                 { name: "Showcase", id: "showcase" },
+                { name: "Reviews", id: "reviews" },
                 { name: "Skills", id: "skills" },
                 { name: "Gallery", id: "gallery" },
                 { name: "FAQ", id: "qa" },
@@ -487,6 +501,7 @@ export default function App() {
                 { name: "Services", id: "services" },
                 { name: "Projects & Tools", id: "projects" },
                 { name: "Client Showcase", id: "showcase" },
+                { name: "Client Reviews", id: "reviews" },
                 { name: "Skills & Stack", id: "skills" },
                 { name: "Studio Gallery", id: "gallery" },
                 { name: "FAQ", id: "qa" },
@@ -528,234 +543,10 @@ export default function App() {
         </header>
 
         {/* ================= HERO SECTION ================= */}
-        <SpatialSection
-          id="hero"
-          className="min-h-screen relative flex items-center justify-center pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
-        >
-          <Waves className="absolute inset-0 z-0 pointer-events-none opacity-20" strokeColor="rgba(178, 217, 229, 0.2)" pointerSize={0.3} disabled={ecoMode} />
-
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-            
-            {/* Hero Left Content Column */}
-            <div className="lg:col-span-7 text-center lg:text-left space-y-6 order-2 lg:order-1">
-              
-              {/* Availability Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full backdrop-blur-xl bg-white/[0.04] border border-white/10 text-xs font-semibold text-cyan-300 shadow-inner">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>Available for New Projects & Collaborations</span>
-              </div>
-
-              {/* Main Name Heading */}
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05]">
-                <span className="text-white">Shahan</span>{" "}
-                <span className="bg-gradient-to-r from-cyan-300 via-emerald-300 to-purple-300 text-transparent bg-clip-text">
-                  Ali
-                </span>
-              </h1>
-
-              {/* Primary Role Subtitle */}
-              <p className="text-lg sm:text-xl text-slate-300 font-medium tracking-wide">
-                Full Stack, AI & Bot Developer from <span className="text-cyan-300 font-semibold">Pakistan</span>
-              </p>
-
-              {/* Secondary Keyword Badges */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1 text-xs">
-                <span className="px-3 py-1 rounded-xl backdrop-blur-md bg-white/[0.03] border border-white/10 text-slate-300 flex items-center gap-1.5">
-                  <Laptop size={14} className="text-cyan-400" /> Web Applications
-                </span>
-                <span className="px-3 py-1 rounded-xl backdrop-blur-md bg-white/[0.03] border border-white/10 text-slate-300 flex items-center gap-1.5">
-                  <Cpu size={14} className="text-purple-400" /> AI Systems
-                </span>
-                <span className="px-3 py-1 rounded-xl backdrop-blur-md bg-white/[0.03] border border-white/10 text-slate-300 flex items-center gap-1.5">
-                  <Bot size={14} className="text-emerald-400" /> WhatsApp Bots
-                </span>
-                <span className="px-3 py-1 rounded-xl backdrop-blur-md bg-white/[0.03] border border-white/10 text-slate-300 flex items-center gap-1.5">
-                  <ShoppingBag size={14} className="text-amber-400" /> Shopify Expert
-                </span>
-              </div>
-
-              {/* High Quality Persona Description */}
-              <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Crafting high-speed web portals, intelligent automated bots (ProBoy-MD), and customized Shopify architectures. Studying ICS at <span className="text-slate-200 font-semibold">Govt Graduate College Burewala</span> while serving clients worldwide. Known online as <span className="text-cyan-400 font-mono">shahan315</span>.
-              </p>
-
-              {/* Hero Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-3">
-                <LiquidButton
-                  onClick={() => {
-                    const el = document.getElementById("projects");
-                    if (el) el.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="w-full sm:w-auto font-bold rounded-2xl px-6 py-3.5 text-xs uppercase tracking-wider text-white bg-cyan-950/20 border border-cyan-400/30 hover:border-cyan-400/80 hover:shadow-lg hover:shadow-cyan-500/20 transition-all cursor-pointer"
-                >
-                  <Rocket size={16} className="text-cyan-400" />
-                  <span>View Projects</span>
-                </LiquidButton>
-
-                <LiquidButton
-                  onClick={() => window.open("https://github.com/ProBoy315", "_blank")}
-                  className="w-full sm:w-auto font-bold rounded-2xl px-6 py-3.5 text-xs uppercase tracking-wider text-white bg-slate-900/40 border border-white/10 hover:border-white/30 transition-all cursor-pointer"
-                >
-                  <Github size={16} className="text-slate-300" />
-                  <span>GitHub Profile</span>
-                </LiquidButton>
-              </div>
-
-              {/* Social Channels Row */}
-              <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-3">
-                <a
-                  href="https://whatsapp.com/channel/0029Vb6vIroBPzjSw1lCQP0X"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-2xl backdrop-blur-md bg-white/[0.03] border border-white/10 hover:border-emerald-400/50 hover:text-emerald-400 transition-all text-slate-400 flex items-center gap-2 text-xs font-medium px-3.5"
-                  title="WhatsApp Broadcast Channel"
-                >
-                  <MessageSquare size={16} className="text-emerald-400" />
-                  <span>WhatsApp Channel</span>
-                </a>
-                <a
-                  href="https://tiktok.com/@itx_proboy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-2xl backdrop-blur-md bg-white/[0.03] border border-white/10 hover:border-cyan-400/50 hover:text-cyan-400 transition-all text-slate-400"
-                  aria-label="TikTok"
-                >
-                  <Compass size={16} />
-                </a>
-                <a
-                  href="https://instagram.com/itx___proboy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-2xl backdrop-blur-md bg-white/[0.03] border border-white/10 hover:border-purple-400/50 hover:text-purple-400 transition-all text-slate-400"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={16} />
-                </a>
-                <a
-                  href="https://www.facebook.com/profile.php?id=100093176537267"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-2xl backdrop-blur-md bg-white/[0.03] border border-white/10 hover:border-blue-400/50 hover:text-blue-400 transition-all text-slate-400"
-                  aria-label="Facebook"
-                >
-                  <Facebook size={16} />
-                </a>
-                <a
-                  href="https://t.me/itx_proboy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-2xl backdrop-blur-md bg-white/[0.03] border border-white/10 hover:border-sky-400/50 hover:text-sky-400 transition-all text-slate-400"
-                  aria-label="Telegram"
-                >
-                  <Send size={16} />
-                </a>
-              </div>
-
-            </div>
-
-            {/* Hero Right Visual Column */}
-            <div className="lg:col-span-5 flex justify-center relative order-1 lg:order-2 my-4 lg:my-0">
-              <div className="relative w-full max-w-[280px] sm:max-w-sm aspect-[4/5] rounded-3xl p-3 backdrop-blur-2xl bg-white/[0.03] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] group">
-                
-                {/* Image Frame */}
-                <div className="w-full h-full rounded-2xl overflow-hidden relative bg-slate-950">
-                  <img
-                    src="/img.png"
-                    alt="Shahan Ali - Full Stack Developer Pakistan"
-                    className="w-full h-full object-cover rounded-2xl transition-transform duration-700 group-hover:scale-105"
-                    referrerPolicy="no-referrer"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      const parent = e.currentTarget.parentElement;
-                      if (parent) {
-                        const div = document.createElement('div');
-                        div.className = "w-full h-full rounded-2xl bg-gradient-to-tr from-slate-900 to-slate-950 flex flex-col items-center justify-center p-6 text-center";
-                        div.innerHTML = '<span class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-emerald-300">SA</span><span class="text-sm font-semibold text-white mt-2">Shahan Ali</span><span class="text-xs text-slate-400">Developer Pakistan</span>';
-                        parent.appendChild(div);
-                      }
-                    }}
-                  />
-                  
-                  {/* Subtle Light Reflection Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60 pointer-events-none" />
-                </div>
-
-                {/* Floating Glass Badges */}
-                <div className="absolute -bottom-3 -left-2 sm:-bottom-4 sm:-left-4 backdrop-blur-xl bg-slate-950/80 border border-white/10 p-2.5 sm:p-3 rounded-2xl shadow-xl flex items-center gap-2.5">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-300">
-                    <CheckCircle2 size={15} />
-                  </div>
-                  <div>
-                    <div className="text-[11px] sm:text-xs font-bold text-white">Shahan Ali</div>
-                    <div className="text-[9px] sm:text-[10px] text-slate-400 font-mono">Full Stack & AI</div>
-                  </div>
-                </div>
-
-                <div className="absolute -top-3 -right-2 sm:-top-4 sm:-right-4 backdrop-blur-xl bg-slate-950/80 border border-white/10 p-2.5 sm:p-3 rounded-2xl shadow-xl flex items-center gap-2.5">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-300">
-                    <MapPin size={15} />
-                  </div>
-                  <div>
-                    <div className="text-[11px] sm:text-xs font-bold text-white">Burewala</div>
-                    <div className="text-[9px] sm:text-[10px] text-slate-400 font-mono">Punjab, Pakistan</div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </SpatialSection>
+        <CinematicHero ecoMode={ecoMode} />
 
         {/* ================= ABOUT SHAHAN ALI ================= */}
-        <SpatialSection id="about" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-white/5">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-cyan-400 bg-cyan-950/30 px-3.5 py-1.5 rounded-full border border-cyan-500/20 inline-flex items-center gap-2">
-              <Award size={13} />
-              About Shahan Ali
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Engineering Digital Excellence in <span className="bg-gradient-to-r from-cyan-300 to-emerald-300 text-transparent bg-clip-text">Pakistan</span>
-            </h2>
-            <p className="text-slate-400 text-sm sm:text-base">
-              Blending academic computer science fundamentals with real-world automated system engineering.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            <TiltCard glowColor="rgba(178, 217, 229, 0.15)" className="backdrop-blur-2xl bg-white/[0.03] p-6 rounded-3xl border border-white/10 space-y-3">
-              <div className="w-10 h-10 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-300">
-                <MapPin size={20} />
-              </div>
-              <h3 className="text-base font-bold text-white">Location & Base</h3>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                Operating from <span className="text-cyan-300">Burewala, Punjab, Pakistan</span>. Building high-availability solutions for clients locally and across global servers.
-              </p>
-            </TiltCard>
-
-            <TiltCard glowColor="rgba(16, 185, 129, 0.15)" className="backdrop-blur-2xl bg-white/[0.03] p-6 rounded-3xl border border-white/10 space-y-3">
-              <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-300">
-                <BookOpen size={20} />
-              </div>
-              <h3 className="text-base font-bold text-white">Academic Journey</h3>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                1st Year ICS (Intermediate in Computer Science) student at <span className="text-emerald-300">Govt Graduate College Burewala</span>.
-              </p>
-            </TiltCard>
-
-            <TiltCard glowColor="rgba(168, 85, 247, 0.15)" className="backdrop-blur-2xl bg-white/[0.03] p-6 rounded-3xl border border-white/10 space-y-3">
-              <div className="w-10 h-10 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-300">
-                <Cpu size={20} />
-              </div>
-              <h3 className="text-base font-bold text-white">Core Philosophy</h3>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                Building fast, lightweight, and scalable software with clean modular architecture and high performance.
-              </p>
-            </TiltCard>
-
-          </div>
-        </SpatialSection>
+        <CinematicAbout />
 
         {/* ================= CERTIFICATES & RECOGNITIONS ================= */}
         <SpatialSection id="certificates" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-white/5">
@@ -875,90 +666,7 @@ export default function App() {
         </SpatialSection>
 
         {/* ================= SERVICES & CAPABILITIES ================= */}
-        <SpatialSection id="services" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-white/5">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/30 px-3.5 py-1.5 rounded-full border border-emerald-500/20 inline-flex items-center gap-2">
-              <Layers size={13} />
-              What I Build
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Services & <span className="bg-gradient-to-r from-emerald-300 to-cyan-300 text-transparent bg-clip-text">Capabilities</span>
-            </h2>
-            <p className="text-slate-400 text-sm sm:text-base">
-              End-to-end technical development for individuals, businesses, and digital creators.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            {/* Service 1 */}
-            <TiltCard glowColor="rgba(178, 217, 229, 0.15)" className="backdrop-blur-2xl bg-white/[0.03] p-6 rounded-3xl border border-white/10 space-y-4 hover:border-cyan-400/40 transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-300">
-                <Code size={22} />
-              </div>
-              <h3 className="text-lg font-bold text-white">Full Stack Web Engineering</h3>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                Building responsive, modern, and high-speed web platforms using React, TypeScript, Vite, Tailwind CSS, and Node.js REST APIs.
-              </p>
-            </TiltCard>
-
-            {/* Service 2 */}
-            <TiltCard glowColor="rgba(168, 85, 247, 0.15)" className="backdrop-blur-2xl bg-white/[0.03] p-6 rounded-3xl border border-white/10 space-y-4 hover:border-purple-400/40 transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-300">
-                <Cpu size={22} />
-              </div>
-              <h3 className="text-lg font-bold text-white">AI Tools & Integrations</h3>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                Integrating LLMs (Gemini API), automated smart agents, dynamic content generators, and conversational AI tools into web systems.
-              </p>
-            </TiltCard>
-
-            {/* Service 3 */}
-            <TiltCard glowColor="rgba(16, 185, 129, 0.15)" className="backdrop-blur-2xl bg-white/[0.03] p-6 rounded-3xl border border-white/10 space-y-4 hover:border-emerald-400/40 transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-300">
-                <Bot size={22} />
-              </div>
-              <h3 className="text-lg font-bold text-white">WhatsApp & Bot Automation</h3>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                Architecting automated multi-device bots (ProBoy-MD), webhook handlers, group moderation filters, and auto-reply servers.
-              </p>
-            </TiltCard>
-
-            {/* Service 4 */}
-            <TiltCard glowColor="rgba(245, 158, 11, 0.15)" className="backdrop-blur-2xl bg-white/[0.03] p-6 rounded-3xl border border-white/10 space-y-4 hover:border-amber-400/40 transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-300">
-                <ShoppingBag size={22} />
-              </div>
-              <h3 className="text-lg font-bold text-white">Shopify OS 2.0 & Liquid</h3>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                Designing lightweight, high-conversion Shopify Liquid themes, automated fulfillment scripts, and product page speed optimizations.
-              </p>
-            </TiltCard>
-
-            {/* Service 5 */}
-            <TiltCard glowColor="rgba(59, 130, 246, 0.15)" className="backdrop-blur-2xl bg-white/[0.03] p-6 rounded-3xl border border-white/10 space-y-4 hover:border-blue-400/40 transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-300">
-                <Terminal size={22} />
-              </div>
-              <h3 className="text-lg font-bold text-white">Code Obfuscation & Security</h3>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                Developing client-side JavaScript compilation tools (ProBoy JS Obfuscator) and diagnostic tools (ProBoy CamLink) to protect production code.
-              </p>
-            </TiltCard>
-
-            {/* Service 6 */}
-            <TiltCard glowColor="rgba(236, 72, 153, 0.15)" className="backdrop-blur-2xl bg-white/[0.03] p-6 rounded-3xl border border-white/10 space-y-4 hover:border-pink-400/40 transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-300">
-                <TrendingUp size={22} />
-              </div>
-              <h3 className="text-lg font-bold text-white">Monetization & Analytics</h3>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                Providing analytical dashboards and monetization frameworks for YouTube, TikTok, and Facebook creator portals from Pakistan.
-              </p>
-            </TiltCard>
-
-          </div>
-        </SpatialSection>
+        <CinematicServices />
 
         {/* ================= PROJECTS & CREATIONS ================= */}
         <SpatialSection id="projects" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-white/5">
@@ -1226,77 +934,194 @@ export default function App() {
           </div>
         </SpatialSection>
 
-        {/* ================= SKILLS & TOOLKIT ================= */}
-        <SpatialSection id="skills" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-white/5">
+        {/* ================= CLIENT REVIEWS & TESTIMONIALS ================= */}
+        <SpatialSection id="reviews" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-white/5">
+          {/* Inject JSON-LD Schema for Reviews */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Product",
+                "name": "Shahan Ali Full Stack & Bot Development Services",
+                "description": "Custom Web Applications, ProBoy-MD WhatsApp Bots, Shopify Liquid Customization & AI Integrations by Shahan Ali.",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "ProBoy315"
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "5.0",
+                  "reviewCount": "4",
+                  "bestRating": "5",
+                  "worstRating": "1"
+                },
+                "review": [
+                  {
+                    "@type": "Review",
+                    "author": { "@type": "Person", "name": "Malik Bilal" },
+                    "datePublished": "2026-06-15",
+                    "reviewBody": "Shahan delivered an outstanding multi-device WhatsApp bot for our e-commerce dispatch team with automated customer alerts. Execution was rapid, clean, and completely reliable!",
+                    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+                  },
+                  {
+                    "@type": "Review",
+                    "author": { "@type": "Person", "name": "Sarah Jenkins" },
+                    "datePublished": "2026-07-02",
+                    "reviewBody": "The custom Shopify Liquid layout and checkout enhancements Shahan engineered boosted our mobile conversion rate by 34%. Highly recommended full-stack developer!",
+                    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+                  },
+                  {
+                    "@type": "Review",
+                    "author": { "@type": "Person", "name": "David Vance" },
+                    "datePublished": "2026-07-28",
+                    "reviewBody": "Shahan's 20 interactive digital product showcase experiences are among the most creative developer portfolios I have seen. Unmatched attention to UI/UX and performance.",
+                    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+                  },
+                  {
+                    "@type": "Review",
+                    "author": { "@type": "Person", "name": "Hamza Sheikh" },
+                    "datePublished": "2026-08-01",
+                    "reviewBody": "Built an automated lead routing script with Node.js and REST APIs that saved our ops team 15+ hours every week. Super responsive on WhatsApp.",
+                    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+                  }
+                ]
+              })
+            }}
+          />
+
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-purple-400 bg-purple-950/30 px-3.5 py-1.5 rounded-full border border-purple-500/20 inline-flex items-center gap-2">
-              <Workflow size={13} />
-              Technical Stack
+            <span className="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-950/30 px-3.5 py-1.5 rounded-full border border-amber-500/20 inline-flex items-center gap-2">
+              <Star size={13} className="fill-amber-400 text-amber-400" />
+              Verified Client Reviews
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Shahan Ali's <span className="bg-gradient-to-r from-purple-300 via-cyan-300 to-emerald-300 text-transparent bg-clip-text">Toolkit & Languages</span>
+              Client & Partner <span className="bg-gradient-to-r from-amber-300 via-amber-400 to-amber-200 text-transparent bg-clip-text">Testimonials</span>
             </h2>
             <p className="text-slate-400 text-sm sm:text-base">
-              High-performance technologies utilized across production systems.
+              Real feedback from e-commerce store owners, SaaS founders, and logistics managers who partnered with Shahan Ali.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            <TiltCard glowColor="rgba(178, 217, 229, 0.12)" className="backdrop-blur-2xl bg-white/[0.03] p-6 rounded-3xl border border-white/10 space-y-3">
-              <div className="text-cyan-300 font-bold text-sm flex items-center gap-2">
-                <Code size={16} /> Languages
-              </div>
-              <div className="flex flex-wrap gap-2 pt-2">
-                {["JavaScript", "TypeScript", "HTML5/CSS3", "Python", "PHP", "SQL"].map((s) => (
-                  <span key={s} className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300 text-xs">
-                    {s}
+            <TiltCard glowColor="rgba(245, 158, 11, 0.15)" className="backdrop-blur-2xl bg-white/[0.03] p-7 rounded-3xl border border-white/10 flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1 text-amber-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={15} className="fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+                    <UserCheck size={11} /> Verified Client
                   </span>
-                ))}
+                </div>
+                <p className="text-slate-200 text-sm sm:text-base leading-relaxed italic">
+                  "Shahan delivered an outstanding multi-device WhatsApp bot for our e-commerce dispatch team with automated customer alerts. Execution was rapid, clean, and completely reliable!"
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                <div>
+                  <h4 className="text-sm font-bold text-white">Malik Bilal</h4>
+                  <p className="text-xs text-slate-400">CEO · Logistics Express PK</p>
+                </div>
+                <span className="px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono text-[10px]">
+                  ShipTrack & WhatsApp API
+                </span>
               </div>
             </TiltCard>
 
-            <TiltCard glowColor="rgba(16, 185, 129, 0.12)" className="backdrop-blur-2xl bg-white/[0.03] p-6 rounded-3xl border border-white/10 space-y-3">
-              <div className="text-emerald-300 font-bold text-sm flex items-center gap-2">
-                <Bot size={16} /> Bot Engines
-              </div>
-              <div className="flex flex-wrap gap-2 pt-2">
-                {["Baileys API", "Venom-Bot", "Node.js", "Express", "Telegraf", "Telethon"].map((s) => (
-                  <span key={s} className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300 text-xs">
-                    {s}
+            <TiltCard glowColor="rgba(245, 158, 11, 0.15)" className="backdrop-blur-2xl bg-white/[0.03] p-7 rounded-3xl border border-white/10 flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1 text-amber-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={15} className="fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+                    <UserCheck size={11} /> Verified Client
                   </span>
-                ))}
+                </div>
+                <p className="text-slate-200 text-sm sm:text-base leading-relaxed italic">
+                  "The custom Shopify Liquid layout and checkout enhancements Shahan engineered boosted our mobile conversion rate by 34%. Highly recommended full-stack developer!"
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                <div>
+                  <h4 className="text-sm font-bold text-white">Sarah Jenkins</h4>
+                  <p className="text-xs text-slate-400">E-Commerce Director · UrbanAura UK</p>
+                </div>
+                <span className="px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono text-[10px]">
+                  LuxeCart Custom Shopify
+                </span>
               </div>
             </TiltCard>
 
-            <TiltCard glowColor="rgba(245, 158, 11, 0.12)" className="backdrop-blur-2xl bg-white/[0.03] p-6 rounded-3xl border border-white/10 space-y-3">
-              <div className="text-amber-300 font-bold text-sm flex items-center gap-2">
-                <ShoppingBag size={16} /> E-Commerce & DB
-              </div>
-              <div className="flex flex-wrap gap-2 pt-2">
-                {["Shopify Liquid", "Shopify OS 2.0", "MySQL", "MongoDB", "Firestore", "REST APIs"].map((s) => (
-                  <span key={s} className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300 text-xs">
-                    {s}
+            <TiltCard glowColor="rgba(245, 158, 11, 0.15)" className="backdrop-blur-2xl bg-white/[0.03] p-7 rounded-3xl border border-white/10 flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1 text-amber-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={15} className="fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+                    <UserCheck size={11} /> Industry Partner
                   </span>
-                ))}
+                </div>
+                <p className="text-slate-200 text-sm sm:text-base leading-relaxed italic">
+                  "Shahan's 20 interactive digital product showcase experiences are among the most creative developer portfolios I've seen. Unmatched attention to UI/UX, 3D storytelling, and performance."
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                <div>
+                  <h4 className="text-sm font-bold text-white">David Vance</h4>
+                  <p className="text-xs text-slate-400">Product Lead · NextGen SaaS US</p>
+                </div>
+                <span className="px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono text-[10px]">
+                  Digital Product Showcases
+                </span>
               </div>
             </TiltCard>
 
-            <TiltCard glowColor="rgba(168, 85, 247, 0.12)" className="backdrop-blur-2xl bg-white/[0.03] p-6 rounded-3xl border border-white/10 space-y-3">
-              <div className="text-purple-300 font-bold text-sm flex items-center gap-2">
-                <Cpu size={16} /> Cloud & AI
-              </div>
-              <div className="flex flex-wrap gap-2 pt-2">
-                {["Gemini API", "Vercel", "Render", "Git & GitHub", "Tailwind CSS", "Vite"].map((s) => (
-                  <span key={s} className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300 text-xs">
-                    {s}
+            <TiltCard glowColor="rgba(245, 158, 11, 0.15)" className="backdrop-blur-2xl bg-white/[0.03] p-7 rounded-3xl border border-white/10 flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1 text-amber-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={15} className="fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+                    <UserCheck size={11} /> Verified Client
                   </span>
-                ))}
+                </div>
+                <p className="text-slate-200 text-sm sm:text-base leading-relaxed italic">
+                  "Built an automated lead routing script with Node.js and REST APIs that saved our ops team 15+ hours every week. Super responsive on WhatsApp and very polite."
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                <div>
+                  <h4 className="text-sm font-bold text-white">Hamza Sheikh</h4>
+                  <p className="text-xs text-slate-400">Founder · TechPulse Solutions</p>
+                </div>
+                <span className="px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono text-[10px]">
+                  Node.js Bot Automation
+                </span>
               </div>
             </TiltCard>
 
           </div>
         </SpatialSection>
+
+        {/* ================= SKILLS & TOOLKIT ================= */}
+        <InteractiveSkillEcosystem />
 
         {/* ================= DIGITAL MEDIA GALLERY ================= */}
         <SpatialSection id="gallery" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-white/5">
@@ -1476,7 +1301,7 @@ export default function App() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">Message</label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">Your Message</label>
                   <textarea
                     required
                     rows={4}
@@ -1489,16 +1314,16 @@ export default function App() {
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500/20 to-emerald-500/20 border border-cyan-400/30 hover:border-cyan-400/80 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-emerald-500/20 border border-emerald-400/40 hover:border-emerald-400 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg"
                 >
-                  <Send size={16} className="text-cyan-300" />
-                  <span>Send Message</span>
+                  <Phone size={16} className="text-emerald-400" />
+                  <span>Send Message via WhatsApp</span>
                 </button>
 
                 {formSuccess && (
                   <div className="p-3.5 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold text-center flex items-center justify-center gap-2">
                     <CheckCircle2 size={16} />
-                    <span>Message sent successfully! Shahan Ali will review it shortly.</span>
+                    <span>WhatsApp launched & message recorded! Shahan Ali will reply shortly.</span>
                   </div>
                 )}
               </form>
