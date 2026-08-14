@@ -1,41 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoVault | Exotic & Hypercar Showroom</title>
+    <title>AutoVault — Exotic Hypercar Showroom | Shahan Ali Portfolio</title>
+    <meta name="description" content="Ultra-exclusive exotic car dealership experience with 3D hypercar aerodynamic scroll storytelling, side-by-side performance spec matrix, and integrated inventory management portal. Designed & Developed by Shahan Ali (shahan315 / ProBoy).">
+    <meta name="author" content="Shahan Ali (shahan315 / ProBoy)">
+    <link rel="canonical" href="https://proboy.vercel.app/showcase/autovault/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="AutoVault — Exotic Hypercar Showroom | Shahan Ali">
+    <meta property="og:description" content="Unleash Pure Horsepower. Interactive hypercar showcase & dealership portal.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts & Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        vault: {
+                            400: '#EF4444',
+                            500: '#DC2626',
+                            600: '#B91C1C',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "AutoVault Hypercar Portal",
+          "applicationCategory": "BusinessApplication",
+          "description": "Exotic automotive showroom platform with 3D aerodynamics and inventory management.",
+          "author": { "@type": "Person", "name": "Shahan Ali", "url": "https://proboy.vercel.app/" }
+        }
+      ]
+    }
+    </script>
+
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0A0A0E; color: #F8FAFC; overflow-x: hidden; }
         .red-gradient { background: linear-gradient(135deg, #EF4444 0%, #DC2626 50%, #991B1B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glass-panel { background: rgba(18, 18, 26, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(239, 68, 68, 0.25); }
+        .glass-panel { background: rgba(18, 18, 26, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(239, 68, 68, 0.25); }
+        .glass-panel:hover { border-color: rgba(239, 68, 68, 0.4); }
     </style>
 </head>
-<body class="bg-[#0A0A0E] text-slate-100 min-h-screen antialiased selection:bg-red-500 selection:text-white">
+<body class="bg-[#0A0A0E] text-slate-100 antialiased selection:bg-red-500 selection:text-white">
 
-    <header class="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0E]/90 backdrop-blur-xl border-b border-red-500/20">
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0E]/90 backdrop-blur-2xl border-b border-red-500/20">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#" onclick="showTab('home')" class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-red-500 to-rose-700 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-red-500/30">🏎️</div>
-                <span class="font-black text-2xl tracking-tight text-white">Auto<span class="text-red-500">Vault</span></span>
+            <a href="#" onclick="showTab('home')" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-red-500 to-rose-700 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-red-500/30 group-hover:scale-105 transition-transform">🏎️</div>
+                <div>
+                    <span class="font-black text-2xl tracking-tight text-white block">Auto<span class="text-red-500">Vault</span></span>
+                    <span class="text-[9px] text-red-400 font-mono tracking-wider block">BY SHAHAN ALI</span>
+                </div>
             </a>
 
             <nav class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-wider text-slate-300">
                 <button onclick="showTab('home')" class="hover:text-red-400 transition-colors cursor-pointer text-red-400">Showroom</button>
+                <button onclick="showTab('inventory')" class="hover:text-red-400 transition-colors cursor-pointer">Hypercar Fleet</button>
                 <button onclick="showTab('specs')" class="hover:text-red-400 transition-colors cursor-pointer">Spec Matrix</button>
-                <button onclick="showTab('finance')" class="hover:text-red-400 transition-colors cursor-pointer">Lease Estimator</button>
                 <button onclick="showTab('contact')" class="hover:text-red-400 transition-colors cursor-pointer">Private Concierge</button>
+                <button onclick="openDealerAdmin()" class="px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-[10px] font-bold hover:bg-red-500/20 cursor-pointer">
+                    ⚙️ Dealer Admin
+                </button>
             </nav>
 
             <div class="flex items-center gap-4">
-                <button onclick="showTab('contact')" class="px-5 py-2.5 rounded-xl bg-red-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-red-400 transition-all cursor-pointer">
+                <button onclick="openInquiryModal('General Hypercar Inquiry')" class="px-5 py-2.5 rounded-xl bg-red-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-red-400 transition-all cursor-pointer shadow-lg shadow-red-500/30">
                     Book Test Drive
                 </button>
-                <a href="/#showcase" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 hidden sm:flex">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Showcase
+                <a href="/showcase/" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 hidden sm:flex">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Showcase Hub
                 </a>
             </div>
         </div>
@@ -45,83 +101,290 @@
 
         <!-- TAB: HOME -->
         <div id="tab-home" class="tab-content">
-            <section class="relative min-h-[85vh] flex items-center justify-center border-b border-red-500/20 py-16 overflow-hidden">
-                <div id="three-car" class="absolute inset-0 pointer-events-none opacity-60 z-0"></div>
-                <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
-                    <div class="lg:col-span-7 space-y-6">
-                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-bold uppercase tracking-widest">
-                            🏎️ Ultra-Exclusive Hypercars & Exotic Engineering
-                        </span>
-                        <h1 class="text-4xl sm:text-7xl font-black text-white tracking-tight leading-tight">
-                            UNLEASH PURE <br/><span class="red-gradient">HORSEPOWER.</span>
-                        </h1>
-                        <p class="text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed">
-                            Bugatti, Koenigsegg, Ferrari, and Pagani inventory curated for discerning collectors.
-                        </p>
-                    </div>
+            
+            <!-- CINEMATIC SCROLL STORYTELLING STAGE (300vh height container with sticky 100vh viewport) -->
+            <section id="scroll-story-container" class="relative h-[300vh] border-b border-red-500/20">
+                <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+                    
+                    <!-- Three.js 3D Wireframe Chassis Background -->
+                    <div id="three-car-container" class="absolute inset-0 pointer-events-none z-0"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0E] via-transparent to-[#0A0A0E]/80 z-0 pointer-events-none"></div>
 
-                    <div class="lg:col-span-5 flex justify-center">
-                        <div class="glass-panel p-6 rounded-3xl space-y-4 max-w-md w-full border border-red-500/30">
-                            <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80" class="w-full h-64 object-cover rounded-2xl">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="font-bold text-white text-base">Ferrari SF90 Stradale</h3>
-                                    <p class="text-xs text-slate-400">986 HP · V8 Twin-Turbo Hybrid</p>
+                    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full pointer-events-auto">
+                        
+                        <!-- Left Hero Column -->
+                        <div class="lg:col-span-7 space-y-6">
+                            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-bold uppercase tracking-widest font-mono">
+                                🏎️ Ultra-Exclusive Hypercars & Exotic Engineering
+                            </span>
+                            <h1 class="text-4xl sm:text-7xl font-black text-white tracking-tight leading-tight">
+                                UNLEASH PURE <br/><span class="red-gradient">HORSEPOWER.</span>
+                            </h1>
+                            <p class="text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed">
+                                Scroll down to explore twin-turbo powertrain telemetry, active aerodynamics, and side-by-side performance benchmarks.
+                            </p>
+
+                            <!-- Progress step label -->
+                            <div class="flex items-center gap-4 text-xs font-mono text-red-400 pt-2">
+                                <span id="story-step-label">STAGE 01 / AERODYNAMIC CHASSIS</span>
+                                <div class="w-32 h-1 bg-white/10 rounded-full overflow-hidden">
+                                    <div id="story-progress-bar" class="h-full bg-red-500 w-1/3 transition-all duration-300"></div>
                                 </div>
-                                <span class="text-lg font-bold text-red-400">$625,000</span>
+                            </div>
+
+                            <div class="flex flex-wrap items-center gap-4 pt-4">
+                                <button onclick="showTab('inventory')" class="px-8 py-4 rounded-xl bg-gradient-to-r from-red-500 to-rose-700 text-white font-bold text-xs uppercase tracking-widest shadow-xl shadow-red-500/30 hover:scale-105 transition-transform cursor-pointer">
+                                    Browse Fleet
+                                </button>
+                                <button onclick="openDealerAdmin()" class="px-8 py-4 rounded-xl bg-white/5 border border-red-500/30 hover:border-red-400 text-white font-semibold text-xs uppercase tracking-widest transition-all cursor-pointer">
+                                    Dealer Admin
+                                </button>
                             </div>
                         </div>
+
+                        <!-- Right Dynamic Floating Panel -->
+                        <div class="lg:col-span-5 flex justify-center">
+                            
+                            <!-- SCENE 1 CARD -->
+                            <div id="scene-card-1" class="glass-panel p-6 rounded-3xl space-y-4 max-w-md w-full border border-red-500/30">
+                                <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80" class="w-full h-64 object-cover rounded-2xl">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-white text-base">Ferrari SF90 Stradale</h3>
+                                        <p class="text-xs text-slate-400">986 HP · V8 Twin-Turbo Hybrid</p>
+                                    </div>
+                                    <span class="text-lg font-bold text-red-400">$625,000</span>
+                                </div>
+                                <button onclick="openInquiryModal('Ferrari SF90 Stradale')" class="w-full py-3 bg-red-500 text-white font-bold text-xs uppercase rounded-xl hover:bg-red-400 transition-colors cursor-pointer">
+                                    Acquire Vehicle
+                                </button>
+                            </div>
+
+                            <!-- SCENE 2 CARD (Shown on scroll 33%-66%) -->
+                            <div id="scene-card-2" class="glass-panel p-6 rounded-3xl space-y-4 max-w-md w-full border border-red-500/40 hidden text-left">
+                                <span class="text-xs font-mono font-bold text-red-400 uppercase tracking-widest block">TELEMETRY BENCHMARK</span>
+                                <h3 class="text-2xl font-bold text-white">Twin-Turbo V8 Engine</h3>
+                                <div class="space-y-3 text-xs text-slate-300">
+                                    <div class="p-3 bg-slate-950 rounded-xl border border-red-500/20">
+                                        <span class="text-red-400 font-bold block">0 - 60 mph in 2.0s</span>
+                                        <span>Instant electric all-wheel drive vectoring launch control.</span>
+                                    </div>
+                                    <div class="p-3 bg-slate-950 rounded-xl border border-red-500/20">
+                                        <span class="text-red-400 font-bold block">211 mph Top Speed</span>
+                                        <span>Carbon-fiber active rear wing with downforce drag reduction.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SCENE 3 CARD (Shown on scroll >66%) -->
+                            <div id="scene-card-3" class="glass-panel p-6 rounded-3xl space-y-4 max-w-md w-full border border-red-500/40 hidden text-left">
+                                <span class="text-xs font-mono font-bold text-red-400 uppercase tracking-widest block">EXOTIC FLEET PORTAL</span>
+                                <h3 class="text-2xl font-bold text-white">Custom Dealership Orders</h3>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    Request private track tests, tailored carbon finish packages, or international air freight delivery.
+                                </p>
+                                <button onclick="showTab('inventory')" class="w-full py-4 bg-gradient-to-r from-red-500 to-rose-700 text-white font-bold text-xs uppercase rounded-xl cursor-pointer">
+                                    View 2026 Inventory
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Metrics -->
+            <section class="py-16 border-b border-red-500/20 bg-slate-950/80">
+                <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-black text-red-400">986 HP</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Peak Hybrid Output</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-black text-red-400">2.0 SEC</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">0-60 MPH Launch</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-black text-red-400">273 MPH</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Max Track Velocity</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-black text-red-400">100%</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Verified Provenance</div>
                     </div>
                 </div>
             </section>
         </div>
 
+        <!-- TAB: INVENTORY FLEET -->
+        <div id="tab-inventory" class="tab-content hidden py-16 max-w-7xl mx-auto px-6 space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <span class="text-xs font-bold text-red-400 uppercase tracking-widest">Prestige Showroom</span>
+                <h2 class="text-3xl sm:text-5xl font-black text-white">Exotic Hypercar Fleet</h2>
+                <p class="text-slate-400 text-sm">Curated Bugatti, Ferrari, Koenigsegg, and Pagani models.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="car-grid">
+                <!-- Injected JS -->
+            </div>
+        </div>
+
         <!-- TAB: SPEC MATRIX -->
-        <div id="tab-specs" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 space-y-6">
-            <h2 class="text-3xl font-black text-white text-center">Hypercar Performance Comparison</h2>
-            <div class="glass-panel p-6 rounded-3xl border border-red-500/30 space-y-4 text-xs">
-                <div class="grid grid-cols-3 gap-4 font-bold border-b border-slate-800 pb-3 text-red-400">
-                    <span>Vehicle</span>
-                    <span>0-60 mph</span>
-                    <span>Top Speed</span>
-                </div>
-                <div class="grid grid-cols-3 gap-4 text-slate-200">
-                    <span>Ferrari SF90 Stradale</span>
-                    <span>2.0 sec</span>
-                    <span>211 mph</span>
-                </div>
-                <div class="grid grid-cols-3 gap-4 text-slate-200">
-                    <span>Bugatti Chiron Super Sport</span>
-                    <span>2.2 sec</span>
-                    <span>273 mph</span>
-                </div>
+        <div id="tab-specs" class="tab-content hidden py-16 max-w-5xl mx-auto px-6 space-y-8">
+            <div class="text-center space-y-2">
+                <span class="text-xs font-bold text-red-400 uppercase tracking-widest">Engineering Comparison</span>
+                <h2 class="text-3xl font-black text-white">Hypercar Benchmark Matrix</h2>
+            </div>
+            
+            <div class="glass-panel p-6 rounded-3xl border border-red-500/30 space-y-4 text-xs overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-800 text-red-400 font-bold">
+                            <th class="p-3">Vehicle</th>
+                            <th class="p-3">Engine & Output</th>
+                            <th class="p-3">0-60 mph</th>
+                            <th class="p-3">Top Speed</th>
+                            <th class="p-3">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="spec-matrix-body" class="divide-y divide-slate-800 text-slate-200">
+                        <!-- Injected JS -->
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <!-- TAB: FINANCING -->
-        <div id="tab-finance" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 text-center space-y-6">
-            <h2 class="text-3xl font-black text-white">Collector Lease Estimator</h2>
-            <div class="glass-panel p-8 rounded-3xl border border-red-500/30">
-                <p class="text-xs text-slate-400">Tailored 36-month closed-end leases with tax structure optimization.</p>
-            </div>
-        </div>
-
-        <!-- TAB: CONTACT -->
-        <div id="tab-contact" class="tab-content hidden py-16 max-w-3xl mx-auto px-6 text-center">
-            <div class="glass-panel p-8 rounded-3xl border border-red-500/30 space-y-4">
-                <h2 class="text-3xl font-black text-white">Private Showroom Visit</h2>
-                <button onclick="alert('Viewing scheduled!')" class="px-8 py-4 rounded-xl bg-red-500 text-white font-bold text-xs uppercase">Schedule Private Tour</button>
+        <!-- TAB: CONTACT / PRIVATE CONCIERGE -->
+        <div id="tab-contact" class="tab-content hidden py-16 max-w-3xl mx-auto px-6">
+            <div class="glass-panel p-8 rounded-3xl space-y-6 border border-red-500/30">
+                <div class="text-center space-y-2">
+                    <span class="text-xs font-bold text-red-400 uppercase tracking-widest">Private Acquisition</span>
+                    <h2 class="text-3xl font-black text-white">Request Hypercar Consultation</h2>
+                </div>
+                <form onsubmit="handleInquirySubmit(event)" class="space-y-4 text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <input type="text" placeholder="Full Name" required class="bg-slate-950 border border-white/10 rounded-xl p-3 text-white">
+                        <input type="email" placeholder="Email Address" required class="bg-slate-950 border border-white/10 rounded-xl p-3 text-white">
+                    </div>
+                    <select class="w-full bg-slate-950 border border-white/10 rounded-xl p-3 text-white">
+                        <option>Ferrari SF90 Stradale</option>
+                        <option>Bugatti Chiron Super Sport</option>
+                        <option>Koenigsegg Jesko Absolut</option>
+                        <option>Pagani Huayra Roadster BC</option>
+                    </select>
+                    <textarea placeholder="Specific delivery requirements..." rows="4" class="w-full bg-slate-950 border border-white/10 rounded-xl p-3 text-white"></textarea>
+                    <button type="submit" class="w-full py-4 bg-red-500 text-white font-bold text-xs uppercase rounded-xl hover:bg-red-400 transition-colors cursor-pointer">
+                        Submit Acquisition Request
+                    </button>
+                </form>
             </div>
         </div>
 
     </main>
 
-    <footer class="mt-20 border-t border-red-500/20 bg-slate-950/90 py-10 text-xs text-center text-slate-400">
-        <p>© 2026 AutoVault Exotic Motors. All Rights Reserved.</p>
+    <!-- FOOTER -->
+    <footer class="mt-20 border-t border-red-500/20 bg-slate-950/90 py-12 text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+                <span class="text-white font-bold text-base">AUTOVAULT</span>
+                <p>© 2026 AutoVault Prestige LLC. Designed & Developed by <strong class="text-red-400">Shahan Ali (shahan315)</strong>.</p>
+            </div>
+            <div class="flex items-center gap-6">
+                <button onclick="openDealerAdmin()" class="text-red-400 font-bold hover:underline cursor-pointer">Dealer Console</button>
+            </div>
+        </div>
     </footer>
+
+    <!-- INQUIRY MODAL -->
+    <div id="inquiry-modal" class="fixed inset-0 z-[110] bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-panel p-8 rounded-3xl max-w-lg w-full border border-red-500/40 relative space-y-4">
+            <button onclick="closeInquiryModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <h3 class="text-2xl font-bold text-white">Book Test Drive & Inspection</h3>
+            <p id="inquiry-vehicle-label" class="text-xs text-red-400 font-mono">Vehicle: General Consultation</p>
+            <form onsubmit="handleModalInquiry(event)" class="space-y-3 text-xs">
+                <input type="text" placeholder="Full Name" required class="w-full bg-slate-950 border border-white/10 rounded-xl p-3 text-white">
+                <input type="phone" placeholder="Phone Number" required class="w-full bg-slate-950 border border-white/10 rounded-xl p-3 text-white">
+                <button type="submit" class="w-full py-4 bg-red-500 text-white font-bold text-xs uppercase rounded-xl cursor-pointer">Confirm Test Drive Appointment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DEALER ADMIN DRAWER -->
+    <div id="dealer-admin-drawer" class="fixed inset-y-0 left-0 z-[120] w-full max-w-xl bg-[#0B0B10] border-r border-red-500/30 p-6 flex flex-col justify-between transform -translate-x-full transition-transform duration-300 shadow-2xl overflow-y-auto">
+        <div class="space-y-6">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-white">Dealership Admin Console</h3>
+                    <p class="text-[10px] text-red-400 font-mono">LocalStorage Hypercar Inventory Manager</p>
+                </div>
+                <button onclick="closeDealerAdmin()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-3 text-center text-xs">
+                <div class="p-3 bg-white/5 rounded-xl border border-white/10">
+                    <span class="text-slate-400 block text-[10px]">Vehicles</span>
+                    <span id="admin-stat-cars" class="text-lg font-bold text-red-400">0</span>
+                </div>
+                <div class="p-3 bg-white/5 rounded-xl border border-white/10">
+                    <span class="text-slate-400 block text-[10px]">Inquiries</span>
+                    <span id="admin-stat-inquiries" class="text-lg font-bold text-emerald-400">0</span>
+                </div>
+                <div class="p-3 bg-white/5 rounded-xl border border-white/10">
+                    <span class="text-slate-400 block text-[10px]">Fleet Value</span>
+                    <span id="admin-stat-val" class="text-lg font-bold text-white">$0</span>
+                </div>
+            </div>
+
+            <!-- Add Vehicle Form -->
+            <div class="p-4 bg-white/5 rounded-2xl border border-red-500/20 space-y-3">
+                <h4 class="text-xs font-bold text-red-400 uppercase">Add Hypercar to Fleet</h4>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <input type="text" id="add-car-name" placeholder="Car Name" class="bg-slate-950 border border-white/10 rounded-lg p-2 text-white">
+                    <input type="number" id="add-car-price" placeholder="Price ($)" class="bg-slate-950 border border-white/10 rounded-lg p-2 text-white">
+                    <input type="text" id="add-car-hp" placeholder="Output (e.g., 986 HP)" class="bg-slate-950 border border-white/10 rounded-lg p-2 text-white">
+                    <input type="text" id="add-car-speed" placeholder="Top Speed (e.g., 211 mph)" class="bg-slate-950 border border-white/10 rounded-lg p-2 text-white">
+                </div>
+                <input type="text" id="add-car-img" placeholder="Image URL" class="w-full bg-slate-950 border border-white/10 rounded-lg p-2 text-xs text-white">
+                <button onclick="adminAddCar()" class="w-full py-2 bg-red-500 text-white font-bold text-xs uppercase rounded-lg cursor-pointer">+ Add to Showroom</button>
+            </div>
+
+            <!-- Current Fleet List -->
+            <div class="space-y-3">
+                <h4 class="text-xs font-bold text-white uppercase">Manage Fleet Inventory</h4>
+                <div id="admin-cars-list" class="space-y-2 max-h-52 overflow-y-auto"></div>
+            </div>
+        </div>
+
+        <div class="border-t border-white/10 pt-4">
+            <button onclick="confirmResetCars()" class="w-full py-3 bg-red-500/20 border border-red-500/40 text-red-300 font-bold text-xs uppercase hover:bg-red-500/30 rounded-xl cursor-pointer">
+                ⚠️ Reset Dealership Data to Default
+            </button>
+        </div>
+    </div>
 
     <script>
         lucide.createIcons();
+
+        const defaultCars = [
+            { id: 1, name: "Ferrari SF90 Stradale", hp: "986 HP", zeroSixty: "2.0s", speed: "211 mph", price: 625000, img: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80" },
+            { id: 2, name: "Bugatti Chiron Super Sport", hp: "1578 HP", zeroSixty: "2.2s", speed: "273 mph", price: 3800000, img: "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=800&q=80" },
+            { id: 3, name: "Koenigsegg Jesko Absolut", hp: "1600 HP", zeroSixty: "2.5s", speed: "310 mph", price: 3400000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" },
+            { id: 4, name: "Pagani Huayra Roadster BC", hp: "791 HP", zeroSixty: "2.8s", speed: "238 mph", price: 3500000, img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80" }
+        ];
+
+        function getStoredCars() {
+            const raw = localStorage.getItem('autovault_cars');
+            return raw ? JSON.parse(raw) : defaultCars;
+        }
+
+        function saveCars(list) {
+            localStorage.setItem('autovault_cars', JSON.stringify(list));
+            renderFleet();
+            renderSpecMatrix();
+            renderAdminCars();
+        }
 
         function showTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -129,28 +392,162 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Three.js Car Wireframe Box
-        window.addEventListener('load', () => {
-            const container = document.getElementById('three-car');
-            if (!container) return;
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            container.appendChild(renderer.domElement);
+        function renderFleet() {
+            const cars = getStoredCars();
+            const grid = document.getElementById('car-grid');
+            if (!grid) return;
+            grid.innerHTML = cars.map(c => `
+                <div class="glass-panel p-6 rounded-3xl space-y-4 border border-white/10 hover:border-red-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <img src="${c.img}" class="w-full h-56 object-cover rounded-2xl mb-4">
+                        <h3 class="text-xl font-bold text-white">${c.name}</h3>
+                        <p class="text-xs text-slate-400 mt-1">${c.hp} · 0-60 in ${c.zeroSixty} · ${c.speed}</p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-lg font-bold text-red-400">$${c.price.toLocaleString()}</span>
+                        <button onclick="openInquiryModal('${c.name}')" class="px-4 py-2 bg-red-500 hover:bg-red-400 text-white font-bold text-xs uppercase rounded-xl cursor-pointer">Inquire</button>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-            const geo = new THREE.BoxGeometry(3.5, 1.2, 2);
-            const mat = new THREE.MeshBasicMaterial({ color: 0xEF4444, wireframe: true });
-            const box = new THREE.Mesh(geo, mat);
-            scene.add(box);
+        function renderSpecMatrix() {
+            const cars = getStoredCars();
+            const tbody = document.getElementById('spec-matrix-body');
+            if (!tbody) return;
+            tbody.innerHTML = cars.map(c => `
+                <tr>
+                    <td class="p-3 font-bold text-white">${c.name}</td>
+                    <td class="p-3 text-red-400">${c.hp}</td>
+                    <td class="p-3">${c.zeroSixty}</td>
+                    <td class="p-3">${c.speed}</td>
+                    <td class="p-3 font-bold text-white">$${c.price.toLocaleString()}</td>
+                </tr>
+            `).join('');
+        }
 
-            camera.position.z = 5;
-            function animate() {
-                requestAnimationFrame(animate);
-                box.rotation.y += 0.008;
-                renderer.render(scene, camera);
+        function openInquiryModal(carName) {
+            document.getElementById('inquiry-vehicle-label').innerText = "Vehicle: " + carName;
+            document.getElementById('inquiry-modal').classList.remove('hidden');
+        }
+
+        function closeInquiryModal() {
+            document.getElementById('inquiry-modal').classList.add('hidden');
+        }
+
+        function handleModalInquiry(e) {
+            e.preventDefault();
+            alert("Test Drive Confirmed! Our AutoVault concierge will contact you shortly.");
+            closeInquiryModal();
+        }
+
+        function handleInquirySubmit(e) {
+            e.preventDefault();
+            alert("Acquisition request submitted successfully!");
+        }
+
+        function openDealerAdmin() {
+            renderAdminCars();
+            document.getElementById('dealer-admin-drawer').classList.remove('-translate-x-full');
+        }
+
+        function closeDealerAdmin() {
+            document.getElementById('dealer-admin-drawer').classList.add('-translate-x-full');
+        }
+
+        function renderAdminCars() {
+            const list = getStoredCars();
+            document.getElementById('admin-stat-cars').innerText = list.length;
+            const totalVal = list.reduce((acc, c) => acc + c.price, 0);
+            document.getElementById('admin-stat-val').innerText = '$' + (totalVal / 1000000).toFixed(1) + 'M';
+
+            const container = document.getElementById('admin-cars-list');
+            container.innerHTML = list.map(c => `
+                <div class="flex items-center justify-between p-2.5 bg-white/5 rounded-xl text-xs">
+                    <div>
+                        <p class="text-white font-bold">${c.name}</p>
+                        <p class="text-red-400 text-[10px]">$${c.price.toLocaleString()} · ${c.hp}</p>
+                    </div>
+                    <button onclick="adminDeleteCar(${c.id})" class="text-red-400 font-bold px-2 py-1 bg-red-500/10 rounded">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        function adminAddCar() {
+            const name = document.getElementById('add-car-name').value.trim();
+            const price = parseFloat(document.getElementById('add-car-price').value);
+            const hp = document.getElementById('add-car-hp').value.trim() || '800 HP';
+            const speed = document.getElementById('add-car-speed').value.trim() || '210 mph';
+            const img = document.getElementById('add-car-img').value.trim() || 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80';
+
+            if (!name || isNaN(price)) {
+                alert("Please enter car name and price.");
+                return;
             }
-            animate();
+
+            const list = getStoredCars();
+            list.push({ id: Date.now(), name, hp, zeroSixty: "2.3s", speed, price, img });
+            saveCars(list);
+            document.getElementById('add-car-name').value = '';
+            document.getElementById('add-car-price').value = '';
+            alert(`Hypercar "${name}" added to fleet!`);
+        }
+
+        function adminDeleteCar(id) {
+            let list = getStoredCars();
+            list = list.filter(c => c.id !== id);
+            saveCars(list);
+        }
+
+        function confirmResetCars() {
+            if (confirm("Reset AutoVault inventory to default cars?")) {
+                localStorage.removeItem('autovault_cars');
+                renderFleet();
+                renderSpecMatrix();
+                renderAdminCars();
+                alert("Inventory reset to defaults!");
+            }
+        }
+
+        // Scroll Story Progress Handler
+        window.addEventListener('scroll', () => {
+            const container = document.getElementById('scroll-story-container');
+            if (!container) return;
+
+            const rect = container.getBoundingClientRect();
+            const totalScrollable = container.offsetHeight - window.innerHeight;
+            const currentProgress = Math.max(0, Math.min(1, -rect.top / totalScrollable));
+
+            const progressBar = document.getElementById('story-progress-bar');
+            const stepLabel = document.getElementById('story-step-label');
+
+            if (progressBar) progressBar.style.width = (currentProgress * 100) + '%';
+
+            const card1 = document.getElementById('scene-card-1');
+            const card2 = document.getElementById('scene-card-2');
+            const card3 = document.getElementById('scene-card-3');
+
+            if (currentProgress < 0.33) {
+                if (stepLabel) stepLabel.innerText = "STAGE 01 / AERODYNAMIC CHASSIS";
+                if (card1) card1.classList.remove('hidden');
+                if (card2) card2.classList.add('hidden');
+                if (card3) card3.classList.add('hidden');
+            } else if (currentProgress < 0.66) {
+                if (stepLabel) stepLabel.innerText = "STAGE 02 / TWIN-TURBO TELEMETRY";
+                if (card1) card1.classList.add('hidden');
+                if (card2) card2.classList.remove('hidden');
+                if (card3) card3.classList.add('hidden');
+            } else {
+                if (stepLabel) stepLabel.innerText = "STAGE 03 / EXOTIC FLEET PORTAL";
+                if (card1) card1.classList.add('hidden');
+                if (card2) card2.classList.add('hidden');
+                if (card3) card3.classList.remove('hidden');
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderFleet();
+            renderSpecMatrix();
         });
     </script>
 </body>
