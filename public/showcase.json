@@ -4,10 +4,10 @@
     "slug": "luxecart",
     "category": "E-Commerce",
     "industry": "Haute Horlogerie & Luxury",
-    "description": "Bespoke high-end watch store with 360° interactive view, Swiss craftsmanship stories, and express side-cart drawer.",
-    "longDescription": "Precision Beyond Time. Swiss luxury watch e-commerce platform built for high-net-worth collectors, complete with movement specifications and interactive watch showcases.",
+    "description": "Enhanced Amazon-class luxury watch marketplace featuring 16+ multi-category timepieces, deals of the day, instant cart & 1-click checkout.",
+    "longDescription": "Amazon-class luxury watch marketplace with multi-category product catalog, real-time search, deals of the day, bespoke watch configurator, and instant cart checkout.",
     "thumbnail": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
-    "technologies": ["React", "Tailwind CSS", "360° View", "Interactive Cart"],
+    "technologies": ["Amazon-Style Marketplace", "Multi-Product Feed", "Deals of the Day", "Instant Cart"],
     "demo": "/showcase/luxecart/",
     "featured": true
   },
@@ -64,12 +64,12 @@
     "slug": "devmarket",
     "category": "Marketplace",
     "industry": "Developer Tools & Boilerplates",
-    "description": "Digital marketplace for verified SaaS boilerplates, API wrappers, and UI kits with a live seller revenue analytics portal.",
-    "longDescription": "Marketplace for developers featuring product code previews, documentation tabs, customer reviews, and live seller revenue metrics.",
+    "description": "Amazon-style developer marketplace for SaaS boilerplates, API starters, WhatsApp bots, and UI kits with instant code checkout.",
+    "longDescription": "Amazon-style software code marketplace featuring multi-product catalog, real-time code search, developer reviews, and instant ZIP downloads.",
     "thumbnail": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
-    "technologies": ["React", "Code Preview", "Analytics Portal"],
+    "technologies": ["Code Marketplace", "SaaS Boilerplates", "Instant Download", "Dev Cart"],
     "demo": "/showcase/devmarket/",
-    "featured": false
+    "featured": true
   },
   {
     "name": "NeuralDesk",
