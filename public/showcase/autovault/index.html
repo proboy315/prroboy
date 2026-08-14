@@ -86,8 +86,11 @@
                 </button>
             </nav>
 
-            <div class="flex items-center gap-4">
-                <button onclick="openInquiryModal('General Hypercar Inquiry')" class="px-5 py-2.5 rounded-xl bg-red-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-red-400 transition-all cursor-pointer shadow-lg shadow-red-500/30">
+            <div class="flex items-center gap-3">
+                <button onclick="openShowcaseAdmin()" class="px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-all shadow-sm">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Admin
+                </button>
+                <button onclick="openInquiryModal('General Hypercar Inquiry')" class="px-5 py-2 rounded-xl bg-red-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-red-400 transition-all cursor-pointer shadow-lg shadow-red-500/30">
                     Book Test Drive
                 </button>
                 <a href="/showcase/" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 hidden sm:flex">
@@ -550,5 +553,6 @@
             renderSpecMatrix();
         });
     </script>
+    <script src="/showcase/admin.js"></script>
 </body>
 </html>
