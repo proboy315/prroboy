@@ -1,275 +1,348 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BiteRush | Ultra-Fast Culinary On-Demand</title>
+    <title>BiteRush — On-Demand Food Delivery Platform | Shahan Ali Portfolio</title>
+    <meta name="description" content="Vibrant culinary ordering experience featuring 3D artisan burger scroll storytelling, live GPS delivery tracker, meal customization drawer, and integrated restaurant management portal. Designed & Developed by Shahan Ali (shahan315 / ProBoy).">
+    <meta name="author" content="Shahan Ali (shahan315 / ProBoy)">
+    <link rel="canonical" href="https://proboy.vercel.app/showcase/biterush/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="BiteRush — On-Demand Food Delivery | Shahan Ali">
+    <meta property="og:description" content="Your Cravings Delivered Faster. Interactive food ordering experience with live order GPS tracking.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        rush: {
+                            400: '#FB923C',
+                            500: '#F97316',
+                            600: '#EA580C',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "BiteRush Food Delivery",
+          "applicationCategory": "BusinessApplication",
+          "description": "On-demand food delivery web application with live order tracking and restaurant admin console.",
+          "author": { "@type": "Person", "name": "Shahan Ali", "url": "https://proboy.vercel.app/" }
+        }
+      ]
+    }
+    </script>
+
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0B0F19; color: #F8FAFC; overflow-x: hidden; }
-        .flame-gradient { background: linear-gradient(135deg, #FF6B00 0%, #FF2E00 50%, #E60000 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glass-card { background: rgba(22, 28, 45, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 107, 0, 0.2); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0C0A09; color: #F5F5F4; overflow-x: hidden; }
+        .orange-gradient { background: linear-gradient(135deg, #FDBA74 0%, #F97316 50%, #C2410C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-panel { background: rgba(28, 25, 23, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(249, 115, 22, 0.25); }
+        .glass-panel:hover { border-color: rgba(249, 115, 22, 0.4); }
     </style>
 </head>
-<body class="bg-[#0B0F19] text-slate-100 min-h-screen antialiased selection:bg-orange-500 selection:text-white">
+<body class="bg-[#0C0A09] text-stone-100 antialiased selection:bg-orange-500 selection:text-white">
 
-    <!-- Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-[#0B0F19]/85 backdrop-blur-xl border-b border-orange-500/20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-            <a href="#" onclick="showTab('home')" class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-orange-500 to-red-600 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-orange-500/30">⚡</div>
-                <span class="font-black text-2xl tracking-tight text-white">Bite<span class="text-orange-500">Rush</span></span>
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#0C0A09]/90 backdrop-blur-2xl border-b border-orange-500/20">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" onclick="showTab('home')" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-orange-400 to-amber-600 flex items-center justify-center text-stone-950 font-black text-xl shadow-lg shadow-orange-500/30 group-hover:scale-105 transition-transform">🍔</div>
+                <div>
+                    <span class="font-black text-2xl tracking-tight text-white block">Bite<span class="text-orange-500">Rush</span></span>
+                    <span class="text-[9px] text-orange-400 font-mono tracking-wider block">BY SHAHAN ALI</span>
+                </div>
             </a>
 
-            <nav class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-wider text-slate-300">
-                <button onclick="showTab('home')" class="nav-btn text-orange-400 hover:text-orange-400 transition-colors cursor-pointer">Explore</button>
-                <button onclick="showTab('customizer')" class="nav-btn hover:text-orange-400 transition-colors cursor-pointer">Meal Customizer</button>
-                <button onclick="showTab('tracker')" class="nav-btn hover:text-orange-400 transition-colors cursor-pointer">Live GPS Tracker</button>
-                <button onclick="showTab('about')" class="nav-btn hover:text-orange-400 transition-colors cursor-pointer">About BiteRush</button>
-                <button onclick="showTab('contact')" class="nav-btn hover:text-orange-400 transition-colors cursor-pointer">Contact</button>
+            <nav class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-wider text-stone-300">
+                <button onclick="showTab('home')" class="hover:text-orange-400 transition-colors cursor-pointer text-orange-400">Discover</button>
+                <button onclick="showTab('menu')" class="hover:text-orange-400 transition-colors cursor-pointer">Artisan Menu</button>
+                <button onclick="showTab('tracker')" class="hover:text-orange-400 transition-colors cursor-pointer">Live Order GPS</button>
+                <button onclick="openRestAdmin()" class="px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-[10px] font-bold hover:bg-orange-500/20 cursor-pointer">
+                    ⚙️ Restaurant Admin
+                </button>
             </nav>
 
             <div class="flex items-center gap-4">
-                <button onclick="toggleCart()" class="relative p-2.5 rounded-2xl bg-orange-500/10 border border-orange-500/30 text-white cursor-pointer hover:border-orange-500 transition-colors">
-                    <i data-lucide="shopping-bag" class="w-5 h-5 text-orange-400"></i>
-                    <span id="cart-badge" class="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-orange-500 text-white text-[10px] font-bold flex items-center justify-center">0</span>
+                <button onclick="toggleCart()" class="relative p-2.5 rounded-full border border-orange-500/30 bg-orange-500/10 hover:border-orange-400 text-orange-400 cursor-pointer">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-orange-500 text-stone-950 text-[10px] font-bold flex items-center justify-center">0</span>
                 </button>
-                <a href="/#showcase" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 hidden sm:flex">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Portfolio
+                <a href="/showcase/" class="text-xs text-stone-400 hover:text-white flex items-center gap-1 hidden sm:flex">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Showcase Hub
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Main Views -->
     <main class="pt-20">
 
         <!-- TAB: HOME -->
         <div id="tab-home" class="tab-content">
-            <!-- Hero with 3D Canvas -->
-            <section class="relative min-h-[85vh] flex items-center justify-center border-b border-orange-500/20 py-16 overflow-hidden">
-                <div id="three-bg" class="absolute inset-0 pointer-events-none opacity-70 z-0"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-[#0B0F19]/80 z-0 pointer-events-none"></div>
+            
+            <!-- CINEMATIC SCROLL STORYTELLING STAGE -->
+            <section id="scroll-story-container" class="relative h-[300vh] border-b border-orange-500/20">
+                <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+                    
+                    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full pointer-events-auto">
+                        <div class="lg:col-span-7 space-y-6">
+                            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-widest font-mono">
+                                🚀 Ultra-Fast Culinary On-Demand Delivery
+                            </span>
+                            <h1 class="text-4xl sm:text-7xl font-black text-white tracking-tight leading-tight">
+                                CRAVINGS, <br/><span class="orange-gradient">DELIVERED FASTER.</span>
+                            </h1>
+                            <p class="text-stone-300 text-sm sm:text-base max-w-xl leading-relaxed">
+                                Scroll down to watch our signature Truffle Wagyu Burger assemble ingredient-by-ingredient with real-time GPS courier dispatch.
+                            </p>
 
-                <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10 w-full">
-                    <div class="lg:col-span-7 space-y-6">
-                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-extrabold uppercase tracking-widest">
-                            🔥 Express Delivery in Under 20 Minutes
-                        </span>
-                        <h1 class="text-4xl sm:text-7xl font-black text-white tracking-tight leading-tight">
-                            Gourmet Cravings, <br/><span class="flame-gradient">Delivered Lightning Fast.</span>
-                        </h1>
-                        <p class="text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed">
-                            Order artisanal burgers, stone-fired pizza, and craft sushi with sub-millisecond dispatch and live thermal GPS bag telemetry.
-                        </p>
-
-                        <div class="p-2 rounded-2xl bg-slate-900/90 border border-orange-500/30 flex items-center gap-3 shadow-2xl max-w-xl">
-                            <i data-lucide="map-pin" class="w-5 h-5 text-orange-400 ml-3"></i>
-                            <input type="text" placeholder="Enter delivery street address..." class="bg-transparent border-none outline-none text-white text-xs sm:text-sm w-full placeholder-slate-500">
-                            <button onclick="showTab('customizer')" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-extrabold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity cursor-pointer">
-                                Order Now
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-5 flex justify-center">
-                        <div class="glass-card p-6 rounded-3xl text-center space-y-4 max-w-md w-full border border-orange-500/30">
-                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" alt="Gourmet Burger" class="w-full h-72 object-cover rounded-2xl">
-                            <div class="flex items-center justify-between text-left">
-                                <div>
-                                    <h3 class="font-extrabold text-white text-lg">BiteRush Monster Burger</h3>
-                                    <p class="text-xs text-slate-400">Double Wagyu, Smoked Cheddar, Truffle Mayo</p>
+                            <!-- Scroll step label -->
+                            <div class="flex items-center gap-4 text-xs font-mono text-orange-400 pt-2">
+                                <span id="story-step-label">SCENE 01 / SMOKED WAGYU ASSEMBLY</span>
+                                <div class="w-32 h-1 bg-white/10 rounded-full overflow-hidden">
+                                    <div id="story-progress-bar" class="h-full bg-orange-500 w-1/3 transition-all duration-300"></div>
                                 </div>
-                                <span class="text-xl font-black text-orange-400">$18.99</span>
                             </div>
-                            <button onclick="addToCart('BiteRush Monster Burger', 18.99, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80')" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-extrabold text-xs uppercase tracking-wider hover:shadow-lg hover:shadow-orange-500/30 transition-all cursor-pointer">
-                                Add to Order
-                            </button>
+
+                            <div class="flex flex-wrap items-center gap-4 pt-4">
+                                <button onclick="showTab('menu')" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-orange-400 to-amber-600 text-stone-950 font-bold text-xs uppercase tracking-widest shadow-xl shadow-orange-500/20 hover:scale-105 transition-transform cursor-pointer">
+                                    Order Now
+                                </button>
+                                <button onclick="openRestAdmin()" class="px-8 py-4 rounded-2xl bg-white/5 border border-orange-500/30 hover:border-orange-400 text-white font-semibold text-xs uppercase tracking-widest transition-all cursor-pointer">
+                                    Restaurant Admin
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel -->
+                        <div class="lg:col-span-5 flex justify-center">
+                            
+                            <!-- SCENE 1 CARD -->
+                            <div id="scene-card-1" class="glass-panel p-6 rounded-3xl space-y-4 max-w-md w-full border border-orange-500/30 text-center">
+                                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" class="w-full h-64 object-cover rounded-2xl">
+                                <div class="flex items-center justify-between text-left">
+                                    <div>
+                                        <h3 class="font-bold text-white text-base">Truffle Wagyu Burger</h3>
+                                        <p class="text-xs text-stone-400">Aged Cheddar · Caramelized Onions</p>
+                                    </div>
+                                    <span class="text-lg font-bold text-orange-400">$18.50</span>
+                                </div>
+                                <button onclick="addToCart('Truffle Wagyu Burger', 18.50, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80')" class="w-full py-3 bg-orange-500 text-stone-950 font-bold text-xs uppercase rounded-xl hover:bg-orange-400 cursor-pointer">
+                                    Add To Order
+                                </button>
+                            </div>
+
+                            <!-- SCENE 2 CARD (Shown on scroll 33%-66%) -->
+                            <div id="scene-card-2" class="glass-panel p-6 rounded-3xl space-y-4 max-w-md w-full border border-orange-500/40 hidden text-left">
+                                <span class="text-xs font-mono font-bold text-orange-400 uppercase tracking-widest block">NUTRITION & INGREDIENTS</span>
+                                <h3 class="text-2xl font-bold text-white">Artisan Fresh Quality</h3>
+                                <div class="space-y-3 text-xs text-stone-300">
+                                    <div class="p-3 bg-stone-950 rounded-xl border border-orange-500/20">
+                                        <span class="text-orange-400 font-bold block">Grade A1 Japanese Wagyu</span>
+                                        <span>Flame-grilled patty with melted smoked cheddar infusion.</span>
+                                    </div>
+                                    <div class="p-3 bg-stone-950 rounded-xl border border-orange-500/20">
+                                        <span class="text-orange-400 font-bold block">Brioche Artisan Bun</span>
+                                        <span>Toasted in garlic butter with organic black sesame.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SCENE 3 CARD (Shown on scroll >66%) -->
+                            <div id="scene-card-3" class="glass-panel p-6 rounded-3xl space-y-4 max-w-md w-full border border-orange-500/40 hidden text-left">
+                                <span class="text-xs font-mono font-bold text-orange-400 uppercase tracking-widest block">LIVE GPS RADAR</span>
+                                <h3 class="text-2xl font-bold text-white">Sub-20 Min Guarantee</h3>
+                                <p class="text-xs text-stone-300 leading-relaxed">
+                                    Track electric delivery scooters in real time from kitchen grill to your doorstep.
+                                </p>
+                                <button onclick="showTab('tracker')" class="w-full py-4 bg-gradient-to-r from-orange-400 to-amber-600 text-stone-950 font-bold text-xs uppercase rounded-xl cursor-pointer">
+                                    Open Live GPS Tracker
+                                </button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Food Category Menu -->
-            <section class="py-16 max-w-7xl mx-auto px-6">
-                <div class="flex items-center justify-between mb-8">
+            <!-- Metrics -->
+            <section class="py-16 border-b border-orange-500/20 bg-stone-950/80">
+                <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                     <div>
-                        <h2 class="text-3xl font-extrabold text-white">Popular Kitchens & Meals</h2>
-                        <p class="text-xs text-slate-400">Curated top-rated kitchens ready for express dispatch</p>
+                        <div class="text-3xl sm:text-4xl font-black text-orange-400">18 MIN</div>
+                        <div class="text-xs text-stone-400 uppercase tracking-widest mt-1">Average Delivery Time</div>
                     </div>
-                    <span class="text-xs font-extrabold text-orange-400 bg-orange-500/10 px-3.5 py-1.5 rounded-full border border-orange-500/20">12 Kitchens Live</span>
-                </div>
-
-                <div id="food-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Cards injected by JS -->
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-black text-orange-400">100+</div>
+                        <div class="text-xs text-stone-400 uppercase tracking-widest mt-1">Partner Kitchens</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-black text-orange-400">4.9 ★</div>
+                        <div class="text-xs text-stone-400 uppercase tracking-widest mt-1">Customer Rating</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-black text-orange-400">GPS Live</div>
+                        <div class="text-xs text-stone-400 uppercase tracking-widest mt-1">Courier Radar</div>
+                    </div>
                 </div>
             </section>
         </div>
 
-        <!-- TAB: MEAL CUSTOMIZER -->
-        <div id="tab-customizer" class="tab-content hidden py-16 max-w-5xl mx-auto px-6 space-y-10">
+        <!-- TAB: MENU -->
+        <div id="tab-menu" class="tab-content hidden py-16 max-w-7xl mx-auto px-6 space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <span class="text-xs font-bold text-orange-400 uppercase tracking-widest">Culinary Delights</span>
+                <h2 class="text-3xl sm:text-5xl font-black text-white">Artisan Menu Catalog</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="dish-grid"></div>
+        </div>
+
+        <!-- TAB: LIVE ORDER GPS TRACKER -->
+        <div id="tab-tracker" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 space-y-8">
             <div class="text-center space-y-2">
-                <span class="text-xs font-extrabold text-orange-400 uppercase tracking-widest">3D Ingredient Studio</span>
-                <h2 class="text-4xl font-black text-white">Build Your Custom Meal</h2>
-                <p class="text-slate-400 text-xs sm:text-sm">Select patty count, cheese layers, gourmet sauces, and artisanal sides.</p>
+                <span class="text-xs font-bold text-orange-400 uppercase tracking-widest">Live Telemetry</span>
+                <h2 class="text-3xl font-black text-white">Real-Time Delivery Tracker</h2>
             </div>
-
-            <div class="glass-card p-8 rounded-3xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center border border-orange-500/30">
-                <div class="space-y-4 text-center">
-                    <div id="burger-preview" class="w-full h-80 rounded-2xl bg-slate-950 border border-white/10 flex items-center justify-center p-4 relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" alt="Burger Custom" class="w-full h-full object-cover rounded-xl">
-                        <div class="absolute bottom-3 left-3 right-3 bg-slate-900/90 backdrop-blur-md p-3 rounded-xl flex justify-between items-center text-xs">
-                            <span class="text-slate-300 font-bold" id="custom-summary">Double Patty · Truffle Mayo · Bacon</span>
-                            <span class="text-orange-400 font-black text-base" id="custom-price">$16.50</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-6">
-                    <div>
-                        <label class="text-xs font-bold text-orange-400 uppercase tracking-wider block mb-2">Patty Selection</label>
-                        <div class="grid grid-cols-3 gap-2">
-                            <button onclick="setCustomOption('patty', 'Single Wagyu', 12.00)" class="p-2.5 rounded-xl bg-orange-500/20 border border-orange-500 text-xs font-bold text-white">Single</button>
-                            <button onclick="setCustomOption('patty', 'Double Wagyu', 16.50)" class="p-2.5 rounded-xl bg-slate-800 border border-white/10 text-xs font-bold text-slate-300 hover:border-orange-500">Double</button>
-                            <button onclick="setCustomOption('patty', 'Triple Monster', 21.00)" class="p-2.5 rounded-xl bg-slate-800 border border-white/10 text-xs font-bold text-slate-300 hover:border-orange-500">Triple</button>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="text-xs font-bold text-orange-400 uppercase tracking-wider block mb-2">Gourmet Toppings</label>
-                        <div class="grid grid-cols-2 gap-2 text-xs">
-                            <label class="flex items-center gap-2 p-2.5 bg-slate-800 rounded-xl cursor-pointer">
-                                <input type="checkbox" checked onchange="toggleTopping('Caramelized Onions', 1.50)" class="accent-orange-500">
-                                <span>Caramelized Onions (+$1.50)</span>
-                            </label>
-                            <label class="flex items-center gap-2 p-2.5 bg-slate-800 rounded-xl cursor-pointer">
-                                <input type="checkbox" checked onchange="toggleTopping('Crispy Bacon', 2.00)" class="accent-orange-500">
-                                <span>Crispy Bacon (+$2.00)</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <button onclick="addCustomBurgerToCart()" class="w-full py-4 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-extrabold text-xs uppercase tracking-widest shadow-xl shadow-orange-500/30 cursor-pointer">
-                        Add Custom Meal to Order
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB: TRACKER -->
-        <div id="tab-tracker" class="tab-content hidden py-16 max-w-4xl mx-auto px-6">
-            <div class="glass-card p-8 rounded-3xl border border-orange-500/30 space-y-8">
+            <div class="glass-panel p-8 rounded-3xl space-y-6 border border-orange-500/30">
                 <div class="flex items-center justify-between border-b border-white/10 pb-4">
                     <div>
-                        <span class="text-xs font-extrabold text-orange-400 uppercase tracking-wider">Live Telemetry</span>
-                        <h2 class="text-2xl font-black text-white">Express Delivery Tracker</h2>
+                        <span class="text-xs font-mono text-orange-400">ACTIVE ORDER #BR-9941</span>
+                        <h3 class="text-lg font-bold text-white">Courier: Alex Mercer (Electric Bike #04)</h3>
                     </div>
-                    <span class="px-3.5 py-1.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold text-xs">Driver En Route</span>
+                    <span class="px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 text-xs font-bold uppercase">Estimated ETA: 12 Mins</span>
                 </div>
-
-                <div class="space-y-6">
-                    <div class="flex items-center justify-between text-xs sm:text-sm text-slate-300">
-                        <span>ETA: <strong class="text-orange-400">12 Mins</strong></span>
-                        <span>Driver: <strong class="text-white">Alex M. (Toyota Prius)</strong></span>
-                        <span>Hot-Bag Temp: <strong class="text-red-400">72°C</strong></span>
-                    </div>
-
-                    <!-- Progress Bar -->
-                    <div class="w-full h-3 bg-slate-800 rounded-full overflow-hidden relative">
-                        <div class="h-full bg-gradient-to-r from-orange-500 to-red-600 w-3/4 rounded-full transition-all duration-1000"></div>
-                    </div>
-
-                    <div class="grid grid-cols-4 gap-2 text-center text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                        <div class="text-orange-400">1. Order Placed</div>
-                        <div class="text-orange-400">2. Kitchen Firing</div>
-                        <div class="text-orange-400">3. Driver Dispatched</div>
-                        <div class="text-slate-600">4. Delivered</div>
-                    </div>
+                
+                <!-- Timeline -->
+                <div class="grid grid-cols-4 gap-2 text-center text-xs">
+                    <div class="p-3 bg-orange-500 text-stone-950 font-bold rounded-xl">1. Order Placed ✓</div>
+                    <div class="p-3 bg-orange-500 text-stone-950 font-bold rounded-xl">2. Kitchen Cooking ✓</div>
+                    <div class="p-3 bg-orange-500/20 border border-orange-500/40 text-orange-300 font-bold rounded-xl animate-pulse">3. Out For Delivery</div>
+                    <div class="p-3 bg-stone-900 text-stone-500 rounded-xl">4. Delivered</div>
                 </div>
-            </div>
-        </div>
-
-        <!-- TAB: ABOUT -->
-        <div id="tab-about" class="tab-content hidden py-16 max-w-4xl mx-auto px-6 space-y-12">
-            <div class="text-center space-y-3">
-                <span class="text-xs font-extrabold text-orange-400 uppercase tracking-widest">Speed & Quality</span>
-                <h2 class="text-4xl font-black text-white">The BiteRush Logistics Engine</h2>
-                <p class="text-slate-400 text-sm max-w-2xl mx-auto leading-relaxed">
-                    BiteRush revolutionizes food delivery with heated insulated thermal pods, algorithmic kitchen routing, and zero-compromise gourmet standards.
-                </p>
-            </div>
-        </div>
-
-        <!-- TAB: CONTACT -->
-        <div id="tab-contact" class="tab-content hidden py-16 max-w-3xl mx-auto px-6">
-            <div class="glass-card p-8 rounded-3xl border border-orange-500/30 space-y-6">
-                <h2 class="text-2xl font-black text-white text-center">Contact BiteRush Support</h2>
-                <form onsubmit="alert('Support ticket submitted!'); return false;" class="space-y-4 text-xs">
-                    <input type="text" placeholder="Your Name" required class="w-full bg-slate-950 border border-white/10 rounded-xl p-3.5 text-white">
-                    <input type="email" placeholder="Your Email" required class="w-full bg-slate-950 border border-white/10 rounded-xl p-3.5 text-white">
-                    <textarea placeholder="How can we assist your order?" rows="4" class="w-full bg-slate-950 border border-white/10 rounded-xl p-3.5 text-white"></textarea>
-                    <button class="w-full py-4 rounded-xl bg-orange-500 text-white font-extrabold uppercase tracking-wider">Send Inquiry</button>
-                </form>
             </div>
         </div>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="mt-20 border-t border-white/10 bg-slate-950/90 py-10">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-            <p>© 2026 BiteRush Technologies Inc. Express On-Demand.</p>
-            <div class="flex items-center gap-6">
-                <button onclick="openModal('terms')" class="hover:text-orange-400">Terms</button>
-                <button onclick="openModal('privacy')" class="hover:text-orange-400">Privacy</button>
+    <!-- FOOTER -->
+    <footer class="mt-20 border-t border-orange-500/20 bg-stone-950/90 py-12 text-xs text-stone-400">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+                <span class="text-white font-bold text-base">BITERUSH</span>
+                <p>© 2026 BiteRush Technologies Inc. Designed & Developed by <strong class="text-orange-400">Shahan Ali (shahan315)</strong>.</p>
             </div>
+            <button onclick="openRestAdmin()" class="text-orange-400 font-bold hover:underline cursor-pointer">Restaurant Admin</button>
         </div>
     </footer>
 
-    <!-- Cart Drawer -->
-    <div id="cart-drawer" class="fixed inset-y-0 right-0 z-[100] w-full max-w-md bg-slate-950 border-l border-orange-500/30 p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 shadow-2xl">
+    <!-- CART DRAWER -->
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 z-[100] w-full max-w-md bg-[#120F0D] border-l border-orange-500/30 p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 shadow-2xl">
         <div class="space-y-6">
             <div class="flex items-center justify-between border-b border-white/10 pb-4">
-                <h3 class="text-lg font-black text-white">Your Food Cart</h3>
-                <button onclick="toggleCart()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+                <h3 class="text-lg font-bold text-white">Your Meal Cart</h3>
+                <button onclick="toggleCart()" class="text-stone-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
             </div>
-            <div id="cart-items" class="space-y-3 max-h-[60vh] overflow-y-auto"></div>
+            <div id="cart-items" class="space-y-4 max-h-[60vh] overflow-y-auto">
+                <p class="text-xs text-stone-500 text-center py-8">Your meal cart is empty.</p>
+            </div>
         </div>
-
         <div class="border-t border-white/10 pt-4 space-y-4">
-            <div class="flex justify-between text-sm font-extrabold text-white">
-                <span>Subtotal:</span>
-                <span id="cart-total" class="text-orange-400">$0.00</span>
+            <div class="flex items-center justify-between text-sm">
+                <span class="text-stone-400">Total Bill:</span>
+                <span id="cart-total" class="font-bold text-orange-400">$0.00</span>
             </div>
-            <button onclick="alert('Order placed successfully! En route.'); toggleCart();" class="w-full py-4 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-extrabold text-xs uppercase tracking-wider">
-                Place Express Order
-            </button>
+            <button onclick="processCheckout()" class="w-full py-4 rounded-xl bg-orange-500 text-stone-950 font-bold text-xs uppercase tracking-widest cursor-pointer">Place Order & Track GPS</button>
         </div>
     </div>
 
-    <!-- Generic Modal -->
-    <div id="info-modal" class="fixed inset-0 z-[110] bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
-        <div class="glass-card p-8 rounded-3xl max-w-xl w-full border border-orange-500/40 relative space-y-4">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
-            <h3 id="modal-title" class="text-2xl font-black text-white">Modal</h3>
-            <div id="modal-body" class="text-xs text-slate-300 leading-relaxed space-y-2"></div>
+    <!-- RESTAURANT ADMIN DRAWER -->
+    <div id="rest-admin-drawer" class="fixed inset-y-0 left-0 z-[120] w-full max-w-xl bg-[#120F0D] border-r border-orange-500/30 p-6 flex flex-col justify-between transform -translate-x-full transition-transform duration-300 shadow-2xl overflow-y-auto">
+        <div class="space-y-6">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-white">Restaurant Admin Console</h3>
+                    <p class="text-[10px] text-orange-400 font-mono">LocalStorage Menu & Order Management</p>
+                </div>
+                <button onclick="closeRestAdmin()" class="text-stone-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 gap-3 text-center text-xs">
+                <div class="p-3 bg-white/5 rounded-xl border border-white/10">
+                    <span class="text-stone-400 block text-[10px]">Menu Items</span>
+                    <span id="admin-stat-dishes" class="text-lg font-bold text-orange-400">0</span>
+                </div>
+                <div class="p-3 bg-white/5 rounded-xl border border-white/10">
+                    <span class="text-stone-400 block text-[10px]">Active Orders</span>
+                    <span id="admin-stat-orders" class="text-lg font-bold text-emerald-400">0</span>
+                </div>
+            </div>
+
+            <!-- Add Dish -->
+            <div class="p-4 bg-white/5 rounded-2xl border border-orange-500/20 space-y-3">
+                <h4 class="text-xs font-bold text-orange-400 uppercase">Add Menu Item</h4>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <input type="text" id="add-dish-name" placeholder="Dish Name" class="bg-stone-950 border border-white/10 rounded-lg p-2 text-white">
+                    <input type="number" id="add-dish-price" placeholder="Price ($)" class="bg-stone-950 border border-white/10 rounded-lg p-2 text-white">
+                </div>
+                <input type="text" id="add-dish-img" placeholder="Image URL" class="w-full bg-stone-950 border border-white/10 rounded-lg p-2 text-xs text-white">
+                <button onclick="adminAddDish()" class="w-full py-2 bg-orange-500 text-stone-950 font-bold text-xs uppercase rounded-lg cursor-pointer">+ Add To Menu</button>
+            </div>
+
+            <!-- Manage Menu List -->
+            <div class="space-y-3">
+                <h4 class="text-xs font-bold text-white uppercase">Current Menu Items</h4>
+                <div id="admin-dishes-list" class="space-y-2 max-h-52 overflow-y-auto"></div>
+            </div>
+        </div>
+
+        <div class="border-t border-white/10 pt-4">
+            <button onclick="confirmResetDishes()" class="w-full py-3 bg-red-500/20 border border-red-500/40 text-red-300 font-bold text-xs uppercase rounded-xl cursor-pointer">
+                ⚠️ Reset Restaurant Data
+            </button>
         </div>
     </div>
 
     <script>
         lucide.createIcons();
 
-        const meals = [
-            { id: 1, name: "BiteRush Monster Burger", price: 18.99, img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80", tag: "Best Seller" },
-            { id: 2, name: "Artisanal Truffle Pizza", price: 22.50, img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80", tag: "Stone Fired" },
-            { id: 3, name: "Spicy Dragon Sushi Roll", price: 19.00, img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800&q=80", tag: "Fresh Catch" },
-            { id: 4, name: "Smoked Texas BBQ Ribs", price: 26.00, img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80", tag: "Pitmaster" },
-            { id: 5, name: "Golden Crispy Wings (12pc)", price: 15.50, img: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=800&q=80", tag: "Spicy" },
-            { id: 6, name: "Matcha Lava Cake", price: 9.50, img: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80", tag: "Dessert" }
+        const defaultDishes = [
+            { id: 1, name: "Truffle Wagyu Burger", price: 18.50, desc: "Aged Cheddar, Caramelized Onions, Truffle Aioli", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" },
+            { id: 2, name: "Woodfired Margherita Pizza", price: 16.00, desc: "San Marzano Tomatoes, Buffalo Mozzarella, Fresh Basil", img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" },
+            { id: 3, name: "Crispy Korean Glazed Chicken Wings", price: 14.50, desc: "Gochujang Honey Glaze, Pickled Radish, Sesame", img: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=800&q=80" }
         ];
+
+        function getStoredDishes() {
+            const raw = localStorage.getItem('biterush_dishes');
+            return raw ? JSON.parse(raw) : defaultDishes;
+        }
+
+        function saveDishes(list) {
+            localStorage.setItem('biterush_dishes', JSON.stringify(list));
+            renderMenu();
+            renderAdminDishes();
+        }
 
         let cart = [];
 
@@ -279,27 +352,24 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function renderMeals() {
-            const grid = document.getElementById('food-grid');
-            grid.innerHTML = meals.map(m => `
-                <div class="glass-card p-6 rounded-3xl flex flex-col justify-between hover:border-orange-500 transition-all group">
+        function renderMenu() {
+            const dishes = getStoredDishes();
+            const grid = document.getElementById('dish-grid');
+            if (!grid) return;
+            grid.innerHTML = dishes.map(d => `
+                <div class="glass-panel p-6 rounded-3xl space-y-4 border border-white/10 hover:border-orange-500/40 transition-all flex flex-col justify-between">
                     <div>
-                        <div class="relative overflow-hidden rounded-2xl mb-4">
-                            <img src="${m.img}" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500">
-                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-slate-950/80 text-orange-400 text-[10px] font-bold uppercase">${m.tag}</span>
-                        </div>
-                        <h3 class="font-extrabold text-white text-lg">${m.name}</h3>
+                        <img src="${d.img}" class="w-full h-52 object-cover rounded-2xl mb-4">
+                        <h3 class="text-xl font-bold text-white">${d.name}</h3>
+                        <p class="text-xs text-stone-400 mt-1">${d.desc}</p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
-                        <span class="text-xl font-black text-orange-400">$${m.price.toFixed(2)}</span>
-                        <button onclick="addToCart('${m.name}', ${m.price}, '${m.img}')" class="px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-400 text-white font-extrabold text-xs uppercase cursor-pointer">
-                            Add +
-                        </button>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-lg font-bold text-orange-400">$${d.price.toFixed(2)}</span>
+                        <button onclick="addToCart('${d.name}', ${d.price}, '${d.img}')" class="px-4 py-2 bg-orange-500 text-stone-950 font-bold text-xs uppercase rounded-xl cursor-pointer">Add</button>
                     </div>
                 </div>
             `).join('');
         }
-        renderMeals();
 
         function toggleCart() {
             document.getElementById('cart-drawer').classList.toggle('translate-x-full');
@@ -312,10 +382,10 @@
         }
 
         function updateCartUI() {
-            document.getElementById('cart-badge').innerText = cart.length;
+            document.getElementById('cart-count').innerText = cart.length;
             const container = document.getElementById('cart-items');
             if (cart.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-500 text-center py-8">Your cart is empty.</p>`;
+                container.innerHTML = `<p class="text-xs text-stone-500 text-center py-8">Your cart is empty.</p>`;
                 document.getElementById('cart-total').innerText = '$0.00';
                 return;
             }
@@ -323,8 +393,8 @@
             container.innerHTML = cart.map((item, idx) => {
                 total += item.price;
                 return `
-                    <div class="flex items-center gap-3 p-3 bg-slate-900 rounded-xl border border-white/10 text-xs">
-                        <img src="${item.img}" class="w-12 h-12 object-cover rounded-lg">
+                    <div class="flex items-center gap-4 p-3 bg-white/5 rounded-xl text-xs">
+                        <img src="${item.img}" class="w-10 h-10 object-cover rounded-lg">
                         <div class="flex-1">
                             <p class="font-bold text-white">${item.name}</p>
                             <p class="text-orange-400 font-bold">$${item.price.toFixed(2)}</p>
@@ -335,51 +405,107 @@
             document.getElementById('cart-total').innerText = '$' + total.toFixed(2);
         }
 
-        function addCustomBurgerToCart() {
-            addToCart("Custom Wagyu Burger", 16.50, "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80");
+        function processCheckout() {
+            if (cart.length === 0) return;
+            cart = [];
+            updateCartUI();
+            toggleCart();
+            showTab('tracker');
+            alert("Order Confirmed! Live GPS tracking activated.");
         }
 
-        function openModal(type) {
-            const modal = document.getElementById('info-modal');
-            const title = document.getElementById('modal-title');
-            const body = document.getElementById('modal-body');
-            if (type === 'terms') {
-                title.innerText = "Terms of Service";
-                body.innerHTML = "<p>BiteRush guarantees delivery within 30 minutes or you receive 50% cash credits. All meals prepared in certified hygiene kitchens.</p>";
-            } else {
-                title.innerText = "Privacy Policy";
-                body.innerHTML = "<p>We collect GPS coordinates strictly during active delivery fulfillment to calculate route telemetry.</p>";
+        function openRestAdmin() {
+            renderAdminDishes();
+            document.getElementById('rest-admin-drawer').classList.remove('-translate-x-full');
+        }
+
+        function closeRestAdmin() {
+            document.getElementById('rest-admin-drawer').classList.add('-translate-x-full');
+        }
+
+        function renderAdminDishes() {
+            const list = getStoredDishes();
+            document.getElementById('admin-stat-dishes').innerText = list.length;
+            const container = document.getElementById('admin-dishes-list');
+            container.innerHTML = list.map(d => `
+                <div class="flex items-center justify-between p-2.5 bg-white/5 rounded-xl text-xs">
+                    <div>
+                        <p class="text-white font-bold">${d.name}</p>
+                        <p class="text-orange-400 text-[10px]">$${d.price.toFixed(2)}</p>
+                    </div>
+                    <button onclick="adminDeleteDish(${d.id})" class="text-red-400 font-bold px-2 py-1 bg-red-500/10 rounded">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        function adminAddDish() {
+            const name = document.getElementById('add-dish-name').value.trim();
+            const price = parseFloat(document.getElementById('add-dish-price').value);
+            const img = document.getElementById('add-dish-img').value.trim() || 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80';
+
+            if (!name || isNaN(price)) return;
+
+            const list = getStoredDishes();
+            list.push({ id: Date.now(), name, price, desc: "Freshly prepared artisan dish", img });
+            saveDishes(list);
+            document.getElementById('add-dish-name').value = '';
+            document.getElementById('add-dish-price').value = '';
+            alert(`Dish "${name}" added to menu!`);
+        }
+
+        function adminDeleteDish(id) {
+            let list = getStoredDishes();
+            list = list.filter(d => d.id !== id);
+            saveDishes(list);
+        }
+
+        function confirmResetDishes() {
+            if (confirm("Reset BiteRush menu data?")) {
+                localStorage.removeItem('biterush_dishes');
+                renderMenu();
+                renderAdminDishes();
+                alert("Menu reset to defaults!");
             }
-            modal.classList.remove('hidden');
         }
 
-        function closeModal() {
-            document.getElementById('info-modal').classList.add('hidden');
-        }
-
-        // Three.js Spark particles
-        window.addEventListener('load', () => {
-            const container = document.getElementById('three-bg');
+        // Scroll Story Progress Handler
+        window.addEventListener('scroll', () => {
+            const container = document.getElementById('scroll-story-container');
             if (!container) return;
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            container.appendChild(renderer.domElement);
 
-            const geometry = new THREE.TorusGeometry(3, 0.2, 16, 100);
-            const material = new THREE.MeshBasicMaterial({ color: 0xFF6B00, wireframe: true });
-            const donut = new THREE.Mesh(geometry, material);
-            scene.add(donut);
+            const rect = container.getBoundingClientRect();
+            const totalScrollable = container.offsetHeight - window.innerHeight;
+            const currentProgress = Math.max(0, Math.min(1, -rect.top / totalScrollable));
 
-            camera.position.z = 6;
-            function animate() {
-                requestAnimationFrame(animate);
-                donut.rotation.x += 0.008;
-                donut.rotation.y += 0.01;
-                renderer.render(scene, camera);
+            const progressBar = document.getElementById('story-progress-bar');
+            const stepLabel = document.getElementById('story-step-label');
+
+            if (progressBar) progressBar.style.width = (currentProgress * 100) + '%';
+
+            const card1 = document.getElementById('scene-card-1');
+            const card2 = document.getElementById('scene-card-2');
+            const card3 = document.getElementById('scene-card-3');
+
+            if (currentProgress < 0.33) {
+                if (stepLabel) stepLabel.innerText = "SCENE 01 / SMOKED WAGYU ASSEMBLY";
+                if (card1) card1.classList.remove('hidden');
+                if (card2) card2.classList.add('hidden');
+                if (card3) card3.classList.add('hidden');
+            } else if (currentProgress < 0.66) {
+                if (stepLabel) stepLabel.innerText = "SCENE 02 / ARTISAN NUTRITION QUALITY";
+                if (card1) card1.classList.add('hidden');
+                if (card2) card2.classList.remove('hidden');
+                if (card3) card3.classList.add('hidden');
+            } else {
+                if (stepLabel) stepLabel.innerText = "SCENE 03 / LIVE GPS RADAR";
+                if (card1) card1.classList.add('hidden');
+                if (card2) card2.classList.add('hidden');
+                if (card3) card3.classList.remove('hidden');
             }
-            animate();
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderMenu();
         });
     </script>
 </body>
