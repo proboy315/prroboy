@@ -1,0 +1,19 @@
+{
+    "ownerNumber": [
+        "923444106158"
+    ],
+    "ownerName": [
+        "MuhammadZahid"
+    ],
+    "botName": "MuhammadZahid",
+    "botimg": "https://proboy.vercel.app/bot/muhammadzahid/bot_image.jpg",
+    "version": "1.0.0",
+    "prefix": ".",
+    "sessionName": "session",
+    "sessionID": "",
+    "newsletterJid": "120363417905726765@newsletter",
+    "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+    "packname": "MuhammadZahid",
+    "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/muhammadzahid/connect.json",
+    "REMOTE_SESSIONS_URL": "https://proboy.vercel.app/bot/muhammadzahid/sessions.json"
+}
