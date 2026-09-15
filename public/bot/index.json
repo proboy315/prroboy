@@ -42,6 +42,11 @@
             "url": "https://proboy.vercel.app/bot/muhammadzahid",
             "expiry": "",
             "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/fahdii-md",
+            "expiry": "",
+            "active": true
         }
     ]
 }
