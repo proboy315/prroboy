@@ -1,0 +1,19 @@
+{
+    "ownerNumber": [
+        "923042618154"
+    ],
+    "ownerName": [
+        "\u0493\u1d00\u029c\u1d00\u1d05 \u1d00\u0280\u1d00\u026a\u0274"
+    ],
+    "botName": "\ud835\udc05\ud835\udc00\ud835\udc07\ud835\udc03\ud835\udc08\ud835\udc08-\ud835\udc0c\ud835\udc03",
+    "botimg": "https://proboy.vercel.app/bot/fahdii-md/bot_image.jpg",
+    "version": "1.0.0",
+    "prefix": ".",
+    "sessionName": "session",
+    "sessionID": "",
+    "newsletterJid": "",
+    "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+    "packname": "Tech by \ud835\uddd9\ud835\uddd4\ud835\udddb\ud835\uddd4\ud835\uddd7 \ud835\uddd4\ud835\udde5\ud835\uddd4\ud835\udddc\ud835\udde1",
+    "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/fahdii-md/connect.json",
+    "REMOTE_SESSIONS_URL": "https://proboy.vercel.app/bot/fahdii-md/sessions.json"
+}
