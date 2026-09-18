@@ -26,7 +26,7 @@
     "tags": ["Camera capture", "Diagnostic logs", "Shortlinks", "Control panel"],
     "category": "fullstack"
   },
-    {
+  {
     "title": "ProBoy JS Obfuscator",
     "description": "Secure, high-performance client-side JavaScript obfuscator tool to compile, safeguard, and optimize your production source files.",
     "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
@@ -34,5 +34,14 @@
     "github": "",
     "tags": ["JavaScript", "Obfuscation", "Security", "Utility"],
     "category": "fullstack"
+  },
+  {
+    "title": "ProBoy Encrypt & Decrypt",
+    "description": "Military-grade AES-256-GCM encryption suite to securely seal text messages or embed hidden secrets inside images via steganography — with editable decrypt, re-encrypt, and local history vault.",
+    "image": "https://proboy.vercel.app/images/encrypt&decrypt.png",
+    "link": "https://proboy.vercel.app/encrypt&decrypt",
+    "github": "",
+    "tags": ["AES-256-GCM", "Steganography", "Web Crypto", "Privacy Tool"],
+    "category": "fullstack"
   }
-  ]
+]
