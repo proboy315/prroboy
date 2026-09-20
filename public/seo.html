@@ -1,0 +1,2629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEO + AEO Expert — Website Optimization Generator</title>
+<style>
+:root{
+  --bg:#07080c; --bg2:#0b0d13; --panel:rgba(255,255,255,.025); --panel2:rgba(255,255,255,.045);
+  --border:rgba(255,255,255,.08); --border2:rgba(255,255,255,.15);
+  --text:#e9ecf5; --muted:#8b90a0; --muted2:#5f6478;
+  --accent:#7c8cff; --accent2:#a855f7; --accent3:#22d3ee;
+  --success:#22c55e; --warn:#f59e0b; --error:#ef4444;
+  --radius:12px; --radius-sm:8px;
+  --grad:linear-gradient(135deg,#7c8cff 0%,#a855f7 55%,#22d3ee 100%);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:radial-gradient(1200px 600px at 15% -10%,rgba(124,140,255,.13),transparent 60%),
+             radial-gradient(1000px 500px at 100% 0%,rgba(168,85,247,.10),transparent 55%),
+             var(--bg);
+  color:var(--text);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:14px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+::selection{background:rgba(124,140,255,.35)}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Layout */
+#app{display:flex;flex-direction:column;min-height:100vh}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px 24px;border-bottom:1px solid var(--border);
+  background:rgba(7,8,12,.72);backdrop-filter:blur(14px);
+  position:sticky;top:0;z-index:20;
+}
+.brand{display:flex;align-items:center;gap:11px;font-weight:650;letter-spacing:-.01em}
+.brand-mark{
+  width:30px;height:30px;border-radius:9px;background:var(--grad);
+  display:grid;place-items:center;font-size:14px;font-weight:800;color:#0b0d13;
+  box-shadow:0 6px 18px rgba(124,140,255,.32);
+}
+.brand small{display:block;font-weight:400;color:var(--muted);font-size:11px;letter-spacing:.02em}
+.topbar-actions{display:flex;gap:8px;align-items:center}
+
+.layout{display:grid;grid-template-columns:268px 1fr;flex:1;min-height:0}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+
+/* Sidebar */
+.sidebar{
+  border-right:1px solid var(--border);
+  background:rgba(9,10,16,.5);
+  padding:20px 14px;overflow-y:auto;max-height:calc(100vh - 60px);
+  position:sticky;top:60px;
+}
+@media(max-width:900px){
+  .sidebar{position:static;max-height:none;border-right:none;border-bottom:1px solid var(--border);
+    display:flex;flex-wrap:wrap;gap:6px;padding:12px}
+  .sidebar .step-item{flex:1 1 140px}
+}
+.sidebar-title{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted2);margin:0 0 12px 10px;font-weight:600}
+.step-item{
+  display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;
+  cursor:pointer;color:var(--muted);transition:all .15s;font-size:13px;
+  border:1px solid transparent;margin-bottom:2px;position:relative;
+}
+.step-item:hover{background:var(--panel);color:var(--text)}
+.step-item.active{background:linear-gradient(90deg,rgba(124,140,255,.14),rgba(168,85,247,.06));
+  color:var(--text);border-color:rgba(124,140,255,.28)}
+.step-item.done .step-num{background:rgba(34,197,94,.15);color:var(--success);border-color:rgba(34,197,94,.4)}
+.step-num{
+  flex:0 0 24px;height:24px;border-radius:6px;border:1px solid var(--border2);
+  display:grid;place-items:center;font-size:11px;font-weight:600;color:var(--muted);
+  background:rgba(255,255,255,.02);transition:all .15s;
+}
+.step-item.active .step-num{background:rgba(124,140,255,.2);color:#cfd5ff;border-color:rgba(124,140,255,.55)}
+
+/* Main */
+.main{padding:32px 40px 80px;max-width:1040px;width:100%}
+@media(max-width:900px){.main{padding:20px 16px 60px}}
+
+.step-head{margin-bottom:26px}
+.step-kicker{
+  display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--accent);
+  background:rgba(124,140,255,.10);border:1px solid rgba(124,140,255,.25);
+  padding:4px 10px;border-radius:99px;margin-bottom:12px;
+}
+.step-title{font-size:26px;font-weight:680;letter-spacing:-.02em;margin:0 0 6px;line-height:1.2}
+.step-desc{color:var(--muted);margin:0;font-size:14px;max-width:760px}
+
+/* Cards */
+.card{
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px;margin-bottom:18px;backdrop-filter:blur(8px);
+}
+.card-title{font-size:15px;font-weight:620;margin:0 0 4px;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.card-sub{color:var(--muted);font-size:13px;margin:0 0 16px}
+.card.accent{background:linear-gradient(135deg,rgba(124,140,255,.06),rgba(168,85,247,.03));border-color:rgba(124,140,255,.18)}
+.card.warn{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(245,158,11,.02));border-color:rgba(245,158,11,.28)}
+.card.success{background:linear-gradient(135deg,rgba(34,197,94,.06),rgba(34,197,94,.02));border-color:rgba(34,197,94,.28)}
+.card.error{background:linear-gradient(135deg,rgba(239,68,68,.06),rgba(239,68,68,.02));border-color:rgba(239,68,68,.28)}
+
+/* Fields */
+.grid{display:grid;gap:14px}
+.grid.cols-2{grid-template-columns:1fr 1fr}
+.grid.cols-3{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:720px){.grid.cols-2,.grid.cols-3{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:12.5px;font-weight:580;color:var(--text);letter-spacing:.005em}
+.field .help{font-size:12px;color:var(--muted);line-height:1.5}
+.field input[type="text"],.field input[type="url"],.field input[type="email"],
+.field input[type="number"],.field textarea,.field select{
+  width:100%;padding:10px 12px;border-radius:var(--radius-sm);
+  background:rgba(255,255,255,.025);color:var(--text);
+  border:1px solid var(--border);font-family:inherit;font-size:13.5px;
+  transition:border-color .15s,background .15s;
+}
+.field textarea{resize:vertical;min-height:74px;line-height:1.55}
+.field input:focus,.field textarea:focus,.field select:focus{
+  outline:none;border-color:rgba(124,140,255,.55);background:rgba(124,140,255,.04);
+  box-shadow:0 0 0 3px rgba(124,140,255,.08);
+}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted2)}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:6px;min-height:0}
+.chips:empty{display:none}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;padding:4px 4px 4px 10px;
+  background:rgba(124,140,255,.10);border:1px solid rgba(124,140,255,.28);
+  border-radius:99px;font-size:12.5px;color:#cfd5ff;font-weight:500;
+}
+.chip button{
+  background:rgba(255,255,255,.06);border:none;color:#cfd5ff;width:18px;height:18px;
+  border-radius:50%;cursor:pointer;display:grid;place-items:center;font-size:13px;line-height:1;
+  padding:0;
+}
+.chip button:hover{background:rgba(239,68,68,.3);color:#fff}
+
+/* Checkbox group */
+.checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.check{
+  display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:var(--radius-sm);
+  background:rgba(255,255,255,.02);border:1px solid var(--border);cursor:pointer;
+  font-size:13px;color:var(--text);transition:all .15s;user-select:none;
+}
+.check:hover{background:rgba(255,255,255,.04);border-color:var(--border2)}
+.check input{accent-color:var(--accent);cursor:pointer}
+.check.checked{background:rgba(124,140,255,.10);border-color:rgba(124,140,255,.45)}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:var(--radius-sm);
+  background:rgba(255,255,255,.04);border:1px solid var(--border2);color:var(--text);
+  font-family:inherit;font-size:13px;font-weight:560;cursor:pointer;transition:all .15s;
+  letter-spacing:.005em;white-space:nowrap;
+}
+.btn:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.25)}
+.btn.primary{background:var(--grad);color:#0b0d13;border:none;font-weight:650;
+  box-shadow:0 6px 20px rgba(124,140,255,.28)}
+.btn.primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn.ghost{background:transparent;border-color:var(--border)}
+.btn.ghost:hover{background:var(--panel2)}
+.btn.danger{color:#fca5a5;border-color:rgba(239,68,68,.35)}
+.btn.danger:hover{background:rgba(239,68,68,.10)}
+.btn.sm{padding:6px 11px;font-size:12px}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important;filter:none!important}
+
+/* Footer */
+.footer{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 40px;border-top:1px solid var(--border);
+  background:rgba(7,8,12,.72);backdrop-filter:blur(14px);position:sticky;bottom:0;z-index:15;
+}
+@media(max-width:900px){.footer{padding:12px 16px}}
+.footer-meta{font-size:12px;color:var(--muted)}
+.footer-actions{display:flex;gap:8px}
+
+/* Repeater */
+.repeater{margin-top:6px}
+.repeater-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.repeater-header h4{margin:0;font-size:14px;font-weight:620}
+.repeater-item{
+  background:rgba(255,255,255,.018);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px;margin-bottom:12px;position:relative;
+}
+.repeater-item-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin:-16px -16px 14px;padding:10px 14px;border-bottom:1px solid var(--border);
+  background:rgba(255,255,255,.02);border-radius:var(--radius) var(--radius) 0 0;
+}
+.repeater-item-head strong{font-size:12.5px;font-weight:600;color:var(--muted)}
+.repeater-item-head strong::before{content:'▸ ';color:var(--accent)}
+
+/* Code editor */
+.code-area{
+  width:100%;min-height:280px;font-family:'JetBrains Mono','Fira Code',ui-monospace,monospace;
+  font-size:12.5px;line-height:1.6;padding:14px;border-radius:var(--radius-sm);
+  background:#050609;color:#cbd5e1;border:1px solid var(--border);
+  resize:vertical;tab-size:2;
+}
+.code-area:focus{outline:none;border-color:rgba(124,140,255,.5)}
+.code-preview{
+  font-family:'JetBrains Mono','Fira Code',ui-monospace,monospace;
+  font-size:12px;line-height:1.6;background:#050609;color:#cbd5e1;
+  padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);
+  overflow-x:auto;white-space:pre;max-height:420px;overflow-y:auto;
+}
+
+/* Audit */
+.audit-grid{display:grid;grid-template-columns:1fr;gap:8px}
+.audit-row{
+  display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:var(--radius-sm);
+  background:rgba(255,255,255,.02);border:1px solid var(--border);
+}
+.audit-row .status{
+  flex:0 0 22px;height:22px;border-radius:50%;display:grid;place-items:center;
+  font-size:12px;font-weight:700;
+}
+.status.ok{background:rgba(34,197,94,.16);color:#4ade80;border:1px solid rgba(34,197,94,.4)}
+.status.warn{background:rgba(245,158,11,.16);color:#fbbf24;border:1px solid rgba(245,158,11,.4)}
+.status.bad{background:rgba(239,68,68,.16);color:#f87171;border:1px solid rgba(239,68,68,.4)}
+.audit-row .audit-name{font-weight:560;min-width:170px;font-size:13px}
+.audit-row .audit-detail{color:var(--muted);font-size:12.5px;flex:1}
+
+/* Preview diff */
+.diff{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:800px){.diff{grid-template-columns:1fr}}
+.diff-col{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:var(--radius);padding:14px}
+.diff-col h5{margin:0 0 10px;font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:600}
+.diff-col.before{border-color:rgba(239,68,68,.18)}
+.diff-col.after{border-color:rgba(34,197,94,.18)}
+.diff-item{margin-bottom:12px}
+.diff-item .k{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.diff-item .v{font-size:13px;color:var(--text);margin-top:3px;word-break:break-word;line-height:1.5}
+
+/* Toast */
+.toast-wrap{position:fixed;bottom:80px;right:24px;display:flex;flex-direction:column;gap:8px;z-index:100}
+.toast{
+  background:rgba(16,18,28,.96);border:1px solid var(--border2);color:var(--text);
+  padding:11px 15px;border-radius:var(--radius-sm);font-size:13px;
+  box-shadow:0 12px 34px rgba(0,0,0,.6);animation:slideIn .22s ease;
+  max-width:340px;
+}
+.toast.success{border-color:rgba(34,197,94,.5)}
+.toast.error{border-color:rgba(239,68,68,.5)}
+.toast.warn{border-color:rgba(245,158,11,.5)}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+
+/* Misc */
+.pill{
+  display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:99px;
+  font-size:11.5px;font-weight:600;letter-spacing:.02em;
+  background:rgba(124,140,255,.12);color:#b5bdff;border:1px solid rgba(124,140,255,.3);
+}
+.pill.warn{background:rgba(245,158,11,.12);color:#fbbf24;border-color:rgba(245,158,11,.3)}
+.pill.ok{background:rgba(34,197,94,.12);color:#4ade80;border-color:rgba(34,197,94,.3)}
+.pill.err{background:rgba(239,68,68,.12);color:#f87171;border-color:rgba(239,68,68,.3)}
+.divider{height:1px;background:var(--border);margin:22px 0}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13px}
+.kv dt{color:var(--muted);font-weight:560}
+.kv dd{margin:0;color:var(--text)}
+.muted{color:var(--muted)}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px}
+.mt-2{margin-top:8px}.mt-3{margin-top:14px}.mt-4{margin-top:22px}
+.file-tree{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;line-height:1.9;color:var(--muted)}
+.file-tree .f{color:var(--text)}
+.file-tree .d{color:#b5bdff;font-weight:600}
+.banner{padding:14px 16px;border-radius:var(--radius);margin-bottom:16px;font-size:13px;line-height:1.6}
+.banner.info{background:rgba(124,140,255,.08);border:1px solid rgba(124,140,255,.28);color:#cfd5ff}
+.banner.warn{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.3);color:#fde68a}
+.banner.success{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);color:#bbf7d0}
+.banner.err{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);color:#fecaca}
+.banner strong{color:#fff}
+ul.tight{margin:6px 0;padding-left:20px}
+ul.tight li{margin-bottom:4px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">S</div>
+      <div>
+        <div>SEO + AEO Expert</div>
+        <small>Website Optimization Generator</small>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn ghost sm" id="btn-reset" title="Clear all data">Reset</button>
+      <button class="btn ghost sm" id="btn-export-json" title="Export form data">Export</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main" id="main"></main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-meta" id="footer-meta">Step 1 of 17</div>
+    <div class="footer-actions">
+      <button class="btn ghost" id="btn-back">← Back</button>
+      <button class="btn primary" id="btn-next">Next →</button>
+    </div>
+  </footer>
+</div>
+<div class="toast-wrap" id="toasts"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+/* ==========================================================================
+   SEO + AEO Expert — Application Logic
+   Modular design: state → analyzer → generators → validators → export
+   ========================================================================== */
+
+/* ---------- Utilities ---------- */
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+const escapeHtml = (s='') => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const escapeAttr = escapeHtml;
+const clone = o => JSON.parse(JSON.stringify(o));
+
+function getPath(obj, path){
+  return path.split('.').reduce((o,k)=> (o==null?undefined:o[k]), obj);
+}
+function setPath(obj, path, val){
+  const keys = path.split('.');
+  let cur = obj;
+  for(let i=0;i<keys.length-1;i++){
+    if(typeof cur[keys[i]] !== 'object' || cur[keys[i]] === null) cur[keys[i]] = {};
+    cur = cur[keys[i]];
+  }
+  cur[keys[keys.length-1]] = val;
+}
+function normalizeUrl(u){
+  if(!u) return '';
+  u = u.trim();
+  if(!/^https?:\/\//i.test(u)) u = 'https://' + u;
+  return u.replace(/\/+$/,'') || u;
+}
+function extractDomain(u){
+  try { return new URL(normalizeUrl(u)).hostname.replace(/^www\./,''); }
+  catch { return u; }
+}
+function isValidUrl(u){
+  if(!u) return false;
+  try { const x = new URL(normalizeUrl(u)); return !!x.hostname && x.hostname.includes('.'); }
+  catch { return false; }
+}
+function truncate(s, n){ s = (s||'').replace(/\s+/g,' ').trim(); return s.length>n ? s.slice(0,n-1).trim()+'…' : s; }
+function toast(msg, type='info', ms=3200){
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.textContent = msg;
+  $('#toasts').appendChild(el);
+  setTimeout(()=>{ el.style.opacity='0'; el.style.transform='translateX(20px)'; setTimeout(()=>el.remove(),300); }, ms);
+}
+function download(filename, content, mime='text/plain'){
+  const blob = new Blob([content], {type:mime});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 100);
+}
+async function copy(text){
+  try { await navigator.clipboard.writeText(text); toast('Copied to clipboard','success',1800); }
+  catch { toast('Copy failed','error'); }
+}
+
+/* ---------- Default State ---------- */
+const DEFAULT_STATE = {
+  _currentStep: 0,
+  website: { url:'', type:'personal-portfolio', purpose:'', goal:'' },
+  code: { html:'', source:'paste', fileName:'' },
+  identity: { searchName:'', confirmed:false, warning:'', suggestions:[] },
+  brand: {
+    fullName:'', publicName:'', brandName:'', handle:'', title:'',
+    shortSummary:'', detailedAbout:''
+  },
+  expertise: { primaryProfession:'', roles:[], skills:[], technologies:[], platforms:[], areas:'' },
+  services: [],
+  audience: { types:[], idealClient:'', problems:'', searches:'' },
+  location: { country:'', state:'', city:'', serviceArea:'Remote', areasServed:'' },
+  unique: {
+    uvp:'', specialization:'', experience:'', certifications:'', awards:'',
+    achievements:'', majorProjects:'', notableClients:'', industries:'', languages:'', years:''
+  },
+  projects: [],
+  socials: {
+    github:'', linkedin:'', instagram:'', facebook:'', x:'', youtube:'',
+    tiktok:'', behance:'', dribbble:'', shopify:'', other:''
+  },
+  seoContext: {
+    mainTopic:'', primary:[], secondary:[], servicesFind:[], locationSearches:[],
+    industries:[], problems:[], questions:[], competitors:[]
+  },
+  seoUnderstand: { google:'', customers:'', questions:'', different:'', topics:'', avoid:'' },
+  aeo: { who:'', what:'', services:'', where:'', withWhom:'', tech:'', specialties:'', different:'' },
+  faqs: [],
+  verification: { method:'meta', metaValue:'', fileName:'', dnsValue:'', fileContent:'' },
+  sitemapUrls: [],
+  generated: {}
+};
+
+/* ---------- Persistence ---------- */
+const STORAGE_KEY = 'seo-aeo-expert-v1';
+let state = loadState();
+let currentStep = state._currentStep || 0;
+
+function loadState(){
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return clone(DEFAULT_STATE);
+    const parsed = JSON.parse(raw);
+    return deepMerge(clone(DEFAULT_STATE), parsed);
+  } catch { return clone(DEFAULT_STATE); }
+}
+function deepMerge(base, ext){
+  for(const k in ext){
+    if(ext[k] && typeof ext[k] === 'object' && !Array.isArray(ext[k]) && base[k] && typeof base[k]==='object'){
+      deepMerge(base[k], ext[k]);
+    } else if(ext[k] !== undefined){
+      base[k] = ext[k];
+    }
+  }
+  return base;
+}
+function saveState(){
+  state._currentStep = currentStep;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){}
+}
+
+/* ==========================================================================
+   STEPS CONFIG
+   ========================================================================== */
+const STEPS = [
+  { id:'website',      label:'Website',             num:'01' },
+  { id:'code',         label:'Existing Code',       num:'02' },
+  { id:'identity',     label:'Search Identity',     num:'03' },
+  { id:'brand',        label:'Personal / Brand',    num:'04' },
+  { id:'expertise',    label:'Expertise',           num:'05' },
+  { id:'services',     label:'Services',            num:'06' },
+  { id:'audience',     label:'Audience',            num:'07' },
+  { id:'location',     label:'Location',            num:'08' },
+  { id:'projects',     label:'Projects',            num:'09' },
+  { id:'socials',      label:'Social Profiles',     num:'10' },
+  { id:'seoContext',   label:'SEO Context',         num:'11' },
+  { id:'aeo',          label:'AEO Context',         num:'12' },
+  { id:'verification', label:'Google Verification', num:'13' },
+  { id:'audit',        label:'SEO Audit',           num:'14' },
+  { id:'preview',      label:'Generated Preview',   num:'15' },
+  { id:'validation',   label:'Validation',          num:'16' },
+  { id:'download',     label:'Download',            num:'17' }
+];
+
+/* ==========================================================================
+   REUSABLE FIELD BUILDERS
+   ========================================================================== */
+function field(label, path, opts={}){
+  const { type='text', placeholder='', help='', rows=4 } = opts;
+  const val = getPath(state, path);
+  const v = val == null ? '' : val;
+  const id = 'f-' + path.replace(/\./g,'-');
+  if(type === 'textarea'){
+    return `<div class="field"><label for="${id}">${label}</label>
+      <textarea id="${id}" data-field="${path}" rows="${rows}" placeholder="${escapeAttr(placeholder)}">${escapeHtml(v)}</textarea>
+      ${help?`<div class="help">${help}</div>`:''}</div>`;
+  }
+  if(type === 'select'){
+    const opts2 = opts.options.map(o => {
+      const value = typeof o === 'string' ? o : o.value;
+      const lbl   = typeof o === 'string' ? o : o.label;
+      return `<option value="${escapeAttr(value)}" ${v===value?'selected':''}>${escapeHtml(lbl)}</option>`;
+    }).join('');
+    return `<div class="field"><label for="${id}">${label}</label>
+      <select id="${id}" data-field="${path}">${opts2}</select>
+      ${help?`<div class="help">${help}</div>`:''}</div>`;
+  }
+  return `<div class="field"><label for="${id}">${label}</label>
+    <input id="${id}" type="${type}" data-field="${path}" value="${escapeAttr(v)}" placeholder="${escapeAttr(placeholder)}">
+    ${help?`<div class="help">${help}</div>`:''}</div>`;
+}
+
+function listField(label, path, placeholder='Type and press Enter', help=''){
+  const arr = getPath(state, path) || [];
+  return `<div class="field">
+    <label>${label}</label>
+    <div class="chips" data-chips="${path}">
+      ${arr.map((v,i)=>`<span class="chip">${escapeHtml(v)}<button type="button" data-remove-chip="${path}" data-idx="${i}" aria-label="Remove">×</button></span>`).join('')}
+    </div>
+    <input type="text" data-chip-input="${path}" placeholder="${escapeAttr(placeholder)}">
+    ${help?`<div class="help">${help}</div>`:''}
+  </div>`;
+}
+
+function checkGroup(label, path, options, help=''){
+  const arr = getPath(state, path) || [];
+  return `<div class="field">
+    <label>${label}</label>
+    <div class="checks">
+      ${options.map(o=>{
+        const checked = arr.includes(o);
+        return `<label class="check ${checked?'checked':''}">
+          <input type="checkbox" data-check="${path}" value="${escapeAttr(o)}" ${checked?'checked':''}>
+          <span>${escapeHtml(o)}</span>
+        </label>`;
+      }).join('')}
+    </div>
+    ${help?`<div class="help">${help}</div>`:''}
+  </div>`;
+}
+
+function repeater(path, title, itemTitleFn, fields, addLabel='+ Add item'){
+  const arr = getPath(state, path) || [];
+  return `<div class="repeater">
+    <div class="repeater-header">
+      <h4>${title}</h4>
+      <button type="button" class="btn sm" data-add-item="${path}">${addLabel}</button>
+    </div>
+    ${arr.length===0 ? `<div class="muted" style="font-size:13px;padding:8px 0">No items yet.</div>` : ''}
+    ${arr.map((item,i)=>`
+      <div class="repeater-item">
+        <div class="repeater-item-head">
+          <strong>${escapeHtml(itemTitleFn(item, i))}</strong>
+          <button type="button" class="btn sm danger" data-remove-item="${path}" data-idx="${i}">Remove</button>
+        </div>
+        <div class="grid cols-2">
+          ${fields.map(f=>field(f.label, `${path}.${i}.${f.key}`, f)).join('')}
+        </div>
+      </div>
+    `).join('')}
+  </div>`;
+}
+
+/* ==========================================================================
+   SEARCH IDENTITY ANALYZER
+   ========================================================================== */
+const BROAD_TERMS = new Set([
+  // common names
+  'ahmed','ali','mohamed','muhammad','mohammad','hassan','hussain','usman','omar','khan','john','james',
+  'david','michael','robert','william','mary','jennifer','linda','elizabeth','susan','jessica','sarah',
+  'karen','nancy','lisa','betty','margaret','sandra','ashley','kimberly','emily','donna','michelle',
+  'carol','amanda','melissa','deborah','stephanie','rebecca','sharon','laura','cynthia','kathleen','amy',
+  'angela','shirley','anna','brenda','pamela','emma','nicole','helen','samantha','katherine','christine',
+  'debra','rachel','carolyn','janet','catherine','maria','heather','diane','ruth','julie','olivia','joyce',
+  'virginia','victoria','kelly','lauren','christina','joan','evelyn','judith','megan','andrea','cheryl',
+  'hannah','jacqueline','martha','gloria','teresa','ann','sara','madison','frances','kathryn','janice',
+  'jean','abigail','alice','julia','judy','sophia','grace','denise','amber','doris','marilyn','danielle',
+  'beverly','isabella','theresa','diana','natalie','brittany','charlotte','marie','kayla','alexis','lori',
+  // generic role / business words
+  'developer','designer','business','tech','technology','agency','shop','store','web','app','digital',
+  'expert','services','service','studio','consultant','consulting','solutions','solution','company',
+  'marketing','seo','freelancer','professional','specialist','engineer','coder','programmer','creator',
+  'marketer','analyst','manager','founder','ceo','owner','guru','master','pro','official','online',
+  'global','world','best','top','the','my','your','it','me','you','personal','portfolio'
+]);
+
+function analyzeIdentity(searchName, s){
+  const clean = (searchName||'').trim();
+  const warnings = [];
+  const suggestions = [];
+  if(!clean){ return { warning:'', suggestions:[] }; }
+
+  const lower = clean.toLowerCase();
+  const tokens = lower.split(/[\s|—\-–_.,&/]+/).filter(Boolean);
+  const wordCount = tokens.length;
+  const charLen = lower.length;
+  const hasBroad = tokens.some(t => BROAD_TERMS.has(t));
+  const singleGeneric = wordCount === 1;
+
+  // Broad name detection
+  if(singleGeneric && (hasBroad || charLen < 8)){
+    warnings.push('This identity is very broad and may overlap with many unrelated people, businesses, and entities. Consider adding a genuine distinguishing element such as your surname, professional identity, brand name, or another authentic identifier.');
+  } else if(hasBroad && wordCount <= 2 && charLen < 16){
+    warnings.push('This identity contains a common term that may overlap with many unrelated entities. Consider making it more distinctive while keeping it authentic.');
+  }
+  if(charLen < 5){
+    warnings.push('The identity is very short. Shorter names are harder for search systems to associate with a specific entity.');
+  }
+
+  // Build suggestions from provided info
+  const fullName = (s.brand.fullName||'').trim();
+  const brandName = (s.brand.brandName||'').trim();
+  const handle = (s.brand.handle||'').trim();
+  const title = (s.brand.title||'').trim();
+  const primary = (s.expertise.primaryProfession||'').trim();
+
+  const push = (v)=>{ if(v && !suggestions.includes(v) && v.toLowerCase() !== lower) suggestions.push(v); };
+  if(fullName) push(fullName);
+  if(fullName && primary) push(`${fullName} ${primary}`);
+  if(fullName && primary) push(`${fullName} | ${primary}`);
+  if(fullName && title && title !== primary) push(`${fullName} | ${title}`);
+  if(brandName) push(brandName);
+  if(fullName && brandName) push(`${fullName} — ${brandName}`);
+  if(handle && fullName) push(`${fullName} (${handle})`);
+
+  return { warning: warnings.join(' '), suggestions: suggestions.slice(0,6) };
+}
+
+/* ==========================================================================
+   GENERATORS
+   ========================================================================== */
+function genTitle(s){
+  const identity = (s.identity.searchName||'').trim() || (s.brand.publicName||'').trim() || (s.brand.fullName||'').trim() || (s.brand.brandName||'').trim();
+  const prof = (s.expertise.primaryProfession||'').trim() || (s.brand.title||'').trim();
+  if(identity && prof) return truncate(`${identity} | ${prof}`, 65);
+  if(identity) return truncate(identity, 65);
+  if(s.website.url) return truncate(extractDomain(s.website.url), 65);
+  return 'My Website';
+}
+
+function genDescription(s){
+  let base = (s.brand.shortSummary||'').trim();
+  if(!base){
+    const who = (s.identity.searchName||s.brand.fullName||s.brand.brandName||'').trim();
+    const prof = (s.expertise.primaryProfession||s.brand.title||'').trim();
+    const loc = [s.location.city, s.location.country].filter(Boolean).join(', ');
+    const parts = [];
+    if(who && prof) parts.push(`${who} is a ${prof.toLowerCase()}`);
+    else if(who) parts.push(who);
+    else if(prof) parts.push(prof);
+    if(loc) parts.push(`based in ${loc}`);
+    base = parts.join(' ') + '.';
+    if(s.services.length) base += ` Offers ${s.services.slice(0,3).map(x=>x.name).filter(Boolean).join(', ')}.`;
+  }
+  // clean and trim
+  base = base.replace(/\s+/g,' ').trim();
+  if(base.length > 158) base = truncate(base, 158);
+  return base;
+}
+
+function genOpenGraph(s, g){
+  const url = s.website.url ? normalizeUrl(s.website.url) : '';
+  const siteName = (s.brand.brandName || s.identity.searchName || s.brand.fullName || '').trim() || (url ? extractDomain(url) : '');
+  const image = (s.brand.ogImage || '').trim();
+  const og = {
+    'og:type': 'website',
+    'og:title': g.title,
+    'og:description': g.description,
+    'og:url': url,
+    'og:site_name': siteName
+  };
+  if(image && isValidUrl(image)) {
+    og['og:image'] = image;
+    og['og:image:alt'] = g.title;
+  }
+  return og;
+}
+
+function genTwitter(s, g){
+  const image = (s.brand.ogImage || '').trim();
+  const tw = {
+    'twitter:card': image && isValidUrl(image) ? 'summary_large_image' : 'summary',
+    'twitter:title': g.title,
+    'twitter:description': g.description
+  };
+  if(image && isValidUrl(image)) tw['twitter:image'] = image;
+  const handle = (s.brand.handle||'').trim();
+  if(handle && /^@/.test(handle)) {
+    tw['twitter:site'] = handle;
+    tw['twitter:creator'] = handle;
+  }
+  return tw;
+}
+
+function genJSONLD(s, g){
+  const url = s.website.url ? normalizeUrl(s.website.url) : '';
+  const identity = (s.identity.searchName||s.brand.publicName||s.brand.fullName||s.brand.brandName||'').trim();
+  const prof = (s.expertise.primaryProfession||s.brand.title||'').trim();
+  const sameAs = Object.values(s.socials).filter(v => v && isValidUrl(v));
+  const knowsAbout = [
+    ...(s.expertise.skills||[]),
+    ...(s.expertise.areas ? [s.expertise.areas] : []),
+    ...(s.services||[]).map(x=>x.name).filter(Boolean)
+  ].slice(0, 20);
+  const address = {};
+  if(s.location.city) address.addressLocality = s.location.city;
+  if(s.location.state) address.addressRegion = s.location.state;
+  if(s.location.country) address.addressCountry = s.location.country;
+
+  const graph = [];
+  const type = s.website.type;
+
+  // Primary entity
+  const isPersonal = ['personal-portfolio','developer-portfolio','blog','service-website'].includes(type);
+  const isOrg = ['business','agency','e-commerce','other'].includes(type);
+
+  if(isPersonal && (identity || prof)){
+    const person = {
+      '@type': 'Person',
+      '@id': (url?url:'') + '#person',
+      name: s.brand.fullName || identity,
+      url: url || undefined,
+      jobTitle: prof || undefined,
+      description: (s.brand.shortSummary||'').slice(0,300) || undefined,
+      knowsAbout: knowsAbout.length ? knowsAbout : undefined,
+      sameAs: sameAs.length ? sameAs : undefined
+    };
+    if(s.brand.publicName && s.brand.publicName !== person.name) person.alternateName = s.brand.publicName;
+    if(Object.keys(address).length) person.address = { '@type':'PostalAddress', ...address };
+    if(s.unique.years) person.knowsLanguage = s.unique.languages ? s.unique.languages.split(',').map(x=>x.trim()).filter(Boolean) : undefined;
+    Object.keys(person).forEach(k=>person[k]===undefined && delete person[k]);
+    graph.push(person);
+  }
+
+  if(isOrg || s.brand.brandName){
+    const orgName = s.brand.brandName || s.brand.fullName || identity;
+    const org = {
+      '@type': type === 'e-commerce' ? 'OnlineStore' : (type === 'agency' || type === 'business') ? 'ProfessionalService' : 'Organization',
+      '@id': (url?url:'') + '#organization',
+      name: orgName,
+      url: url || undefined,
+      description: (s.brand.shortSummary||'').slice(0,300) || undefined,
+      sameAs: sameAs.length ? sameAs : undefined,
+      knowsAbout: knowsAbout.length ? knowsAbout : undefined
+    };
+    if(Object.keys(address).length) org.address = { '@type':'PostalAddress', ...address };
+    if(s.location.serviceArea) org.areaServed = s.location.serviceArea;
+    if(s.location.areasServed) org.areaServed = s.location.areasServed;
+    if(s.brand.handle) org.alternateName = s.brand.handle;
+    Object.keys(org).forEach(k=>org[k]===undefined && delete org[k]);
+    graph.push(org);
+  }
+
+  // WebSite
+  if(url){
+    const ws = {
+      '@type': 'WebSite',
+      '@id': url + '#website',
+      url: url,
+      name: s.brand.brandName || s.identity.searchName || s.brand.fullName || extractDomain(url),
+      description: g.description || undefined,
+      inLanguage: 'en'
+    };
+    Object.keys(ws).forEach(k=>ws[k]===undefined && delete ws[k]);
+    graph.push(ws);
+
+    // WebPage
+    graph.push({
+      '@type': 'WebPage',
+      '@id': url + '#webpage',
+      url: url,
+      name: g.title,
+      description: g.description || undefined,
+      isPartOf: { '@id': url + '#website' },
+      inLanguage: 'en'
+    });
+  }
+
+  // Services
+  (s.services||[]).forEach((svc, i) => {
+    if(!svc.name) return;
+    graph.push({
+      '@type': 'Service',
+      '@id': url ? `${url}#service-${i+1}` : undefined,
+      name: svc.name,
+      description: (svc.shortDescription || svc.detailedDescription || '').slice(0,300) || undefined,
+      provider: url ? { '@id': url + (isOrg || s.brand.brandName ? '#organization' : '#person') } : undefined
+    });
+  });
+
+  // Projects (CreativeWork)
+  (s.projects||[]).forEach((p, i) => {
+    if(!p.name) return;
+    graph.push({
+      '@type': 'CreativeWork',
+      '@id': (p.url || (url ? url + '#project-' + (i+1) : '')),
+      name: p.name,
+      description: (p.description||'').slice(0,300) || undefined,
+      url: p.url || undefined,
+      creator: url ? { '@id': url + (isOrg || s.brand.brandName ? '#organization' : '#person') } : undefined
+    });
+  });
+
+  // FAQPage from FAQ entries
+  if((s.faqs||[]).length){
+    const mainEntity = s.faqs
+      .filter(f => f.question && f.answer)
+      .map(f => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer }
+      }));
+    if(mainEntity.length){
+      graph.push({
+        '@type': 'FAQPage',
+        mainEntity
+      });
+    }
+  }
+
+  // Clean up undefined
+  const clean = (o) => {
+    if(Array.isArray(o)) return o.map(clean).filter(x => x !== undefined && x !== null);
+    if(o && typeof o === 'object'){
+      const out = {};
+      for(const k in o){
+        const v = clean(o[k]);
+        if(v !== undefined && v !== null && !(Array.isArray(v) && v.length===0)) out[k] = v;
+      }
+      return out;
+    }
+    return o === undefined ? undefined : o;
+  };
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': graph.map(clean)
+  };
+}
+
+function genSitemap(s){
+  const urls = [];
+  const base = s.website.url ? normalizeUrl(s.website.url) : '';
+  if(base) urls.push({ loc: base + '/', priority: '1.0', changefreq: 'weekly' });
+  (s.sitemapUrls||[]).forEach(u => {
+    if(!u.url) return;
+    let loc = u.url.trim();
+    if(!/^https?:\/\//i.test(loc)) loc = base + (loc.startsWith('/') ? loc : '/' + loc);
+    urls.push({ loc, priority: u.priority || '', changefreq: u.changefreq || '' });
+  });
+  // Dedup
+  const seen = new Set();
+  const unique = urls.filter(u => { if(seen.has(u.loc)) return false; seen.add(u.loc); return true; });
+  const today = new Date().toISOString().split('T')[0];
+  const body = unique.map(u => {
+    const parts = [`    <loc>${escapeHtml(u.loc)}</loc>`];
+    if(u.changefreq) parts.push(`    <changefreq>${escapeHtml(u.changefreq)}</changefreq>`);
+    if(u.priority) parts.push(`    <priority>${escapeHtml(u.priority)}</priority>`);
+    parts.push(`    <lastmod>${today}</lastmod>`);
+    return `  <url>\n${parts.join('\n')}\n  </url>`;
+  }).join('\n');
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>`;
+}
+
+function genRobotsTxt(s){
+  const base = s.website.url ? normalizeUrl(s.website.url) : 'https://example.com';
+  return `# robots.txt for ${extractDomain(base)}
+# Learn more: https://developers.google.com/search/docs/crawling-indexing/robots/intro
+
+User-agent: *
+Allow: /
+
+# Block admin / private areas (uncomment if needed)
+# Disallow: /admin/
+# Disallow: /private/
+# Disallow: /api/
+
+# Sitemap
+Sitemap: ${base}/sitemap.xml
+`;
+}
+
+function genLlms(s, g){
+  const url = s.website.url ? normalizeUrl(s.website.url) : 'https://example.com';
+  const identity = s.identity.searchName || s.brand.fullName || s.brand.brandName || '';
+  const lines = [];
+  lines.push(`# ${identity}`);
+  lines.push('');
+  if(s.brand.shortSummary) lines.push(`> ${s.brand.shortSummary}`);
+  lines.push('');
+  lines.push('## About');
+  lines.push(s.brand.detailedAbout || s.brand.shortSummary || 'Information about this website owner.');
+  lines.push('');
+  if(s.expertise.primaryProfession || s.expertise.roles?.length){
+    lines.push('## Profession');
+    if(s.expertise.primaryProfession) lines.push(`- Primary: ${s.expertise.primaryProfession}`);
+    if(s.expertise.roles?.length) lines.push(`- Also: ${s.expertise.roles.join(', ')}`);
+    lines.push('');
+  }
+  if(s.services?.length){
+    lines.push('## Services');
+    s.services.forEach(x => {
+      if(x.name) lines.push(`- **${x.name}**: ${x.shortDescription || ''}`.trim());
+    });
+    lines.push('');
+  }
+  if(s.expertise.skills?.length || s.expertise.technologies?.length){
+    lines.push('## Expertise');
+    if(s.expertise.skills?.length) lines.push(`- Skills: ${s.expertise.skills.join(', ')}`);
+    if(s.expertise.technologies?.length) lines.push(`- Technologies: ${s.expertise.technologies.join(', ')}`);
+    if(s.expertise.platforms?.length) lines.push(`- Platforms: ${s.expertise.platforms.join(', ')}`);
+    lines.push('');
+  }
+  if(s.location.city || s.location.country){
+    lines.push('## Location');
+    lines.push([s.location.city, s.location.state, s.location.country].filter(Boolean).join(', '));
+    if(s.location.serviceArea) lines.push(`Service area: ${s.location.serviceArea}`);
+    lines.push('');
+  }
+  if(s.faqs?.length){
+    lines.push('## FAQ');
+    s.faqs.forEach(f => {
+      if(f.question && f.answer){
+        lines.push(`### ${f.question}`);
+        lines.push(f.answer);
+        lines.push('');
+      }
+    });
+  }
+  lines.push('## Links');
+  lines.push(`- Website: ${url}`);
+  Object.entries(s.socials).forEach(([k,v]) => { if(v) lines.push(`- ${k}: ${v}`); });
+  return lines.join('\n');
+}
+
+function genReadme(s, g, audit, injected){
+  const base = s.website.url ? normalizeUrl(s.website.url) : 'https://example.com';
+  const L = [];
+  L.push('========================================');
+  L.push('SEO + AEO IMPLEMENTATION PACKAGE');
+  L.push('========================================');
+  L.push('');
+  L.push('Generated by SEO + AEO Expert');
+  L.push('Date: ' + new Date().toISOString().split('T')[0]);
+  L.push('');
+  L.push('----------------------------------------');
+  L.push('1. WHAT WAS GENERATED');
+  L.push('----------------------------------------');
+  L.push('- index.html   → Your existing site with SEO/AEO tags injected (existing design/functionality preserved)');
+  L.push('- robots.txt   → Crawler directives + sitemap reference');
+  L.push('- sitemap.xml  → XML sitemap of your canonical URLs');
+  L.push('- schema.json  → JSON-LD structured data (also embedded in index.html)');
+  L.push('- llms.txt     → Optional AI/LLM-oriented context file (not a Google ranking factor)');
+  if(s.verification.method === 'file' && s.verification.fileName) {
+    L.push('- google-verification/ → Google Search Console HTML verification file');
+  }
+  L.push('');
+  L.push('----------------------------------------');
+  L.push('2. WHAT CHANGED IN index.html');
+  L.push('----------------------------------------');
+  if(injected && injected.changes && injected.changes.length){
+    injected.changes.forEach(c => L.push('- ' + c));
+  } else {
+    L.push('- (No changes were injected because no existing index.html was provided.)');
+  }
+  L.push('');
+  L.push('The following were preserved:');
+  L.push('- All existing HTML content, classes, IDs, layout');
+  L.push('- All existing CSS and JavaScript');
+  L.push('- All existing functionality and routes');
+  L.push('');
+  L.push('----------------------------------------');
+  L.push('3. WHERE TO UPLOAD EACH FILE');
+  L.push('----------------------------------------');
+  L.push('Upload to the ROOT of your domain (e.g. https://yourdomain.com/):');
+  L.push('  • index.html    (replace existing)');
+  L.push('  • robots.txt');
+  L.push('  • sitemap.xml');
+  L.push('  • llms.txt      (optional)');
+  if(s.verification.method === 'file') {
+    L.push(`  • ${s.verification.fileName}  (Google verification file — must be at: ${base}/${s.verification.fileName})`);
+  }
+  L.push('');
+  L.push('----------------------------------------');
+  L.push('4. GOOGLE SEARCH CONSOLE VERIFICATION');
+  L.push('----------------------------------------');
+  if(s.verification.method === 'meta' && s.verification.metaValue){
+    L.push('Method: HTML meta tag');
+    L.push('The following tag has been added to your <head>:');
+    L.push(`  <meta name="google-site-verification" content="${s.verification.metaValue}">`);
+    L.push('');
+    L.push('Steps:');
+    L.push('  1. Upload the updated index.html to your domain.');
+    L.push('  2. Visit https://search.google.com/search-console');
+    L.push('  3. Add your property and click "Verify".');
+  } else if(s.verification.method === 'file' && s.verification.fileName){
+    L.push('Method: HTML file upload');
+    L.push(`Upload the file "${s.verification.fileName}" to your website root.`);
+    L.push(`It must be accessible at: ${base}/${s.verification.fileName}`);
+    L.push('Then click "Verify" in Google Search Console.');
+  } else if(s.verification.method === 'dns' && s.verification.dnsValue){
+    L.push('Method: DNS TXT record');
+    L.push('Add the following TXT record at your DNS provider:');
+    L.push(`  Host: @   (or your domain)`);
+    L.push(`  Value: ${s.verification.dnsValue}`);
+    L.push('Then click "Verify" in Google Search Console.');
+    L.push('Note: This app cannot modify your DNS. You must add it at your registrar/DNS provider.');
+  } else {
+    L.push('No verification method was configured. You can verify manually later.');
+  }
+  L.push('');
+  L.push('----------------------------------------');
+  L.push('5. SUBMIT YOUR SITEMAP');
+  L.push('----------------------------------------');
+  L.push('After verification, submit your sitemap in Google Search Console:');
+  L.push(`  ${base}/sitemap.xml`);
+  L.push('');
+  L.push('Steps:');
+  L.push('  1. Open your property in Search Console.');
+  L.push('  2. Go to "Sitemaps" in the left menu.');
+  L.push('  3. Enter "sitemap.xml" and click Submit.');
+  L.push('');
+  L.push('----------------------------------------');
+  L.push('6. STRUCTURED DATA EXPLANATION');
+  L.push('----------------------------------------');
+  L.push('The schema.json file contains JSON-LD structured data describing:');
+  L.push('- Who you are (Person / Organization)');
+  L.push('- Your website (WebSite)');
+  L.push('- Your services (Service)');
+  L.push('- Your projects (CreativeWork)');
+  L.push('- Frequently asked questions (FAQPage)');
+  L.push('');
+  L.push('This data is embedded in index.html inside a <script type="application/ld+json"> tag.');
+  L.push('Validate it at: https://validator.schema.org/ and https://search.google.com/test/rich-results');
+  L.push('');
+  L.push('----------------------------------------');
+  L.push('7. AEO EXPLANATION');
+  L.push('----------------------------------------');
+  L.push('Answer Engine Optimization (AEO) helps your website communicate information clearly to search engines and answer-oriented systems. This package includes:');
+  L.push('- Explicit entity data (who you are, what you do)');
+  L.push('- FAQ structured data');
+  L.push('- Clear service and expertise descriptions');
+  L.push('- Optional llms.txt for AI/LLM-oriented context');
+  L.push('');
+  L.push('Note: AEO is not a guaranteed Google ranking factor. It is a best-practice approach to clearly structured content.');
+  L.push('');
+  L.push('----------------------------------------');
+  L.push('8. VALIDATION CHECKLIST');
+  L.push('----------------------------------------');
+  L.push('[ ] index.html uploaded');
+  L.push('[ ] robots.txt accessible at ' + base + '/robots.txt');
+  L.push('[ ] sitemap.xml accessible at ' + base + '/sitemap.xml');
+  L.push('[ ] Google Search Console verified');
+  L.push('[ ] Sitemap submitted');
+  L.push('[ ] Rich Results Test passed (https://search.google.com/test/rich-results)');
+  L.push('[ ] Schema Validator passed (https://validator.schema.org/)');
+  L.push('[ ] No accidental noindex in production');
+  L.push('[ ] Canonical URLs point to the correct domain');
+  L.push('');
+  L.push('----------------------------------------');
+  L.push('9. IMPORTANT WARNINGS');
+  L.push('----------------------------------------');
+  L.push('- Optimization ≠ ranking guarantee. No SEO/AEO implementation can guarantee rankings.');
+  L.push('- Never use keyword stuffing. Relevance and clarity beat keyword quantity.');
+  L.push('- Do not add fake reviews, fake awards, or false claims to structured data.');
+  L.push('- Keep your public search identity consistent across all profiles.');
+  L.push('- Re-submit your sitemap after major content changes.');
+  L.push('');
+  L.push('End of README.');
+  return L.join('\n');
+}
+
+/* ==========================================================================
+   HTML INJECTION (preserves existing content)
+   ========================================================================== */
+function injectSEOIntoHtml(html, g, s){
+  if(!html || !html.trim()) return { html:'', changes:[] };
+  const changes = [];
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+
+  // Ensure <head>
+  let head = doc.querySelector('head');
+  if(!head){
+    head = doc.createElement('head');
+    doc.documentElement.insertBefore(head, doc.documentElement.firstChild);
+    changes.push('Created missing <head> element.');
+  }
+
+  // Title
+  let titleEl = head.querySelector('title');
+  if(!titleEl){
+    titleEl = doc.createElement('title');
+    head.appendChild(titleEl);
+    changes.push('Added <title>.');
+  } else {
+    changes.push(`Updated <title>: "${truncate(titleEl.textContent,50)}" → "${truncate(g.title,50)}"`);
+  }
+  titleEl.textContent = g.title;
+
+  // Helper to set/replace meta by name or property
+  function setMeta(attr, key, content){
+    if(content === undefined || content === null || content === '') return;
+    let el = head.querySelector(`meta[${attr}="${CSS.escape(key)}"]`);
+    if(!el){
+      el = doc.createElement('meta');
+      el.setAttribute(attr, key);
+      head.appendChild(el);
+      changes.push(`Added <meta ${attr}="${key}">`);
+    } else {
+      changes.push(`Updated <meta ${attr}="${key}">`);
+    }
+    el.setAttribute('content', content);
+  }
+
+  // Description
+  if(g.description) setMeta('name', 'description', g.description);
+
+  // Canonical
+  if(g.canonical){
+    let link = head.querySelector('link[rel="canonical"]');
+    if(!link){
+      link = doc.createElement('link');
+      link.setAttribute('rel','canonical');
+      head.appendChild(link);
+      changes.push('Added <link rel="canonical">.');
+    } else {
+      changes.push(`Updated canonical: ${link.getAttribute('href')} → ${g.canonical}`);
+    }
+    link.setAttribute('href', g.canonical);
+  }
+
+  // Robots
+  setMeta('name','robots', g.robots);
+  // Author
+  const author = s.brand.fullName || s.identity.searchName || s.brand.brandName;
+  if(author) setMeta('name','author', author);
+  // Viewport (ensure exists)
+  let vp = head.querySelector('meta[name="viewport"]');
+  if(!vp){
+    vp = doc.createElement('meta');
+    vp.setAttribute('name','viewport');
+    vp.setAttribute('content','width=device-width, initial-scale=1');
+    head.appendChild(vp);
+    changes.push('Added viewport meta.');
+  }
+  // Theme color
+  setMeta('name','theme-color', '#0a0b0f');
+
+  // Open Graph
+  Object.entries(g.og).forEach(([k,v]) => setMeta('property', k, v));
+  // Twitter
+  Object.entries(g.twitter).forEach(([k,v]) => setMeta('name', k, v));
+
+  // JSON-LD — remove old ones then add new
+  const oldLD = head.querySelectorAll('script[type="application/ld+json"]');
+  if(oldLD.length){
+    oldLD.forEach(x => x.remove());
+    changes.push(`Replaced ${oldLD.length} existing JSON-LD block(s).`);
+  }
+  const ld = doc.createElement('script');
+  ld.setAttribute('type','application/ld+json');
+  ld.textContent = '\n' + JSON.stringify(g.jsonld, null, 2) + '\n';
+  head.appendChild(ld);
+  changes.push('Injected JSON-LD structured data.');
+
+  // Google verification (meta method)
+  if(s.verification.method === 'meta' && s.verification.metaValue){
+    setMeta('name','google-site-verification', s.verification.metaValue);
+    changes.push('Injected Google Search Console verification meta tag.');
+  }
+
+  // Language
+  if(!doc.documentElement.getAttribute('lang')){
+    doc.documentElement.setAttribute('lang','en');
+    changes.push('Added lang="en" to <html>.');
+  }
+
+  const out = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+  return { html: out, changes };
+}
+
+/* ==========================================================================
+   SEO AUDIT
+   ========================================================================== */
+function auditHtml(html){
+  const results = [];
+  if(!html || !html.trim()){
+    return { results: [], empty: true };
+  }
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const head = doc.querySelector('head') || doc.documentElement;
+
+  // Title
+  const title = head.querySelector('title');
+  if(title && title.textContent.trim()){
+    const len = title.textContent.trim().length;
+    if(len >= 30 && len <= 65) results.push({ name:'Title', status:'ok', detail:`Present (${len} chars) — good length.` });
+    else if(len < 30) results.push({ name:'Title', status:'warn', detail:`Present but short (${len} chars). Aim for 30–65.` });
+    else results.push({ name:'Title', status:'warn', detail:`Present but long (${len} chars). Aim for 30–65.` });
+  } else {
+    results.push({ name:'Title', status:'bad', detail:'Missing <title>. This is critical.' });
+  }
+
+  // Meta description
+  const desc = head.querySelector('meta[name="description"]');
+  if(desc && desc.getAttribute('content')){
+    const len = desc.getAttribute('content').length;
+    if(len >= 120 && len <= 160) results.push({ name:'Meta Description', status:'ok', detail:`Present (${len} chars).` });
+    else results.push({ name:'Meta Description', status:'warn', detail:`Present but ${len<120?'short':'long'} (${len} chars). Aim for 120–160.` });
+  } else {
+    results.push({ name:'Meta Description', status:'bad', detail:'Missing meta description.' });
+  }
+
+  // Canonical
+  const canon = head.querySelector('link[rel="canonical"]');
+  if(canon && canon.getAttribute('href')) results.push({ name:'Canonical URL', status:'ok', detail:`Present: ${canon.getAttribute('href')}` });
+  else results.push({ name:'Canonical URL', status:'bad', detail:'Missing canonical link.' });
+
+  // Robots meta
+  const robotsMeta = head.querySelector('meta[name="robots"]');
+  if(robotsMeta){
+    const c = (robotsMeta.getAttribute('content')||'').toLowerCase();
+    if(c.includes('noindex')) results.push({ name:'Robots Meta', status:'warn', detail:`Contains "noindex" — site may be blocked from indexing: "${c}".` });
+    else results.push({ name:'Robots Meta', status:'ok', detail:`Present: "${c}".` });
+  } else {
+    results.push({ name:'Robots Meta', status:'warn', detail:'Not specified. Defaults to index,follow.' });
+  }
+
+  // Open Graph
+  const og = head.querySelectorAll('meta[property^="og:"]');
+  if(og.length >= 4) results.push({ name:'Open Graph', status:'ok', detail:`${og.length} og: tags found.` });
+  else if(og.length) results.push({ name:'Open Graph', status:'warn', detail:`Only ${og.length} og: tag(s). Recommended: og:title, og:description, og:url, og:type, og:image.` });
+  else results.push({ name:'Open Graph', status:'bad', detail:'No Open Graph tags found.' });
+
+  // Twitter
+  const tw = head.querySelectorAll('meta[name^="twitter:"]');
+  if(tw.length >= 3) results.push({ name:'Twitter/X Cards', status:'ok', detail:`${tw.length} twitter: tags found.` });
+  else if(tw.length) results.push({ name:'Twitter/X Cards', status:'warn', detail:`Only ${tw.length} twitter: tag(s).` });
+  else results.push({ name:'Twitter/X Cards', status:'bad', detail:'No Twitter card tags found.' });
+
+  // Structured Data
+  const ld = head.querySelectorAll('script[type="application/ld+json"]');
+  if(ld.length){
+    let valid = true;
+    ld.forEach(x => { try { JSON.parse(x.textContent); } catch { valid = false; } });
+    if(valid) results.push({ name:'Structured Data', status:'ok', detail:`${ld.length} valid JSON-LD block(s).` });
+    else results.push({ name:'Structured Data', status:'warn', detail:`${ld.length} JSON-LD block(s) found but at least one has malformed JSON.` });
+  } else {
+    results.push({ name:'Structured Data', status:'bad', detail:'No JSON-LD structured data found.' });
+  }
+
+  // Sitemap / robots.txt — can't check from index.html
+  results.push({ name:'Sitemap', status:'warn', detail:'Cannot be verified from index.html alone. Ensure /sitemap.xml exists at your domain root.' });
+  results.push({ name:'Robots.txt', status:'warn', detail:'Cannot be verified from index.html alone. Ensure /robots.txt exists at your domain root.' });
+
+  // Headings
+  const h1 = doc.querySelectorAll('h1');
+  if(h1.length === 1) results.push({ name:'Heading Structure', status:'ok', detail:'Exactly one <h1> found.' });
+  else if(h1.length === 0) results.push({ name:'Heading Structure', status:'bad', detail:'No <h1> found.' });
+  else results.push({ name:'Heading Structure', status:'warn', detail:`${h1.length} <h1> tags found. Recommended: exactly one.` });
+
+  // Images
+  const imgs = doc.querySelectorAll('img');
+  if(imgs.length === 0) results.push({ name:'Image Alt Text', status:'warn', detail:'No images found.' });
+  else {
+    const missing = Array.from(imgs).filter(i => !i.getAttribute('alt')).length;
+    if(missing === 0) results.push({ name:'Image Alt Text', status:'ok', detail:`All ${imgs.length} image(s) have alt text.` });
+    else results.push({ name:'Image Alt Text', status:'warn', detail:`${missing} of ${imgs.length} image(s) missing alt text.` });
+  }
+
+  // Viewport
+  const vp = head.querySelector('meta[name="viewport"]');
+  if(vp && /width=device-width/i.test(vp.getAttribute('content')||'')) results.push({ name:'Viewport', status:'ok', detail:'Responsive viewport configured.' });
+  else if(vp) results.push({ name:'Viewport', status:'warn', detail:`Viewport present but may not be responsive: "${vp.getAttribute('content')}"` });
+  else results.push({ name:'Viewport', status:'bad', detail:'Missing viewport meta tag.' });
+
+  // Language
+  const lang = doc.documentElement.getAttribute('lang');
+  if(lang) results.push({ name:'Language', status:'ok', detail:`lang="${lang}"` });
+  else results.push({ name:'Language', status:'warn', detail:'Missing lang attribute on <html>.' });
+
+  return { results, empty: false };
+}
+
+/* ==========================================================================
+   VALIDATION
+   ========================================================================== */
+function runValidation(s, g){
+  const issues = [];
+  const warnings = [];
+
+  // Website URL
+  if(!s.website.url) issues.push('Website URL is missing.');
+  else if(!isValidUrl(s.website.url)) issues.push('Website URL is not a valid URL.');
+
+  // Identity
+  if(!s.identity.searchName && !s.brand.fullName && !s.brand.brandName)
+    warnings.push('No search identity or name provided. The generated <title> may be generic.');
+
+  // Title
+  if(!g.title) issues.push('Title is empty.');
+  else if(g.title.length > 70) warnings.push(`Title is ${g.title.length} chars (recommended ≤ 65).`);
+  else if(g.title.length < 15) warnings.push('Title is very short.');
+
+  // Description
+  if(!g.description) warnings.push('Meta description is empty.');
+  else if(g.description.length > 165) warnings.push(`Description is ${g.description.length} chars (recommended ≤ 160).`);
+
+  // Canonical
+  if(!g.canonical) warnings.push('Canonical URL missing.');
+
+  // JSON-LD
+  try { JSON.parse(JSON.stringify(g.jsonld)); } catch { issues.push('JSON-LD could not be serialized.'); }
+
+  // Sitemap
+  try {
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(g.sitemap, 'application/xml');
+    if(xml.querySelector('parsererror')) issues.push('Sitemap XML is malformed.');
+  } catch { issues.push('Sitemap XML could not be parsed.'); }
+
+  // Robots
+  if(!g.robotsTxt || !g.robotsTxt.includes('User-agent')) warnings.push('Robots.txt looks unusual.');
+
+  // Noindex check in injected HTML
+  if(g.injectedHtml){
+    if(/<meta[^>]+name=["']robots["'][^>]+noindex/i.test(g.injectedHtml))
+      issues.push('Injected HTML contains "noindex" in robots meta — your site would be blocked from indexing!');
+  }
+
+  // Duplicate title check in injected HTML
+  if(g.injectedHtml){
+    const doc = new DOMParser().parseFromString(g.injectedHtml, 'text/html');
+    const titles = doc.querySelectorAll('title');
+    if(titles.length > 1) issues.push(`Multiple <title> tags found (${titles.length}).`);
+    const descs = doc.querySelectorAll('meta[name="description"]');
+    if(descs.length > 1) issues.push(`Multiple meta descriptions found (${descs.length}).`);
+    const canons = doc.querySelectorAll('link[rel="canonical"]');
+    if(canons.length > 1) issues.push(`Multiple canonical links found (${canons.length}).`);
+  }
+
+  // Verification format
+  if(s.verification.method === 'meta' && s.verification.metaValue){
+    if(!/^[A-Za-z0-9_\-]{20,}$/.test(s.verification.metaValue.trim()))
+      warnings.push('Google verification meta value format looks unusual (usually a long token).');
+  }
+
+  // Canonical domain match
+  if(g.canonical && s.website.url){
+    const canDomain = extractDomain(g.canonical);
+    const siteDomain = extractDomain(s.website.url);
+    if(canDomain && siteDomain && canDomain !== siteDomain)
+      issues.push(`Canonical domain (${canDomain}) does not match website domain (${siteDomain}).`);
+  }
+
+  return { issues, warnings };
+}
+
+/* ==========================================================================
+   GENERATE ALL
+   ========================================================================== */
+function generateAll(){
+  const s = state;
+  const g = {};
+  g.title = s.generated.title || genTitle(s);
+  g.description = s.generated.description || genDescription(s);
+  g.canonical = s.website.url ? normalizeUrl(s.website.url) + '/' : '';
+  g.robots = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+  g.og = genOpenGraph(s, g);
+  g.twitter = genTwitter(s, g);
+  g.jsonld = genJSONLD(s, g);
+  g.sitemap = genSitemap(s);
+  g.robotsTxt = genRobotsTxt(s);
+  g.llms = genLlms(s, g);
+  const audit = auditHtml(s.code.html);
+  g.audit = audit;
+  let injected = { html:'', changes:[] };
+  if(s.code.html){
+    injected = injectSEOIntoHtml(s.code.html, g, s);
+  }
+  g.injectedHtml = injected.html;
+  g.injectionChanges = injected.changes;
+  g.readme = genReadme(s, g, audit, injected);
+  return g;
+}
+
+/* ==========================================================================
+   RENDER: SIDEBAR
+   ========================================================================== */
+function renderSidebar(){
+  const el = $('#sidebar');
+  el.innerHTML = `<div class="sidebar-title">Wizard</div>` +
+    STEPS.map((st,i)=>{
+      const done = isStepComplete(st.id);
+      return `<div class="step-item ${i===currentStep?'active':''} ${done?'done':''}" data-goto="${i}">
+        <div class="step-num">${done?'✓':st.num}</div>
+        <div>${st.label}</div>
+      </div>`;
+    }).join('');
+}
+
+function isStepComplete(id){
+  // Basic heuristics for sidebar status
+  switch(id){
+    case 'website': return !!state.website.url;
+    case 'code': return !!state.code.html;
+    case 'identity': return !!state.identity.searchName;
+    case 'brand': return !!(state.brand.fullName || state.brand.brandName);
+    case 'expertise': return !!state.expertise.primaryProfession;
+    case 'services': return state.services.length > 0;
+    case 'audience': return state.audience.types.length > 0;
+    case 'location': return !!(state.location.country || state.location.city);
+    case 'projects': return state.projects.length > 0;
+    case 'socials': return Object.values(state.socials).some(v => v);
+    case 'seoContext': return !!state.seoContext.mainTopic;
+    case 'aeo': return !!state.aeo.who;
+    case 'verification': return !!state.verification.metaValue || !!state.verification.fileName || !!state.verification.dnsValue;
+    case 'audit': return !!state.code.html;
+    case 'preview': return true;
+    case 'validation': return true;
+    case 'download': return true;
+  }
+  return false;
+}
+
+/* ==========================================================================
+   RENDER: STEPS
+   ========================================================================== */
+const stepRenderers = {
+
+  /* -------- 01 Website -------- */
+  website(){
+    return `
+      <div class="step-head">
+        <div class="step-kicker">01 — Website</div>
+        <h1 class="step-title">Tell us about your website</h1>
+        <p class="step-desc">This information drives your canonical URL, sitemap, and technical metadata.</p>
+      </div>
+
+      <div class="card">
+        <div class="grid cols-2">
+          ${field('Website URL', 'website.url', { type:'url', placeholder:'https://example.com', help:'Include https:// — we will normalize it.' })}
+          ${field('Website Type', 'website.type', { type:'select', options:[
+            {value:'personal-portfolio', label:'Personal Portfolio'},
+            {value:'developer-portfolio', label:'Developer Portfolio'},
+            {value:'business', label:'Business'},
+            {value:'agency', label:'Agency'},
+            {value:'e-commerce', label:'E-commerce'},
+            {value:'blog', label:'Blog'},
+            {value:'documentation', label:'Documentation'},
+            {value:'service-website', label:'Service Website'},
+            {value:'landing-page', label:'Landing Page'},
+            {value:'other', label:'Other'}
+          ], help:'Determines which structured data types we generate.' })}
+        </div>
+        ${field('What is the main purpose of this website?', 'website.purpose', { type:'textarea', rows:3, placeholder:'e.g. Showcase my development work and attract freelance clients for Shopify and AI projects.' })}
+        ${field('Main conversion goal', 'website.goal', { type:'textarea', rows:2, placeholder:'e.g. Get contacted through the contact form / book a call / purchase a product.' })}
+      </div>
+
+      <div class="card accent">
+        <div class="card-title">🔒 Privacy note</div>
+        <div class="card-sub">Everything you enter stays in your browser (localStorage). Nothing is sent to a server by this tool.</div>
+      </div>
+    `;
+  },
+
+  /* -------- 02 Existing Code -------- */
+  code(){
+    const size = state.code.html ? (state.code.html.length/1024).toFixed(1) + ' KB' : 'empty';
+    return `
+      <div class="step-head">
+        <div class="step-kicker">02 — Existing Code</div>
+        <h1 class="step-title">Paste or upload your existing index.html</h1>
+        <p class="step-desc">We inject SEO/AEO tags into your existing file — your design, content, classes, IDs, CSS, and JavaScript remain untouched.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Provide your index.html</div>
+        <div class="card-sub">Either paste the code below or upload the file. Current content: <strong>${size}</strong></div>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+          <label class="btn sm" style="cursor:pointer">
+            📁 Upload index.html
+            <input type="file" id="upload-html" accept=".html,.htm,text/html" style="display:none">
+          </label>
+          <button class="btn sm" data-action="sample-html">Load sample HTML</button>
+          <button class="btn sm danger" data-action="clear-html">Clear</button>
+        </div>
+
+        <textarea class="code-area" id="code-input" placeholder="<!DOCTYPE html>&#10;<html lang=&quot;en&quot;>&#10;  <head>...">${escapeHtml(state.code.html||'')}</textarea>
+
+        <div class="help mt-2">
+          If you don't have an index.html yet, you can leave this empty. We'll still generate robots.txt, sitemap.xml, schema.json, and README for you.
+        </div>
+      </div>
+
+      ${state.code.html ? `
+        <div class="card">
+          <div class="card-title">Quick preview</div>
+          <div class="card-sub">First 600 characters of the parsed file. We will not modify any existing content.</div>
+          <div class="code-preview">${escapeHtml(state.code.html.slice(0,600))}${state.code.html.length>600?'\n...':''}</div>
+        </div>
+      ` : ''}
+    `;
+  },
+
+  /* -------- 03 Search Identity -------- */
+  identity(){
+    const a = state.identity;
+    const suggestions = a.suggestions || [];
+    return `
+      <div class="step-head">
+        <div class="step-kicker">03 — Search Identity</div>
+        <h1 class="step-title">Define your search identity</h1>
+        <p class="step-desc">Choose a unique public name or identity that people can use to find you more easily in search engines. Avoid extremely broad names like "Ahmed", "Ali", "Developer", or "John" — they may be shared by many unrelated people or entities. Your search identity should be recognizable, consistent, and genuinely connected to your online presence.</p>
+      </div>
+
+      <div class="card accent">
+        <div class="field">
+          <label for="id-search">What name should people search for to find you?</label>
+          <input id="id-search" type="text" data-field="identity.searchName" value="${escapeAttr(a.searchName)}" placeholder="e.g. Shahan Ali | Shopify Expert — Bot Architect">
+          <div class="help">Ideally: unique, consistent across profiles, authentic, memorable, connected to your website/domain, and used consistently across online profiles.</div>
+        </div>
+        <div class="mt-3">
+          <button class="btn primary sm" data-action="analyze-identity">Analyze identity</button>
+        </div>
+      </div>
+
+      ${a.warning ? `
+        <div class="card warn">
+          <div class="card-title">⚠ Identity warning</div>
+          <div class="card-sub" style="color:#fde68a">${escapeHtml(a.warning)}</div>
+          <div class="muted" style="font-size:12px">This can make your identity more distinguishable and easier for search systems to associate with your website when your other signals are consistent. It does not guarantee rankings.</div>
+        </div>
+      ` : ''}
+
+      ${suggestions.length ? `
+        <div class="card">
+          <div class="card-title">Suggestions</div>
+          <div class="card-sub">These are based only on the information you have already provided. Clearly marked as suggestions — you choose the final identity.</div>
+          <div class="chips">
+            ${suggestions.map(s => `<button type="button" class="chip" data-use-identity="${escapeAttr(s)}" style="cursor:pointer">${escapeHtml(s)}</button>`).join('')}
+          </div>
+        </div>
+      ` : ''}
+
+      <div class="card">
+        <div class="card-title">Why this matters</div>
+        <ul class="tight">
+          <li>Helps search engines disambiguate you from others with similar names.</li>
+          <li>Consistent use across title, description, JSON-LD, and sameAs signals entity clarity.</li>
+          <li>We will <strong>not</strong> fabricate a surname, brand, or credentials.</li>
+          <li>We will <strong>not</strong> promise rankings — only clearer identity signals.</li>
+        </ul>
+      </div>
+    `;
+  },
+
+  /* -------- 04 Personal / Brand -------- */
+  brand(){
+    return `
+      <div class="step-head">
+        <div class="step-kicker">04 — Personal / Brand</div>
+        <h1 class="step-title">Tell us about you</h1>
+        <p class="step-desc">Your identity, brand, and story. Used across meta tags, JSON-LD, and your README.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Identity</div>
+        <div class="grid cols-2">
+          ${field('Full Name', 'brand.fullName', { placeholder:'Your legal / public full name' })}
+          ${field('Public / Search Name', 'brand.publicName', { placeholder:'The name people should search for' })}
+          ${field('Brand / Business Name', 'brand.brandName', { placeholder:'Optional' })}
+          ${field('Username / Handle', 'brand.handle', { placeholder:'@yourhandle' })}
+          ${field('Professional Title', 'brand.title', { placeholder:'Full Stack Developer · AI Developer · Shopify Expert' })}
+          ${field('Open Graph image URL', 'brand.ogImage', { type:'url', placeholder:'https://example.com/og.jpg', help:'Optional. If missing, we will warn you — we never invent image URLs.' })}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Professional summary</div>
+        ${field('Short professional summary', 'brand.shortSummary', { type:'textarea', rows:3, placeholder:'Describe yourself professionally in 1–3 sentences.' })}
+        ${field('Detailed about you', 'brand.detailedAbout', { type:'textarea', rows:8, placeholder:'Tell us about your experience, expertise, background, interests, achievements, and the type of work you do.' })}
+      </div>
+
+      <div class="card">
+        <div class="card-title">What makes you different?</div>
+        <div class="grid cols-2">
+          ${field('Unique Value Proposition', 'unique.uvp', { type:'textarea', rows:2 })}
+          ${field('Specialization', 'unique.specialization', { type:'textarea', rows:2 })}
+          ${field('Years of Experience', 'unique.years', { placeholder:'e.g. 5' })}
+          ${field('Languages', 'unique.languages', { placeholder:'e.g. English, Urdu, Hindi' })}
+          ${field('Certifications', 'unique.certifications', { type:'textarea', rows:2 })}
+          ${field('Awards', 'unique.awards', { type:'textarea', rows:2 })}
+          ${field('Achievements', 'unique.achievements', { type:'textarea', rows:2 })}
+          ${field('Notable Clients (optional)', 'unique.notableClients', { type:'textarea', rows:2 })}
+          ${field('Industries Served', 'unique.industries', { type:'textarea', rows:2 })}
+        </div>
+        <div class="help mt-2">We only generate structured data for information you actually provide. We never fabricate credentials, employers, awards, clients, or relationships.</div>
+      </div>
+    `;
+  },
+
+  /* -------- 05 Expertise -------- */
+  expertise(){
+    return `
+      <div class="step-head">
+        <div class="step-kicker">05 — Expertise</div>
+        <h1 class="step-title">What do you do?</h1>
+        <p class="step-desc">Your roles, skills, technologies, and platforms. This builds the semantic topic map.</p>
+      </div>
+
+      <div class="card">
+        ${field('Primary Profession', 'expertise.primaryProfession', { placeholder:'e.g. Full Stack Developer' })}
+      </div>
+
+      <div class="card">
+        ${listField('Other Professional Roles', 'expertise.roles', 'e.g. AI Developer, Shopify Developer, Bot Architect', 'Press Enter after each.')}
+        ${listField('Skills', 'expertise.skills', 'e.g. JavaScript, React, Node.js', 'Press Enter after each.')}
+        ${listField('Technologies', 'expertise.technologies', 'e.g. TypeScript, Python, MongoDB', 'Press Enter after each.')}
+        ${listField('Platforms', 'expertise.platforms', 'e.g. Shopify, WhatsApp, GitHub, Vercel', 'Press Enter after each.')}
+      </div>
+
+      <div class="card">
+        ${field('Areas of Expertise', 'expertise.areas', { type:'textarea', rows:6, placeholder:'Describe your areas of expertise in detail. This helps build semantic relevance.' })}
+      </div>
+    `;
+  },
+
+  /* -------- 06 Services -------- */
+  services(){
+    return `
+      <div class="step-head">
+        <div class="step-kicker">06 — Services</div>
+        <h1 class="step-title">What services do you offer?</h1>
+        <p class="step-desc">Each service becomes a schema.org Service entry and informs your semantic topic map. Only terms genuinely supported by your information are used.</p>
+      </div>
+      <div class="card">
+        ${repeater('services', 'Your Services',
+          (item, i) => item.name || `Service ${i+1}`,
+          [
+            { label:'Service Name', key:'name', placeholder:'e.g. Shopify Development' },
+            { label:'Short Description', key:'shortDescription', placeholder:'One line summary' },
+            { label:'Detailed Description', key:'detailedDescription', type:'textarea', rows:3 },
+            { label:'Who is this service for?', key:'targetAudience', placeholder:'e.g. Clothing brands in Pakistan' },
+            { label:'What problem does it solve?', key:'problemSolved', type:'textarea', rows:2 },
+            { label:'Technologies used', key:'technologies', placeholder:'e.g. Shopify Liquid, JavaScript' },
+            { label:'Relevant keywords', key:'keywords', placeholder:'e.g. shopify developer, store customization' }
+          ],
+          '+ Add service'
+        )}
+      </div>
+    `;
+  },
+
+  /* -------- 07 Audience -------- */
+  audience(){
+    return `
+      <div class="step-head">
+        <div class="step-kicker">07 — Audience</div>
+        <h1 class="step-title">Who do you want to reach?</h1>
+        <p class="step-desc">Understanding your audience helps us align with search intent.</p>
+      </div>
+
+      <div class="card">
+        ${checkGroup('Audience types', 'audience.types', [
+          'Businesses','Startups','Shopify store owners','Content creators','Local businesses',
+          'Agencies','Developers','Individuals','E-commerce brands','Enterprises','Non-profits','Other'
+        ])}
+      </div>
+
+      <div class="card">
+        ${field('Describe your ideal client / customer', 'audience.idealClient', { type:'textarea', rows:4 })}
+        ${field('What problems do they usually have?', 'audience.problems', { type:'textarea', rows:4 })}
+        ${field('What are they searching for?', 'audience.searches', { type:'textarea', rows:4, placeholder:'Phrases, questions, or topics they search for.' })}
+      </div>
+    `;
+  },
+
+  /* -------- 08 Location -------- */
+  location(){
+    return `
+      <div class="step-head">
+        <div class="step-kicker">08 — Location</div>
+        <h1 class="step-title">Where do you operate?</h1>
+        <p class="step-desc">Only publicly intended geographic information — do not enter private addresses.</p>
+      </div>
+
+      <div class="card">
+        <div class="grid cols-3">
+          ${field('Country', 'location.country', { placeholder:'e.g. Pakistan' })}
+          ${field('State / Province', 'location.state', { placeholder:'e.g. Punjab' })}
+          ${field('City', 'location.city', { placeholder:'e.g. Lahore' })}
+        </div>
+        ${field('Service Area', 'location.serviceArea', { type:'select', options:['Local','National','International','Remote'] })}
+        ${field('Areas you serve (optional)', 'location.areasServed', { type:'textarea', rows:3, placeholder:'e.g. Pakistan, UAE, USA — or specific cities/regions.' })}
+      </div>
+    `;
+  },
+
+  /* -------- 09 Projects -------- */
+  projects(){
+    return `
+      <div class="step-head">
+        <div class="step-kicker">09 — Projects</div>
+        <h1 class="step-title">Your projects & portfolio</h1>
+        <p class="step-desc">Each project becomes a schema.org CreativeWork entry, helping search engines understand your topical relevance.</p>
+      </div>
+      <div class="card">
+        ${repeater('projects', 'Projects',
+          (item, i) => item.name || `Project ${i+1}`,
+          [
+            { label:'Project Name', key:'name' },
+            { label:'Project URL', key:'url', type:'url', placeholder:'https://...' },
+            { label:'Description', key:'description', type:'textarea', rows:3 },
+            { label:'Technologies', key:'technologies', placeholder:'e.g. React, Node.js' },
+            { label:'Category', key:'category', placeholder:'e.g. Web App' },
+            { label:'Client / Organization (optional)', key:'client' },
+            { label:'Completion date (optional)', key:'date', placeholder:'e.g. 2024-03' },
+            { label:'Image URL (optional)', key:'image', type:'url' }
+          ],
+          '+ Add project'
+        )}
+      </div>
+    `;
+  },
+
+  /* -------- 10 Socials -------- */
+  socials(){
+    const socials = state.socials;
+    const defs = [
+      ['github','GitHub','https://github.com/...'],
+      ['linkedin','LinkedIn','https://linkedin.com/in/...'],
+      ['instagram','Instagram','https://instagram.com/...'],
+      ['facebook','Facebook','https://facebook.com/...'],
+      ['x','X (Twitter)','https://x.com/...'],
+      ['youtube','YouTube','https://youtube.com/@...'],
+      ['tiktok','TikTok','https://tiktok.com/@...'],
+      ['behance','Behance','https://behance.net/...'],
+      ['dribbble','Dribbble','https://dribbble.com/...'],
+      ['shopify','Shopify profile','https://...'],
+      ['other','Other','https://...']
+    ];
+    return `
+      <div class="step-head">
+        <div class="step-kicker">10 — Social Profiles</div>
+        <h1 class="step-title">Your online profiles</h1>
+        <p class="step-desc">These become <code>sameAs</code> in your structured data — which helps search engines confirm your identity. We never invent profile URLs.</p>
+      </div>
+      <div class="card">
+        <div class="grid cols-2">
+          ${defs.map(([k,label,ph]) => `
+            <div class="field">
+              <label>${label}</label>
+              <input type="url" data-field="socials.${k}" value="${escapeAttr(socials[k]||'')}" placeholder="${escapeAttr(ph)}">
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  },
+
+  /* -------- 11 SEO Context -------- */
+  seoContext(){
+    return `
+      <div class="step-head">
+        <div class="step-kicker">11 — SEO Context</div>
+        <h1 class="step-title">What should people find you for?</h1>
+        <p class="step-desc">We do not stuff keywords. We build a semantic topic map. Every phrase you provide here is used intelligently — in metadata, structured content, semantic relationships, and page recommendations.</p>
+      </div>
+
+      <div class="card">
+        ${field('Main Search Topic', 'seoContext.mainTopic', { placeholder:'e.g. Shopify development for clothing brands in Pakistan' })}
+        ${listField('Primary search phrases', 'seoContext.primary', 'Press Enter after each phrase.')}
+        ${listField('Secondary search phrases', 'seoContext.secondary', 'Press Enter after each phrase.')}
+        ${listField('Services people should find', 'seoContext.servicesFind', 'Press Enter after each.')}
+        ${listField('Location-based searches', 'seoContext.locationSearches', 'Press Enter after each.')}
+        ${listField('Industry terms', 'seoContext.industries', 'Press Enter after each.')}
+        ${listField('Problem-based searches', 'seoContext.problems', 'Press Enter after each.')}
+        ${listField('Questions people might ask', 'seoContext.questions', 'Press Enter after each.')}
+        ${listField('Competitor / alternative terms (optional)', 'seoContext.competitors', 'Press Enter after each.')}
+      </div>
+
+      <div class="card">
+        <div class="card-title">SEO content context</div>
+        ${field('What do you want Google to understand about you?', 'seoUnderstand.google', { type:'textarea', rows:3 })}
+        ${field('What do you want customers to understand?', 'seoUnderstand.customers', { type:'textarea', rows:3 })}
+        ${field('What questions should your website answer?', 'seoUnderstand.questions', { type:'textarea', rows:3 })}
+        ${field('What makes your service different?', 'seoUnderstand.different', { type:'textarea', rows:3 })}
+        ${field('What topics can you confidently discuss?', 'seoUnderstand.topics', { type:'textarea', rows:3 })}
+        ${field('What topics should NOT be associated with you?', 'seoUnderstand.avoid', { type:'textarea', rows:3 })}
+      </div>
+
+      <div class="card warn">
+        <div class="card-title">⚠ Important note on keywords</div>
+        <div class="card-sub" style="color:#fde68a">More keywords ≠ better SEO. We do not generate hundreds of repetitive variations. We prioritise relevance, uniqueness, natural language, entity clarity, and search intent.</div>
+      </div>
+    `;
+  },
+
+  /* -------- 12 AEO Context -------- */
+  aeo(){
+    return `
+      <div class="step-head">
+        <div class="step-kicker">12 — AEO Context</div>
+        <h1 class="step-title">Answer Engine Optimization</h1>
+        <p class="step-desc">AEO helps your website communicate information clearly to search engines and answer-oriented systems by providing structured, understandable, and well-organized information.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Answer Engine facts</div>
+        <div class="card-sub">Write in clear, plain language. These become your FAQ structured data and llms.txt context.</div>
+        ${field('Who are you?', 'aeo.who', { type:'textarea', rows:2 })}
+        ${field('What do you do?', 'aeo.what', { type:'textarea', rows:2 })}
+        ${field('What services do you provide?', 'aeo.services', { type:'textarea', rows:2 })}
+        ${field('Where are you based?', 'aeo.where', { type:'textarea', rows:2 })}
+        ${field('Who do you work with?', 'aeo.withWhom', { type:'textarea', rows:2 })}
+        ${field('What technologies do you use?', 'aeo.tech', { type:'textarea', rows:2 })}
+        ${field('What are your specialties?', 'aeo.specialties', { type:'textarea', rows:2 })}
+        ${field('What makes you different?', 'aeo.different', { type:'textarea', rows:2 })}
+      </div>
+
+      <div class="card">
+        <div class="card-title">Frequently Asked Questions</div>
+        <div class="card-sub">Each FAQ becomes a schema.org Question / Answer pair. Only write FAQs based on real, accurate information.</div>
+        ${repeater('faqs', 'FAQ entries',
+          (item,i) => item.question || `FAQ ${i+1}`,
+          [
+            { label:'Question', key:'question', placeholder:'e.g. What services do you offer?' },
+            { label:'Answer', key:'answer', type:'textarea', rows:3 }
+          ],
+          '+ Add FAQ'
+        )}
+      </div>
+
+      <div class="card warn">
+        Do not create fake claims. Every FAQ answer must be true and consistent with your actual services and experience.
+      </div>
+    `;
+  },
+
+  /* -------- 13 Verification -------- */
+  verification(){
+    const v = state.verification;
+    const base = state.website.url ? normalizeUrl(state.website.url) : 'https://example.com';
+    return `
+      <div class="step-head">
+        <div class="step-kicker">13 — Google Search Console</div>
+        <h1 class="step-title">Google Search Console verification</h1>
+        <p class="step-desc">Google Search Console verification must be completed by the website owner or someone with appropriate access to the domain/property. This app cannot verify on your behalf — but it can prepare the exact files/tags you need.</p>
+      </div>
+
+      <div class="card">
+        <div class="field">
+          <label>Verification method</label>
+          <select data-field="verification.method">
+            <option value="meta" ${v.method==='meta'?'selected':''}>HTML meta tag (recommended)</option>
+            <option value="file" ${v.method==='file'?'selected':''}>HTML file upload</option>
+            <option value="dns"  ${v.method==='dns'?'selected':''}>DNS TXT record</option>
+            <option value="skip" ${v.method==='skip'?'selected':''}>Skip for now</option>
+          </select>
+        </div>
+      </div>
+
+      ${v.method === 'meta' ? `
+        <div class="card">
+          <div class="card-title">HTML meta tag method</div>
+          <div class="card-sub">Paste the content value of the meta tag Google gives you. We will inject it into your &lt;head&gt; and add it to the README.</div>
+          ${field('Verification content value', 'verification.metaValue', { placeholder:'e.g. AbC123...longToken...' })}
+          ${v.metaValue ? `<div class="code-preview mt-2">&lt;meta name="google-site-verification" content="${escapeHtml(v.metaValue)}"&gt;</div>` : ''}
+        </div>
+      ` : ''}
+
+      ${v.method === 'file' ? `
+        <div class="card">
+          <div class="card-title">HTML file method</div>
+          <div class="card-sub">Google gives you a filename like <code>google1234abcd.html</code>. Enter the filename below. We will generate the verification file for you to upload.</div>
+          ${field('Verification filename', 'verification.fileName', { placeholder:'e.g. google1234abcd.html' })}
+          ${v.fileName ? `
+            <div class="code-preview mt-2">${escapeHtml(`<!-- Google Search Console verification file -->
+${v.fileName}
+
+google-site-verification: ${v.fileName}`)}</div>
+            <div class="help mt-2">Upload this file to your website root so it is accessible at:
+              <code>${base}/${escapeHtml(v.fileName)}</code>
+            </div>
+          ` : ''}
+        </div>
+      ` : ''}
+
+      ${v.method === 'dns' ? `
+        <div class="card">
+          <div class="card-title">DNS TXT method</div>
+          <div class="card-sub">Add the following TXT record at your DNS provider (registrar or DNS host). This app cannot modify your DNS.</div>
+          ${field('TXT record value', 'verification.dnsValue', { placeholder:'google-site-verification=...' })}
+          ${v.dnsValue ? `
+            <div class="code-preview mt-2">Host: @
+Type: TXT
+Value: ${escapeHtml(v.dnsValue)}
+TTL: Auto</div>
+          ` : ''}
+        </div>
+      ` : ''}
+
+      <div class="card accent">
+        <div class="card-title">📋 After verification</div>
+        <ul class="tight">
+          <li>Open <a href="https://search.google.com/search-console" target="_blank" rel="noopener">Google Search Console</a>.</li>
+          <li>Add your property (URL prefix or Domain).</li>
+          <li>Verify using the method above.</li>
+          <li>Submit your sitemap: <code>${base}/sitemap.xml</code></li>
+        </ul>
+      </div>
+    `;
+  },
+
+  /* -------- 14 Audit -------- */
+  audit(){
+    if(!state.code.html){
+      return `
+        <div class="step-head">
+          <div class="step-kicker">14 — SEO Audit</div>
+          <h1 class="step-title">SEO Audit</h1>
+          <p class="step-desc">No index.html provided yet.</p>
+        </div>
+        <div class="card warn">
+          Go back to step <strong>02 — Existing Code</strong> and paste or upload your index.html to run the audit.
+        </div>
+      `;
+    }
+    const audit = auditHtml(state.code.html);
+    const okCount = audit.results.filter(r=>r.status==='ok').length;
+    const warnCount = audit.results.filter(r=>r.status==='warn').length;
+    const badCount = audit.results.filter(r=>r.status==='bad').length;
+    const total = audit.results.length;
+    // Honest "health" metric — clearly defined
+    const health = Math.round((okCount + warnCount*0.5) / total * 100);
+    return `
+      <div class="step-head">
+        <div class="step-kicker">14 — SEO Audit</div>
+        <h1 class="step-title">Existing SEO analysis</h1>
+        <p class="step-desc">We analyzed your existing &lt;head&gt;. This is a factual inspection — not a fake SEO score.</p>
+      </div>
+
+      <div class="card">
+        <div class="grid cols-3" style="margin-bottom:16px">
+          <div><div class="muted" style="font-size:12px">OK</div><div style="font-size:22px;font-weight:700;color:#4ade80">${okCount}</div></div>
+          <div><div class="muted" style="font-size:12px">Warnings</div><div style="font-size:22px;font-weight:700;color:#fbbf24">${warnCount}</div></div>
+          <div><div class="muted" style="font-size:12px">Missing / Critical</div><div style="font-size:22px;font-weight:700;color:#f87171">${badCount}</div></div>
+        </div>
+        <div class="help">Health metric = (OK × 1 + Warnings × 0.5) / Total × 100 = <strong>${health}%</strong>. This is a weighted completion ratio, not a Google ranking score.</div>
+      </div>
+
+      <div class="card">
+        <div class="audit-grid">
+          ${audit.results.map(r => `
+            <div class="audit-row">
+              <div class="status ${r.status}">${r.status==='ok'?'✓':r.status==='warn'?'!':'✕'}</div>
+              <div class="audit-name">${escapeHtml(r.name)}</div>
+              <div class="audit-detail">${escapeHtml(r.detail)}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  },
+
+  /* -------- 15 Preview -------- */
+  preview(){
+    const g = generateAll();
+    // Save generated for later use
+    state.generated = {
+      title: state.generated.title || g.title,
+      description: state.generated.description || g.description
+    };
+    const beforeTitle = extractBeforeTitle(state.code.html) || '(none)';
+    const beforeDesc = extractBeforeDesc(state.code.html) || '(none)';
+    const beforeCanon = extractBeforeCanonical(state.code.html) || '(none)';
+    const editable = true;
+
+    return `
+      <div class="step-head">
+        <div class="step-kicker">15 — Generated Preview</div>
+        <h1 class="step-title">Your generated SEO + AEO output</h1>
+        <p class="step-desc">Every field is editable. Regenerate or edit manually — you remain in control.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Title & Description</div>
+        <div class="field">
+          <label>Generated Title <span class="muted" style="font-weight:400">(${g.title.length} chars)</span></label>
+          <input type="text" data-field="generated.title" value="${escapeAttr(state.generated.title || g.title)}">
+          <div class="help">
+            <button type="button" class="btn sm ghost mt-2" data-action="regen-title">↻ Regenerate</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Generated Description <span class="muted" style="font-weight:400">(${g.description.length} chars)</span></label>
+          <textarea data-field="generated.description" rows="3">${escapeHtml(state.generated.description || g.description)}</textarea>
+          <div class="help">
+            <button type="button" class="btn sm ghost mt-2" data-action="regen-desc">↻ Regenerate</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Before / After comparison</div>
+        <div class="diff">
+          <div class="diff-col before">
+            <h5>Before</h5>
+            <div class="diff-item"><div class="k">Title</div><div class="v">${escapeHtml(beforeTitle)}</div></div>
+            <div class="diff-item"><div class="k">Meta Description</div><div class="v">${escapeHtml(beforeDesc)}</div></div>
+            <div class="diff-item"><div class="k">Canonical</div><div class="v">${escapeHtml(beforeCanon)}</div></div>
+            <div class="diff-item"><div class="k">Open Graph</div><div class="v">${state.code.html && /og:title/.test(state.code.html) ? 'Present' : 'Missing'}</div></div>
+            <div class="diff-item"><div class="k">Structured Data</div><div class="v">${state.code.html && /application\/ld\+json/.test(state.code.html) ? 'Present' : 'Missing'}</div></div>
+          </div>
+          <div class="diff-col after">
+            <h5>After</h5>
+            <div class="diff-item"><div class="k">Title</div><div class="v">${escapeHtml(state.generated.title || g.title)}</div></div>
+            <div class="diff-item"><div class="k">Meta Description</div><div class="v">${escapeHtml(state.generated.description || g.description)}</div></div>
+            <div class="diff-item"><div class="k">Canonical</div><div class="v">${escapeHtml(g.canonical || '(will be set from website URL)')}</div></div>
+            <div class="diff-item"><div class="k">Open Graph</div><div class="v">✓ ${Object.keys(g.og).length} tags</div></div>
+            <div class="diff-item"><div class="k">Structured Data</div><div class="v">✓ ${g.jsonld['@graph'].length} entities</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Canonical & Robots</div>
+        <div class="grid cols-2">
+          <div class="field"><label>Canonical URL</label><input type="text" value="${escapeAttr(g.canonical)}" readonly></div>
+          <div class="field"><label>Robots Meta</label><input type="text" value="${escapeAttr(g.robots)}" readonly></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Open Graph</div>
+        <div class="code-preview">${escapeHtml(Object.entries(g.og).map(([k,v]) => `<meta property="${k}" content="${v}">`).join('\n'))}</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Twitter / X Card</div>
+        <div class="code-preview">${escapeHtml(Object.entries(g.twitter).map(([k,v]) => `<meta name="${k}" content="${v}">`).join('\n'))}</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">JSON-LD structured data</div>
+        <div class="card-sub">schema.org graph — this is also embedded inside your updated index.html.</div>
+        <div class="code-preview" style="max-height:520px">${escapeHtml(JSON.stringify(g.jsonld, null, 2))}</div>
+      </div>
+
+      ${g.injectionChanges && g.injectionChanges.length ? `
+        <div class="card success">
+          <div class="card-title">✓ What we changed in your index.html</div>
+          <ul class="tight">
+            ${g.injectionChanges.map(c => `<li>${escapeHtml(c)}</li>`).join('')}
+          </ul>
+          <div class="help mt-2">All existing HTML, CSS, JS, classes, IDs, layout, and functionality remain untouched.</div>
+        </div>
+      ` : ''}
+    `;
+  },
+
+  /* -------- 16 Validation -------- */
+  validation(){
+    const g = generateAll();
+    const { issues, warnings } = runValidation(state, g);
+    const allGood = issues.length === 0;
+    return `
+      <div class="step-head">
+        <div class="step-kicker">16 — Validation</div>
+        <h1 class="step-title">Pre-download validation</h1>
+        <p class="step-desc">We checked URLs, HTML, duplicates, JSON-LD, sitemap XML, robots.txt structure, and possible accidental noindex.</p>
+      </div>
+
+      ${allGood ? `
+        <div class="banner success">
+          <strong>✓ No blocking issues detected.</strong> You can proceed to download. Review warnings below.
+        </div>
+      ` : `
+        <div class="banner err">
+          <strong>✕ ${issues.length} blocking issue(s) found.</strong> Fix these before downloading.
+        </div>
+      `}
+
+      ${issues.length ? `
+        <div class="card error">
+          <div class="card-title">Blocking issues</div>
+          <ul class="tight">
+            ${issues.map(i => `<li style="color:#fecaca">${escapeHtml(i)}</li>`).join('')}
+          </ul>
+        </div>
+      ` : ''}
+
+      ${warnings.length ? `
+        <div class="card warn">
+          <div class="card-title">Warnings</div>
+          <ul class="tight">
+            ${warnings.map(w => `<li style="color:#fde68a">${escapeHtml(w)}</li>`).join('')}
+          </ul>
+          <div class="help mt-2">Warnings are not blocking. You can proceed, but review them.</div>
+        </div>
+      ` : ''}
+
+      <div class="card">
+        <div class="card-title">Checks performed</div>
+        <ul class="tight">
+          <li>Website URL validity</li>
+          <li>Injected HTML — valid parse, no duplicate title/description/canonical</li>
+          <li>JSON-LD — serializable, no malformed structures</li>
+          <li>Sitemap — well-formed XML</li>
+          <li>Robots.txt — contains User-agent directive</li>
+          <li>Accidental noindex detection</li>
+          <li>Canonical domain matches website domain</li>
+          <li>Google verification code format</li>
+        </ul>
+      </div>
+    `;
+  },
+
+  /* -------- 17 Download -------- */
+  async download(){
+    const g = generateAll();
+    const base = state.website.url ? normalizeUrl(state.website.url) : '';
+    const v = state.verification;
+
+    // Compute package contents lazily on click.
+    const fileList = [];
+    fileList.push(['index.html', g.injectedHtml || '(no existing index.html provided — nothing to inject)', 'text/html']);
+    fileList.push(['sitemap.xml', g.sitemap, 'application/xml']);
+    fileList.push(['robots.txt', g.robotsTxt, 'text/plain']);
+    fileList.push(['schema.json', JSON.stringify(g.jsonld, null, 2), 'application/json']);
+    fileList.push(['llms.txt', g.llms, 'text/plain']);
+    fileList.push(['SEO-README.txt', g.readme, 'text/plain']);
+    if(v.method === 'file' && v.fileName){
+      fileList.push(['google-verification/' + v.fileName,
+        `google-site-verification: ${v.fileName}\n`,
+        'text/html']);
+    }
+
+    const checks = [
+      ['Website analyzed', !!state.code.html],
+      ['Search identity configured', !!state.identity.searchName],
+      ['SEO metadata generated', !!g.title && !!g.description],
+      ['Open Graph configured', Object.keys(g.og).length > 0],
+      ['Structured data generated', g.jsonld['@graph'].length > 0],
+      ['Sitemap generated', !!g.sitemap],
+      ['Robots.txt generated', !!g.robotsTxt],
+      ['Google verification prepared', v.method === 'skip' || !!(v.metaValue || v.fileName || v.dnsValue)],
+      ['Validation completed', true]
+    ];
+
+    return `
+      <div class="step-head">
+        <div class="step-kicker">17 — Download</div>
+        <h1 class="step-title">Your SEO + AEO package is ready</h1>
+        <p class="step-desc">Download the full ZIP, or grab individual files. Copy the implementation guide and Search Console instructions.</p>
+      </div>
+
+      <div class="card success">
+        <div class="card-title">✓ Package status</div>
+        <div class="audit-grid mt-2">
+          ${checks.map(([name, ok]) => `
+            <div class="audit-row">
+              <div class="status ${ok?'ok':'warn'}">${ok?'✓':'!'}</div>
+              <div class="audit-name">${escapeHtml(name)}</div>
+              <div class="audit-detail">${ok?'Ready':'Not configured'}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📦 Package contents</div>
+        <div class="file-tree mt-2">
+          <div><span class="d">SEO-AEO-Package/</span></div>
+          ${fileList.map(([p]) => `<div>  ├── <span class="f">${escapeHtml(p)}</span></div>`).join('')}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Download</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          <button class="btn primary" data-action="download-zip">⬇ Download Complete Package (ZIP)</button>
+        </div>
+        <div class="divider"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          ${fileList.map(([p]) => `<button class="btn sm" data-action="download-file" data-path="${escapeAttr(p)}">⬇ ${escapeHtml(p.split('/').pop())}</button>`).join('')}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Copy shortcuts</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          <button class="btn sm" data-action="copy-head">Copy SEO &lt;head&gt; code</button>
+          <button class="btn sm" data-action="copy-sitemap-url">Copy Sitemap URL</button>
+          <button class="btn sm" data-action="copy-gsc">Copy Search Console Instructions</button>
+          <button class="btn sm" data-action="copy-jsonld">Copy JSON-LD</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Quick deploy guide</div>
+        <ol class="tight" style="padding-left:18px">
+          <li>Upload <code>robots.txt</code> to the root of your domain.</li>
+          <li>Upload <code>sitemap.xml</code> to the root of your domain.</li>
+          <li>Upload the updated <code>index.html</code> (with SEO/AEO tags injected).</li>
+          <li>Optionally upload <code>llms.txt</code>.</li>
+          <li>Complete Google Search Console verification.</li>
+          <li>Submit: <code>${base ? base + '/sitemap.xml' : 'https://yourdomain.com/sitemap.xml'}</code></li>
+        </ol>
+      </div>
+
+      <div class="card warn">
+        <div class="card-title">⚠ Honest limitations</div>
+        <ul class="tight">
+          <li>Optimization ≠ ranking guarantee. No implementation can guarantee Google rankings, indexing, or AI visibility.</li>
+          <li>Validation reduces risk but does not guarantee Search Console approval.</li>
+          <li>Re-run audits after major content or structural changes.</li>
+        </ul>
+      </div>
+    `;
+  }
+};
+
+/* Helpers for preview (before values) */
+function extractBeforeTitle(html){
+  if(!html) return '';
+  try {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const t = doc.querySelector('title');
+    return t ? t.textContent.trim() : '';
+  } catch { return ''; }
+}
+function extractBeforeDesc(html){
+  if(!html) return '';
+  try {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const d = doc.querySelector('meta[name="description"]');
+    return d ? d.getAttribute('content') : '';
+  } catch { return ''; }
+}
+function extractBeforeCanonical(html){
+  if(!html) return '';
+  try {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const c = doc.querySelector('link[rel="canonical"]');
+    return c ? c.getAttribute('href') : '';
+  } catch { return ''; }
+}
+
+/* ==========================================================================
+   RENDER: MAIN + FOOTER
+   ========================================================================== */
+function renderMain(){
+  const step = STEPS[currentStep];
+  const fn = stepRenderers[step.id];
+  $('#main').innerHTML = fn ? fn() : '<div class="card">Step not implemented.</div>';
+  // Update textarea code content if on code step
+  if(step.id === 'code'){
+    const ta = $('#code-input');
+    if(ta){
+      ta.value = state.code.html || '';
+      ta.addEventListener('input', e => {
+        state.code.html = e.target.value;
+        saveState();
+      });
+    }
+  }
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function renderFooter(){
+  $('#footer-meta').textContent = `Step ${currentStep+1} of ${STEPS.length} — ${STEPS[currentStep].label}`;
+  $('#btn-back').disabled = currentStep === 0;
+  $('#btn-next').textContent = currentStep === STEPS.length-1 ? 'Finish' : 'Next →';
+}
+
+function render(){
+  renderSidebar();
+  renderMain();
+  renderFooter();
+}
+
+/* ==========================================================================
+   EVENT HANDLERS
+   ========================================================================== */
+document.addEventListener('input', e => {
+  const t = e.target;
+  if(t.dataset.field){
+    setPath(state, t.dataset.field, t.value);
+    saveState();
+    // Auto-analyze identity when it changes
+    if(t.dataset.field === 'identity.searchName'){
+      const a = analyzeIdentity(t.value, state);
+      state.identity.warning = a.warning;
+      state.identity.suggestions = a.suggestions;
+      // Update warning/suggestion block live without full re-render
+      const warningCard = document.querySelector('.card.warn');
+      // simple: re-render only the identity step if active
+      if(STEPS[currentStep].id === 'identity') renderMain();
+    }
+  }
+});
+
+// Enter to add chips
+document.addEventListener('keydown', e => {
+  if(e.target.dataset.chipInput && e.key === 'Enter'){
+    e.preventDefault();
+    const path = e.target.dataset.chipInput;
+    const val = e.target.value.trim();
+    if(!val) return;
+    const arr = getPath(state, path) || [];
+    arr.push(val);
+    setPath(state, path, arr);
+    e.target.value = '';
+    saveState();
+    renderMain();
+  }
+});
+
+// Change (checkboxes, selects)
+document.addEventListener('change', e => {
+  const t = e.target;
+  if(t.dataset.check){
+    const path = t.dataset.check;
+    const arr = getPath(state, path) || [];
+    const val = t.value;
+    if(t.checked){
+      if(!arr.includes(val)) arr.push(val);
+    } else {
+      const idx = arr.indexOf(val);
+      if(idx>=0) arr.splice(idx,1);
+    }
+    setPath(state, path, arr);
+    saveState();
+    // Update visual
+    const wrap = t.closest('.check');
+    if(wrap) wrap.classList.toggle('checked', t.checked);
+  }
+  if(t.dataset.field && t.tagName === 'SELECT'){
+    setPath(state, t.dataset.field, t.value);
+    saveState();
+    if(t.dataset.field === 'verification.method') renderMain();
+  }
+});
+
+// Clicks
+document.addEventListener('click', async e => {
+  const t = e.target.closest('[data-goto],[data-add-item],[data-remove-item],[data-remove-chip],[data-use-identity],[data-action]');
+  if(!t) return;
+
+  if(t.dataset.goto !== undefined){
+    currentStep = parseInt(t.dataset.goto,10);
+    saveState();
+    render();
+    return;
+  }
+
+  if(t.dataset.addItem){
+    const path = t.dataset.addItem;
+    const arr = getPath(state, path) || [];
+    // Create blank item with expected keys
+    const templates = {
+      'services': { name:'', shortDescription:'', detailedDescription:'', targetAudience:'', problemSolved:'', technologies:'', keywords:'' },
+      'projects': { name:'', url:'', description:'', technologies:'', category:'', client:'', date:'', image:'' },
+      'faqs': { question:'', answer:'' }
+    };
+    arr.push(templates[path] ? clone(templates[path]) : {});
+    setPath(state, path, arr);
+    saveState();
+    renderMain();
+    return;
+  }
+
+  if(t.dataset.removeItem){
+    const path = t.dataset.removeItem;
+    const idx = parseInt(t.dataset.idx,10);
+    const arr = getPath(state, path) || [];
+    arr.splice(idx,1);
+    setPath(state, path, arr);
+    saveState();
+    renderMain();
+    return;
+  }
+
+  if(t.dataset.removeChip){
+    const path = t.dataset.removeChip;
+    const idx = parseInt(t.dataset.idx,10);
+    const arr = getPath(state, path) || [];
+    arr.splice(idx,1);
+    setPath(state, path, arr);
+    saveState();
+    renderMain();
+    return;
+  }
+
+  if(t.dataset.useIdentity){
+    state.identity.searchName = t.dataset.useIdentity;
+    state.identity.confirmed = true;
+    saveState();
+    renderMain();
+    toast('Identity applied','success',1600);
+    return;
+  }
+
+  if(t.dataset.action){
+    handleAction(t.dataset.action, t);
+  }
+});
+
+// File upload
+document.addEventListener('change', e => {
+  if(e.target.id === 'upload-html'){
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      state.code.html = ev.target.result;
+      state.code.source = 'file';
+      state.code.fileName = file.name;
+      saveState();
+      renderMain();
+      toast('index.html loaded','success');
+    };
+    reader.readAsText(file);
+  }
+});
+
+async function handleAction(action, el){
+  switch(action){
+    case 'analyze-identity': {
+      const a = analyzeIdentity(state.identity.searchName, state);
+      state.identity.warning = a.warning;
+      state.identity.suggestions = a.suggestions;
+      saveState();
+      renderMain();
+      if(!a.warning) toast('Identity looks distinctive ✓','success');
+      else toast('Identity warning applied','warn');
+      break;
+    }
+    case 'regen-title': {
+      state.generated.title = genTitle(state);
+      saveState();
+      renderMain();
+      break;
+    }
+    case 'regen-desc': {
+      state.generated.description = genDescription(state);
+      saveState();
+      renderMain();
+      break;
+    }
+    case 'clear-html': {
+      if(confirm('Clear the loaded index.html?')){
+        state.code.html = '';
+        state.code.fileName = '';
+        saveState();
+        renderMain();
+      }
+      break;
+    }
+    case 'sample-html': {
+      state.code.html = sampleHtml();
+      saveState();
+      renderMain();
+      toast('Sample HTML loaded','success');
+      break;
+    }
+    case 'download-zip': {
+      await downloadZip();
+      break;
+    }
+    case 'download-file': {
+      const g = generateAll();
+      const p = el.dataset.path;
+      const map = {
+        'index.html': g.injectedHtml || '',
+        'sitemap.xml': g.sitemap,
+        'robots.txt': g.robotsTxt,
+        'schema.json': JSON.stringify(g.jsonld, null, 2),
+        'llms.txt': g.llms,
+        'SEO-README.txt': g.readme
+      };
+      if(p.startsWith('google-verification/') && state.verification.fileName){
+        download(state.verification.fileName, `google-site-verification: ${state.verification.fileName}\n`, 'text/html');
+        return;
+      }
+      const content = map[p];
+      if(content === undefined){ toast('File not found','error'); return; }
+      download(p.split('/').pop(), content);
+      toast('Downloaded ' + p.split('/').pop(), 'success');
+      break;
+    }
+    case 'copy-head': {
+      const g = generateAll();
+      const lines = [];
+      lines.push(`<title>${g.title}</title>`);
+      lines.push(`<meta name="description" content="${g.description}">`);
+      if(g.canonical) lines.push(`<link rel="canonical" href="${g.canonical}">`);
+      lines.push(`<meta name="robots" content="${g.robots}">`);
+      Object.entries(g.og).forEach(([k,v]) => lines.push(`<meta property="${k}" content="${v}">`));
+      Object.entries(g.twitter).forEach(([k,v]) => lines.push(`<meta name="${k}" content="${v}">`));
+      if(state.verification.method === 'meta' && state.verification.metaValue)
+        lines.push(`<meta name="google-site-verification" content="${state.verification.metaValue}">`);
+      lines.push(`<script type="application/ld+json">\n${JSON.stringify(g.jsonld,null,2)}\n</script>`);
+      copy(lines.join('\n'));
+      break;
+    }
+    case 'copy-sitemap-url': {
+      const base = state.website.url ? normalizeUrl(state.website.url) : 'https://yourdomain.com';
+      copy(base + '/sitemap.xml');
+      break;
+    }
+    case 'copy-gsc': {
+      const base = state.website.url ? normalizeUrl(state.website.url) : 'https://yourdomain.com';
+      copy(
+`Google Search Console — Step by Step
+
+1. Open https://search.google.com/search-console
+2. Add a property (URL prefix or Domain).
+3. Verify using your chosen method (meta tag / file / DNS).
+4. Once verified, go to "Sitemaps" in the left menu.
+5. Enter the sitemap path: sitemap.xml
+   Full URL: ${base}/sitemap.xml
+6. Click Submit.
+7. Check "Coverage" after 24-72 hours for indexing status.
+
+Note: Verification must be done by the domain owner.
+Optimization does not guarantee indexing or rankings.`);
+      break;
+    }
+    case 'copy-jsonld': {
+      const g = generateAll();
+      copy(JSON.stringify(g.jsonld, null, 2));
+      break;
+    }
+  }
+}
+
+function sampleHtml(){
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Website</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>Welcome to My Portfolio</h1>
+    <nav>
+      <a href="/about">About</a>
+      <a href="/projects">Projects</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h2>About Me</h2>
+      <p>I'm a developer building web applications.</p>
+    </section>
+  </main>
+  <script src="/main.js"></script>
+</body>
+</html>`;
+}
+
+async function downloadZip(){
+  const g = generateAll();
+  const v = state.verification;
+  const zip = new JSZip();
+  const root = zip.folder('SEO-AEO-Package');
+
+  if(g.injectedHtml) root.file('index.html', g.injectedHtml);
+  else root.file('index.html.README.txt',
+`No existing index.html was provided.
+
+Paste the following tags into the <head> of your website manually:
+
+<title>${g.title}</title>
+<meta name="description" content="${g.description}">
+<link rel="canonical" href="${g.canonical}">
+<meta name="robots" content="${g.robots}">
+
+<!-- Open Graph -->
+${Object.entries(g.og).map(([k,val]) => `<meta property="${k}" content="${val}">`).join('\n')}
+
+<!-- Twitter -->
+${Object.entries(g.twitter).map(([k,val]) => `<meta name="${k}" content="${val}">`).join('\n')}
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+${JSON.stringify(g.jsonld, null, 2)}
+</script>
+`);
+
+  root.file('robots.txt', g.robotsTxt);
+  root.file('sitemap.xml', g.sitemap);
+  root.file('schema.json', JSON.stringify(g.jsonld, null, 2));
+  root.file('llms.txt', g.llms);
+  root.file('SEO-README.txt', g.readme);
+
+  if(v.method === 'file' && v.fileName){
+    const gf = root.folder('google-verification');
+    gf.file(v.fileName, `google-site-verification: ${v.fileName}\n`);
+  }
+
+  const blob = await zip.generateAsync({ type:'blob' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'SEO-AEO-Package.zip';
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 100);
+  toast('Package downloaded ✓','success');
+}
+
+/* Nav buttons */
+$('#btn-next').addEventListener('click', ()=>{
+  if(currentStep < STEPS.length-1){
+    currentStep++;
+    saveState();
+    render();
+  } else {
+    toast('You have reached the end. Download your package above.','info');
+  }
+});
+$('#btn-back').addEventListener('click', ()=>{
+  if(currentStep > 0){ currentStep--; saveState(); render(); }
+});
+$('#btn-reset').addEventListener('click', ()=>{
+  if(confirm('Reset all data? This will clear everything you entered.')){
+    localStorage.removeItem(STORAGE_KEY);
+    state = clone(DEFAULT_STATE);
+    currentStep = 0;
+    render();
+    toast('Reset complete','success');
+  }
+});
+$('#btn-export-json').addEventListener('click', ()=>{
+  download('seo-aeo-form-data.json', JSON.stringify(state, null, 2), 'application/json');
+  toast('Exported form data','success');
+});
+
+/* ==========================================================================
+   INIT
+   ========================================================================== */
+render();
+</script>
+</body>
+</html>
