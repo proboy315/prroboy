@@ -29,7 +29,6 @@ body{
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 
-/* Layout */
 #app{display:flex;flex-direction:column;min-height:100vh}
 .topbar{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
@@ -49,7 +48,6 @@ a:hover{text-decoration:underline}
 .layout{display:grid;grid-template-columns:268px 1fr;flex:1;min-height:0}
 @media(max-width:900px){.layout{grid-template-columns:1fr}}
 
-/* Sidebar */
 .sidebar{
   border-right:1px solid var(--border);
   background:rgba(9,10,16,.5);
@@ -78,7 +76,6 @@ a:hover{text-decoration:underline}
 }
 .step-item.active .step-num{background:rgba(124,140,255,.2);color:#cfd5ff;border-color:rgba(124,140,255,.55)}
 
-/* Main */
 .main{padding:32px 40px 80px;max-width:1040px;width:100%}
 @media(max-width:900px){.main{padding:20px 16px 60px}}
 
@@ -92,7 +89,6 @@ a:hover{text-decoration:underline}
 .step-title{font-size:26px;font-weight:680;letter-spacing:-.02em;margin:0 0 6px;line-height:1.2}
 .step-desc{color:var(--muted);margin:0;font-size:14px;max-width:760px}
 
-/* Cards */
 .card{
   background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
   padding:22px;margin-bottom:18px;backdrop-filter:blur(8px);
@@ -104,7 +100,6 @@ a:hover{text-decoration:underline}
 .card.success{background:linear-gradient(135deg,rgba(34,197,94,.06),rgba(34,197,94,.02));border-color:rgba(34,197,94,.28)}
 .card.error{background:linear-gradient(135deg,rgba(239,68,68,.06),rgba(239,68,68,.02));border-color:rgba(239,68,68,.28)}
 
-/* Fields */
 .grid{display:grid;gap:14px}
 .grid.cols-2{grid-template-columns:1fr 1fr}
 .grid.cols-3{grid-template-columns:1fr 1fr 1fr}
@@ -126,7 +121,6 @@ a:hover{text-decoration:underline}
 }
 .field input::placeholder,.field textarea::placeholder{color:var(--muted2)}
 
-/* Chips */
 .chips{display:flex;flex-wrap:wrap;gap:6px;min-height:0}
 .chips:empty{display:none}
 .chip{
@@ -141,7 +135,6 @@ a:hover{text-decoration:underline}
 }
 .chip button:hover{background:rgba(239,68,68,.3);color:#fff}
 
-/* Checkbox group */
 .checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
 .check{
   display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:var(--radius-sm);
@@ -152,7 +145,6 @@ a:hover{text-decoration:underline}
 .check input{accent-color:var(--accent);cursor:pointer}
 .check.checked{background:rgba(124,140,255,.10);border-color:rgba(124,140,255,.45)}
 
-/* Buttons */
 .btn{
   display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:var(--radius-sm);
   background:rgba(255,255,255,.04);border:1px solid var(--border2);color:var(--text);
@@ -170,7 +162,6 @@ a:hover{text-decoration:underline}
 .btn.sm{padding:6px 11px;font-size:12px}
 .btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important;filter:none!important}
 
-/* Footer */
 .footer{
   display:flex;align-items:center;justify-content:space-between;gap:12px;
   padding:14px 40px;border-top:1px solid var(--border);
@@ -180,7 +171,6 @@ a:hover{text-decoration:underline}
 .footer-meta{font-size:12px;color:var(--muted)}
 .footer-actions{display:flex;gap:8px}
 
-/* Repeater */
 .repeater{margin-top:6px}
 .repeater-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .repeater-header h4{margin:0;font-size:14px;font-weight:620}
@@ -196,7 +186,6 @@ a:hover{text-decoration:underline}
 .repeater-item-head strong{font-size:12.5px;font-weight:600;color:var(--muted)}
 .repeater-item-head strong::before{content:'▸ ';color:var(--accent)}
 
-/* Code editor */
 .code-area{
   width:100%;min-height:280px;font-family:'JetBrains Mono','Fira Code',ui-monospace,monospace;
   font-size:12.5px;line-height:1.6;padding:14px;border-radius:var(--radius-sm);
@@ -211,7 +200,6 @@ a:hover{text-decoration:underline}
   overflow-x:auto;white-space:pre;max-height:420px;overflow-y:auto;
 }
 
-/* Audit */
 .audit-grid{display:grid;grid-template-columns:1fr;gap:8px}
 .audit-row{
   display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:var(--radius-sm);
@@ -227,7 +215,6 @@ a:hover{text-decoration:underline}
 .audit-row .audit-name{font-weight:560;min-width:170px;font-size:13px}
 .audit-row .audit-detail{color:var(--muted);font-size:12.5px;flex:1}
 
-/* Preview diff */
 .diff{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:800px){.diff{grid-template-columns:1fr}}
 .diff-col{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:var(--radius);padding:14px}
@@ -238,7 +225,6 @@ a:hover{text-decoration:underline}
 .diff-item .k{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
 .diff-item .v{font-size:13px;color:var(--text);margin-top:3px;word-break:break-word;line-height:1.5}
 
-/* Toast */
 .toast-wrap{position:fixed;bottom:80px;right:24px;display:flex;flex-direction:column;gap:8px;z-index:100}
 .toast{
   background:rgba(16,18,28,.96);border:1px solid var(--border2);color:var(--text);
@@ -251,7 +237,6 @@ a:hover{text-decoration:underline}
 .toast.warn{border-color:rgba(245,158,11,.5)}
 @keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
 
-/* Misc */
 .pill{
   display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:99px;
   font-size:11.5px;font-weight:600;letter-spacing:.02em;
@@ -541,7 +526,6 @@ function repeater(path, title, itemTitleFn, fields, addLabel='+ Add item'){
    SEARCH IDENTITY ANALYZER
    ========================================================================== */
 const BROAD_TERMS = new Set([
-  // common names
   'ahmed','ali','mohamed','muhammad','mohammad','hassan','hussain','usman','omar','khan','john','james',
   'david','michael','robert','william','mary','jennifer','linda','elizabeth','susan','jessica','sarah',
   'karen','nancy','lisa','betty','margaret','sandra','ashley','kimberly','emily','donna','michelle',
@@ -552,7 +536,6 @@ const BROAD_TERMS = new Set([
   'hannah','jacqueline','martha','gloria','teresa','ann','sara','madison','frances','kathryn','janice',
   'jean','abigail','alice','julia','judy','sophia','grace','denise','amber','doris','marilyn','danielle',
   'beverly','isabella','theresa','diana','natalie','brittany','charlotte','marie','kayla','alexis','lori',
-  // generic role / business words
   'developer','designer','business','tech','technology','agency','shop','store','web','app','digital',
   'expert','services','service','studio','consultant','consulting','solutions','solution','company',
   'marketing','seo','freelancer','professional','specialist','engineer','coder','programmer','creator',
@@ -573,7 +556,6 @@ function analyzeIdentity(searchName, s){
   const hasBroad = tokens.some(t => BROAD_TERMS.has(t));
   const singleGeneric = wordCount === 1;
 
-  // Broad name detection
   if(singleGeneric && (hasBroad || charLen < 8)){
     warnings.push('This identity is very broad and may overlap with many unrelated people, businesses, and entities. Consider adding a genuine distinguishing element such as your surname, professional identity, brand name, or another authentic identifier.');
   } else if(hasBroad && wordCount <= 2 && charLen < 16){
@@ -583,7 +565,6 @@ function analyzeIdentity(searchName, s){
     warnings.push('The identity is very short. Shorter names are harder for search systems to associate with a specific entity.');
   }
 
-  // Build suggestions from provided info
   const fullName = (s.brand.fullName||'').trim();
   const brandName = (s.brand.brandName||'').trim();
   const handle = (s.brand.handle||'').trim();
@@ -628,7 +609,6 @@ function genDescription(s){
     base = parts.join(' ') + '.';
     if(s.services.length) base += ` Offers ${s.services.slice(0,3).map(x=>x.name).filter(Boolean).join(', ')}.`;
   }
-  // clean and trim
   base = base.replace(/\s+/g,' ').trim();
   if(base.length > 158) base = truncate(base, 158);
   return base;
@@ -686,7 +666,6 @@ function genJSONLD(s, g){
   const graph = [];
   const type = s.website.type;
 
-  // Primary entity
   const isPersonal = ['personal-portfolio','developer-portfolio','blog','service-website'].includes(type);
   const isOrg = ['business','agency','e-commerce','other'].includes(type);
 
@@ -727,7 +706,6 @@ function genJSONLD(s, g){
     graph.push(org);
   }
 
-  // WebSite
   if(url){
     const ws = {
       '@type': 'WebSite',
@@ -740,7 +718,6 @@ function genJSONLD(s, g){
     Object.keys(ws).forEach(k=>ws[k]===undefined && delete ws[k]);
     graph.push(ws);
 
-    // WebPage
     graph.push({
       '@type': 'WebPage',
       '@id': url + '#webpage',
@@ -752,7 +729,6 @@ function genJSONLD(s, g){
     });
   }
 
-  // Services
   (s.services||[]).forEach((svc, i) => {
     if(!svc.name) return;
     graph.push({
@@ -764,7 +740,6 @@ function genJSONLD(s, g){
     });
   });
 
-  // Projects (CreativeWork)
   (s.projects||[]).forEach((p, i) => {
     if(!p.name) return;
     graph.push({
@@ -777,7 +752,6 @@ function genJSONLD(s, g){
     });
   });
 
-  // FAQPage from FAQ entries
   if((s.faqs||[]).length){
     const mainEntity = s.faqs
       .filter(f => f.question && f.answer)
@@ -794,7 +768,6 @@ function genJSONLD(s, g){
     }
   }
 
-  // Clean up undefined
   const clean = (o) => {
     if(Array.isArray(o)) return o.map(clean).filter(x => x !== undefined && x !== null);
     if(o && typeof o === 'object'){
@@ -824,7 +797,6 @@ function genSitemap(s){
     if(!/^https?:\/\//i.test(loc)) loc = base + (loc.startsWith('/') ? loc : '/' + loc);
     urls.push({ loc, priority: u.priority || '', changefreq: u.changefreq || '' });
   });
-  // Dedup
   const seen = new Set();
   const unique = urls.filter(u => { if(seen.has(u.loc)) return false; seen.add(u.loc); return true; });
   const today = new Date().toISOString().split('T')[0];
@@ -1006,7 +978,7 @@ function genReadme(s, g, audit, injected){
   L.push('- Your projects (CreativeWork)');
   L.push('- Frequently asked questions (FAQPage)');
   L.push('');
-  L.push('This data is embedded in index.html inside a <script type="application/ld+json"> tag.');
+  L.push('This data is embedded in index.html inside a JSON-LD script tag.');
   L.push('Validate it at: https://validator.schema.org/ and https://search.google.com/test/rich-results');
   L.push('');
   L.push('----------------------------------------');
@@ -1055,26 +1027,23 @@ function injectSEOIntoHtml(html, g, s){
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
 
-  // Ensure <head>
   let head = doc.querySelector('head');
   if(!head){
     head = doc.createElement('head');
     doc.documentElement.insertBefore(head, doc.documentElement.firstChild);
-    changes.push('Created missing <head> element.');
+    changes.push('Created missing head element.');
   }
 
-  // Title
   let titleEl = head.querySelector('title');
   if(!titleEl){
     titleEl = doc.createElement('title');
     head.appendChild(titleEl);
-    changes.push('Added <title>.');
+    changes.push('Added title tag.');
   } else {
-    changes.push(`Updated <title>: "${truncate(titleEl.textContent,50)}" → "${truncate(g.title,50)}"`);
+    changes.push(`Updated title: "${truncate(titleEl.textContent,50)}" → "${truncate(g.title,50)}"`);
   }
   titleEl.textContent = g.title;
 
-  // Helper to set/replace meta by name or property
   function setMeta(attr, key, content){
     if(content === undefined || content === null || content === '') return;
     let el = head.querySelector(`meta[${attr}="${CSS.escape(key)}"]`);
@@ -1082,36 +1051,31 @@ function injectSEOIntoHtml(html, g, s){
       el = doc.createElement('meta');
       el.setAttribute(attr, key);
       head.appendChild(el);
-      changes.push(`Added <meta ${attr}="${key}">`);
+      changes.push(`Added meta ${attr}="${key}"`);
     } else {
-      changes.push(`Updated <meta ${attr}="${key}">`);
+      changes.push(`Updated meta ${attr}="${key}"`);
     }
     el.setAttribute('content', content);
   }
 
-  // Description
   if(g.description) setMeta('name', 'description', g.description);
 
-  // Canonical
   if(g.canonical){
     let link = head.querySelector('link[rel="canonical"]');
     if(!link){
       link = doc.createElement('link');
       link.setAttribute('rel','canonical');
       head.appendChild(link);
-      changes.push('Added <link rel="canonical">.');
+      changes.push('Added link rel=canonical.');
     } else {
       changes.push(`Updated canonical: ${link.getAttribute('href')} → ${g.canonical}`);
     }
     link.setAttribute('href', g.canonical);
   }
 
-  // Robots
   setMeta('name','robots', g.robots);
-  // Author
   const author = s.brand.fullName || s.identity.searchName || s.brand.brandName;
   if(author) setMeta('name','author', author);
-  // Viewport (ensure exists)
   let vp = head.querySelector('meta[name="viewport"]');
   if(!vp){
     vp = doc.createElement('meta');
@@ -1120,15 +1084,11 @@ function injectSEOIntoHtml(html, g, s){
     head.appendChild(vp);
     changes.push('Added viewport meta.');
   }
-  // Theme color
   setMeta('name','theme-color', '#0a0b0f');
 
-  // Open Graph
   Object.entries(g.og).forEach(([k,v]) => setMeta('property', k, v));
-  // Twitter
   Object.entries(g.twitter).forEach(([k,v]) => setMeta('name', k, v));
 
-  // JSON-LD — remove old ones then add new
   const oldLD = head.querySelectorAll('script[type="application/ld+json"]');
   if(oldLD.length){
     oldLD.forEach(x => x.remove());
@@ -1140,16 +1100,14 @@ function injectSEOIntoHtml(html, g, s){
   head.appendChild(ld);
   changes.push('Injected JSON-LD structured data.');
 
-  // Google verification (meta method)
   if(s.verification.method === 'meta' && s.verification.metaValue){
     setMeta('name','google-site-verification', s.verification.metaValue);
     changes.push('Injected Google Search Console verification meta tag.');
   }
 
-  // Language
   if(!doc.documentElement.getAttribute('lang')){
     doc.documentElement.setAttribute('lang','en');
-    changes.push('Added lang="en" to <html>.');
+    changes.push('Added lang="en" to html element.');
   }
 
   const out = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
@@ -1167,7 +1125,6 @@ function auditHtml(html){
   const doc = new DOMParser().parseFromString(html, 'text/html');
   const head = doc.querySelector('head') || doc.documentElement;
 
-  // Title
   const title = head.querySelector('title');
   if(title && title.textContent.trim()){
     const len = title.textContent.trim().length;
@@ -1175,10 +1132,9 @@ function auditHtml(html){
     else if(len < 30) results.push({ name:'Title', status:'warn', detail:`Present but short (${len} chars). Aim for 30–65.` });
     else results.push({ name:'Title', status:'warn', detail:`Present but long (${len} chars). Aim for 30–65.` });
   } else {
-    results.push({ name:'Title', status:'bad', detail:'Missing <title>. This is critical.' });
+    results.push({ name:'Title', status:'bad', detail:'Missing title tag. This is critical.' });
   }
 
-  // Meta description
   const desc = head.querySelector('meta[name="description"]');
   if(desc && desc.getAttribute('content')){
     const len = desc.getAttribute('content').length;
@@ -1188,12 +1144,10 @@ function auditHtml(html){
     results.push({ name:'Meta Description', status:'bad', detail:'Missing meta description.' });
   }
 
-  // Canonical
   const canon = head.querySelector('link[rel="canonical"]');
   if(canon && canon.getAttribute('href')) results.push({ name:'Canonical URL', status:'ok', detail:`Present: ${canon.getAttribute('href')}` });
   else results.push({ name:'Canonical URL', status:'bad', detail:'Missing canonical link.' });
 
-  // Robots meta
   const robotsMeta = head.querySelector('meta[name="robots"]');
   if(robotsMeta){
     const c = (robotsMeta.getAttribute('content')||'').toLowerCase();
@@ -1203,19 +1157,16 @@ function auditHtml(html){
     results.push({ name:'Robots Meta', status:'warn', detail:'Not specified. Defaults to index,follow.' });
   }
 
-  // Open Graph
   const og = head.querySelectorAll('meta[property^="og:"]');
   if(og.length >= 4) results.push({ name:'Open Graph', status:'ok', detail:`${og.length} og: tags found.` });
   else if(og.length) results.push({ name:'Open Graph', status:'warn', detail:`Only ${og.length} og: tag(s). Recommended: og:title, og:description, og:url, og:type, og:image.` });
   else results.push({ name:'Open Graph', status:'bad', detail:'No Open Graph tags found.' });
 
-  // Twitter
   const tw = head.querySelectorAll('meta[name^="twitter:"]');
   if(tw.length >= 3) results.push({ name:'Twitter/X Cards', status:'ok', detail:`${tw.length} twitter: tags found.` });
   else if(tw.length) results.push({ name:'Twitter/X Cards', status:'warn', detail:`Only ${tw.length} twitter: tag(s).` });
   else results.push({ name:'Twitter/X Cards', status:'bad', detail:'No Twitter card tags found.' });
 
-  // Structured Data
   const ld = head.querySelectorAll('script[type="application/ld+json"]');
   if(ld.length){
     let valid = true;
@@ -1226,17 +1177,14 @@ function auditHtml(html){
     results.push({ name:'Structured Data', status:'bad', detail:'No JSON-LD structured data found.' });
   }
 
-  // Sitemap / robots.txt — can't check from index.html
   results.push({ name:'Sitemap', status:'warn', detail:'Cannot be verified from index.html alone. Ensure /sitemap.xml exists at your domain root.' });
   results.push({ name:'Robots.txt', status:'warn', detail:'Cannot be verified from index.html alone. Ensure /robots.txt exists at your domain root.' });
 
-  // Headings
   const h1 = doc.querySelectorAll('h1');
-  if(h1.length === 1) results.push({ name:'Heading Structure', status:'ok', detail:'Exactly one <h1> found.' });
-  else if(h1.length === 0) results.push({ name:'Heading Structure', status:'bad', detail:'No <h1> found.' });
-  else results.push({ name:'Heading Structure', status:'warn', detail:`${h1.length} <h1> tags found. Recommended: exactly one.` });
+  if(h1.length === 1) results.push({ name:'Heading Structure', status:'ok', detail:'Exactly one h1 found.' });
+  else if(h1.length === 0) results.push({ name:'Heading Structure', status:'bad', detail:'No h1 found.' });
+  else results.push({ name:'Heading Structure', status:'warn', detail:`${h1.length} h1 tags found. Recommended: exactly one.` });
 
-  // Images
   const imgs = doc.querySelectorAll('img');
   if(imgs.length === 0) results.push({ name:'Image Alt Text', status:'warn', detail:'No images found.' });
   else {
@@ -1245,16 +1193,14 @@ function auditHtml(html){
     else results.push({ name:'Image Alt Text', status:'warn', detail:`${missing} of ${imgs.length} image(s) missing alt text.` });
   }
 
-  // Viewport
   const vp = head.querySelector('meta[name="viewport"]');
   if(vp && /width=device-width/i.test(vp.getAttribute('content')||'')) results.push({ name:'Viewport', status:'ok', detail:'Responsive viewport configured.' });
   else if(vp) results.push({ name:'Viewport', status:'warn', detail:`Viewport present but may not be responsive: "${vp.getAttribute('content')}"` });
   else results.push({ name:'Viewport', status:'bad', detail:'Missing viewport meta tag.' });
 
-  // Language
   const lang = doc.documentElement.getAttribute('lang');
   if(lang) results.push({ name:'Language', status:'ok', detail:`lang="${lang}"` });
-  else results.push({ name:'Language', status:'warn', detail:'Missing lang attribute on <html>.' });
+  else results.push({ name:'Language', status:'warn', detail:'Missing lang attribute on html element.' });
 
   return { results, empty: false };
 }
@@ -1266,63 +1212,51 @@ function runValidation(s, g){
   const issues = [];
   const warnings = [];
 
-  // Website URL
   if(!s.website.url) issues.push('Website URL is missing.');
   else if(!isValidUrl(s.website.url)) issues.push('Website URL is not a valid URL.');
 
-  // Identity
   if(!s.identity.searchName && !s.brand.fullName && !s.brand.brandName)
-    warnings.push('No search identity or name provided. The generated <title> may be generic.');
+    warnings.push('No search identity or name provided. The generated title may be generic.');
 
-  // Title
   if(!g.title) issues.push('Title is empty.');
   else if(g.title.length > 70) warnings.push(`Title is ${g.title.length} chars (recommended ≤ 65).`);
   else if(g.title.length < 15) warnings.push('Title is very short.');
 
-  // Description
   if(!g.description) warnings.push('Meta description is empty.');
   else if(g.description.length > 165) warnings.push(`Description is ${g.description.length} chars (recommended ≤ 160).`);
 
-  // Canonical
   if(!g.canonical) warnings.push('Canonical URL missing.');
 
-  // JSON-LD
   try { JSON.parse(JSON.stringify(g.jsonld)); } catch { issues.push('JSON-LD could not be serialized.'); }
 
-  // Sitemap
   try {
     const parser = new DOMParser();
     const xml = parser.parseFromString(g.sitemap, 'application/xml');
     if(xml.querySelector('parsererror')) issues.push('Sitemap XML is malformed.');
   } catch { issues.push('Sitemap XML could not be parsed.'); }
 
-  // Robots
   if(!g.robotsTxt || !g.robotsTxt.includes('User-agent')) warnings.push('Robots.txt looks unusual.');
 
-  // Noindex check in injected HTML
   if(g.injectedHtml){
     if(/<meta[^>]+name=["']robots["'][^>]+noindex/i.test(g.injectedHtml))
       issues.push('Injected HTML contains "noindex" in robots meta — your site would be blocked from indexing!');
   }
 
-  // Duplicate title check in injected HTML
   if(g.injectedHtml){
     const doc = new DOMParser().parseFromString(g.injectedHtml, 'text/html');
     const titles = doc.querySelectorAll('title');
-    if(titles.length > 1) issues.push(`Multiple <title> tags found (${titles.length}).`);
+    if(titles.length > 1) issues.push(`Multiple title tags found (${titles.length}).`);
     const descs = doc.querySelectorAll('meta[name="description"]');
     if(descs.length > 1) issues.push(`Multiple meta descriptions found (${descs.length}).`);
     const canons = doc.querySelectorAll('link[rel="canonical"]');
     if(canons.length > 1) issues.push(`Multiple canonical links found (${canons.length}).`);
   }
 
-  // Verification format
   if(s.verification.method === 'meta' && s.verification.metaValue){
     if(!/^[A-Za-z0-9_\-]{20,}$/.test(s.verification.metaValue.trim()))
       warnings.push('Google verification meta value format looks unusual (usually a long token).');
   }
 
-  // Canonical domain match
   if(g.canonical && s.website.url){
     const canDomain = extractDomain(g.canonical);
     const siteDomain = extractDomain(s.website.url);
@@ -1377,7 +1311,6 @@ function renderSidebar(){
 }
 
 function isStepComplete(id){
-  // Basic heuristics for sidebar status
   switch(id){
     case 'website': return !!state.website.url;
     case 'code': return !!state.code.html;
@@ -1405,7 +1338,6 @@ function isStepComplete(id){
    ========================================================================== */
 const stepRenderers = {
 
-  /* -------- 01 Website -------- */
   website(){
     return `
       <div class="step-head">
@@ -1441,7 +1373,6 @@ const stepRenderers = {
     `;
   },
 
-  /* -------- 02 Existing Code -------- */
   code(){
     const size = state.code.html ? (state.code.html.length/1024).toFixed(1) + ' KB' : 'empty';
     return `
@@ -1464,7 +1395,7 @@ const stepRenderers = {
           <button class="btn sm danger" data-action="clear-html">Clear</button>
         </div>
 
-        <textarea class="code-area" id="code-input" placeholder="<!DOCTYPE html>&#10;<html lang=&quot;en&quot;>&#10;  <head>...">${escapeHtml(state.code.html||'')}</textarea>
+        <textarea class="code-area" id="code-input" placeholder="Paste your existing index.html here...">${escapeHtml(state.code.html||'')}</textarea>
 
         <div class="help mt-2">
           If you don't have an index.html yet, you can leave this empty. We'll still generate robots.txt, sitemap.xml, schema.json, and README for you.
@@ -1481,7 +1412,6 @@ const stepRenderers = {
     `;
   },
 
-  /* -------- 03 Search Identity -------- */
   identity(){
     const a = state.identity;
     const suggestions = a.suggestions || [];
@@ -1533,7 +1463,6 @@ const stepRenderers = {
     `;
   },
 
-  /* -------- 04 Personal / Brand -------- */
   brand(){
     return `
       <div class="step-head">
@@ -1578,7 +1507,6 @@ const stepRenderers = {
     `;
   },
 
-  /* -------- 05 Expertise -------- */
   expertise(){
     return `
       <div class="step-head">
@@ -1604,7 +1532,6 @@ const stepRenderers = {
     `;
   },
 
-  /* -------- 06 Services -------- */
   services(){
     return `
       <div class="step-head">
@@ -1630,7 +1557,6 @@ const stepRenderers = {
     `;
   },
 
-  /* -------- 07 Audience -------- */
   audience(){
     return `
       <div class="step-head">
@@ -1654,7 +1580,6 @@ const stepRenderers = {
     `;
   },
 
-  /* -------- 08 Location -------- */
   location(){
     return `
       <div class="step-head">
@@ -1675,7 +1600,6 @@ const stepRenderers = {
     `;
   },
 
-  /* -------- 09 Projects -------- */
   projects(){
     return `
       <div class="step-head">
@@ -1702,7 +1626,6 @@ const stepRenderers = {
     `;
   },
 
-  /* -------- 10 Socials -------- */
   socials(){
     const socials = state.socials;
     const defs = [
@@ -1737,7 +1660,6 @@ const stepRenderers = {
     `;
   },
 
-  /* -------- 11 SEO Context -------- */
   seoContext(){
     return `
       <div class="step-head">
@@ -1775,7 +1697,6 @@ const stepRenderers = {
     `;
   },
 
-  /* -------- 12 AEO Context -------- */
   aeo(){
     return `
       <div class="step-head">
@@ -1816,7 +1737,6 @@ const stepRenderers = {
     `;
   },
 
-  /* -------- 13 Verification -------- */
   verification(){
     const v = state.verification;
     const base = state.website.url ? normalizeUrl(state.website.url) : 'https://example.com';
@@ -1842,7 +1762,7 @@ const stepRenderers = {
       ${v.method === 'meta' ? `
         <div class="card">
           <div class="card-title">HTML meta tag method</div>
-          <div class="card-sub">Paste the content value of the meta tag Google gives you. We will inject it into your &lt;head&gt; and add it to the README.</div>
+          <div class="card-sub">Paste the content value of the meta tag Google gives you. We will inject it into your head and add it to the README.</div>
           ${field('Verification content value', 'verification.metaValue', { placeholder:'e.g. AbC123...longToken...' })}
           ${v.metaValue ? `<div class="code-preview mt-2">&lt;meta name="google-site-verification" content="${escapeHtml(v.metaValue)}"&gt;</div>` : ''}
         </div>
@@ -1854,9 +1774,11 @@ const stepRenderers = {
           <div class="card-sub">Google gives you a filename like <code>google1234abcd.html</code>. Enter the filename below. We will generate the verification file for you to upload.</div>
           ${field('Verification filename', 'verification.fileName', { placeholder:'e.g. google1234abcd.html' })}
           ${v.fileName ? `
-            <div class="code-preview mt-2">${escapeHtml(`<!-- Google Search Console verification file -->
-${v.fileName}
+            <div class="code-preview mt-2">${escapeHtml(`Google Search Console verification file
 
+Filename: ${v.fileName}
+
+Content:
 google-site-verification: ${v.fileName}`)}</div>
             <div class="help mt-2">Upload this file to your website root so it is accessible at:
               <code>${base}/${escapeHtml(v.fileName)}</code>
@@ -1891,7 +1813,6 @@ TTL: Auto</div>
     `;
   },
 
-  /* -------- 14 Audit -------- */
   audit(){
     if(!state.code.html){
       return `
@@ -1910,13 +1831,12 @@ TTL: Auto</div>
     const warnCount = audit.results.filter(r=>r.status==='warn').length;
     const badCount = audit.results.filter(r=>r.status==='bad').length;
     const total = audit.results.length;
-    // Honest "health" metric — clearly defined
     const health = Math.round((okCount + warnCount*0.5) / total * 100);
     return `
       <div class="step-head">
         <div class="step-kicker">14 — SEO Audit</div>
         <h1 class="step-title">Existing SEO analysis</h1>
-        <p class="step-desc">We analyzed your existing &lt;head&gt;. This is a factual inspection — not a fake SEO score.</p>
+        <p class="step-desc">We analyzed your existing head. This is a factual inspection — not a fake SEO score.</p>
       </div>
 
       <div class="card">
@@ -1942,10 +1862,8 @@ TTL: Auto</div>
     `;
   },
 
-  /* -------- 15 Preview -------- */
   preview(){
     const g = generateAll();
-    // Save generated for later use
     state.generated = {
       title: state.generated.title || g.title,
       description: state.generated.description || g.description
@@ -1953,7 +1871,6 @@ TTL: Auto</div>
     const beforeTitle = extractBeforeTitle(state.code.html) || '(none)';
     const beforeDesc = extractBeforeDesc(state.code.html) || '(none)';
     const beforeCanon = extractBeforeCanonical(state.code.html) || '(none)';
-    const editable = true;
 
     return `
       <div class="step-head">
@@ -2038,7 +1955,6 @@ TTL: Auto</div>
     `;
   },
 
-  /* -------- 16 Validation -------- */
   validation(){
     const g = generateAll();
     const { issues, warnings } = runValidation(state, g);
@@ -2095,13 +2011,11 @@ TTL: Auto</div>
     `;
   },
 
-  /* -------- 17 Download -------- */
   async download(){
     const g = generateAll();
     const base = state.website.url ? normalizeUrl(state.website.url) : '';
     const v = state.verification;
 
-    // Compute package contents lazily on click.
     const fileList = [];
     fileList.push(['index.html', g.injectedHtml || '(no existing index.html provided — nothing to inject)', 'text/html']);
     fileList.push(['sitemap.xml', g.sitemap, 'application/xml']);
@@ -2169,7 +2083,7 @@ TTL: Auto</div>
       <div class="card">
         <div class="card-title">Copy shortcuts</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-          <button class="btn sm" data-action="copy-head">Copy SEO &lt;head&gt; code</button>
+          <button class="btn sm" data-action="copy-head">Copy SEO head code</button>
           <button class="btn sm" data-action="copy-sitemap-url">Copy Sitemap URL</button>
           <button class="btn sm" data-action="copy-gsc">Copy Search Console Instructions</button>
           <button class="btn sm" data-action="copy-jsonld">Copy JSON-LD</button>
@@ -2200,7 +2114,6 @@ TTL: Auto</div>
   }
 };
 
-/* Helpers for preview (before values) */
 function extractBeforeTitle(html){
   if(!html) return '';
   try {
@@ -2233,7 +2146,6 @@ function renderMain(){
   const step = STEPS[currentStep];
   const fn = stepRenderers[step.id];
   $('#main').innerHTML = fn ? fn() : '<div class="card">Step not implemented.</div>';
-  // Update textarea code content if on code step
   if(step.id === 'code'){
     const ta = $('#code-input');
     if(ta){
@@ -2267,20 +2179,15 @@ document.addEventListener('input', e => {
   if(t.dataset.field){
     setPath(state, t.dataset.field, t.value);
     saveState();
-    // Auto-analyze identity when it changes
     if(t.dataset.field === 'identity.searchName'){
       const a = analyzeIdentity(t.value, state);
       state.identity.warning = a.warning;
       state.identity.suggestions = a.suggestions;
-      // Update warning/suggestion block live without full re-render
-      const warningCard = document.querySelector('.card.warn');
-      // simple: re-render only the identity step if active
       if(STEPS[currentStep].id === 'identity') renderMain();
     }
   }
 });
 
-// Enter to add chips
 document.addEventListener('keydown', e => {
   if(e.target.dataset.chipInput && e.key === 'Enter'){
     e.preventDefault();
@@ -2296,7 +2203,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// Change (checkboxes, selects)
 document.addEventListener('change', e => {
   const t = e.target;
   if(t.dataset.check){
@@ -2311,7 +2217,6 @@ document.addEventListener('change', e => {
     }
     setPath(state, path, arr);
     saveState();
-    // Update visual
     const wrap = t.closest('.check');
     if(wrap) wrap.classList.toggle('checked', t.checked);
   }
@@ -2322,7 +2227,6 @@ document.addEventListener('change', e => {
   }
 });
 
-// Clicks
 document.addEventListener('click', async e => {
   const t = e.target.closest('[data-goto],[data-add-item],[data-remove-item],[data-remove-chip],[data-use-identity],[data-action]');
   if(!t) return;
@@ -2337,7 +2241,6 @@ document.addEventListener('click', async e => {
   if(t.dataset.addItem){
     const path = t.dataset.addItem;
     const arr = getPath(state, path) || [];
-    // Create blank item with expected keys
     const templates = {
       'services': { name:'', shortDescription:'', detailedDescription:'', targetAudience:'', problemSolved:'', technologies:'', keywords:'' },
       'projects': { name:'', url:'', description:'', technologies:'', category:'', client:'', date:'', image:'' },
@@ -2386,7 +2289,6 @@ document.addEventListener('click', async e => {
   }
 });
 
-// File upload
 document.addEventListener('change', e => {
   if(e.target.id === 'upload-html'){
     const file = e.target.files[0];
@@ -2480,7 +2382,9 @@ async function handleAction(action, el){
       Object.entries(g.twitter).forEach(([k,v]) => lines.push(`<meta name="${k}" content="${v}">`));
       if(state.verification.method === 'meta' && state.verification.metaValue)
         lines.push(`<meta name="google-site-verification" content="${state.verification.metaValue}">`);
-      lines.push(`<script type="application/ld+json">\n${JSON.stringify(g.jsonld,null,2)}\n</script>`);
+      // NOTE: closing script tag must be escaped as <\/script> so this
+      // outer <script> block is not terminated by the HTML parser.
+      lines.push(`<script type="application/ld+json">\n${JSON.stringify(g.jsonld,null,2)}\n<\/script>`);
       copy(lines.join('\n'));
       break;
     }
@@ -2515,6 +2419,9 @@ Optimization does not guarantee indexing or rankings.`);
   }
 }
 
+/* ==========================================================================
+   SAMPLE HTML — closing script tag escaped to avoid breaking this block
+   ========================================================================== */
 function sampleHtml(){
   return `<!DOCTYPE html>
 <html lang="en">
@@ -2539,39 +2446,45 @@ function sampleHtml(){
       <p>I'm a developer building web applications.</p>
     </section>
   </main>
-  <script src="/main.js"></script>
+  <script src="/main.js"><\/script>
 </body>
 </html>`;
 }
 
+/* ==========================================================================
+   ZIP EXPORT — README template must escape closing script tag
+   ========================================================================== */
 async function downloadZip(){
   const g = generateAll();
   const v = state.verification;
   const zip = new JSZip();
   const root = zip.folder('SEO-AEO-Package');
 
-  if(g.injectedHtml) root.file('index.html', g.injectedHtml);
-  else root.file('index.html.README.txt',
+  if(g.injectedHtml) {
+    root.file('index.html', g.injectedHtml);
+  } else {
+    root.file('index.html.README.txt',
 `No existing index.html was provided.
 
-Paste the following tags into the <head> of your website manually:
+Paste the following tags into the head of your website manually:
 
 <title>${g.title}</title>
 <meta name="description" content="${g.description}">
 <link rel="canonical" href="${g.canonical}">
 <meta name="robots" content="${g.robots}">
 
-<!-- Open Graph -->
+Open Graph:
 ${Object.entries(g.og).map(([k,val]) => `<meta property="${k}" content="${val}">`).join('\n')}
 
-<!-- Twitter -->
+Twitter:
 ${Object.entries(g.twitter).map(([k,val]) => `<meta name="${k}" content="${val}">`).join('\n')}
 
-<!-- JSON-LD -->
+JSON-LD:
 <script type="application/ld+json">
 ${JSON.stringify(g.jsonld, null, 2)}
-</script>
+<\/script>
 `);
+  }
 
   root.file('robots.txt', g.robotsTxt);
   root.file('sitemap.xml', g.sitemap);
