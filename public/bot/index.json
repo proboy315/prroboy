@@ -52,6 +52,11 @@
             "url": "https://proboy.vercel.app/bot/rahman-md",
             "expiry": "",
             "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/fm-abdullah-md",
+            "expiry": "",
+            "active": true
         }
     ]
 }
