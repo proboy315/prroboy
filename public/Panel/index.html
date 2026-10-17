@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProBoy Link Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #1e1e1e;
+      padding: 25px;
+      border-radius: 15px;
+      width: 85%;
+      max-width: 450px;
+      text-align: center;
+    }
+
+    a {
+      color: #00e5ff;
+      overflow-wrap: anywhere;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>ProBoy-PANEL</h2>
+    <p id="status">Loading...</p>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    async function loadLink() {
+      const status = document.getElementById("status");
+      const result = document.getElementById("result");
+
+      try {
+        const response = await fetch(
+          "https://ubiquitous-succotash-omega.vercel.app/"
+        );
+
+        if (!response.ok) {
+          throw new Error("API request failed");
+        }
+
+        const data = await response.json();
+
+        if (data.success && data.link) {
+          const link = document.createElement("a");
+          link.href = data.link;
+          link.textContent = data.link;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+
+          result.replaceChildren(link);
+          status.textContent = "Your Link:";
+        } else {
+          status.textContent = "Link not found!";
+        }
+      } catch (error) {
+        status.textContent =
+          "Failed to load link. Check API or CORS settings.";
+      }
+    }
+
+    loadLink();
+  </script>
+
+</body>
+</html>
