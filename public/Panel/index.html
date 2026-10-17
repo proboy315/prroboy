@@ -5,216 +5,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ProBoy-PANEL</title>
-
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
       background: #080b12;
-      color: #fff;
+      color: white;
       font-family: Arial, sans-serif;
     }
 
-    .panel {
-      width: 100%;
-      max-width: 480px;
-      padding: 30px 24px;
-      border: 1px solid #292f40;
-      border-radius: 22px;
-      background: #111622;
-      box-shadow: 0 20px 70px #0008;
-      text-align: center;
+    .loading {
+      font-size: 16px;
+      letter-spacing: 1px;
     }
 
-    .logo {
-      font-size: 13px;
-      font-weight: bold;
-      letter-spacing: 4px;
-      color: #a78bfa;
+    .dot {
+      display: inline-block;
+      animation: pulse 1s infinite;
     }
 
-    h1 {
-      font-size: 27px;
-      margin: 18px 0 8px;
-    }
-
-    .subtitle {
-      color: #9ca3af;
-      font-size: 14px;
-      margin-bottom: 28px;
-    }
-
-    .status {
-      color: #9ca3af;
-      font-size: 14px;
-      margin: 18px 0;
-      overflow-wrap: anywhere;
-    }
-
-    .link-box {
-      padding: 16px;
-      background: #090d16;
-      border: 1px solid #30394d;
-      border-radius: 12px;
-      overflow-wrap: anywhere;
-      line-height: 1.6;
-    }
-
-    .link-box a {
-      color: #67e8f9;
-      text-decoration: none;
-    }
-
-    .link-box a:hover {
-      text-decoration: underline;
-    }
-
-    button {
-      width: 100%;
-      margin-top: 15px;
-      padding: 13px;
-      border: none;
-      border-radius: 10px;
-      background: #7c3aed;
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #6d28d9;
-    }
-
-    .footer {
-      margin-top: 28px;
-      color: #6b7280;
-      font-size: 12px;
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
     }
   </style>
 </head>
-
 <body>
 
-  <main class="panel">
-    <div class="logo">PROBOY</div>
-
-    <h1>ProBoy-PANEL</h1>
-
-    <p class="subtitle">
-      Your link, always up to date.
-    </p>
-
-    <p class="status" id="status">Connecting to API...</p>
-
-    <div class="link-box" id="result">
-      Please wait...
-    </div>
-
-    <button id="copyBtn" hidden>Copy Link</button>
-    <button id="refreshBtn">Refresh Link</button>
-
-    <div class="footer">
-      Powered by ProBoy · Link Viewer
-    </div>
-  </main>
+  <div class="loading">Loading<span class="dot">...</span></div>
 
   <script>
-    const API_URL =
-      "https://ubiquitous-succotash-omega.vercel.app/";
-
-    const statusEl = document.getElementById("status");
-    const resultEl = document.getElementById("result");
-    const copyBtn = document.getElementById("copyBtn");
-    const refreshBtn = document.getElementById("refreshBtn");
-
-    let currentLink = "";
-
-    async function loadLink() {
-      statusEl.textContent = "Loading latest link...";
-      resultEl.textContent = "Please wait...";
-      copyBtn.hidden = true;
-      refreshBtn.disabled = true;
+    (async function () {
+      const API_URL =
+        "https://ubiquitous-succotash-omega.vercel.app/";
 
       try {
         const response = await fetch(API_URL, {
           cache: "no-store"
         });
 
-        if (!response.ok) {
-          throw new Error("API error: HTTP " + response.status);
-        }
+        if (!response.ok) throw new Error("API error");
 
         const data = await response.json();
 
         if (
-          data.success !== true ||
-          typeof data.link !== "string" ||
-          !/^https?:\/\//i.test(data.link)
+          data.success === true &&
+          typeof data.link === "string" &&
+          /^https?:\/\//i.test(data.link)
         ) {
-          throw new Error("Valid link not found in JSON");
+          window.location.replace(data.link);
         }
-
-        currentLink = data.link;
-
-        const linkEl = document.createElement("a");
-        linkEl.href = currentLink;
-        linkEl.target = "_blank";
-        linkEl.rel = "noopener noreferrer";
-        linkEl.textContent = currentLink;
-
-        resultEl.replaceChildren(linkEl);
-        statusEl.textContent = "✓ Link loaded successfully";
-        copyBtn.hidden = false;
-
       } catch (error) {
-        currentLink = "";
-        statusEl.textContent = "Unable to load link";
-        resultEl.textContent =
-          error.message +
-          ". If this is a CORS error, enable CORS on the API.";
-        console.error(error);
-      } finally {
-        refreshBtn.disabled = false;
+        console.error("Redirect failed:", error);
       }
-    }
-
-    copyBtn.addEventListener("click", async () => {
-      if (!currentLink) return;
-
-      try {
-        await navigator.clipboard.writeText(currentLink);
-        copyBtn.textContent = "Copied!";
-      } catch {
-        const input = document.createElement("textarea");
-        input.value = currentLink;
-        document.body.appendChild(input);
-        input.select();
-
-        const copied = document.execCommand("copy");
-        input.remove();
-
-        copyBtn.textContent = copied
-          ? "Copied!"
-          : "Copy failed";
-      }
-
-      setTimeout(() => {
-        copyBtn.textContent = "Copy Link";
-      }, 2000);
-    });
-
-    refreshBtn.addEventListener("click", loadLink);
-
-    loadLink();
+    })();
   </script>
 
 </body>
