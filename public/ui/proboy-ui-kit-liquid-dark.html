@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="en" data-accent="violet"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0f2a">
+<title>PROBOY UI Kit Liquid Dark — night glass capsule template</title>
+<!--
+  PROBOY UI KIT — Liquid Dark   (Liquid Glass Dark · Night wallpaper + clear glass)
+  Single-file design template: offline, no CDN, no libraries.
+   1. Live style-guide : har component ka preview + HTML code + notes
+   2. CSS framework    : <style id="panel-css"> = poora theme (sidebar ka "Copy full CSS" button)
+   3. Starter template : last section mein copy-paste page skeleton
+  Rang badalne ho to sirf :root ke variables badlo (--accent, --accent2, --accent3 ...).
+-->
+<style id="panel-css">
+
+:root{
+  --bg:#080a12; --bg2:#0e111b; --bg3:#151927; --bg4:#1c2133;
+  --fg:#e8edf7; --muted:#8a94aa; --faint:#5c667c;
+  --border:rgba(255,255,255,.08); --border2:rgba(255,255,255,.14);
+  --accent:#8b5cf6; --accent2:#22d3ee; --accent3:#34d399;
+  --danger:#ff5a7a; --warn:#fbbf24; --ok:#34d399; --info:#60a5fa;
+  --code:#06080e; --radius:16px; --radius-sm:10px;
+  --glass-bg:rgba(21,25,39,.94); --glass-bd:rgba(255,255,255,.09);
+  --grad:linear-gradient(135deg,var(--accent),var(--accent2) 55%,var(--accent3));
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --font:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+:root[data-accent="blue"]{--accent:#3b82f6;--accent2:#22d3ee;--accent3:#a78bfa}
+:root[data-accent="green"]{--accent:#10b981;--accent2:#22d3ee;--accent3:#a3e635}
+:root[data-accent="rose"]{--accent:#f43f5e;--accent2:#fb923c;--accent3:#fbbf24}
+:root[data-accent="amber"]{--accent:#f59e0b;--accent2:#f43f5e;--accent3:#a78bfa}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;overflow-x:hidden}
+a{color:var(--accent2);text-decoration:none}
+a:hover{text-decoration:underline}
+button,input,select,textarea{font:inherit;color:inherit}
+::selection{background:rgba(139,92,246,.4)}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:8px;border:2px solid transparent;background-clip:content-box}::-webkit-scrollbar-track{background:transparent}
+.hide{display:none!important}
+.muted{color:var(--muted)}.faint{color:var(--faint)}
+.mono{font-family:var(--mono)}
+.sm{font-size:12px}
+
+/* ---------- animated background ---------- */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:radial-gradient(1200px 600px at 80% -10%,rgba(139,92,246,.10),transparent 60%),var(--bg)}
+.orb{position:absolute;border-radius:50%;opacity:.55;will-change:transform}
+.orb.o1{width:520px;height:520px;left:-140px;top:-120px;background:radial-gradient(circle at 50% 50%,var(--accent),transparent 68%);animation:float1 22s ease-in-out infinite alternate}
+.orb.o2{width:460px;height:460px;right:-120px;top:25%;background:radial-gradient(circle at 50% 50%,var(--accent2),transparent 68%);animation:float2 26s ease-in-out infinite alternate;opacity:.35}
+.orb.o3{width:420px;height:420px;left:30%;bottom:-200px;background:radial-gradient(circle at 50% 50%,var(--accent3),transparent 68%);animation:float3 30s ease-in-out infinite alternate;opacity:.28}
+@keyframes float1{to{transform:translate(120px,80px) scale(1.15)}}
+@keyframes float2{to{transform:translate(-140px,60px) scale(1.2)}}
+@keyframes float3{to{transform:translate(100px,-90px) scale(1.1)}}
+
+/* ---------- glass ---------- */
+.glass{background:var(--glass-bg);border:1px solid var(--glass-bd);border-radius:var(--radius);box-shadow:var(--shadow)}
+@supports ((-webkit-backdrop-filter:blur(2px)) or (backdrop-filter:blur(2px))){
+  .glass{background:rgba(20,24,38,.55);-webkit-backdrop-filter:blur(16px) saturate(150%);backdrop-filter:blur(16px) saturate(150%)}
+  .sidebar,.topbar,.modal .box,.palette .box{background:rgba(14,17,27,.72)}
+}
+.card{padding:18px;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.card.lift:hover{transform:translateY(-3px);border-color:var(--border2);box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.card h3{margin:0 0 4px;font-size:15px}
+.k{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.9px;font-weight:600}
+.v{font-size:24px;font-weight:700;margin-top:4px;letter-spacing:-.4px}
+
+/* ---------- layout ---------- */
+.layout{position:relative;z-index:1;display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;padding:20px 14px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:30}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.6px;font-size:16px;padding:4px 10px 18px}
+.brand .logo{width:34px;height:34px;border-radius:10px;background:var(--grad);display:grid;place-items:center;color:#fff;box-shadow:0 6px 18px rgba(139,92,246,.45)}
+.brand b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav{display:flex;flex-direction:column;gap:3px;overflow:auto}
+.nav a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;color:var(--muted);font-weight:500;position:relative;transition:background .2s,color .2s,transform .2s}
+.nav a:hover{background:rgba(255,255,255,.05);color:var(--fg);text-decoration:none;transform:translateX(2px)}
+.nav a.active{background:linear-gradient(90deg,rgba(139,92,246,.22),rgba(34,211,238,.06));color:#fff}
+.nav a.active::before{content:"";position:absolute;left:-14px;top:9px;bottom:9px;width:3px;border-radius:3px;background:var(--grad)}
+.nav a .badge{margin-left:auto;font-size:11px;padding:1px 7px;border-radius:99px;background:rgba(251,191,36,.18);color:var(--warn)}
+.sb-foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--border)}
+.userchip{display:flex;align-items:center;gap:10px;padding:8px 10px}
+.avatar{width:34px;height:34px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font-weight:700;color:#fff;text-transform:uppercase}
+.main{padding:0 28px 60px;max-width:1500px;width:100%;min-width:0}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:14px 0;margin-bottom:6px;background:transparent}
+.topbar .grow{flex:1}
+.btn.hamburger{display:none}
+.scrim{display:none}
+.view{animation:viewIn .35s ease both}
+@keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{margin:0;font-size:26px;letter-spacing:-.5px;line-height:1.2}
+h2{margin:28px 0 12px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1.1px;font-weight:700}
+.page-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:6px 0 20px}
+.page-head .sub{color:var(--muted);margin-top:4px}
+.grid{display:grid;gap:14px}
+.grid.c4{grid-template-columns:repeat(auto-fit,minmax(165px,1fr))}
+.grid.c3{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.grid.c2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.grid.cards{grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.row.nowrap{flex-wrap:nowrap}
+.row>.grow,.grow{flex:1 1 0;min-width:0}
+.spacer{flex:1}
+.stack{display:flex;flex-direction:column;gap:12px}
+
+/* ---------- buttons & inputs ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--grad);color:#fff;border:0;border-radius:12px;padding:9px 16px;cursor:pointer;font-weight:600;white-space:nowrap;transition:transform .15s ease,filter .2s,box-shadow .2s;box-shadow:0 6px 18px rgba(139,92,246,.28)}
+.btn:hover{transform:translateY(-1px) scale(1.03);filter:brightness(1.1)}
+.btn:active{transform:scale(.97)}
+.btn.secondary{background:rgba(255,255,255,.06);color:var(--fg);border:1px solid var(--border2);box-shadow:none}
+.btn.secondary:hover{background:rgba(255,255,255,.1)}
+.btn.ghost{background:transparent;color:var(--muted);box-shadow:none;border:1px solid transparent}
+.btn.ghost:hover{color:var(--fg);background:rgba(255,255,255,.06)}
+.btn.danger{background:linear-gradient(135deg,#ff5a7a,#ff7a59);box-shadow:0 6px 18px rgba(255,90,122,.25)}
+.btn.ok{background:linear-gradient(135deg,#10b981,#34d399);color:#03251a;box-shadow:0 6px 18px rgba(52,211,153,.25)}
+.btn.sm{padding:6px 11px;font-size:12.5px;border-radius:10px}
+.btn.icon{padding:8px;border-radius:10px}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none;filter:none}
+.btn.busy::after{content:"";width:13px;height:13px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+input,select,textarea{background:rgba(6,8,14,.6);border:1px solid var(--border2);border-radius:12px;padding:10px 13px;width:100%;outline:none;transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(139,92,246,.22)}
+select option{background:#151927}
+input[type=checkbox]{width:auto}
+textarea{resize:vertical;font-family:var(--mono);font-size:13px}
+label{display:block;margin:14px 0 6px;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.8px;font-weight:600}
+.switch{position:relative;display:inline-block;width:42px;height:24px;flex:0 0 auto}
+.switch input{opacity:0;width:0;height:0}
+.switch span{position:absolute;inset:0;background:rgba(255,255,255,.12);border-radius:99px;cursor:pointer;transition:.25s}
+.switch span::before{content:"";position:absolute;height:18px;width:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.25s}
+.switch input:checked+span{background:var(--accent)}
+.switch input:checked+span::before{transform:translateX(18px)}
+.seg{display:inline-flex;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;padding:3px}
+.seg button{background:transparent;border:0;color:var(--muted);padding:6px 10px;border-radius:9px;cursor:pointer;display:inline-flex;align-items:center}
+.seg button.on{background:rgba(255,255,255,.12);color:var(--fg)}
+kbd{font-family:var(--mono);font-size:11px;background:rgba(255,255,255,.08);border:1px solid var(--border2);border-bottom-width:2px;border-radius:6px;padding:1px 6px;color:var(--muted)}
+.search{position:relative;flex:1 1 220px}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--faint)}
+.search input{padding-left:38px}
+
+/* ---------- pills / status ---------- */
+.pill{display:inline-flex;align-items:center;gap:7px;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:600;border:1px solid transparent;text-transform:capitalize}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:currentColor}
+.pill.running{background:rgba(52,211,153,.14);color:var(--ok);border-color:rgba(52,211,153,.3)}
+.pill.running .dot{animation:pulse 1.6s ease-out infinite}
+.pill.stopped{background:rgba(255,255,255,.06);color:var(--muted);border-color:var(--border)}
+.pill.starting,.pill.connecting{background:rgba(251,191,36,.14);color:var(--warn);border-color:rgba(251,191,36,.3)}
+.pill.starting .dot,.pill.connecting .dot{animation:blink 1s infinite}
+.pill.crashed,.pill.error,.pill.fail,.pill.failed{background:rgba(255,90,122,.14);color:var(--danger);border-color:rgba(255,90,122,.3)}
+.pill.ok{background:rgba(52,211,153,.14);color:var(--ok);border-color:rgba(52,211,153,.3)}
+.pill.warn,.pill.disconnected,.pill.unavailable,.pill.disabled{background:rgba(251,191,36,.12);color:var(--warn);border-color:rgba(251,191,36,.28)}
+.pill.info{background:rgba(96,165,250,.14);color:var(--info);border-color:rgba(96,165,250,.3)}
+.pill.flash{animation:flash .9s ease}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.65)}80%,100%{box-shadow:0 0 0 8px rgba(52,211,153,0)}}
+@keyframes blink{50%{opacity:.25}}
+@keyframes flash{0%{transform:scale(1.25);filter:brightness(1.6)}100%{transform:scale(1)}}
+.weblink{display:flex;align-items:center;gap:8px;min-width:0;margin-top:12px;padding:7px 8px 7px 11px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--border)}
+.weblink.off{opacity:.7}
+.weblink .u{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12.5px;font-family:var(--mono);color:var(--accent2)}
+.weblink.off .u{color:var(--muted)}
+.weblink .btn{flex:none}
+.tag{display:inline-block;padding:2px 8px;border-radius:8px;font-size:11px;background:rgba(255,255,255,.06);color:var(--muted);border:1px solid var(--border)}
+
+/* ---------- tables ---------- */
+.tw{overflow:auto;border-radius:var(--radius-sm)}
+table{width:100%;border-collapse:collapse;min-width:520px}
+th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--border);vertical-align:middle}
+th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap}
+tbody tr{transition:background .15s}
+tbody tr:hover{background:rgba(255,255,255,.03)}
+tr:last-child td{border-bottom:0}
+.act{white-space:nowrap;text-align:right}
+.fname{display:inline-flex;align-items:center;gap:9px;cursor:pointer;color:var(--fg)}
+.fname:hover{color:var(--accent2)}
+
+/* ---------- tabs ---------- */
+.tabs{display:flex;gap:4px;margin:0 0 16px;overflow-x:auto;padding-bottom:2px;border-bottom:1px solid var(--border)}
+.tabs a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;font-weight:500;margin-bottom:-1px;transition:color .2s}
+.tabs a:hover{color:var(--fg);text-decoration:none}
+.tabs a.active{color:#fff;border-bottom-color:var(--accent)}
+
+/* ---------- console ---------- */
+.console{background:var(--code);border:1px solid var(--border);border-radius:14px;height:440px;overflow:auto;padding:12px 14px;font-family:var(--mono);font-size:12.5px;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+.console .ln{min-height:1.5em}
+.console:empty::before{content:"No output yet. Start the project or run Install deps to see live logs here.";color:var(--faint)}
+.console .ln.l-err{color:#ff8fa3}.console .ln.l-warn{color:#fcd34d}
+.console .ln.hl{background:rgba(251,191,36,.12)}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+pre.code{margin:0;padding:14px;background:var(--code);border:1px solid var(--border);border-radius:12px;overflow:auto;font-family:var(--mono);font-size:12.5px;word-break:break-all;white-space:pre-wrap}
+
+/* ---------- modal / palette / toast ---------- */
+.modal,.palette{position:fixed;inset:0;background:rgba(3,5,10,.62);display:none;align-items:center;justify-content:center;padding:18px;z-index:60;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.modal.open,.palette.open{display:flex;animation:fadeIn .18s ease}
+.modal .box{background:var(--bg3);border:1px solid var(--border2);border-radius:20px;padding:24px;max-width:680px;width:100%;max-height:92vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:pop .22s ease}
+.modal .box.wide{max-width:980px}
+.modal .box h1{font-size:20px;margin-bottom:6px}
+.modal .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:22px;flex-wrap:wrap}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+.palette{align-items:flex-start;padding-top:12vh}
+.palette .box{width:100%;max-width:600px;background:var(--bg3);border:1px solid var(--border2);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:pop .2s ease}
+.palette input{border:0;border-radius:0;border-bottom:1px solid var(--border);padding:16px 18px;font-size:16px;background:transparent;box-shadow:none}
+.palette ul{list-style:none;margin:0;padding:8px;max-height:50vh;overflow:auto}
+.palette li{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;cursor:pointer;color:var(--muted)}
+.palette li.sel{background:rgba(139,92,246,.2);color:#fff}
+.palette li .hint{margin-left:auto;font-size:11px;color:var(--faint)}
+.toasts{position:fixed;right:18px;bottom:18px;z-index:90;display:flex;flex-direction:column;gap:10px;max-width:min(420px,calc(100vw - 28px))}
+.toast{display:flex;gap:12px;align-items:flex-start;background:var(--bg3);border:1px solid var(--border2);border-left:4px solid var(--info);border-radius:14px;padding:12px 14px;box-shadow:0 14px 40px rgba(0,0,0,.5);animation:toastIn .3s ease;cursor:pointer}
+.toast.success{border-left-color:var(--ok)}.toast.error{border-left-color:var(--danger)}.toast.warn{border-left-color:var(--warn)}
+.toast .ti{flex:0 0 auto;margin-top:1px}.toast.success .ti{color:var(--ok)}.toast.error .ti{color:var(--danger)}.toast.warn .ti{color:var(--warn)}.toast.info .ti{color:var(--info)}
+.toast .tb{min-width:0;word-break:break-word}.toast .th{font-size:12px;color:var(--muted);margin-top:3px;font-family:var(--mono)}
+.toast.out{animation:toastOut .25s ease forwards}
+@keyframes toastIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+@keyframes toastOut{to{opacity:0;transform:translateX(30px)}}
+
+/* ---------- skeleton / empty ---------- */
+.sk{background:linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.1) 37%,rgba(255,255,255,.04) 63%);background-size:400% 100%;animation:shimmer 1.4s ease infinite;border-radius:10px;height:14px}
+.sk.b{height:90px;border-radius:16px}.sk.t{height:28px;width:40%;margin-bottom:12px}
+@keyframes shimmer{0%{background-position:100% 50%}100%{background-position:0 50%}}
+.empty{text-align:center;padding:44px 18px;color:var(--muted)}
+.empty svg{margin:0 auto 14px;display:block;opacity:.95}
+.empty h3{color:var(--fg);margin:0 0 6px;font-size:17px}
+
+/* ---------- gauges ---------- */
+.ring{position:relative;width:72px;height:72px;flex:0 0 auto}
+.ring svg{transform:rotate(-90deg)}
+.ring .rt{position:absolute;inset:0;display:grid;place-items:center;font-weight:700;font-size:14px}
+.ring circle{fill:none;stroke-width:7;stroke-linecap:round}
+.ring .bgc{stroke:rgba(255,255,255,.08)}.ring .fgc{transition:stroke-dasharray .8s ease,stroke .4s}
+canvas.spark{width:100%;height:56px;display:block}
+.bar{height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--grad);border-radius:99px;transition:width .6s ease}
+.stat-ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(139,92,246,.16);color:var(--accent);flex:0 0 auto}
+.stat-ic.g{background:rgba(52,211,153,.14);color:var(--ok)}.stat-ic.r{background:rgba(255,90,122,.14);color:var(--danger)}.stat-ic.y{background:rgba(251,191,36,.14);color:var(--warn)}.stat-ic.c{background:rgba(34,211,238,.14);color:var(--accent2)}
+
+/* ---------- project cards ---------- */
+.pcard{display:flex;flex-direction:column;gap:12px;cursor:pointer}
+.pcard .top{display:flex;gap:12px;align-items:flex-start}
+.pcard .nm{font-weight:700;font-size:16px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pcard .meta{display:flex;gap:14px;color:var(--muted);font-size:12px;flex-wrap:wrap}
+.pcard .qa{display:flex;gap:8px;margin-top:2px}
+.tpl{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:14px;cursor:pointer;background:rgba(255,255,255,.03);transition:border-color .2s,background .2s,transform .2s;text-align:left;color:inherit;width:100%}
+.tpl:hover{transform:translateY(-2px);border-color:var(--border2)}
+.tpl.sel{border-color:var(--accent);background:rgba(139,92,246,.12)}
+.tpl b{display:block;font-size:13.5px}.tpl span{color:var(--muted);font-size:12px;line-height:1.4}
+.kv{display:grid;grid-template-columns:1fr 1.4fr auto;gap:8px;margin-bottom:8px;align-items:center}
+.info{background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.28);border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.6}
+.info.warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.3)}
+.info.err{background:rgba(255,90,122,.08);border-color:rgba(255,90,122,.3)}
+.qr{background:#fff;padding:10px;border-radius:14px;display:inline-block;line-height:0}
+.qr svg{width:176px;height:176px}
+.swatch{width:34px;height:34px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0}
+.swatch.on{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+
+/* ---------- login ---------- */
+.login-wrap{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding:24px}
+.login-box{width:100%;max-width:410px;padding:32px;animation:pop .4s ease}
+.login-box .brand{padding:0 0 6px;font-size:20px}
+#boot-err{display:none;position:fixed;top:0;left:0;right:0;background:#ff5a7a;color:#fff;padding:12px 16px;z-index:99999;font-family:var(--mono);font-size:13px;white-space:pre-wrap;line-height:1.4}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .sidebar{position:fixed;left:0;top:0;bottom:0;width:272px;transform:translateX(-102%);transition:transform .28s ease;box-shadow:20px 0 60px rgba(0,0,0,.5)}
+  .sidebar.open{transform:none}
+  .scrim.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:25}
+  .btn.hamburger{display:inline-flex}
+  .topbar kbd{display:none}
+  .main{padding:0 14px 60px}
+  .nav a.active::before{left:-14px}
+  h1{font-size:22px}
+  .orb{opacity:.3}
+  .kv{grid-template-columns:1fr}
+  .toasts{right:10px;left:10px;bottom:10px;max-width:none}
+}
+@media (max-width:768px){
+  @supports ((-webkit-backdrop-filter:blur(2px)) or (backdrop-filter:blur(2px))){
+    .glass{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  }
+  .console{height:360px}
+}
+@media (prefers-reduced-motion:reduce){
+  .orb,.view,.pill .dot,.sk{animation:none!important}
+  *{transition-duration:.01ms!important}
+}
+
+
+
+/* SKIN — "LIQUID GLASS": vivid wallpaper behind CLEAR glass (low-opacity white + strong blur/saturate), bright specular rim, capsule shapes, dark ink text */
+:root{
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --bg:#7aa7ff; --bg2:rgba(255,255,255,.28); --bg3:rgba(255,255,255,.42); --bg4:rgba(255,255,255,.55);
+  --fg:#0b1533; --muted:#3b4a75; --faint:#62709b;
+  --border:rgba(255,255,255,.5); --border2:rgba(255,255,255,.75); --code:#0b1533; --radius:28px; --radius-sm:18px;
+  --accent:#0a84ff; --accent2:#5ac8fa; --accent3:#30d158; --accent-dk:#0060c9;
+  --grad:linear-gradient(180deg,#4aa8ff,#0a6cf0);
+  --glass-bg:rgba(255,255,255,.26); --glass-bd:rgba(255,255,255,.7);
+  --well:rgba(255,255,255,.32); --line:rgba(11,21,51,.12); --line2:rgba(11,21,51,.22); --hl:rgba(255,255,255,.35);
+  --p1:rgba(255,255,255,.5); --p2:rgba(255,255,255,.22); --plate:linear-gradient(180deg,var(--p1),var(--p2)); --sheen:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,0) 40%);
+  --float:rgba(255,255,255,.55); --codebg:#0b1533; --codefg:#dbe7ff; --strong:#050c22; --on-accent:#fff;
+  --k1:#fff; --k2:#f1f4ff; --k3:#cfd8f5; --s1:#fff; --s2:#9aa8d6;
+  --edge:inset 0 1.5px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.35),inset 1px 0 0 rgba(255,255,255,.4),inset -1px 0 0 rgba(255,255,255,.2);
+  --raise:0 18px 40px -12px rgba(20,40,120,.35),0 2px 6px rgba(20,40,120,.1);
+  --raise-sm:0 10px 24px -10px rgba(20,40,120,.35),0 1px 3px rgba(20,40,120,.1);
+  --raise-xs:0 5px 12px -6px rgba(20,40,120,.35);
+  --sunk:inset 0 2px 6px rgba(20,40,120,.22),inset 0 -1px 0 rgba(255,255,255,.7); --sunk-sm:inset 0 2px 5px rgba(20,40,120,.2),inset 0 -1px 0 rgba(255,255,255,.7);
+  --glass-fill:rgba(255,255,255,.26);
+}
+:root[data-accent="violet"]{--accent:#0a84ff;--accent-dk:#0060c9;--grad:linear-gradient(180deg,#4aa8ff,#0a6cf0)}
+:root[data-accent="blue"]{--accent:#7c5cff;--accent-dk:#4f35c9;--grad:linear-gradient(180deg,#9b82ff,#6a45f0)}
+:root[data-accent="green"]{--accent:#30d158;--accent-dk:#1f9e3d;--grad:linear-gradient(180deg,#5be07c,#25b84a)}
+:root[data-accent="rose"]{--accent:#ff375f;--accent-dk:#c8163b;--grad:linear-gradient(180deg,#ff6a88,#f02a55)}
+:root[data-accent="amber"]{--accent:#ff9f0a;--accent-dk:#c97700;--grad:linear-gradient(180deg,#ffbf47,#f58f00)}
+html,body{background:#7aa7ff;color:var(--fg)}
+::selection{background:rgba(10,132,255,.35)}
+h1,h2,h3,h4,b,strong,.v,.hero-t{color:var(--strong)}
+.hero-t{letter-spacing:-.04em;font-weight:800}
+.muted{color:var(--muted)}
+.k{color:var(--muted)}
+.grad-t{background:linear-gradient(100deg,#0a3fd8,#7c3aed 55%,#d6249f);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.hero-t{text-shadow:none}
+/* wallpaper */
+.bg{background:radial-gradient(60vmax 50vmax at 12% 8%,#ff7ab8,transparent 60%),radial-gradient(55vmax 45vmax at 88% 12%,#ffb454,transparent 60%),radial-gradient(60vmax 55vmax at 78% 95%,#5ee0ff,transparent 62%),radial-gradient(55vmax 50vmax at 8% 90%,#7a6bff,transparent 60%),linear-gradient(135deg,#6aa0ff,#9a7bff 55%,#ff8fb8);overflow:hidden}
+.bg::before{content:"";position:absolute;width:46vmax;height:46vmax;left:30%;top:18%;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.75),rgba(255,255,255,.1) 45%,transparent 70%);filter:blur(6px);animation:lqdrift 18s ease-in-out infinite alternate;opacity:.55}
+@keyframes lqdrift{to{transform:translate(-14vmax,14vmax) scale(.85)}}
+.orb{display:none}
+
+.glass{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.42),rgba(255,255,255,.16));border:1px solid rgba(255,255,255,.55);border-radius:28px;box-shadow:var(--raise),var(--edge);-webkit-backdrop-filter:blur(26px) saturate(1.9) brightness(1.08);backdrop-filter:blur(26px) saturate(1.9) brightness(1.08);overflow:hidden}
+.glass::after{content:"";position:absolute;left:-10%;top:-30%;width:70%;height:70%;background:radial-gradient(ellipse at 30% 30%,rgba(255,255,255,.55),transparent 65%);pointer-events:none;opacity:.55}
+.glass>*{position:relative;z-index:1}
+.card.lift{transition:transform .35s cubic-bezier(.2,.9,.3,1.2),box-shadow .3s}
+.card.lift:hover{transform:translateY(-5px) scale(1.015);box-shadow:0 28px 54px -14px rgba(20,40,120,.45),var(--edge)}
+.sidebar,.topbar,.modal .box,.palette .box{background:linear-gradient(160deg,rgba(255,255,255,.5),rgba(255,255,255,.22));-webkit-backdrop-filter:blur(30px) saturate(1.9);backdrop-filter:blur(30px) saturate(1.9)}
+.sidebar{border-right:1px solid rgba(255,255,255,.6);box-shadow:10px 0 40px -16px rgba(20,40,120,.3),inset -1px 0 0 rgba(255,255,255,.6)}
+.topbar{border-radius:999px;border:1px solid rgba(255,255,255,.6);box-shadow:var(--raise-sm),var(--edge);margin:12px 0 10px;top:10px;padding:8px 18px}
+.brand .logo{background:var(--grad);border-radius:12px;color:#fff;box-shadow:0 6px 14px -4px rgba(10,100,240,.6),inset 0 1.5px 0 rgba(255,255,255,.7)}
+.brand b,.brand span{color:var(--strong)}
+.nav a{border-radius:999px;color:var(--muted);font-weight:600;transition:background .2s,transform .2s,color .2s}
+.nav a:hover{background:rgba(255,255,255,.4);color:var(--strong);transform:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+.nav a.active{background:rgba(255,255,255,.7);color:var(--accent-dk);box-shadow:0 6px 16px -8px rgba(20,40,120,.5),inset 0 1.5px 0 #fff}
+.nav a.active::before{display:none}
+.nav a.active svg{color:var(--accent);filter:none}
+.nav-sec,.sb-foot{color:var(--faint)}
+.sb-foot{border-top:1px solid rgba(255,255,255,.55)}
+.avatar{background:var(--grad);color:#fff;box-shadow:0 5px 12px -4px rgba(10,100,240,.6),inset 0 1.5px 0 rgba(255,255,255,.7)}
+
+.btn{position:relative;overflow:hidden;background:var(--grad);color:#fff;border:0;border-radius:999px;font-weight:700;text-shadow:0 1px 1px rgba(0,40,120,.35);box-shadow:0 8px 18px -6px var(--accent),inset 0 1.5px 0 rgba(255,255,255,.7),inset 0 -2px 4px rgba(0,40,120,.25);transition:transform .25s cubic-bezier(.2,.9,.3,1.3),box-shadow .2s,filter .2s}
+.btn::before{content:"";position:absolute;left:8%;right:8%;top:2px;height:46%;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0));pointer-events:none}
+.btn:hover{transform:scale(1.05);filter:brightness(1.06)}
+.btn:active{transform:scale(.96)}
+.btn.secondary{background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.28));color:var(--strong);text-shadow:none;box-shadow:0 6px 14px -6px rgba(20,40,120,.35),inset 0 1.5px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.btn.secondary::before{opacity:.5}
+.btn.ghost{background:transparent;color:var(--muted);box-shadow:none;text-shadow:none}
+.btn.ghost::before{display:none}
+.btn.ghost:hover{background:rgba(255,255,255,.45);color:var(--strong);transform:none}
+.btn.danger{background:linear-gradient(180deg,#ff6a88,#f02a55);box-shadow:0 8px 18px -6px #ff375f,inset 0 1.5px 0 rgba(255,255,255,.7),inset 0 -2px 4px rgba(120,0,30,.25)}
+.btn.ok{background:linear-gradient(180deg,#5be07c,#25b84a);box-shadow:0 8px 18px -6px #30d158,inset 0 1.5px 0 rgba(255,255,255,.7),inset 0 -2px 4px rgba(0,80,20,.25)}
+.btn:disabled{background:rgba(255,255,255,.3);color:var(--faint);text-shadow:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5);transform:none;filter:none}
+.btn:disabled::before{display:none}
+
+input,select,textarea{background:rgba(255,255,255,.38);color:var(--fg);border:1px solid rgba(255,255,255,.7);border-radius:999px;padding-left:16px;box-shadow:var(--sunk-sm)}
+textarea{border-radius:20px}
+input::placeholder,textarea::placeholder{color:var(--faint)}
+input:focus,select:focus,textarea:focus{background:rgba(255,255,255,.6);border-color:#fff;box-shadow:var(--sunk-sm),0 0 0 4px rgba(10,132,255,.3)}
+label{color:var(--muted)}
+.search svg{color:var(--muted)}
+.switch{width:52px;height:30px}
+.switch span{background:rgba(11,21,51,.2);box-shadow:inset 0 2px 5px rgba(11,21,51,.25)}
+.switch span::before{width:26px;height:26px;top:2px;left:2px;background:#fff;box-shadow:0 3px 8px rgba(11,21,51,.4),inset 0 -1px 2px rgba(11,21,51,.1)}
+.switch input:checked+span{background:#30d158;box-shadow:inset 0 2px 5px rgba(0,80,20,.3)}
+.switch input:checked+span::before{transform:translateX(22px)}
+.seg,.tabs{background:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.6);border-radius:999px;box-shadow:var(--sunk-sm)}
+.seg button{border-radius:999px;color:var(--muted);font-weight:600}
+.seg button.on{background:#fff;color:var(--strong);box-shadow:0 3px 10px -3px rgba(20,40,120,.4)}
+.tabs{padding:4px;gap:2px}
+.tabs a{border-radius:999px;border-bottom:0;margin-bottom:0;color:var(--muted);font-weight:600}
+.tabs a.active{background:#fff;color:var(--strong);box-shadow:0 3px 10px -3px rgba(20,40,120,.4)}
+kbd{background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.8);color:var(--fg);box-shadow:inset 0 1px 0 #fff,0 2px 0 rgba(20,40,120,.15)}
+.pill{background:rgba(255,255,255,.45);color:var(--strong);border:1px solid rgba(255,255,255,.7);box-shadow:inset 0 1px 0 #fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.tag{background:rgba(255,255,255,.5);color:var(--accent-dk);border:1px solid rgba(255,255,255,.7);border-radius:999px}
+.stat-ic{border-radius:16px;border:1px solid rgba(255,255,255,.7);box-shadow:0 6px 14px -5px rgba(20,40,120,.4),inset 0 1.5px 0 rgba(255,255,255,.9)}
+.ring{background:rgba(255,255,255,.3);border-radius:50%;box-shadow:var(--sunk-sm)}
+.ring .bgc{stroke:rgba(11,21,51,.12)}
+.bar{height:12px;background:rgba(255,255,255,.4);box-shadow:var(--sunk-sm)}
+.bar>i{background:var(--grad);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.6),0 0 10px -2px var(--accent)}
+.weblink{background:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.7);border-radius:999px;box-shadow:var(--sunk-sm)}
+.weblink .u{color:var(--accent-dk)}
+.console,pre.code{background:rgba(11,21,51,.82);color:#dbe7ff;border:1px solid rgba(255,255,255,.2);border-radius:20px;box-shadow:var(--raise-sm)}
+th{color:var(--muted)}th,td{border-bottom:1px solid rgba(11,21,51,.1)}
+td{color:var(--fg)}
+tbody tr:hover{background:rgba(255,255,255,.35)}
+.tpl{background:rgba(255,255,255,.4);border-color:rgba(255,255,255,.7);border-radius:20px;box-shadow:inset 0 1px 0 #fff}
+.tpl.sel{background:rgba(255,255,255,.75);box-shadow:0 0 0 2px var(--accent),0 10px 24px -10px var(--accent)}
+.info{background:rgba(255,255,255,.4);color:var(--fg);border:1px solid rgba(255,255,255,.7);border-radius:20px;box-shadow:inset 0 1px 0 #fff}
+.info.warn{background:rgba(255,214,102,.5)}.info.err{background:rgba(255,120,140,.4)}
+.swatch{border:2px solid #fff;box-shadow:0 6px 12px -4px rgba(20,40,120,.5)}
+.swatch.on{box-shadow:0 0 0 3px var(--accent),0 6px 12px -4px rgba(20,40,120,.5)}
+.qr{box-shadow:var(--raise-sm);border-radius:16px}
+.modal .box,.palette .box{border:1px solid rgba(255,255,255,.75);border-radius:34px;box-shadow:0 40px 80px -20px rgba(20,40,120,.5),var(--edge);animation:lqpop .5s cubic-bezier(.2,.9,.3,1.15)}
+@keyframes lqpop{from{opacity:0;transform:scale(.88);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
+.palette input{margin:10px;width:calc(100% - 20px)}
+.palette li{color:var(--fg)}
+.palette li.sel{background:rgba(255,255,255,.7);box-shadow:inset 0 1px 0 #fff}
+.toast{background:linear-gradient(160deg,rgba(255,255,255,.7),rgba(255,255,255,.4));color:var(--fg);border:1px solid rgba(255,255,255,.8);border-radius:999px;box-shadow:var(--raise-sm),var(--edge);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+.sk{background:linear-gradient(90deg,rgba(255,255,255,.2) 25%,rgba(255,255,255,.6) 37%,rgba(255,255,255,.2) 63%);background-size:400% 100%}
+@media (max-width:768px){.glass,.sidebar,.topbar{-webkit-backdrop-filter:blur(14px) saturate(1.6);backdrop-filter:blur(14px) saturate(1.6)}.bg::before{animation:none}.topbar{border-radius:22px}}
+@media (prefers-reduced-motion:reduce){.bg::before,.modal .box,.palette .box{animation:none}}
+
+/* ===== DARK OVERRIDES (night variant of Liquid Glass) ===== */
+:root{
+  --bg:#0a0f2a; --fg:#eef2ff; --muted:#b0bce6; --faint:#7886b8; --strong:#fff;
+  --border:rgba(255,255,255,.16); --border2:rgba(255,255,255,.3); --line:rgba(255,255,255,.12); --line2:rgba(255,255,255,.26); --hl:rgba(255,255,255,.09);
+  --well:rgba(0,0,10,.32); --glass-fill:rgba(255,255,255,.08); --float:rgba(22,28,66,.62); --codebg:#04071a; --codefg:#d6e0ff;
+  --p1:rgba(255,255,255,.18); --p2:rgba(255,255,255,.05); --sheen:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0) 40%);
+  --accent:#8b7bff; --accent2:#5ee0ff; --accent-dk:#c7beff; --grad:linear-gradient(180deg,#9d8dff,#6a4df0);
+  --edge:inset 0 1.5px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(255,255,255,.1),inset 1px 0 0 rgba(255,255,255,.18),inset -1px 0 0 rgba(255,255,255,.08);
+  --raise:0 24px 50px -16px rgba(0,0,10,.7),0 2px 6px rgba(0,0,10,.3); --raise-sm:0 12px 26px -10px rgba(0,0,10,.65); --raise-xs:0 6px 14px -6px rgba(0,0,10,.6);
+  --sunk:inset 0 2px 8px rgba(0,0,10,.55),inset 0 -1px 0 rgba(255,255,255,.1); --sunk-sm:inset 0 2px 6px rgba(0,0,10,.5),inset 0 -1px 0 rgba(255,255,255,.1);
+}
+:root[data-accent="blue"]{--accent:#4aa8ff;--accent-dk:#b9dcff;--grad:linear-gradient(180deg,#5ab4ff,#0a6cf0)}
+:root[data-accent="green"]{--accent:#34e07c;--accent-dk:#bdf5d2;--grad:linear-gradient(180deg,#5be07c,#1fae48)}
+:root[data-accent="rose"]{--accent:#ff5a86;--accent-dk:#ffc2d3;--grad:linear-gradient(180deg,#ff7a9c,#e8244f)}
+:root[data-accent="amber"]{--accent:#ffb02e;--accent-dk:#ffe0a8;--grad:linear-gradient(180deg,#ffc95e,#f08a00)}
+:root[data-accent="violet"]{--accent:#8b7bff;--accent-dk:#c7beff;--grad:linear-gradient(180deg,#9d8dff,#6a4df0)}
+html,body{background:#0a0f2a;color:var(--fg)}
+.bg{background:radial-gradient(55vmax 45vmax at 10% 5%,rgba(255,70,170,.55),transparent 60%),radial-gradient(50vmax 42vmax at 92% 10%,rgba(255,140,60,.38),transparent 60%),radial-gradient(60vmax 52vmax at 80% 100%,rgba(30,200,255,.5),transparent 62%),radial-gradient(55vmax 50vmax at 5% 92%,rgba(110,80,255,.6),transparent 60%),linear-gradient(160deg,#0a0f2a,#140d36 55%,#0b1c3a)}
+.bg::before{background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.28),rgba(255,255,255,.03) 45%,transparent 70%);opacity:.5}
+.grad-t{background:linear-gradient(100deg,#9ec5ff,#c9a8ff 50%,#ff9ed2)}
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.05));border-color:rgba(255,255,255,.22);-webkit-backdrop-filter:blur(26px) saturate(1.7) brightness(1);backdrop-filter:blur(26px) saturate(1.7) brightness(1)}
+.glass::after{background:radial-gradient(ellipse at 30% 30%,rgba(255,255,255,.3),transparent 65%);opacity:.45}
+.card.lift:hover{box-shadow:0 30px 60px -16px rgba(0,0,10,.75),0 0 40px -14px var(--accent),var(--edge)}
+.sidebar,.topbar,.modal .box,.palette .box{background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.05)),rgba(14,18,48,.55)}
+.sidebar{border-right-color:rgba(255,255,255,.16);box-shadow:10px 0 40px -16px rgba(0,0,10,.6),inset -1px 0 0 rgba(255,255,255,.12)}
+.topbar{border-color:rgba(255,255,255,.2)}
+.brand .logo{box-shadow:0 6px 16px -4px var(--accent),inset 0 1.5px 0 rgba(255,255,255,.6)}
+.nav a:hover{background:rgba(255,255,255,.1);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+.nav a.active{background:linear-gradient(160deg,rgba(255,255,255,.22),rgba(255,255,255,.08));color:#fff;box-shadow:0 8px 20px -8px var(--accent),inset 0 1.5px 0 rgba(255,255,255,.5)}
+.nav a.active svg{color:var(--accent2)}
+.sb-foot{border-top-color:rgba(255,255,255,.14)}
+.btn{text-shadow:0 1px 1px rgba(0,0,40,.4);box-shadow:0 10px 22px -6px var(--accent),inset 0 1.5px 0 rgba(255,255,255,.6),inset 0 -2px 4px rgba(0,0,40,.3)}
+.btn.secondary{background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,.07));color:#fff;box-shadow:0 8px 18px -8px rgba(0,0,10,.6),inset 0 1.5px 0 rgba(255,255,255,.45),inset 0 0 0 1px rgba(255,255,255,.2)}
+.btn.ghost:hover{background:rgba(255,255,255,.12);color:#fff}
+.btn:disabled{background:rgba(255,255,255,.08);color:var(--faint);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+input,select,textarea{background:rgba(0,0,12,.3);color:#fff;border-color:rgba(255,255,255,.2)}
+input:focus,select:focus,textarea:focus{background:rgba(0,0,12,.45);border-color:rgba(255,255,255,.5);box-shadow:var(--sunk-sm),0 0 0 4px rgba(139,123,255,.3)}
+.switch span{background:rgba(255,255,255,.16);box-shadow:inset 0 2px 5px rgba(0,0,10,.5)}
+.seg,.tabs{background:rgba(0,0,12,.28);border-color:rgba(255,255,255,.16)}
+.seg button.on,.tabs a.active{background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,.14));color:#fff;box-shadow:0 4px 12px -4px rgba(0,0,10,.6),inset 0 1px 0 rgba(255,255,255,.5)}
+kbd{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 2px 0 rgba(0,0,10,.4)}
+.pill{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+.tag{background:rgba(255,255,255,.12);color:var(--accent-dk);border-color:rgba(255,255,255,.22)}
+.stat-ic{border-color:rgba(255,255,255,.3);box-shadow:0 8px 18px -6px rgba(0,0,10,.6),inset 0 1.5px 0 rgba(255,255,255,.5)}
+.ring{background:rgba(0,0,12,.3)}.ring .bgc{stroke:rgba(255,255,255,.16)}
+.bar{background:rgba(0,0,12,.35)}
+.weblink{background:rgba(0,0,12,.3);border-color:rgba(255,255,255,.2)}
+.weblink .u{color:#9ec5ff}
+.console,pre.code{background:rgba(2,4,18,.78);border-color:rgba(255,255,255,.16)}
+th{color:var(--muted)}th,td{border-bottom-color:rgba(255,255,255,.1)}
+tbody tr:hover{background:rgba(255,255,255,.07)}
+.tpl{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+.tpl.sel{background:rgba(255,255,255,.16)}
+.info{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+.info.warn{background:rgba(255,190,60,.16)}.info.err{background:rgba(255,80,110,.18)}
+.swatch{border-color:rgba(255,255,255,.6)}
+.modal .box,.palette .box{border-color:rgba(255,255,255,.28);box-shadow:0 40px 90px -20px rgba(0,0,10,.8),0 0 70px -24px var(--accent),var(--edge)}
+.palette li.sel{background:rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.toast{background:linear-gradient(160deg,rgba(255,255,255,.2),rgba(255,255,255,.07)),rgba(14,18,48,.7);color:#fff;border-color:rgba(255,255,255,.25)}
+.sk{background:linear-gradient(90deg,rgba(255,255,255,.05) 25%,rgba(255,255,255,.2) 37%,rgba(255,255,255,.05) 63%);background-size:400% 100%}
+
+/* =====================================================================
+   EXTRAS — extra components used by this kit (not in the panel itself)
+   ===================================================================== */
+.btn.lg{padding:13px 24px;font-size:15px;border-radius:15px}
+.btn.block{width:100%}
+.btn.round{border-radius:99px}
+.btn-group{display:inline-flex}
+.btn-group .btn{border-radius:0}
+.btn-group .btn:first-child{border-radius:12px 0 0 12px}
+.btn-group .btn:last-child{border-radius:0 12px 12px 0}
+.btn-group .btn+.btn{margin-left:-1px}
+.fab{width:56px;height:56px;padding:0;border-radius:50%;font-size:0}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:99px;background:var(--plate);box-shadow:var(--raise-xs),var(--edge);border:1px solid var(--line);font-size:12.5px;color:var(--fg);cursor:pointer;transition:box-shadow .15s}
+.chip.on{background:var(--well);box-shadow:var(--sunk-sm),0 0 0 1px var(--accent);color:var(--strong)}
+.chip .x{opacity:.55;cursor:pointer}
+.field{margin-bottom:6px}
+.help{font-size:12px;color:var(--muted);margin-top:6px}
+.field.err input,.field.err select,.field.err textarea{border-bottom-color:var(--danger);box-shadow:var(--sunk-sm),0 0 0 3px rgba(255,90,122,.16)}
+.field.err .help{color:var(--danger)}
+.field.good input{border-bottom-color:var(--ok);box-shadow:var(--sunk-sm),0 0 0 3px rgba(52,211,153,.14)}
+.field.good .help{color:var(--ok)}
+input:disabled,select:disabled,textarea:disabled{opacity:.5;cursor:not-allowed}
+.input-group{display:flex}
+.input-group>input{border-radius:12px 0 0 12px}
+.input-group>.btn{border-radius:0 12px 12px 0}
+.input-group>.addon{display:flex;align-items:center;padding:0 13px;background:var(--plate);border:1px solid rgba(0,0,0,.5);border-right:0;border-radius:12px 0 0 12px;color:var(--muted);font-family:var(--mono);font-size:13px;white-space:nowrap}
+.input-group>.addon+input{border-radius:0 12px 12px 0}
+.input-icon{position:relative}
+.input-icon>[data-ic] svg,.input-icon>svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--faint);pointer-events:none}
+.input-icon input{padding-left:40px}
+.input-icon .eye{position:absolute;right:5px;top:50%;transform:translateY(-50%)}
+input[type=radio]{-webkit-appearance:none;appearance:none;width:19px;height:19px;border-radius:50%;padding:0;flex:none;cursor:pointer;background:var(--well);border:1px solid rgba(0,0,0,.55);box-shadow:var(--sunk-sm);display:inline-grid;place-items:center;vertical-align:middle}
+input[type=radio]:checked{background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:inset 2px 2px 5px rgba(0,0,0,.45),0 0 10px -2px var(--accent)}
+input[type=radio]:checked::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--on-accent);box-shadow:0 0 6px #fff}
+input[type=range]{-webkit-appearance:none;appearance:none;height:12px;padding:0;border-radius:99px;background:var(--well);border:0;box-shadow:inset 2px 2px 5px rgba(0,0,0,.75),inset -1px -1px 3px var(--line)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 35% 28%,var(--k1),var(--k2) 45%,var(--k3));box-shadow:0 3px 7px rgba(0,0,0,.65),inset 0 -2px 3px rgba(0,0,0,.25);cursor:pointer;border:0}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 35% 28%,var(--k1),var(--k2) 45%,var(--k3));box-shadow:0 3px 7px rgba(0,0,0,.65);border:0;cursor:pointer}
+input[type=file]{padding:8px}
+.opt{display:flex;align-items:center;gap:10px;margin:8px 0;color:var(--fg);text-transform:none;letter-spacing:0;font-size:14px;font-weight:500}
+.drop{display:grid;place-items:center;gap:6px;text-align:center;padding:26px 16px;border-radius:16px;border:2px dashed var(--line2);background:var(--well);box-shadow:var(--sunk-sm);color:var(--muted);cursor:pointer;transition:border-color .2s,color .2s}
+.drop:hover{border-color:var(--accent);color:var(--fg)}
+.otp{display:flex;gap:10px}
+.otp input{width:48px;height:56px;text-align:center;font-size:22px;font-weight:700;font-family:var(--mono);padding:0}
+.nm-raise{background:var(--plate);border-radius:18px;box-shadow:var(--raise);border:1px solid var(--line);padding:18px}
+.nm-sunk{background:var(--well);border-radius:18px;box-shadow:var(--sunk);border:1px solid rgba(0,0,0,.4);padding:18px}
+.plate{position:relative;background:var(--sheen),linear-gradient(145deg,var(--p1),var(--p2));border-radius:18px;padding:22px 20px;border:1px solid var(--line);box-shadow:var(--raise),var(--edge)}
+.plate::before,.plate::after,.plate>.sc1,.plate>.sc2{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--s1),var(--s2) 70%);box-shadow:inset 0 -1px 1px rgba(0,0,0,.6),0 1px 0 var(--line2)}
+.plate::before{top:10px;left:10px}.plate::after{top:10px;right:10px}.plate>.sc1{bottom:10px;left:10px}.plate>.sc2{bottom:10px;right:10px}
+.frame{border-radius:var(--radius);overflow:hidden}
+.frame-h{display:flex;align-items:center;gap:10px;padding:13px 18px;border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(0,0,0,.4);background:linear-gradient(180deg,var(--line),transparent)}
+.frame-h h3{margin:0;font-size:14.5px}
+.frame-b{padding:18px}
+.frame-f{display:flex;gap:10px;justify-content:flex-end;align-items:center;padding:12px 18px;border-top:1px solid var(--line);background:var(--hl)}
+.acc details{background:var(--plate);border:1px solid var(--line);border-radius:14px;box-shadow:var(--raise-xs),var(--edge);margin-bottom:10px;overflow:hidden}
+.acc summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style:none;display:flex;align-items:center;gap:10px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+";margin-left:auto;color:var(--muted);font-size:18px;line-height:1}
+.acc details[open] summary::after{content:"–"}
+.acc details>div{padding:0 16px 14px;color:var(--muted)}
+.crumbs{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--fg)}
+.crumbs .sep{color:var(--faint)}.crumbs b{color:var(--fg);font-weight:600}
+.pager{display:inline-flex;gap:6px;align-items:center}
+.pager button{min-width:36px;height:36px;border-radius:11px;border:1px solid var(--line);background:var(--plate);box-shadow:var(--raise-xs),var(--edge);color:var(--fg);cursor:pointer}
+.pager button.on{background:var(--well);box-shadow:var(--sunk-sm),0 0 0 1px var(--accent);color:var(--strong)}
+.stepper{display:flex;align-items:center;gap:0}
+.stepper .st{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px}
+.stepper .st i{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:700;background:var(--well);box-shadow:var(--sunk-sm);color:var(--muted)}
+.stepper .st.done i{background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--strong);box-shadow:0 0 12px -2px var(--accent)}
+.stepper .st.now i{box-shadow:var(--sunk-sm),0 0 0 2px var(--accent);color:var(--strong)}
+.stepper .st.now,.stepper .st.done{color:var(--fg)}
+.stepper .ln{flex:1;height:4px;min-width:26px;margin:0 10px;border-radius:9px;background:var(--well);box-shadow:inset 1px 1px 3px rgba(0,0,0,.7)}
+.stepper .ln.done{background:var(--grad)}
+.bottombar{display:flex;justify-content:space-around;gap:4px;padding:8px;border-radius:22px;border:1px solid var(--line);border-top-color:var(--line2);background:var(--sheen),var(--float);box-shadow:var(--raise-sm),var(--edge)}
+.bottombar a{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 14px;border-radius:16px;color:var(--muted);font-size:11px;font-weight:600}
+.bottombar a:hover{text-decoration:none;color:var(--fg)}
+.bottombar a.active{color:var(--strong);background:linear-gradient(145deg,rgba(0,0,0,.42),rgba(255,255,255,.015));box-shadow:var(--sunk-sm)}
+.bottombar a.active svg{color:var(--accent2);filter:drop-shadow(0 0 5px var(--accent2))}
+.footer{display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;align-items:flex-start;padding:22px;border-radius:var(--radius)}
+.footer h4{margin:0 0 8px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.footer a{display:block;color:var(--fg);opacity:.8;padding:2px 0}
+.statusbar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:8px 14px;border-radius:14px;background:var(--well);box-shadow:var(--sunk-sm);font-family:var(--mono);font-size:12px;color:var(--muted)}
+.statusbar .led{display:inline-flex;align-items:center;gap:7px}
+.statusbar .led i{width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#fff,currentColor 42%,rgba(0,0,0,.45));box-shadow:0 0 8px currentColor}
+.avatars{display:flex}.avatars .avatar{margin-left:-9px;border:2px solid var(--bg2);width:36px;height:36px;font-size:13px}.avatars .avatar:first-child{margin-left:0}
+.spinner{width:22px;height:22px;border-radius:50%;border:3px solid var(--line2);border-top-color:var(--accent2);animation:spin .8s linear infinite}
+.pill.info{padding:3px 10px;border-radius:99px;font-size:12px;line-height:inherit;background:rgba(96,165,250,.14);color:var(--info);border:1px solid rgba(96,165,250,.3)}
+.hero-t{font-size:34px;font-weight:800;letter-spacing:-.8px;line-height:1.15;margin:0}
+.grad-t{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* =====================================================================
+   DOC-ONLY STYLES (ds-*) — sirf is guide page ke liye, apne project mein zaroori nahi
+   ===================================================================== */
+.ds-sec{padding-top:34px;margin-top:6px;scroll-margin-top:84px}
+.ds-sec>h2.ds-h{margin:0 0 6px;font-size:24px;letter-spacing:-.4px;text-transform:none;color:var(--fg);font-weight:800;display:flex;align-items:center;gap:12px}
+.ds-h .n{font-size:12px;font-family:var(--mono);color:var(--accent2);background:var(--well);box-shadow:var(--sunk-sm);padding:3px 9px;border-radius:9px;font-weight:600}
+.ds-lead{color:var(--muted);max-width:78ch;margin:0 0 16px}
+.ds-sub{margin:26px 0 10px;font-size:12px;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.ds-note{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:14px;font-size:13px;line-height:1.6;background:linear-gradient(145deg,rgba(96,165,250,.1),rgba(96,165,250,.03));border:1px solid rgba(96,165,250,.25);box-shadow:var(--sunk-sm);margin:12px 0}
+.ds-note.warn{background:linear-gradient(145deg,rgba(251,191,36,.1),rgba(251,191,36,.03));border-color:rgba(251,191,36,.3)}
+.ds-note.good{background:linear-gradient(145deg,rgba(52,211,153,.1),rgba(52,211,153,.03));border-color:rgba(52,211,153,.28)}
+.ds-note.bad{background:linear-gradient(145deg,rgba(255,90,122,.1),rgba(255,90,122,.03));border-color:rgba(255,90,122,.3)}
+.ds-note svg{flex:none;margin-top:2px}
+.ds-demo{margin:0 0 18px}
+.ds-stage{padding:22px;border-radius:var(--radius) var(--radius) 0 0;background:linear-gradient(180deg,var(--hl),rgba(0,0,0,.12)),var(--bg2);border:1px solid var(--line);border-bottom:0;box-shadow:var(--sunk-sm)}
+.ds-stage.alone{border-radius:var(--radius);border-bottom:1px solid var(--line)}
+.ds-stage .row+.row{margin-top:14px}
+.ds-cap{font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.8px;margin:0 0 8px;font-weight:700}
+details.ds-code{border:1px solid var(--line);border-radius:0 0 var(--radius) var(--radius);background:var(--codebg);overflow:hidden}
+details.ds-code>summary{cursor:pointer;display:flex;align-items:center;gap:8px;padding:9px 14px;font-size:12px;color:var(--muted);font-weight:600;list-style:none;user-select:none}
+details.ds-code>summary::-webkit-details-marker{display:none}
+details.ds-code>summary .cp{margin-left:auto}
+details.ds-code pre{margin:0;padding:14px 16px;max-height:340px;overflow:auto;font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--codefg);white-space:pre;border-top:1px solid var(--line)}
+.ds-spec{width:100%;min-width:0;font-size:13px}
+.ds-spec td:first-child,.ds-spec th:first-child{white-space:nowrap;font-family:var(--mono);color:var(--accent2)}
+.ds-sw{height:64px;border-radius:14px;margin-bottom:8px;box-shadow:var(--raise-xs),inset 0 1px 0 var(--line2);border:1px solid var(--line)}
+.ds-tile{cursor:pointer}.ds-tile:hover .ds-sw{transform:translateY(-2px)}.ds-sw{transition:transform .2s}
+.ds-tile b{display:block;font-size:13px}.ds-tile span{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.ds-shadowbox{height:84px;border-radius:16px;display:grid;place-items:center;font-family:var(--mono);font-size:12px;color:var(--muted);background:var(--plate);text-align:center}
+.ds-icons{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:10px}
+.ds-ico{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 6px 10px;border-radius:14px;background:var(--plate);border:1px solid var(--line);box-shadow:var(--raise-xs),var(--edge);cursor:pointer;color:var(--fg);transition:box-shadow .15s,color .15s}
+.ds-ico:hover{color:var(--accent2);box-shadow:var(--sunk-sm)}
+.ds-ico span{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.ds-ico.hide{display:none}
+.ds-shell{display:grid;grid-template-columns:150px 1fr;gap:10px;height:230px;border-radius:16px;padding:10px;background:var(--well);box-shadow:var(--sunk-sm)}
+.ds-shell>div{border-radius:12px;display:grid;place-items:center;font-size:12px;color:var(--muted);font-family:var(--mono);border:1px dashed var(--line2);background:var(--hl)}
+.ds-shell .col{display:grid;grid-template-rows:42px 1fr 34px;gap:10px;border:0;background:none;padding:0}
+.ds-shell .col>div{border-radius:12px;display:grid;place-items:center;border:1px dashed var(--line2);background:var(--hl)}
+.ds-box{height:52px;border-radius:12px;display:grid;place-items:center;font-family:var(--mono);font-size:12px;color:var(--muted);background:var(--plate);box-shadow:var(--raise-xs)}
+.ds-anim{width:46px;height:46px;border-radius:14px;background:var(--grad);box-shadow:var(--raise-xs)}
+.ds-dd{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.ds-dd ul{margin:8px 0 0;padding-left:18px;color:var(--muted)}.ds-dd li{margin:5px 0}
+.ds-mini{isolation:isolate;z-index:0;position:relative;height:430px;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--bg)}
+.ds-mini .sidebar{transform:none;position:absolute;left:0;top:0;height:100%;width:190px;padding:14px 10px}
+.ds-mini .mm{position:absolute;left:190px;right:0;top:0;bottom:0;padding:12px;overflow:hidden}
+.ds-mini .topbar{position:static;margin:0 0 12px}
+.ds-quick{display:flex;gap:10px;flex-wrap:wrap}
+.ds-kbd{font-family:var(--mono);font-size:12px}
+.ds-toc-h{padding:6px 12px 4px;font-size:10.5px;letter-spacing:1.1px;text-transform:uppercase;color:var(--faint);font-weight:700}
+.ds-sb-foot{margin-top:auto;padding-top:12px}
+.ds-tabs-demo .pane{display:none;padding:10px 4px;color:var(--muted)}.ds-tabs-demo .pane.on{display:block}
+.ds-copied{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;padding:10px 18px;border-radius:99px;background:var(--bg3);border:1px solid var(--border2);box-shadow:var(--raise-sm);z-index:200;transition:.25s;font-size:13px}
+.ds-copied.on{opacity:1;transform:translateX(-50%)}
+@media (max-width:640px){.hide-m{display:none}}
+@media (max-width:560px){.ds-mini .sidebar{width:62px;padding:12px 6px}.ds-mini .mm{left:62px;padding:8px}.ds-mini .nav a{font-size:0;gap:0;justify-content:center;padding:11px 0}.ds-mini .nav a .badge,.ds-mini .brand>span:last-child,.ds-mini .userchip>div:last-child,.ds-mini .topbar .btn.sm,.ds-mini .topbar .btn.ghost{display:none}.ds-mini .brand{padding:4px 0 12px;justify-content:center}.ds-mini .userchip{justify-content:center;padding:6px 0}.grid.c2,.grid.c3,.grid.cards{grid-template-columns:minmax(0,1fr)}.ds-stage{padding:14px}.stepper{flex-wrap:wrap;gap:8px}.otp input{width:40px;height:50px}}
+@media (max-width:900px){.ds-shell{grid-template-columns:90px 1fr}.hero-t{font-size:26px}.ds-mini .sidebar{width:150px}.ds-mini .mm{left:150px}}
+@media print{.sidebar,.topbar,.scrim{display:none}.layout{display:block}}
+
+.lq-stage{background:linear-gradient(135deg,#6aa0ff,#a07bff 55%,#ff8fb8)!important;border:1px solid rgba(255,255,255,.6)!important;border-bottom:0!important;box-shadow:inset 0 0 40px rgba(255,255,255,.2)!important;display:flex;justify-content:center}
+.dock{display:flex;gap:10px;align-items:flex-end;padding:12px 16px;border-radius:28px;background:linear-gradient(160deg,rgba(255,255,255,.5),rgba(255,255,255,.2));border:1px solid rgba(255,255,255,.7);box-shadow:0 18px 36px -12px rgba(20,40,120,.5),var(--edge);-webkit-backdrop-filter:blur(24px) saturate(1.8);backdrop-filter:blur(24px) saturate(1.8)}
+.dock a{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;color:var(--accent-dk);background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.5));box-shadow:0 6px 12px -4px rgba(20,40,120,.45),inset 0 1.5px 0 #fff;transition:transform .25s cubic-bezier(.2,.9,.3,1.4);transform-origin:50% 100%;cursor:pointer}
+.dock a:hover{transform:scale(1.4) translateY(-6px)}
+.dock a:hover+a,.dock a:has(+a:hover){transform:scale(1.18) translateY(-3px)}
+.ctl{display:grid;grid-template-columns:repeat(2,96px);gap:10px;padding:12px;border-radius:30px;background:linear-gradient(160deg,rgba(255,255,255,.45),rgba(255,255,255,.18));border:1px solid rgba(255,255,255,.7);box-shadow:var(--raise-sm),var(--edge)}
+.ctile{display:flex;flex-direction:column;gap:2px;justify-content:center;align-items:flex-start;padding:12px;height:84px;border-radius:22px;background:rgba(255,255,255,.35);color:var(--strong);cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.8);transition:transform .2s}
+.ctile b{font-size:13px}.ctile small{font-size:11px;color:var(--muted)}
+.ctile.on{background:linear-gradient(180deg,#4aa8ff,#0a6cf0);color:#fff;box-shadow:0 8px 16px -6px #0a84ff,inset 0 1.5px 0 rgba(255,255,255,.6)}.ctile.on small{color:#e6f1ff}
+.ctile:active{transform:scale(.94)}
+.np{display:flex;gap:14px;align-items:center;padding:16px 18px;min-width:230px;border-radius:30px;background:linear-gradient(160deg,rgba(255,255,255,.5),rgba(255,255,255,.2));border:1px solid rgba(255,255,255,.7);box-shadow:var(--raise-sm),var(--edge);color:var(--strong)}
+.np-art{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#ff6a88,#ff9f0a);box-shadow:0 8px 16px -6px #ff375f,inset 0 1.5px 0 rgba(255,255,255,.6)}
+.np-bar{height:5px;border-radius:9px;background:rgba(11,21,51,.18);margin-top:10px;overflow:hidden;width:120px}.np-bar i{display:block;height:100%;width:62%;background:var(--strong);border-radius:9px}
+.ds-stage:not(.lq-stage){background:linear-gradient(135deg,#7da6ff,#b199ff 60%,#ffa1c4)!important;border:1px solid rgba(255,255,255,.6)!important;border-bottom:0!important;box-shadow:inset 0 0 40px rgba(255,255,255,.25)!important}
+details.ds-code{border:1px solid rgba(255,255,255,.4);background:#0b1533}
+details.ds-code>summary{color:#aebbe6}details.ds-code .btn.ghost{color:#dbe7ff}
+.ds-lead,.ds-sub{color:var(--strong)}
+.ds-h{color:var(--strong)}
+@media (max-width:560px){.ctl{grid-template-columns:repeat(2,84px)}.dock a{width:44px;height:44px}}
+.ds-h .n{background:var(--grad)!important;color:#fff!important;box-shadow:inset 0 1.5px 0 rgba(255,255,255,.6),0 4px 10px -3px var(--accent)!important}
+.topbar{background:linear-gradient(160deg,rgba(255,255,255,.85),rgba(255,255,255,.7))}
+.lq-stage,.ds-stage:not(.lq-stage){background:linear-gradient(135deg,#2a1b6e,#1a3d8f 55%,#7a2a8f)!important;border-color:rgba(255,255,255,.2)!important}
+.ds-stage:not(.lq-stage){background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(0,0,12,.18)),rgba(10,14,40,.5)!important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.dock a{color:#fff;background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,.1));box-shadow:0 8px 14px -4px rgba(0,0,10,.6),inset 0 1.5px 0 rgba(255,255,255,.5)}
+.ctile{background:rgba(255,255,255,.12);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}.ctile small{color:var(--muted)}
+.ctl,.np,.dock{background:linear-gradient(160deg,rgba(255,255,255,.2),rgba(255,255,255,.06));border-color:rgba(255,255,255,.28);color:#fff}
+.np{color:#fff}.np-bar{background:rgba(255,255,255,.2)}.np-bar i{background:#fff}
+.ds-h .n{color:#fff!important}
+details.ds-code{border-color:rgba(255,255,255,.18);background:#04071a}
+.topbar{background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.05)),rgba(16,20,52,.78)!important}.topbar,.topbar *{color:inherit}.topbar b,.topbar .muted{color:#fff}.topbar .muted{color:var(--muted)}
+
+</style>
+</head>
+<body>
+<div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+
+<div class="layout" id="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><span class="logo"><span data-ic="logo" data-s="20"></span></span><span>PROBOY <b>Liquid Dark</b></span></div>
+    <nav class="nav" id="nav"></nav>
+    <div class="sb-foot">
+      <button class="btn secondary block" id="btn-copycss"><span data-ic="copy" data-s="15"></span> Copy full CSS</button>
+      <div class="faint sm" style="text-align:center;margin-top:10px">Liquid Dark kit · offline · 1 file</div>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <main class="main">
+    <div class="topbar">
+      <button class="btn secondary icon hamburger" id="btn-menu" aria-label="Menu"><span data-ic="menu" data-s="18"></span></button>
+      <div class="grow"><b>Design template</b> <span class="muted sm hide-m">· Liquid Glass Dark · Night wallpaper + clear glass</span></div>
+      <div class="row" style="gap:6px" id="accent-bar" title="Accent colour badlo — poora page badal jayega"></div>
+    </div>
+
+    <!-- ============================== 1. OVERVIEW ============================== -->
+    <section class="ds-sec" id="s-overview" data-t="Overview" data-i="dashboard" style="padding-top:8px">
+      <p class="hero-t">PROBOY <span class="grad-t">Liquid Dark</span></p>
+      <p class="ds-lead" style="margin-top:10px;">Ye <b>liquid glass dark</b> theme ka template + style guide hai: raat ke gehre rangeen wallpaper ke upar <b>saaf, almost-transparent glass</b>, jis ke kinare par roshni ki line (specular rim) hoti hai. Capsule shapes, iOS-jaisi controls. Har example ke neeche HTML code copy-paste ke liye hai. Koi library, CDN ya font nahi; offline chalti hai.</p>
+      <div class="ds-quick">
+        <a class="btn" href="#s-buttons"><span data-ic="play" data-s="15"></span> Buttons</a>
+        <a class="btn secondary" href="#s-inputs"><span data-ic="edit" data-s="15"></span> Inputs</a>
+        <a class="btn secondary" href="#s-liquid"><span data-ic="zap" data-s="15"></span> Glass widgets</a>
+        <a class="btn secondary" href="#s-starter"><span data-ic="file" data-s="15"></span> Starter</a>
+      </div>
+      <h3 class="ds-sub">Liquid glass ke teen rules</h3>
+      <div class="grid c3">
+        <div class="glass card"><div class="row"><div class="stat-ic c"><span data-ic="layers" data-s="20"></span></div><h3 style="margin:0">Clear, not frosted</h3></div>
+          <p class="muted" style="margin:12px 0 8px">Fill sirf <b>15–40% safed</b>; piche ka rang dikhna chahiye.</p>
+          <ul class="muted" style="margin:0;padding-left:18px"><li><span class="mono">blur(26px) saturate(1.9)</span></li><li>Piche vivid wallpaper zaroori</li></ul></div>
+        <div class="glass card"><div class="row"><div class="stat-ic"><span data-ic="zap" data-s="20"></span></div><h3 style="margin:0">Specular rim</h3></div>
+          <p class="muted" style="margin:12px 0 8px">Upar ki kinar par <b>roshan line</b> aur ek chamak ka blob.</p>
+          <ul class="muted" style="margin:0;padding-left:18px"><li><span class="mono">--edge</span> inset highlights</li><li>::after radial shine</li></ul></div>
+        <div class="glass card"><div class="row"><div class="stat-ic g"><span data-ic="play" data-s="20"></span></div><h3 style="margin:0">Capsules + spring</h3></div>
+          <p class="muted" style="margin:12px 0 8px">Sab kuch <b>poora gol</b>; hover par halka spring.</p>
+          <ul class="muted" style="margin:0;padding-left:18px"><li>Cards 28px radius</li><li>Safed text + neon accent</li></ul></div>
+      </div>
+      <h3 class="ds-sub">Depth ka golden rule</h3>
+      <div class="grid c3">
+        <div class="nm-raise"><b>Raised</b> <span class="tag">--raise</span><div class="muted sm" style="margin-top:6px">Glass jo upar tairta hai.</div></div>
+        <div class="nm-sunk"><b>Sunk</b> <span class="tag">--sunk</span><div class="muted sm" style="margin-top:6px">Andar dhansa: input / track.</div></div>
+        <div class="glass card"><b>Panel</b> <span class="tag">.glass</span><div class="muted sm" style="margin-top:6px">Clear glass + rim + shine.</div></div>
+      </div>
+    </section>
+
+    <!-- ============================== 2. TOKENS ============================== -->
+    <section class="ds-sec" id="s-tokens" data-t="Design tokens" data-i="sliders">
+      <h2 class="ds-h"><span class="n">02</span> Design tokens</h2>
+      <p class="ds-lead">Poora theme CSS variables (<span class="mono">:root</span>) se chalta hai. Rang, shadow ya radius badalna ho to sirf yahan badlo — baaki sab apne aap badal jata hai. Kisi tile par click karo to value copy ho jati hai.</p>
+
+      <div class="ds-sub">Surface (background) colours</div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))" id="tok-surface"></div>
+      <div class="ds-sub">Text colours</div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))" id="tok-text"></div>
+      <div class="ds-sub">Accent &amp; status colours</div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))" id="tok-accent"></div>
+
+      <div class="ds-sub">Gradient</div>
+      <div class="ds-demo"><div class="ds-stage alone"><div style="height:56px;border-radius:14px;background:var(--grad);box-shadow:var(--raise-xs),inset 0 1px 0 rgba(255,255,255,.4)"></div><div class="muted sm" style="margin-top:8px"><span class="mono">--grad: linear-gradient(135deg, var(--accent), var(--accent2) 55%, var(--accent3))</span> — logo, primary button, progress fill, avatar, heading highlight.</div></div></div>
+
+      <div class="ds-sub">Shadow tokens (depth)</div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:20px">
+        <div class="ds-shadowbox" style="box-shadow:var(--raise)">--raise<br>bade cards</div>
+        <div class="ds-shadowbox" style="box-shadow:var(--raise-sm)">--raise-sm<br>buttons, tabs</div>
+        <div class="ds-shadowbox" style="box-shadow:var(--raise-xs)">--raise-xs<br>chips, tags</div>
+        <div class="ds-shadowbox" style="box-shadow:var(--sunk);background:var(--well)">--sunk<br>bade wells</div>
+        <div class="ds-shadowbox" style="box-shadow:var(--sunk-sm);background:var(--well)">--sunk-sm<br>inputs, tracks</div>
+        <div class="ds-shadowbox" style="box-shadow:var(--edge)">--edge<br>highlight line</div>
+      </div>
+      <details class="ds-code" style="margin-top:12px"><summary><span data-ic="terminal" data-s="14"></span> CSS code (is theme ke asli values) <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre id="tok-code"></pre></details>
+
+      <div class="ds-sub">Radius</div>
+      <div class="row" style="gap:16px">
+        <div class="ds-box" style="width:90px;border-radius:10px">10 · sm</div>
+        <div class="ds-box" style="width:90px;border-radius:12px">12 · btn/input</div>
+        <div class="ds-box" style="width:90px;border-radius:14px">14 · tabs</div>
+        <div class="ds-box" style="width:90px;border-radius:16px">16 · card</div>
+        <div class="ds-box" style="width:90px;border-radius:20px">20 · modal</div>
+        <div class="ds-box" style="width:90px;border-radius:99px">99 · pill</div>
+      </div>
+
+      <div class="ds-sub">Typography</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <h1>Heading 1 — 26px / 800</h1>
+        <h3 style="font-size:20px;margin:14px 0 4px">Heading — 20px (modal title)</h3>
+        <h3 style="margin:10px 0 4px">Card title — 15px / 700</h3>
+        <p style="margin:6px 0">Body text — 14px / 1.55. Paragraph ka normal text isi size mein hota hai.</p>
+        <p class="muted sm" style="margin:6px 0">Small muted — 12px, secondary information ke liye.</p>
+        <div class="k" style="margin-top:10px">LABEL / KICKER — 11px uppercase</div>
+        <div class="mono" style="margin-top:8px">mono — ui-monospace 12.5px (code, URL, id)</div>
+        <h2 style="margin:16px 0 0">Section label (h2) — 12px uppercase</h2>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> Font stack <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre>--font: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+--mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+/* koi web-font load nahi hota — device ka system font use hota hai (offline-safe, fast) */</pre></details></div>
+
+      <div class="ds-sub">Spacing scale</div>
+      <div class="row" style="align-items:flex-end;gap:14px" id="tok-space"></div>
+      <div class="muted sm" style="margin-top:8px">Card padding 18 · grid gap 14 · button gap 8–10 · page side padding 28 (phone par 14) · section gap 28.</div>
+    </section>
+
+    <!-- ============================== 3. THEMES ============================== -->
+    <section class="ds-sec" id="s-themes" data-t="Accent themes" data-i="sliders">
+      <h2 class="ds-h"><span class="n">03</span> Accent themes</h2>
+      <p class="ds-lead">Theme ka rang <span class="mono">&lt;html data-accent="..."&gt;</span> se badalta hai. Neeche kisi bhi gole par click karo — <b>poora page</b> (buttons, glow, toggle, icons) badal jayega. Top-bar mein bhi yehi switcher hai.</p>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="row" style="gap:14px" id="swatches">
+          <button class="swatch" data-accent="violet" style="background:linear-gradient(135deg,#8b5cf6,#22d3ee)" title="violet (default)"></button>
+          <button class="swatch" data-accent="blue" style="background:linear-gradient(135deg,#3b82f6,#22d3ee)" title="blue"></button>
+          <button class="swatch" data-accent="green" style="background:linear-gradient(135deg,#10b981,#22d3ee)" title="green"></button>
+          <button class="swatch" data-accent="rose" style="background:linear-gradient(135deg,#f43f5e,#fb923c)" title="rose"></button>
+          <button class="swatch" data-accent="amber" style="background:linear-gradient(135deg,#f59e0b,#f43f5e)" title="amber"></button>
+        </div>
+        <div class="row" style="margin-top:18px"><button class="btn">Primary</button><button class="btn secondary">Secondary</button><label class="switch"><input type="checkbox" checked><span></span></label><span class="pill running"><span class="dot"></span>running</span></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> CSS code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre>:root{ --accent:#8b5cf6; --accent2:#22d3ee; --accent3:#34d399; }          /* violet (default) */
+:root[data-accent="blue"]  {--accent:#3b82f6;--accent2:#22d3ee;--accent3:#a78bfa}
+:root[data-accent="green"] {--accent:#10b981;--accent2:#22d3ee;--accent3:#a3e635}
+:root[data-accent="rose"]  {--accent:#f43f5e;--accent2:#fb923c;--accent3:#fbbf24}
+:root[data-accent="amber"] {--accent:#f59e0b;--accent2:#f43f5e;--accent3:#a78bfa}
+
+/* JS: document.documentElement.setAttribute('data-accent','rose'); localStorage mein save kar do */</pre></details></div>
+      <div class="ds-note"><span data-ic="info" data-s="17"></span><div>Naya theme banana ho to <b>sirf 3 variables</b> do: <span class="mono">--accent</span> (main), <span class="mono">--accent2</span> (gradient ka doosra rang / highlight), <span class="mono">--accent3</span> (gradient ka end). Status colours (danger/warn/ok/info) theme se alag rehte hain.</div></div>
+    </section>
+
+    <!-- ============================== 4. LAYOUT ============================== -->
+    <section class="ds-sec" id="s-layout" data-t="Layout &amp; grid" data-i="grid">
+      <h2 class="ds-h"><span class="n">04</span> Layout &amp; grid</h2>
+      <p class="ds-lead">App shell: left <b>sidebar</b> (260px), uske saath <b>main</b> area jisme upar <b>topbar</b>, beech mein page content, neeche <b>footer</b>. 900px se chhoti screen par sidebar drawer ban jata hai (hamburger se khulta hai).</p>
+      <div class="ds-demo"><div class="ds-stage alone">
+        <div class="ds-shell"><div>SIDEBAR<br>260px</div><div class="col"><div>TOPBAR · sticky</div><div>MAIN · max 1500px · padding 0 28px</div><div>FOOTER</div></div></div>
+      </div></div>
+      <div class="ds-sub">Grid helpers</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="ds-cap">.grid.c4 — stat cards (min 165px)</div>
+        <div class="grid c4"><div class="ds-box">1</div><div class="ds-box">2</div><div class="ds-box">3</div><div class="ds-box">4</div></div>
+        <div class="ds-cap" style="margin-top:16px">.grid.c3 — gauges (min 270px)</div>
+        <div class="grid c3"><div class="ds-box">1</div><div class="ds-box">2</div><div class="ds-box">3</div></div>
+        <div class="ds-cap" style="margin-top:16px">.grid.c2 — do column (min 340px)</div>
+        <div class="grid c2"><div class="ds-box">1</div><div class="ds-box">2</div></div>
+        <div class="ds-cap" style="margin-top:16px">.grid.cards — project cards (min 310px)</div>
+        <div class="grid cards"><div class="ds-box">card</div><div class="ds-box">card</div><div class="ds-box">card</div></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> CSS code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre>.grid{display:grid;gap:14px}
+.grid.c4{grid-template-columns:repeat(auto-fit,minmax(165px,1fr))}
+.grid.c3{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.grid.c2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.grid.cards{grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}   /* horizontal group */
+.row.nowrap{flex-wrap:nowrap}  .grow{flex:1 1 0;min-width:0}  .stack{display:flex;flex-direction:column;gap:12px}</pre></details></div>
+      <div class="ds-sub">Breakpoints</div>
+      <div class="tw glass"><table class="ds-spec"><thead><tr><th>Width</th><th>Kya badalta hai</th></tr></thead><tbody>
+        <tr><td>&gt; 900px</td><td>Sidebar hamesha dikhta, main ke saath 2 column layout.</td></tr>
+        <tr><td>≤ 900px</td><td>Sidebar drawer (<span class="mono">.sidebar.open</span> + <span class="mono">.scrim.open</span>), hamburger dikhta, page padding 14px.</td></tr>
+        <tr><td>≤ 768px</td><td>Blur 14 → 8px aur shadows halke (Android Chrome ko smooth rakhne ke liye).</td></tr>
+        <tr><td>≈ 390px</td><td>Phone: stat cards 2-2 ek row mein, tabs scroll hote hain, buttons wrap hote hain.</td></tr></tbody></table></div>
+    </section>
+
+    <!-- ============================== 5. BUTTONS ============================== -->
+    <section class="ds-sec" id="s-buttons" data-t="Buttons" data-i="play">
+      <h2 class="ds-h"><span class="n">05</span> Buttons</h2>
+      <p class="ds-lead">Buttons ka rule: <b>ek screen par ek hi primary</b> (gradient key). Baaki actions secondary ya ghost. Dabne par button neeche dab jata hai (<span class="mono">:active</span> state).</p>
+
+      <div class="ds-sub">Variants</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="row">
+          <button class="btn">Primary</button>
+          <button class="btn secondary">Secondary</button>
+          <button class="btn ghost">Ghost</button>
+          <button class="btn ok">Success</button>
+          <button class="btn danger">Danger</button>
+          <button class="btn" disabled>Disabled</button>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+      <div class="tw glass"><table class="ds-spec"><thead><tr><th>Class</th><th>Kab use karein</th></tr></thead><tbody>
+        <tr><td>.btn</td><td><b>Primary</b> — screen ka sabse zaroori action: Save, Create, Start, Sign in.</td></tr>
+        <tr><td>.btn.secondary</td><td>Normal / doosre actions: Cancel, Restart, Copy, Refresh.</td></tr>
+        <tr><td>.btn.ghost</td><td>Halke actions: toolbar, table row, "Console" jaisa link-button.</td></tr>
+        <tr><td>.btn.ok</td><td>Positive start/confirm: Start project, Approve.</td></tr>
+        <tr><td>.btn.danger</td><td>Destructive: Delete, Kill. Hamesha confirm dialog ke saath.</td></tr></tbody></table></div>
+
+      <div class="ds-sub">Sizes</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="row">
+          <button class="btn lg">Large</button>
+          <button class="btn">Default</button>
+          <button class="btn sm">Small</button>
+          <button class="btn secondary icon" aria-label="Settings"><span data-ic="sliders" data-s="18"></span></button>
+          <button class="btn fab" aria-label="Add"><span data-ic="plus" data-s="24"></span></button>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">With icons</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="row">
+          <button class="btn"><span data-ic="plus" data-s="16"></span> New project</button>
+          <button class="btn ok"><span data-ic="play" data-s="16"></span> Start</button>
+          <button class="btn secondary"><span data-ic="stop" data-s="16"></span> Stop</button>
+          <button class="btn secondary"><span data-ic="restart" data-s="16"></span> Restart</button>
+          <button class="btn secondary"><span data-ic="download" data-s="16"></span> Download</button>
+          <button class="btn danger"><span data-ic="trash" data-s="16"></span> Delete</button>
+          <button class="btn ghost"><span data-ic="terminal" data-s="16"></span> Console</button>
+        </div>
+        <div class="row"><button class="btn secondary round"><span data-ic="upload" data-s="16"></span> Upload</button><button class="btn round">Get started <span data-ic="external" data-s="15"></span></button></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">States — loading, toggle, group</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="row">
+          <button class="btn busy" id="btn-busy">Saving…</button>
+          <button class="btn secondary busy">Loading</button>
+          <button class="btn" id="btn-click">Click me (loading demo)</button>
+        </div>
+        <div class="row">
+          <div class="btn-group"><button class="btn secondary">Day</button><button class="btn secondary">Week</button><button class="btn secondary">Month</button></div>
+          <div class="seg" id="seg-demo"><button class="on">Grid</button><button>List</button><button>Board</button></div>
+          <div class="seg"><button class="on" aria-label="grid"><span data-ic="grid" data-s="16"></span></button><button aria-label="list"><span data-ic="list" data-s="16"></span></button></div>
+        </div>
+        <div class="row"><button class="btn block">Full width button</button></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+      <div class="ds-note warn"><span data-ic="alert" data-s="17"></span><div><b>Loading state:</b> <span class="mono">.btn.busy</span> class lagao aur button ko <span class="mono">disabled</span> karo — spinner apne aap aa jata hai. Kaam khatam hote hi class hata do. Kabhi bina asli kaam ke "success" mat dikhao.</div></div>
+    </section>
+
+    <!-- ============================== 6. INPUTS ============================== -->
+    <section class="ds-sec" id="s-inputs" data-t="Inputs &amp; forms" data-i="edit">
+      <h2 class="ds-h"><span class="n">06</span> Inputs &amp; forms</h2>
+      <p class="ds-lead">Saare fields ka ek hi look rakho. Focus par accent highlight aata hai, error par laal, success par hara. Label upar chhoti capital letters mein.</p>
+
+      <div class="ds-sub">Text inputs</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="grid c2">
+          <div class="field"><label>Username</label><input placeholder="admin" autocomplete="off"><div class="help">2–32 characters.</div></div>
+          <div class="field"><label>Project name</label><input value="My Node App"></div>
+          <div class="field"><label>Email</label><div class="input-icon"><span data-ic="user" data-s="16"></span><input type="email" placeholder="you@example.com"></div></div>
+          <div class="field"><label>Password</label><div class="input-icon"><span data-ic="key" data-s="16"></span><input type="password" value="secret123" id="pw-demo"><button class="btn ghost sm icon eye" type="button" id="pw-eye" aria-label="Show"><span data-ic="eye" data-s="16"></span></button></div></div>
+          <div class="field"><label>Search</label><div class="search" style="flex:none"><span data-ic="search" data-s="16"></span><input placeholder="Filter projects..."></div></div>
+          <div class="field"><label>Start command (mono)</label><input class="mono" value="node index.js"></div>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Validation states</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="grid c3">
+          <div class="field err"><label>Port</label><input value="99999"><div class="help">Port 1–65535 ke beech hona chahiye.</div></div>
+          <div class="field good"><label>Link name</label><input value="my-site"><div class="help">Available hai.</div></div>
+          <div class="field"><label>Locked</label><input value="read only" disabled><div class="help">Disabled field.</div></div>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Select, textarea, number, input groups</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="grid c2">
+          <div class="field"><label>Restart policy</label><select><option>Never</option><option selected>On failure (max 5 tries)</option><option>Always</option></select></div>
+          <div class="field"><label>Memory limit (MB)</label><input type="number" min="0" value="512"></div>
+          <div class="field" style="grid-column:1/-1"><label>Environment (.env)</label><textarea rows="3" placeholder="KEY=value">NODE_ENV=production
+PORT=3000</textarea></div>
+          <div class="field"><label>Webhook URL</label><div class="input-group"><input placeholder="https://example.com/hook"><button class="btn">Add</button></div></div>
+          <div class="field"><label>Link</label><div class="input-group"><span class="addon">https://</span><input value="abc123.lhr.life/p/my-app/"></div></div>
+        </div>
+        <div class="field"><label>Environment variable row (.kv)</label>
+          <div class="kv"><input class="mono" value="API_KEY"><input class="mono" value="sk_live_123"><button class="btn ghost sm icon" aria-label="Remove"><span data-ic="trash" data-s="15"></span></button></div>
+          <div class="kv"><input class="mono" placeholder="KEY"><input class="mono" placeholder="value"><button class="btn secondary sm icon" aria-label="Add"><span data-ic="plus" data-s="15"></span></button></div>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Checkbox, radio, switch, slider</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="grid c3">
+          <div><div class="ds-cap">Checkbox</div>
+            <label class="opt"><input type="checkbox" checked> start</label>
+            <label class="opt"><input type="checkbox" checked> stop</label>
+            <label class="opt"><input type="checkbox"> crash</label></div>
+          <div><div class="ds-cap">Radio</div>
+            <label class="opt"><input type="radio" name="rd" checked> Automatic</label>
+            <label class="opt"><input type="radio" name="rd"> Static files</label>
+            <label class="opt"><input type="radio" name="rd"> No website</label></div>
+          <div><div class="ds-cap">Switch (metal knob)</div>
+            <div class="row nowrap" style="margin:8px 0"><label class="switch"><input type="checkbox" checked><span></span></label><span>Auto-start projects</span></div>
+            <div class="row nowrap" style="margin:8px 0"><label class="switch"><input type="checkbox"><span></span></label><span>Public access</span></div>
+            <div class="row nowrap" style="margin:8px 0"><label class="switch"><input type="checkbox" disabled><span></span></label><span class="muted">Disabled</span></div></div>
+        </div>
+        <div class="field" style="margin-top:14px"><label>Slider — backups to keep: <b id="rg-v" style="color:var(--fg)">5</b></label><input type="range" min="1" max="20" value="5" id="rg"></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Chips, file drop, 2FA code, full form</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="ds-cap">Chips (filter / tags)</div>
+        <div class="row" id="chips"><span class="chip on">All</span><span class="chip">Running</span><span class="chip">Stopped</span><span class="chip"><span data-ic="zap" data-s="13"></span> Bots <span class="x">×</span></span></div>
+        <div class="grid c2" style="margin-top:18px">
+          <div><div class="ds-cap">File drop zone</div><div class="drop"><span data-ic="upload" data-s="26"></span><b style="color:var(--fg)">Files yahan chhodo</b><span class="sm">ya click karke chuno · max 100 MB</span></div></div>
+          <div><div class="ds-cap">2FA code (OTP)</div><div class="otp"><input maxlength="1" inputmode="numeric" value="4"><input maxlength="1" inputmode="numeric" value="8"><input maxlength="1" inputmode="numeric" value="2"><input maxlength="1" inputmode="numeric" placeholder="·"><input maxlength="1" inputmode="numeric" placeholder="·"><input maxlength="1" inputmode="numeric" placeholder="·"></div></div>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-demo"><div class="ds-stage alone" style="padding:0">
+        <div class="glass frame" style="max-width:520px;margin:22px auto">
+          <div class="frame-h"><span data-ic="plus" data-s="18"></span><h3>New project</h3></div>
+          <div class="frame-b">
+            <div class="field"><label>Name</label><input placeholder="my-awesome-bot"></div>
+            <div class="field"><label>Template</label><select><option>Node bot</option><option>Python</option><option>Static site</option><option>Express API</option></select></div>
+            <label class="opt"><input type="checkbox" checked> Create with sample files</label>
+          </div>
+          <div class="frame-f"><button class="btn secondary">Cancel</button><button class="btn"><span data-ic="check" data-s="15"></span> Create</button></div>
+        </div>
+      </div></div>
+      <div class="ds-note"><span data-ic="info" data-s="17"></span><div>Upar wala <b>form frame</b> (header + body + footer actions) har dialog / settings card ke liye reuse karo. Primary button hamesha <b>right</b> mein, Cancel uske baayein.</div></div>
+    </section>
+
+    <!-- ============================== 7. CARDS / BOARDS ============================== -->
+    <section class="ds-sec" id="s-cards" data-t="Cards, boards &amp; frames" data-i="box">
+      <h2 class="ds-h"><span class="n">07</span> Cards, boards &amp; frames</h2>
+      <p class="ds-lead">"Board" = koi bhi content container. Teen base surfaces hain: <b>.glass</b> (default card / container), <b>.nm-raise</b> (ubhra hua plate) aur <b>.nm-sunk</b> (dhansa hua well). Inke andar content rakho. Class ke naam sab kits mein same hain, sirf look badalta hai.</p>
+
+      <div class="ds-sub">Base surfaces</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="grid c3">
+          <div class="glass card"><h3>.glass.card</h3><p class="muted sm" style="margin:6px 0 0">Default board / container. Hover par <span class="mono">.lift</span> lagao to upar uthta hai.</p></div>
+          <div class="nm-raise"><h3 style="margin:0">.nm-raise</h3><p class="muted sm" style="margin:6px 0 0">Ubhra hua plate. Chhote controls ya list items ke liye.</p></div>
+          <div class="nm-sunk"><h3 style="margin:0">.nm-sunk</h3><p class="muted sm" style="margin:6px 0 0">Dhansa hua well. Data / code / value dikhane ke liye.</p></div>
+        </div>
+        <div class="grid c2" style="margin-top:14px">
+          <div class="glass card lift"><h3>.glass.card.lift</h3><p class="muted sm" style="margin:6px 0 0">Mouse laao — card upar uthega. Clickable cards ke liye.</p></div>
+          <div class="plate"><span class="sc1"></span><span class="sc2"></span><h3 style="margin:0">.plate</h3><p class="muted sm" style="margin:6px 0 0">Special plate jisme 4 screws hain. Login / hardware-jaisi panel ke liye.</p></div>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Stat boards (icon tile + number)</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="grid c4">
+          <div class="glass card"><div class="row nowrap"><div class="stat-ic"><span data-ic="box" data-s="20"></span></div><div><div class="k">Projects</div><div class="v">12</div></div></div></div>
+          <div class="glass card"><div class="row nowrap"><div class="stat-ic g"><span data-ic="play" data-s="20"></span></div><div><div class="k">Running</div><div class="v">8</div></div></div></div>
+          <div class="glass card"><div class="row nowrap"><div class="stat-ic r"><span data-ic="alert" data-s="20"></span></div><div><div class="k">Crashed</div><div class="v">1</div></div></div></div>
+          <div class="glass card"><div class="row nowrap"><div class="stat-ic y"><span data-ic="stop" data-s="20"></span></div><div><div class="k">Stopped</div><div class="v">3</div></div></div></div>
+        </div>
+        <div class="row" style="margin-top:14px"><div class="stat-ic c"><span data-ic="tunnel" data-s="20"></span></div><span class="muted sm">Icon tile colours: default (accent) · <b>.g</b> green · <b>.y</b> yellow · <b>.r</b> red · <b>.c</b> cyan</span></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Project / item board</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="grid cards">
+          <div class="glass card lift pcard">
+            <div class="top"><div class="stat-ic"><span data-ic="bot" data-s="20"></span></div><div class="grow" style="min-width:0"><div class="nm">My Discord Bot</div><div class="muted sm">node · process · template</div></div><span class="pill running"><span class="dot"></span>running</span></div>
+            <div class="weblink"><span style="flex:none;color:var(--accent2)"><span data-ic="globe" data-s="15"></span></span><span class="u">https://abc123.lhr.life/p/my-discord-bot/</span><button class="btn sm ghost icon" aria-label="Copy"><span data-ic="copy" data-s="14"></span></button><button class="btn sm secondary icon" aria-label="Open"><span data-ic="external" data-s="14"></span></button></div>
+            <div class="meta"><span>CPU 0.4% · RAM 47 MiB</span><span>Uptime 99.2%</span><span>0 restarts</span></div>
+            <div class="qa"><button class="btn sm secondary"><span data-ic="stop" data-s="14"></span> Stop</button><button class="btn sm secondary"><span data-ic="restart" data-s="14"></span> Restart</button><button class="btn sm ghost"><span data-ic="terminal" data-s="14"></span> Console</button></div>
+          </div>
+          <div class="glass card lift pcard">
+            <div class="top"><div class="stat-ic y"><span data-ic="globe" data-s="20"></span></div><div class="grow" style="min-width:0"><div class="nm">Landing Page</div><div class="muted sm">static · html</div></div><span class="pill stopped"><span class="dot"></span>stopped</span></div>
+            <div class="weblink off"><span style="flex:none"><span data-ic="globe" data-s="15"></span></span><span class="u">https://abc123.lhr.life/p/landing-page/</span><span class="tag">offline</span></div>
+            <div class="meta"><span>Updated 2m ago</span><span>Uptime 0%</span></div>
+            <div class="qa"><button class="btn sm ok"><span data-ic="play" data-s="14"></span> Start</button><button class="btn sm secondary"><span data-ic="restart" data-s="14"></span> Restart</button></div>
+          </div>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Frame (header + body + footer)</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="grid c2">
+          <div class="glass frame"><div class="frame-h"><span data-ic="server" data-s="17"></span><h3>This host</h3><span class="pill ok" style="margin-left:auto"><span class="dot"></span>ok</span></div>
+            <div class="frame-b"><table style="min-width:0"><tbody><tr><td class="muted">Platform</td><td>linux · Node 22</td></tr><tr><td class="muted">Tools</td><td>13/13 installed</td></tr></tbody></table></div>
+            <div class="frame-f"><button class="btn secondary sm">Re-check</button><button class="btn sm">Install missing</button></div></div>
+          <div class="glass frame"><div class="frame-h"><span data-ic="terminal" data-s="17"></span><h3>Console</h3></div>
+            <div class="frame-b" style="padding:12px"><div class="console" style="height:130px"><div class="ln">$ node index.js</div><div class="ln" style="color:var(--ok)">Server running on port 4100</div></div></div></div>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Info / alert boxes</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="info" style="margin-bottom:10px"><b>Info:</b> Link tunnel connect hote hi public address mein badal jayega.</div>
+        <div class="info warn" style="margin-bottom:10px"><b>Warning:</b> Project chal raha hai — command badalne ke baad restart karo.</div>
+        <div class="info err"><b>Error:</b> <span class="mono">git</span> nahi mila. Chalao: <span class="mono">pkg install -y git</span></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Accordion, avatars, empty board</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="grid c2">
+          <div class="acc"><details open><summary><span data-ic="info" data-s="16"></span> Link kaise banta hai?</summary><div>Main tunnel URL ke aage <span class="mono">/p/&lt;project&gt;/</span> lag jata hai.</div></details><details><summary><span data-ic="shield" data-s="16"></span> Private kaise karein?</summary><div>Settings → Who can open it → "Only signed-in owner / admin".</div></details></div>
+          <div><div class="ds-cap">Avatars</div><div class="avatars"><div class="avatar">A</div><div class="avatar" style="background:linear-gradient(135deg,#f43f5e,#fb923c)">R</div><div class="avatar" style="background:linear-gradient(135deg,#10b981,#a3e635)">S</div><div class="avatar" style="background:#1f2435;color:var(--muted)">+4</div></div></div>
+        </div>
+        <div class="glass card" style="margin-top:14px"><div class="empty"><svg width="120" height="100" viewBox="0 0 120 100" fill="none"><circle cx="60" cy="50" r="34" fill="rgba(139,92,246,.1)" stroke="rgba(139,92,246,.5)" stroke-width="2" stroke-dasharray="5 6"/><path d="M46 50h28M60 36v28" stroke="rgba(34,211,238,.8)" stroke-width="3" stroke-linecap="round"/></svg><h3>Abhi kuch nahi hai</h3><div>Pehla item banao — sirf ek click.</div><div style="margin-top:14px"><button class="btn"><span data-ic="plus" data-s="15"></span> Create</button></div></div></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+    </section>
+
+    <!-- ============================== 8. NAVIGATION ============================== -->
+    <section class="ds-sec" id="s-nav" data-t="Navigation" data-i="menu">
+      <h2 class="ds-h"><span class="n">08</span> Navigation — sidebar, topbar, tabs</h2>
+      <p class="ds-lead">Navigation ka rule: <b>active item andar dhansa hua</b> + accent LED line + icon glow. Hover par item bahar ubhar aata hai. Kam-se-kam 44px touch target phone par.</p>
+
+      <div class="ds-sub">Sidebar + topbar (live mini app)</div>
+      <div class="ds-demo"><div class="ds-stage alone" style="padding:0">
+        <div class="ds-mini">
+          <aside class="sidebar">
+            <div class="brand"><span class="logo"><span data-ic="logo" data-s="18"></span></span><span>APP <b>NAME</b></span></div>
+            <nav class="nav">
+              <a href="#" class="active" onclick="return false"><span data-ic="dashboard" data-s="18"></span> Dashboard</a>
+              <a href="#" onclick="return false"><span data-ic="projects" data-s="18"></span> Projects</a>
+              <a href="#" onclick="return false"><span data-ic="tools" data-s="18"></span> Tools <span class="badge">2</span></a>
+              <a href="#" onclick="return false"><span data-ic="tunnel" data-s="18"></span> Tunnel</a>
+              <a href="#" onclick="return false"><span data-ic="users" data-s="18"></span> Users</a>
+            </nav>
+            <div class="sb-foot"><div class="userchip"><div class="avatar">A</div><div><div style="font-weight:600">admin</div><div class="muted sm">admin</div></div></div></div>
+          </aside>
+          <div class="mm">
+            <div class="topbar"><button class="btn secondary icon" aria-label="Menu"><span data-ic="menu" data-s="18"></span></button><div class="grow"><b>Dashboard</b></div><button class="btn secondary sm"><span data-ic="search" data-s="15"></span> Search <kbd>Ctrl K</kbd></button><button class="btn ghost icon" aria-label="Notifications"><span data-ic="bell" data-s="18"></span></button></div>
+            <div class="grid c2"><div class="glass card"><div class="k">Content</div><div class="v">Area</div></div><div class="glass card"><div class="k">Content</div><div class="v">Area</div></div></div>
+          </div>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code (sidebar + topbar) <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+      <div class="ds-note"><span data-ic="info" data-s="17"></span><div><b>Sidebar:</b> 260px, <span class="mono">position:sticky; height:100vh</span>. Brand upar, <span class="mono">.nav</span> beech mein (scroll hota hai), user chip + Sign out <span class="mono">.sb-foot</span> mein neeche. Phone par <span class="mono">position:fixed</span> drawer ban jata hai.<br><b>Topbar:</b> sticky bar. Left: hamburger (sirf mobile). Beech: title/breadcrumb. Right: search / notifications / user actions.</div></div>
+
+      <div class="ds-sub">Tabs (tray + raised active tab)</div>
+      <div class="ds-demo ds-tabs-demo"><div class="ds-stage">
+        <div class="tabs" id="tabs-demo">
+          <a href="#" class="active" data-pane="p1"><span data-ic="terminal" data-s="16"></span> Console</a>
+          <a href="#" data-pane="p2"><span data-ic="folder" data-s="16"></span> Files</a>
+          <a href="#" data-pane="p3"><span data-ic="key" data-s="16"></span> Environment</a>
+          <a href="#" data-pane="p4"><span data-ic="clock" data-s="16"></span> Schedule</a>
+          <a href="#" data-pane="p5"><span data-ic="sliders" data-s="16"></span> Settings</a>
+        </div>
+        <div class="pane on" id="p1">Console tab ka content — live logs yahan aate hain.</div>
+        <div class="pane" id="p2">Files tab — file manager.</div>
+        <div class="pane" id="p3">Environment tab — key/value editor.</div>
+        <div class="pane" id="p4">Schedule tab — cron tasks.</div>
+        <div class="pane" id="p5">Settings tab — project settings.</div>
+        <div class="ds-cap" style="margin-top:12px">Segmented control (chhote switch ke liye)</div>
+        <div class="seg"><button class="on">Overview</button><button>Activity</button><button>Billing</button></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Breadcrumb, pagination, stepper</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="crumbs"><a href="#" onclick="return false">Projects</a><span class="sep">/</span><a href="#" onclick="return false">My Node App</a><span class="sep">/</span><b>Settings</b></div>
+        <div class="row" style="margin-top:18px"><div class="pager" id="pager"><button aria-label="Prev">‹</button><button class="on">1</button><button>2</button><button>3</button><button>…</button><button>9</button><button aria-label="Next">›</button></div></div>
+        <div class="stepper" style="margin-top:22px"><div class="st done"><i>✓</i>Account</div><div class="ln done"></div><div class="st now"><i>2</i>Project</div><div class="ln"></div><div class="st"><i>3</i>Deploy</div></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Mobile bottom navigation bar</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="bottombar" style="max-width:420px;margin:0 auto">
+          <a href="#" class="active" onclick="return false"><span data-ic="dashboard" data-s="20"></span>Home</a>
+          <a href="#" onclick="return false"><span data-ic="projects" data-s="20"></span>Projects</a>
+          <a href="#" onclick="return false"><span data-ic="terminal" data-s="20"></span>Console</a>
+          <a href="#" onclick="return false"><span data-ic="user" data-s="20"></span>Account</a>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+      <div class="ds-note warn"><span data-ic="alert" data-s="17"></span><div>Bottom bar tab <span class="mono">position:fixed; bottom:10px; left:10px; right:10px</span> karke phone par use karo, aur main ke neeche <span class="mono">padding-bottom:90px</span> do taake content na chhupe. 4–5 items se zyada nahi.</div></div>
+    </section>
+
+    <!-- ============================== 9. HEADER / FOOTER ============================== -->
+    <section class="ds-sec" id="s-hf" data-t="Header &amp; footer" data-i="list">
+      <h2 class="ds-h"><span class="n">09</span> Header, footer &amp; status bar</h2>
+      <p class="ds-lead">Page header (title + subtitle + actions), hero header, footer, aur ek <b>status bar</b> jisme LED lights hoti hain.</p>
+
+      <div class="ds-sub">Page header</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="page-head" style="margin:0 0 6px"><div><h1>Projects</h1><div class="sub">Your bots, APIs and workers.</div></div><div class="row"><button class="btn secondary"><span data-ic="tools" data-s="16"></span> Tools</button><button class="btn"><span data-ic="plus" data-s="16"></span> New project</button></div></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Hero header (landing / welcome)</div>
+      <div class="ds-demo"><div class="ds-stage alone" style="padding:0">
+        <div class="glass" style="padding:34px 26px;text-align:center;border-radius:var(--radius)">
+          <div class="stat-ic" style="margin:0 auto 14px;width:54px;height:54px;border-radius:16px"><span data-ic="zap" data-s="26"></span></div>
+          <p class="hero-t">Host karo <span class="grad-t">kuch bhi</span></p>
+          <p class="muted" style="max-width:46ch;margin:10px auto 18px">Bots, APIs aur websites — ek panel se, apne phone par bhi.</p>
+          <div class="row" style="justify-content:center"><button class="btn lg">Get started</button><button class="btn lg secondary">Documentation</button></div>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Footer</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="glass footer">
+          <div style="max-width:260px"><div class="brand" style="padding:0 0 8px"><span class="logo"><span data-ic="logo" data-s="18"></span></span><span>PROBOY <b>PANEL</b></span></div><div class="muted sm">Private project hosting. Offline-first, single file.</div></div>
+          <div><h4>Product</h4><a href="#" onclick="return false">Dashboard</a><a href="#" onclick="return false">Projects</a><a href="#" onclick="return false">Tools</a></div>
+          <div><h4>Help</h4><a href="#" onclick="return false">Docs</a><a href="#" onclick="return false">API keys</a><a href="#" onclick="return false">Support</a></div>
+          <div style="align-self:flex-end;text-align:right" class="faint sm">v3.1 · © 2026 PROBOY</div>
+        </div>
+        <div class="ds-cap" style="margin-top:16px">Compact footer (app ke neeche)</div>
+        <div class="row" style="justify-content:space-between;padding:12px 4px;border-top:1px solid var(--border)"><span class="faint sm">PROBOY PANEL v3.1</span><span class="row" style="gap:14px"><a class="sm" href="#" onclick="return false">Privacy</a><a class="sm" href="#" onclick="return false">Status</a></span></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Status bar (footer bar with LEDs)</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="statusbar"><span class="led" style="color:var(--ok)"><i></i>tunnel online</span><span class="led" style="color:var(--ok)"><i></i>8 running</span><span class="led" style="color:var(--warn)"><i></i>1 warning</span><span class="led" style="color:var(--danger)"><i></i>0 crashed</span><span style="margin-left:auto">CPU 12% · RAM 41%</span></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+    </section>
+
+    <!-- ============================== 10. STATUS & FEEDBACK ============================== -->
+    <section class="ds-sec" id="s-status" data-t="Status &amp; feedback" data-i="activity">
+      <h2 class="ds-h"><span class="n">10</span> Status &amp; feedback</h2>
+      <p class="ds-lead">Status hamesha <b>rang + text</b> dono se batao (sirf rang par bharosa mat karo). LED lens ka glow state ke hisaab se: running = hara + pulse, starting = peela + blink, crashed = laal.</p>
+
+      <div class="ds-sub">Status pills (LED)</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="row"><span class="pill running"><span class="dot"></span>running</span><span class="pill starting"><span class="dot"></span>starting</span><span class="pill stopped"><span class="dot"></span>stopped</span><span class="pill crashed"><span class="dot"></span>crashed</span><span class="pill ok"><span class="dot"></span>ok</span><span class="pill warn"><span class="dot"></span>warning</span><span class="pill info"><span class="dot"></span>info</span><span class="pill failed"><span class="dot"></span>failed</span><span class="pill connecting"><span class="dot"></span>connecting</span></div>
+        <div class="row"><span class="tag">node</span><span class="tag">process</span><span class="tag">template</span><span class="tag mono">p_8d6f731a</span><span class="badge" style="font-size:11px;padding:1px 8px;border-radius:99px;background:rgba(251,191,36,.18);color:var(--warn)">2 new</span></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Progress bars</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="grid c2">
+          <div><div class="row" style="justify-content:space-between"><span class="muted sm">Uptime</span><b>92%</b></div><div class="bar" style="margin-top:6px"><i style="width:92%"></i></div></div>
+          <div><div class="row" style="justify-content:space-between"><span class="muted sm">Disk</span><b>64%</b></div><div class="bar" style="margin-top:6px"><i style="width:64%;background:linear-gradient(180deg,rgba(255,255,255,.3),transparent 55%),linear-gradient(90deg,#fbbf24,#f59e0b)"></i></div></div>
+          <div><div class="row" style="justify-content:space-between"><span class="muted sm">Memory</span><b>91%</b></div><div class="bar" style="margin-top:6px"><i style="width:91%;background:linear-gradient(180deg,rgba(255,255,255,.3),transparent 55%),linear-gradient(90deg,#ff5a7a,#ff7a59)"></i></div></div>
+          <div><div class="row" style="justify-content:space-between"><span class="muted sm">Installing…</span><span class="spinner"></span></div><div class="bar" style="margin-top:6px"><i style="width:35%"></i></div></div>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Ring gauges &amp; sparklines</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="grid c3">
+          <div class="glass card"><div class="row nowrap"><div class="ring"><svg width="72" height="72" viewBox="0 0 72 72"><circle class="bgc" cx="36" cy="36" r="29"/><circle class="fgc" cx="36" cy="36" r="29" stroke="var(--accent)" stroke-dasharray="107 182.2"/></svg><div class="rt"><span>59%</span></div></div><div><div class="k">CPU</div><div class="v">59.0%</div></div></div><canvas class="spark" data-v="12,20,18,30,28,44,40,52,48,59" data-c="#8b5cf6" style="margin-top:8px"></canvas></div>
+          <div class="glass card"><div class="row nowrap"><div class="ring"><svg width="72" height="72" viewBox="0 0 72 72"><circle class="bgc" cx="36" cy="36" r="29"/><circle class="fgc" cx="36" cy="36" r="29" stroke="var(--warn)" stroke-dasharray="130 182.2"/></svg><div class="rt"><span>71%</span></div></div><div><div class="k">Memory</div><div class="v">71.4%</div></div></div><canvas class="spark" data-v="50,52,55,60,58,66,70,69,72,71" data-c="#22d3ee" style="margin-top:8px"></canvas></div>
+          <div class="glass card"><div class="row nowrap"><div class="ring"><svg width="72" height="72" viewBox="0 0 72 72"><circle class="bgc" cx="36" cy="36" r="29"/><circle class="fgc" cx="36" cy="36" r="29" stroke="var(--danger)" stroke-dasharray="160 182.2"/></svg><div class="rt"><span>88%</span></div></div><div><div class="k">Disk</div><div class="v">88.2%</div></div></div><canvas class="spark" data-v="80,81,82,84,85,86,86,87,88,88" data-c="#ff5a7a" style="margin-top:8px"></canvas></div>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code (ring: dasharray = percent × 1.822) <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+      <div class="ds-note"><span data-ic="info" data-s="17"></span><div>Ring ka rang: <b>&lt; 65%</b> accent · <b>65–85%</b> <span class="mono">--warn</span> · <b>&gt; 85%</b> <span class="mono">--danger</span>. Sparkline ek chhota <span class="mono">&lt;canvas class="spark"&gt;</span> hai jo line + niche halka fill banata hai (is file ke JS mein <span class="mono">spark()</span> function dekho).</div></div>
+
+      <div class="ds-sub">Toasts (icon notifications)</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="row"><button class="btn ok sm" data-toast="success">Success</button><button class="btn danger sm" data-toast="error">Error</button><button class="btn secondary sm" data-toast="warn">Warning</button><button class="btn secondary sm" data-toast="info">Info</button></div>
+        <div class="ds-cap" style="margin-top:16px">Static look</div>
+        <div class="toast success" style="animation:none"><span class="ti"><span data-ic="ok" data-s="18"></span></span><div class="tb"><b>Project started</b><div class="th">pid 4521 · port 4100</div></div></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">Skeleton, spinner</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="grid c2"><div class="glass card"><div class="sk t"></div><div class="sk" style="width:90%;margin-bottom:8px"></div><div class="sk" style="width:70%"></div></div><div class="glass card"><div class="sk b"></div></div></div>
+        <div class="row" style="margin-top:14px"><span class="spinner"></span><span class="muted">Loading…</span></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+    </section>
+
+    <!-- ============================== 11. TABLES ============================== -->
+    <section class="ds-sec" id="s-tables" data-t="Tables &amp; lists" data-i="list">
+      <h2 class="ds-h"><span class="n">11</span> Tables &amp; lists</h2>
+      <p class="ds-lead">Table ko hamesha <span class="mono">.tw</span> (scroll wrapper) mein rakho taake phone par horizontal scroll ho. Header chhota uppercase, rows ke beech halki line, hover par halka highlight.</p>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="glass card" style="padding:6px 8px"><div class="tw"><table>
+          <thead><tr><th>Name</th><th>Status</th><th>Type</th><th>Resources</th><th>Updated</th><th></th></tr></thead>
+          <tbody>
+            <tr><td><a href="#" onclick="return false" style="font-weight:600">My Node App</a></td><td><span class="pill running"><span class="dot"></span>running</span></td><td>node / process</td><td class="muted sm">CPU 0.2% · RAM 47 MiB</td><td class="muted">2m ago</td><td class="act"><button class="btn ghost sm icon" aria-label="Restart"><span data-ic="restart" data-s="15"></span></button><button class="btn ghost sm icon" aria-label="Delete"><span data-ic="trash" data-s="15"></span></button></td></tr>
+            <tr><td><a href="#" onclick="return false" style="font-weight:600">Landing Page</a></td><td><span class="pill stopped"><span class="dot"></span>stopped</span></td><td>static / process</td><td class="muted sm">—</td><td class="muted">1h ago</td><td class="act"><button class="btn ghost sm icon" aria-label="Start"><span data-ic="play" data-s="15"></span></button><button class="btn ghost sm icon" aria-label="Delete"><span data-ic="trash" data-s="15"></span></button></td></tr>
+            <tr><td><a href="#" onclick="return false" style="font-weight:600">API Server</a></td><td><span class="pill crashed"><span class="dot"></span>crashed</span></td><td>node / docker</td><td class="muted sm">exit code 1</td><td class="muted">5m ago</td><td class="act"><button class="btn ghost sm icon" aria-label="Restart"><span data-ic="restart" data-s="15"></span></button><button class="btn ghost sm icon" aria-label="Delete"><span data-ic="trash" data-s="15"></span></button></td></tr>
+          </tbody></table></div></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+
+      <div class="ds-sub">File list &amp; key-value list</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="grid c2">
+          <div class="glass card" style="padding:6px 8px"><div class="tw"><table style="min-width:0"><tbody>
+            <tr><td><span class="fname"><span data-ic="folder" data-s="17"></span> src</span></td><td class="muted sm">—</td><td class="act muted sm">2 hrs ago</td></tr>
+            <tr><td><span class="fname"><span data-ic="file" data-s="17"></span> index.js</span></td><td class="muted sm">2.4 KB</td><td class="act muted sm">5 min ago</td></tr>
+            <tr><td><span class="fname"><span data-ic="file" data-s="17"></span> package.json</span></td><td class="muted sm">640 B</td><td class="act muted sm">1 day ago</td></tr></tbody></table></div></div>
+          <div class="glass card"><table style="min-width:0"><tbody><tr><td class="muted">Uptime</td><td>92.3% (2h running)</td></tr><tr><td class="muted">Auto-restarts</td><td>0</td></tr><tr><td class="muted">Avg / peak memory</td><td>48 MiB / 51 MiB</td></tr></tbody></table></div>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+    </section>
+
+    <!-- ============================== 12. CONSOLE / CODE ============================== -->
+    <section class="ds-sec" id="s-console" data-t="Console &amp; code" data-i="terminal">
+      <h2 class="ds-h"><span class="n">12</span> Console, code &amp; keyboard keys</h2>
+      <p class="ds-lead">Console / code ek <b>andar dhansi hui screen</b> hai — bahut gehra background, halki scan-lines, mono font. Log ke rang: error laal, warning peela, success hara, hint magenta.</p>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="toolbar"><div class="search"><span data-ic="search" data-s="16"></span><input placeholder="Filter output..."></div><label class="row nowrap" style="margin:0;text-transform:none;letter-spacing:0;font-size:13px;color:var(--fg)"><span class="switch"><input type="checkbox" checked><span></span></span> Autoscroll</label><button class="btn secondary sm"><span data-ic="download" data-s="14"></span> Download</button></div>
+        <div class="console" style="height:210px"><div class="ln" style="color:#22d3ee">[start] node index.js  (cwd=projects/p_8d6f)</div><div class="ln" style="color:#34d399">[running] pid=4521</div><div class="ln">Server running on port 4100</div><div class="ln">GET /api/users 200 12ms</div><div class="ln l-warn">DeprecationWarning: Buffer() is deprecated</div><div class="ln l-err">Error: Cannot find module 'express'</div><div class="ln" style="color:#d946ef">[hint] Run: npm install   (Install deps button)</div><div class="ln" style="color:#fbbf24">[exit] code=1 signal=none</div></div>
+        <div class="ds-cap" style="margin-top:16px">Code block (pre.code) + keyboard keys</div>
+        <pre class="code">curl -X POST -H "Authorization: Bearer pbk_YOUR_KEY" \
+  http://localhost:3000/api/projects/p_123/restart</pre>
+        <div class="row" style="margin-top:12px"><span class="muted">Command palette:</span><kbd>Ctrl</kbd><kbd>K</kbd><span class="muted">· Close:</span><kbd>Esc</kbd></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+    </section>
+
+    <!-- ============================== GLASS WIDGETS ============================== -->
+    <section class="ds-sec" id="s-liquid" data-t="Glass widgets" data-i="zap">
+      <h2 class="ds-h"><span class="n">LG</span> Glass widgets</h2>
+      <p class="ds-lead">Is theme ke khaas pieces: <b>magnifying dock</b>, <b>control tiles</b>, <b>now-playing widget</b>.</p>
+      <div class="ds-sub">Dock (hover karo, icons bade hote hain)</div>
+      <div class="ds-demo"><div class="ds-stage lq-stage">
+        <div class="dock">
+          <a><span data-ic="dashboard" data-s="26"></span></a><a><span data-ic="projects" data-s="26"></span></a><a><span data-ic="tunnel" data-s="26"></span></a><a><span data-ic="terminal" data-s="26"></span></a><a><span data-ic="tools" data-s="26"></span></a><a><span data-ic="users" data-s="26"></span></a>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+      <div class="ds-sub">Control tiles + now playing</div>
+      <div class="ds-demo"><div class="ds-stage lq-stage">
+        <div class="row" style="gap:18px;align-items:stretch">
+          <div class="ctl"><div class="ctile on"><span data-ic="tunnel" data-s="22"></span><b>Tunnel</b><small>Online</small></div><div class="ctile"><span data-ic="shield" data-s="22"></span><b>2FA</b><small>Off</small></div><div class="ctile"><span data-ic="activity" data-s="22"></span><b>Stats</b><small>Live</small></div><div class="ctile on"><span data-ic="zap" data-s="22"></span><b>Auto</b><small>On</small></div></div>
+          <div class="np"><div class="np-art"><span data-ic="play" data-s="26"></span></div><div><b>Deploy Mix</b><div class="sm">ProBoy · Live</div><div class="np-bar"><i></i></div></div></div>
+        </div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+    </section>
+
+    <!-- ============================== 13. ICONS ============================== -->
+    <section class="ds-sec" id="s-icons" data-t="Icons" data-i="grid">
+      <h2 class="ds-h"><span class="n">13</span> Icons</h2>
+      <p class="ds-lead">Saare icons <b>inline SVG</b> hain — koi icon-font ya image file nahi, to offline bhi chalte hain aur text ke rang mein rang jate hain. Kisi icon par click karo, uska SVG code copy ho jayega.</p>
+      <div class="row" style="margin-bottom:12px"><div class="search" style="max-width:340px"><span data-ic="search" data-s="16"></span><input id="ico-q" placeholder="Icon dhoondo… (play, user, file)"></div><span class="muted sm" id="ico-count"></span></div>
+      <div class="ds-icons" id="ico-grid"></div>
+
+      <div class="ds-sub">Icon rules</div>
+      <div class="tw glass"><table class="ds-spec"><thead><tr><th>Rule</th><th>Value</th></tr></thead><tbody>
+        <tr><td>viewBox</td><td><span class="mono">0 0 24 24</span> — hamesha 24 ka grid.</td></tr>
+        <tr><td>Style</td><td>Outline / line icon: <span class="mono">fill="none" stroke="currentColor"</span>. Fill wale icon mat milao.</td></tr>
+        <tr><td>Stroke</td><td><span class="mono">stroke-width="1.9"</span>, <span class="mono">stroke-linecap="round"</span>, <span class="mono">stroke-linejoin="round"</span>.</td></tr>
+        <tr><td>Colour</td><td><span class="mono">currentColor</span> — icon parent text ka rang le leta hai. Active nav icon par accent2 + glow.</td></tr>
+        <tr><td>Sizes</td><td>13–14 (tag/small btn) · 15–16 (button) · 18 (nav, input) · 20 (icon tile) · 24–26 (hero / empty).</td></tr>
+        <tr><td>Alignment</td><td>Button mein icon + text ke beech <span class="mono">gap:8px</span> (flex). Sirf icon wale button par <span class="mono">aria-label</span> zaroor do.</td></tr>
+        <tr><td>Naya icon</td><td>24×24 grid par line-art banao, sirf andar ke <span class="mono">&lt;path/&gt;</span> tags lo aur <span class="mono">ICONS</span> object mein naam ke saath daal do.</td></tr></tbody></table></div>
+
+      <div class="ds-sub">Sizes &amp; colours</div>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="row" style="gap:22px;align-items:center"><span data-ic="zap" data-s="14"></span><span data-ic="zap" data-s="16"></span><span data-ic="zap" data-s="18"></span><span data-ic="zap" data-s="20"></span><span data-ic="zap" data-s="24"></span><span data-ic="zap" data-s="32"></span>
+          <span style="color:var(--ok)" data-ic="ok" data-s="22"></span><span style="color:var(--danger)" data-ic="err" data-s="22"></span><span style="color:var(--warn)" data-ic="alert" data-s="22"></span><span style="color:var(--info)" data-ic="info" data-s="22"></span><span style="color:var(--accent2)" data-ic="globe" data-s="22"></span></div>
+        <div class="row" style="margin-top:14px"><div class="stat-ic"><span data-ic="box" data-s="20"></span></div><div class="stat-ic g"><span data-ic="play" data-s="20"></span></div><div class="stat-ic y"><span data-ic="clock" data-s="20"></span></div><div class="stat-ic r"><span data-ic="alert" data-s="20"></span></div><div class="stat-ic c"><span data-ic="tunnel" data-s="20"></span></div><span class="muted sm">Icon tiles (raised glass tile + tinted icon)</span></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> HTML code <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre></pre></details></div>
+    </section>
+
+    <!-- ============================== 14. OVERLAYS ============================== -->
+    <section class="ds-sec" id="s-overlays" data-t="Modal, palette, drawer" data-i="shield">
+      <h2 class="ds-h"><span class="n">14</span> Modals, command palette &amp; drawer</h2>
+      <p class="ds-lead">Modal, palette aur toast sabse upar tairte hain. Piche ka page halka dhundhla ho jata hai. <kbd>Esc</kbd> ya bahar click se band hon.</p>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="row"><button class="btn" id="open-modal"><span data-ic="shield" data-s="15"></span> Confirm modal</button><button class="btn secondary" id="open-form"><span data-ic="edit" data-s="15"></span> Form modal</button><button class="btn secondary" id="open-pal"><span data-ic="search" data-s="15"></span> Command palette <kbd>Ctrl K</kbd></button><button class="btn secondary" id="open-drawer"><span data-ic="menu" data-s="15"></span> Sidebar drawer (mobile)</button></div>
+      </div>
+      <details class="ds-code"><summary><span data-ic="terminal" data-s="14"></span> Modal HTML <button class="btn ghost sm cp" data-copy-next>Copy</button></summary><pre id="modal-code"></pre></details></div>
+      <div class="ds-note"><span data-ic="info" data-s="17"></span><div><b>Modal rules:</b> title (h1 20px) + ek line description, neeche actions right-aligned. Destructive action ho to button <span class="mono">.danger</span> aur text mein saaf likho kya hoga ("Files disk par rahengi"). Max width 680px, phone par full-width with 18px margin.</div></div>
+    </section>
+
+    <!-- ============================== 15. MOTION ============================== -->
+    <section class="ds-sec" id="s-motion" data-t="Motion" data-i="zap">
+      <h2 class="ds-h"><span class="n">15</span> Motion &amp; interaction</h2>
+      <p class="ds-lead">Animation chhoti aur matlab-wali rakho. Sab kuch <span class="mono">transform</span> / <span class="mono">opacity</span> par — taake phone par smooth rahe.</p>
+      <div class="ds-demo"><div class="ds-stage">
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;text-align:center">
+          <div><div class="ds-anim" style="margin:0 auto 8px;animation:viewIn .9s ease infinite alternate"></div><div class="sm muted">viewIn · page load<br>.35s fade + 8px</div></div>
+          <div><div class="ds-anim" style="margin:0 auto 8px;animation:pop .9s ease infinite alternate"></div><div class="sm muted">pop · modal<br>.22s scale .97→1</div></div>
+          <div><div class="ds-anim" style="margin:0 auto 8px;animation:blink 1s infinite"></div><div class="sm muted">blink · starting LED</div></div>
+          <div><div class="ds-anim" style="margin:0 auto 8px;animation:flash .9s ease infinite"></div><div class="sm muted">flash · status change</div></div>
+          <div><div class="spinner" style="margin:12px auto 20px"></div><div class="sm muted">spin · .7–.8s linear</div></div>
+          <div><div class="sk" style="height:46px;width:46px;margin:0 auto 8px;border-radius:14px"></div><div class="sm muted">shimmer · skeleton</div></div>
+        </div>
+      </div></div>
+      <div class="tw glass"><table class="ds-spec"><thead><tr><th>Interaction</th><th>Timing / effect</th></tr></thead><tbody>
+        <tr><td>Button hover</td><td>.15s · <span class="mono">translateY(-1px)</span> + brightness 1.08</td></tr>
+        <tr><td>Button press</td><td><span class="mono">translateY(1px)</span> + inset shadow (andar dhansta hai)</td></tr>
+        <tr><td>Card hover (.lift)</td><td>.25s · <span class="mono">translateY(-3px)</span> + gehri shadow</td></tr>
+        <tr><td>Toggle</td><td>.25s knob slide, track accent gradient se bhar jata hai</td></tr>
+        <tr><td>Toast</td><td>.25s slide-in right, 3–5 s baad slide-out</td></tr>
+        <tr><td>Reduced motion</td><td><span class="mono">@media (prefers-reduced-motion:reduce)</span> mein saari animation band — already CSS mein hai.</td></tr></tbody></table></div>
+    </section>
+
+    <!-- ============================== 16. RULES ============================== -->
+    <section class="ds-sec" id="s-rules" data-t="Do &amp; don't, responsive" data-i="check">
+      <h2 class="ds-h"><span class="n">16</span> Do &amp; don't, responsive, performance</h2>
+      <div class="ds-dd">
+        <div class="glass card"><h3 style="color:var(--ok)">✔ Karo</h3><ul>
+          <li>Ek screen par <b>ek primary</b> button.</li>
+          <li>Container = <span class="mono">.glass</span> card, controls = raised, main action = primary button.</li>
+          <li>Saare inputs ek jaise, saare buttons ek jaise — mix mat karo.</li>
+          <li>Status = rang + text + LED.</li>
+          <li>Table ko <span class="mono">.tw</span> mein lapeto.</li>
+          <li>Destructive action par confirm modal.</li>
+          <li>Real error message dikhao (command, hint, HTTP status).</li>
+          <li>Phone par touch target ≥ 40px.</li>
+        </ul></div>
+        <div class="glass card"><h3 style="color:var(--danger)">✘ Mat karo</h3><ul>
+          <li>Card ke andar card ke andar card — nesting 2 level se zyada nahi.</li>
+          <li>Ek hi element par bahut saare effects ek saath.</li>
+          <li>Bahut chamkeele neon glow — glow sirf active/LED par.</li>
+          <li>Pure white (#fff) background — theme dark hai.</li>
+          <li>Bina asli kaam ke "success" toast.</li>
+          <li>Web-font / CDN / icon-font jodna (offline toot jata hai).</li>
+          <li>Light source badalna — roshni/shadow ki disha poore page par ek hi rakho.</li>
+        </ul></div>
+      </div>
+      <div class="ds-sub">Responsive &amp; Android Chrome</div>
+      <div class="tw glass"><table class="ds-spec"><thead><tr><th>Cheez</th><th>Rule</th></tr></thead><tbody>
+        <tr><td>Viewport</td><td><span class="mono">&lt;meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"&gt;</span> zaroori.</td></tr>
+        <tr><td>Heavy effects</td><td><span class="mono">backdrop-filter</span>, 3D transforms aur bade shadows phone par kam rakho; <span class="mono">backdrop-filter</span> hamesha <span class="mono">@supports</span> ke andar.</td></tr>
+        
+        <tr><td>Shadows</td><td>Phone par <span class="mono">--raise</span> chhote kar do (media query mein already hai).</td></tr>
+        <tr><td>Overflow</td><td>Body <span class="mono">overflow-x:hidden</span>; table <span class="mono">.tw</span> mein; lambe URL par <span class="mono">word-break:break-all</span>.</td></tr>
+        <tr><td>Text</td><td>Min 12px; main body 14px; input font phone par ≥ 16px rakho taake iOS zoom na kare (optional).</td></tr></tbody></table></div>
+    </section>
+
+    <!-- ============================== 17. STARTER ============================== -->
+    <section class="ds-sec" id="s-starter" data-t="Starter template" data-i="file">
+      <h2 class="ds-h"><span class="n">17</span> Starter page (copy-paste)</h2>
+      <p class="ds-lead">Naya page shuru karne ke liye: (1) <b>Copy full CSS</b> button se CSS lo (top-bar / sidebar mein hai) aur <span class="mono">&lt;style&gt;</span> mein daalo, (2) neeche wala skeleton copy karo, (3) apna content daalo. Isme sidebar, topbar, page header, stat cards, table aur footer sab shamil hain.</p>
+      <div class="row" style="margin-bottom:12px"><button class="btn" id="btn-copystarter"><span data-ic="copy" data-s="15"></span> Copy starter HTML</button><button class="btn secondary" id="btn-copycss2"><span data-ic="copy" data-s="15"></span> Copy full CSS</button><button class="btn secondary" id="btn-dlstarter"><span data-ic="download" data-s="15"></span> Download starter.html</button></div>
+      <details class="ds-code" open><summary><span data-ic="terminal" data-s="14"></span> starter.html (CSS ke bina — CSS ko &lt;style&gt; mein paste karo)</summary><pre id="starter-pre" style="max-height:480px"></pre></details>
+    </section>
+
+    <!-- footer -->
+    <footer class="glass footer" style="margin-top:44px">
+      <div style="max-width:280px"><div class="brand" style="padding:0 0 8px"><span class="logo"><span data-ic="logo" data-s="18"></span></span><span>PROBOY <b>Liquid Dark</b></span></div><div class="muted sm">Liquid glass dark design template: deep night wallpaper, clear refractive glass, specular rim light, capsule shapes. Single file, offline, no dependencies.</div></div>
+      <div><h4>Jump to</h4><a href="#s-buttons">Buttons</a><a href="#s-inputs">Inputs</a><a href="#s-cards">Cards</a><a href="#s-nav">Navigation</a></div>
+      <div><h4>Also</h4><a href="#s-icons">Icons</a><a href="#s-status">Status</a><a href="#s-starter">Starter</a></div>
+      <div class="faint sm" style="align-self:flex-end">Liquid Dark kit v1.0 · made for PROBOY PANEL</div>
+    </footer>
+  </main>
+</div>
+
+<!-- demo overlays -->
+<div class="modal" id="demo-modal"><div class="box" style="max-width:460px" id="demo-modal-box">
+  <h1>Delete "My Node App"?</h1>
+  <div class="muted">Process kill ho jayega aur project panel se hat jayega. Files <span class="mono">projects/p_8d6f/</span> disk par rahengi.</div>
+  <div class="actions"><button class="btn secondary" data-close="demo-modal">Cancel</button><button class="btn danger" data-close="demo-modal"><span data-ic="trash" data-s="15"></span> Delete project</button></div>
+</div></div>
+<div class="modal" id="demo-form"><div class="box">
+  <h1>New project</h1><div class="muted">Naam do aur template chuno.</div>
+  <label>Name</label><input placeholder="my-awesome-bot">
+  <label>Template</label><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px"><div class="tpl sel"><span data-ic="bot" data-s="22"></span><div><b>Node bot</b><span>index.js + package.json</span></div></div><div class="tpl"><span data-ic="python" data-s="22"></span><div><b>Python</b><span>main.py</span></div></div><div class="tpl"><span data-ic="globe" data-s="22"></span><div><b>Static site</b><span>index.html</span></div></div></div>
+  <div class="actions"><button class="btn secondary" data-close="demo-form">Cancel</button><button class="btn" data-close="demo-form"><span data-ic="check" data-s="15"></span> Create</button></div>
+</div></div>
+<div class="palette" id="demo-pal"><div class="box"><input placeholder="Type a command or search…" id="pal-in"><ul>
+  <li class="sel"><span data-ic="dashboard" data-s="17"></span> Go to Dashboard <span class="hint">G D</span></li>
+  <li><span data-ic="projects" data-s="17"></span> Go to Projects <span class="hint">G P</span></li>
+  <li><span data-ic="plus" data-s="17"></span> New project <span class="hint">N</span></li>
+  <li><span data-ic="tools" data-s="17"></span> Open Tools</li>
+  <li><span data-ic="logout" data-s="17"></span> Sign out</li></ul></div></div>
+<div class="toasts" id="toasts"></div>
+<div class="ds-copied" id="copied">Copied!</div>
+<script>
+(function(){
+'use strict';
+var ICONS = {"logo":"<path d=\"M7 20V5h6.5a4.5 4.5 0 0 1 0 9H7\"/>","dashboard":"<rect x=\"3\" y=\"3\" width=\"7\" height=\"9\" rx=\"1.8\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"5\" rx=\"1.8\"/><rect x=\"14\" y=\"12\" width=\"7\" height=\"9\" rx=\"1.8\"/><rect x=\"3\" y=\"16\" width=\"7\" height=\"5\" rx=\"1.8\"/>","projects":"<path d=\"M12 3 3 8l9 5 9-5-9-5z\"/><path d=\"m3 13 9 5 9-5\"/><path d=\"m3 17.5 9 5 9-5\" opacity=\".5\"/>","tunnel":"<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M3 12h18\"/><path d=\"M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18\"/>","tools":"<path d=\"M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z\"/>","users":"<path d=\"M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2\"/><circle cx=\"9\" cy=\"7\" r=\"4\"/><path d=\"M23 21v-2a4 4 0 0 0-3-3.87\"/><path d=\"M16 3.13a4 4 0 0 1 0 7.75\"/>","activity":"<polyline points=\"22 12 18 12 15 21 9 3 6 12 2 12\"/>","user":"<path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/>","play":"<polygon points=\"6 4 20 12 6 20 6 4\"/>","stop":"<rect x=\"5\" y=\"5\" width=\"14\" height=\"14\" rx=\"2.5\"/>","restart":"<polyline points=\"23 4 23 10 17 10\"/><path d=\"M20.49 15a9 9 0 1 1-2.12-9.36L23 10\"/>","trash":"<polyline points=\"3 6 5 6 21 6\"/><path d=\"M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6\"/><path d=\"M10 11v6M14 11v6\"/><path d=\"M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2\"/>","plus":"<line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"/><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/>","folder":"<path d=\"M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z\"/>","file":"<path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"/><polyline points=\"14 2 14 8 20 8\"/>","terminal":"<polyline points=\"4 17 10 11 4 5\"/><line x1=\"12\" y1=\"19\" x2=\"20\" y2=\"19\"/>","download":"<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" y1=\"15\" x2=\"12\" y2=\"3\"/>","upload":"<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"17 8 12 3 7 8\"/><line x1=\"12\" y1=\"3\" x2=\"12\" y2=\"15\"/>","search":"<circle cx=\"11\" cy=\"11\" r=\"7\"/><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"/>","menu":"<line x1=\"3\" y1=\"6\" x2=\"21\" y2=\"6\"/><line x1=\"3\" y1=\"12\" x2=\"21\" y2=\"12\"/><line x1=\"3\" y1=\"18\" x2=\"21\" y2=\"18\"/>","x":"<line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"/><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"/>","check":"<polyline points=\"20 6 9 17 4 12\"/>","alert":"<path d=\"M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z\"/><line x1=\"12\" y1=\"9\" x2=\"12\" y2=\"13\"/><line x1=\"12\" y1=\"17\" x2=\"12.01\" y2=\"17\"/>","info":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"12\" y1=\"16\" x2=\"12\" y2=\"12\"/><line x1=\"12\" y1=\"8\" x2=\"12.01\" y2=\"8\"/>","ok":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"8 12 11 15 16 9\"/>","err":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"15\" y1=\"9\" x2=\"9\" y2=\"15\"/><line x1=\"9\" y1=\"9\" x2=\"15\" y2=\"15\"/>","copy":"<rect x=\"9\" y=\"9\" width=\"13\" height=\"13\" rx=\"2\"/><path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\"/>","key":"<path d=\"M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4\"/>","shield":"<path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"/>","clock":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"12 6 12 12 16 14\"/>","backup":"<ellipse cx=\"12\" cy=\"5\" rx=\"9\" ry=\"3\"/><path d=\"M21 12c0 1.66-4 3-9 3s-9-1.34-9-3\"/><path d=\"M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5\"/>","link":"<path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\"/><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\"/>","sliders":"<line x1=\"4\" y1=\"21\" x2=\"4\" y2=\"14\"/><line x1=\"4\" y1=\"10\" x2=\"4\" y2=\"3\"/><line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"12\"/><line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"3\"/><line x1=\"20\" y1=\"21\" x2=\"20\" y2=\"16\"/><line x1=\"20\" y1=\"12\" x2=\"20\" y2=\"3\"/><line x1=\"1\" y1=\"14\" x2=\"7\" y2=\"14\"/><line x1=\"9\" y1=\"8\" x2=\"15\" y2=\"8\"/><line x1=\"17\" y1=\"16\" x2=\"23\" y2=\"16\"/>","grid":"<rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1.5\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1.5\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1.5\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1.5\"/>","list":"<line x1=\"8\" y1=\"6\" x2=\"21\" y2=\"6\"/><line x1=\"8\" y1=\"12\" x2=\"21\" y2=\"12\"/><line x1=\"8\" y1=\"18\" x2=\"21\" y2=\"18\"/><line x1=\"3\" y1=\"6\" x2=\"3.01\" y2=\"6\"/><line x1=\"3\" y1=\"12\" x2=\"3.01\" y2=\"12\"/><line x1=\"3\" y1=\"18\" x2=\"3.01\" y2=\"18\"/>","refresh":"<polyline points=\"23 4 23 10 17 10\"/><polyline points=\"1 20 1 14 7 14\"/><path d=\"M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15\"/>","external":"<path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\"/><polyline points=\"15 3 21 3 21 9\"/><line x1=\"10\" y1=\"14\" x2=\"21\" y2=\"3\"/>","save":"<path d=\"M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z\"/><polyline points=\"17 21 17 13 7 13 7 21\"/><polyline points=\"7 3 7 8 15 8\"/>","edit":"<path d=\"M12 20h9\"/><path d=\"M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z\"/>","zap":"<polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"/>","cpu":"<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"2\"/><rect x=\"9\" y=\"9\" width=\"6\" height=\"6\"/><line x1=\"9\" y1=\"1\" x2=\"9\" y2=\"4\"/><line x1=\"15\" y1=\"1\" x2=\"15\" y2=\"4\"/><line x1=\"9\" y1=\"20\" x2=\"9\" y2=\"23\"/><line x1=\"15\" y1=\"20\" x2=\"15\" y2=\"23\"/><line x1=\"20\" y1=\"9\" x2=\"23\" y2=\"9\"/><line x1=\"20\" y1=\"14\" x2=\"23\" y2=\"14\"/><line x1=\"1\" y1=\"9\" x2=\"4\" y2=\"9\"/><line x1=\"1\" y1=\"14\" x2=\"4\" y2=\"14\"/>","ram":"<rect x=\"2\" y=\"7\" width=\"20\" height=\"10\" rx=\"2\"/><path d=\"M6 7v10M10 7v10M14 7v10M18 7v10\" opacity=\".5\"/><path d=\"M5 17v3M9 17v3M13 17v3M17 17v3\"/>","disk":"<line x1=\"22\" y1=\"12\" x2=\"2\" y2=\"12\"/><path d=\"M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z\"/><line x1=\"6\" y1=\"16\" x2=\"6.01\" y2=\"16\"/><line x1=\"10\" y1=\"16\" x2=\"10.01\" y2=\"16\"/>","server":"<rect x=\"2\" y=\"2\" width=\"20\" height=\"8\" rx=\"2\"/><rect x=\"2\" y=\"14\" width=\"20\" height=\"8\" rx=\"2\"/><line x1=\"6\" y1=\"6\" x2=\"6.01\" y2=\"6\"/><line x1=\"6\" y1=\"18\" x2=\"6.01\" y2=\"18\"/>","bot":"<rect x=\"3\" y=\"8\" width=\"18\" height=\"12\" rx=\"3\"/><path d=\"M12 8V4\"/><circle cx=\"12\" cy=\"3\" r=\"1\"/><circle cx=\"8.5\" cy=\"14\" r=\"1.3\"/><circle cx=\"15.5\" cy=\"14\" r=\"1.3\"/>","python":"<path d=\"M12 3c-4 0-4 1.5-4 3v2h4v1H6c-2 0-3 1.5-3 4s1 4 3 4h1.5v-2c0-1.5 1.2-3 3-3h4c1.5 0 2.5-1 2.5-2.5V6c0-1.5-1.5-3-5-3z\"/><path d=\"M12 21c4 0 4-1.5 4-3v-2h-4v-1h6c2 0 3-1.5 3-4s-1-4-3-4h-1.5v2c0 1.5-1.2 3-3 3h-4C8.5 12 7.5 13 7.5 14.5V18c0 1.5 1.5 3 4.5 3z\"/>","globe":"<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M3 12h18\"/><path d=\"M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18\"/>","discord":"<path d=\"M7 7c3-1.5 7-1.5 10 0 2 3 3 6 3 10-1.5 1.2-3 1.8-4.5 2l-1-2c-1 .3-2 .3-3 0l-1 2C9 18.8 7.500 18.200 6 17c0-4 1-7 3-10\"/><circle cx=\"9.5\" cy=\"12.5\" r=\"1.2\"/><circle cx=\"14.5\" cy=\"12.5\" r=\"1.2\"/>","whatsapp":"<path d=\"M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.500l1.700-5A8.500 8.500 0 1 1 21 11.500z\"/><path d=\"M9 9c0 3 3 6 6 6l1-1.500-2-1-1 .700c-1-.5-1.800-1.300-2.300-2.300l.7-1-1-2z\"/>","logout":"<path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\"/><polyline points=\"16 17 21 12 16 7\"/><line x1=\"21\" y1=\"12\" x2=\"9\" y2=\"12\"/>","eye":"<path d=\"M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>","qr":"<rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><path d=\"M14 14h3v3h-3zM20 14v3M14 20h3M20 20h1\"/>","box":"<path d=\"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z\"/><polyline points=\"3.27 6.96 12 12.01 20.73 6.96\"/><line x1=\"12\" y1=\"22.08\" x2=\"12\" y2=\"12\"/>","bell":"<path d=\"M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9\"/><path d=\"M13.73 21a2 2 0 0 1-3.46 0\"/>"};
+function $(id){ return document.getElementById(id); }
+function qa(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+function svgStr(name, size, extra){
+  return '<svg class="ic" width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"' + (extra || '') + '>' + (ICONS[name] || '') + '</svg>';
+}
+function hydrate(root){
+  qa('[data-ic]', root).forEach(function(el){
+    if (el.getAttribute('data-done')) return;
+    el.setAttribute('data-done', '1');
+    el.style.display = 'inline-flex'; el.style.lineHeight = '0'; el.style.flex = 'none';
+    el.innerHTML = svgStr(el.getAttribute('data-ic'), +el.getAttribute('data-s') || 18);
+  });
+}
+function lsGet(k, d){ try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } }
+function lsSet(k, v){ try { localStorage.setItem(k, v); } catch (e) {} }
+var copiedTimer = null;
+function copyText(text, msg){
+  function done(){ var c = $('copied'); c.textContent = msg || 'Copied!'; c.classList.add('on'); clearTimeout(copiedTimer); copiedTimer = setTimeout(function(){ c.classList.remove('on'); }, 1400); }
+  function fallback(){
+    var t = document.createElement('textarea'); t.value = text; t.style.cssText = 'position:fixed;opacity:0;left:-999px'; document.body.appendChild(t); t.select();
+    try { document.execCommand('copy'); done(); } catch (e) { alert('Copy nahi hua — text manually select karo.'); }
+    document.body.removeChild(t);
+  }
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+}
+
+/* ---------- 0. hydrate icons ---------- */
+hydrate(document);
+
+/* ---------- 1. sidebar nav from sections ---------- */
+var sections = qa('section.ds-sec');
+var nav = $('nav');
+nav.innerHTML = '<div class="ds-toc-h">Guide</div>' + sections.map(function(s){
+  var t = s.getAttribute('data-t'), i = s.getAttribute('data-i') || 'dashboard';
+  return '<a href="#' + s.id + '" data-sec="' + s.id + '"><span data-ic="' + i + '" data-s="18"></span> ' + t + '</a>';
+}).join('');
+hydrate(nav);
+var sbOpen = function(o){ $('sidebar').classList.toggle('open', o); $('scrim').classList.toggle('open', o); };
+$('btn-menu').addEventListener('click', function(){ sbOpen(!$('sidebar').classList.contains('open')); });
+$('scrim').addEventListener('click', function(){ sbOpen(false); });
+nav.addEventListener('click', function(e){ if (e.target.closest('a')) sbOpen(false); });
+if ('IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting) { qa('#nav a').forEach(function(a){ var on = a.getAttribute('data-sec') === en.target.id; a.classList.toggle('active', on); if (on && a.scrollIntoView) { var r = a.getBoundingClientRect(), n = nav.getBoundingClientRect(); if (r.top < n.top || r.bottom > n.bottom) nav.scrollTop += r.top - n.top - 80; } }); } });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  sections.forEach(function(s){ io.observe(s); });
+}
+
+/* ---------- 2. accent themes ---------- */
+var ACCENTS = [['violet', 'linear-gradient(135deg,#8b5cf6,#22d3ee)'], ['blue', 'linear-gradient(135deg,#3b82f6,#22d3ee)'], ['green', 'linear-gradient(135deg,#10b981,#22d3ee)'], ['rose', 'linear-gradient(135deg,#f43f5e,#fb923c)'], ['amber', 'linear-gradient(135deg,#f59e0b,#f43f5e)']];
+function setAccent(a){
+  document.documentElement.setAttribute('data-accent', a); lsSet('proboy_kit_accent', a);
+  qa('.swatch').forEach(function(s){ s.classList.toggle('on', s.getAttribute('data-accent') === a); });
+  buildTokens(); drawSparks();
+}
+$('accent-bar').innerHTML = ACCENTS.map(function(a){ return '<button class="swatch" data-accent="' + a[0] + '" style="background:' + a[1] + ';width:22px;height:22px" title="' + a[0] + '" aria-label="' + a[0] + '"></button>'; }).join('');
+document.addEventListener('click', function(e){ var s = e.target.closest('.swatch'); if (s) setAccent(s.getAttribute('data-accent')); });
+
+/* ---------- 3. tokens ---------- */
+function cssVar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+function tiles(id, names){
+  var el = $(id); if (!el) return;
+  el.innerHTML = names.map(function(n){ return '<div class="ds-tile" data-copy="var(' + n + ')"><div class="ds-sw" style="background:var(' + n + ')"></div><b>' + n + '</b><span>' + cssVar(n) + '</span></div>'; }).join('');
+}
+function buildTokens(){
+  var tc = $('tok-code');
+  if (tc) {
+    var rs = [];
+    try { for (var si = 0; si < document.styleSheets.length; si++) { var rules = document.styleSheets[si].cssRules || []; for (var ri = 0; ri < rules.length; ri++) { var r = rules[ri]; if (r.selectorText === ':root' && r.style) { for (var pi = 0; pi < r.style.length; pi++) { var pn = r.style[pi]; if (/^--(raise|sunk|edge|plate|sheen|well|line|glass-fill|float)/.test(pn) && rs.indexOf(pn) < 0) rs.push(pn); } } } } } catch (e) {}
+    tc.textContent = rs.length ? rs.map(function(n){ return n + ': ' + cssVar(n) + ';'; }).join('\n') : '/* :root variables dekho — <style id="panel-css"> ke shuru mein */';
+  }
+  tiles('tok-surface', ['--bg', '--bg2', '--bg3', '--bg4', '--code']);
+  tiles('tok-text', ['--fg', '--muted', '--faint']);
+  tiles('tok-accent', ['--accent', '--accent2', '--accent3', '--danger', '--warn', '--ok', '--info']);
+}
+buildTokens();
+$('tok-space').innerHTML = [4, 8, 10, 12, 14, 18, 24, 28].map(function(n){ return '<div style="text-align:center"><div style="width:' + n + 'px;height:' + n + 'px;border-radius:5px;background:var(--grad);margin:0 auto 6px;box-shadow:var(--raise-xs)"></div><span class="mono sm muted">' + n + '</span></div>'; }).join('');
+document.addEventListener('click', function(e){ var t = e.target.closest('[data-copy]'); if (t) copyText(t.getAttribute('data-copy'), 'Copied ' + t.getAttribute('data-copy')); });
+
+/* ---------- 4. code capture (live preview = copyable code) ---------- */
+function dedent(s){
+  var lines = s.replace(/\t/g, '  ').split('\n');
+  while (lines.length && !lines[0].trim()) lines.shift();
+  while (lines.length && !lines[lines.length - 1].trim()) lines.pop();
+  var min = 1e9;
+  lines.forEach(function(l){ if (l.trim()) { var m = l.match(/^ */)[0].length; if (m < min) min = m; } });
+  if (min === 1e9) min = 0;
+  return lines.map(function(l){ return l.slice(min).replace(/\s+$/, ''); }).join('\n');
+}
+function cleanHTML(node){
+  var c = node.cloneNode(true);
+  qa('[data-ic]', c).forEach(function(sp){
+    var holder = document.createElement('div'); holder.innerHTML = sp.innerHTML;
+    var svg = holder.firstChild; if (!svg) { sp.remove(); return; }
+    var st = sp.getAttribute('style') || '';
+    st = st.replace(/display:\s*inline-flex;?|line-height:\s*0;?|flex:\s*none;?/g, '').trim();
+    if (st) svg.setAttribute('style', st);
+    sp.parentNode.replaceChild(svg, sp);
+  });
+  qa('[data-done]', c).forEach(function(x){ x.removeAttribute('data-done'); });
+  qa('canvas', c).forEach(function(cv){ cv.removeAttribute('width'); cv.removeAttribute('height'); cv.removeAttribute('style'); cv.setAttribute('style', 'margin-top:8px'); });
+  return dedent(c.innerHTML.replace(/=""/g, ''));
+}
+qa('details.ds-code').forEach(function(d){
+  var pre = d.querySelector('pre'); var prev = d.previousElementSibling;
+  if (pre && !pre.textContent.trim() && prev && prev.classList.contains('ds-stage')) pre.textContent = cleanHTML(prev);
+});
+$('modal-code').textContent = cleanHTML($('demo-modal-box')).replace(/^/, '<div class="modal open"><div class="box">\n').replace(/$/, '\n</div></div>');
+document.addEventListener('click', function(e){
+  var b = e.target.closest('[data-copy-next]'); if (!b) return;
+  e.preventDefault(); e.stopPropagation();
+  var pre = b.closest('details').querySelector('pre'); copyText(pre.textContent, 'Code copied');
+});
+
+/* ---------- 5. icons gallery ---------- */
+var names = Object.keys(ICONS);
+$('ico-grid').innerHTML = names.map(function(n){ return '<div class="ds-ico" data-ico="' + n + '" title="Click: SVG copy">' + svgStr(n, 24) + '<span>' + n + '</span></div>'; }).join('');
+$('ico-count').textContent = names.length + ' icons';
+$('ico-q').addEventListener('input', function(){
+  var q = this.value.trim().toLowerCase(), n = 0;
+  qa('.ds-ico').forEach(function(el){ var ok = !q || el.getAttribute('data-ico').indexOf(q) >= 0; el.classList.toggle('hide', !ok); if (ok) n++; });
+  $('ico-count').textContent = n + ' / ' + names.length + ' icons';
+});
+$('ico-grid').addEventListener('click', function(e){ var t = e.target.closest('.ds-ico'); if (t) copyText(svgStr(t.getAttribute('data-ico'), 18), 'SVG copied: ' + t.getAttribute('data-ico')); });
+
+/* ---------- 6. sparklines ---------- */
+function spark(cv){
+  var vals = cv.getAttribute('data-v').split(',').map(Number), color = cv.getAttribute('data-c') || '#8b5cf6';
+  var dpr = window.devicePixelRatio || 1, w = cv.clientWidth || 200, h = cv.clientHeight || 56;
+  cv.width = w * dpr; cv.height = h * dpr;
+  var x = cv.getContext('2d'); x.setTransform(dpr, 0, 0, dpr, 0, 0); x.clearRect(0, 0, w, h);
+  var max = Math.max.apply(null, vals) * 1.1, min = Math.min.apply(null, vals) * 0.9, step = w / (vals.length - 1);
+  function px(i){ return i * step; } function py(v){ return h - 4 - (v - min) / (max - min || 1) * (h - 10); }
+  x.strokeStyle = 'rgba(255,255,255,.05)'; x.lineWidth = 1;
+  [0.25, 0.5, 0.75].forEach(function(f){ x.beginPath(); x.moveTo(0, h * f); x.lineTo(w, h * f); x.stroke(); });
+  var g = x.createLinearGradient(0, 0, 0, h); g.addColorStop(0, color + '55'); g.addColorStop(1, color + '00');
+  x.beginPath(); vals.forEach(function(v, i){ i ? x.lineTo(px(i), py(v)) : x.moveTo(px(i), py(v)); });
+  x.lineTo(w, h); x.lineTo(0, h); x.closePath(); x.fillStyle = g; x.fill();
+  x.beginPath(); vals.forEach(function(v, i){ i ? x.lineTo(px(i), py(v)) : x.moveTo(px(i), py(v)); });
+  x.strokeStyle = color; x.lineWidth = 2; x.lineJoin = 'round'; x.stroke();
+}
+function drawSparks(){ qa('canvas.spark').forEach(spark); }
+drawSparks(); window.addEventListener('resize', drawSparks);
+
+/* ---------- 7. small interactions ---------- */
+document.addEventListener('click', function(e){
+  var sg = e.target.closest('.seg button'); if (sg) { qa('button', sg.parentNode).forEach(function(b){ b.classList.toggle('on', b === sg); }); }
+  var tb = e.target.closest('#tabs-demo a'); if (tb) { e.preventDefault(); qa('#tabs-demo a').forEach(function(a){ a.classList.toggle('active', a === tb); }); qa('.ds-tabs-demo .pane').forEach(function(p){ p.classList.toggle('on', p.id === tb.getAttribute('data-pane')); }); }
+  var pg = e.target.closest('#pager button'); if (pg && /^\d+$/.test(pg.textContent)) { qa('#pager button').forEach(function(b){ b.classList.toggle('on', b === pg); }); }
+  var ch = e.target.closest('#chips .chip'); if (ch && !e.target.classList.contains('x')) ch.classList.toggle('on'); else if (ch) ch.remove();
+  var anchor = e.target.closest('a[href="#"]'); if (anchor) e.preventDefault();
+});
+$('rg').addEventListener('input', function(){ $('rg-v').textContent = this.value; });
+$('pw-eye').addEventListener('click', function(){ var i = $('pw-demo'); i.type = i.type === 'password' ? 'text' : 'password'; });
+$('btn-click').addEventListener('click', function(){
+  var b = this; b.classList.add('busy'); b.disabled = true; b.firstChild.nodeValue = 'Working…';
+  setTimeout(function(){ b.classList.remove('busy'); b.disabled = false; b.firstChild.nodeValue = 'Click me (loading demo)'; toast('success', 'Done', 'Asli app mein yahan real result dikhao'); }, 1400);
+});
+
+/* ---------- 8. toasts ---------- */
+var TOAST_ICON = { success: 'ok', error: 'err', warn: 'alert', info: 'info' };
+function toast(kind, title, hint){
+  var t = document.createElement('div'); t.className = 'toast ' + kind;
+  t.innerHTML = '<span class="ti">' + svgStr(TOAST_ICON[kind] || 'info', 18) + '</span><div class="tb"><b>' + title + '</b>' + (hint ? '<div class="th">' + hint + '</div>' : '') + '</div>';
+  $('toasts').appendChild(t);
+  setTimeout(function(){ t.classList.add('out'); setTimeout(function(){ t.remove(); }, 260); }, 3600);
+}
+var TOAST_TEXT = { success: ['Project started', 'pid 4521 · port 4100'], error: ['git nahi mila', 'Run: pkg install -y git'], warn: ['Disk 88% bhar gayi', 'Purane backups hata do'], info: ['Tunnel connect ho raha hai', 'Isme 45 second tak lag sakte hain'] };
+document.addEventListener('click', function(e){ var b = e.target.closest('[data-toast]'); if (b) { var k = b.getAttribute('data-toast'); toast(k, TOAST_TEXT[k][0], TOAST_TEXT[k][1]); } });
+
+/* ---------- 9. overlays ---------- */
+function openO(id){ $(id).classList.add('open'); }
+function closeO(id){ $(id).classList.remove('open'); }
+$('open-modal').addEventListener('click', function(){ openO('demo-modal'); });
+$('open-form').addEventListener('click', function(){ openO('demo-form'); });
+$('open-pal').addEventListener('click', function(){ openO('demo-pal'); setTimeout(function(){ $('pal-in').focus(); }, 30); });
+$('open-drawer').addEventListener('click', function(){
+  if (window.innerWidth > 900) { toast('info', 'Window ko 900px se chhota karo', 'Phone par sidebar drawer ban jata hai'); return; }
+  sbOpen(true);
+});
+document.addEventListener('click', function(e){
+  var c = e.target.closest('[data-close]'); if (c) { closeO(c.getAttribute('data-close')); return; }
+  if (e.target.classList && (e.target.classList.contains('modal') || e.target.classList.contains('palette'))) e.target.classList.remove('open');
+});
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') { qa('.modal.open,.palette.open').forEach(function(m){ m.classList.remove('open'); }); sbOpen(false); }
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openO('demo-pal'); setTimeout(function(){ $('pal-in').focus(); }, 30); }
+});
+
+/* ---------- 10. starter template ---------- */
+var STARTER = [
+'<!DOCTYPE html>',
+'<html lang="en" data-accent="violet"><head>',
+'<meta charset="utf-8">',
+'<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">',
+'<meta name="theme-color" content="#0f121b">',
+'<title>My App</title>',
+'<style>',
+'  /* >>> yahan "Copy full CSS" wala poora CSS paste karo <<< */',
+'</style>',
+'</head><body>',
+'<div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>',
+'<div class="layout">',
+'  <aside class="sidebar" id="sidebar">',
+'    <div class="brand"><span class="logo">P</span><span>MY <b>APP</b></span></div>',
+'    <nav class="nav">',
+'      <a href="#" class="active">Dashboard</a>',
+'      <a href="#">Projects</a>',
+'      <a href="#">Settings</a>',
+'    </nav>',
+'    <div class="sb-foot"><button class="btn secondary" style="width:100%">Sign out</button></div>',
+'  </aside>',
+'  <div class="scrim" id="scrim"></div>',
+'  <main class="main">',
+'    <div class="topbar">',
+'      <button class="btn secondary icon hamburger" id="menu" aria-label="Menu">&#9776;</button>',
+'      <div class="grow"><b>Dashboard</b></div>',
+'      <button class="btn secondary sm">Search <kbd>Ctrl K</kbd></button>',
+'    </div>',
+'    <div class="page-head">',
+'      <div><h1>Dashboard</h1><div class="sub">Overview of everything.</div></div>',
+'      <div class="row"><button class="btn secondary">Export</button><button class="btn">New item</button></div>',
+'    </div>',
+'    <div class="grid c4">',
+'      <div class="glass card"><div class="k">Projects</div><div class="v">12</div></div>',
+'      <div class="glass card"><div class="k">Running</div><div class="v">8</div></div>',
+'      <div class="glass card"><div class="k">Crashed</div><div class="v">1</div></div>',
+'      <div class="glass card"><div class="k">Stopped</div><div class="v">3</div></div>',
+'    </div>',
+'    <h2>Recent</h2>',
+'    <div class="glass card" style="padding:6px 8px"><div class="tw"><table>',
+'      <thead><tr><th>Name</th><th>Status</th><th></th></tr></thead>',
+'      <tbody><tr><td>My Node App</td><td><span class="pill running"><span class="dot"></span>running</span></td><td class="act"><button class="btn ghost sm">Open</button></td></tr></tbody>',
+'    </table></div></div>',
+'    <footer class="glass footer" style="margin-top:36px"><div class="muted sm">My App v1.0</div><div class="faint sm">&copy; 2026</div></footer>',
+'  </main>',
+'</div>',
+'<script>',
+'  var sb = document.getElementById("sidebar"), sc = document.getElementById("scrim");',
+'  function toggle(o){ sb.classList.toggle("open", o); sc.classList.toggle("open", o); }',
+'  document.getElementById("menu").onclick = function(){ toggle(!sb.classList.contains("open")); };',
+'  sc.onclick = function(){ toggle(false); };',
+'<\/script>',
+''].join('\n');
+$('starter-pre').textContent = STARTER;
+function fullCss(){ return $('panel-css').textContent.trim(); }
+$('btn-copystarter').addEventListener('click', function(){ copyText(STARTER, 'Starter HTML copied'); });
+$('btn-copycss').addEventListener('click', function(){ copyText(fullCss(), 'Full CSS copied (' + Math.round(fullCss().length / 1024) + ' KB)'); });
+$('btn-copycss2').addEventListener('click', function(){ copyText(fullCss(), 'Full CSS copied (' + Math.round(fullCss().length / 1024) + ' KB)'); });
+$('btn-dlstarter').addEventListener('click', function(){
+  var html = STARTER.replace('  /* >>> yahan "Copy full CSS" wala poora CSS paste karo <<< */', fullCss());
+  var blob = new Blob([html], { type: 'text/html' }), a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'starter.html'; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+});
+
+/* ---------- 11. init ---------- */
+var saved = lsGet('proboy_kit_accent', 'violet');
+setAccent(ACCENTS.some(function(a){ return a[0] === saved; }) ? saved : 'violet');
+})();
+</script>
+
+</body></html>
