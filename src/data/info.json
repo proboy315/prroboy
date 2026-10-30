@@ -1,0 +1,488 @@
+{
+  "name": "Shahan Ali",
+  "handle": "shahan315",
+  "brand": "PROBOY",
+  "aliases": [
+    "ProBoy",
+    "itx_proboy",
+    "shahan315",
+    "proboy315"
+  ],
+  "siteUrl": "https://proboy.vercel.app",
+  "greeting": "Hi, I'm",
+  "role": "Full-Stack Developer",
+  "titles": [
+    "Full-Stack Developer",
+    "Bot Architect",
+    "Shopify Expert",
+    "Web Developer",
+    "Automation Developer"
+  ],
+  "subtitles": [
+    "AI & WhatsApp Bot Architect",
+    "Shopify Expert"
+  ],
+  "typewriter": [
+    "Full-Stack Developer",
+    "Bot Architect",
+    "Shopify Expert",
+    "AI & Automation Developer"
+  ],
+  "intro": "I build high-performance web applications, ProBoy-MD WhatsApp bots, custom Shopify stores and AI integrations.",
+  "introEmphasis": "Engineering high-speed systems from Burewala, Pakistan.",
+  "heroDescription": "I build modern web applications, smart AI solutions, WhatsApp bots and high-converting Shopify stores.",
+  "heroEmphasis": "Turning ideas into powerful digital products.",
+  "availability": "Available for new projects & collaborations",
+  "about": [
+    "Shahan Ali, also known as ProBoy, itx_proboy, shahan315 and proboy315, is a full-stack developer, bot architect and Shopify expert from Burewala, Punjab, Pakistan.",
+    "He builds web applications, the ProBoy-MD WhatsApp bot, custom Shopify e-commerce, and AI integrations while studying ICS 1st Year at Govt Graduate College Burewala."
+  ],
+  "chapters": [
+    {
+      "n": "01",
+      "title": "Who I am",
+      "text": "ICS 1st Year student at Govt Graduate College Burewala, based in Burewala, District Vehari, Punjab, Pakistan. Also known online as ProBoy, shahan315 and proboy315."
+    },
+    {
+      "n": "02",
+      "title": "What I build",
+      "text": "Full-stack portals, the ProBoy-MD WhatsApp bot, Shopify Online Store 2.0 themes, and AI features using Google Gemini."
+    },
+    {
+      "n": "03",
+      "title": "How I think",
+      "text": "Modular architecture, performance-first interfaces, and work he can explain and stand behind."
+    }
+  ],
+  "education": "ICS 1st Year — Govt Graduate College Burewala, Punjab, Pakistan",
+  "location": "Burewala, Punjab, Pakistan",
+  "email": "shahanali.dev@gmail.com",
+  "phone": "+92 326 1684315",
+  "phoneTel": "+923261684315",
+  "whatsapp": "https://wa.me/923261684315",
+  "whatsappChannel": "https://whatsapp.com/channel/0029Vb8yiOF42DcjDYgq5g0Q",
+  "geo": {
+    "lat": 30.1667,
+    "lng": 72.6833,
+    "region": "PK-PB",
+    "placename": "Burewala"
+  },
+  "profileImage": "/images/shahan-ali-portrait.jpg",
+  "portrait": {
+    "alt": "Shahan Ali (ProBoy) in a maroon jacket with red-lit architectural artwork",
+    "width": 1696,
+    "height": 2544,
+    "objectPosition": "50% 50%",
+    "emptyTitle": "Your portrait, not a substitute.",
+    "emptyDescription": "Select the maroon photo you supplied. It will appear here without a frame, with a soft red edge glow.",
+    "chooseLabel": "Select portrait",
+    "localNotice": "Local preview only. Your image is not uploaded."
+  },
+  "resume": "",
+  "tagline": [
+    "Better Code",
+    "Bigger Dreams"
+  ],
+  "motto": [
+    "Dream",
+    "Code",
+    "Build"
+  ],
+  "socials": [
+    {
+      "id": "github",
+      "label": "GitHub",
+      "url": "https://github.com/ProBoy315"
+    },
+    {
+      "id": "whatsapp",
+      "label": "WhatsApp",
+      "url": "https://wa.me/923261684315"
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "url": "https://instagram.com/itx___proboy"
+    },
+    {
+      "id": "telegram",
+      "label": "Telegram",
+      "url": "https://t.me/itx_proboy"
+    },
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "url": "https://www.facebook.com/profile.php?id=100093176537267"
+    },
+    {
+      "id": "mail",
+      "label": "Email",
+      "url": "mailto:shahanali.dev@gmail.com"
+    }
+  ],
+  "stats": [
+    {
+      "value": "8",
+      "label": "Projects Listed"
+    },
+    {
+      "value": "21",
+      "label": "Showcase Demos"
+    },
+    {
+      "value": "6",
+      "label": "Services"
+    },
+    {
+      "value": "4",
+      "label": "Client Reviews"
+    }
+  ],
+  "heroServices": [
+    "code",
+    "bot",
+    "bag",
+    "spark"
+  ],
+  "services": [
+    {
+      "icon": "code",
+      "heroLabel": "Web Development",
+      "heroMeta": "React / Node / TypeScript",
+      "title": "Full Stack Web Engineering",
+      "meta": "React • TypeScript • Node.js",
+      "text": "Web apps, client portals and admin dashboards with React, TypeScript, Vite, Tailwind CSS and Node.js, including REST APIs and responsive layouts.",
+      "cta": "Hire for a web project"
+    },
+    {
+      "icon": "bag",
+      "heroLabel": "Shopify Expert",
+      "heroMeta": "OS 2.0 / Liquid",
+      "title": "Shopify OS 2.0 & E-Commerce",
+      "meta": "Liquid • Checkout • Webhooks",
+      "text": "Custom Liquid themes, product options, supplier inventory sync, checkout flows, collection filters and Shopify webhooks.",
+      "cta": "Order a custom theme"
+    },
+    {
+      "icon": "bot",
+      "heroLabel": "WhatsApp Bots",
+      "heroMeta": "Baileys / Multi-Device",
+      "title": "WhatsApp & Bot Automation",
+      "meta": "Node.js • Baileys • Multi-device",
+      "text": "Multi-device WhatsApp bots with command handlers, auto-responders, group tools and cloud hosting. ProBoy-MD is the flagship bot.",
+      "cta": "Order a bot"
+    },
+    {
+      "icon": "spark",
+      "heroLabel": "AI & Automation",
+      "heroMeta": "Gemini / Prompt Eng.",
+      "title": "AI Tools & Gemini Integration",
+      "meta": "Gemini • Prompt engineering",
+      "text": "Gemini-powered features for websites and workflows: prompt tools, content helpers, chat assistants and document analysis.",
+      "cta": "Build an AI feature"
+    },
+    {
+      "icon": "shield",
+      "title": "JS Obfuscation & Source Protection",
+      "meta": "Client-side protection tool",
+      "text": "A client-side JavaScript obfuscator for encoding and protecting production source files. See the live ProBoy JS Obfuscator.",
+      "cta": "Open the security tool"
+    },
+    {
+      "icon": "chart",
+      "title": "Creator Analytics & Monetization",
+      "meta": "YouTube • Meta • Dashboards",
+      "text": "Dashboards and guidance for creators covering CPM/RPM, lead funnels and conversion tracking.",
+      "cta": "Book a consultation"
+    }
+  ],
+  "skills": [
+    {
+      "icon": "react",
+      "label": "React / TypeScript"
+    },
+    {
+      "icon": "node",
+      "label": "Node.js"
+    },
+    {
+      "icon": "db",
+      "label": "MySQL / Firestore"
+    },
+    {
+      "icon": "bag",
+      "label": "Shopify"
+    },
+    {
+      "icon": "whatsapp",
+      "label": "WhatsApp API"
+    },
+    {
+      "icon": "spark",
+      "label": "Gemini AI"
+    }
+  ],
+  "skillGroups": [
+    {
+      "title": "Full stack & web",
+      "items": [
+        "React & JSX",
+        "TypeScript",
+        "Vite",
+        "Tailwind CSS",
+        "Node.js",
+        "REST APIs & webhooks"
+      ]
+    },
+    {
+      "title": "Bots & messaging",
+      "items": [
+        "ProBoy-MD",
+        "Baileys",
+        "Multi-device pairing",
+        "Group moderation",
+        "Auto-responders",
+        "Media tools"
+      ]
+    },
+    {
+      "title": "Shopify & commerce",
+      "items": [
+        "Shopify OS 2.0",
+        "Liquid",
+        "Custom checkout",
+        "Supplier sync",
+        "Store performance",
+        "Cart APIs"
+      ]
+    },
+    {
+      "title": "AI & Gemini",
+      "items": [
+        "Gemini API",
+        "Prompt engineering",
+        "Text generation",
+        "QuizOff 2026",
+        "Agent workflows",
+        "AI chat features"
+      ]
+    },
+    {
+      "title": "Data & hosting",
+      "items": [
+        "MySQL",
+        "Firestore / Firebase",
+        "GitHub",
+        "Vercel",
+        "Render",
+        "Local storage"
+      ]
+    },
+    {
+      "title": "Security & utilities",
+      "items": [
+        "JS obfuscation tool",
+        "ProBoy CamLink",
+        "Diagnostic shortlinks",
+        "Git",
+        "Linux shell",
+        "Version control"
+      ]
+    }
+  ],
+  "nav": [
+    {
+      "id": "home",
+      "label": "Home",
+      "icon": "home",
+      "href": "/#home",
+      "header": true
+    },
+    {
+      "id": "about",
+      "label": "About",
+      "icon": "user",
+      "href": "/#about",
+      "header": true
+    },
+    {
+      "id": "services",
+      "label": "Services",
+      "icon": "layers",
+      "href": "/#services",
+      "header": true
+    },
+    {
+      "id": "projects",
+      "label": "Projects",
+      "icon": "folder",
+      "href": "/#projects",
+      "header": true
+    },
+    {
+      "id": "showcase",
+      "label": "Showcase",
+      "icon": "grid",
+      "href": "/#showcase",
+      "header": true
+    },
+    {
+      "id": "contact",
+      "label": "Contact",
+      "icon": "mail",
+      "href": "/#contact",
+      "header": true
+    },
+    {
+      "id": "certificates",
+      "label": "Certificate",
+      "icon": "shield",
+      "href": "/#certificates",
+      "header": false
+    },
+    {
+      "id": "reviews",
+      "label": "Reviews",
+      "icon": "star",
+      "href": "/#reviews",
+      "header": false
+    },
+    {
+      "id": "gallery",
+      "label": "Gallery",
+      "icon": "image",
+      "href": "/#gallery",
+      "header": false
+    },
+    {
+      "id": "qa",
+      "label": "FAQ",
+      "icon": "help",
+      "href": "/#qa",
+      "header": false
+    },
+    {
+      "id": "proboy-md",
+      "label": "ProBoy-MD",
+      "icon": "bot",
+      "href": "/proboy-md",
+      "header": false
+    }
+  ],
+  "contactForm": {
+    "provider": "whatsapp",
+    "endpoint": ""
+  },
+  "analytics": {
+    "enabled": false,
+    "provider": "",
+    "id": ""
+  },
+  "seo": {
+    "title": "Shahan Ali (ProBoy) — Full-Stack Developer, Bot Architect & Shopify Expert",
+    "description": "Official portfolio of Shahan Ali (ProBoy, shahan315, proboy315) from Burewala, Pakistan. Full-stack web apps, ProBoy-MD WhatsApp bot, Shopify stores, AI integrations, and 21 showcase demos.",
+    "ogImage": "/images/shahan-ali-portrait.jpg"
+  },
+  "introAnimation": {
+    "enabled": true,
+    "directory": "/intro-animation/",
+    "framePrefix": "progress-",
+    "frameExtension": ".png",
+    "frameCount": 300,
+    "fps": 30,
+    "audio": "audio.mp3",
+    "policy": "always",
+    "maxWaitMs": 8000
+  },
+  "certificate": {
+    "title": "Google Gemini QuizOff 2026",
+    "subtitle": "Certificate of recognition — India's Biggest AI Quiz",
+    "organizers": "CampusCrew and Unstop, in connection with Google Gemini AI initiatives",
+    "awardedTo": "Shahan (Shahan Ali)",
+    "date": "19 July 2026",
+    "image": "https://proboy.vercel.app/images/quizoff_certificate_1786079838704.png",
+    "quote": "I officially received a certificate from Google Gemini QuizOff 2026: India's Biggest AI Quiz, organised by CampusCrew and hosted on Unstop, where 5,25,000+ students from 48,500+ institutions across 35+ countries took part.",
+    "facts": [
+      [
+        "Awarded to",
+        "Shahan (Shahan Ali)"
+      ],
+      [
+        "Competition",
+        "QuizOff 2026 AI"
+      ],
+      [
+        "Platform",
+        "Unstop & CampusCrew"
+      ],
+      [
+        "Participants",
+        "5,25,000+"
+      ],
+      [
+        "Institutions",
+        "48,500+"
+      ],
+      [
+        "Countries",
+        "35+"
+      ]
+    ]
+  },
+  "reviews": [
+    {
+      "name": "Malik Bilal",
+      "role": "CEO, Logistics Express PK",
+      "text": "Outstanding multi-device WhatsApp bot for e-commerce dispatch with automated customer alerts. Rapid, clean and reliable.",
+      "project": "ShipTrack & WhatsApp API",
+      "date": "2026-06-15"
+    },
+    {
+      "name": "Sarah Jenkins",
+      "role": "E-Commerce Director, UrbanAura UK",
+      "text": "Custom Shopify Liquid layout and checkout enhancements boosted mobile conversion by 34%.",
+      "project": "LuxeCart custom Shopify",
+      "date": "2026-07-02"
+    },
+    {
+      "name": "David Vance",
+      "role": "Product Lead, NextGen SaaS US",
+      "text": "The interactive digital product showcase experiences stood out for UI, storytelling and performance.",
+      "project": "Digital product showcases",
+      "date": "2026-07-28"
+    },
+    {
+      "name": "Hamza Sheikh",
+      "role": "Founder, TechPulse Solutions",
+      "text": "An automated lead-routing script with Node.js and REST APIs saved 15+ hours a week. Responsive on WhatsApp.",
+      "project": "Node.js bot automation",
+      "date": "2026-08-01"
+    }
+  ],
+  "faq": [
+    {
+      "q": "Who is Shahan Ali?",
+      "a": "Shahan Ali (ProBoy, shahan315, proboy315) is a full-stack, AI, bot and Shopify developer from Burewala, Punjab, Pakistan. He studies ICS 1st Year at Govt Graduate College Burewala and builds web apps, the ProBoy-MD WhatsApp bot, and e-commerce stores."
+    },
+    {
+      "q": "What services does Shahan Ali offer?",
+      "a": "Full-stack web engineering, Shopify Online Store 2.0 and Liquid customization, WhatsApp and bot automation, Gemini AI features, a JavaScript obfuscation tool, and creator analytics dashboards."
+    },
+    {
+      "q": "What is ProBoy-MD?",
+      "a": "ProBoy-MD is a Node.js WhatsApp multi-device bot built with Baileys by Shahan Ali (ProBoy). It is command-based and includes automation, media utilities, group tools and developer utilities. Full notes are on the ProBoy-MD documentation page."
+    },
+    {
+      "q": "Did Shahan Ali receive a Google Gemini QuizOff certificate?",
+      "a": "The portfolio shows a Certificate of Recognition for Google Gemini QuizOff 2026, organised by CampusCrew and hosted on Unstop, awarded to Shahan (Shahan Ali), dated 19 July 2026."
+    },
+    {
+      "q": "How can I contact Shahan Ali?",
+      "a": "WhatsApp +92 326 1684315, email shahanali.dev@gmail.com, or the contact form on this site, which opens WhatsApp with your message. WhatsApp channel: https://whatsapp.com/channel/0029Vb8yiOF42DcjDYgq5g0Q"
+    },
+    {
+      "q": "Where can I view the live tools and code?",
+      "a": "ProBoy-MD documentation is on this site. Live tools linked from the portfolio include CamLink, the JS Obfuscator, the pairing portal and the SiM database on proboy.vercel.app. Code is on GitHub at github.com/ProBoy315."
+    }
+  ]
+}
