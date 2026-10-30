@@ -1,0 +1,41 @@
+# Shahan Ali (ProBoy, itx_proboy, shahan315, proboy315)
+
+> Shahan Ali, also known as ProBoy, itx_proboy, shahan315 and proboy315, is a full-stack developer, bot architect and Shopify expert from Burewala, Punjab, Pakistan. He builds web applications, the ProBoy-MD WhatsApp bot, custom Shopify e-commerce, and AI integrations while studying ICS 1st Year at Govt Graduate College Burewala.
+
+- Site: https://proboy.vercel.app
+- Email: shahanali.dev@gmail.com
+- WhatsApp: +92 326 1684315
+
+## Projects
+- [ProBoy-MD](https://proboy.vercel.app/projects/proboy-md): An advanced WhatsApp automation bot developed by Shahan Ali.
+- [ProBoy-SiM_Database](https://proboy.vercel.app/projects/proboy-sim-database): An interactive lookup tool for simulation database files and cellular activation reports.
+- [ProBoy CamLink](https://proboy.vercel.app/projects/proboy-camlink): A camera shortlink system with device diagnostics and captured image viewing.
+- [ProBoy JS Obfuscator](https://proboy.vercel.app/projects/proboy-js-obfuscator): A client-side JavaScript obfuscation tool for protecting production source code.
+- [ProBoy Encrypt & Decrypt](https://proboy.vercel.app/projects/proboy-encrypt-decrypt): An AES-256-GCM encryption suite with image steganography and a local history vault.
+
+## Showcase demos
+- [LuxeCart](https://proboy.vercel.app/showcase/luxecart): Premier luxury watch marketplace featuring Swiss tourbillons, multi-category catalogs, instant shopping cart, 1-click checkout, and live merchant admin portal.
+- [DevMarket](https://proboy.vercel.app/showcase/devmarket): Full-scale software and code marketplace for SaaS boilerplates, API starters, WhatsApp bots, and UI kits with instant checkout and seller admin console.
+- [BiteRush](https://proboy.vercel.app/showcase/biterush): Multi-restaurant food delivery marketplace with item customization drawer, live GPS order tracking, shopping cart, and restaurant owner admin panel.
+- [AutoVault](https://proboy.vercel.app/showcase/autovault): Premier luxury automotive dealership portal with twin-turbo engine specs, side-by-side vehicle comparison matrix, test drive booking, and dealer admin console.
+- [Nestora](https://proboy.vercel.app/showcase/nestora): Architectural estate marketplace featuring dynamic search filters, interactive mortgage estimator, private viewing schedules, and broker admin console.
+- [FitForge](https://proboy.vercel.app/showcase/fitforge): High-performance athletic dashboard with daily caloric SVG ring charts, exercise logging, workout streak counters, and fitness trainer admin console.
+- [Tripora](https://proboy.vercel.app/showcase/tripora): Editorial travel package platform featuring day-by-day expedition itineraries, gallery highlights, concierge booking, and agency admin panel.
+- [SoundPulse](https://proboy.vercel.app/showcase/soundpulse): High-fidelity audiophile audio marketplace with studio monitors, vinyl players, headphones, dynamic audio equalizer, and merchant admin panel.
+- [NeuralDesk](https://proboy.vercel.app/showcase/neuraldesk): Intelligent workspace suite supporting multi-agent prompts, document analysis, token analytics, conversation sessions, and workspace admin panel.
+- [Learnova](https://proboy.vercel.app/showcase/learnova): Interactive online academy with HD video course streams, curriculum accordions, student progress certificate modals, and instructor admin console.
+- [MediBook](https://proboy.vercel.app/showcase/medibook): Medical consultation booking portal with specialist search, time slot selector, doctor ratings, SMS confirmation, and clinic admin console.
+- [Artivio](https://proboy.vercel.app/showcase/artivio): Digital fine art gallery with live auction bidding counters, verified 1/1 artwork lots, collector suites, and curator admin console.
+- [HireFlow](https://proboy.vercel.app/showcase/hireflow): Recruitment platform featuring tech stack candidate match scores, job pipelines, 1-click apply, and HR recruiter admin console.
+- [ShipTrack](https://proboy.vercel.app/showcase/shiptrack): Enterprise freight logistics platform with active container status metrics, ETA tracking, real-time port logs, and logistics admin console.
+- [Stayora](https://proboy.vercel.app/showcase/stayora): 5-star hospitality reservation platform featuring plunge pool suites, overwater villas, penthouse bookings, and hotel manager admin console.
+- [Finova](https://proboy.vercel.app/showcase/finova): Personal finance dashboard with net worth portfolio tracking, monthly spending breakdown, savings goal progress, and finance admin console.
+- [SecurePass](https://proboy.vercel.app/showcase/securepass): AES-256 encrypted password security manager with zero-knowledge vault score, interactive password generator, and security admin console.
+- [CloudPanel](https://proboy.vercel.app/showcase/cloudpanel): Server administration dashboard with multi-region vCPU/RAM monitoring, live terminal system logs, container states, and cloud admin console.
+- [ShopAdmin](https://proboy.vercel.app/showcase/shopadmin): Store operational dashboard tracking daily revenue, low-stock inventory alerts, customer order statuses, fulfillment, and central management.
+- [Vortex](https://proboy.vercel.app/showcase/vortex): Experimental creative web architecture utilizing spatial canvas aesthetics, particle physics, and visual parameters admin controller.
+- [ProHub](https://proboy.vercel.app/showcase/prohub): Global freelancer marketplace and client project workspace with verified talent profiles, hourly rate hires, and platform admin console.
+
+## ProBoy-MD
+- [Documentation](https://proboy.vercel.app/proboy-md)
+- [Source](https://github.com/ProBoy315/ProBoy-MD)
