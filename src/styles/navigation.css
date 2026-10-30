@@ -1,0 +1,43 @@
+.site-header { position: fixed; inset: 0 0 auto; z-index: 40; height: var(--header-height); border-bottom: 1px solid #ffffff0b; background: #030406ed; backdrop-filter: blur(12px); transition: transform .28s ease; }
+.site-header.is-hidden { transform: translateY(-100%); }
+.site-header:focus-within { transform: none; }
+.header-inner { height: 100%; display: flex; justify-content: space-between; align-items: center; gap: 26px; }
+.header-inner > a:first-child { gap: 10px; }
+.header-inner > a:first-child > span { font-size: 32px; letter-spacing: .015em; }
+.header-inner > a:first-child > svg { width: 58px; height: 44px; filter: drop-shadow(0 0 12px #ed00332c); }
+.header-nav { display: flex; align-items: center; gap: clamp(23px, 3.15vw, 49px); font-size: 15px; }
+.header-nav a { padding-block: 10px; }
+.header-contact { display: inline-flex; flex: none; align-items: center; gap: 14px; padding: 12px 22px; min-height: 46px; font-size: 14px; border: 1px solid #ffffff5c; border-radius: 30px; transition: background .2s, color .2s; }
+.header-contact:hover { background: #fff; color: #0a090d; }
+.header-menu { display: none; width: 44px; height: 44px; place-items: center; }
+
+/* The rail is centered only within the usable space BELOW the fixed header. */
+.section-rail { position: fixed; z-index: 30; left: 12px; top: calc(var(--header-height) + 14px); bottom: max(18px, env(safe-area-inset-bottom)); width: 48px; display: flex; flex-direction: column; justify-content: center; pointer-events: none; transition: width .2s ease; }
+.section-rail.is-expanded { width: 186px; }
+.rail-shell { display: flex; flex-direction: column; min-height: 0; max-height: 100%; border: 1px solid #ffffff12; border-radius: 15px; background: #0b0a0ff0; box-shadow: 0 8px 24px #0005; pointer-events: auto; overflow: hidden; }
+.rail-links { display: flex; flex-direction: column; gap: 3px; min-height: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; padding: 7px 4px; scrollbar-width: thin; scrollbar-color: #9a244255 transparent; scroll-padding: 5px; }
+.rail-link { position: relative; display: flex; flex: none; align-items: center; gap: 12px; min-height: 39px; padding-inline: 10px; border-radius: 9px; color: #9c9daa; transition: color .18s, background .18s; }
+.rail-link:hover { background: #ffffff07; color: #fff; }
+.rail-link.is-active { color: #ff4168; background: #ec0c3515; }
+.rail-link.is-active::before { content: ""; position: absolute; left: -2px; top: 12px; bottom: 12px; width: 2px; background: #ff2453; border-radius: 2px; }
+.rail-label { display: none; font-size: 12px; white-space: nowrap; }
+.is-expanded .rail-label { display: block; }
+.rail-toggle { display: flex; flex: none; height: 40px; width: 100%; align-items: center; gap: 12px; padding: 0 15px; color: #91929f; border-top: 1px solid #ffffff0c; }
+.rail-toggle:hover { color: white; background: #ffffff05; }
+.rail-tooltip { position: fixed; left: 69px; transform: translateY(-50%); padding: 7px 11px; border: 1px solid #ffffff1c; border-radius: 7px; background: #111016; color: #eeeef4; font-size: 11px; white-space: nowrap; box-shadow: 0 5px 18px #0006; pointer-events: none; }
+.drawer-panel { position: absolute; right: 0; top: 0; height: 100dvh; max-height: 100%; width: min(86%, 370px); display: flex; flex-direction: column; background: #0b0b10; border-left: 1px solid #ffffff1a; padding: max(20px, env(safe-area-inset-top)) 21px max(20px, env(safe-area-inset-bottom)); transition: transform .28s ease; }
+.drawer-links { display: flex; flex-direction: column; gap: 2px; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #e1214d4d transparent; }
+@media (max-height: 740px) { .rail-link { min-height: 34px; } .rail-links { gap: 2px; } }
+@media (min-width: 1100px) { .mobile-drawer { display: none; } }
+@media (min-width: 1100px) and (max-width: 1279px) {
+  .header-nav { gap: 22px; font-size: 13px; }
+  .header-inner > a:first-child > span { font-size: 28px; }
+  .header-inner > a:first-child > svg { width: 45px; }
+  .header-contact { padding-inline: 17px; font-size: 12px; }
+}
+@media (max-width: 1099px) {
+  .section-rail, .header-nav, .header-contact { display: none; }
+  .header-menu { display: grid; margin-right: -8px; }
+  .header-inner > a:first-child > span { font-size: 28px; }
+  .header-inner > a:first-child > svg { width: 45px; height: 35px; }
+}
