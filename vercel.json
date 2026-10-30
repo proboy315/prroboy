@@ -1,0 +1,6 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/((?!projects|showcase|proboy-md|images|intro-animation|sitemap\\.xml|robots\\.txt|llms\\.txt).*)", "destination": "/index.html" }
+  ]
+}
