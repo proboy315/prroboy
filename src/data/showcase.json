@@ -1,0 +1,546 @@
+ [
+  {
+    "title": "LuxeCart",
+    "slug": "luxecart",
+    "category": "E-Commerce",
+    "industry": "Haute Horlogerie & Luxury",
+    "description": "Premier luxury watch marketplace featuring Swiss tourbillons, multi-category catalogs, instant shopping cart, 1-click checkout, and live merchant admin portal.",
+    "longDescription": "High-conversion luxury timepiece marketplace with dynamic department search, real-time inventory management, deals catalog, bespoke watch configurator, and administrative control console.",
+    "features": [
+      "Swiss tourbillon catalogue",
+      "Multi-category product catalogue",
+      "Shopping cart",
+      "One-click checkout",
+      "Merchant admin portal",
+      "Dynamic department search",
+      "Inventory management",
+      "Deals catalogue",
+      "Watch configurator"
+    ],
+    "technologies": [
+      "React & TypeScript",
+      "Interactive Cart",
+      "Merchant Admin Panel",
+      "Tailwind CSS"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/luxecart/",
+    "status": "published"
+  },
+  {
+    "title": "DevMarket",
+    "slug": "devmarket",
+    "category": "Marketplace",
+    "industry": "Developer Tools & Codebases",
+    "description": "Full-scale software and code marketplace for SaaS boilerplates, API starters, WhatsApp bots, and UI kits with instant checkout and seller admin console.",
+    "longDescription": "Production software marketplace featuring categorized product feeds, search indexing, verified developer reviews, instant download delivery, and developer sales admin panel.",
+    "features": [
+      "SaaS boilerplate listings",
+      "API starter listings",
+      "WhatsApp bot listings",
+      "UI kit listings",
+      "Instant checkout",
+      "Seller admin console",
+      "Categorized product feeds",
+      "Search",
+      "Developer reviews",
+      "Digital downloads"
+    ],
+    "technologies": [
+      "Full Stack Commerce",
+      "Digital Delivery",
+      "Seller Admin Console",
+      "TypeScript"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/devmarket/",
+    "status": "published"
+  },
+  {
+    "title": "BiteRush",
+    "slug": "biterush",
+    "category": "Marketplace",
+    "industry": "Food & On-Demand Delivery",
+    "description": "Multi-restaurant food delivery marketplace with item customization drawer, live GPS order tracking, shopping cart, and restaurant owner admin panel.",
+    "longDescription": "On-demand food ordering experience with customizable meal add-ons, restaurant search, live delivery timelines, and real-time kitchen order management admin dashboard.",
+    "features": [
+      "Multi-restaurant marketplace",
+      "Item customization",
+      "Live GPS order tracking",
+      "Shopping cart",
+      "Restaurant search",
+      "Delivery timelines",
+      "Kitchen order management",
+      "Restaurant admin panel"
+    ],
+    "technologies": [
+      "Order Engine",
+      "Live GPS Tracker",
+      "Restaurant Admin",
+      "Tailwind CSS"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/biterush/",
+    "status": "published"
+  },
+  {
+    "title": "AutoVault",
+    "slug": "autovault",
+    "category": "Marketplace",
+    "industry": "Exotic & Hypercar Sales",
+    "description": "Premier luxury automotive dealership portal with twin-turbo engine specs, side-by-side vehicle comparison matrix, test drive booking, and dealer admin console.",
+    "longDescription": "Automotive prestige platform showcasing high-performance hypercars with engine specifications, top speed metrics, vehicle matrices, and dealer fleet management portal.",
+    "features": [
+      "Hypercar catalogue",
+      "Engine specifications",
+      "Top speed metrics",
+      "Side-by-side comparison matrix",
+      "Test-drive booking",
+      "Dealer fleet management",
+      "Dealer admin console"
+    ],
+    "technologies": [
+      "Dealership Portal",
+      "Comparison Matrix",
+      "Dealer Admin Console",
+      "Interactive Specs"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/autovault/",
+    "status": "published"
+  },
+  {
+    "title": "Nestora",
+    "slug": "nestora",
+    "category": "Marketplace",
+    "industry": "Real Estate & Architecture",
+    "description": "Architectural estate marketplace featuring dynamic search filters, interactive mortgage estimator, private viewing schedules, and broker admin console.",
+    "longDescription": "Curated luxury estate discovery featuring image galleries, floor plans, neighborhood amenities, mortgage financing calculators, and broker listing administration.",
+    "features": [
+      "Property search filters",
+      "Image galleries",
+      "Floor plans",
+      "Neighborhood amenities",
+      "Mortgage estimator",
+      "Private viewing schedules",
+      "Broker listing administration"
+    ],
+    "technologies": [
+      "Real Estate Portal",
+      "Mortgage Calculator",
+      "Broker Admin Panel",
+      "Property Filters"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/nestora/",
+    "status": "published"
+  },
+  {
+    "title": "FitForge",
+    "slug": "fitforge",
+    "category": "SaaS",
+    "industry": "Fitness & Athletic Health",
+    "description": "High-performance athletic dashboard with daily caloric SVG ring charts, exercise logging, workout streak counters, and fitness trainer admin console.",
+    "longDescription": "Modern fitness technology platform enabling custom routine builders, trainer analytics, caloric intake monitoring, and gym coach management dashboard.",
+    "features": [
+      "Daily calorie ring charts",
+      "Exercise logging",
+      "Workout streak counters",
+      "Custom routine builder",
+      "Trainer analytics",
+      "Calorie intake monitoring",
+      "Trainer admin console"
+    ],
+    "technologies": [
+      "Fitness SaaS",
+      "Health Analytics",
+      "Trainer Admin Panel",
+      "SVG Charts"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/fitforge/",
+    "status": "published"
+  },
+  {
+    "title": "Tripora",
+    "slug": "tripora",
+    "category": "Travel",
+    "industry": "Expeditions & Luxury Travel",
+    "description": "Editorial travel package platform featuring day-by-day expedition itineraries, gallery highlights, concierge booking, and agency admin panel.",
+    "longDescription": "Luxury travel booking engine offering curated expedition itineraries, luxury destination showcases, custom traveler concierge, and tour package admin console.",
+    "features": [
+      "Day-by-day itineraries",
+      "Destination galleries",
+      "Concierge booking",
+      "Custom traveler concierge",
+      "Tour package administration",
+      "Agency admin panel"
+    ],
+    "technologies": [
+      "Travel Booking",
+      "Itinerary Builder",
+      "Agency Admin Panel",
+      "Editorial UI"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/tripora/",
+    "status": "published"
+  },
+  {
+    "title": "SoundPulse",
+    "slug": "soundpulse",
+    "category": "E-Commerce",
+    "industry": "Audiophile & Studio Gear",
+    "description": "High-fidelity audiophile audio marketplace with studio monitors, vinyl players, headphones, dynamic audio equalizer, and merchant admin panel.",
+    "longDescription": "Bespoke audio equipment store featuring studio acoustics catalog, frequency visualizer, shopping cart checkout, and merchant inventory manager.",
+    "features": [
+      "Studio monitor catalogue",
+      "Vinyl player catalogue",
+      "Headphone catalogue",
+      "Audio equalizer",
+      "Frequency visualizer",
+      "Shopping cart checkout",
+      "Merchant inventory manager"
+    ],
+    "technologies": [
+      "Audio Gear Store",
+      "Equalizer UI",
+      "Merchant Admin Panel",
+      "Cart Checkout"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/soundpulse/",
+    "status": "published"
+  },
+  {
+    "title": "NeuralDesk",
+    "slug": "neuraldesk",
+    "category": "SaaS",
+    "industry": "Intelligent Workspace & Workflow",
+    "description": "Intelligent workspace suite supporting multi-agent prompts, document analysis, token analytics, conversation sessions, and workspace admin panel.",
+    "longDescription": "Enterprise workspace platform with document analysis, workflow generation interfaces, automated agent tools, and token consumption administration console.",
+    "features": [
+      "Multi-agent prompts",
+      "Document analysis",
+      "Token analytics",
+      "Conversation sessions",
+      "Workflow generation interface",
+      "Automated agent tools",
+      "Workspace admin panel"
+    ],
+    "technologies": [
+      "Workspace Suite",
+      "Intelligent Workflows",
+      "Workspace Admin",
+      "Analytics"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/neuraldesk/",
+    "status": "published"
+  },
+  {
+    "title": "Learnova",
+    "slug": "learnova",
+    "category": "SaaS",
+    "industry": "Education & EdTech Academy",
+    "description": "Interactive online academy with HD video course streams, curriculum accordions, student progress certificate modals, and instructor admin console.",
+    "longDescription": "Modern learning academy platform with video lecture player, module locks, curriculum accordions, verifiable graduation certificates, and instructor portal.",
+    "features": [
+      "HD video course streams",
+      "Video lecture player",
+      "Curriculum accordions",
+      "Module locks",
+      "Student progress",
+      "Certificate modals",
+      "Instructor admin console"
+    ],
+    "technologies": [
+      "E-Learning Academy",
+      "Video Player",
+      "Instructor Admin",
+      "Certificates"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/learnova/",
+    "status": "published"
+  },
+  {
+    "title": "MediBook",
+    "slug": "medibook",
+    "category": "Healthcare",
+    "industry": "Medical Appointments & Clinics",
+    "description": "Medical consultation booking portal with specialist search, time slot selector, doctor ratings, SMS confirmation, and clinic admin console.",
+    "longDescription": "Healthcare appointment booking platform connecting patients with top cardiologists, dermatologists, and surgeons with clinic schedule management.",
+    "features": [
+      "Specialist search",
+      "Appointment time-slot selector",
+      "Doctor ratings",
+      "SMS confirmation",
+      "Clinic schedule management",
+      "Clinic admin console"
+    ],
+    "technologies": [
+      "Clinic Booking",
+      "Calendar Scheduler",
+      "Clinic Admin Panel",
+      "Patient Portal"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/medibook/",
+    "status": "published"
+  },
+  {
+    "title": "Artivio",
+    "slug": "artivio",
+    "category": "Marketplace",
+    "industry": "Fine Art & Live Auctions",
+    "description": "Digital fine art gallery with live auction bidding counters, verified 1/1 artwork lots, collector suites, and curator admin console.",
+    "longDescription": "Curated online art gallery for high-end art collectors with real-time bidding interactive triggers, provenance details, and curator auction management.",
+    "features": [
+      "Digital fine art gallery",
+      "Live auction bidding counters",
+      "One-of-one artwork lots",
+      "Collector suites",
+      "Artwork provenance details",
+      "Curator auction management"
+    ],
+    "technologies": [
+      "Live Bidding",
+      "Art Marketplace",
+      "Curator Admin Panel",
+      "Gallery UI"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/artivio/",
+    "status": "published"
+  },
+  {
+    "title": "HireFlow",
+    "slug": "hireflow",
+    "category": "SaaS",
+    "industry": "Recruitment & HR Tech",
+    "description": "Recruitment platform featuring tech stack candidate match scores, job pipelines, 1-click apply, and HR recruiter admin console.",
+    "longDescription": "Hiring platform analyzing candidate skill profiles against engineering requirements with full pipeline management and recruiter dashboard.",
+    "features": [
+      "Candidate match scores",
+      "Job pipeline management",
+      "One-click apply",
+      "Skill profile analysis",
+      "Recruiter dashboard",
+      "HR admin console"
+    ],
+    "technologies": [
+      "Recruitment SaaS",
+      "Candidate Pipeline",
+      "Recruiter Admin Panel",
+      "Match Engine"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/hireflow/",
+    "status": "published"
+  },
+  {
+    "title": "ShipTrack",
+    "slug": "shiptrack",
+    "category": "Dashboard",
+    "industry": "Logistics & Global Freight",
+    "description": "Enterprise freight logistics platform with active container status metrics, ETA tracking, real-time port logs, and logistics admin console.",
+    "longDescription": "Global cargo shipment dashboard tracking maritime vessels, customs status, arrival estimations, live port telemetry, and logistics manager console.",
+    "features": [
+      "Container status metrics",
+      "ETA tracking",
+      "Real-time port logs",
+      "Maritime vessel tracking",
+      "Customs status",
+      "Arrival estimations",
+      "Logistics admin console"
+    ],
+    "technologies": [
+      "Logistics Portal",
+      "Freight Telemetry",
+      "Logistics Admin",
+      "Container Tracking"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/shiptrack/",
+    "status": "published"
+  },
+  {
+    "title": "Stayora",
+    "slug": "stayora",
+    "category": "Travel",
+    "industry": "Luxury Hotels & Sanctuaries",
+    "description": "5-star hospitality reservation platform featuring plunge pool suites, overwater villas, penthouse bookings, and hotel manager admin console.",
+    "longDescription": "Luxury hotel reservation experience featuring high-resolution suite photos, private butler amenities, instant bookings, and hotel admin console.",
+    "features": [
+      "Plunge-pool suites",
+      "Overwater villas",
+      "Penthouse bookings",
+      "High-resolution suite photos",
+      "Private butler amenities",
+      "Hotel manager admin console"
+    ],
+    "technologies": [
+      "Hotel Reservation",
+      "Suite Booking",
+      "Hotel Admin Panel",
+      "Hospitality UI"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/stayora/",
+    "status": "published"
+  },
+  {
+    "title": "Finova",
+    "slug": "finova",
+    "category": "Dashboard",
+    "industry": "Fintech & Wealth Intelligence",
+    "description": "Personal finance dashboard with net worth portfolio tracking, monthly spending breakdown, savings goal progress, and finance admin console.",
+    "longDescription": "Wealth management console displaying net worth trends, income breakdowns, and progress tracking towards personal financial milestones.",
+    "features": [
+      "Net-worth portfolio tracking",
+      "Monthly spending breakdown",
+      "Savings goal progress",
+      "Net-worth trends",
+      "Income breakdowns",
+      "Finance admin console"
+    ],
+    "technologies": [
+      "Wealth Dashboard",
+      "Portfolio Metrics",
+      "Finance Admin",
+      "SVG Analytics"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/finova/",
+    "status": "published"
+  },
+  {
+    "title": "SecurePass",
+    "slug": "securepass",
+    "category": "SaaS",
+    "industry": "Cybersecurity & Password Vault",
+    "description": "AES-256 encrypted password security manager with zero-knowledge vault score, interactive password generator, and security admin console.",
+    "longDescription": "Security vault console showcasing encrypted password health ratings, breach checks, customizable string generation, and enterprise security control.",
+    "features": [
+      "AES-256 encrypted password manager concept",
+      "Vault security score",
+      "Interactive password generator",
+      "Password health ratings",
+      "Breach checks",
+      "Security admin console"
+    ],
+    "technologies": [
+      "Security Vault",
+      "Generator",
+      "Security Admin Console",
+      "Cyber UI"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/securepass/",
+    "status": "published"
+  },
+  {
+    "title": "CloudPanel",
+    "slug": "cloudpanel",
+    "category": "Dashboard",
+    "industry": "DevOps & VPS Infrastructure",
+    "description": "Server administration dashboard with multi-region vCPU/RAM monitoring, live terminal system logs, container states, and cloud admin console.",
+    "longDescription": "Developer cloud platform managing virtual servers, memory utilization, real-time NGINX logs, container deployments, and VPS cluster admin.",
+    "features": [
+      "Multi-region vCPU monitoring",
+      "RAM monitoring",
+      "Terminal system logs",
+      "Container states",
+      "NGINX logs",
+      "Container deployments",
+      "VPS cluster administration"
+    ],
+    "technologies": [
+      "DevOps Console",
+      "Terminal Logs",
+      "Server Admin Panel",
+      "Infrastructure UI"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/cloudpanel/",
+    "status": "published"
+  },
+  {
+    "title": "ShopAdmin",
+    "slug": "shopadmin",
+    "category": "Dashboard",
+    "industry": "E-Commerce Admin Console",
+    "description": "Store operational dashboard tracking daily revenue, low-stock inventory alerts, customer order statuses, fulfillment, and central management.",
+    "longDescription": "Multi-store order management portal displaying revenue metrics, low inventory alerts, fulfillment statuses, and global store settings.",
+    "features": [
+      "Daily revenue tracking",
+      "Low-stock inventory alerts",
+      "Customer order statuses",
+      "Fulfillment tracking",
+      "Revenue metrics",
+      "Global store settings"
+    ],
+    "technologies": [
+      "E-Commerce Console",
+      "Store Analytics",
+      "Inventory Control",
+      "Order Manager"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/shopadmin/",
+    "status": "published"
+  },
+  {
+    "title": "Vortex",
+    "slug": "vortex",
+    "category": "Creative",
+    "industry": "Spatial Web Experience",
+    "description": "Experimental creative web architecture utilizing spatial canvas aesthetics, particle physics, and visual parameters admin controller.",
+    "longDescription": "Interactive creative web experience with glowing radial shaders, particle pulses, fluid motion typography, and live visual director controls.",
+    "features": [
+      "Spatial canvas aesthetics",
+      "Particle physics",
+      "Glowing radial shaders",
+      "Particle pulses",
+      "Fluid motion typography",
+      "Visual director controls"
+    ],
+    "technologies": [
+      "Canvas & Shaders",
+      "Particle System",
+      "Director Admin",
+      "Creative UI"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/vortex/",
+    "status": "published"
+  },
+  {
+    "title": "ProHub",
+    "slug": "prohub",
+    "category": "Marketplace",
+    "industry": "Freelancer Ecosystem",
+    "description": "Global freelancer marketplace and client project workspace with verified talent profiles, hourly rate hires, and platform admin console.",
+    "longDescription": "Freelance marketplace connecting businesses with full-stack engineers, UI/UX designers, and bot developers with escrow and dispute administration.",
+    "features": [
+      "Freelancer marketplace",
+      "Client project workspace",
+      "Talent profiles",
+      "Hourly-rate hiring",
+      "Full-stack engineer, UI/UX designer and bot developer listings",
+      "Escrow administration",
+      "Dispute administration",
+      "Platform admin console"
+    ],
+    "technologies": [
+      "Talent Marketplace",
+      "Contract Escrow",
+      "Platform Admin",
+      "Freelancer Directory"
+    ],
+    "thumbnail": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+    "preview": "/showcase/prohub/",
+    "status": "published"
+  }
+]
