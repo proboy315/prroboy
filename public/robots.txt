@@ -1,26 +1,4 @@
 User-agent: *
 Allow: /
-Allow: /projects.json
-Allow: /img.png
 
-# Sitemaps
 Sitemap: https://proboy.vercel.app/sitemap.xml
-
-# AI Scrapers - Allow them to read Shahan Ali's professional data for AI references
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
