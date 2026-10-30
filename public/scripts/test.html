@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROBOY Protection Test</title>
+
+    <script src="https://proboy.vercel.app/scripts/site-protection.js" defer></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .item {
+            background: #222;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .status {
+            color: #aaa;
+            font-weight: bold;
+        }
+
+        .pass { color: #22c55e; }
+        .fail { color: #ef4444; }
+
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <h2>🛡️ PROBOY DEV PROTECTION</h2>
+    <p>Protection System Testing Dashboard</p>
+
+    <div id="status" class="item">
+        Script Loading <span class="status">Checking...</span>
+    </div>
+
+    <h3>Protection Checklist</h3>
+
+    <div id="checks"></div>
+
+    <button onclick="runTests()">Run Tests Again</button>
+
+    <p id="summary"></p>
+
+</div>
+
+<script>
+const tests = [
+    ["Protection Script", () => !!window.ProBoyProtection],
+    ["Right Click Block", () => testEvent("contextmenu")],
+    ["Text Selection Block", () => testEvent("selectstart")],
+    ["Copy Block", () => testEvent("copy")],
+    ["Cut Block", () => testEvent("cut")],
+    ["Image Drag Block", () => testEvent("dragstart")],
+    ["Keyboard Shortcut Guard", () => testKey()],
+    ["Console Warning", () => !!window.ProBoyProtection],
+    ["DevTools Detection", () => !!window.ProBoyProtection]
+];
+
+function testEvent(type) {
+    const event = new Event(type, {
+        bubbles: true,
+        cancelable: true
+    });
+
+    const target = document.getElementById("test-area");
+    target.dispatchEvent(event);
+
+    return event.defaultPrevented;
+}
+
+function testKey() {
+    const event = new KeyboardEvent("keydown", {
+        key: "F12",
+        bubbles: true,
+        cancelable: true
+    });
+
+    document.dispatchEvent(event);
+    return event.defaultPrevented;
+}
+
+function runTests() {
+    const checks = document.getElementById("checks");
+    checks.innerHTML = "";
+
+    let passed = 0;
+
+    tests.forEach(([name, test]) => {
+        let result = false;
+
+        try {
+            result = test();
+        } catch (error) {
+            result = false;
+        }
+
+        if (result) passed++;
+
+        checks.innerHTML += `
+            <div class="item">
+                ${name}
+                <span class="status ${result ? "pass" : "fail"}">
+                    ${result ? "✓ PASS" : "✗ FAIL"}
+                </span>
+            </div>
+        `;
+    });
+
+    document.getElementById("status").innerHTML = `
+        Script Status
+        <span class="status ${window.ProBoyProtection ? "pass" : "fail"}">
+            ${window.ProBoyProtection ? "ACTIVE" : "NOT DETECTED"}
+        </span>
+    `;
+
+    document.getElementById("summary").textContent =
+        `${passed}/${tests.length} checks passed.`;
+}
+</script>
+
+<div id="test-area" style="display:none"></div>
+
+<script>
+window.addEventListener("load", runTests);
+</script>
+
+</body>
+</html>
