@@ -1,0 +1,155 @@
+[
+  {
+    "slug": "proboy-md",
+    "title": "ProBoy-MD",
+    "featured": true,
+    "category": "WhatsApp Bot",
+    "summary": "An advanced WhatsApp automation bot developed by Shahan Ali.",
+    "description": [
+      "ProBoy-MD is a futuristic WhatsApp bot developed by Shahan Ali.",
+      "It supports advanced automation, media processing, interactive games, and auto-reply scripts."
+    ],
+    "features": [
+      "WhatsApp automation",
+      "Media processing",
+      "Interactive games",
+      "Auto-reply scripts"
+    ],
+    "technologies": [
+      "Node.js",
+      "NPM",
+      "Baileys API",
+      "WhatsApp Bot"
+    ],
+    "image": "https://proboy.vercel.app/botimg.png",
+    "screenshots": [],
+    "repo": "https://github.com/ProBoy315/ProBoy-MD",
+    "demo": "https://ProBoy-MD.gt.tc",
+    "docs": "",
+    "creator": "Shahan Ali",
+    "year": 2026
+  },
+  {
+    "slug": "proboy-sim-database",
+    "title": "ProBoy-SiM_Database",
+    "featured": false,
+    "category": "Full-Stack Development",
+    "summary": "An interactive lookup tool for simulation database files and cellular activation reports.",
+    "description": [
+      "This advanced lookup tool helps users find simulation database files and cellular activation reports inside structured portals.",
+      "It provides an interactive table interface for browsing and viewing organized information."
+    ],
+    "features": [
+      "Simulation database lookup",
+      "Cellular activation reports",
+      "Interactive table interface",
+      "API synchronization",
+      "Structured information portal"
+    ],
+    "technologies": [
+      "SIM Database",
+      "API Sync",
+      "MySQL",
+      "Information Portal"
+    ],
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXMUm6-k4TnrKIBHeP0LKiAb-qY4GCO8jvVGR_YEUX9w&s=10",
+    "screenshots": [],
+    "repo": "",
+    "demo": "https://proboy.vercel.app/sim.html",
+    "docs": "",
+    "creator": "Shahan Ali",
+    "year": 2026
+  },
+  {
+    "slug": "proboy-camlink",
+    "title": "ProBoy CamLink",
+    "featured": false,
+    "category": "Full-Stack Development",
+    "summary": "A camera shortlink system with device diagnostics and captured image viewing.",
+    "description": [
+      "ProBoy CamLink generates dynamic camera shortlinks.",
+      "It provides a control panel to view real-time smart device diagnostic logs and captured pictures."
+    ],
+    "features": [
+      "Dynamic camera shortlinks",
+      "Device diagnostic logs",
+      "Captured picture viewing",
+      "Control panel"
+    ],
+    "technologies": [
+      "Camera Capture",
+      "Diagnostic Logs",
+      "Shortlinks",
+      "Control Panel"
+    ],
+    "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
+    "screenshots": [],
+    "repo": "",
+    "demo": "/camera/",
+    "docs": "",
+    "creator": "Shahan Ali",
+    "year": 2026
+  },
+  {
+    "slug": "proboy-js-obfuscator",
+    "title": "ProBoy JS Obfuscator",
+    "featured": false,
+    "category": "Developer Tools",
+    "summary": "A client-side JavaScript obfuscation tool for protecting production source code.",
+    "description": [
+      "ProBoy JS Obfuscator is a secure, high-performance client-side JavaScript obfuscator.",
+      "It helps compile, safeguard, and optimize production source files."
+    ],
+    "features": [
+      "JavaScript obfuscation",
+      "Source code protection",
+      "Client-side processing",
+      "Production source optimization"
+    ],
+    "technologies": [
+      "JavaScript",
+      "Obfuscation",
+      "Security",
+      "Utility"
+    ],
+    "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+    "screenshots": [],
+    "repo": "",
+    "demo": "/obfuscator/",
+    "docs": "",
+    "creator": "Shahan Ali",
+    "year": 2026
+  },
+  {
+    "slug": "proboy-encrypt-decrypt",
+    "title": "ProBoy Encrypt & Decrypt",
+    "featured": false,
+    "category": "Security & Privacy",
+    "summary": "An AES-256-GCM encryption suite with image steganography and a local history vault.",
+    "description": [
+      "ProBoy Encrypt & Decrypt is an encryption suite designed to securely protect text messages.",
+      "It also supports embedding hidden secrets inside images through steganography.",
+      "Users can decrypt, edit, re-encrypt, and manage their local history vault."
+    ],
+    "features": [
+      "AES-256-GCM text encryption",
+      "Image steganography",
+      "Message decryption",
+      "Edit and re-encrypt functionality",
+      "Local history vault"
+    ],
+    "technologies": [
+      "AES-256-GCM",
+      "Steganography",
+      "Web Crypto",
+      "Privacy Tool"
+    ],
+    "image": "https://proboy.vercel.app/images/encrypt&decrypt.png",
+    "screenshots": [],
+    "repo": "",
+    "demo": "https://proboy.vercel.app/encrypt&decrypt",
+    "docs": "",
+    "creator": "Shahan Ali",
+    "year": 2026
+  }
+]
