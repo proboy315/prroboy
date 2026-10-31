@@ -53,6 +53,7 @@ export default function ProBoyMd() {
           <p className="lead">ProBoy-MD is a Node.js WhatsApp multi-device bot with command-based automation, AI integrations, media utilities, group tools and developer utilities. This page explains the project, the reported architecture, feature categories and official links. It is not a claim that every command has been independently tested.</p>
           <div className="actions">
             <a className="btn primary" href="https://github.com/ProBoy315/ProBoy-MD">View source on GitHub</a>
+            <a className="btn secondary" href="https://proboy-md.gt.tc/" target="_blank" rel="noopener noreferrer">Open Pairing Website</a>
             <a className="btn secondary" href="/">Owner portfolio</a>
           </div>
           <div className="pills" style={{ marginTop: 22 }}>{["Node.js", "JavaScript", "Baileys", "JSON storage", "ProBoy315"].map((p) => <span key={p} className="pill">{p}</span>)}</div>
