@@ -40,3 +40,6 @@ The original photo itself includes glass shapes and red accents. Those pixels re
 ## Verification
 
 The interface can be tested with a labeled synthetic image fixture for sizing, selection and refresh persistence. A passing fixture test does not mean the unavailable original portrait has been visually verified. Check the actual photo after importing it, at desktop and mobile sizes, before publishing.
+
+## OG image behaviour
+`og:image` uses the same priority as the hero: explicit `seo.ogImage` → published `profileImage` → `public/og-image.jpg` brand card. Once you publish the portrait via `node scripts/set-portrait.mjs`, share cards automatically show your photo with `portrait.alt` as the image alt text. The portrait picker, change and publish controls are hidden whenever a published portrait exists.
