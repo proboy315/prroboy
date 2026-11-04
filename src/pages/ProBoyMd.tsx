@@ -1,184 +1,235 @@
-import { useMemo, useState } from "react";
+import { CommandDirectory, commandMeta, commandCategories } from "../components/CommandDirectory";
+import Icon from "../components/Icon";
 import { info, site } from "../lib/data";
 import { useSeo } from "../lib/seo";
+import { personLd } from "../lib/seo";
+import { onLink } from "../lib/router";
 import "./proboy-md.css";
 
-const commands = [
-  ["ai", ".ai", "AI-related command family. Exact syntax depends on the loaded command file.", "Source category reported"],
-  ["gpt ai", ".gpt", "A GPT-related command name reported in the supplied inventory. A name collision was also reported.", "Potential name collision"],
-  ["group admin", ".invite", "Group invite or link command reported in the audit. Check current group permissions.", "Check group permissions"],
-  ["info privacy", ".info", "Information lookup flagged in the audit as privacy-sensitive. Review before any public deployment.", "Review before deployment"],
-  ["camera privacy", ".camera", "Camera or short-link feature flagged for privacy and consent review. Do not deploy without that review.", "Do not deploy without review"],
-  ["npm developer", ".npm", "Package utility reported in the audit. Owner checks and shell safety should be reviewed. Not a public install guide.", "Owner-only claim needs testing"],
-  ["systeminfo", ".systeminfo", "Server information command reported in the source audit. Limit what it exposes.", "Limit server details"],
-  ["textmaker", "Textmaker commands", "A category of text-effect and text-styling tools.", "Category summary"],
-  ["media", "Media commands", "Media tools that may depend on external services. Respect copyright and service terms.", "Category summary"],
-  ["fun", "Fun commands", "Entertainment and general utility commands.", "Category summary"],
-  ["owner sudo", "Owner tools", "Restricted operations depend on the bot's permission logic. Review access controls.", "Review access controls"],
-  ["help menu", "Help / menu", "Use the deployed bot menu or the repository to confirm current syntax. It changes by version.", "Version-dependent"],
+const REPO = "https://github.com/proboy315/ProBoy-MD";
+const PAIRING = commandMeta.pairingUrl;
+
+const categories: [string, string][] = [
+  ["general", "Chat, stickers, group info, uptime and everyday commands."],
+  ["ai", "AI chat, image generation, photo editing, transcription-style helpers."],
+  ["group", "Moderation: add, kick, promote, welcome, warning and spam controls."],
+  ["dev", "Session, channel, broadcast, plugin and owner-only configuration."],
+  ["media", "Downloaders for common video, music and image sources."],
+  ["fun", "Lightweight entertainment, quotes, images and animation responses."],
+  ["utility", "Calculator, weather, short URLs, definitions, pairing and utilities."],
+  ["textmaker", "Stylised text and name-image effects."],
+  ["admin", "Additional administrative controls declared separately in the source."],
+];
+
+const steps: [string, string][] = [
+  ["Open the ProBoy-MD page", "Use the Get Pairing Code button above."],
+  ["Enter your WhatsApp number", "Include the country code, for example 923001234567, without + or spaces."],
+  ["Generate the pairing code", "The pairing service returns a short code and copies it."],
+  ["Open WhatsApp on your phone", "Go to Linked devices, then Link a device."],
+  ["Choose phone number login", "Select the pairing-code option instead of scanning a QR code."],
+  ["Enter the code", "Type the pairing code to connect the bot session."],
 ];
 
 export default function ProBoyMd() {
-  const [q, setQ] = useState("");
-  const shown = useMemo(() => commands.filter((c) => !q || (c[0] + c[1] + c[2]).toLowerCase().includes(q.toLowerCase())), [q]);
   const url = `${site}/proboy-md`;
   useSeo({
-    title: "ProBoy-MD by Shahan Ali (ProBoy) | WhatsApp Bot Documentation",
-    description: "Documentation for ProBoy-MD, a Node.js WhatsApp multi-device bot maintained by Shahan Ali (ProBoy, ProBoy315). Features, command categories, architecture, setup notes and project links.",
+    title: "ProBoy-MD Commands & WhatsApp Pairing — Shahan Ali (ProBoy)",
+    description: `ProBoy-MD is the WhatsApp Multi-Device bot by Shahan Ali (ProBoy), version ${commandMeta.version}, prefix ${commandMeta.prefix}. Search ${commandMeta.repositoryCommandFiles} verified commands, browse categories and get a WhatsApp pairing code.`,
     path: "/proboy-md",
-    jsonLd: [{
-      "@context": "https://schema.org", "@type": "SoftwareApplication", name: "ProBoy-MD",
-      applicationCategory: "DeveloperApplication", operatingSystem: "Node.js",
-      description: "A Node.js WhatsApp multi-device bot with command categories for AI, media, group administration and developer utilities.",
-      author: { "@type": "Person", name: "Shahan Ali", alternateName: ["ProBoy", "ProBoy315", "shahan315"], url: site },
-      codeRepository: "https://github.com/ProBoy315/ProBoy-MD", url,
-    }],
+    jsonLd: [
+      personLd(),
+      {
+        "@context": "https://schema.org", "@type": "SoftwareApplication", "@id": `${url}#software`,
+        name: "ProBoy-MD", alternateName: ["ProBoy MD", "ProBoy315 WhatsApp Bot"], version: commandMeta.version,
+        applicationCategory: "DeveloperApplication", operatingSystem: "Node.js",
+        description: `ProBoy-MD is a Node.js WhatsApp Multi-Device bot by Shahan Ali (ProBoy) with AI, group, media, utility, text-maker and developer commands, prefix ${commandMeta.prefix}.`,
+        codeRepository: REPO, url, softwareVersion: commandMeta.version,
+        author: { "@id": site ? `${site}/#person` : undefined, name: info.name, alternateName: info.aliases },
+        offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      },
+      {
+        "@context": "https://schema.org", "@type": "FAQPage", "@id": `${url}#faq`,
+        mainEntity: [
+          ["What is ProBoy-MD?", `ProBoy-MD is a Node.js WhatsApp Multi-Device bot developed by Shahan Ali (ProBoy). Version ${commandMeta.version} uses the prefix ${commandMeta.prefix} and covers AI, group, media, utility, text-maker and developer commands.`],
+          ["How many commands does ProBoy-MD have?", `The bot menu generated on 4 November 2026 reported ${commandMeta.reportedMenuTotal} commands. Parsing the current repository gives ${commandMeta.repositoryCommandFiles} command files (${commandMeta.uniquePrimaryNames} unique names). The difference is documented rather than invented.`],
+          ["How do I connect ProBoy-MD to WhatsApp?", `Open ${PAIRING}, enter your phone number with its country code, generate a pairing code, then enter it in WhatsApp under Linked devices. The pairing flow is handled by that site, never by this portfolio.`],
+          ["Who created ProBoy-MD?", `${info.name} (online as ProBoy, ProBoy315 and shahan315) created ProBoy-MD. Source: ${REPO}.`],
+        ].map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+      },
+      {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: `${site}/` },
+          { "@type": "ListItem", position: 2, name: "ProBoy-MD", item: url },
+        ],
+      },
+    ],
   });
 
   return (
     <div className="pmd">
-      <header>
-        <div className="wrap nav">
-          <a className="brand" href="/proboy-md"><span className="mark">PB</span> PROBOY-MD</a>
-          <nav aria-label="Documentation">
-            {["overview", "features", "commands", "architecture", "owner", "links"].map((id) => <a key={id} href={`#${id}`}>{id[0].toUpperCase() + id.slice(1)}</a>)}
-            <a href="/">Portfolio</a>
-          </nav>
+      <section className="pmd-hero" aria-labelledby="pmd-title">
+        <div className="pmd-glow" aria-hidden="true" />
+        <div className="pmd-hero-inner">
+          <p className="pmd-kicker"><span /> WhatsApp Multi-Device bot · version {commandMeta.version}</p>
+          <h1 id="pmd-title">ProBoy-MD</h1>
+          <p className="pmd-byline">by <a href="/">Shahan Ali</a> <span>(ProBoy)</span></p>
+          <p className="pmd-lead">
+            ProBoy-MD is the WhatsApp Multi-Device bot created and maintained by {info.name} (ProBoy). It runs on
+            Node.js with the Baileys library and drives {commandMeta.repositoryCommandFiles} command files through
+            a {commandMeta.prefix} prefix across {commandCategories.length} categories: AI helpers, group moderation,
+            media utilities, text effects and developer tooling.
+          </p>
+          <div className="pmd-actions">
+            <a className="pmd-btn primary" href={PAIRING} target="_blank" rel="noopener noreferrer nofollow">
+              <Icon name="whatsapp" className="w-4 h-4" /> Get Pairing Code <Icon name="external" className="w-4 h-4" />
+            </a>
+            <a className="pmd-btn ghost" href={REPO} target="_blank" rel="noopener noreferrer">
+              <Icon name="github" className="w-4 h-4" /> View source on GitHub
+            </a>
+            <a className="pmd-btn ghost" href="/#projects" onClick={onLink}>Portfolio projects</a>
+          </div>
+          <dl className="pmd-stats">
+            <div><dt>Command prefix</dt><dd>{commandMeta.prefix}</dd></div>
+            <div><dt>Menu reported</dt><dd>{commandMeta.reportedMenuTotal}</dd></div>
+            <div><dt>Verified in source</dt><dd>{commandMeta.repositoryCommandFiles}</dd></div>
+            <div><dt>Categories</dt><dd>{commandCategories.length}</dd></div>
+          </dl>
         </div>
-      </header>
-      <main className="wrap">
-        <section className="hero" id="top">
-          <p className="kicker">Project documentation</p>
-          <h1>Meet <span>ProBoy-MD</span><br />by Shahan Ali (ProBoy)</h1>
-          <p className="lead">ProBoy-MD is a Node.js WhatsApp multi-device bot with command-based automation, AI integrations, media utilities, group tools and developer utilities. This page explains the project, the reported architecture, feature categories and official links. It is not a claim that every command has been independently tested.</p>
-          <div className="actions">
-            <a className="btn primary" href="https://github.com/ProBoy315/ProBoy-MD">View source on GitHub</a>
-            <a className="btn secondary" href="https://proboy-md.gt.tc/" target="_blank" rel="noopener noreferrer">Open Pairing Website</a>
-            <a className="btn secondary" href="/">Owner portfolio</a>
+      </section>
+
+      <div className="pmd-wrap">
+        <section id="pairing" className="pmd-pair" aria-labelledby="pair-title">
+          <div className="pmd-pair-copy">
+            <p className="pmd-kicker">WhatsApp connection</p>
+            <h2 id="pair-title">Connect your WhatsApp</h2>
+            <p>
+              ProBoy-MD connects with a pairing code instead of a QR scan. The flow runs on the official pairing
+              site at <a href={PAIRING} target="_blank" rel="noopener noreferrer nofollow">{PAIRING.replace("https://", "")}</a>,
+              which is configured in the repository. This portfolio does not collect your phone number, password,
+              session string or any pairing credential.
+            </p>
+            <div className="pmd-pair-cta">
+              <a className="pmd-btn primary lg" href={PAIRING} target="_blank" rel="noopener noreferrer nofollow">
+                <Icon name="whatsapp" className="w-5 h-5" /> Open the pairing website <Icon name="external" className="w-4 h-4" />
+              </a>
+              <small>Opens a new tab · enter your own number with the country code</small>
+            </div>
           </div>
-          <div className="pills" style={{ marginTop: 22 }}>{["Node.js", "JavaScript", "Baileys", "JSON storage", "ProBoy315"].map((p) => <span key={p} className="pill">{p}</span>)}</div>
+          <ol className="pmd-steps">
+            {steps.map(([title, text], i) => (
+              <li key={title}>
+                <span className="pmd-step-no">{String(i + 1).padStart(2, "0")}</span>
+                <div><h3>{title}</h3><p>{text}</p></div>
+              </li>
+            ))}
+          </ol>
+          <aside className="pmd-safety">
+            <Icon name="shield" className="w-4 h-4" />
+            <p><strong>Safety.</strong> Never share a WhatsApp password, OTP or recovery code with anyone, including
+            bot admins. A pairing code is entered only inside WhatsApp under <em>Linked devices</em>. If a site asks
+            for more than a phone number, do not continue.</p>
+          </aside>
         </section>
 
-        <section id="overview">
-          <p className="kicker">01 / Overview</p>
-          <h2>What is ProBoy-MD?</h2>
-          <p className="muted">A command-driven WhatsApp automation project by Shahan Ali, also known as ProBoy and ProBoy315, from Burewala, Pakistan.</p>
-          <div className="grid">
-            <article className="card"><h3>Command-based</h3><p className="muted">Features are organised into JavaScript command files. A message handler identifies the command and applies permission checks.</p></article>
-            <article className="card"><h3>Feature groups</h3><p className="muted">The supplied project notes report AI, media, text effects, fun, general utilities, group administration and developer tools.</p></article>
-            <article className="card"><h3>External APIs</h3><p className="muted">Some commands depend on outside services. Availability changes with network access, provider changes, keys and rate limits.</p></article>
+        <CommandDirectory />
+
+        <section id="capabilities" className="pmd-cats" aria-labelledby="cats-title">
+          <div className="pmd-head reveal">
+            <p className="pmd-kicker">Capability areas</p>
+            <h2 id="cats-title">What each category does</h2>
+            <p className="pmd-lead">
+              Categories and counts come from the repository itself. Command availability depends on the version you
+              run and on any external APIs it calls.
+            </p>
           </div>
-          <p className="callout"><strong>Status: </strong>Written from project notes and a partial source audit. It does not certify every endpoint or deployment.</p>
+          <ul className="pmd-cat-grid">
+            {categories.map(([id, text]) => {
+              const found = commandMeta.categoryStats?.find?.((c: { id: string }) => c.id === id);
+              return (
+                <li key={id} className="reveal">
+                  <h3><span>{id}</span><em>{found ? found.count : ""}</em></h3>
+                  <p>{text}</p>
+                </li>
+              );
+            })}
+          </ul>
         </section>
 
-        <section id="features">
-          <p className="kicker">02 / Capabilities</p>
-          <h2>Feature categories</h2>
-          <p className="muted">Exact commands vary by the version installed.</p>
-          <div className="grid">
+        <section id="architecture" className="pmd-arch" aria-labelledby="arch-title">
+          <div className="pmd-head reveal">
+            <p className="pmd-kicker">Architecture</p>
+            <h2 id="arch-title">How a message becomes a reply</h2>
+          </div>
+          <div className="pmd-arch-grid">
+            <ol className="pmd-flow reveal">
+              {[
+                ["Connect", "Baileys opens a WhatsApp Multi-Device session for the configured account."],
+                ["Receive", "The main process receives the message event and applies deduplication guards."],
+                ["Resolve", "The handler checks the prefix, command name or alias, and permission level."],
+                ["Execute", "The matching command file runs, then replies through the session."],
+              ].map(([t, d], i) => (
+                <li key={t}><span>{String(i + 1).padStart(2, "0")}</span><div><strong>{t}</strong><p>{d}</p></div></li>
+              ))}
+            </ol>
+            <div className="pmd-tree reveal">
+              <h3>Reported project structure</h3>
+              <pre><code>{"index.js\nproboy.js\nhandler.js\ncommands/\n  <category>/\ndatabase.js\nsettings/\nutils/"}</code></pre>
+              <p>Confirmed against the current repository layout. <code>proboy.js</code> is an obfuscated wrapper;
+              per-command files under <code>commands/</code> expose <code>name</code>, <code>aliases</code>,
+              <code>category</code>, <code>description</code> and <code>usage</code>, which is how this directory was built.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="owner" className="pmd-owner" aria-labelledby="owner-title">
+          <div className="reveal">
+            <p className="pmd-kicker">Creator and maintainer</p>
+            <h2 id="owner-title">Who built ProBoy-MD?</h2>
+            <p className="pmd-lead">
+              {info.name} — online as {info.aliases.join(", ")} — is a {info.role} from {info.location} and the creator
+              of the PROBOY brand. He also maintains this portfolio at <a href={site}>{site.replace("https://", "")}</a>.
+            </p>
+            <ul className="pmd-links">
+              {[
+                ["Portfolio", "/", "home", false],
+                ["GitHub profile", "https://github.com/proboy315", "github", true],
+                ["ProBoy-MD repository", REPO, "github", true],
+                ["Pairing website", PAIRING, "whatsapp", true],
+              ].map(([labelText, href, icon, ext]) => (
+                <li key={labelText as string}>
+                  <a href={href as string} onClick={ext ? undefined : onLink} target={ext ? "_blank" : undefined} rel={ext ? "noopener noreferrer" : undefined}>
+                    <Icon name={icon as string} className="w-4 h-4" /> {labelText as string}
+                    {ext && <Icon name="external" className="w-3.5 h-3.5 pmd-link-arrow" />}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section id="faq" className="pmd-faq" aria-labelledby="faq-title">
+          <div className="pmd-head reveal">
+            <p className="pmd-kicker">FAQ</p>
+            <h2 id="faq-title">ProBoy-MD questions</h2>
+          </div>
+          <div className="pmd-faq-grid">
             {[
-              ["AI tools", "Reported chat, coding and image-related helpers. Availability depends on the configured provider.", ["Chat", "Code help"]],
-              ["Media utilities", "Media and conversion commands, subject to third-party availability and usage rights.", ["Media", "Conversion"]],
-              ["Textmaker", "Text effects and stylised text tools reported in the source set.", ["Typography"]],
-              ["Group administration", "Group management commands with varying admin requirements.", ["Moderation"]],
-              ["Developer tools", "Developer utilities, including some owner-restricted actions that should stay locked down.", ["Owner-restricted"]],
-              ["Fun and general", "Entertainment commands and everyday bot utilities.", ["Fun", "General"]],
-            ].map(([title, text, tags]) => (
-              <article key={title as string} className="card"><h3>{title as string}</h3><p className="muted">{text as string}</p><div className="tag-row">{(tags as string[]).map((t) => <span key={t} className="tag">{t}</span>)}</div></article>
+              ["What is ProBoy-MD built with?", "Node.js and the Baileys library for WhatsApp Multi-Device connectivity, using JavaScript with CommonJS-style command files."],
+              [`How many commands are there?`, `The supplied menu reports ${commandMeta.reportedMenuTotal} and documents ${commandMeta.reportedListed}. The repository currently contains ${commandMeta.repositoryCommandFiles} command files with ${commandMeta.uniquePrimaryNames} unique names. Both figures are shown so the difference stays visible.`],
+              ["Does every command always work?", "No. Commands may depend on external APIs, keys, permissions and the version you run. Verify against the repository you deploy."],
+              ["Where do I enter a pairing code?", "Only inside WhatsApp, under Linked devices. The code is generated by the pairing website, not by this portfolio."],
+              ["Is this a QR-scan connection?", "No. ProBoy-MD's documented connection flow uses a pairing code rather than scanning a QR code."],
+              ["Who created the bot?", `${info.name} (ProBoy / ProBoy315), a developer from ${info.location}.`],
+            ].map(([q, a]) => (
+              <article key={q} className="reveal">
+                <h3>{q}</h3>
+                <p>{a}</p>
+              </article>
             ))}
           </div>
         </section>
-
-        <section id="commands">
-          <p className="kicker">03 / Command explorer</p>
-          <h2>Example commands</h2>
-          <p className="muted">Illustrative names from the audit, not a complete verified registry. The default prefix in the notes is a dot.</p>
-          <label htmlFor="cmd">Search by command or category</label>
-          <input id="cmd" className="search" type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Try: ai, group, info" />
-          <div className="commands">
-            {shown.map((c) => (
-              <article key={c[1]} className="command"><strong>{c[1]}</strong><p>{c[2]}</p><span className="status">{c[3]}</span></article>
-            ))}
-          </div>
-          <p className="muted" style={{ marginTop: 12 }} aria-live="polite">{q ? `${shown.length} example ${shown.length === 1 ? "entry" : "entries"} found.` : "Showing all example entries."}</p>
-        </section>
-
-        <section id="architecture">
-          <p className="kicker">04 / Architecture</p>
-          <h2>How the bot is structured</h2>
-          <div className="grid two">
-            <article className="card">
-              <h3>Typical message flow</h3>
-              <div className="steps">
-                {[["Connect", "Baileys opens a WhatsApp multi-device session."], ["Receive", "The main process receives a message and applies basic guards."], ["Resolve", "The handler checks prefix, command name and permissions."], ["Reply", "The command uses local JSON or an external API, then replies in WhatsApp."]].map(([t, d]) => (
-                  <div key={t} className="step"><div><strong>{t}</strong><p className="muted">{d}</p></div></div>
-                ))}
-              </div>
-            </article>
-            <article className="card">
-              <h3>Reported layout</h3>
-              <pre><code>{`index.js\nproboy.js\ncommands/<category>/\ndatabase/\nsessions/\nsettings/`}</code></pre>
-              <p className="muted">A simplified map. Confirm paths in the current repository before treating this as a deploy guide. Do not publish session files or tokens.</p>
-            </article>
-          </div>
-        </section>
-
-        <section id="setup">
-          <p className="kicker">05 / Setup notes</p>
-          <h2>Before you run it</h2>
-          <div className="grid two">
-            <article className="card"><h3>Checklist</h3><ul className="muted"><li>Use a Node.js version the repository supports.</li><li>Read the repository README and its dependencies.</li><li>Keep session, owner and API settings out of public files.</li><li>Run it on a machine you control and read the startup logs.</li></ul></article>
-            <article className="card"><h3>Pairing site</h3><p className="muted">The live pairing page linked from this portfolio is <a href="https://proboy.vercel.app/pair/">proboy.vercel.app/pair/</a>. Confirm it is the deployment you intend before entering a phone number.</p></article>
-          </div>
-        </section>
-
-        <section id="security">
-          <p className="kicker">06 / Safety</p>
-          <h2>Notes from the partial audit</h2>
-          <div className="grid two">
-            <article className="card"><h3>Remote actions</h3><p className="muted">The audit flagged possible remote command execution and remote configuration changes. Those paths should be verified and limited to authenticated, allow-listed actions. This page does not document how to run them.</p></article>
-            <article className="card"><h3>Secrets</h3><p className="muted">Review stored tokens and any auto-download or auto-repair behaviour. Rotate credentials that have been exposed and keep secrets out of the repository.</p></article>
-            <article className="card"><h3>Privacy-sensitive commands</h3><p className="muted">Commands that touch phone numbers, camera images or device data need consent, limited access and a lawful basis. Do not deploy them as a way to watch someone without permission.</p></article>
-            <article className="card"><h3>What this audit did not cover</h3><p className="muted">Not every file, lockfile or runtime path was available. A reported issue is not automatically a confirmed bug.</p></article>
-          </div>
-        </section>
-
-        <section id="owner">
-          <p className="kicker">07 / Creator</p>
-          <h2>Who made ProBoy-MD?</h2>
-          <article className="card">
-            <h3>Shahan Ali — ProBoy / ProBoy315</h3>
-            <p className="muted">This documentation attributes ProBoy-MD to Shahan Ali (ProBoy), based in Burewala, Punjab, Pakistan. Public metadata can differ between files, so the repository history is the place to confirm maintainer details.</p>
-            <p>Portfolio: <a href={site || "/"}>{site || "this site"}</a></p>
-            <p>GitHub: <a href="https://github.com/ProBoy315">github.com/ProBoy315</a></p>
-            <p>Email: <a href={`mailto:${info.email}`}>{info.email}</a> · WhatsApp: <a href={info.whatsapp}>{info.phone}</a></p>
-          </article>
-        </section>
-
-        <section id="links">
-          <p className="kicker">08 / Links</p>
-          <h2>Project links</h2>
-          <div className="grid">
-            <a className="link-card" href="/"><span><b>Portfolio</b><br /><span className="muted">Shahan Ali — ProBoy</span></span></a>
-            <a className="link-card" href="https://github.com/ProBoy315"><span><b>GitHub profile</b><br /><span className="muted">ProBoy315</span></span></a>
-            <a className="link-card" href="https://github.com/ProBoy315/ProBoy-MD"><span><b>Source repository</b><br /><span className="muted">ProBoy-MD</span></span></a>
-          </div>
-        </section>
-
-        <section id="faq">
-          <p className="kicker">09 / FAQ</p>
-          <h2>Common questions</h2>
-          <div className="grid two">
-            <article className="card"><h3>What is it built with?</h3><p className="muted">The notes describe a Node.js application using Baileys for WhatsApp multi-device connectivity, with JSON files for configuration.</p></article>
-            <article className="card"><h3>Who maintains it?</h3><p className="muted">Shahan Ali, also known as ProBoy and ProBoy315. Check the repository for the latest public history.</p></article>
-            <article className="card"><h3>Does every command always work?</h3><p className="muted">No. Commands can depend on APIs, keys, permissions and the files in that deployment.</p></article>
-            <article className="card"><h3>Where is the pairing page?</h3><p className="muted">Linked as proboy.vercel.app/pair/. Verify the host before using it.</p></article>
-          </div>
-        </section>
-      </main>
-      <footer>
-        <div className="wrap">PROBOY-MD · documentation for the project by Shahan Ali (ProBoy). Verify version-specific details in the repository before deployment.</div>
-      </footer>
+      </div>
     </div>
   );
 }
