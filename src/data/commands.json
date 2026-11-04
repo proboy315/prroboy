@@ -1,0 +1,3054 @@
+{
+ "meta": {
+  "project": "ProBoy-MD",
+  "version": "6.0.1",
+  "prefix": ".",
+  "source": "https://github.com/proboy315/ProBoy-MD",
+  "pairingUrl": "https://proboy-md.gt.tc/",
+  "pairingApiDefault": "https://proboy-pair.onrender.com",
+  "menuGenerated": "2026-11-04T12:15:02",
+  "reportedMenuTotal": 531,
+  "reportedListed": 219,
+  "repoVerifiedAt": "2026-11-04",
+  "repositoryCommandFiles": 224,
+  "uniquePrimaryNames": 220,
+  "uniqueInvocableTokens": 537,
+  "note": "Counts above were parsed from the repository source. The supplied menu reported 531 total commands and listed 219 entries; the current repository exposes 224 command files across 9 categories. The difference is reported rather than reconciled by inventing commands.",
+  "categoryStats": [
+   {
+    "id": "admin",
+    "count": 3,
+    "documented": 2
+   },
+   {
+    "id": "ai",
+    "count": 49,
+    "documented": 49
+   },
+   {
+    "id": "dev",
+    "count": 29,
+    "documented": 29
+   },
+   {
+    "id": "fun",
+    "count": 43,
+    "documented": 38
+   },
+   {
+    "id": "general",
+    "count": 25,
+    "documented": 25
+   },
+   {
+    "id": "group",
+    "count": 25,
+    "documented": 23
+   },
+   {
+    "id": "media",
+    "count": 12,
+    "documented": 12
+   },
+   {
+    "id": "textmaker",
+    "count": 19,
+    "documented": 19
+   },
+   {
+    "id": "utility",
+    "count": 19,
+    "documented": 19
+   }
+  ]
+ },
+ "categories": [
+  {
+   "id": "admin",
+   "count": 3,
+   "documented": 2
+  },
+  {
+   "id": "ai",
+   "count": 49,
+   "documented": 49
+  },
+  {
+   "id": "dev",
+   "count": 29,
+   "documented": 29
+  },
+  {
+   "id": "fun",
+   "count": 43,
+   "documented": 38
+  },
+  {
+   "id": "general",
+   "count": 25,
+   "documented": 25
+  },
+  {
+   "id": "group",
+   "count": 25,
+   "documented": 23
+  },
+  {
+   "id": "media",
+   "count": 12,
+   "documented": 12
+  },
+  {
+   "id": "textmaker",
+   "count": 19,
+   "documented": 19
+  },
+  {
+   "id": "utility",
+   "count": 19,
+   "documented": 19
+  }
+ ],
+ "commands": [
+  {
+   "key": "ai/3dlogo",
+   "name": "3dlogo",
+   "category": "ai",
+   "description": "Generate 3D logo images from a text prompt",
+   "usage": [
+    ".3dlogo <prompt>"
+   ],
+   "aliases": [
+    "logo3d",
+    "genlogo",
+    "logogen"
+   ],
+   "file": "commands/ai/3dlogo.js"
+  },
+  {
+   "key": "ai/gemini",
+   "name": "gemini",
+   "category": "ai",
+   "description": "Chat with Gemini AI",
+   "usage": [
+    ".gemini <your question>"
+   ],
+   "aliases": [
+    "geminiai",
+    "geminichat",
+    "ai2"
+   ],
+   "file": "commands/ai/Gemini.js"
+  },
+  {
+   "key": "ai/adorablekawaii",
+   "name": "adorablekawaii",
+   "category": "ai",
+   "description": "Generate AI image in adorable kawaii style",
+   "usage": [
+    ".adorablekawaii <prompt>"
+   ],
+   "aliases": [
+    "adorable_kawaii"
+   ],
+   "file": "commands/ai/adorablekawaii.js"
+  },
+  {
+   "key": "ai/ai",
+   "name": "ai",
+   "category": "ai",
+   "description": "Ask the AI anything",
+   "usage": [
+    ".ai <your question>"
+   ],
+   "aliases": [
+    "gpt",
+    "ask",
+    "chatgpt"
+   ],
+   "file": "commands/ai/ai.js"
+  },
+  {
+   "key": "ai/aicode",
+   "name": "aicode",
+   "category": "ai",
+   "description": "Generate code using AI",
+   "usage": [
+    ".aicode <language> | <prompt>"
+   ],
+   "aliases": [
+    "codeai",
+    "codechat",
+    "ai6"
+   ],
+   "file": "commands/ai/aicode.js"
+  },
+  {
+   "key": "ai/alcoholink",
+   "name": "alcoholink",
+   "category": "ai",
+   "description": "Generate AI image in alcohol ink style",
+   "usage": [
+    ".alcoholink <prompt>"
+   ],
+   "aliases": [
+    "alcohol_ink"
+   ],
+   "file": "commands/ai/alcoholink.js"
+  },
+  {
+   "key": "ai/blackbox",
+   "name": "blackbox",
+   "category": "ai",
+   "description": "Chat with BlackBox AI",
+   "usage": [
+    ".blackbox <your question>"
+   ],
+   "aliases": [
+    "bbox",
+    "bb"
+   ],
+   "file": "commands/ai/blackbox.js"
+  },
+  {
+   "key": "ai/caricature",
+   "name": "caricature",
+   "category": "ai",
+   "description": "Generate AI image in caricature style",
+   "usage": [
+    ".caricature <prompt>"
+   ],
+   "aliases": [],
+   "file": "commands/ai/caricature.js"
+  },
+  {
+   "key": "ai/chatgpt",
+   "name": "chatgpt",
+   "category": "ai",
+   "description": "Chat with ChatGPT",
+   "usage": [
+    ".chatgpt <your question>"
+   ],
+   "aliases": [
+    "gptai",
+    "gpt",
+    "ai5"
+   ],
+   "file": "commands/ai/chatgpt.js"
+  },
+  {
+   "key": "ai/coloredpencilart",
+   "name": "coloredpencilart",
+   "category": "ai",
+   "description": "Generate AI image in colored pencil art style",
+   "usage": [
+    ".coloredpencilart <prompt>"
+   ],
+   "aliases": [
+    "colored_pencil_art"
+   ],
+   "file": "commands/ai/coloredpencilart.js"
+  },
+  {
+   "key": "ai/comic",
+   "name": "comic",
+   "category": "ai",
+   "description": "Generate AI image in comic style",
+   "usage": [
+    ".comic <prompt>"
+   ],
+   "aliases": [],
+   "file": "commands/ai/comic.js"
+  },
+  {
+   "key": "ai/crossstitching",
+   "name": "crossstitching",
+   "category": "ai",
+   "description": "Generate AI image in cross stitching style",
+   "usage": [
+    ".crossstitching <prompt>"
+   ],
+   "aliases": [
+    "cross_stitching"
+   ],
+   "file": "commands/ai/crossstitching.js"
+  },
+  {
+   "key": "ai/cubist",
+   "name": "cubist",
+   "category": "ai",
+   "description": "Generate AI image in cubist style",
+   "usage": [
+    ".cubist <prompt>"
+   ],
+   "aliases": [],
+   "file": "commands/ai/cubist.js"
+  },
+  {
+   "key": "ai/drippingpaintsplatter",
+   "name": "drippingpaintsplatter",
+   "category": "ai",
+   "description": "Generate AI image in dripping paint splatter style",
+   "usage": [
+    ".drippingpaintsplatter <prompt>"
+   ],
+   "aliases": [
+    "dripping_paint_splatter"
+   ],
+   "file": "commands/ai/drippingpaintsplatter.js"
+  },
+  {
+   "key": "ai/explain",
+   "name": "explain",
+   "category": "ai",
+   "description": "Explain a concept simply",
+   "usage": [
+    ".explain <topic>"
+   ],
+   "aliases": [
+    "eli5",
+    "define"
+   ],
+   "file": "commands/ai/explain.js"
+  },
+  {
+   "key": "ai/fauvism",
+   "name": "fauvism",
+   "category": "ai",
+   "description": "Generate AI image in fauvism style",
+   "usage": [
+    ".fauvism <prompt>"
+   ],
+   "aliases": [],
+   "file": "commands/ai/fauvism.js"
+  },
+  {
+   "key": "ai/futuristicretrocyberpunk",
+   "name": "futuristicretrocyberpunk",
+   "category": "ai",
+   "description": "Generate AI image in futuristic retro cyberpunk style",
+   "usage": [
+    ".futuristicretrocyberpunk <prompt>"
+   ],
+   "aliases": [
+    "futuristic_retro_cyberpunk"
+   ],
+   "file": "commands/ai/futuristicretrocyberpunk.js"
+  },
+  {
+   "key": "ai/graffiti",
+   "name": "graffiti",
+   "category": "ai",
+   "description": "Generate AI image in graffiti style",
+   "usage": [
+    ".graffiti <prompt>"
+   ],
+   "aliases": [],
+   "file": "commands/ai/graffiti.js"
+  },
+  {
+   "key": "ai/imagine",
+   "name": "imagine",
+   "category": "ai",
+   "description": "Generate an image from text",
+   "usage": [
+    ".imagine <description>"
+   ],
+   "aliases": [
+    "imagegen",
+    "genimg",
+    "ai7"
+   ],
+   "file": "commands/ai/imagine.js"
+  },
+  {
+   "key": "ai/img2prompt",
+   "name": "img2prompt",
+   "category": "ai",
+   "description": "Convert image to AI prompt",
+   "usage": [
+    ".img2prompt (reply/send image)"
+   ],
+   "aliases": [
+    "i2p",
+    "toprompt"
+   ],
+   "file": "commands/ai/img2prompt.js"
+  },
+  {
+   "key": "ai/inkdripping",
+   "name": "inkdripping",
+   "category": "ai",
+   "description": "Generate AI image in ink dripping style",
+   "usage": [
+    ".inkdripping <prompt>"
+   ],
+   "aliases": [
+    "ink_dripping"
+   ],
+   "file": "commands/ai/inkdripping.js"
+  },
+  {
+   "key": "ai/lineart",
+   "name": "lineart",
+   "category": "ai",
+   "description": "Generate AI image in line art style",
+   "usage": [
+    ".lineart <prompt>"
+   ],
+   "aliases": [
+    "line_art"
+   ],
+   "file": "commands/ai/lineart.js"
+  },
+  {
+   "key": "ai/lowpoly",
+   "name": "lowpoly",
+   "category": "ai",
+   "description": "Generate AI image in lowpoly style",
+   "usage": [
+    ".lowpoly <prompt>"
+   ],
+   "aliases": [],
+   "file": "commands/ai/lowpoly.js"
+  },
+  {
+   "key": "ai/manga",
+   "name": "manga",
+   "category": "ai",
+   "description": "Generate AI image in manga style",
+   "usage": [
+    ".manga <prompt>"
+   ],
+   "aliases": [],
+   "file": "commands/ai/manga.js"
+  },
+  {
+   "key": "ai/meta",
+   "name": "meta",
+   "category": "ai",
+   "description": "Chat with Meta AI",
+   "usage": [
+    ".meta <your question>"
+   ],
+   "aliases": [
+    "metaai",
+    "metachat",
+    "ai4"
+   ],
+   "file": "commands/ai/meta.js"
+  },
+  {
+   "key": "ai/monochrome",
+   "name": "monochrome",
+   "category": "ai",
+   "description": "Generate AI image in monochrome style",
+   "usage": [
+    ".monochrome <prompt>"
+   ],
+   "aliases": [],
+   "file": "commands/ai/monochrome.js"
+  },
+  {
+   "key": "ai/papercraftkirigami",
+   "name": "papercraftkirigami",
+   "category": "ai",
+   "description": "Generate AI image in papercraft kirigami style",
+   "usage": [
+    ".papercraftkirigami <prompt>"
+   ],
+   "aliases": [
+    "papercraft_kirigami"
+   ],
+   "file": "commands/ai/papercraftkirigami.js"
+  },
+  {
+   "key": "ai/papercraftpapermache",
+   "name": "papercraftpapermache",
+   "category": "ai",
+   "description": "Generate AI image in papercraft paper mache style",
+   "usage": [
+    ".papercraftpapermache <prompt>"
+   ],
+   "aliases": [
+    "papercraft_paper_mache"
+   ],
+   "file": "commands/ai/papercraftpapermache.js"
+  },
+  {
+   "key": "ai/papercraftpaperquilling",
+   "name": "papercraftpaperquilling",
+   "category": "ai",
+   "description": "Generate AI image in papercraft paper quilling style",
+   "usage": [
+    ".papercraftpaperquilling <prompt>"
+   ],
+   "aliases": [
+    "papercraft_paper_quilling"
+   ],
+   "file": "commands/ai/papercraftpaperquilling.js"
+  },
+  {
+   "key": "ai/photoedit",
+   "name": "photoedit",
+   "category": "ai",
+   "description": "Edit a photo with AI (reply to image with prompt)",
+   "usage": [
+    ".photoedit <prompt> (reply to an image)"
+   ],
+   "aliases": [
+    "pedit",
+    "editphoto"
+   ],
+   "file": "commands/ai/photoeditai.js"
+  },
+  {
+   "key": "ai/photoedit2",
+   "name": "photoedit2",
+   "category": "ai",
+   "description": "Edit photo with GPT model (reply to image with prompt)",
+   "usage": [
+    ".photoedit2 <prompt> (reply to an image)"
+   ],
+   "aliases": [
+    "pedit2",
+    "editphoto2",
+    "gptphoto"
+   ],
+   "file": "commands/ai/photoeditai2.js"
+  },
+  {
+   "key": "ai/photoedit3",
+   "name": "photoedit3",
+   "category": "ai",
+   "description": "Edit photo with advanced models (reply to image)",
+   "usage": [
+    ".photoedit3 <prompt> | <model> | <resolution>"
+   ],
+   "aliases": [
+    "pedit3",
+    "editphoto3",
+    "aiphoto"
+   ],
+   "file": "commands/ai/photoeiditai3.js"
+  },
+  {
+   "key": "ai/pixelart",
+   "name": "pixelart",
+   "category": "ai",
+   "description": "Generate AI image in pixel art style",
+   "usage": [
+    ".pixelart <prompt>"
+   ],
+   "aliases": [
+    "pixel_art"
+   ],
+   "file": "commands/ai/pixelart.js"
+  },
+  {
+   "key": "ai/pointillism",
+   "name": "pointillism",
+   "category": "ai",
+   "description": "Generate AI image in pointillism style",
+   "usage": [
+    ".pointillism <prompt>"
+   ],
+   "aliases": [],
+   "file": "commands/ai/pointillism.js"
+  },
+  {
+   "key": "ai/popart",
+   "name": "popart",
+   "category": "ai",
+   "description": "Generate AI image in pop art style",
+   "usage": [
+    ".popart <prompt>"
+   ],
+   "aliases": [
+    "pop_art"
+   ],
+   "file": "commands/ai/popart.js"
+  },
+  {
+   "key": "ai/proboyai",
+   "name": "proboyai",
+   "category": "ai",
+   "description": "ProBoy AI developer with memory — builds plugins, debugs, learns from you.",
+   "usage": [],
+   "aliases": [
+    "ai",
+    "proboy",
+    "dev"
+   ],
+   "file": "commands/ai/proboyai.js"
+  },
+  {
+   "key": "ai/psychedelic",
+   "name": "psychedelic",
+   "category": "ai",
+   "description": "Generate AI image in psychedelic style",
+   "usage": [
+    ".psychedelic <prompt>"
+   ],
+   "aliases": [],
+   "file": "commands/ai/psychedelic.js"
+  },
+  {
+   "key": "ai/stainedglass",
+   "name": "stainedglass",
+   "category": "ai",
+   "description": "Generate AI image in stained glass style",
+   "usage": [
+    ".stainedglass <prompt>"
+   ],
+   "aliases": [
+    "stained_glass"
+   ],
+   "file": "commands/ai/stainedglass.js"
+  },
+  {
+   "key": "ai/generatesticker",
+   "name": "generatesticker",
+   "category": "ai",
+   "description": "Generate AI image in sticker style",
+   "usage": [
+    ".generatesticker <prompt>"
+   ],
+   "aliases": [],
+   "file": "commands/ai/stickergenerator.js"
+  },
+  {
+   "key": "ai/sumiesymbolic",
+   "name": "sumiesymbolic",
+   "category": "ai",
+   "description": "Generate AI image in sumi-e symbolic style",
+   "usage": [
+    ".sumiesymbolic <prompt>"
+   ],
+   "aliases": [
+    "sumi_e_symbolic"
+   ],
+   "file": "commands/ai/sumiesymbolic.js"
+  },
+  {
+   "key": "ai/summarize",
+   "name": "summarize",
+   "category": "ai",
+   "description": "Summarize a long text",
+   "usage": [
+    ".summarize <text>"
+   ],
+   "aliases": [
+    "sum",
+    "summary",
+    "tldr"
+   ],
+   "file": "commands/ai/summarize.js"
+  },
+  {
+   "key": "ai/surrealpainting",
+   "name": "surrealpainting",
+   "category": "ai",
+   "description": "Generate AI image in surreal painting style",
+   "usage": [
+    ".surrealpainting <prompt>"
+   ],
+   "aliases": [
+    "surreal_painting"
+   ],
+   "file": "commands/ai/surrealpainting.js"
+  },
+  {
+   "key": "ai/tlingitart",
+   "name": "tlingitart",
+   "category": "ai",
+   "description": "Generate AI image in Tlingit art style",
+   "usage": [
+    ".tlingitart <prompt>"
+   ],
+   "aliases": [
+    "tlingit_art"
+   ],
+   "file": "commands/ai/tlingitart.js"
+  },
+  {
+   "key": "ai/translate",
+   "name": "translate",
+   "category": "ai",
+   "description": "Translate text to another language",
+   "usage": [
+    ".translate <target> | <text>"
+   ],
+   "aliases": [
+    "tr",
+    "trans"
+   ],
+   "file": "commands/ai/translate.js"
+  },
+  {
+   "key": "ai/typography",
+   "name": "typography",
+   "category": "ai",
+   "description": "Generate AI image in typography style",
+   "usage": [
+    ".typography <prompt>"
+   ],
+   "aliases": [],
+   "file": "commands/ai/typography.js"
+  },
+  {
+   "key": "ai/vangogh",
+   "name": "vangogh",
+   "category": "ai",
+   "description": "Generate AI image in Van Gogh style",
+   "usage": [
+    ".vangogh <prompt>"
+   ],
+   "aliases": [
+    "van_gogh"
+   ],
+   "file": "commands/ai/vangogh.js"
+  },
+  {
+   "key": "ai/vocalremover",
+   "name": "vocalremover",
+   "category": "ai",
+   "description": "Separate vocals from a song (reply to audio or provide URL)",
+   "usage": [
+    ".vocalremover (reply to audio) or .vocalremover <audio URL>"
+   ],
+   "aliases": [
+    "removevocals",
+    "splitvocals",
+    "vrm"
+   ],
+   "file": "commands/ai/vocalremover.js"
+  },
+  {
+   "key": "ai/vocalremover2",
+   "name": "vocalremover2",
+   "category": "ai",
+   "description": "Vocal remover v2 (original + vocals + instrumental)",
+   "usage": [
+    ".vocalremover2 (reply to audio) or .vocalremover2 <audio URL>"
+   ],
+   "aliases": [
+    "removevocals2",
+    "splitvocals2",
+    "vrm2"
+   ],
+   "file": "commands/ai/vocalremover2.js"
+  },
+  {
+   "key": "ai/watercolor",
+   "name": "watercolor",
+   "category": "ai",
+   "description": "Generate AI image in watercolor style",
+   "usage": [
+    ".watercolor <prompt>"
+   ],
+   "aliases": [],
+   "file": "commands/ai/watercolor.js"
+  },
+  {
+   "key": "dev/anticall",
+   "name": "anticall",
+   "category": "dev",
+   "description": "Enable or disable anti-call system",
+   "usage": [
+    ".anticall on/off"
+   ],
+   "aliases": [],
+   "file": "commands/dev/anticall.js"
+  },
+  {
+   "key": "dev/autoreact",
+   "name": "autoreact",
+   "category": "dev",
+   "description": "Auto‑react to every incoming message with a chosen emoji",
+   "usage": [],
+   "aliases": [
+    "areact",
+    "autoreact"
+   ],
+   "file": "commands/dev/autoreact.js"
+  },
+  {
+   "key": "dev/autostatus",
+   "name": "autostatus",
+   "category": "dev",
+   "description": "Auto view and auto like WhatsApp statuses",
+   "usage": [],
+   "aliases": [
+    "statusauto",
+    "autostory"
+   ],
+   "file": "commands/dev/autostatus.js"
+  },
+  {
+   "key": "dev/ban",
+   "name": "ban",
+   "category": "dev",
+   "description": "Ban user from bot commands",
+   "usage": [
+    ".ban @user | number"
+   ],
+   "aliases": [
+    "userban"
+   ],
+   "file": "commands/dev/ban.js"
+  },
+  {
+   "key": "dev/banlist",
+   "name": "banlist",
+   "category": "dev",
+   "description": "List banned users",
+   "usage": [
+    ".banlist"
+   ],
+   "aliases": [
+    "listban"
+   ],
+   "file": "commands/dev/banlist.js"
+  },
+  {
+   "key": "dev/block",
+   "name": "block",
+   "category": "dev",
+   "description": "Block a user",
+   "usage": [
+    ".block @user or reply"
+   ],
+   "aliases": [],
+   "file": "commands/dev/block.js"
+  },
+  {
+   "key": "dev/broadcast",
+   "name": "broadcast",
+   "category": "dev",
+   "description": "Broadcast message to all chats",
+   "usage": [
+    ".broadcast <message>"
+   ],
+   "aliases": [
+    "bc"
+   ],
+   "file": "commands/dev/broadcast.js"
+  },
+  {
+   "key": "dev/button",
+   "name": "button",
+   "category": "dev",
+   "description": "Enable or disable button menu mode",
+   "usage": [
+    ".button <on/off/status>"
+   ],
+   "aliases": [
+    "menubutton",
+    "buttons"
+   ],
+   "file": "commands/dev/button.js"
+  },
+  {
+   "key": "dev/cforward",
+   "name": "cforward",
+   "category": "dev",
+   "description": "Forward a replied post (or a channel post link) to every channel this session owns/admins; -a -s = all sessions (main owner only)",
+   "usage": [],
+   "aliases": [
+    "chforward"
+   ],
+   "file": "commands/dev/cforward.js"
+  },
+  {
+   "key": "dev/channels",
+   "name": "channels",
+   "category": "dev",
+   "description": "List WhatsApp Channels you own/admin (verified with WhatsApp) and manage the channel list",
+   "usage": [],
+   "aliases": [
+    "mychannels",
+    "chlist"
+   ],
+   "file": "commands/dev/channels.js"
+  },
+  {
+   "key": "dev/connect",
+   "name": "connect",
+   "category": "dev",
+   "description": "Manage multi-session WhatsApp connections",
+   "usage": [
+    ".connect <session_id>\\n.connect status\\n.connect del <number>"
+   ],
+   "aliases": [
+    "con"
+   ],
+   "file": "commands/dev/connect.js"
+  },
+  {
+   "key": "dev/forward",
+   "name": "forward",
+   "category": "dev",
+   "description": "Forward a replied message to multiple JIDs/LIDs",
+   "usage": [
+    ".forward jid1,jid2,jid3,..."
+   ],
+   "aliases": [
+    "fwd",
+    "sendto"
+   ],
+   "file": "commands/dev/forward.js"
+  },
+  {
+   "key": "dev/gccmd",
+   "name": "gccmd",
+   "category": "dev",
+   "description": "Lock a group to one auto command",
+   "usage": [
+    ".gccmd <set/remove/list/mode/help>"
+   ],
+   "aliases": [
+    "groupcmd"
+   ],
+   "file": "commands/dev/gccmd.js"
+  },
+  {
+   "key": "dev/groupjids",
+   "name": "groupjids",
+   "category": "dev",
+   "description": "List all groups with name and JID",
+   "usage": [
+    ".groupjids"
+   ],
+   "aliases": [
+    "gjids",
+    "groups",
+    "groupids"
+   ],
+   "file": "commands/dev/groupjid.js"
+  },
+  {
+   "key": "dev/health",
+   "name": "health",
+   "category": "dev",
+   "description": "Memory, sessions, caches and channel-system status (owner only)",
+   "usage": [],
+   "aliases": [
+    "hlth"
+   ],
+   "file": "commands/dev/health.js"
+  },
+  {
+   "key": "dev/install",
+   "name": "install",
+   "category": "dev",
+   "description": "Install a plugin from a GitHub Gist URL or by replying to a plugin file",
+   "usage": [
+    ".install [-r|--restart] <gist_url>  OR  reply to a .js file with .install [-r]"
+   ],
+   "aliases": [
+    "plugin",
+    "addplugin"
+   ],
+   "file": "commands/dev/install.js"
+  },
+  {
+   "key": "dev/listsudo",
+   "name": "listsudo",
+   "category": "dev",
+   "description": "Show all sudo users",
+   "usage": [
+    ".listsudo"
+   ],
+   "aliases": [
+    "sudolist"
+   ],
+   "file": "commands/dev/listsudo.js"
+  },
+  {
+   "key": "dev/mode",
+   "name": "mode",
+   "category": "dev",
+   "description": "Toggle bot between private and public mode",
+   "usage": [
+    ".mode <private/public>"
+   ],
+   "aliases": [
+    "botmode",
+    "privatemode",
+    "publicmode"
+   ],
+   "file": "commands/dev/mode.js"
+  },
+  {
+   "key": "dev/publish",
+   "name": "publish",
+   "category": "dev",
+   "description": "Publish files/plugins to GitHub repository (TOTP protected, auto‑renames index files)",
+   "usage": [],
+   "aliases": [
+    "githubpush"
+   ],
+   "file": "commands/dev/publish.js"
+  },
+  {
+   "key": "dev/removesudo",
+   "name": "removesudo",
+   "category": "dev",
+   "description": "Remove sudo user",
+   "usage": [
+    ".removesudo @user | number"
+   ],
+   "aliases": [
+    "delsudo"
+   ],
+   "file": "commands/dev/removesudo.js"
+  },
+  {
+   "key": "dev/restart",
+   "name": "restart",
+   "category": "dev",
+   "description": "Restart the bot (Owner Only)",
+   "usage": [
+    ".restart"
+   ],
+   "aliases": [
+    "reboot",
+    "reload"
+   ],
+   "file": "commands/dev/restart.js"
+  },
+  {
+   "key": "dev/setprefix",
+   "name": "setprefix",
+   "category": "dev",
+   "description": "Change bot command prefix",
+   "usage": [
+    ".setprefix <new prefix>"
+   ],
+   "aliases": [
+    "prefix"
+   ],
+   "file": "commands/dev/setprefix.js"
+  },
+  {
+   "key": "dev/setsudo",
+   "name": "setsudo",
+   "category": "dev",
+   "description": "Add sudo user",
+   "usage": [
+    ".setsudo @user | number"
+   ],
+   "aliases": [
+    "addsudo"
+   ],
+   "file": "commands/dev/setsudo.js"
+  },
+  {
+   "key": "dev/unban",
+   "name": "unban",
+   "category": "dev",
+   "description": "Unban user from bot commands",
+   "usage": [
+    ".unban @user | number"
+   ],
+   "aliases": [
+    "delban"
+   ],
+   "file": "commands/dev/unban.js"
+  },
+  {
+   "key": "dev/unblock",
+   "name": "unblock",
+   "category": "dev",
+   "description": "Unblock a user",
+   "usage": [
+    ".unblock @user or reply"
+   ],
+   "aliases": [],
+   "file": "commands/dev/unblock.js"
+  },
+  {
+   "key": "dev/uninstall",
+   "name": "uninstall",
+   "category": "dev",
+   "description": "Uninstall a plugin by name (deletes its file)",
+   "usage": [],
+   "aliases": [
+    "removeplugin",
+    "delplugin",
+    "unload"
+   ],
+   "file": "commands/dev/uninstall.js"
+  },
+  {
+   "key": "dev/update",
+   "name": "update",
+   "category": "dev",
+   "description": "Update bot from configured ZIP URL (Owner Only)",
+   "usage": [
+    ".update [optional_zip_url]"
+   ],
+   "aliases": [
+    "upgrade"
+   ],
+   "file": "commands/dev/update.js"
+  },
+  {
+   "key": "dev/webui",
+   "name": "webui",
+   "category": "dev",
+   "description": "Test the HTML payload (WebUI) message (experimental)",
+   "usage": [],
+   "aliases": [
+    "htmlui"
+   ],
+   "file": "commands/dev/webui.js"
+  },
+  {
+   "key": "fun/jio",
+   "name": "jio",
+   "category": "fun",
+   "description": "JIO network boosting animation",
+   "usage": [
+    ".jio"
+   ],
+   "aliases": [
+    "network",
+    "jionet"
+   ],
+   "file": "commands/fun/Jio.js"
+  },
+  {
+   "key": "fun/advice",
+   "name": "advice",
+   "category": "fun",
+   "description": "Get a random piece of advice",
+   "usage": [
+    ".advice"
+   ],
+   "aliases": [],
+   "file": "commands/fun/advice.js"
+  },
+  {
+   "key": "fun/bfsday",
+   "name": "bfsday",
+   "category": "fun",
+   "description": "Get a random Boyfriend’s Day wish",
+   "usage": [
+    ".bfsday"
+   ],
+   "aliases": [],
+   "file": "commands/fun/bfsday.js"
+  },
+  {
+   "key": "fun/boom",
+   "name": "boom",
+   "category": "fun",
+   "description": "Repeat a message multiple times (max 20). Optionally send to another number.",
+   "usage": [
+    ".boom <message,count[,number]>"
+   ],
+   "aliases": [
+    "repeat",
+    "spam"
+   ],
+   "file": "commands/fun/boom.js"
+  },
+  {
+   "key": "fun/cat",
+   "name": "cat",
+   "category": "fun",
+   "description": "Get a random cat image",
+   "usage": [
+    ".cat"
+   ],
+   "aliases": [],
+   "file": "commands/fun/cat.js"
+  },
+  {
+   "key": "fun/christmas",
+   "name": "christmas",
+   "category": "fun",
+   "description": "Get a random Christmas wish",
+   "usage": [
+    ".christmas"
+   ],
+   "aliases": [],
+   "file": "commands/fun/christmas.js"
+  },
+  {
+   "key": "fun/clock",
+   "name": "clock",
+   "category": "fun",
+   "description": "Animated analog clock",
+   "usage": [
+    ".clock"
+   ],
+   "aliases": [
+    "time"
+   ],
+   "file": "commands/fun/clock.js"
+  },
+  {
+   "key": "fun/compliment",
+   "name": "compliment",
+   "category": "fun",
+   "description": "",
+   "usage": [
+    "compliment [@user]"
+   ],
+   "aliases": [
+    "praise",
+    "compliment"
+   ],
+   "file": "commands/fun/complimentry.js"
+  },
+  {
+   "key": "fun/dare",
+   "name": "dare",
+   "category": "fun",
+   "description": "",
+   "usage": [
+    "dare"
+   ],
+   "aliases": [],
+   "file": "commands/fun/dare.js"
+  },
+  {
+   "key": "fun/roll",
+   "name": "roll",
+   "category": "fun",
+   "description": "Rolls a dice with animation",
+   "usage": [
+    ".roll"
+   ],
+   "aliases": [
+    "dice"
+   ],
+   "file": "commands/fun/dice.js"
+  },
+  {
+   "key": "fun/dog",
+   "name": "dog",
+   "category": "fun",
+   "description": "Get a random dog image",
+   "usage": [
+    ".dog"
+   ],
+   "aliases": [],
+   "file": "commands/fun/dog.js"
+  },
+  {
+   "key": "fun/emojimix",
+   "name": "emojimix",
+   "category": "fun",
+   "description": "Mix two emojis together using Google Kitchen",
+   "usage": [
+    ".emojimix <emoji1> <emoji2>\\nExample: .emojimix 😂 🔥"
+   ],
+   "aliases": [
+    "mixemoji",
+    "emojiblend"
+   ],
+   "file": "commands/fun/emojimix.js"
+  },
+  {
+   "key": "fun/face",
+   "name": "face",
+   "category": "fun",
+   "description": "Animated square face",
+   "usage": [
+    ".face"
+   ],
+   "aliases": [
+    "smiley"
+   ],
+   "file": "commands/fun/face.js"
+  },
+  {
+   "key": "fun/fathersday",
+   "name": "fathersday",
+   "category": "fun",
+   "description": "Get a random Father’s Day wish",
+   "usage": [
+    ".fathersday"
+   ],
+   "aliases": [],
+   "file": "commands/fun/fathersday.js"
+  },
+  {
+   "key": "fun/flirt",
+   "name": "flirt",
+   "category": "fun",
+   "description": "Get a flirty pick‑up line",
+   "usage": [
+    ".flirt"
+   ],
+   "aliases": [],
+   "file": "commands/fun/flirt.js"
+  },
+  {
+   "key": "fun/funfact",
+   "name": "funfact",
+   "category": "fun",
+   "description": "Get a random fun fact",
+   "usage": [
+    ".funfact"
+   ],
+   "aliases": [
+    "factapi"
+   ],
+   "file": "commands/fun/funfact.js"
+  },
+  {
+   "key": "fun/gayrate",
+   "name": "gayrate",
+   "category": "fun",
+   "description": "Playful gay percentage. Reply or mention a user.",
+   "usage": [
+    ".gayrate (reply or @user)"
+   ],
+   "aliases": [
+    "gay"
+   ],
+   "file": "commands/fun/gayrate.js"
+  },
+  {
+   "key": "fun/gfsday",
+   "name": "gfsday",
+   "category": "fun",
+   "description": "Get a random Girlfriend’s Day wish",
+   "usage": [
+    ".gfsday"
+   ],
+   "aliases": [],
+   "file": "commands/fun/gfsday.js"
+  },
+  {
+   "key": "fun/goodnight",
+   "name": "goodnight",
+   "category": "fun",
+   "description": "Get a sweet goodnight wish",
+   "usage": [
+    ".goodnight"
+   ],
+   "aliases": [],
+   "file": "commands/fun/goodnight.js"
+  },
+  {
+   "key": "fun/gratitude",
+   "name": "gratitude",
+   "category": "fun",
+   "description": "Get a gratitude quote",
+   "usage": [
+    ".gratitude"
+   ],
+   "aliases": [],
+   "file": "commands/fun/gratitude.js"
+  },
+  {
+   "key": "fun/hack",
+   "name": "hack",
+   "category": "fun",
+   "description": "Hacking prank animation",
+   "usage": [
+    ".hack"
+   ],
+   "aliases": [],
+   "file": "commands/fun/hack.js"
+  },
+  {
+   "key": "fun/halloween",
+   "name": "halloween",
+   "category": "fun",
+   "description": "Get a random Halloween wish",
+   "usage": [
+    ".halloween"
+   ],
+   "aliases": [],
+   "file": "commands/fun/halloween.js"
+  },
+  {
+   "key": "fun/hand",
+   "name": "hand",
+   "category": "fun",
+   "description": "Animated hand gestures",
+   "usage": [
+    ".hand"
+   ],
+   "aliases": [
+    "gesture"
+   ],
+   "file": "commands/fun/hand.js"
+  },
+  {
+   "key": "fun/heartbeat",
+   "name": "heartbeat",
+   "category": "fun",
+   "description": "Beating heart animation",
+   "usage": [
+    ".heartbeat"
+   ],
+   "aliases": [
+    "heart"
+   ],
+   "file": "commands/fun/heartbeat.js"
+  },
+  {
+   "key": "fun/heartbreak",
+   "name": "heartbreak",
+   "category": "fun",
+   "description": "Get a heartbreak quote",
+   "usage": [
+    ".heartbreak"
+   ],
+   "aliases": [],
+   "file": "commands/fun/heartbreak.js"
+  },
+  {
+   "key": "fun/insult",
+   "name": "insult",
+   "category": "fun",
+   "description": "Give a silly insult to a user. Reply or mention to target someone.",
+   "usage": [
+    ".insult (reply or @user)"
+   ],
+   "aliases": [
+    "insultme",
+    "burn"
+   ],
+   "file": "commands/fun/insult.js"
+  },
+  {
+   "key": "fun/joke",
+   "name": "joke",
+   "category": "fun",
+   "description": "Get a random joke to brighten your day",
+   "usage": [
+    ".joke"
+   ],
+   "aliases": [
+    "jokes",
+    "dadjoke"
+   ],
+   "file": "commands/fun/joke.js"
+  },
+  {
+   "key": "fun/lovequotes",
+   "name": "lovequotes",
+   "category": "fun",
+   "description": "Get a romantic love quote",
+   "usage": [
+    ".lovequotes"
+   ],
+   "aliases": [
+    "lovequote"
+   ],
+   "file": "commands/fun/lovequote.js"
+  },
+  {
+   "key": "fun/meme",
+   "name": "meme",
+   "category": "fun",
+   "description": "Get random memes",
+   "usage": [
+    ".meme"
+   ],
+   "aliases": [
+    "memes"
+   ],
+   "file": "commands/fun/meme.js"
+  },
+  {
+   "key": "fun/memesearch",
+   "name": "memesearch",
+   "category": "fun",
+   "description": "",
+   "usage": [
+    "memesearch <query>"
+   ],
+   "aliases": [
+    "memes",
+    "sm",
+    "smeme",
+    "gifsearch",
+    "gif"
+   ],
+   "file": "commands/fun/memesearch.js"
+  },
+  {
+   "key": "fun/moon",
+   "name": "moon",
+   "category": "fun",
+   "description": "Shows a cool moon phase animation",
+   "usage": [
+    ".moon"
+   ],
+   "aliases": [
+    "moonphase"
+   ],
+   "file": "commands/fun/moon.js"
+  },
+  {
+   "key": "fun/moon2",
+   "name": "moon2",
+   "category": "fun",
+   "description": "Animated moon phases (single emoji)",
+   "usage": [
+    ".moon2"
+   ],
+   "aliases": [
+    "moonemoji"
+   ],
+   "file": "commands/fun/moon2.js"
+  },
+  {
+   "key": "fun/mothersday",
+   "name": "mothersday",
+   "category": "fun",
+   "description": "Get a random Mother’s Day wish",
+   "usage": [
+    ".mothersday"
+   ],
+   "aliases": [],
+   "file": "commands/fun/mothersday.js"
+  },
+  {
+   "key": "fun/motivation",
+   "name": "motivation",
+   "category": "fun",
+   "description": "Get a motivational quote",
+   "usage": [
+    ".motivation"
+   ],
+   "aliases": [],
+   "file": "commands/fun/motivation.js"
+  },
+  {
+   "key": "fun/newyear",
+   "name": "newyear",
+   "category": "fun",
+   "description": "Get a random New Year wish",
+   "usage": [
+    ".newyear"
+   ],
+   "aliases": [],
+   "file": "commands/fun/newyear.js"
+  },
+  {
+   "key": "fun/pies",
+   "name": "pies",
+   "category": "fun",
+   "description": "",
+   "usage": [
+    "pies <country>"
+   ],
+   "aliases": [
+    "pie",
+    "india",
+    "malaysia",
+    "thailand",
+    "china",
+    "indonesia",
+    "japan",
+    "korea",
+    "vietnam"
+   ],
+   "file": "commands/fun/pies.js"
+  },
+  {
+   "key": "fun/quotes",
+   "name": "quotes",
+   "category": "fun",
+   "description": "Get a random general quote",
+   "usage": [
+    ".quotes"
+   ],
+   "aliases": [
+    "quoteapi"
+   ],
+   "file": "commands/fun/quotes.js"
+  },
+  {
+   "key": "fun/shayari",
+   "name": "shayari",
+   "category": "fun",
+   "description": "Get a random shayari (Hindi/Urdu)",
+   "usage": [
+    ".shayari"
+   ],
+   "aliases": [],
+   "file": "commands/fun/shayari.js"
+  },
+  {
+   "key": "fun/ship",
+   "name": "ship",
+   "category": "fun",
+   "description": "Ship two users randomly or mention/reply to specific users.",
+   "usage": [
+    ".ship (random) OR .ship @user1 @user2 OR reply with .ship"
+   ],
+   "aliases": [
+    "shipit",
+    "match"
+   ],
+   "file": "commands/fun/ship.js"
+  },
+  {
+   "key": "fun/stupid",
+   "name": "stupid",
+   "category": "fun",
+   "description": "Animation: brain being thrown into trash",
+   "usage": [
+    ".stupid"
+   ],
+   "aliases": [
+    "brain"
+   ],
+   "file": "commands/fun/stupid.js"
+  },
+  {
+   "key": "fun/thankyou",
+   "name": "thankyou",
+   "category": "fun",
+   "description": "Get a thank you quote",
+   "usage": [
+    ".thankyou"
+   ],
+   "aliases": [],
+   "file": "commands/fun/thankyou.js"
+  },
+  {
+   "key": "fun/truth",
+   "name": "truth",
+   "category": "fun",
+   "description": "",
+   "usage": [
+    "truth"
+   ],
+   "aliases": [],
+   "file": "commands/fun/truth.js"
+  },
+  {
+   "key": "fun/valentine",
+   "name": "valentine",
+   "category": "fun",
+   "description": "Get a random Valentine’s Day wish",
+   "usage": [
+    ".valentine"
+   ],
+   "aliases": [
+    "valentines",
+    "valentinesday"
+   ],
+   "file": "commands/fun/valentine.js"
+  },
+  {
+   "key": "general/antidelete",
+   "name": "antidelete",
+   "category": "general",
+   "description": "Recover deleted messages (text + media) everywhere",
+   "usage": [
+    ".antidelete <on/off/status/chat/jid/bot> [jid]"
+   ],
+   "aliases": [
+    "antidel"
+   ],
+   "file": "commands/general/antidelete.js"
+  },
+  {
+   "key": "general/attp",
+   "name": "attp",
+   "category": "general",
+   "description": "Create animated text sticker",
+   "usage": [
+    "<text>"
+   ],
+   "aliases": [
+    "ttp"
+   ],
+   "file": "commands/general/attp.js"
+  },
+  {
+   "key": "general/bugmenu",
+   "name": "bugmenu",
+   "category": "general",
+   "description": "Show bug category commands",
+   "usage": [
+    ".bugmenu"
+   ],
+   "aliases": [
+    "bugs",
+    "bugcommands"
+   ],
+   "file": "commands/general/bugmenu.js"
+  },
+  {
+   "key": "utility/check",
+   "name": "check",
+   "category": "utility",
+   "description": "Demo: buttons that run commands + a button that runs a custom script",
+   "usage": [],
+   "aliases": [],
+   "file": "commands/general/check.js"
+  },
+  {
+   "key": "general/getpp",
+   "name": "getpp",
+   "category": "general",
+   "description": "Get profile picture of a user or group",
+   "usage": [
+    ".getpp [@mention | reply | phone number]"
+   ],
+   "aliases": [
+    "gp",
+    "getpic"
+   ],
+   "file": "commands/general/getpp.js"
+  },
+  {
+   "key": "general/github",
+   "name": "github",
+   "category": "general",
+   "description": "Show bot GitHub repository and statistics",
+   "usage": [
+    ".github"
+   ],
+   "aliases": [
+    "repo",
+    "git",
+    "source",
+    "sc",
+    "script"
+   ],
+   "file": "commands/general/github.js"
+  },
+  {
+   "key": "general/groupinfo",
+   "name": "groupinfo",
+   "category": "general",
+   "description": "Show group information",
+   "usage": [
+    ".groupinfo"
+   ],
+   "aliases": [
+    "info",
+    "ginfo"
+   ],
+   "file": "commands/general/groupinfo.js"
+  },
+  {
+   "key": "general/groupstats",
+   "name": "groupstats",
+   "category": "general",
+   "description": "Show today\\",
+   "usage": [
+    ".groupstats"
+   ],
+   "aliases": [
+    "stats",
+    "leaderboard",
+    "gstats",
+    "topmembers",
+    "msgs",
+    "messagestats"
+   ],
+   "file": "commands/general/groupstats.js"
+  },
+  {
+   "key": "utility/info",
+   "name": "info",
+   "category": "utility",
+   "description": "Fetch phone/CNIC information using public API",
+   "usage": [],
+   "aliases": [
+    "infosearch",
+    "whois"
+   ],
+   "file": "commands/general/info.js"
+  },
+  {
+   "key": "general/jid",
+   "name": "jid",
+   "category": "general",
+   "description": "Get WhatsApp JID of a user, group, or channel",
+   "usage": [
+    ".jid (reply to message / @mention / direct)"
+   ],
+   "aliases": [
+    "getjid",
+    "jidinfo"
+   ],
+   "file": "commands/general/jid.js"
+  },
+  {
+   "key": "general/list",
+   "name": "list",
+   "category": "general",
+   "description": "Display all available commands in a stylish format",
+   "usage": [
+    ".list"
+   ],
+   "aliases": [
+    "commands",
+    "all"
+   ],
+   "file": "commands/general/list.js"
+  },
+  {
+   "key": "general/MAIN",
+   "name": "MAIN",
+   "category": "general",
+   "description": "Show all available commands",
+   "usage": [
+    ".menu"
+   ],
+   "aliases": [
+    "help",
+    "commands"
+   ],
+   "file": "commands/general/menu.js"
+  },
+  {
+   "key": "general/menuinfo",
+   "name": "menuinfo",
+   "category": "general",
+   "description": "Generate a text file with all command details (single document)",
+   "usage": [
+    ".menuinfo"
+   ],
+   "aliases": [
+    "allcmds",
+    "cmdinfoall"
+   ],
+   "file": "commands/general/menuinfo.js"
+  },
+  {
+   "key": "general/myactivity",
+   "name": "myactivity",
+   "category": "general",
+   "description": "Check your activity stats for today",
+   "usage": [
+    ".myactivity"
+   ],
+   "aliases": [
+    "mystats",
+    "mymsgs",
+    "rank"
+   ],
+   "file": "commands/general/myactivity.js"
+  },
+  {
+   "key": "general/numlist",
+   "name": "numlist",
+   "category": "general",
+   "description": "Get comma‑separated phone numbers of a group",
+   "usage": [
+    ".numlist [groupJid]"
+   ],
+   "aliases": [
+    "numbers",
+    "members",
+    "listnumbers"
+   ],
+   "file": "commands/general/numlist.js"
+  },
+  {
+   "key": "general/owner",
+   "name": "owner",
+   "category": "general",
+   "description": "Show bot owner contact information",
+   "usage": [
+    ".owner"
+   ],
+   "aliases": [
+    "creator",
+    "dev",
+    "botowner"
+   ],
+   "file": "commands/general/owner.js"
+  },
+  {
+   "key": "general/ping",
+   "name": "ping",
+   "category": "general",
+   "description": "Check bot response time",
+   "usage": [
+    ".ping"
+   ],
+   "aliases": [
+    "p"
+   ],
+   "file": "commands/general/ping.js"
+  },
+  {
+   "key": "general/qr",
+   "name": "qr",
+   "category": "general",
+   "description": "Generate QR code from text",
+   "usage": [
+    ".qr <text>"
+   ],
+   "aliases": [
+    "qrcode"
+   ],
+   "file": "commands/general/qr.js"
+  },
+  {
+   "key": "general/save",
+   "name": "save",
+   "category": "general",
+   "description": "Save any Status by replying with .save (works for status forwards too)",
+   "usage": [
+    "Reply to a Status with .save"
+   ],
+   "aliases": [
+    "saver"
+   ],
+   "file": "commands/general/save.js"
+  },
+  {
+   "key": "general/simage",
+   "name": "simage",
+   "category": "general",
+   "description": "Convert sticker to image (PNG)",
+   "usage": [
+    ".simage (reply to sticker)"
+   ],
+   "aliases": [
+    "toimg",
+    "stickertoimg",
+    "sticker2img",
+    "svideo"
+   ],
+   "file": "commands/general/simage.js"
+  },
+  {
+   "key": "general/ssweb",
+   "name": "ssweb",
+   "category": "general",
+   "description": "Take a screenshot of a website",
+   "usage": [
+    ".ssweb <url>"
+   ],
+   "aliases": [
+    "screenshot",
+    "ss",
+    "webss"
+   ],
+   "file": "commands/general/ssweb.js"
+  },
+  {
+   "key": "general/sticker",
+   "name": "sticker",
+   "category": "general",
+   "description": "Convert image or video to sticker (auto compression)",
+   "usage": [
+    ".sticker (reply to media)"
+   ],
+   "aliases": [
+    "s",
+    "stiker",
+    "stc"
+   ],
+   "file": "commands/general/sticker.js"
+  },
+  {
+   "key": "general/take",
+   "name": "take",
+   "category": "general",
+   "description": "Steal a sticker and change its packname",
+   "usage": [
+    ".take [packname] (reply to sticker)"
+   ],
+   "aliases": [
+    "steal"
+   ],
+   "file": "commands/general/take.js"
+  },
+  {
+   "key": "general/uptime",
+   "name": "uptime",
+   "category": "general",
+   "description": "Show how long the bot has been running",
+   "usage": [
+    ".uptime"
+   ],
+   "aliases": [
+    "runtime",
+    "botuptime",
+    "alive"
+   ],
+   "file": "commands/general/uptime.js"
+  },
+  {
+   "key": "general/viewonce",
+   "name": "viewonce",
+   "category": "general",
+   "description": "Reveal view-once messages (images/videos/audio)",
+   "usage": [
+    ".viewonce (reply to view-once message)"
+   ],
+   "aliases": [
+    "readvo",
+    "read",
+    "vv",
+    "readviewonce"
+   ],
+   "file": "commands/general/viewonce.js"
+  },
+  {
+   "key": "general/viewonce2",
+   "name": "viewonce2",
+   "category": "general",
+   "description": "Reveal view‑once media and send it to your own self‑chat",
+   "usage": [
+    ".vv2 (reply to view‑once message)"
+   ],
+   "aliases": [
+    "vv2",
+    "readvo2",
+    "readvv",
+    "vvprivate"
+   ],
+   "file": "commands/general/viewonce2.js"
+  },
+  {
+   "key": "group/add",
+   "name": "add",
+   "category": "group",
+   "description": "Add members to a group using phone numbers",
+   "usage": [
+    ".add [groupJid] 92300123456,92300765432 (max 10)"
+   ],
+   "aliases": [
+    "addmember",
+    "addm"
+   ],
+   "file": "commands/group/add.js"
+  },
+  {
+   "key": "group/antibadword",
+   "name": "antibadword",
+   "category": "group",
+   "description": "Detect bad words and act",
+   "usage": [
+    ".antibadword <on/off/status/action/add/del/list/clear>"
+   ],
+   "aliases": [
+    "badword",
+    "abw"
+   ],
+   "file": "commands/group/antibadword.js"
+  },
+  {
+   "key": "group/antibot",
+   "name": "antibot",
+   "category": "group",
+   "description": "Remove detected bot accounts on join (best-effort)",
+   "usage": [
+    ".antibot <on/off/status>"
+   ],
+   "aliases": [
+    "abot"
+   ],
+   "file": "commands/group/antibot.js"
+  },
+  {
+   "key": "group/antifake",
+   "name": "antifake",
+   "category": "group",
+   "description": "Kick new members not matching allowed country codes",
+   "usage": [
+    ".antifake <on/off/status/set> ..."
+   ],
+   "aliases": [
+    "afake"
+   ],
+   "file": "commands/group/antifake.js"
+  },
+  {
+   "key": "general/antilink",
+   "name": "antilink",
+   "category": "general",
+   "description": "Configure anti-link: on/off, exclude/include lists, action, warning limit",
+   "usage": [],
+   "aliases": [],
+   "file": "commands/group/antilink.js"
+  },
+  {
+   "key": "group/antispam",
+   "name": "antispam",
+   "category": "group",
+   "description": "Anti-spam rate limit",
+   "usage": [
+    ".antispam <on/off/status/set> ..."
+   ],
+   "aliases": [
+    "aspam"
+   ],
+   "file": "commands/group/antispam.js"
+  },
+  {
+   "key": "group/antiviewonce",
+   "name": "antiviewonce",
+   "category": "group",
+   "description": "Save view-once media by forwarding to the bot number",
+   "usage": [
+    ".antiviewonce <on/off/status>"
+   ],
+   "aliases": [
+    "avo",
+    "viewonce"
+   ],
+   "file": "commands/group/antiviewonce.js"
+  },
+  {
+   "key": "group/autosticker",
+   "name": "autosticker",
+   "category": "group",
+   "description": "Enable or disable auto-sticker conversion (images/videos automatically become stickers)",
+   "usage": [
+    ".autosticker <on/off>"
+   ],
+   "aliases": [
+    "autos",
+    "asticker"
+   ],
+   "file": "commands/group/autosticker.js"
+  },
+  {
+   "key": "group/delete",
+   "name": "delete",
+   "category": "group",
+   "description": "Delete a replied message",
+   "usage": [
+    ".delete (reply to a message)"
+   ],
+   "aliases": [
+    "del"
+   ],
+   "file": "commands/group/delete.js"
+  },
+  {
+   "key": "group/demote",
+   "name": "demote",
+   "category": "group",
+   "description": "Remove admin privileges from member",
+   "usage": [
+    ".demote @user"
+   ],
+   "aliases": [
+    "removeadmin"
+   ],
+   "file": "commands/group/demote.js"
+  },
+  {
+   "key": "group/ginfo",
+   "name": "ginfo",
+   "category": "group",
+   "description": "ℹ Get detailed group information",
+   "usage": [
+    ".ginfo"
+   ],
+   "aliases": [
+    "groupinfo"
+   ],
+   "file": "commands/group/ginfo.js"
+  },
+  {
+   "key": "group/goodbye",
+   "name": "goodbye",
+   "category": "group",
+   "description": "",
+   "usage": [
+    "goodbye on/off"
+   ],
+   "aliases": [
+    "goodbyeon",
+    "goodbyeoff"
+   ],
+   "file": "commands/group/goodbye.js"
+  },
+  {
+   "key": "group/welcome",
+   "name": "welcome",
+   "category": "group",
+   "description": "Configure welcome/goodbye messages",
+   "usage": [
+    ".welcome on/off | .setwelcome <text> | .goodbye on/off | .setgoodbye <text>"
+   ],
+   "aliases": [
+    "goodbye",
+    "setwelcome",
+    "setgoodbye"
+   ],
+   "file": "commands/group/greetings.js"
+  },
+  {
+   "key": "group/.invite",
+   "name": ".invite",
+   "category": "group",
+   "description": "Get group invite link",
+   "usage": [
+    ".invite"
+   ],
+   "aliases": [
+    "link",
+    "invite",
+    "grouplink"
+   ],
+   "file": "commands/group/grouplink.js"
+  },
+  {
+   "key": "group/hidetag",
+   "name": "hidetag",
+   "category": "group",
+   "description": "Silently tag all members in the group",
+   "usage": [
+    ".tag <message> (or reply to media)"
+   ],
+   "aliases": [
+    "tag"
+   ],
+   "file": "commands/group/hidetag.js"
+  },
+  {
+   "key": "group/kick",
+   "name": "kick",
+   "category": "group",
+   "description": "Kick mentioned/replied members from the group",
+   "usage": [
+    ".kick @user"
+   ],
+   "aliases": [
+    "remove"
+   ],
+   "file": "commands/group/kick.js"
+  },
+  {
+   "key": "group/lockgs",
+   "name": "lockgs",
+   "category": "group",
+   "description": "Lock group settings (only admins can edit)",
+   "usage": [
+    ".lockgs"
+   ],
+   "aliases": [
+    "lockgsettings"
+   ],
+   "file": "commands/group/lockgs.js"
+  },
+  {
+   "key": "group/warn",
+   "name": "warn",
+   "category": "group",
+   "description": "Moderation commands (warn/mute/tagall/kickall)",
+   "usage": [
+    ".warn/.unwarn/.warnings | .mute/.unmute | .tagall | .kickall confirm"
+   ],
+   "aliases": [
+    "unwarn",
+    "warnings",
+    "mute",
+    "unmute",
+    "tagall",
+    "kickall"
+   ],
+   "file": "commands/group/moderation.js"
+  },
+  {
+   "key": "group/mute",
+   "name": "mute",
+   "category": "group",
+   "description": "Close group (only admins can send messages)",
+   "usage": [
+    ".mute"
+   ],
+   "aliases": [
+    "close",
+    "closegroup"
+   ],
+   "file": "commands/group/mute.js"
+  },
+  {
+   "key": "group/online",
+   "name": "online",
+   "category": "group",
+   "description": "List members currently online in the group",
+   "usage": [
+    ".online"
+   ],
+   "aliases": [
+    "listonline",
+    "whosonline"
+   ],
+   "file": "commands/group/online.js"
+  },
+  {
+   "key": "group/promote",
+   "name": "promote",
+   "category": "group",
+   "description": "Promote member to admin",
+   "usage": [
+    ".promote @user"
+   ],
+   "aliases": [
+    "makeadmin"
+   ],
+   "file": "commands/group/promote.js"
+  },
+  {
+   "key": "group/resetwarn",
+   "name": "resetwarn",
+   "category": "group",
+   "description": "Reset all warnings for a user",
+   "usage": [
+    ".resetwarn @user"
+   ],
+   "aliases": [
+    "resetwarning",
+    "clearwarn",
+    "unwarn",
+    "delwarn"
+   ],
+   "file": "commands/group/resetwarn.js"
+  },
+  {
+   "key": "group/setgoodbye",
+   "name": "setgoodbye",
+   "category": "group",
+   "description": "",
+   "usage": [
+    "setgoodbye <message> (use @user for member mention)"
+   ],
+   "aliases": [
+    "goodbyetext"
+   ],
+   "file": "commands/group/setgoodbye.js"
+  },
+  {
+   "key": "group/tagall",
+   "name": "tagall",
+   "category": "group",
+   "description": "Tag all group members",
+   "usage": [
+    ".tagall <message>"
+   ],
+   "aliases": [
+    "mentionall",
+    "everyone"
+   ],
+   "file": "commands/group/tagall.js"
+  },
+  {
+   "key": "dev/taggroups",
+   "name": "taggroups",
+   "category": "dev",
+   "description": "Send a message to multiple groups (separate JIDs with commas, then ±)",
+   "usage": [
+    ".taggroups <jid1,jid2,...> ± <message>"
+   ],
+   "aliases": [
+    "sendtag",
+    "taggrp"
+   ],
+   "file": "commands/group/tagroups.js"
+  },
+  {
+   "key": "group/unlockgs",
+   "name": "unlockgs",
+   "category": "group",
+   "description": "Unlock group settings (all members can edit)",
+   "usage": [
+    ".unlockgs"
+   ],
+   "aliases": [
+    "unlockgsettings"
+   ],
+   "file": "commands/group/unlockgs.js"
+  },
+  {
+   "key": "admin/unmute",
+   "name": "unmute",
+   "category": "admin",
+   "description": "Open group (all members can send messages)",
+   "usage": [
+    ".unmute"
+   ],
+   "aliases": [
+    "open",
+    "opengroup"
+   ],
+   "file": "commands/group/unmute.js"
+  },
+  {
+   "key": "group/vcf",
+   "name": "vcf",
+   "category": "group",
+   "description": "Save all group members as vCard file",
+   "usage": [
+    ".vcf"
+   ],
+   "aliases": [
+    "savecontact",
+    "scontact",
+    "savecontacts"
+   ],
+   "file": "commands/group/vcf.js"
+  },
+  {
+   "key": "admin/warn",
+   "name": "warn",
+   "category": "admin",
+   "description": "Warn a user",
+   "usage": [
+    ".warn @user <reason>"
+   ],
+   "aliases": [
+    "warning"
+   ],
+   "file": "commands/group/warn.js"
+  },
+  {
+   "key": "admin/welcome",
+   "name": "welcome",
+   "category": "admin",
+   "description": "",
+   "usage": [
+    "welcome on/off"
+   ],
+   "aliases": [
+    "welcomeon",
+    "welcomeoff"
+   ],
+   "file": "commands/group/welcome.js"
+  },
+  {
+   "key": "media/ig",
+   "name": "ig",
+   "category": "media",
+   "description": "Download Instagram reels/videos",
+   "usage": [
+    ".ig <instagram url>"
+   ],
+   "aliases": [
+    "igdl",
+    "instagram"
+   ],
+   "file": "commands/media/Ig.js"
+  },
+  {
+   "key": "media/yt",
+   "name": "yt",
+   "category": "media",
+   "description": "Download YouTube videos (supports URL or search query)",
+   "usage": [
+    ".yt <url or search query>"
+   ],
+   "aliases": [
+    "youtube",
+    "ytdl"
+   ],
+   "file": "commands/media/YouTube.js"
+  },
+  {
+   "key": "media/apk",
+   "name": "apk",
+   "category": "media",
+   "description": "Download APK files for Android apps",
+   "usage": [
+    ".apk <app name>"
+   ],
+   "aliases": [
+    "apkdownload",
+    "getapk",
+    "downloadapk"
+   ],
+   "file": "commands/media/apk.js"
+  },
+  {
+   "key": "media/capcut",
+   "name": "capcut",
+   "category": "media",
+   "description": "Download original video from CapCut template",
+   "usage": [
+    ".capcut <url>"
+   ],
+   "aliases": [
+    "cc",
+    "capcuttemplate"
+   ],
+   "file": "commands/media/capcut.js"
+  },
+  {
+   "key": "media/facebook",
+   "name": "facebook",
+   "category": "media",
+   "description": "Download Facebook videos (supports HD)",
+   "usage": [
+    ".facebook <url> [hd]"
+   ],
+   "aliases": [
+    "fb",
+    "fbdl"
+   ],
+   "file": "commands/media/facebook.js"
+  },
+  {
+   "key": "media/gdrive",
+   "name": "gdrive",
+   "category": "media",
+   "description": "Download public files from Google Drive",
+   "usage": [
+    ".gdrive <url>"
+   ],
+   "aliases": [
+    "gd",
+    "googledrive"
+   ],
+   "file": "commands/media/gdrive.js"
+  },
+  {
+   "key": "media/img",
+   "name": "img",
+   "category": "media",
+   "description": "Search for images using Google (up to 10 results)",
+   "usage": [
+    ".img <search term>"
+   ],
+   "aliases": [
+    "googleimage",
+    "image",
+    "imagesearch"
+   ],
+   "file": "commands/media/img.js"
+  },
+  {
+   "key": "media/mediafire",
+   "name": "mediafire",
+   "category": "media",
+   "description": "Download files from MediaFire",
+   "usage": [
+    ".mediafire <url>"
+   ],
+   "aliases": [
+    "mf",
+    "mfdl"
+   ],
+   "file": "commands/media/mediafire.js"
+  },
+  {
+   "key": "media/pinterest",
+   "name": "pinterest",
+   "category": "media",
+   "description": "Download images from Pinterest (URL or search)",
+   "usage": [
+    ".pinterest <url or search query>"
+   ],
+   "aliases": [
+    "pin",
+    "pindl"
+   ],
+   "file": "commands/media/pinterest.js"
+  },
+  {
+   "key": "media/song",
+   "name": "song",
+   "category": "media",
+   "description": "Download audio from YouTube",
+   "usage": [
+    ".song <song name or YouTube link>"
+   ],
+   "aliases": [
+    "play",
+    "music",
+    "yta"
+   ],
+   "file": "commands/media/song.js"
+  },
+  {
+   "key": "media/tiktok",
+   "name": "tiktok",
+   "category": "media",
+   "description": "Download TikTok videos (no watermark) with rich info",
+   "usage": [
+    ".tiktok <url>"
+   ],
+   "aliases": [
+    "tt",
+    "ttdl",
+    "tiktokdl"
+   ],
+   "file": "commands/media/tiktok.js"
+  },
+  {
+   "key": "media/wallpapers",
+   "name": "wallpapers",
+   "category": "media",
+   "description": "Search for HD wallpapers (up to 10 results)",
+   "usage": [
+    ".wallpapers <search term>"
+   ],
+   "aliases": [
+    "wallpaper",
+    "hdwallpaper",
+    "wp",
+    "walpaper",
+    "walpapers"
+   ],
+   "file": "commands/media/wallpapers.js"
+  },
+  {
+   "key": "textmaker/1917",
+   "name": "1917",
+   "category": "textmaker",
+   "description": "Create 1917 style text effect",
+   "usage": [
+    ".1917 <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/1917.js"
+  },
+  {
+   "key": "textmaker/arena",
+   "name": "arena",
+   "category": "textmaker",
+   "description": "Create arena text effect",
+   "usage": [
+    ".arena <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/arena.js"
+  },
+  {
+   "key": "textmaker/birthday",
+   "name": "birthday",
+   "category": "textmaker",
+   "description": "Generate a birthday cake image with your name",
+   "usage": [
+    ".birthday <name>"
+   ],
+   "aliases": [
+    "bday",
+    "happybirthday"
+   ],
+   "file": "commands/textmaker/birthday.js"
+  },
+  {
+   "key": "textmaker/blackpink",
+   "name": "blackpink",
+   "category": "textmaker",
+   "description": "Create blackpink text effect",
+   "usage": [
+    ".blackpink <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/blackpink.js"
+  },
+  {
+   "key": "textmaker/devil",
+   "name": "devil",
+   "category": "textmaker",
+   "description": "Create devil text effect",
+   "usage": [
+    ".devil <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/devil.js"
+  },
+  {
+   "key": "textmaker/fire",
+   "name": "fire",
+   "category": "textmaker",
+   "description": "Create fire text effect",
+   "usage": [
+    ".fire <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/fire.js"
+  },
+  {
+   "key": "textmaker/glitch",
+   "name": "glitch",
+   "category": "textmaker",
+   "description": "Create glitch text effect",
+   "usage": [
+    ".glitch <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/glitch.js"
+  },
+  {
+   "key": "textmaker/hacker",
+   "name": "hacker",
+   "category": "textmaker",
+   "description": "Create hacker text effect",
+   "usage": [
+    ".hacker <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/hacker.js"
+  },
+  {
+   "key": "textmaker/ice",
+   "name": "ice",
+   "category": "textmaker",
+   "description": "Create ice text effect",
+   "usage": [
+    ".ice <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/ice.js"
+  },
+  {
+   "key": "textmaker/impressive",
+   "name": "impressive",
+   "category": "textmaker",
+   "description": "Create impre ssive text effect",
+   "usage": [
+    ".impressive <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/impressive.js"
+  },
+  {
+   "key": "textmaker/leaves",
+   "name": "leaves",
+   "category": "textmaker",
+   "description": "Create leaves text effect",
+   "usage": [
+    ".leaves <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/leaves.js"
+  },
+  {
+   "key": "textmaker/light",
+   "name": "light",
+   "category": "textmaker",
+   "description": "Create light text effect",
+   "usage": [
+    ".light <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/light.js"
+  },
+  {
+   "key": "textmaker/matrix",
+   "name": "matrix",
+   "category": "textmaker",
+   "description": "Create matrix text effect",
+   "usage": [
+    ".matrix <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/matrix.js"
+  },
+  {
+   "key": "textmaker/metallic",
+   "name": "metallic",
+   "category": "textmaker",
+   "description": "Create metallic text effect",
+   "usage": [
+    ".metallic <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/metallic.js"
+  },
+  {
+   "key": "textmaker/neon",
+   "name": "neon",
+   "category": "textmaker",
+   "description": "Create neon text effect",
+   "usage": [
+    ".neon <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/neon.js"
+  },
+  {
+   "key": "textmaker/purple",
+   "name": "purple",
+   "category": "textmaker",
+   "description": "Create purple text effect",
+   "usage": [
+    ".purple <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/purple.js"
+  },
+  {
+   "key": "textmaker/sand",
+   "name": "sand",
+   "category": "textmaker",
+   "description": "Create sand text effect",
+   "usage": [
+    ".sand <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/sand.js"
+  },
+  {
+   "key": "textmaker/snow",
+   "name": "snow",
+   "category": "textmaker",
+   "description": "Create snow text effect",
+   "usage": [
+    ".snow <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/snow.js"
+  },
+  {
+   "key": "textmaker/thunder",
+   "name": "thunder",
+   "category": "textmaker",
+   "description": "Create thunder text effect",
+   "usage": [
+    ".thunder <text>"
+   ],
+   "aliases": [],
+   "file": "commands/textmaker/thunder.js"
+  },
+  {
+   "key": "utility/autoreply",
+   "name": "autoreply",
+   "category": "utility",
+   "description": "Set auto‑replies (text or media) with a 4s delay. Global, owner only.",
+   "usage": [],
+   "aliases": [
+    "areply",
+    "replybot"
+   ],
+   "file": "commands/utility/autoreply.js"
+  },
+  {
+   "key": "utility/calc",
+   "name": "calc",
+   "category": "utility",
+   "description": "Calculate math expressions",
+   "usage": [
+    ".calc <expression>"
+   ],
+   "aliases": [
+    "calculate",
+    "math"
+   ],
+   "file": "commands/utility/calc.js"
+  },
+  {
+   "key": "utility/define",
+   "name": "define",
+   "category": "utility",
+   "description": "Get definitions from Urban Dictionary (all definitions in separate messages)",
+   "usage": [
+    ".define <word or phrase>"
+   ],
+   "aliases": [
+    "urbandictionary",
+    "ud",
+    "dictionary",
+    "meaning"
+   ],
+   "file": "commands/utility/define.js"
+  },
+  {
+   "key": "utility/download",
+   "name": "download",
+   "category": "utility",
+   "description": "Download file from direct URL",
+   "usage": [],
+   "aliases": [
+    "dl"
+   ],
+   "file": "commands/utility/download.js"
+  },
+  {
+   "key": "utility/fancy",
+   "name": "fancy",
+   "category": "utility",
+   "description": "Convert text into 91+ fancy Unicode styles",
+   "usage": [
+    ".fancy <your text>"
+   ],
+   "aliases": [
+    "fancytext",
+    "style",
+    "fancyv2",
+    "textstyle"
+   ],
+   "file": "commands/utility/fancy.js"
+  },
+  {
+   "key": "utility/firstmessage",
+   "name": "firstmessage",
+   "category": "utility",
+   "description": "Send a customizable auto‑reply to first‑time private messages (newline friendly)",
+   "usage": [],
+   "aliases": [
+    "firstmsg",
+    "greet",
+    "welcomemsg"
+   ],
+   "file": "commands/utility/firstmessage.js"
+  },
+  {
+   "key": "utility/getcid",
+   "name": "getcid",
+   "category": "utility",
+   "description": "Get WhatsApp Channel ID from invite link",
+   "usage": [
+    ".getcid <channel-invite-link>"
+   ],
+   "aliases": [
+    "getchannelid",
+    "cid",
+    "channelid"
+   ],
+   "file": "commands/utility/getcid.js"
+  },
+  {
+   "key": "utility/image2url",
+   "name": "image2url",
+   "category": "utility",
+   "description": "Upload an image and get a shareable URL",
+   "usage": [
+    ".image2url (reply/send image)"
+   ],
+   "aliases": [
+    "imgurl",
+    "uploadimg",
+    "imgbb"
+   ],
+   "file": "commands/utility/img2url.js"
+  },
+  {
+   "key": "utility/info",
+   "name": "info",
+   "category": "utility",
+   "description": "Fetch phone/CNIC information using public API",
+   "usage": [],
+   "aliases": [
+    "infosearch",
+    "whois"
+   ],
+   "file": "commands/utility/info.js"
+  },
+  {
+   "key": "utility/npm",
+   "name": "npm",
+   "category": "utility",
+   "description": "Show npm package info or install packages (install is owner-only)",
+   "usage": [
+    ".npm <package>\\n.npm install <package>\\n.npm i <package>"
+   ],
+   "aliases": [
+    "npmi"
+   ],
+   "file": "commands/utility/npm.js"
+  },
+  {
+   "key": "utility/obfuscate",
+   "name": "obfuscate",
+   "category": "utility",
+   "description": "Obfuscate a JavaScript file with strong protection",
+   "usage": [
+    ".obfuscate (reply to .js file) or .obfuscate <filepath>"
+   ],
+   "aliases": [
+    "obf",
+    "obfuscator"
+   ],
+   "file": "commands/utility/obfuscate.js"
+  },
+  {
+   "key": "utility/pair",
+   "name": "pair",
+   "category": "utility",
+   "description": "Generate a WhatsApp pairing code for a given phone number",
+   "usage": [
+    ".pair <phone_number>"
+   ],
+   "aliases": [
+    "getpair"
+   ],
+   "file": "commands/utility/pair.js"
+  },
+  {
+   "key": "utility/qr",
+   "name": "qr",
+   "category": "utility",
+   "description": "Generate QR code from text/URL or from any media file (uploads media first)",
+   "usage": [
+    ".qr <text>  or  reply to any media with .qr"
+   ],
+   "aliases": [
+    "qrcode",
+    "qrcreate",
+    "makeqr",
+    "generateqr"
+   ],
+   "file": "commands/utility/qr.js"
+  },
+  {
+   "key": "utility/readmore",
+   "name": "readmore",
+   "category": "utility",
+   "description": "Multi‑step readmore with copy button (single message)",
+   "usage": [
+    ".readmore 1 + 2 + 3 + 4"
+   ],
+   "aliases": [
+    "rdmore",
+    "rmore"
+   ],
+   "file": "commands/utility/readmore.js"
+  },
+  {
+   "key": "utility/shorturl",
+   "name": "shorturl",
+   "category": "utility",
+   "description": "Shorten long URLs using TinyURL",
+   "usage": [
+    ".shorturl <long_url>"
+   ],
+   "aliases": [
+    "shorten",
+    "tinyurl",
+    "urlshort"
+   ],
+   "file": "commands/utility/shorturl.js"
+  },
+  {
+   "key": "utility/weather",
+   "name": "weather",
+   "category": "utility",
+   "description": "Get weather for a city",
+   "usage": [
+    ".weather <city>"
+   ],
+   "aliases": [
+    "w",
+    "clima"
+   ],
+   "file": "commands/utility/weather.js"
+  },
+  {
+   "key": "utility/wiki",
+   "name": "wiki",
+   "category": "utility",
+   "description": "Fetch Wikipedia-style summaries for any topic",
+   "usage": [
+    ".wiki <search term>"
+   ],
+   "aliases": [
+    "wikipedia",
+    "wikimedia",
+    "summary"
+   ],
+   "file": "commands/utility/wiki.js"
+  }
+ ]
+}
