@@ -38,3 +38,8 @@ export const gallery: GalleryImage[] = arr<Record<string, unknown>>(imagesRaw).f
   .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
 export const socials = info.socials.filter((s) => s.url);
+
+import demosRaw from "../data/demos.json";
+export type Demo = { slug: string; name: string; kind: string; category: string; accent: string; ink: string; summary: string; features: string[] };
+export const demos: Demo[] = (demosRaw.demos || []).filter((d) => d.slug && d.name);
+export const getDemo = (slug: string) => demos.find((d) => d.slug === slug);
