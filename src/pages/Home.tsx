@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Icon from "../components/Icon";
 import { Img } from "../components/Layout";
 import Hero from "../components/Hero";
-import { info, projects, showcase, gallery } from "../lib/data";
+import { info, projects, showcase, gallery, demos } from "../lib/data";
 import { onLink } from "../lib/router";
 import { useSeo, personLd } from "../lib/seo";
 
@@ -126,6 +126,22 @@ function ShowcaseSection() {
   return (
     <Wrap id="showcase" className="pt-32">
       <Heading eyebrow="Showcase" title="Concept demo websites" text="Design and development concepts — not client work. Each concept explores its own visual identity." />
+      <div className="reveal mb-12">
+        <p className="text-red-500 text-xs tracking-[0.3em] uppercase font-semibold mb-4">Working demos · open and click around</p>
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {demos.map((d) => (
+            <li key={d.slug} className="group rounded-2xl border border-white/10 overflow-hidden" style={{ background: `linear-gradient(160deg, ${d.accent}22, rgba(255,255,255,.02))` }}>
+              <a href={`/demos/${d.slug}`} onClick={onLink} className="block p-5 h-full hover:-translate-y-0.5 transition">
+                <span className="inline-block text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full border" style={{ color: d.accent, borderColor: d.accent + "66" }}>{d.category}</span>
+                <h3 className="mt-3 text-lg font-semibold group-hover:text-red-400">{d.name}</h3>
+                <p className="text-[13px] text-zinc-400 mt-1 leading-relaxed">{d.summary}</p>
+                <span className="mt-3 inline-flex items-center gap-2 text-sm text-red-400">Open demo <span aria-hidden="true">↗</span><span className="sr-only"> {d.name}</span></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <p className="reveal text-xs text-zinc-500 -mt-4 mb-8">Seven interactive demos below and {showcase.length} concept showcase cards are demonstrations built by {info.name} (ProBoy) — not client deployments.</p>
       <Filters cats={cats} value={cat} set={setCat} />
       <ul className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {showcase.filter((s) => cat === "All" || s.category === cat).map((s) => (
