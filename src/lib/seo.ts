@@ -13,23 +13,28 @@ export function useSeo(o: { title: string; description: string; path: string; js
     meta("name", "robots", o.noindex ? "noindex, follow" : "index, follow");
     meta("property", "og:title", o.title); meta("property", "og:description", o.description);
     meta("property", "og:type", "website"); meta("property", "og:site_name", info.brand);
-    meta("name", "twitter:card", info.seo.ogImage ? "summary_large_image" : "summary");
     meta("property", "og:locale", "en_US");
     meta("name", "geo.region", info.geo.region);
     meta("name", "geo.placename", info.geo.placename);
     meta("name", "geo.position", `${info.geo.lat};${info.geo.lng}`);
     if (url) meta("property", "og:url", url);
-    if (site && info.seo.ogImage) {
-      const image = new URL(info.seo.ogImage, site + "/").href;
+    if (site) {
+      // og:image follows the hero: explicit seo.ogImage > published portrait > brand card.
+      const source = info.seo.ogImage || info.profileImage || "/og-image.jpg";
+      const image = new URL(source, site + "/").href;
+      const isPortrait = Boolean(info.profileImage && source === info.profileImage);
       meta("property", "og:image", image);
+      meta("property", "og:image:alt", isPortrait ? info.portrait.alt : `${info.name} (${info.brand}) — developer portfolio`);
+      meta("name", "twitter:card", "summary_large_image");
+      meta("name", "twitter:site", "@itx_proboy");
+      meta("name", "twitter:title", o.title);
+      meta("name", "twitter:description", o.description);
       meta("name", "twitter:image", image);
-    } else {
-      document.head.querySelector('meta[property="og:image"]')?.remove();
-      document.head.querySelector('meta[property="og:image:alt"]')?.remove();
-      document.head.querySelector('meta[name="twitter:image"]')?.remove();
     }
     let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    if (url) { if (!link) { link = document.createElement("link"); link.rel = "canonical"; document.head.appendChild(link); } link.href = url; } else link?.remove();
+    if (o.noindex) link?.remove();
+    else if (url) { if (!link) { link = document.createElement("link"); link.rel = "canonical"; document.head.appendChild(link); } link.href = url; }
+    else link?.remove();
     document.getElementById("ld-static")?.remove();
     document.getElementById("ld")?.remove();
     const s = document.createElement("script"); s.type = "application/ld+json"; s.id = "ld";
