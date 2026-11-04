@@ -17,9 +17,9 @@ function Portrait() {
   const [dragging, setDragging] = useState(false);
   const [error, setError] = useState("");
 
-  // A published image always takes precedence over an older browser-only preview.
+  // A published portrait file in the project always wins over a browser-only preview.
   const publishedSource = info.profileImage;
-  const source = localUrl || publishedSource;
+  const source = publishedSource || localUrl;
   const usable = Boolean(source && source !== failedSource);
 
   useEffect(() => {
@@ -71,8 +71,8 @@ function Portrait() {
 
   return (
     <div className={`portrait-stage${usable ? " has-portrait" : " is-pending"}${dragging ? " is-dragging" : ""}`}
-      onDragOver={(event) => { event.preventDefault(); setDragging(true); }}
-      onDragLeave={() => setDragging(false)} onDrop={drop}>
+      onDragOver={(event) => { if (!publishedSource) { event.preventDefault(); setDragging(true); } }}
+      onDragLeave={() => setDragging(false)} onDrop={(event) => { if (!publishedSource) drop(event); }}>
       <input ref={input} type="file" accept="image/jpeg,image/png,image/webp,image/avif"
         aria-label="Select your portrait image" className="sr-only" tabIndex={-1}
         onChange={(event) => void choose(event.target.files?.[0])} />
@@ -98,7 +98,7 @@ function Portrait() {
           </div>
         </div>
       )}
-      {localUrl && usable && (
+      {localUrl && usable && !publishedSource && (
         <div className="portrait-preview-controls">
           <span>Local preview</span>
           <button type="button" onClick={() => input.current?.click()}>Change photo</button>
@@ -171,7 +171,7 @@ export default function Hero() {
         <div className="hero-content">
           <p className="hero-availability"><span />{info.availability}</p>
           <p className="hero-greeting">{info.greeting}</p>
-          <h1 id="hero-name"><span>{info.name.split(" ")[0]}</span> <em>{info.name.split(" ").slice(1).join(" ")}</em></h1>
+          <h1 id="hero-name"><span>{info.name.split(" ")[0]}</span> <em>{info.name.split(" ").slice(1).join(" ")}</em><span className="sr-only"> (ProBoy), full-stack developer, bot architect and Shopify expert</span></h1>
           <p className="hero-role">{info.role}</p>
           <p className="hero-specialties">{info.subtitles.map((title) => <span key={title}>{title}</span>)}</p>
           <p className="hero-description">{info.heroDescription}<strong>{info.heroEmphasis}</strong></p>
