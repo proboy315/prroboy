@@ -1,0 +1,74 @@
+{
+  "demos": [
+    {
+      "slug": "luxecart-store",
+      "name": "LuxeCart",
+      "kind": "Premium e-commerce store",
+      "category": "E-Commerce",
+      "accent": "#d9a441",
+      "ink": "#0d0d0f",
+      "summary": "Product catalogue with live search, category filters, working cart, quantity controls and a validated checkout demonstration.",
+      "features": ["Live search and category filters", "Add to cart with quantities", "Persistent cart panel", "Validated checkout form"]
+    },
+    {
+      "slug": "pulse-dashboard",
+      "name": "Pulse",
+      "kind": "SaaS analytics dashboard",
+      "category": "SaaS",
+      "accent": "#4f8cff",
+      "ink": "#05070d",
+      "summary": "Sidebar navigation, tabbed overview, interactive SVG charts, metric cards and a settings panel with toggles.",
+      "features": ["Sidebar + tab navigation", "Interactive SVG charts", "Range selector recalculates data", "Settings toggles"]
+    },
+    {
+      "slug": "ember-kitchen",
+      "name": "Ember Kitchen",
+      "kind": "Restaurant website",
+      "category": "Hospitality",
+      "accent": "#e2603c",
+      "ink": "#120b09",
+      "summary": "Menu browsing by course, a reservation form with validation and confirmation, plus opening hours and contact details.",
+      "features": ["Menu filter by course", "Reservation form validation", "Confirmation state", "Hours and directions"]
+    },
+    {
+      "slug": "haven-properties",
+      "name": "Haven",
+      "kind": "Real estate listings",
+      "category": "Real Estate",
+      "accent": "#3aa98a",
+      "ink": "#06110f",
+      "summary": "Property search with filters for type, bedrooms and price, expandable listing details and an agent enquiry form.",
+      "features": ["Multi-criteria filtering", "Expandable property details", "Empty-results state", "Enquiry form validation"]
+    },
+    {
+      "slug": "northline-agency",
+      "name": "Northline",
+      "kind": "Creative agency site",
+      "category": "Agency",
+      "accent": "#8b5cf6",
+      "ink": "#0a0713",
+      "summary": "Services, selected work, a small team section and a project enquiry form with real validation and success feedback.",
+      "features": ["Services and case studies", "Team section", "Enquiry form with errors", "Success confirmation"]
+    },
+    {
+      "slug": "synth-ai-studio",
+      "name": "Synth Studio",
+      "kind": "AI tool interface",
+      "category": "AI",
+      "accent": "#22d3ee",
+      "ink": "#041014",
+      "summary": "Prompt input, model and tone selectors, character counter and a deterministic sample response generator that runs entirely in the browser.",
+      "features": ["Prompt input with counter", "Model and tone selectors", "Generated sample responses", "Prompt history"]
+    },
+    {
+      "slug": "forge-docs",
+      "name": "Forge Docs",
+      "kind": "Developer documentation",
+      "category": "Documentation",
+      "accent": "#f59e0b",
+      "ink": "#100c04",
+      "summary": "Documentation layout with sidebar navigation, in-page search across sections and copyable code examples.",
+      "features": ["Sidebar navigation", "Client-side section search", "Copyable code snippets", "Responsive reading layout"]
+    }
+  ]
+}
