@@ -1,0 +1,17 @@
+{
+  "navigation": "passed",
+  "headerAutoHide": "passed",
+  "invalidImage": "rejected",
+  "routes": "passed",
+  "runtimeErrors": [],
+  "intro": {
+    "automatic": true,
+    "firstFrame": 0,
+    "lastFrame": 299,
+    "requested": 300,
+    "replayOnRefresh": true,
+    "skip": "passed",
+    "missingFrames": "graceful fallback",
+    "assets": "synthetic test fixtures, not the user's animation"
+  }
+}
