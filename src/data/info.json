@@ -67,7 +67,7 @@
     "region": "PK-PB",
     "placename": "Burewala"
   },
-  "profileImage": "",
+  "profileImage": "/images/shahan-ali-portrait.jpg",
   "portrait": {
     "alt": "Shahan Ali (ProBoy) in a maroon jacket with red-lit architectural artwork",
     "width": 1696,
@@ -381,7 +381,7 @@
   "seo": {
     "title": "Shahan Ali (ProBoy) — Full-Stack Developer",
     "description": "Shahan Ali (ProBoy) — full-stack developer, bot architect and Shopify expert from Burewala, Pakistan. Creator of the ProBoy-MD WhatsApp bot.",
-    "ogImage": ""
+    "ogImage": "/images/shahan-ali-portrait.jpg"
   },
   "introAnimation": {
     "enabled": true,
