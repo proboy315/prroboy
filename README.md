@@ -60,3 +60,43 @@ Browsers block sound until a visitor interacts with the page, so if autoplay wit
 
 ## Verification
 The hero and navigation were tested in Chromium at eleven desktop, tablet, phone and short-height viewport sizes. Reproducible scripts are in `tests/`; verified behavior and remaining limitations are recorded in `docs/VERIFICATION.md`. The exact supplied portrait and real intro soundtrack still need their source files.
+
+## ProBoy-MD command directory
+`src/data/commands.json` is generated from the **repository source** (every `commands/<category>/*.js` exposes `name`, `aliases`, `category`, `description`, `usage`). It carries a `meta` block that records both figures:
+
+- menu reported: **531** (menu generated 4 Nov 2026, 219 entries documented)
+- repository verified: **224 command files** (220 unique names) across 9 categories
+
+Both are shown on the page; commands are never invented. The directory supports relevance-ranked search, category filters with counts, usage copy buttons, aliases, pagination and an empty state.
+
+**Pairing CTA:** `https://proboy-md.gt.tc/` — taken from the repository README (`proboy.md` pairing section). The bot's API default is `PROBOY_PAIR_BASE_URL || https://proboy-pair.onrender.com` in `settings/apis.js`.
+
+## Working showcase demos
+Seven interactive demos live at `/demos/<slug>` (data: `src/data/demos.json`, components: `src/pages/Demos.tsx`, styles: `src/pages/demos.css`): LuxeCart, Pulse, Ember Kitchen, Haven, Northline, Synth Studio, Forge Docs. Each has its own accent palette and genuinely functional controls (search, filters, cart, validated forms, toggles, copy, generation). They are demonstrations, not client work.
+
+## Routing / SEO
+`scripts/gen-seo.mjs` writes `sitemap.xml`, `robots.txt`, `llms.txt` and the SEO block + crawlable `<noscript>` into `index.html`. There are **no static folder copies** of project/showcase/ProBoy-MD pages anymore, so every URL serves exactly one document (previously static folders shadowed the React pages).
+
+`vercel.json` rewrites everything except real assets to `index.html`.
+
+## Tests
+```sh
+npm run build
+npx vite preview --port 4180
+QA_BASE=http://127.0.0.1:4180 PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs node tests/pages.mjs
+node tests/layout.mjs      # 11 viewports, sidebar, drawer, portrait
+node tests/interactions.mjs # nav, header auto-hide, intro frames 0-299
+```
+Results live in `.work/*-results.json`.
+
+## OG / Twitter share tags
+`og:image` follows the hero portrait, in this order:
+
+1. `seo.ogImage` in `info.json` (explicit override), else
+2. the published portrait (`profileImage`) once the file exists in the project, else
+3. `public/og-image.jpg` (brand fallback card).
+
+`og:image:alt`, `og:locale`, `twitter:card` (summary_large_image), `twitter:site`, `twitter:title`, `twitter:description` and `twitter:image` are emitted on every page, both in the static `index.html` and at runtime (`src/lib/seo.ts`).
+
+## Portrait picker behaviour
+When `profileImage` points to a real file in `public/`, the hero renders it and the "Select portrait", "Change photo" and "Publish this image" controls disappear automatically — a published portrait always wins over any browser-only preview.
