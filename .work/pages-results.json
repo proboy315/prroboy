@@ -1,0 +1,81 @@
+{
+  "results": [
+    {
+      "name": "Homepage H1 carries the primary identity",
+      "pass": true
+    },
+    {
+      "name": "OG and Twitter tags are complete with the portrait image",
+      "pass": true
+    },
+    {
+      "name": "Showcase lists the seven working demos",
+      "pass": true
+    },
+    {
+      "name": "ProBoy-MD uses Option A palette, not the old green theme",
+      "pass": true
+    },
+    {
+      "name": "Pairing button points at the verified pairing website",
+      "pass": true
+    },
+    {
+      "name": "Verified command counts are visible",
+      "pass": true
+    },
+    {
+      "name": "Search finds .pair and .ai",
+      "pass": true
+    },
+    {
+      "name": "Category filters and counts work",
+      "pass": true
+    },
+    {
+      "name": "Empty search state and reset",
+      "pass": true
+    },
+    {
+      "name": "Copy command button copies usage",
+      "pass": true
+    },
+    {
+      "name": "ProBoy-MD has H1, structured data and FAQ",
+      "pass": true
+    },
+    {
+      "name": "Demo works: luxecart-store",
+      "pass": true
+    },
+    {
+      "name": "Demo works: pulse-dashboard",
+      "pass": true
+    },
+    {
+      "name": "Demo works: ember-kitchen",
+      "pass": true
+    },
+    {
+      "name": "Demo works: haven-properties",
+      "pass": true
+    },
+    {
+      "name": "Demo works: northline-agency",
+      "pass": true
+    },
+    {
+      "name": "Demo works: synth-ai-studio",
+      "pass": true
+    },
+    {
+      "name": "Demo works: forge-docs",
+      "pass": true
+    },
+    {
+      "name": "Every route serves a unique title and canonical",
+      "pass": true
+    }
+  ],
+  "errors": []
+}
