@@ -1,6 +1,15 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
-    { "source": "/((?!projects|showcase|proboy-md|images|intro-animation|sitemap\\.xml|robots\\.txt|llms\\.txt).*)", "destination": "/index.html" }
+    {
+      "source": "/((?!images/|intro-animation/|og-image\\.(png|jpg|webp)|sitemap\\.xml|robots\\.txt|llms\\.txt|favicon\\.ico).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    { "source": "/images/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=86400" }] },
+    { "source": "/intro-animation/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }] }
   ]
 }
