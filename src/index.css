@@ -17,3 +17,6 @@ body{font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;backgroun
 .card3d:hover{transform:translateY(-4px) perspective(800px) rotateX(2deg);border-color:rgba(220,38,38,.45);box-shadow:0 20px 40px -20px rgba(220,38,38,.35)}
 .float-slow{animation:float 6s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1!important;transform:none!important}}
+
+/* single clear control in search fields */
+input[type="search"]::-webkit-search-cancel-button{filter:invert(1);opacity:.45;-webkit-appearance:none;appearance:none;width:14px;height:14px}
