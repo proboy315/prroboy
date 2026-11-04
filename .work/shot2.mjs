@@ -1,0 +1,14 @@
+import { chromium } from "../.work/testkit/node_modules/playwright/index.mjs";
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 1440, height: 1050 } });
+await p.goto("http://127.0.0.1:4180/proboy-md", { waitUntil: "networkidle" });
+await p.waitForSelector("#commands");
+await p.evaluate(() => document.getElementById("commands").scrollIntoView({ block: "start" }));
+await p.waitForTimeout(500);
+await p.screenshot({ path: ".work/pmd-cmds2.png" });
+await p.fill(".cmd-search input", "pair");
+await p.waitForTimeout(300);
+await p.evaluate(() => document.getElementById("commands").scrollIntoView({ block: "start" }));
+await p.waitForTimeout(300);
+await p.screenshot({ path: ".work/pmd-pair-search.png" });
+await b.close(); console.log("ok");
