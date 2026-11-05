@@ -3,14 +3,10 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
-  "routes": [
+  "rewrites": [
     {
-      "src": "^/(?!images/|intro-animation/|og-image\\.(png|jpg|webp)$|sitemap\\.xml$|robots\\.txt$|llms\\.txt$|favicon\\.ico$)(.*)$",
-      "dest": "/index.html"
-    },
-    {
-      "src": "^/.*$",
-      "handle": "filesystem"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [
