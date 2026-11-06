@@ -27,7 +27,7 @@ export function resolveOgImage() {
   return {
     url: image,
     alt: isCustomCard
-      ? "Shahan Ali (PROBOY), full-stack developer from Burewala, Pakistan"
+      ? "Shahan Ali (PROBOY), developer from Burewala, Pakistan"
       : info.portrait.alt,
     width: isCustomCard ? "1200" : String(info.portrait.width),
     height: isCustomCard ? "630" : String(info.portrait.height),
@@ -96,7 +96,7 @@ export const personLd = () => ({
   name: info.name,
   givenName: "Shahan",
   familyName: "Ali",
-  alternateName: info.aliases,
+  alternateName: [info.brand, ...info.aliases],
   jobTitle: info.titles,
   description: info.seo.description,
   email: `mailto:${info.email}`,
@@ -126,14 +126,10 @@ export const personLd = () => ({
     name: "Google Gemini QuizOff 2026 Certificate of Recognition",
     credentialCategory: "Certificate of Recognition",
     dateCreated: "2026-07-19",
-    recognizedBy: {
-      "@type": "Organization",
-      name: "CampusCrew and Unstop",
-    },
   },
   ...(site ? { url: site } : {}),
   ...(site && info.profileImage ? { image: new URL(info.profileImage, site + "/").href } : {}),
-  sameAs: info.socials.filter((s) => s.url && !s.url.startsWith("mailto")).map((s) => s.url),
+  sameAs: [info.linkedin, info.github],
   knowsAbout: [
     "Full-stack web development",
     "React",
