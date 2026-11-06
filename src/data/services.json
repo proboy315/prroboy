@@ -4,17 +4,17 @@
     "icon": "code",
     "title": "Full-Stack Web Development",
     "shortTitle": "Web Development",
-    "tagline": "Fast web apps and APIs with React, TypeScript, and Node.js.",
-    "summary": "End-to-end web work by Shahan Ali (PROBOY): semantic frontends, accessible UI, Node.js backends, and clean deployment.",
+    "tagline": "Web apps and dashboards built with React, TypeScript and Node.js.",
+    "summary": "Shahan Ali builds accessible web apps, dashboards and Node.js APIs. From the first screen to the database, he keeps the code clear and easy to maintain.",
     "overview": [
-      "Modern web apps need clean components, predictable state, and fast first renders. So I build with React, TypeScript, Vite, and Tailwind CSS, paired with Node.js APIs and MySQL or Firestore.",
-      "Every build uses semantic HTML, keyboard-friendly navigation, and technical SEO. As a result, pages load fast and stay easy to keep."
+      "A useful web app should feel quick and work on every screen. I build interfaces with React and TypeScript. For data and business logic, I use Node.js APIs with MySQL or Firebase when the project needs them.",
+      "I also check keyboard access, mobile layouts and page markup. That way, people can use the site and search engines can read its content."
     ],
     "deliverables": [
-      "React and TypeScript web apps",
-      "Dashboards and client portals",
-      "Node.js REST APIs and database integration",
-      "Responsive UI, technical SEO, and clean deployment"
+      "Custom React & TypeScript single-page and server-rendered web applications",
+      "Admin dashboards, interactive data tables, and client portals",
+      "Node.js REST API endpoints, webhook handlers, and database integration (MySQL / Firestore)",
+      "Responsive, accessible UI with semantic markup, structured data, and clean deployment configuration"
     ],
     "technologies": [
       "React",
@@ -31,24 +31,24 @@
       "proboy-encrypt-decrypt",
       "proboy-sim-database"
     ],
-    "idealFor": "Founders and teams who need a custom web app, a dashboard, or a fast marketing site with clean, readable code."
+    "idealFor": "Founders, small businesses, and product teams who need a custom web app, internal dashboard, or fast marketing site built with clean, readable code."
   },
   {
     "slug": "whatsapp-bot-development",
     "icon": "bot",
     "title": "WhatsApp Bot Development & Automation",
     "shortTitle": "WhatsApp Bots",
-    "tagline": "Node.js WhatsApp bots with commands, pairing-code setup, and automation.",
-    "summary": "Custom WhatsApp automation built on Node.js and Baileys by the creator of ProBoy-MD.",
+    "tagline": "WhatsApp bots for replies, group tools and repeat tasks.",
+    "summary": "Shahan Ali builds WhatsApp bots with Node.js and Baileys, the library used by ProBoy-MD. Bots can handle replies, group tools and API connections.",
     "overview": [
-      "I also build and maintain ProBoy-MD, a WhatsApp Multi-Device bot with 224 commands. So I know how bots behave under real chat load.",
-      "Each system uses modular command routers, pairing-code login, and clean API hooks. That means every command stays isolated and easy to audit."
+      "ProBoy-MD has 224 command files across nine categories. That work informs how I build other WhatsApp bots: each command has its own job, which makes changes easier to test.",
+      "A pairing code connects the bot to WhatsApp. I also add permission checks and guards to stop the same message from being handled twice."
     ],
     "deliverables": [
-      "Custom Node.js and Baileys WhatsApp bot",
-      "Prefix commands with aliases and role permissions",
-      "Auto-replies, order alerts, and webhook triggers",
-      "Group tools and cloud hosting on Render or a VPS"
+      "Custom Node.js + Baileys multi-device WhatsApp bot architecture",
+      "Modular command routing with prefix handling, aliases, and role permissions",
+      "Automated inquiry replies, order/status notifications, and webhook triggers",
+      "Group moderation rules, media utilities, and cloud hosting setup (Render / VPS)"
     ],
     "technologies": [
       "Node.js",
@@ -61,24 +61,24 @@
     "relatedProjectSlugs": [
       "proboy-md"
     ],
-    "idealFor": "Businesses and communities that want to automate replies, notifications, or group tasks on WhatsApp."
+    "idealFor": "Businesses, online communities, and operators looking to automate repetitive WhatsApp responses, notifications, or group management workflows."
   },
   {
     "slug": "shopify-development",
     "icon": "bag",
     "title": "Shopify Development",
     "shortTitle": "Shopify Expert",
-    "tagline": "Custom Shopify themes and Liquid sections for fast, trusted stores. For example, cart drawers and product filters.",
-    "summary": "Shopify Online Store 2.0 development by Shahan Ali (PROBOY) — Liquid, speed, and clean mobile UX.",
+    "tagline": "Shopify themes that make products easy to find and buy.",
+    "summary": "Shahan Ali customizes Shopify Online Store 2.0 themes with Liquid, Shopify's template language. Work can include product pages, filters, carts and store speed.",
     "overview": [
-      "Good Shopify work balances design with speed. So I build inside Online Store 2.0 and Liquid, with lean sections and no bloated scripts.",
-      "For example, I add product filters, slide-out carts, and checkout upgrades. In addition, I wire inventory and order webhooks when needed."
+      "A good store should look right and load fast on a phone. I use Liquid, Shopify's template language, to make custom sections, product filters and carts.",
+      "I can also connect order or stock updates through webhooks. These are messages Shopify sends when something changes."
     ],
     "deliverables": [
-      "Shopify Online Store 2.0 sections and Liquid templates",
-      "Mobile-first product pages and slide-out cart drawer",
-      "Collection filters and storefront speed tuning",
-      "Order and inventory webhook integrations"
+      "Custom Shopify Online Store 2.0 sections and Liquid template customization",
+      "Mobile-first product pages, variant selectors, and slide-out cart drawers",
+      "Collection filtering, search UX improvements, and storefront speed optimization",
+      "Order/inventory webhook integrations and custom store utilities"
     ],
     "technologies": [
       "Shopify Online Store 2.0",
@@ -89,24 +89,24 @@
       "Webhooks"
     ],
     "relatedProjectSlugs": [],
-    "idealFor": "Brands launching or upgrading a Shopify store for better mobile UX and faster page loads."
+    "idealFor": "D2C brands and e-commerce merchants launching a new Shopify store or upgrading an existing theme for cleaner mobile UX and faster page loads."
   },
   {
     "slug": "ai-integrations-automation",
     "icon": "spark",
     "title": "AI Integrations & Automation",
     "shortTitle": "AI & Automation",
-    "tagline": "AI features that solve real problems. For example, Gemini assistants in web apps and WhatsApp bots.",
-    "summary": "Applied AI engineering with Google Gemini APIs and Node.js / React interfaces.",
+    "tagline": "Gemini-powered tools for websites, chat and routine work.",
+    "summary": "Shahan Ali adds Google Gemini tools to web apps and bots. He connects prompts and APIs to useful features and handles errors clearly.",
     "overview": [
-      "I add AI where it solves a real problem. For example, chat assistants inside WhatsApp bots, content helpers in admin tools, and structured automation in web apps.",
-      "In practice, each integration includes input checks, error handling, and clear fallbacks when an API fails."
+      "AI is useful when it solves a clear problem. For example, Gemini can help a chat bot answer questions or turn a prompt into a structured draft.",
+      "I check inputs and handle failed requests so the app explains what happened instead of pretending an answer was sent."
     ],
     "deliverables": [
-      "Google Gemini API integration for web apps and Node.js",
-      "AI chat and command helpers inside WhatsApp bots",
-      "Structured prompts, validation, and safe fallbacks",
-      "Automated multi-step API workflows"
+      "Google Gemini API integration for React web apps and Node.js services",
+      "AI-powered chat and command helpers inside WhatsApp bots",
+      "Structured prompt templates, response formatting, and validation guards",
+      "Automated multi-step API workflows connecting forms, chat, and databases"
     ],
     "technologies": [
       "Google Gemini API",
@@ -119,6 +119,6 @@
     "relatedProjectSlugs": [
       "proboy-md"
     ],
-    "idealFor": "Teams who want reliable Gemini AI assistants or automated workflows inside existing web apps or chat."
+    "idealFor": "Product builders and small teams looking to embed reliable Gemini AI assistants or automated text/data workflows into existing websites or messaging channels."
   }
 ]
