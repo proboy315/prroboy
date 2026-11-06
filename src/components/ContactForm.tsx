@@ -115,8 +115,8 @@ export default function ContactForm({ compact = false }: { compact?: boolean }) 
         data = null;
       }
 
-      if (!response.ok || (data && data.success === false)) {
-        const apiError = data?.error || data?.message || `Contact service returned HTTP ${response.status}.`;
+      if (!response.ok || data?.success !== true) {
+        const apiError = data?.error || data?.message || `The contact service did not confirm delivery (HTTP ${response.status}).`;
         setStatus("error");
         setFeedback(`Message could not be sent: ${apiError}`);
         return;
