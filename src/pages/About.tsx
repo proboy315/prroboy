@@ -11,8 +11,8 @@ export default function AboutPage() {
   ];
 
   useSeo({
-    title: `About ${info.name} (${info.brand}) — Developer Profile, Education & Work`,
-    description: `Biography, current ICS education at Govt Graduate College Burewala, technical stack, ProBoy-MD bot architecture, and verified profile links for ${info.name} (${info.aliases.join(", ")}) from ${info.location}.`,
+    title: `About Shahan Ali | Developer in Burewala`,
+    description: `Meet Shahan Ali (PROBOY), a developer and ICS student in Burewala. Read about his work, ProBoy-MD, education and contact links.`,
     path: "/about",
     ogType: "profile",
     jsonLd: [
