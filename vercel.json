@@ -1,12 +1,32 @@
-
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/projects/camlink",
+      "destination": "/projects/proboy-camlink",
+      "permanent": true
+    },
+    {
+      "source": "/projects/js-obfuscator",
+      "destination": "/projects/proboy-js-obfuscator",
+      "permanent": true
+    },
+    {
+      "source": "/projects/sim-database",
+      "destination": "/projects/proboy-sim-database",
+      "permanent": true
+    },
+    {
+      "source": "/projects/md-pairing",
+      "destination": "/proboy-md",
+      "permanent": true
+    },
+    {
+      "source": "/showcase/luxecart",
+      "destination": "/demos/luxecart-store",
+      "permanent": true
     }
   ],
   "headers": [
