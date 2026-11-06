@@ -4,82 +4,51 @@
     "title": "ProBoy-MD",
     "featured": true,
     "category": "WhatsApp Bot",
-    "summary": "An advanced WhatsApp automation bot developed by Shahan Ali.",
+    "summary": "An open-source Node.js WhatsApp Multi-Device automation bot developed by Shahan Ali (proboy315) with 224 verified command files across 9 categories.",
     "description": [
-      "ProBoy-MD is a futuristic WhatsApp bot developed by Shahan Ali.",
-      "It supports advanced automation, media processing, interactive games, and auto-reply scripts."
+      "ProBoy-MD is a modular Node.js WhatsApp Multi-Device bot built on the Baileys library by Shahan Ali (PROBOY).",
+      "It organizes 224 command files across nine functional categories — general, AI helpers, group moderation, media processing, text effects, utilities, and developer tools — using pairing-code authentication."
     ],
     "features": [
-      "WhatsApp automation",
-      "Media processing",
-      "Interactive games",
-      "Auto-reply scripts"
+      "Multi-device WhatsApp session management via Baileys",
+      "224 verified command modules across 9 categories",
+      "Pairing-code login workflow without QR scanning",
+      "Group moderation, media conversion, and Gemini AI helpers"
     ],
     "technologies": [
       "Node.js",
-      "NPM",
+      "JavaScript",
       "Baileys API",
-      "WhatsApp Bot"
+      "WhatsApp Multi-Device"
     ],
-    "image": "https://proboy.vercel.app/botimg.png",
+    "image": "/botimg.png",
     "screenshots": [],
-    "repo": "https://github.com/ProBoy315/ProBoy-MD",
-    "demo": "https://ProBoy-MD.gt.tc",
-    "docs": "",
+    "repo": "https://github.com/proboy315/ProBoy-MD",
+    "demo": "https://proboy-md.gt.tc/",
+    "docs": "/proboy-md",
     "creator": "Shahan Ali",
-    "year": 2026
-  },
-  {
-    "slug": "proboy-sim-database",
-    "title": "ProBoy-SiM_Database",
-    "featured": false,
-    "category": "Full-Stack Development",
-    "summary": "An interactive lookup tool for simulation database files and cellular activation reports.",
-    "description": [
-      "This advanced lookup tool helps users find simulation database files and cellular activation reports inside structured portals.",
-      "It provides an interactive table interface for browsing and viewing organized information."
-    ],
-    "features": [
-      "Simulation database lookup",
-      "Cellular activation reports",
-      "Interactive table interface",
-      "API synchronization",
-      "Structured information portal"
-    ],
-    "technologies": [
-      "SIM Database",
-      "API Sync",
-      "MySQL",
-      "Information Portal"
-    ],
-    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXMUm6-k4TnrKIBHeP0LKiAb-qY4GCO8jvVGR_YEUX9w&s=10",
-    "screenshots": [],
-    "repo": "",
-    "demo": "https://proboy.vercel.app/sim.html",
-    "docs": "",
-    "creator": "Shahan Ali",
-    "year": 2026
+    "year": "2026"
   },
   {
     "slug": "proboy-camlink",
     "title": "ProBoy CamLink",
     "featured": false,
     "category": "Full-Stack Development",
-    "summary": "A camera shortlink system with device diagnostics and captured image viewing.",
+    "summary": "A camera shortlink and browser diagnostic utility with device telemetry logs and capture session management.",
     "description": [
-      "ProBoy CamLink generates dynamic camera shortlinks.",
-      "It provides a control panel to view real-time smart device diagnostic logs and captured pictures."
+      "ProBoy CamLink generates browser-based diagnostic shortlinks for testing camera permissions and device capabilities.",
+      "It pairs a lightweight capture frontend with a control panel for inspecting diagnostic logs and session outputs."
     ],
     "features": [
-      "Dynamic camera shortlinks",
-      "Device diagnostic logs",
-      "Captured picture viewing",
-      "Control panel"
+      "Dynamic shortlink generation for browser permission testing",
+      "Real-time device and browser diagnostic telemetry",
+      "Session control panel and capture review",
+      "Responsive web interface"
     ],
     "technologies": [
-      "Camera Capture",
-      "Diagnostic Logs",
-      "Shortlinks",
+      "JavaScript",
+      "HTML5 MediaDevices API",
+      "REST API",
       "Control Panel"
     ],
     "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
@@ -88,29 +57,29 @@
     "demo": "/camera/",
     "docs": "",
     "creator": "Shahan Ali",
-    "year": 2026
+    "year": "2026"
   },
   {
     "slug": "proboy-js-obfuscator",
     "title": "ProBoy JS Obfuscator",
     "featured": false,
     "category": "Developer Tools",
-    "summary": "A client-side JavaScript obfuscation tool for protecting production source code.",
+    "summary": "A client-side JavaScript obfuscation utility for transforming and hardening browser-delivered source code.",
     "description": [
-      "ProBoy JS Obfuscator is a secure, high-performance client-side JavaScript obfuscator.",
-      "It helps compile, safeguard, and optimize production source files."
+      "ProBoy JS Obfuscator is a browser-based utility for encoding and obfuscating JavaScript source files locally without uploading proprietary code to third-party servers.",
+      "Designed for quick bundling checks and source protection workflows."
     ],
     "features": [
-      "JavaScript obfuscation",
-      "Source code protection",
-      "Client-side processing",
-      "Production source optimization"
+      "100% client-side JavaScript transformation",
+      "Configurable identifier mangling and string encoding",
+      "Instant output preview and copy/download",
+      "Zero server-side code retention"
     ],
     "technologies": [
       "JavaScript",
-      "Obfuscation",
-      "Security",
-      "Utility"
+      "AST / Code Transform",
+      "Client-Side Security",
+      "Web Utility"
     ],
     "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
     "screenshots": [],
@@ -118,38 +87,66 @@
     "demo": "/obfuscator/",
     "docs": "",
     "creator": "Shahan Ali",
-    "year": 2026
+    "year": "2026"
   },
   {
     "slug": "proboy-encrypt-decrypt",
     "title": "ProBoy Encrypt & Decrypt",
     "featured": false,
     "category": "Security & Privacy",
-    "summary": "An AES-256-GCM encryption suite with image steganography and a local history vault.",
+    "summary": "A browser-native AES-256-GCM encryption suite with image steganography and a local encrypted history vault.",
     "description": [
-      "ProBoy Encrypt & Decrypt is an encryption suite designed to securely protect text messages.",
-      "It also supports embedding hidden secrets inside images through steganography.",
-      "Users can decrypt, edit, re-encrypt, and manage their local history vault."
+      "ProBoy Encrypt & Decrypt uses the Web Crypto API to encrypt and decrypt sensitive text messages with AES-256-GCM directly in the browser.",
+      "It also supports LSB image steganography for embedding encrypted payloads inside PNG images alongside a local browser vault."
     ],
     "features": [
-      "AES-256-GCM text encryption",
-      "Image steganography",
-      "Message decryption",
-      "Edit and re-encrypt functionality",
-      "Local history vault"
+      "Client-side AES-256-GCM authenticated encryption",
+      "Image steganography for embedding hidden payloads",
+      "Decrypt, edit, and re-encrypt workflow",
+      "Local browser history vault"
     ],
     "technologies": [
       "AES-256-GCM",
+      "Web Crypto API",
       "Steganography",
-      "Web Crypto",
-      "Privacy Tool"
+      "JavaScript"
     ],
-    "image": "https://proboy.vercel.app/images/encrypt&decrypt.png",
+    "image": "/images/encrypt&decrypt.png",
     "screenshots": [],
     "repo": "",
-    "demo": "https://proboy.vercel.app/encrypt&decrypt",
+    "demo": "/encrypt&decrypt.html",
     "docs": "",
     "creator": "Shahan Ali",
-    "year": 2026
+    "year": "2026"
+  },
+  {
+    "slug": "proboy-sim-database",
+    "title": "ProBoy-SiM_Database",
+    "featured": false,
+    "category": "Full-Stack Development",
+    "summary": "A structured lookup interface for browsing simulation records and cellular activation datasets.",
+    "description": [
+      "ProBoy-SiM_Database is a structured query interface built to search and filter simulation database records and activation reports.",
+      "It features an interactive tabular layout designed for fast record lookup and API-backed synchronization."
+    ],
+    "features": [
+      "Structured dataset search and filtering",
+      "Interactive tabular record display",
+      "API data synchronization",
+      "Lightweight responsive UI"
+    ],
+    "technologies": [
+      "JavaScript",
+      "MySQL",
+      "REST API",
+      "Web Portal"
+    ],
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+    "screenshots": [],
+    "repo": "",
+    "demo": "/sim.html",
+    "docs": "",
+    "creator": "Shahan Ali",
+    "year": "2026"
   }
 ]
