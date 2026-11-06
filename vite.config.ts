@@ -132,7 +132,7 @@ function prerenderRoutesPlugin(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), viteSingleFile(), prerenderRoutesPlugin()],
+  plugins: [react(), tailwindcss(), viteSingleFile({ overrideConfig: { base: "/" } }), prerenderRoutesPlugin()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
