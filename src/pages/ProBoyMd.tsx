@@ -1,4 +1,5 @@
 import { CommandDirectory, commandMeta, commandCategories } from "../components/CommandDirectory";
+import ProBoyPlayground from "../components/ProBoyPlayground";
 import Icon from "../components/Icon";
 import { info, site } from "../lib/data";
 import { useSeo } from "../lib/seo";
@@ -6,7 +7,7 @@ import { personLd } from "../lib/seo";
 import { onLink } from "../lib/router";
 import "./proboy-md.css";
 
-const REPO = "https://github.com/proboy315/ProBoy-MD";
+const REPO = "https://github.com/ProBoy315/ProBoy-MD";
 const PAIRING = commandMeta.pairingUrl;
 
 const categories: [string, string][] = [
@@ -33,8 +34,8 @@ const steps: [string, string][] = [
 export default function ProBoyMd() {
   const url = `${site}/proboy-md`;
   useSeo({
-    title: "ProBoy-MD Commands & WhatsApp Pairing — Shahan Ali (ProBoy)",
-    description: `ProBoy-MD is the WhatsApp Multi-Device bot by Shahan Ali (ProBoy), version ${commandMeta.version}, prefix ${commandMeta.prefix}. Search ${commandMeta.repositoryCommandFiles} verified commands, browse categories and get a WhatsApp pairing code.`,
+    title: "ProBoy-MD Commands & Pairing | Shahan Ali",
+    description: `Explore ProBoy-MD, Shahan Ali's open-source WhatsApp bot. Search ${commandMeta.repositoryCommandFiles} command files and find pairing and source links.`,
     path: "/proboy-md",
     jsonLd: [
       personLd(),
@@ -81,7 +82,10 @@ export default function ProBoyMd() {
             media utilities, text effects and developer tooling.
           </p>
           <div className="pmd-actions">
-            <a className="pmd-btn primary" href={PAIRING} target="_blank" rel="noopener noreferrer nofollow">
+            <a className="pmd-btn primary" href="#playground" onClick={onLink}>
+              <Icon name="terminal" className="w-4 h-4" /> Try Command Playground
+            </a>
+            <a className="pmd-btn ghost" href={PAIRING} target="_blank" rel="noopener noreferrer nofollow">
               <Icon name="whatsapp" className="w-4 h-4" /> Get Pairing Code <Icon name="external" className="w-4 h-4" />
             </a>
             <a className="pmd-btn ghost" href={REPO} target="_blank" rel="noopener noreferrer">
@@ -131,6 +135,8 @@ export default function ProBoyMd() {
             for more than a phone number, do not continue.</p>
           </aside>
         </section>
+
+        <ProBoyPlayground />
 
         <CommandDirectory />
 
@@ -193,7 +199,7 @@ export default function ProBoyMd() {
             <ul className="pmd-links">
               {[
                 ["Portfolio", "/", "home", false],
-                ["GitHub profile", "https://github.com/proboy315", "github", true],
+                ["GitHub profile", "https://github.com/ProBoy315", "github", true],
                 ["ProBoy-MD repository", REPO, "github", true],
                 ["Pairing website", PAIRING, "whatsapp", true],
               ].map(([labelText, href, icon, ext]) => (
