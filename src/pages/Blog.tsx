@@ -11,8 +11,8 @@ export function BlogIndexPage() {
   ];
 
   useSeo({
-    title: `Engineering Notes & Blog — ${info.name} (${info.brand})`,
-    description: `Technical articles and architecture notes by ${info.name} (${info.brand}) on Node.js WhatsApp bots (ProBoy-MD), full-stack web engineering, Shopify Liquid, and AI workflows.`,
+    title: `Engineering Notes | Shahan Ali (PROBOY)`,
+    description: `Read Shahan Ali's notes on ProBoy-MD and building web apps, bots and AI tools. Practical lessons from projects he has worked on.`,
     path: "/blog",
     jsonLd: [
       breadcrumbLd(trail),
@@ -114,7 +114,7 @@ export function BlogArticlePage({ slug }: { slug: string }) {
   ];
 
   useSeo({
-    title: post ? `${post.title} — ${info.name} (${info.brand})` : `Article Not Found — ${info.brand}`,
+    title: post ? `${post.title.split(":")[0]} | ${info.name} (${info.brand})` : `Article Not Found — ${info.brand}`,
     description: post?.summary || "Requested article could not be found.",
     path: `/blog/${slug}`,
     ogType: "article",
