@@ -39,7 +39,7 @@ export function ProjectPage({ slug }: { slug: string }) {
   ];
 
   useSeo({
-    title: p ? `${p.title} by ${info.name} (${info.brand}) — ${p.category}` : `Project not found — ${info.brand}`,
+    title: p ? `${p.title} | Shahan Ali (PROBOY)` : `Project not found — ${info.brand}`,
     description: p?.summary || "The requested project page could not be found.",
     path: `/projects/${slug}`,
     noindex: !p,
