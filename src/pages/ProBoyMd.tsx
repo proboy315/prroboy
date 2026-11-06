@@ -73,9 +73,9 @@ export default function ProBoyMd() {
         <div className="pmd-hero-inner">
           <p className="pmd-kicker"><span /> WhatsApp Multi-Device bot · version {commandMeta.version}</p>
           <h1 id="pmd-title">ProBoy-MD</h1>
-          <p className="pmd-byline">by <a href="/">Shahan Ali</a> <span>(ProBoy)</span></p>
+          <p className="pmd-byline">by <a href="/about" onClick={onLink}>Shahan Ali</a> <span>(PROBOY)</span></p>
           <p className="pmd-lead">
-            ProBoy-MD is the WhatsApp Multi-Device bot created and maintained by {info.name} (ProBoy). It runs on
+            ProBoy-MD is the WhatsApp Multi-Device bot created and maintained by {info.name} (PROBOY). It runs on
             Node.js with the Baileys library and drives {commandMeta.repositoryCommandFiles} command files through
             a {commandMeta.prefix} prefix across {commandCategories.length} categories: AI helpers, group moderation,
             media utilities, text effects and developer tooling.
@@ -87,7 +87,7 @@ export default function ProBoyMd() {
             <a className="pmd-btn ghost" href={REPO} target="_blank" rel="noopener noreferrer">
               <Icon name="github" className="w-4 h-4" /> View source on GitHub
             </a>
-            <a className="pmd-btn ghost" href="/#projects" onClick={onLink}>Portfolio projects</a>
+            <a className="pmd-btn ghost" href="/projects" onClick={onLink}>Portfolio projects</a>
           </div>
           <dl className="pmd-stats">
             <div><dt>Command prefix</dt><dd>{commandMeta.prefix}</dd></div>
