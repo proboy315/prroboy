@@ -4,16 +4,16 @@
     "title": "ProBoy-MD",
     "featured": true,
     "category": "WhatsApp Bot",
-    "summary": "An open-source Node.js WhatsApp Multi-Device automation bot developed by Shahan Ali (proboy315) with 224 verified command files across 9 categories.",
+    "summary": "An open-source WhatsApp Multi-Device bot written in Node.js. It ships 224 command files across 9 categories.",
     "description": [
-      "ProBoy-MD is a modular Node.js WhatsApp Multi-Device bot built on the Baileys library by Shahan Ali (PROBOY).",
-      "It organizes 224 command files across nine functional categories — general, AI helpers, group moderation, media processing, text effects, utilities, and developer tools — using pairing-code authentication."
+      "ProBoy-MD is a modular WhatsApp Multi-Device bot built with Node.js and the Baileys library.",
+      "It ships 224 command files across nine categories: general, AI, group, dev, media, fun, utility, textmaker, and admin. It uses pairing-code login and a '.' prefix."
     ],
     "features": [
-      "Multi-device WhatsApp session management via Baileys",
-      "224 verified command modules across 9 categories",
-      "Pairing-code login workflow without QR scanning",
-      "Group moderation, media conversion, and Gemini AI helpers"
+      "Multi-device sessions via Baileys",
+      "224 command files in 9 categories",
+      "Pairing-code login, no QR scan",
+      "Group tools, media, and AI helpers"
     ],
     "technologies": [
       "Node.js",
@@ -34,14 +34,14 @@
     "title": "ProBoy CamLink",
     "featured": false,
     "category": "Full-Stack Development",
-    "summary": "A camera shortlink and browser diagnostic utility with device telemetry logs and capture session management.",
+    "summary": "Camera shortlinks with browser diagnostics, device telemetry, and capture sessions.",
     "description": [
       "ProBoy CamLink generates browser-based diagnostic shortlinks for testing camera permissions and device capabilities.",
-      "It pairs a lightweight capture frontend with a control panel for inspecting diagnostic logs and session outputs."
+      "It pairs a capture frontend with a control panel for logs and session review."
     ],
     "features": [
-      "Dynamic shortlink generation for browser permission testing",
-      "Real-time device and browser diagnostic telemetry",
+      "Shortlinks for browser permission testing",
+      "Live device and browser diagnostics",
       "Session control panel and capture review",
       "Responsive web interface"
     ],
@@ -64,16 +64,16 @@
     "title": "ProBoy JS Obfuscator",
     "featured": false,
     "category": "Developer Tools",
-    "summary": "A client-side JavaScript obfuscation utility for transforming and hardening browser-delivered source code.",
+    "summary": "A client-side JavaScript obfuscator that encodes source code in your browser.",
     "description": [
-      "ProBoy JS Obfuscator is a browser-based utility for encoding and obfuscating JavaScript source files locally without uploading proprietary code to third-party servers.",
-      "Designed for quick bundling checks and source protection workflows."
+      "ProBoy JS Obfuscator encodes and obfuscates JavaScript locally in your browser. Your source never leaves your machine.",
+      "It is built for quick checks and source protection before production builds."
     ],
     "features": [
-      "100% client-side JavaScript transformation",
-      "Configurable identifier mangling and string encoding",
-      "Instant output preview and copy/download",
-      "Zero server-side code retention"
+      "Works fully client-side",
+      "Mangled identifiers and string encoding",
+      "Instant output with copy and download",
+      "Zero server-side storage"
     ],
     "technologies": [
       "JavaScript",
@@ -94,16 +94,16 @@
     "title": "ProBoy Encrypt & Decrypt",
     "featured": false,
     "category": "Security & Privacy",
-    "summary": "A browser-native AES-256-GCM encryption suite with image steganography and a local encrypted history vault.",
+    "summary": "AES-256-GCM encryption plus image steganography and a local vault, all in the browser.",
     "description": [
-      "ProBoy Encrypt & Decrypt uses the Web Crypto API to encrypt and decrypt sensitive text messages with AES-256-GCM directly in the browser.",
-      "It also supports LSB image steganography for embedding encrypted payloads inside PNG images alongside a local browser vault."
+      "ProBoy Encrypt & Decrypt encrypts text with AES-256-GCM using the Web Crypto API.",
+      "It also hides encrypted payloads inside PNG images and keeps a local vault in your browser."
     ],
     "features": [
-      "Client-side AES-256-GCM authenticated encryption",
-      "Image steganography for embedding hidden payloads",
+      "AES-256-GCM encryption in the browser",
+      "Image steganography for hidden payloads",
       "Decrypt, edit, and re-encrypt workflow",
-      "Local browser history vault"
+      "Local history vault"
     ],
     "technologies": [
       "AES-256-GCM",
@@ -124,14 +124,14 @@
     "title": "ProBoy-SiM_Database",
     "featured": false,
     "category": "Full-Stack Development",
-    "summary": "A structured lookup interface for browsing simulation records and cellular activation datasets.",
+    "summary": "Structured lookup for simulation records and cellular activation reports.",
     "description": [
-      "ProBoy-SiM_Database is a structured query interface built to search and filter simulation database records and activation reports.",
-      "It features an interactive tabular layout designed for fast record lookup and API-backed synchronization."
+      "ProBoy-SiM_Database is a structured portal for simulation records and activation reports.",
+      "It uses an interactive table for fast lookup and filtering, with API-backed data."
     ],
     "features": [
-      "Structured dataset search and filtering",
-      "Interactive tabular record display",
+      "Structured search and filtering",
+      "Interactive table interface",
       "API data synchronization",
       "Lightweight responsive UI"
     ],
