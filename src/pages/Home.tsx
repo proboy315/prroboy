@@ -61,7 +61,7 @@ function AboutSection() {
           onClick={onLink}
           className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold bg-white/5 border border-white/15 hover:border-red-500 text-white transition"
         >
-          Read Full Profile &amp; Identity Disambiguation <Icon name="arrow" className="w-4 h-4" />
+          Read my story <Icon name="arrow" className="w-4 h-4" />
         </a>
         <a
           href={info.linkedin}
@@ -81,8 +81,8 @@ function ServicesAndSkillsSection() {
     <Wrap id="services" className="pt-32">
       <Heading
         eyebrow="Core Services"
-        title="Full-stack web, WhatsApp bots, Shopify & Gemini AI"
-        text="Focused engineering services delivered from Burewala, Pakistan for clients worldwide."
+        title="Web apps, bots, Shopify & AI"
+        text="Need a new site or a tool that saves time? Here are four ways I can help."
       />
 
       <ul className="grid sm:grid-cols-2 gap-6">
@@ -137,7 +137,7 @@ function ServicesAndSkillsSection() {
           onClick={onLink}
           className="inline-flex items-center gap-2 text-sm font-semibold text-red-400 hover:text-red-300"
         >
-          Compare all services &amp; engagement process <Icon name="arrow" className="w-4 h-4" />
+          Explore all services <Icon name="arrow" className="w-4 h-4" />
         </a>
       </div>
 
@@ -207,9 +207,9 @@ function ProjectsSection() {
       <div className="flex flex-wrap items-end justify-between gap-4 mb-12">
         <div className="reveal max-w-2xl">
           <p className="text-red-500 text-sm tracking-[0.3em] uppercase font-semibold">Projects</p>
-          <h2 className="mt-3 text-3xl sm:text-5xl font-bold tracking-tight">Real software built &amp; shipped</h2>
+          <h2 className="mt-3 text-3xl sm:text-5xl font-bold tracking-tight">Projects you can explore</h2>
           <p className="mt-4 text-zinc-400 leading-relaxed">
-            For example: the open-source ProBoy-MD bot, browser security tools, and lookup utilities — all built by Shahan Ali ({info.brand}).
+            These are tools I built, from a WhatsApp bot to browser-based utilities. Open a project to see what it does and how it works.
           </p>
         </div>
         <a
@@ -217,7 +217,7 @@ function ProjectsSection() {
           onClick={onLink}
           className="inline-flex items-center gap-2 text-sm font-semibold text-red-400 hover:text-red-300"
         >
-          Open full project index <Icon name="arrow" className="w-4 h-4" />
+          See all projects <Icon name="arrow" className="w-4 h-4" />
         </a>
       </div>
 
@@ -250,11 +250,11 @@ function ProjectsSection() {
             </ul>
             <div className="mt-8 flex flex-wrap gap-4">
               <a
-                href="/proboy-md"
+                href="/proboy-md#playground"
                 onClick={onLink}
                 className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold bg-red-600 hover:bg-red-500 text-white transition"
               >
-                Explore {featured.title} Commands <Icon name="arrow" className="w-4 h-4" />
+                Try {featured.title} Playground <Icon name="arrow" className="w-4 h-4" />
               </a>
               <a
                 href={`/projects/${featured.slug}`}
@@ -296,27 +296,57 @@ function ProjectsSection() {
 }
 
 function InteractiveDemosSection() {
+  const featuredDemos = demos.filter((d) => d.featured).slice(0, 8);
   return (
     <Wrap id="demos" className="pt-32">
-      <Heading
-        eyebrow="Interactive Demos"
-        title="Working browser UI demonstrations"
-        text="Seven interactive interface demonstrations built by Shahan Ali (PROBOY) — featuring live filtering, carts, charts, validated forms, and documentation layouts. Sample data only; not client deployments."
-      />
+      <div className="flex flex-wrap items-end justify-between gap-4 mb-12">
+        <div className="reveal max-w-2xl">
+          <p className="text-red-500 text-sm tracking-[0.3em] uppercase font-semibold">Interactive Demos</p>
+          <h2 className="mt-3 text-3xl sm:text-5xl font-bold tracking-tight">
+            {demos.length} working browser demonstrations
+          </h2>
+          <p className="mt-4 text-zinc-400 leading-relaxed">
+            Try search, carts, 360° product viewers, charts, Kanban boards and validated forms. Each demo uses
+            fictional sample data, so these are interface demonstrations rather than client deployments.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <a
+            href="/demos"
+            onClick={onLink}
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold bg-red-600 hover:bg-red-500 text-white transition"
+          >
+            Explore All {demos.length} Demos <Icon name="arrow" className="w-4 h-4" />
+          </a>
+          <a
+            href="/demos/control-room"
+            onClick={onLink}
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm border border-white/20 hover:bg-white hover:text-black transition"
+          >
+            Demo Control Room
+          </a>
+        </div>
+      </div>
+
       <ul className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {demos.map((d) => (
+        {featuredDemos.map((d) => (
           <li
             key={d.slug}
             className="reveal group rounded-2xl border border-white/10 overflow-hidden"
             style={{ background: `linear-gradient(160deg, ${d.accent}22, rgba(255,255,255,.02))` }}
           >
             <a href={`/demos/${d.slug}`} onClick={onLink} className="block p-5 h-full hover:-translate-y-0.5 transition">
-              <span
-                className="inline-block text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full border"
-                style={{ color: d.accent, borderColor: `${d.accent}66` }}
-              >
-                {d.category}
-              </span>
+              <div className="flex items-center justify-between gap-2">
+                <span
+                  className="inline-block text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full border"
+                  style={{ color: d.accent, borderColor: `${d.accent}66` }}
+                >
+                  {d.category}
+                </span>
+                {d.has360Viewer && (
+                  <span className="text-[10px] uppercase tracking-wider text-zinc-300">360° Viewer</span>
+                )}
+              </div>
               <h3 className="mt-3 text-lg font-semibold group-hover:text-red-400 transition">{d.name}</h3>
               <p className="text-[13px] text-zinc-400 mt-1 leading-relaxed">{d.summary}</p>
               <span className="mt-3 inline-flex items-center gap-2 text-sm text-red-400">
@@ -347,8 +377,8 @@ function CertificateSection() {
           <img
             src={c.image}
             alt={`${c.subtitle}, awarded to ${c.awardedTo}`}
-            width={1600}
-            height={1131}
+            width={2000}
+            height={1414}
             loading="lazy"
             className="w-full rounded-2xl border border-white/10 bg-white/5"
           />
@@ -398,32 +428,6 @@ function CertificateSection() {
   );
 }
 
-function ReviewsSection() {
-  return (
-    <Wrap id="reviews" className="pt-32">
-      <Heading
-        eyebrow="Client Notes"
-        title="Feedback from collaborations"
-        text="Testimonials submitted directly to this portfolio."
-      />
-      <ul className="grid md:grid-cols-2 gap-5">
-        {info.reviews.map((r) => (
-          <li key={r.name} className="reveal glass p-6">
-            <blockquote>
-              <p className="text-zinc-200 leading-relaxed">&ldquo;{r.text}&rdquo;</p>
-            </blockquote>
-            <p className="mt-4 font-semibold">{r.name}</p>
-            <p className="text-sm text-zinc-500">{r.role}</p>
-            <p className="mt-2 text-xs text-red-400">
-              {r.project} · {r.date}
-            </p>
-          </li>
-        ))}
-      </ul>
-    </Wrap>
-  );
-}
-
 function FaqSection() {
   const [open, setOpen] = useState(0);
   const blockRef = useRef<HTMLDivElement>(null);
@@ -432,7 +436,7 @@ function FaqSection() {
       <Heading
         eyebrow="FAQ & Disambiguation"
         title="Frequently asked questions"
-        text="Short answers about Shahan Ali (PROBOY), his services, ProBoy-MD, and identity disambiguation."
+        text="Direct answers about Shahan Ali (PROBOY), services, ProBoy-MD, and identity disambiguation."
       />
       <div ref={blockRef} className="max-w-3xl divide-y divide-white/10 border-y border-white/10">
         {info.faq.map((f, i) => (
@@ -462,7 +466,7 @@ function ContactSection() {
       <Heading
         eyebrow="Contact"
         title="Start a project or send an inquiry"
-        text="Submit your details below. If you prefer, you can also reach out via WhatsApp, email, or LinkedIn."
+        text="Tell me what you want to build. You can use the form or reach me by WhatsApp, email or LinkedIn."
       />
       <div className="reveal grid lg:grid-cols-[1.35fr_0.85fr] gap-8 items-start">
         <div className="glass p-6 sm:p-8">
@@ -472,8 +476,7 @@ function ContactSection() {
         <aside className="glass p-6 sm:p-7 space-y-4 text-sm">
           <h3 className="text-lg font-bold text-white">Direct Channels</h3>
           <p className="text-zinc-400 leading-relaxed">
-            Available for full-stack web apps, custom WhatsApp bots, Shopify Online Store 2.0 builds, and Gemini AI
-            integrations.
+            Need a web app, a WhatsApp bot, a Shopify store or an AI tool? Share the basics and we can discuss the next step.
           </p>
           <dl className="space-y-3 pt-2">
             <div>
@@ -541,7 +544,7 @@ export default function Home() {
         operatingSystem: "Node.js",
         description: projects[0]?.summary,
         author: { "@id": `${site}/#person` },
-        codeRepository: "https://github.com/proboy315/ProBoy-MD",
+        codeRepository: "https://github.com/ProBoy315/ProBoy-MD",
         url: `${site}/proboy-md`,
       },
       {
@@ -584,7 +587,6 @@ export default function Home() {
       <ProjectsSection />
       <InteractiveDemosSection />
       <CertificateSection />
-      <ReviewsSection />
       <FaqSection />
       <ContactSection />
     </>
