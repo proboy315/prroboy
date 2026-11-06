@@ -10,7 +10,7 @@
 - Blog: https://proboy.vercel.app/blog
 - Contact: https://proboy.vercel.app/contact
 - LinkedIn: https://pk.linkedin.com/in/shahanali687
-- GitHub: https://github.com/proboy315
+- GitHub: https://github.com/ProBoy315
 - Email: shahanali.dev@gmail.com
 - WhatsApp: +92 326 1684315
 
@@ -18,7 +18,7 @@
 Shahan Ali (PROBOY / proboy315 / shahan315) is a software developer and ICS student in Burewala, Punjab, Pakistan. He is not affiliated with Shahan Ali Mohsin (the Indian motorsport racing driver) or Shahan Ali Jamil (the EcoPack executive).
 
 ## Real Projects
-- [ProBoy-MD](https://proboy.vercel.app/projects/proboy-md): Open-source Node.js WhatsApp Multi-Device automation bot with 224 verified command files across 9 categories (https://github.com/proboy315/ProBoy-MD).
+- [ProBoy-MD](https://proboy.vercel.app/projects/proboy-md): Open-source Node.js WhatsApp Multi-Device automation bot with 224 verified command files across 9 categories (https://github.com/ProBoy315/ProBoy-MD).
 - [ProBoy CamLink](https://proboy.vercel.app/projects/proboy-camlink): Camera shortlink and browser diagnostic utility with device telemetry logs and session management.
 - [ProBoy JS Obfuscator](https://proboy.vercel.app/projects/proboy-js-obfuscator): Client-side JavaScript obfuscation utility for transforming browser-delivered source code.
 - [ProBoy Encrypt & Decrypt](https://proboy.vercel.app/projects/proboy-encrypt-decrypt): Browser-native AES-256-GCM encryption suite with image steganography and a local history vault.
