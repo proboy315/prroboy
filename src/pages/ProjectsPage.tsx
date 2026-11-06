@@ -15,8 +15,8 @@ export default function ProjectsPage() {
   ];
 
   useSeo({
-    title: `Projects by ${info.name} (${info.brand}) — Bots, Web Apps & Security Tools`,
-    description: `Production software projects and interactive demos built by ${info.name} (${info.brand}), including ProBoy-MD, ProBoy CamLink, ProBoy JS Obfuscator, ProBoy Encrypt & Decrypt, and ProBoy-SiM_Database.`,
+    title: `Projects | Shahan Ali (PROBOY)`,
+    description: `Explore Shahan Ali's real projects: ProBoy-MD, web tools and browser utilities. See what each build does and try the separate interactive demos.`,
     path: "/projects",
     jsonLd: [
       breadcrumbLd(trail),
@@ -149,22 +149,40 @@ export default function ProjectsPage() {
         ))}
       </ul>
 
-      {/* Interactive Browser Demos (Preserved from Demos area) */}
+      {/* Interactive Browser Demos (Preserved & Expanded) */}
       <section id="demos" aria-labelledby="demos-heading" className="mt-20 pt-14 border-t border-white/10">
-        <div className="max-w-3xl">
-          <p className="text-red-500 text-xs tracking-[0.3em] uppercase font-semibold">Interactive Demos</p>
-          <h2 id="demos-heading" className="mt-2 text-3xl font-bold">
-            Working browser interface demonstrations
-          </h2>
-          <p className="mt-3 text-zinc-400 leading-relaxed">
-            Seven self-contained interactive UI demonstrations built by {info.name} ({info.brand}) — featuring live
-            search, carts, charts, validated forms, and documentation layouts. Sample data only; not client
-            deployments.
-          </p>
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div className="max-w-3xl">
+            <p className="text-red-500 text-xs tracking-[0.3em] uppercase font-semibold">Interactive Demos</p>
+            <h2 id="demos-heading" className="mt-2 text-3xl font-bold">
+              {demos.length} working browser interface demonstrations
+            </h2>
+            <p className="mt-3 text-zinc-400 leading-relaxed">
+              Self-contained interactive UI demonstrations built by {info.name} ({info.brand}) — featuring live search,
+              carts, 360° angle viewers, charts, Kanban boards, and validated forms. Sample data only; not client
+              deployments.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="/demos"
+              onClick={onLink}
+              className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold bg-red-600 hover:bg-red-500 text-white transition"
+            >
+              Open Demos Directory <Icon name="arrow" className="w-4 h-4" />
+            </a>
+            <a
+              href="/demos/control-room"
+              onClick={onLink}
+              className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm border border-white/20 hover:bg-white hover:text-black transition"
+            >
+              Demo Control Room
+            </a>
+          </div>
         </div>
 
         <ul className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {demos.map((d) => (
+          {demos.slice(0, 8).map((d) => (
             <li
               key={d.slug}
               className="group rounded-2xl border border-white/10 overflow-hidden"
