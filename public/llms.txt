@@ -1,66 +1,31 @@
-# Shahan Ali (ProBoy, itx_proboy, shahan315, proboy315)
+# Shahan Ali (PROBOY, ProBoy, itx_proboy, shahan315, proboy315)
 
-> Shahan Ali, also known as ProBoy, itx_proboy, shahan315 and proboy315, is a full-stack developer, bot architect and Shopify expert from Burewala, Punjab, Pakistan. He builds web applications, the ProBoy-MD WhatsApp bot, custom Shopify e-commerce, and AI integrations while studying ICS 1st Year at Govt Graduate College Burewala.
+> Shahan Ali (PROBOY) is a Full-Stack Developer, AI & WhatsApp Bot Architect, and Shopify Expert based in Burewala, Punjab, Pakistan. He is currently an ICS student at Govt Graduate College Burewala and builds web applications, the open-source ProBoy-MD WhatsApp Multi-Device bot, custom Shopify Online Store 2.0 storefronts, and Google Gemini AI integrations.
 
-- Site: https://proboy.vercel.app
+- Official Website: https://proboy.vercel.app/
+- About: https://proboy.vercel.app/about
+- Services: https://proboy.vercel.app/services
+- Projects: https://proboy.vercel.app/projects
+- ProBoy-MD Commands & Pairing: https://proboy.vercel.app/proboy-md
+- Blog: https://proboy.vercel.app/blog
+- Contact: https://proboy.vercel.app/contact
+- LinkedIn: https://pk.linkedin.com/in/shahanali687
+- GitHub: https://github.com/proboy315
 - Email: shahanali.dev@gmail.com
 - WhatsApp: +92 326 1684315
 
-## Projects
-- [ProBoy-MD](https://proboy.vercel.app/projects/proboy-md): ProBoy-MD is a Node.js WhatsApp multi-device bot by Shahan Ali (ProBoy), built with Baileys. It uses command files for automation, media utilities, group tools and developer utilities.
-- [ProBoy Connections](https://proboy.vercel.app/projects/proboy-connections): ProBoy Connections is an analytics portal by Shahan Ali for watching active bot-node connections, regional distribution, hourly traffic and live connection logs.
-- [ProBoy CamLink](https://proboy.vercel.app/projects/camlink): ProBoy CamLink is a control panel by Shahan Ali for diagnostic shortlinks, device diagnostic logs and image-capture feeds, with a glass-style control interface.
-- [ProBoy JS Obfuscator](https://proboy.vercel.app/projects/js-obfuscator): ProBoy JS Obfuscator is a client-side tool by Shahan Ali for encoding and protecting JavaScript source files before production use.
-- [ProBoy-MD Pairing Portal](https://proboy.vercel.app/projects/md-pairing): The ProBoy-MD pairing portal is a web page by Shahan Ali that generates a multi-device pairing code for WhatsApp bots, so a session can be linked without scanning a QR code.
-- [ProBoy-SiM Database](https://proboy.vercel.app/projects/sim-database): ProBoy-SiM is a database portal by Shahan Ali for browsing structured simulation records and activation reports with table filtering.
-- [Shopify Custom E-Commerce Engine](https://proboy.vercel.app/projects/shopify-engine): A Shopify build by Shahan Ali that connects supplier inventory and fulfillment to an Online Store 2.0 storefront, with Liquid theme work aimed at fast page loads.
-- [Social Creator Monetization Dashboard](https://proboy.vercel.app/projects/creator-dashboard): A creator analytics dashboard by Shahan Ali for reading YouTube, TikTok and Facebook creator-fund style revenue, including RPM-style forecasts.
+## Identity Disambiguation
+Shahan Ali (PROBOY / proboy315 / shahan315) is a software developer and ICS student in Burewala, Punjab, Pakistan. He is not affiliated with Shahan Ali Mohsin (the Indian motorsport racing driver) or Shahan Ali Jamil (the EcoPack executive).
 
-## Showcase demos
-- [LuxeCart](https://proboy.vercel.app/showcase/luxecart): Concept storefront for a luxury watch house: Swiss tourbillon catalogue, cart, one-click checkout and a merchant admin.
-- [DevMarket](https://proboy.vercel.app/showcase/devmarket): Concept marketplace for developer products: SaaS boilerplates, API starters, bots and UI kits, plus a seller admin.
-- [BiteRush](https://proboy.vercel.app/showcase/biterush): Concept food-delivery app with item customization, order tracking and a restaurant admin.
-- [AutoVault](https://proboy.vercel.app/showcase/autovault): Concept showroom for hypercars with specifications, a comparison matrix, test-drive booking and a dealer admin.
-- [Nestora](https://proboy.vercel.app/showcase/nestora): Concept property site with search filters, a mortgage estimator and a broker admin.
-- [FitForge](https://proboy.vercel.app/showcase/fitforge): Concept fitness product with calorie rings, workout streaks and a trainer admin.
-- [Tripora](https://proboy.vercel.app/showcase/tripora): Concept expedition site with itineraries, a gallery, concierge booking and an agency admin.
-- [SoundPulse](https://proboy.vercel.app/showcase/soundpulse): Concept shop for studio monitors and vinyl, with an equalizer-style interface and a merchant admin.
-- [NeuralDesk](https://proboy.vercel.app/showcase/neuraldesk): Concept AI workspace with multi-agent prompts, document analysis and token analytics.
-- [Learnova](https://proboy.vercel.app/showcase/learnova): Concept learning platform with video lessons, a curriculum, certificates and an instructor admin.
-- [MediBook](https://proboy.vercel.app/showcase/medibook): Concept clinic booking flow with specialist search, time slots, confirmation states and a clinic admin.
-- [Artivio](https://proboy.vercel.app/showcase/artivio): Concept auction house for fine art with live-bidding screens, one-of-one lots, collector suites and a curator admin.
-- [HireFlow](https://proboy.vercel.app/showcase/hireflow): Concept hiring tool with match scores, candidate pipelines and one-click apply, plus a recruiter admin.
-- [ShipTrack](https://proboy.vercel.app/showcase/shiptrack): Concept logistics dashboard for container status, ETAs and port logs, with a logistics admin.
-- [Stayora](https://proboy.vercel.app/showcase/stayora): Concept hotel site for villas and penthouses with plunge-pool stays and a hotel admin.
-- [Finova](https://proboy.vercel.app/showcase/finova): Concept finance dashboard for net worth, spending and savings goals, with a finance admin.
-- [SecurePass](https://proboy.vercel.app/showcase/securepass): Concept password-vault interface with a generator screen and a security admin. A UI demo only.
-- [CloudPanel](https://proboy.vercel.app/showcase/cloudpanel): Concept hosting panel with CPU and memory charts, a terminal-style panel and a container list.
-- [ShopAdmin](https://proboy.vercel.app/showcase/shopadmin): Concept store admin for revenue, stock alerts, order statuses and fulfillment.
-- [Vortex](https://proboy.vercel.app/showcase/vortex): Concept creative studio site built around canvas, shader and particle visuals, with a director admin.
-- [ProHub](https://proboy.vercel.app/showcase/prohub): Concept freelancer marketplace with talent profiles, hourly hiring, escrow states and a platform admin.
+## Real Projects
+- [ProBoy-MD](https://proboy.vercel.app/projects/proboy-md): Open-source Node.js WhatsApp Multi-Device automation bot with 224 verified command files across 9 categories (https://github.com/proboy315/ProBoy-MD).
+- [ProBoy CamLink](https://proboy.vercel.app/projects/proboy-camlink): Camera shortlink and browser diagnostic utility with device telemetry logs and session management.
+- [ProBoy JS Obfuscator](https://proboy.vercel.app/projects/proboy-js-obfuscator): Client-side JavaScript obfuscation utility for transforming browser-delivered source code.
+- [ProBoy Encrypt & Decrypt](https://proboy.vercel.app/projects/proboy-encrypt-decrypt): Browser-native AES-256-GCM encryption suite with image steganography and a local history vault.
+- [ProBoy-SiM_Database](https://proboy.vercel.app/projects/proboy-sim-database): Structured lookup interface for browsing simulation records and cellular activation datasets.
 
-## Interactive demos
-- [LuxeCart](https://proboy.vercel.app/demos/luxecart-store) — Premium e-commerce store: Product catalogue with live search, category filters, working cart, quantity controls and a validated checkout demonstration.
-- [Pulse](https://proboy.vercel.app/demos/pulse-dashboard) — SaaS analytics dashboard: Sidebar navigation, tabbed overview, interactive SVG charts, metric cards and a settings panel with toggles.
-- [Ember Kitchen](https://proboy.vercel.app/demos/ember-kitchen) — Restaurant website: Menu browsing by course, a reservation form with validation and confirmation, plus opening hours and contact details.
-- [Haven](https://proboy.vercel.app/demos/haven-properties) — Real estate listings: Property search with filters for type, bedrooms and price, expandable listing details and an agent enquiry form.
-- [Northline](https://proboy.vercel.app/demos/northline-agency) — Creative agency site: Services, selected work, a small team section and a project enquiry form with real validation and success feedback.
-- [Synth Studio](https://proboy.vercel.app/demos/synth-ai-studio) — AI tool interface: Prompt input, model and tone selectors, character counter and a deterministic sample response generator that runs entirely in the browser.
-- [Forge Docs](https://proboy.vercel.app/demos/forge-docs) — Developer documentation: Documentation layout with sidebar navigation, in-page search across sections and copyable code examples.
-
-## ProBoy-MD commands
-ProBoy-MD v6.0.1 uses prefix ".". The supplied menu reported 531 commands; parsing the current repository found 224 command files across 9 categories.
-- admin: 3 commands
-- ai: 49 commands
-- dev: 29 commands
-- fun: 43 commands
-- general: 25 commands
-- group: 25 commands
-- media: 12 commands
-- textmaker: 19 commands
-- utility: 19 commands
-- Pairing website: https://proboy-md.gt.tc/
-
-## ProBoy-MD
-- [Documentation](https://proboy.vercel.app/proboy-md)
-- [Source](https://github.com/ProBoy315/ProBoy-MD)
+## Services
+- [Full-Stack Web Development](https://proboy.vercel.app/services/full-stack-web-development)
+- [WhatsApp Bot Development & Automation](https://proboy.vercel.app/services/whatsapp-bot-development)
+- [Shopify Development](https://proboy.vercel.app/services/shopify-development)
+- [AI Integrations & Automation](https://proboy.vercel.app/services/ai-integrations-automation)
