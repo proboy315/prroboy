@@ -28,30 +28,30 @@
     "Shopify Expert",
     "Automation Developer"
   ],
-  "intro": "I build full-stack web applications, the ProBoy-MD WhatsApp bot, custom Shopify stores, and practical AI integrations.",
+  "intro": "I build full-stack web apps, the ProBoy-MD WhatsApp bot, Shopify stores, and practical AI tools.",
   "introEmphasis": "Engineering reliable software from Burewala, Punjab, Pakistan.",
-  "heroDescription": "I build modern web applications, multi-device WhatsApp bots, high-converting Shopify stores, and Gemini AI integrations.",
-  "heroEmphasis": "Turning practical ideas into fast, maintainable digital products.",
+  "heroDescription": "I build modern web apps, multi-device WhatsApp bots, Shopify stores, and Gemini AI tools.",
+  "heroEmphasis": "Turning practical ideas into fast, maintainable products.",
   "availability": "Available for freelance projects & collaborations",
   "about": [
-    "Shahan Ali — known online as PROBOY, ProBoy, itx_proboy, shahan315, and proboy315 — is a Full-Stack Developer, AI & WhatsApp Bot Architect, and Shopify Expert based in Burewala, Punjab, Pakistan.",
-    "Alongside his current studies as an ICS student at Govt Graduate College Burewala, he builds production web applications, maintains the open-source ProBoy-MD WhatsApp Multi-Device bot, engineers custom Shopify Online Store 2.0 storefronts, and integrates Google Gemini AI workflows."
+    "Shahan Ali is a full-stack developer from Burewala, Punjab, Pakistan. Also known online as PROBOY, ProBoy, itx_proboy, shahan315, and proboy315, he builds web apps, WhatsApp bots, and Shopify stores.",
+    "At the same time, he studies ICS at Govt Graduate College Burewala. In addition, he maintains the open-source ProBoy-MD WhatsApp bot, builds Shopify Online Store 2.0 storefronts, and adds Google Gemini AI to real workflows."
   ],
   "chapters": [
     {
       "n": "01",
       "title": "Who I Am",
-      "text": "Full-stack developer and current ICS student at Govt Graduate College Burewala, based in Burewala, Punjab, Pakistan. Operating under the PROBOY brand (shahan315 / proboy315 / itx_proboy)."
+      "text": "Shahan Ali is based in Burewala, Punjab, Pakistan, and he is currently an ICS student at Govt Graduate College Burewala. Online he also goes by PROBOY, shahan315, proboy315, and itx_proboy."
     },
     {
       "n": "02",
       "title": "What I Build",
-      "text": "Full-stack web apps with React, TypeScript, and Node.js; the 224-command ProBoy-MD WhatsApp Multi-Device bot; Shopify Online Store 2.0 themes; and Gemini AI tools."
+      "text": "He builds full-stack web apps with React, TypeScript, and Node.js. He also created ProBoy-MD, an open-source WhatsApp bot with 224 command files. In addition, he builds Shopify Online Store 2.0 themes and Gemini AI tools."
     },
     {
       "n": "03",
       "title": "How I Work",
-      "text": "Modular codebases, honest technical communication, semantic and accessible interfaces, and maintainable systems built without unnecessary bloat."
+      "text": "He writes modular code and explains his work clearly. In practice, his interfaces stay accessible and lean because small, clear systems are easier to keep."
     }
   ],
   "education": "ICS Student — Govt Graduate College Burewala, Punjab, Pakistan",
@@ -167,7 +167,7 @@
       "heroMeta": "React / TypeScript / Node",
       "title": "Full-Stack Web Development",
       "meta": "React • TypeScript • Node.js • REST APIs",
-      "text": "Custom web applications, interactive dashboards, client portals, and RESTful backends built with React, TypeScript, Vite, Tailwind CSS, and Node.js.",
+      "text": "Web apps, dashboards, client portals, and backends built with React, TypeScript, and Node.js. REST APIs and responsive layouts included.",
       "cta": "Explore web development"
     },
     {
@@ -177,7 +177,7 @@
       "heroMeta": "Baileys / Multi-Device",
       "title": "WhatsApp Bot Development & Automation",
       "meta": "Node.js • Baileys • Multi-Device Pairing",
-      "text": "Multi-device WhatsApp automation bots with modular command routing, auto-responders, group moderation, media utilities, and cloud deployment.",
+      "text": "WhatsApp bots with command routing, auto-responders, group tools, and cloud hosting. ProBoy-MD is the flagship bot.",
       "cta": "Explore bot development"
     },
     {
@@ -187,7 +187,7 @@
       "heroMeta": "OS 2.0 / Liquid",
       "title": "Shopify Development",
       "meta": "Online Store 2.0 • Liquid • Storefront UX",
-      "text": "Custom Shopify Online Store 2.0 themes, Liquid section architecture, product filtering, cart drawers, checkout enhancements, and webhook integrations.",
+      "text": "Custom Shopify Online Store 2.0 themes, Liquid sections, product filters, cart drawers, and checkout upgrades.",
       "cta": "Explore Shopify services"
     },
     {
@@ -197,7 +197,7 @@
       "heroMeta": "Gemini AI / Workflows",
       "title": "AI Integrations & Automation",
       "meta": "Google Gemini • Prompt Engineering • APIs",
-      "text": "Practical AI features for web apps and messaging bots using Google Gemini APIs, structured prompt pipelines, assistants, and workflow automation.",
+      "text": "AI features for web apps and bots. For example, Gemini-powered assistants, content helpers, and workflow automation.",
       "cta": "Explore AI integrations"
     }
   ],
@@ -356,12 +356,12 @@
     "clarityProjectId": ""
   },
   "seo": {
-    "title": "Shahan Ali (PROBOY) — Full-Stack Developer, AI & WhatsApp Bot Architect",
-    "description": "Official portfolio of Shahan Ali (PROBOY / proboy315 / shahan315) from Burewala, Punjab, Pakistan — Full-Stack Developer, AI & WhatsApp Bot Architect, Shopify Expert, and creator of ProBoy-MD.",
+    "title": "Shahan Ali | Full-Stack Developer & Bot Architect",
+    "description": "Shahan Ali (PROBOY) is a developer from Burewala, Pakistan, building web apps, WhatsApp bots, AI integrations and Shopify stores. Creator of ProBoy-MD.",
     "ogImage": "/images/og-shahan-ali.jpg"
   },
   "introAnimation": {
-    "enabled": true,
+    "enabled": false,
     "directory": "/intro-animation/",
     "framePrefix": "progress-",
     "frameExtension": ".png",
@@ -378,7 +378,7 @@
     "awardedTo": "Shahan (Shahan Ali)",
     "date": "19 July 2026",
     "image": "/images/quizoff_certificate_1786079838704.png",
-    "quote": "Received a Certificate of Recognition for Google Gemini QuizOff 2026, organised by CampusCrew and hosted on Unstop, a nationwide AI competition with 5,25,000+ student participants across 48,500+ institutions and 35+ countries.",
+    "quote": "Shahan Ali earned a Certificate of Recognition for Google Gemini QuizOff 2026. CampusCrew organized the event and Unstop hosted it. More than 5,25,000 students from 48,500+ institutions, across 35+ countries, took part.",
     "facts": [
       [
         "Awarded to",
@@ -439,27 +439,27 @@
   "faq": [
     {
       "q": "Who is Shahan Ali (PROBOY)?",
-      "a": "Shahan Ali — known online as PROBOY, ProBoy, itx_proboy, shahan315, and proboy315 — is a Full-Stack Developer, AI & WhatsApp Bot Architect, and Shopify Expert based in Burewala, Punjab, Pakistan. He is currently an ICS student at Govt Graduate College Burewala and builds web applications, the ProBoy-MD WhatsApp bot, custom Shopify stores, and Gemini AI tools."
+      "a": "Shahan Ali is a developer from Burewala, Punjab, Pakistan. Online he goes by PROBOY, ProBoy, itx_proboy, shahan315, and proboy315. He is currently an ICS student at Govt Graduate College Burewala, and he builds web apps, the ProBoy-MD WhatsApp bot, Shopify stores, and Gemini AI tools."
     },
     {
       "q": "Is this Shahan Ali the same person as Shahan Ali Mohsin or Shahan Ali Jamil?",
-      "a": "No. This website belongs to Shahan Ali (PROBOY / proboy315 / shahan315), a software developer and ICS student in Burewala, Punjab, Pakistan. He is not affiliated with Shahan Ali Mohsin (the Indian motorsport racing driver) or Shahan Ali Jamil (the corporate executive associated with EcoPack)."
+      "a": "No. This site belongs to Shahan Ali (PROBOY), a developer and ICS student in Burewala, Punjab, Pakistan. He is not the same person as Shahan Ali Mohsin, the Indian motorsport racing driver, or Shahan Ali Jamil, the EcoPack executive."
     },
     {
       "q": "What services does Shahan Ali offer?",
-      "a": "Shahan Ali provides four core development services: Full-Stack Web Development (React, TypeScript, Node.js), WhatsApp Bot Development & Automation (Node.js, Baileys multi-device architecture), Shopify Development (Online Store 2.0 and Liquid), and AI Integrations & Automation (Google Gemini APIs and workflow tools)."
+      "a": "Four services: full-stack web development with React, TypeScript, and Node.js; WhatsApp bot development with Node.js and Baileys; Shopify development for Online Store 2.0; and AI integrations using Google Gemini APIs."
     },
     {
       "q": "What is ProBoy-MD?",
-      "a": "ProBoy-MD is an open-source Node.js WhatsApp Multi-Device bot created by Shahan Ali (proboy315) using the Baileys library. The repository contains 224 verified command files across 9 categories (general, ai, group, dev, media, fun, utility, textmaker, and admin) using a '.' prefix."
+      "a": "ProBoy-MD is an open-source WhatsApp Multi-Device bot created by Shahan Ali (proboy315). It uses Node.js and the Baileys library. The repository holds 224 verified command files in 9 categories, all using a '.' prefix."
     },
     {
       "q": "What credential did Shahan Ali earn in 2026?",
-      "a": "Shahan Ali earned a Certificate of Recognition for Google Gemini QuizOff 2026 (dated 19 July 2026), organised by CampusCrew and hosted on Unstop."
+      "a": "He earned a Certificate of Recognition for Google Gemini QuizOff 2026. It is dated 19 July 2026 and was organized by CampusCrew and hosted on Unstop."
     },
     {
       "q": "How can I contact or hire Shahan Ali?",
-      "a": "You can submit a direct inquiry through the contact form at https://proboy.vercel.app/contact, email shahanali.dev@gmail.com, message on WhatsApp at +92 326 1684315, or connect via LinkedIn (linkedin.com/in/shahanali687) and GitHub (github.com/proboy315)."
+      "a": "You can use the contact form at https://proboy.vercel.app/contact, or email shahanali.dev@gmail.com. You can also message him on WhatsApp at +92 326 1684315, or connect via LinkedIn and GitHub."
     }
   ]
 }
