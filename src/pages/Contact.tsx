@@ -12,8 +12,8 @@ export default function ContactPage() {
   ];
 
   useSeo({
-    title: `Contact ${info.name} (${info.brand}) — Hire Full-Stack, Bot & Shopify Developer`,
-    description: `Contact ${info.name} (${info.brand}) in ${info.location} for Full-Stack Web Development, WhatsApp Bot Automation, Shopify Online Store 2.0, and Gemini AI integrations.`,
+    title: `Contact Shahan Ali | Web, Bots & Shopify`,
+    description: `Contact Shahan Ali (PROBOY) about web apps, WhatsApp bots, Shopify stores or AI tools. Use the form, email or WhatsApp.`,
     path: "/contact",
     jsonLd: [
       breadcrumbLd(trail),
@@ -123,7 +123,7 @@ export default function ContactPage() {
                     rel="noopener noreferrer"
                     className="text-red-400 hover:text-red-300"
                   >
-                    github.com/proboy315
+                    github.com/ProBoy315
                   </a>
                 </dd>
               </div>
