@@ -11,8 +11,8 @@ export function ServicesHub() {
   ];
 
   useSeo({
-    title: `Development Services — ${info.name} (${info.brand})`,
-    description: `Full-Stack Web Development, WhatsApp Bot Development & Automation, Shopify Online Store 2.0 Development, and AI Integrations by ${info.name} (${info.brand}) in ${info.location}.`,
+    title: `Development Services | Shahan Ali (PROBOY)`,
+    description: `Explore Shahan Ali's web development, WhatsApp bot, Shopify and AI services. See what each service includes and how to get in touch.`,
     path: "/services",
     jsonLd: [
       breadcrumbLd(trail),
