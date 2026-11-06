@@ -9,6 +9,7 @@ import ProBoyMd from "./pages/ProBoyMd";
 import { BlogIndexPage, BlogArticlePage } from "./pages/Blog";
 import ContactPage from "./pages/Contact";
 import Demos from "./pages/Demos";
+import DemosDirectory from "./pages/DemosDirectory";
 import Intro, { shouldShowIntro } from "./components/Intro";
 import { Header, Sidebar, Drawer, Footer, BackToTop, useActiveSection } from "./components/Layout";
 import { info } from "./lib/data";
@@ -123,6 +124,10 @@ export default function App({ initialPath }: { initialPath?: string }) {
       <BlogArticlePage slug={blogMatch[1]} />
     ) : path === "/contact" ? (
       <ContactPage />
+    ) : path === "/demos" ? (
+      <DemosDirectory initialTab="directory" />
+    ) : path === "/demos/control-room" ? (
+      <DemosDirectory initialTab="control-room" />
     ) : demoMatch ? (
       <Demos slug={demoMatch[1]} />
     ) : (
