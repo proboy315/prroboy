@@ -1,0 +1,124 @@
+[
+  {
+    "slug": "full-stack-web-development",
+    "icon": "code",
+    "title": "Full-Stack Web Development",
+    "shortTitle": "Web Development",
+    "tagline": "Fast, responsive web applications, dashboards, and REST APIs engineered with React, TypeScript, and Node.js.",
+    "summary": "End-to-end web engineering by Shahan Ali (PROBOY) — covering semantic frontend architecture, accessible UI systems, Node.js backends, database design, and Vercel/Render deployment.",
+    "overview": [
+      "Modern web applications require clean component architecture, predictable state management, and fast initial rendering. I build production interfaces using React, TypeScript, Vite, and Tailwind CSS paired with Node.js REST APIs and MySQL or Firebase/Firestore data layers.",
+      "Every build prioritizes semantic HTML, keyboard accessibility, mobile responsiveness, and technical SEO readiness so pages load reliably and remain easy to maintain."
+    ],
+    "deliverables": [
+      "Custom React & TypeScript single-page and server-rendered web applications",
+      "Admin dashboards, interactive data tables, and client portals",
+      "Node.js REST API endpoints, webhook handlers, and database integration (MySQL / Firestore)",
+      "Responsive, accessible UI with semantic markup, structured data, and clean deployment configuration"
+    ],
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Node.js",
+      "MySQL",
+      "Firebase / Firestore",
+      "Vercel"
+    ],
+    "relatedProjectSlugs": [
+      "proboy-camlink",
+      "proboy-encrypt-decrypt",
+      "proboy-sim-database"
+    ],
+    "idealFor": "Founders, small businesses, and product teams who need a custom web app, internal dashboard, or fast marketing site built with clean, readable code."
+  },
+  {
+    "slug": "whatsapp-bot-development",
+    "icon": "bot",
+    "title": "WhatsApp Bot Development & Automation",
+    "shortTitle": "WhatsApp Bots",
+    "tagline": "Modular Node.js WhatsApp Multi-Device bots with command handlers, pairing-code setup, and automated workflows.",
+    "summary": "Custom WhatsApp bot architecture built on Node.js and Baileys by the creator of ProBoy-MD — supporting automated customer replies, group administration, media processing, and API webhooks.",
+    "overview": [
+      "Drawing directly from building and maintaining ProBoy-MD (224 verified command modules across 9 categories), I architect custom Node.js WhatsApp Multi-Device bots tailored to operational and community workflows.",
+      "Systems are structured around modular command routers, pairing-code authentication, deduplication guards, and clean external API integrations."
+    ],
+    "deliverables": [
+      "Custom Node.js + Baileys multi-device WhatsApp bot architecture",
+      "Modular command routing with prefix handling, aliases, and role permissions",
+      "Automated inquiry replies, order/status notifications, and webhook triggers",
+      "Group moderation rules, media utilities, and cloud hosting setup (Render / VPS)"
+    ],
+    "technologies": [
+      "Node.js",
+      "JavaScript",
+      "Baileys Multi-Device",
+      "Pairing-Code Auth",
+      "REST Webhooks",
+      "Render / Linux"
+    ],
+    "relatedProjectSlugs": [
+      "proboy-md"
+    ],
+    "idealFor": "Businesses, online communities, and operators looking to automate repetitive WhatsApp responses, notifications, or group management workflows."
+  },
+  {
+    "slug": "shopify-development",
+    "icon": "bag",
+    "title": "Shopify Development",
+    "shortTitle": "Shopify Expert",
+    "tagline": "Custom Shopify Online Store 2.0 themes, Liquid sections, and conversion-focused storefront engineering.",
+    "summary": "Shopify Online Store 2.0 customization and Liquid development by Shahan Ali (PROBOY) — focused on fast storefront performance, clean product merchandising, and reliable cart/checkout UX.",
+    "overview": [
+      "An effective Shopify storefront balances visual polish with fast mobile loading and clear product discovery. I work directly with Shopify Online Store 2.0 architecture and Liquid templates to build custom sections, collection filters, and streamlined cart drawers.",
+      "From theme customization to webhook-connected inventory and order workflows, changes are implemented cleanly without bloated third-party script overhead."
+    ],
+    "deliverables": [
+      "Custom Shopify Online Store 2.0 sections and Liquid template customization",
+      "Mobile-first product pages, variant selectors, and slide-out cart drawers",
+      "Collection filtering, search UX improvements, and storefront speed optimization",
+      "Order/inventory webhook integrations and custom store utilities"
+    ],
+    "technologies": [
+      "Shopify Online Store 2.0",
+      "Liquid",
+      "JavaScript",
+      "CSS / Tailwind",
+      "Shopify Cart AJAX API",
+      "Webhooks"
+    ],
+    "relatedProjectSlugs": [],
+    "idealFor": "D2C brands and e-commerce merchants launching a new Shopify store or upgrading an existing theme for cleaner mobile UX and faster page loads."
+  },
+  {
+    "slug": "ai-integrations-automation",
+    "icon": "spark",
+    "title": "AI Integrations & Automation",
+    "shortTitle": "AI & Automation",
+    "tagline": "Practical Google Gemini API integrations, prompt workflows, and automated assistants for web and chat.",
+    "summary": "Applied AI engineering using Google Gemini APIs and Node.js/React interfaces — turning structured prompts and external APIs into reliable, usable product features.",
+    "overview": [
+      "Rather than adding superficial AI wrappers, I integrate Google Gemini and API-driven automation where they solve concrete workflow problems — such as conversational assistants inside WhatsApp bots, structured text/content helpers, and interactive web tools.",
+      "Every integration includes clear input validation, rate/error handling, and transparent fallback states when upstream APIs are unavailable."
+    ],
+    "deliverables": [
+      "Google Gemini API integration for React web apps and Node.js services",
+      "AI-powered chat and command helpers inside WhatsApp bots",
+      "Structured prompt templates, response formatting, and validation guards",
+      "Automated multi-step API workflows connecting forms, chat, and databases"
+    ],
+    "technologies": [
+      "Google Gemini API",
+      "Node.js",
+      "TypeScript",
+      "Prompt Engineering",
+      "REST APIs",
+      "Webhook Automation"
+    ],
+    "relatedProjectSlugs": [
+      "proboy-md"
+    ],
+    "idealFor": "Product builders and small teams looking to embed reliable Gemini AI assistants or automated text/data workflows into existing websites or messaging channels."
+  }
+]
