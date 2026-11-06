@@ -209,7 +209,7 @@ function ProjectsSection() {
           <p className="text-red-500 text-sm tracking-[0.3em] uppercase font-semibold">Projects</p>
           <h2 className="mt-3 text-3xl sm:text-5xl font-bold tracking-tight">Real software built &amp; shipped</h2>
           <p className="mt-4 text-zinc-400 leading-relaxed">
-            Production bots, web utilities, and security tools engineered by Shahan Ali ({info.brand}).
+            For example: the open-source ProBoy-MD bot, browser security tools, and lookup utilities — all built by Shahan Ali ({info.brand}).
           </p>
         </div>
         <a
@@ -432,7 +432,7 @@ function FaqSection() {
       <Heading
         eyebrow="FAQ & Disambiguation"
         title="Frequently asked questions"
-        text="Direct answers about Shahan Ali (PROBOY), services, ProBoy-MD, and identity disambiguation."
+        text="Short answers about Shahan Ali (PROBOY), his services, ProBoy-MD, and identity disambiguation."
       />
       <div ref={blockRef} className="max-w-3xl divide-y divide-white/10 border-y border-white/10">
         {info.faq.map((f, i) => (
@@ -462,7 +462,7 @@ function ContactSection() {
       <Heading
         eyebrow="Contact"
         title="Start a project or send an inquiry"
-        text="Submit your details directly through the contact form below, or reach out via WhatsApp, email, or LinkedIn."
+        text="Submit your details below. If you prefer, you can also reach out via WhatsApp, email, or LinkedIn."
       />
       <div className="reveal grid lg:grid-cols-[1.35fr_0.85fr] gap-8 items-start">
         <div className="glass p-6 sm:p-8">
