@@ -178,7 +178,7 @@ export default function Hero() {
           <ul className="hero-services" aria-label="Explore development services">
             {heroServices.map((service) => (
               <li key={service.icon}>
-                <a href="/#services" onClick={onLink}>
+                <a href={service.slug ? `/services/${service.slug}` : "/services"} onClick={onLink}>
                   <span className={`service-symbol tech-${service.icon}`}><Icon name={service.icon} className="w-6 h-6" /></span>
                   <span><b>{service.heroLabel || service.title}</b><small>{service.heroMeta || service.meta}</small></span>
                 </a>
@@ -186,11 +186,11 @@ export default function Hero() {
             ))}
           </ul>
           <div className="hero-actions">
-            <a className="hero-button primary" href="/#projects" onClick={onLink}>View My Projects <Icon name="arrow" className="w-[18px] h-[18px]" /></a>
+            <a className="hero-button primary" href="/projects" onClick={onLink}>View My Projects <Icon name="arrow" className="w-[18px] h-[18px]" /></a>
             {info.resume ? (
               <a className="hero-button secondary" href={info.resume} download>Download CV <Icon name="download" className="w-[18px] h-[18px]" /></a>
             ) : (
-              <a className="hero-button secondary" href="/#contact" onClick={onLink}>Get in Touch <Icon name="arrow" className="w-[18px] h-[18px]" /></a>
+              <a className="hero-button secondary" href="/contact" onClick={onLink}>Get in Touch <Icon name="arrow" className="w-[18px] h-[18px]" /></a>
             )}
           </div>
           <dl className="hero-stats">
