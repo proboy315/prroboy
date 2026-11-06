@@ -2,7 +2,7 @@
   {
     "slug": "building-proboy-md-whatsapp-bot-architecture",
     "title": "How ProBoy-MD Works: Modular WhatsApp Multi-Device Bot Architecture in Node.js",
-    "summary": "A technical walkthrough of how ProBoy-MD organizes 224 command files across 9 categories using Node.js, Baileys multi-device sessions, and pairing-code authentication.",
+    "summary": "See how ProBoy-MD organizes 224 command files with Node.js and Baileys, a library for WhatsApp's multi-device connection.",
     "publishedAt": "2026-11-05",
     "updatedAt": "2026-11-06",
     "category": "Bot Architecture",
@@ -19,7 +19,7 @@
       {
         "heading": "Why Modularity Matters in a Multi-Command Bot",
         "paragraphs": [
-          "When a WhatsApp automation bot grows beyond a handful of commands, putting every handler inside a single switch statement quickly becomes impossible to debug or extend. When designing ProBoy-MD (github.com/proboy315/ProBoy-MD), the primary engineering goal was keeping every command self-contained so individual modules can be inspected, updated, or disabled without breaking the core session loop.",
+          "When a WhatsApp automation bot grows beyond a handful of commands, putting every handler inside a single switch statement quickly becomes impossible to debug or extend. When designing ProBoy-MD (github.com/ProBoy315/ProBoy-MD), the primary engineering goal was keeping every command self-contained so individual modules can be inspected, updated, or disabled without breaking the core session loop.",
           "In the current repository source, ProBoy-MD structures 224 verified command files (220 unique primary command names) across nine functional directories: general, ai, group, dev, media, fun, utility, textmaker, and admin."
         ]
       },
