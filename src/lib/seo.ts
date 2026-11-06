@@ -27,7 +27,7 @@ export function resolveOgImage() {
   return {
     url: image,
     alt: isCustomCard
-      ? "Shahan Ali (PROBOY) — Full-Stack Developer, AI & WhatsApp Bot Architect, Shopify Expert from Burewala, Pakistan"
+      ? "Shahan Ali (PROBOY), full-stack developer from Burewala, Pakistan"
       : info.portrait.alt,
     width: isCustomCard ? "1200" : String(info.portrait.width),
     height: isCustomCard ? "630" : String(info.portrait.height),
