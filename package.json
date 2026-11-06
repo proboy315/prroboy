@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "clsx": "2.1.1",
     "react": "19.2.6",
     "react-dom": "19.2.6",
@@ -24,14 +25,5 @@
     "typescript": "5.9.3",
     "vite": "7.3.2",
     "vite-plugin-singlefile": "2.3.0"
-  },
-  "description": "Static React + Vite + Tailwind site. No backend, no database. Deploys to Vercel as-is.",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs",
-    "test": "tests"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }
