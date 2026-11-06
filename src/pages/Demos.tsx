@@ -16,13 +16,13 @@ function DemoShell({ slug, children }: { slug: string; children: ReactNode }) {
         <div className="demo-bar-inner">
           <span className="demo-logo"><span className="demo-dot" />{d.name}</span>
           <span className="demo-kind">Working demo · {d.kind}</span>
-          <a href="/#showcase" onClick={onLink} className="demo-back">Back to portfolio <Icon name="arrow" className="w-4 h-4" /></a>
+          <a href="/projects#demos" onClick={onLink} className="demo-back">Back to portfolio <Icon name="arrow" className="w-4 h-4" /></a>
         </div>
       </div>
       <main className="demo-stage">{children}</main>
       <footer className="demo-foot">
         <p><strong>{d.name}</strong> — {d.category} concept demonstration by Shahan Ali (ProBoy). Sample data only; not a client deployment.</p>
-        <a href="/#showcase" onClick={onLink}>All demos</a>
+        <a href="/projects#demos" onClick={onLink}>All demos</a>
       </footer>
     </div>
   );
