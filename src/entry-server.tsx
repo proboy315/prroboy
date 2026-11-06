@@ -38,7 +38,7 @@ export function getPrerenderRoutes(): RouteMeta[] {
           operatingSystem: "Node.js",
           description: projects[0]?.summary,
           author: { "@id": `${site}/#person` },
-          codeRepository: "https://github.com/proboy315/ProBoy-MD",
+          codeRepository: "https://github.com/ProBoy315/ProBoy-MD",
           url: `${site}/proboy-md`,
         },
         {
@@ -74,8 +74,8 @@ export function getPrerenderRoutes(): RouteMeta[] {
     },
     {
       path: "/about",
-      title: `About ${info.name} (${info.brand}) — Developer Profile, Education & Work`,
-      description: `Biography, current ICS education at Govt Graduate College Burewala, technical stack, ProBoy-MD bot architecture, and verified profile links for ${info.name} (${info.aliases.join(", ")}) from ${info.location}.`,
+      title: `About Shahan Ali | Developer in Burewala`,
+      description: `Meet Shahan Ali (PROBOY), a developer and ICS student in Burewala. Read about his work, ProBoy-MD, education and contact links.`,
       ogType: "profile",
       jsonLd: [
         breadcrumbLd([
@@ -94,8 +94,8 @@ export function getPrerenderRoutes(): RouteMeta[] {
     },
     {
       path: "/services",
-      title: `Development Services — ${info.name} (${info.brand})`,
-      description: `Full-Stack Web Development, WhatsApp Bot Development & Automation, Shopify Online Store 2.0 Development, and AI Integrations by ${info.name} (${info.brand}) in ${info.location}.`,
+      title: `Development Services | Shahan Ali (PROBOY)`,
+      description: `Explore Shahan Ali's web development, WhatsApp bot, Shopify and AI services. See what each service includes and how to get in touch.`,
       ogType: "website",
       jsonLd: [
         breadcrumbLd([
@@ -140,8 +140,8 @@ export function getPrerenderRoutes(): RouteMeta[] {
     })),
     {
       path: "/projects",
-      title: `Projects by ${info.name} (${info.brand}) — Bots, Web Apps & Security Tools`,
-      description: `Production software projects and interactive demos built by ${info.name} (${info.brand}), including ProBoy-MD, ProBoy CamLink, ProBoy JS Obfuscator, ProBoy Encrypt & Decrypt, and ProBoy-SiM_Database.`,
+      title: `Projects | Shahan Ali (PROBOY)`,
+      description: `Explore Shahan Ali's real projects: ProBoy-MD, web tools and browser utilities. See what each build does and try the separate interactive demos.`,
       ogType: "website",
       jsonLd: [
         breadcrumbLd([
@@ -169,7 +169,7 @@ export function getPrerenderRoutes(): RouteMeta[] {
     },
     ...projects.map((p) => ({
       path: `/projects/${p.slug}`,
-      title: `${p.title} by ${info.name} (${info.brand}) — ${p.category}`,
+      title: `${p.title} | Shahan Ali (PROBOY)`,
       description: p.summary,
       ogType: "website" as const,
       jsonLd: [
@@ -197,8 +197,8 @@ export function getPrerenderRoutes(): RouteMeta[] {
     })),
     {
       path: "/proboy-md",
-      title: "ProBoy-MD Commands & WhatsApp Pairing — Shahan Ali (ProBoy)",
-      description: `ProBoy-MD is the WhatsApp Multi-Device bot by Shahan Ali (ProBoy), version ${commandMeta.version}, prefix ${commandMeta.prefix}. Search ${commandMeta.repositoryCommandFiles} verified commands, browse categories and get a WhatsApp pairing code.`,
+      title: "ProBoy-MD Commands & Pairing | Shahan Ali",
+      description: `Explore ProBoy-MD, Shahan Ali's open-source WhatsApp bot. Search ${commandMeta.repositoryCommandFiles} command files and find pairing and source links.`,
       ogType: "website",
       jsonLd: [
         personLd(),
@@ -212,7 +212,7 @@ export function getPrerenderRoutes(): RouteMeta[] {
           applicationCategory: "DeveloperApplication",
           operatingSystem: "Node.js",
           description: `ProBoy-MD is a Node.js WhatsApp Multi-Device bot by Shahan Ali (ProBoy) with AI, group, media, utility, text-maker and developer commands, prefix ${commandMeta.prefix}.`,
-          codeRepository: "https://github.com/proboy315/ProBoy-MD",
+          codeRepository: "https://github.com/ProBoy315/ProBoy-MD",
           url: `${site}/proboy-md`,
           softwareVersion: commandMeta.version,
           author: { "@id": `${site}/#person`, name: info.name, alternateName: info.aliases },
@@ -226,8 +226,8 @@ export function getPrerenderRoutes(): RouteMeta[] {
     },
     {
       path: "/blog",
-      title: `Engineering Notes & Blog — ${info.name} (${info.brand})`,
-      description: `Technical articles and architecture notes by ${info.name} (${info.brand}) on Node.js WhatsApp bots (ProBoy-MD), full-stack web engineering, Shopify Liquid, and AI workflows.`,
+      title: `Engineering Notes | Shahan Ali (PROBOY)`,
+      description: `Read Shahan Ali's notes on ProBoy-MD and building web apps, bots and AI tools. Practical lessons from projects he has worked on.`,
       ogType: "website",
       jsonLd: [
         breadcrumbLd([
@@ -246,7 +246,7 @@ export function getPrerenderRoutes(): RouteMeta[] {
     },
     ...blogPosts.map((post) => ({
       path: `/blog/${post.slug}`,
-      title: `${post.title} — ${info.name} (${info.brand})`,
+      title: `${post.title.split(":")[0]} | ${info.name} (${info.brand})`,
       description: post.summary,
       ogType: "article" as const,
       jsonLd: [
@@ -271,8 +271,8 @@ export function getPrerenderRoutes(): RouteMeta[] {
     })),
     {
       path: "/contact",
-      title: `Contact ${info.name} (${info.brand}) — Hire Full-Stack, Bot & Shopify Developer`,
-      description: `Contact ${info.name} (${info.brand}) in ${info.location} for Full-Stack Web Development, WhatsApp Bot Automation, Shopify Online Store 2.0, and Gemini AI integrations.`,
+      title: `Contact Shahan Ali | Web, Bots & Shopify`,
+      description: `Contact Shahan Ali (PROBOY) about web apps, WhatsApp bots, Shopify stores or AI tools. Use the form, email or WhatsApp.`,
       ogType: "website",
       jsonLd: [
         breadcrumbLd([
@@ -289,10 +289,47 @@ export function getPrerenderRoutes(): RouteMeta[] {
         },
       ],
     },
+    {
+      path: "/demos",
+      title: `Interactive Demos (${demos.length}) | Shahan Ali (PROBOY)`,
+      description: `Explore ${demos.length} interactive website and app demos by Shahan Ali (PROBOY) across e-commerce, SaaS, AI, hospitality, real estate, and developer tools.`,
+      ogType: "website",
+      jsonLd: [
+        breadcrumbLd([
+          ["Home", "/"],
+          ["Demos", "/demos"],
+        ]),
+        personLd(),
+        {
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: `Interactive Demos by ${info.name} (${info.brand})`,
+          url: `${site}/demos`,
+          mainEntity: {
+            "@type": "ItemList",
+            itemListElement: demos.map((d, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: d.name,
+              description: d.summary,
+              url: `${site}/demos/${d.slug}`,
+            })),
+          },
+        },
+      ],
+    },
+    {
+      path: "/demos/control-room",
+      title: `Demo Control Room | Shahan Ali (PROBOY)`,
+      description: "Local browser sandbox to customize, reorder, hide/show, and preview interactive demo cards built by Shahan Ali (PROBOY).",
+      ogType: "website",
+      noindex: true,
+      jsonLd: [],
+    },
     ...demos.map((d) => ({
       path: `/demos/${d.slug}`,
-      title: `${d.name} — ${d.kind} demo by Shahan Ali (ProBoy)`,
-      description: `${d.name} is an interactive ${d.category.toLowerCase()} demo by Shahan Ali (ProBoy). ${d.summary}`,
+      title: `${d.name} Demo | Shahan Ali (PROBOY)`,
+      description: `Try ${d.name}, a ${d.kind} demo by Shahan Ali. Explore working controls with sample data; this is not a client project.`,
       ogType: "website" as const,
       jsonLd: [
         {
