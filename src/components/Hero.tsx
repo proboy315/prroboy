@@ -174,7 +174,7 @@ export default function Hero() {
           <h1 id="hero-name"><span>{info.name.split(" ")[0]}</span> <em>{info.name.split(" ").slice(1).join(" ")}</em><span className="sr-only"> (ProBoy), full-stack developer, bot architect and Shopify expert</span></h1>
           <p className="hero-role">{info.role}</p>
           <p className="hero-specialties">{info.subtitles.map((title) => <span key={title}>{title}</span>)}</p>
-          <p className="hero-description">{info.heroDescription}<strong>{info.heroEmphasis}</strong></p>
+          <p className="hero-description">{info.heroDescription} <strong>{info.heroEmphasis}</strong></p>
           <ul className="hero-services" aria-label="Explore development services">
             {heroServices.map((service) => (
               <li key={service.icon}>
