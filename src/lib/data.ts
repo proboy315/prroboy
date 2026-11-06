@@ -67,8 +67,13 @@ export type Demo = {
   category: string;
   accent: string;
   ink: string;
+  featured?: boolean;
+  has360Viewer?: boolean;
   summary: string;
+  testGuide?: string;
   features: string[];
+  hidden?: boolean;
+  isCustom?: boolean;
 };
 
 const str = (v: unknown, d = "") => (typeof v === "string" ? v : d);
