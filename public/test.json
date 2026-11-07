@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "results_count": 2,
+  "results_count": 4,
   "meta": {
     "environment": "staging",
     "api_version": "v2.1",
@@ -48,7 +48,11 @@
               "name": "Mechanical Wireless Keyboard",
               "quantity": 1,
               "price": 129.99,
-              "tags": ["electronics", "office", "wireless"]
+              "tags": [
+                "electronics",
+                "office",
+                "wireless"
+              ]
             },
             {
               "product_id": "prod_xyz78",
@@ -56,7 +60,10 @@
               "name": "Ergonomic Mouse Pad",
               "quantity": 2,
               "price": 12.49,
-              "tags": ["office", "accessories"]
+              "tags": [
+                "office",
+                "accessories"
+              ]
             }
           ]
         }
@@ -95,4 +102,3 @@
     }
   ]
 }
-
