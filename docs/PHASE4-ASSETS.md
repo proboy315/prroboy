@@ -45,7 +45,6 @@ Based in Burewala, Punjab, Pakistan · Working on ProBoy-MD, an open-source What
 - Portfolio and engineering notes: https://proboy.vercel.app/
 - ProBoy-MD (source): https://github.com/proboy315/ProBoy-MD
 - Documentation for ProBoy-MD: https://proboy.vercel.app/proboy-md/docs
-- LinkedIn: https://pk.linkedin.com/in/shahanali687
 - Telegram: https://t.me/itx_proboy
 - Email: shahanali.dev@gmail.com
 
@@ -471,7 +470,7 @@ and anything else.
 | Location | "Burewala, Punjab, Pakistan" — same wording everywhere | Portfolio, llms.txt and press kit consistent |
 | Website | https://proboy.vercel.app/ (exact URL with trailing slash) | Consistent |
 | GitHub | https://github.com/ProBoy315 — reachable (HTTP 200 confirmed) | Verified |
-| LinkedIn | https://pk.linkedin.com/in/shahanali687 — owner-controlled | Present; LinkedIn blocks automated checks (HTTP 999), so verify by opening it in a browser |
+| LinkedIn | No verified profile URL supplied — omitted from the site | Removed 2026-11-07: the previously listed URL was unrelated to Shahan Ali; do not re-add without a user-supplied verified URL |
 | Telegram | https://t.me/itx_proboy — reachable (HTTP 200 confirmed) | Verified, and used in the Person `sameAs` set |
 | Repo link | https://github.com/proboy315/ProBoy-MD — reachable (HTTP 200 confirmed) | Verified |
 | Spelling | "Shahan Ali", "PROBOY", "ProBoy-MD", "Burewala" — identical everywhere | Consistent |
