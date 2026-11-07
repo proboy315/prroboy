@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Icon from "../components/Icon";
 import { Socials } from "../components/Layout";
 import { info, projects, site } from "../lib/data";
@@ -5,6 +6,7 @@ import { onLink } from "../lib/router";
 import { breadcrumbLd, personLd, useSeo } from "../lib/seo";
 
 export default function AboutPage() {
+  const [portraitMissing, setPortraitMissing] = useState(false);
   const trail: [string, string][] = [
     ["Home", "/"],
     ["About", "/about"],
@@ -87,13 +89,32 @@ export default function AboutPage() {
         </div>
 
         <figure className="glass p-4 sm:p-5">
-          <img
-            src={info.profileImage}
-            alt={info.portrait.alt}
-            width={info.portrait.width}
-            height={info.portrait.height}
-            className="w-full aspect-[4/5] object-cover object-top rounded-xl"
-          />
+          {!portraitMissing && (
+            <img
+              src={info.profileImage}
+              alt={info.portrait.alt}
+              width={info.portrait.width}
+              height={info.portrait.height}
+              onError={() => setPortraitMissing(true)}
+              className="w-full aspect-[4/5] object-cover object-top rounded-xl"
+            />
+          )}
+          {portraitMissing && (
+          <div
+            className="w-full aspect-[4/5] rounded-xl border border-white/10 bg-[radial-gradient(ellipse_at_50%_0%,rgba(220,38,38,0.18),transparent_70%)] grid place-items-center text-center p-6"
+          >
+            <span>
+              <span className="block text-3xl font-extrabold text-red-500">P</span>
+              <span className="mt-3 block text-sm text-zinc-400">
+                Portrait file is not published in this build. Use the{" "}
+                <a href="/press" onClick={onLink} className="text-red-400 hover:text-red-300">
+                  press kit
+                </a>{" "}
+                for the current asset status.
+              </span>
+            </span>
+          </div>
+          )}
           <figcaption className="mt-3 text-xs text-zinc-400 leading-relaxed">
             {info.name} ({info.brand}) — Full-Stack Developer &amp; Bot Architect in {info.location}.
           </figcaption>
@@ -295,15 +316,23 @@ export default function AboutPage() {
           <li className="flex gap-3">
             <span className="mt-2 w-1.5 h-1.5 rounded-full bg-zinc-500 shrink-0" />
             <span>
-              <strong>Not Shahan Ali Mohsin:</strong> This developer is not affiliated with Shahan Ali Mohsin, the
-              Indian motorsport racing driver.
+              <strong>How to verify this profile:</strong> the GitHub account{" "}
+              <a href={info.github} target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300">
+                proboy315
+              </a>{" "}
+              owns the public{" "}
+              <a href="https://github.com/proboy315/ProBoy-MD" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300">
+                ProBoy-MD
+              </a>{" "}
+              repository, and the portfolio, blog and documentation published here all reference the same account.
             </span>
           </li>
           <li className="flex gap-3">
             <span className="mt-2 w-1.5 h-1.5 rounded-full bg-zinc-500 shrink-0" />
             <span>
-              <strong>Not Shahan Ali Jamil:</strong> This developer is not affiliated with Shahan Ali Jamil, the
-              corporate executive associated with EcoPack.
+              <strong>Scope of this note:</strong> this page describes only the PROBOY developer named above. It makes no
+              statement about any other person who shares the name, and it is not an attempt to characterise anyone
+              else.
             </span>
           </li>
         </ul>
