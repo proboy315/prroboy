@@ -150,6 +150,25 @@ export default function ProjectsPage() {
       </ul>
 
       {/* Interactive Browser Demos (Preserved & Expanded) */}
+      <section aria-labelledby="verification-heading" className="mt-16 glass p-7 sm:p-9">
+        <h2 id="verification-heading" className="text-xl font-bold">How to verify this work</h2>
+        <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
+          Every project below links to its own source or a working route. For third-party coverage, verified brand facts
+          and approved bios, use the press kit and the mentions register.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-3 text-sm">
+          <a href="/press" onClick={onLink} className="rounded-full px-5 py-2.5 bg-white/5 border border-white/15 hover:border-red-500 text-zinc-200 transition">
+            Press kit and verified facts
+          </a>
+          <a href="/mentions" onClick={onLink} className="rounded-full px-5 py-2.5 bg-white/5 border border-white/15 hover:border-red-500 text-zinc-200 transition">
+            Mentions and publications
+          </a>
+          <a href="/blog" onClick={onLink} className="rounded-full px-5 py-2.5 bg-white/5 border border-white/15 hover:border-red-500 text-zinc-200 transition">
+            Engineering notes
+          </a>
+        </div>
+      </section>
+
       <section id="demos" aria-labelledby="demos-heading" className="mt-20 pt-14 border-t border-white/10">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-3xl">
