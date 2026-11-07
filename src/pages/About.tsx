@@ -344,17 +344,9 @@ export default function AboutPage() {
           Verified Official Profiles &amp; Contact
         </h2>
         <p className="mt-2 text-sm text-zinc-400">
-          Confirm Shahan Ali&apos;s official online presence across LinkedIn, GitHub, email, and WhatsApp:
+          Confirm Shahan Ali&apos;s official online presence across GitHub, email, and WhatsApp:
         </p>
         <div className="mt-5 flex flex-wrap gap-3 text-sm">
-          <a
-            href={info.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 bg-white/5 border border-white/15 hover:border-red-500 text-zinc-200 hover:text-white transition"
-          >
-            <Icon name="linkedin" className="w-4 h-4 text-red-400" /> LinkedIn (shahanali687)
-          </a>
           <a
             href={info.github}
             target="_blank"
