@@ -1,6 +1,12 @@
 import { renderToString } from "react-dom/server";
+import fs from "node:fs";
+import path from "node:path";
 import App from "./App";
-import { blogPosts, demos, gallery, info, projects, services, site } from "./lib/data";
+import { demos, gallery, info, projects, services, site } from "./lib/data";
+import { articles } from "./data/editorial";
+import { botDocs } from "./data/botDocs";
+import { articleSeo } from "./pages/Blog";
+import { docSeo } from "./pages/BotDocs";
 import { breadcrumbLd, personLd, resolveOgImage, websiteLd } from "./lib/seo";
 import { commandMeta } from "./components/CommandDirectory";
 
@@ -227,7 +233,7 @@ export function getPrerenderRoutes(): RouteMeta[] {
     {
       path: "/blog",
       title: `Engineering Notes | Shahan Ali (PROBOY)`,
-      description: `Read Shahan Ali's notes on ProBoy-MD and building web apps, bots and AI tools. Practical lessons from projects he has worked on.`,
+      description: "Source-checked guides on ProBoy-MD, React SEO, accessibility and honest developer project practice.",
       ogType: "website",
       jsonLd: [
         breadcrumbLd([
@@ -244,31 +250,54 @@ export function getPrerenderRoutes(): RouteMeta[] {
         },
       ],
     },
-    ...blogPosts.map((post) => ({
-      path: `/blog/${post.slug}`,
-      title: `${post.title.split(":")[0]} | ${info.name} (${info.brand})`,
-      description: post.summary,
-      ogType: "article" as const,
+    ...articles.map((post) => articleSeo(post)),
+    ...botDocs.map((doc) => ({ ...docSeo(doc.slug), ogType: "website" as const })),
+    {
+      path: "/press",
+      title: "Press Kit & Brand Facts | Shahan Ali (PROBOY)",
+      description:
+        "Approved bios, verified brand facts, project notes and asset links for Shahan Ali (PROBOY), full-stack developer from Burewala, Pakistan. Facts checked against public source.",
+      ogType: "website",
       jsonLd: [
         breadcrumbLd([
           ["Home", "/"],
-          ["Blog", "/blog"],
-          [post.title, `/blog/${post.slug}`],
+          ["Press kit", "/press"],
         ]),
         {
           "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          headline: post.title,
-          description: post.summary,
-          datePublished: post.publishedAt,
-          dateModified: post.updatedAt,
-          url: `${site}/blog/${post.slug}`,
-          author: { "@id": `${site}/#person`, "@type": "Person", name: info.name },
-          publisher: { "@id": `${site}/#person`, "@type": "Person", name: info.name },
-          keywords: post.tags.join(", "),
+          "@type": "WebPage",
+          name: "Press kit and brand facts",
+          url: `${site}/press`,
+          description: "Approved bios, verified brand facts and asset links for Shahan Ali (PROBOY).",
+          mainEntity: { "@id": `${site}/#person` },
+          dateModified: "2026-11-07",
         },
+        personLd(),
       ],
-    })),
+    },
+    {
+      path: "/mentions",
+      title: "Mentions & Publications | Shahan Ali (PROBOY)",
+      description:
+        "Independently published mentions, repository references and community contributions about Shahan Ali (PROBOY). Only verified third-party publications are listed as independent coverage.",
+      ogType: "website",
+      jsonLd: [
+        breadcrumbLd([
+          ["Home", "/"],
+          ["Mentions & publications", "/mentions"],
+        ]),
+        {
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Mentions and publications about Shahan Ali (PROBOY)",
+          url: `${site}/mentions`,
+          description: "Verified third-party publications and community contributions with publication date and canonical URL.",
+          mainEntity: { "@id": `${site}/#person` },
+          dateModified: "2026-11-07",
+        },
+        personLd(),
+      ],
+    },
     {
       path: "/contact",
       title: `Contact Shahan Ali | Web, Bots & Shopify`,
@@ -351,6 +380,15 @@ export function getPrerenderRoutes(): RouteMeta[] {
       jsonLd: [],
     },
   ];
+  // The build already calls this function while prerendering. Emit a sitemap from
+  // the same public route inventory, so deploys never require a manual generator.
+  const escapeXml = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const entries = routes.filter(r => !r.noindex).map(r => {
+    const article = articles.find(a => r.path === `/blog/${a.slug}`);
+    const doc = botDocs.find(d => r.path === (d.slug === "documentation-home" ? "/proboy-md/docs" : `/proboy-md/docs/${d.slug}`));
+    return `  <url><loc>${escapeXml(site + r.path)}</loc>${article || doc ? `<lastmod>${article?.updatedAt || "2026-11-07"}</lastmod>` : ""}</url>`;
+  });
+  fs.writeFileSync(path.resolve("dist/sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries.join("\n")}\n</urlset>\n`);
   return routes;
 }
 
