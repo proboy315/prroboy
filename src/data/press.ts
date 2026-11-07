@@ -99,6 +99,5 @@ export const pressAssets = [
 export const contactChannels = [
   { label: "Email", value: "shahanali.dev@gmail.com", href: "mailto:shahanali.dev@gmail.com", note: "Preferred for press and verification requests." },
   { label: "WhatsApp", value: "+92 326 1684315", href: "https://wa.me/923261684315", note: "Available for scoping conversations." },
-  { label: "LinkedIn", value: "pk.linkedin.com/in/shahanali687", href: "https://pk.linkedin.com/in/shahanali687", note: "Professional profile." },
   { label: "GitHub", value: "github.com/ProBoy315", href: "https://github.com/ProBoy315", note: "Code and public projects." },
 ] as const;
