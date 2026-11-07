@@ -56,7 +56,7 @@ export default function ContactPage() {
         </h1>
         <p className="mt-5 text-lg text-zinc-300 leading-relaxed">
           Have a web application, WhatsApp automation bot, Shopify storefront, or Gemini AI integration in mind? Send
-          your project details below or reach out directly via WhatsApp, email, or LinkedIn.
+          your project details below or reach out directly via WhatsApp or email.
         </p>
       </header>
 
@@ -100,19 +100,6 @@ export default function ContactPage() {
               <div>
                 <dt className="text-zinc-500">Location</dt>
                 <dd className="mt-1 text-zinc-200">{info.location}</dd>
-              </div>
-              <div>
-                <dt className="text-zinc-500">LinkedIn</dt>
-                <dd className="mt-1">
-                  <a
-                    href={info.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-red-400 hover:text-red-300 break-all"
-                  >
-                    pk.linkedin.com/in/shahanali687
-                  </a>
-                </dd>
               </div>
               <div>
                 <dt className="text-zinc-500">GitHub</dt>
