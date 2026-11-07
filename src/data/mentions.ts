@@ -44,14 +44,6 @@ export const ownedProfiles: OwnedProfile[] = [
     verifiedOn: "2026-11-07",
   },
   {
-    id: "linkedin",
-    platform: "LinkedIn",
-    handle: "shahanali687",
-    url: "https://pk.linkedin.com/in/shahanali687",
-    purpose: "Professional profile.",
-    verifiedOn: "2026-11-07",
-  },
-  {
     id: "portfolio",
     platform: "This site",
     handle: "proboy.vercel.app",
