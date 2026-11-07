@@ -1,24 +1,32 @@
 # Shahan Ali (PROBOY, ProBoy, itx_proboy, shahan315, proboy315)
 
-> Shahan Ali (PROBOY) is a Full-Stack Developer, AI & WhatsApp Bot Architect, and Shopify Expert based in Burewala, Punjab, Pakistan. He is currently an ICS student at Govt Graduate College Burewala and builds web applications, the open-source ProBoy-MD WhatsApp Multi-Device bot, custom Shopify Online Store 2.0 storefronts, and Google Gemini AI integrations.
+> Shahan Ali (PROBOY) is a full-stack developer, AI and WhatsApp bot architect, and Shopify specialist based in Burewala, Punjab, Pakistan. He builds React web applications, maintains the open-source ProBoy-MD WhatsApp multi-device bot, custom Shopify Online Store 2.0 storefronts, and Google Gemini integrations. He also writes source-checked engineering articles and maintains a documentation centre for his own project.
 
 - Official Website: https://proboy.vercel.app/
+- Press kit and verified brand facts: https://proboy.vercel.app/press
+- Mentions and publications: https://proboy.vercel.app/mentions
 - About: https://proboy.vercel.app/about
 - Services: https://proboy.vercel.app/services
 - Projects: https://proboy.vercel.app/projects
-- ProBoy-MD Commands & Pairing: https://proboy.vercel.app/proboy-md
-- Blog: https://proboy.vercel.app/blog
+- ProBoy-MD project page: https://proboy.vercel.app/proboy-md
+- ProBoy-MD documentation centre: https://proboy.vercel.app/proboy-md/docs
+- Engineering blog: https://proboy.vercel.app/blog
+- Interactive demos: https://proboy.vercel.app/demos
 - Contact: https://proboy.vercel.app/contact
 - LinkedIn: https://pk.linkedin.com/in/shahanali687
 - GitHub: https://github.com/ProBoy315
+- Telegram: https://t.me/itx_proboy
 - Email: shahanali.dev@gmail.com
 - WhatsApp: +92 326 1684315
 
-## Identity Disambiguation
-Shahan Ali (PROBOY / proboy315 / shahan315) is a software developer and ICS student in Burewala, Punjab, Pakistan. He is not affiliated with Shahan Ali Mohsin (the Indian motorsport racing driver) or Shahan Ali Jamil (the EcoPack executive).
+## Identity disambiguation
+This Shahan Ali is the developer who works under the brand PROBOY from Burewala, Punjab, Pakistan, and who owns the public ProBoy-MD repository and the PROBOY portfolio. Several people share the name; this file describes only the PROBOY developer and makes no claim about anyone else. The verifiable markers are the GitHub account proboy315, the ProBoy-MD repository, and the portfolio at proboy.vercel.app.
 
-## Real Projects
-- [ProBoy-MD](https://proboy.vercel.app/projects/proboy-md): Open-source Node.js WhatsApp Multi-Device automation bot with 224 verified command files across 9 categories (https://github.com/ProBoy315/ProBoy-MD).
+## Recognition
+Certificate of Recognition for the Google Gemini QuizOff 2026, organised by CampusCrew and hosted on Unstop, awarded to Shahan (Shahan Ali) on 19 July 2026. This is a participation certificate of recognition, not an employment, partnership, endorsement or award from Google.
+
+## Real projects
+- [ProBoy-MD](https://proboy.vercel.app/projects/proboy-md): Open-source Node.js WhatsApp multi-device bot using the Baileys library. At the audited commit (c05d3225, checked 2026-11-07) the repository contains 224 JavaScript command files across eight physical command directories: ai 49, dev 28, fun 43, general 26, group 30, media 12, textmaker 19, utility 17. Command metadata is explicit in source and permissions are enforced in the handler. Source: https://github.com/proboy315/ProBoy-MD
 - [ProBoy CamLink](https://proboy.vercel.app/projects/proboy-camlink): Camera shortlink and browser diagnostic utility with device telemetry logs and session management.
 - [ProBoy JS Obfuscator](https://proboy.vercel.app/projects/proboy-js-obfuscator): Client-side JavaScript obfuscation utility for transforming browser-delivered source code.
 - [ProBoy Encrypt & Decrypt](https://proboy.vercel.app/projects/proboy-encrypt-decrypt): Browser-native AES-256-GCM encryption suite with image steganography and a local history vault.
@@ -29,3 +37,16 @@ Shahan Ali (PROBOY / proboy315 / shahan315) is a software developer and ICS stud
 - [WhatsApp Bot Development & Automation](https://proboy.vercel.app/services/whatsapp-bot-development)
 - [Shopify Development](https://proboy.vercel.app/services/shopify-development)
 - [AI Integrations & Automation](https://proboy.vercel.app/services/ai-integrations-automation)
+
+## Engineering notes
+- [ProBoy-MD source audit](https://proboy.vercel.app/blog/proboy-md-source-audit)
+- [Command handler design](https://proboy.vercel.app/blog/whatsapp-bot-command-handler)
+- [Baileys session safety](https://proboy.vercel.app/blog/baileys-session-safety)
+- [Documenting a large command library](https://proboy.vercel.app/blog/documenting-open-source-command-library)
+- [React SEO and crawlable content](https://proboy.vercel.app/blog/react-seo-rendered-content)
+- [Structured data without fake authority](https://proboy.vercel.app/blog/structured-data-developer-portfolio)
+- [Accessible interactive interfaces](https://proboy.vercel.app/blog/accessible-interactive-interfaces)
+- [Presenting developer projects honestly](https://proboy.vercel.app/blog/presenting-developer-projects)
+
+## Counting notes
+Command counts above describe the audited commit only. An earlier snapshot of the project recorded nine logical command categories and 537 unique invocable tokens; those numbers describe a different snapshot and are not reconciled with the audited commit. The repository's declared start script also references an entry file that is absent at the audited commit, so a working one-command start has not been verified.
