@@ -132,7 +132,8 @@ export const personLd = () => ({
   ...(site ? { url: site } : {}),
   ...(site && info.profileImage ? { image: new URL(info.profileImage, site + "/").href } : {}),
   // Only owner-controlled profile pages that were reachable during the Phase 4 audit.
-  sameAs: [info.github, info.linkedin, "https://t.me/itx_proboy"],
+  // No LinkedIn URL is listed: no verified LinkedIn profile has been supplied.
+  sameAs: [info.github, "https://t.me/itx_proboy"],
   knowsAbout: [
     "Full-stack web development",
     "React",
