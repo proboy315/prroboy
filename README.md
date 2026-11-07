@@ -4,7 +4,7 @@ Static React + Vite + Tailwind site. No backend, no database. Deploys to Vercel 
 
 ## Commands
 - `npm install` / `npm run dev` / `npm run build` (output: `dist/`)
-- `node scripts/gen-seo.mjs` — sitemap, robots.txt, llms.txt, crawlable HTML for each project, showcase and `/proboy-md`, plus JSON-LD in `index.html`. Run this after editing `src/data`, then build.
+- `npm run build` automatically prerenders public routes and writes a sitemap from the same route list. No separate SEO generator is needed for deployment. The older `scripts/gen-seo.mjs` is retained only for historical context; do not run it for Phase 3 content.
 
 ## Content (src/data/)
 | File | Purpose |
@@ -13,6 +13,8 @@ Static React + Vite + Tailwind site. No backend, no database. Deploys to Vercel 
 | `projects.json` | `{ slug, title, featured, category, summary, description[], features[], technologies[], image, screenshots[], repo, demo, creator, year }` → `/projects/<slug>` |
 | `showcase.json` | `{ slug, title, category, description, technologies[], thumbnail, preview, status: "planned"\|"live" }` → `/showcase/<slug>` (only `live` items are indexed) |
 | `images.json` | `[{ src, alt, caption, category, order, width, height }]` → Gallery + lightbox |
+| `editorial.ts` | Published, source-checked blog articles; unpublished roadmap lives in `docs/PHASE3-EDITORIAL.md` |
+| `botDocs.ts` | 30 ProBoy-MD documentation chapters audited against a pinned repository commit |
 
 Items missing a title/src are skipped; duplicate slugs are logged and skipped; missing images get a branded fallback.
 
@@ -23,7 +25,7 @@ Frames are requested by numeric index. Playback follows the audio clock when the
 
 ## Deploy + Google
 1. Push to GitHub → import in Vercel (framework: Vite). `vercel.json` rewrites routes to `index.html`.
-2. Add your domain in Vercel, set `siteUrl` in `info.json`, run `node scripts/gen-seo.mjs`, redeploy.
+2. Add your domain in Vercel, set `siteUrl` in `info.json`, then redeploy; `npm run build` generates the route HTML and sitemap automatically.
 3. Google Search Console → add the domain property → verify via DNS → submit `/sitemap.xml`.
 Indexing and ranking are decided by Google and are not guaranteed.
 
@@ -39,7 +41,6 @@ To publish the exact photo, save the original file locally and run:
 
 ```sh
 node scripts/set-portrait.mjs path/to/your-original-photo.jpg
-node scripts/gen-seo.mjs
 npm run build
 ```
 
@@ -75,7 +76,7 @@ Both are shown on the page; commands are never invented. The directory supports 
 Seven interactive demos live at `/demos/<slug>` (data: `src/data/demos.json`, components: `src/pages/Demos.tsx`, styles: `src/pages/demos.css`): LuxeCart, Pulse, Ember Kitchen, Haven, Northline, Synth Studio, Forge Docs. Each has its own accent palette and genuinely functional controls (search, filters, cart, validated forms, toggles, copy, generation). They are demonstrations, not client work.
 
 ## Routing / SEO
-`scripts/gen-seo.mjs` writes `sitemap.xml`, `robots.txt`, `llms.txt` and the SEO block + crawlable `<noscript>` into `index.html`. There are **no static folder copies** of project/showcase/ProBoy-MD pages anymore, so every URL serves exactly one document (previously static folders shadowed the React pages).
+The Vite build prerenders known routes with page-specific metadata and writes `dist/sitemap.xml` automatically. The legacy generator is not part of deployment. The removed Showcase's old static folder copies were deleted; projects and demos remain. Blog and documentation routes are served from prerendered HTML with clean-URL rewrites on Vercel.
 
 `vercel.json` rewrites everything except real assets to `index.html`.
 
