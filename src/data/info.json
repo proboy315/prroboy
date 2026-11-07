@@ -69,7 +69,7 @@
   "phoneTel": "+923261684315",
   "whatsapp": "https://wa.me/923261684315",
   "whatsappChannel": "https://whatsapp.com/channel/0029Vb8yiOF42DcjDYgq5g0Q",
-  "linkedin": "https://pk.linkedin.com/in/shahanali687",
+  "linkedin": "",
   "github": "https://github.com/ProBoy315",
   "geo": {
     "lat": 30.1667,
@@ -99,11 +99,6 @@
     "Build"
   ],
   "socials": [
-    {
-      "id": "linkedin",
-      "label": "LinkedIn",
-      "url": "https://pk.linkedin.com/in/shahanali687"
-    },
     {
       "id": "github",
       "label": "GitHub",
@@ -466,7 +461,7 @@
     },
     {
       "q": "How can I contact or hire Shahan Ali?",
-      "a": "Use the contact form at https://proboy.vercel.app/contact, email shahanali.dev@gmail.com or send a WhatsApp message to +92 326 1684315. You can also find his LinkedIn and GitHub links on this site."
+      "a": "Use the contact form at https://proboy.vercel.app/contact, email shahanali.dev@gmail.com or send a WhatsApp message to +92 326 1684315. You can also find his GitHub link on this site."
     }
   ]
 }
