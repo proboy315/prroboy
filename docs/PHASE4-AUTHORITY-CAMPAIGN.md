@@ -9,7 +9,7 @@ third party publishes something and the live URL has been opened and checked.
 
 | Bucket | Meaning | Owned by me? | Count now |
 |---|---|---|---|
-| Owned profiles | Accounts I control (GitHub profile, LinkedIn, Telegram, this site) | Yes | 4 verified |
+| Owned profiles | Accounts I control (GitHub profile, Telegram, this site) | Yes | 3 verified |
 | Repository / project references | My own repositories and project pages | Yes | 1 public repo (ProBoy-MD) + 5 project pages |
 | Community contributions | Answers, comments and PRs written by me in other people's spaces | No | 0 published, 5 planned |
 | Editorial / press mentions | Third-party publications writing about the work | No | 0 published, 2 planned |
@@ -18,6 +18,8 @@ third party publishes something and the live URL has been opened and checked.
 | **Independently earned total** | **Third-party publications only** | **No** | **0** |
 
 **The number 15 is a campaign target, not a claim.** Nothing has been submitted, accepted or published from this plan yet.
+
+**Correction (2026-11-07):** LinkedIn was removed from the owned-profiles bucket — no verified LinkedIn profile URL has been supplied. Do not re-add without one.
 
 ## Status vocabulary
 
