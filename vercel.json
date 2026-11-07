@@ -2,6 +2,12 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/blog", "destination": "/blog/index" },
+    { "source": "/blog/:slug", "destination": "/blog/:slug/index" },
+    { "source": "/proboy-md/docs", "destination": "/proboy-md/docs/index" },
+    { "source": "/proboy-md/docs/:slug", "destination": "/proboy-md/docs/:slug/index" }
+  ],
   "redirects": [
     {
       "source": "/projects/camlink",
