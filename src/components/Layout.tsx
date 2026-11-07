@@ -372,6 +372,9 @@ export function Footer() {
               </li>
             ))}
           </ul>
+          <a href="/proboy-md/docs" onClick={onLink} className="text-sm text-zinc-300 hover:text-red-500 mt-3 block">ProBoy-MD documentation</a>
+          <a href="/press" onClick={onLink} className="text-sm text-zinc-300 hover:text-red-500 mt-2 block">Press kit &amp; brand facts</a>
+          <a href="/mentions" onClick={onLink} className="text-sm text-zinc-300 hover:text-red-500 mt-2 block">Mentions &amp; publications</a>
         </nav>
 
         <nav aria-label="Footer services">
