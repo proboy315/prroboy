@@ -142,6 +142,13 @@ export function ServicesHub() {
           >
             Inspect past work
           </a>
+          <a
+            href="/press"
+            onClick={onLink}
+            className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium border border-white/25 hover:bg-white hover:text-black transition"
+          >
+            Press kit and verified facts
+          </a>
         </div>
       </section>
     </article>
@@ -270,6 +277,7 @@ export function ServiceDetailPage({ slug }: { slug: string }) {
               </ul>
             </section>
           )}
+          {svc.slug === "whatsapp-bot-development" && <p className="text-sm text-zinc-300 leading-relaxed">Explore the <a href="/proboy-md/docs" onClick={onLink} className="text-red-400 underline">source-checked ProBoy-MD documentation</a> and <a href="/blog/whatsapp-bot-command-handler" onClick={onLink} className="text-red-400 underline">command handler guide</a> before planning an integration.</p>}
         </div>
 
         <aside className="space-y-6">
