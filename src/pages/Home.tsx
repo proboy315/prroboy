@@ -63,14 +63,6 @@ function AboutSection() {
         >
           Read my story <Icon name="arrow" className="w-4 h-4" />
         </a>
-        <a
-          href={info.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm text-zinc-300 hover:text-white border border-white/10 hover:border-white/30 transition"
-        >
-          <Icon name="linkedin" className="w-4 h-4 text-red-400" /> LinkedIn Profile
-        </a>
       </div>
     </Wrap>
   );
@@ -479,7 +471,7 @@ function ContactSection() {
       <Heading
         eyebrow="Contact"
         title="Start a project or send an inquiry"
-        text="Tell me what you want to build. You can use the form or reach me by WhatsApp, email or LinkedIn."
+        text="Tell me what you want to build. You can use the form or reach me by WhatsApp or email."
       />
       <div className="reveal grid lg:grid-cols-[1.35fr_0.85fr] gap-8 items-start">
         <div className="glass p-6 sm:p-8">
@@ -513,11 +505,8 @@ function ContactSection() {
               <dd className="mt-0.5 text-zinc-200">{info.location}</dd>
             </div>
             <div>
-              <dt className="text-zinc-500">LinkedIn &amp; GitHub</dt>
+              <dt className="text-zinc-500">GitHub</dt>
               <dd className="mt-1 flex flex-wrap gap-3">
-                <a href={info.linkedin} target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300">
-                  LinkedIn
-                </a>
                 <a href={info.github} target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300">
                   GitHub
                 </a>
