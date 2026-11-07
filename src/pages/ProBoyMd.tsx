@@ -72,7 +72,7 @@ export default function ProBoyMd() {
       <section className="pmd-hero" aria-labelledby="pmd-title">
         <div className="pmd-glow" aria-hidden="true" />
         <div className="pmd-hero-inner">
-          <p className="pmd-kicker"><span /> WhatsApp Multi-Device bot · version {commandMeta.version}</p>
+          <p className="pmd-kicker"><span /> WhatsApp Multi-Device bot · source and command guide</p>
           <h1 id="pmd-title">ProBoy-MD</h1>
           <p className="pmd-byline">by <a href="/about" onClick={onLink}>Shahan Ali</a> <span>(PROBOY)</span></p>
           <p className="pmd-lead">
@@ -91,8 +91,11 @@ export default function ProBoyMd() {
             <a className="pmd-btn ghost" href={REPO} target="_blank" rel="noopener noreferrer">
               <Icon name="github" className="w-4 h-4" /> View source on GitHub
             </a>
+            <a className="pmd-btn ghost" href="/proboy-md/docs" onClick={onLink}>Read developer documentation</a>
             <a className="pmd-btn ghost" href="/projects" onClick={onLink}>Portfolio projects</a>
+            <a className="pmd-btn ghost" href="/press" onClick={onLink}>Press kit &amp; verified facts</a>
           </div>
+          <p className="pmd-lead">Source audit note: this command directory is an older snapshot. The checked bot revision has eight physical command folders and a missing declared startup file. <a href="/proboy-md/docs/command-categories" onClick={onLink}>Read the count and version audit</a> before using these numbers.</p>
           <dl className="pmd-stats">
             <div><dt>Command prefix</dt><dd>{commandMeta.prefix}</dd></div>
             <div><dt>Menu reported</dt><dd>{commandMeta.reportedMenuTotal}</dd></div>
@@ -180,8 +183,8 @@ export default function ProBoyMd() {
             </ol>
             <div className="pmd-tree reveal">
               <h3>Reported project structure</h3>
-              <pre><code>{"index.js\nproboy.js\nhandler.js\ncommands/\n  <category>/\ndatabase.js\nsettings/\nutils/"}</code></pre>
-              <p>Confirmed against the current repository layout. <code>proboy.js</code> is an obfuscated wrapper;
+              <pre><code>{"proboy.js\nhandler.js\ncommands/\n  <category>/\ndatabase.js\nsettings/\nutils/"}</code></pre>
+              <p>At the checked commit, <code>index.js</code> is missing even though the package start script refers to it. See the <a href="/proboy-md/docs/installation" onClick={onLink}>installation caveat</a>. <code>proboy.js</code> is an obfuscated wrapper;
               per-command files under <code>commands/</code> expose <code>name</code>, <code>aliases</code>,
               <code>category</code>, <code>description</code> and <code>usage</code>, which is how this directory was built.</p>
             </div>
