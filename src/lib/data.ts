@@ -3,7 +3,6 @@ import projectsRaw from "../data/projects.json";
 import imagesRaw from "../data/images.json";
 import demosRaw from "../data/demos.json";
 import servicesRaw from "../data/services.json";
-import blogRaw from "../data/blog.json";
 
 export type Project = {
   slug: string;
@@ -35,19 +34,6 @@ export type ServiceDetail = {
   technologies: string[];
   relatedProjectSlugs: string[];
   idealFor: string;
-};
-
-export type BlogPost = {
-  slug: string;
-  title: string;
-  summary: string;
-  publishedAt: string;
-  updatedAt: string;
-  category: string;
-  readingTime: string;
-  author: string;
-  tags: string[];
-  sections: { heading: string; paragraphs: string[] }[];
 };
 
 export type GalleryImage = {
@@ -123,12 +109,6 @@ export const services: ServiceDetail[] = uniq(
   "services"
 );
 export const getService = (slug: string) => services.find((s) => s.slug === slug);
-
-export const blogPosts: BlogPost[] = uniq(
-  arr<BlogPost>(blogRaw).filter((b) => Boolean(b.slug && b.title)),
-  "blog"
-);
-export const getBlogPost = (slug: string) => blogPosts.find((b) => b.slug === slug);
 
 export const gallery: GalleryImage[] = arr<Record<string, unknown>>(imagesRaw)
   .filter((g) => str(g.src))
