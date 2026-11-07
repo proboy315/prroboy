@@ -364,13 +364,14 @@ function InteractiveDemosSection() {
 function CertificateSection() {
   const c = info.certificate;
   const [open, setOpen] = useState(false);
+  const [imageMissing, setImageMissing] = useState(false);
   return (
     <Wrap id="certificates" className="pt-32">
       <Heading eyebrow="Credential & Recognition" title={c.title} text={c.subtitle} />
       <div className="reveal grid lg:grid-cols-[1.1fr_.9fr] gap-8 items-start">
         <button
           type="button"
-          onClick={() => setOpen(true)}
+          onClick={() => { if (!imageMissing) setOpen(true); }}
           className="block text-left"
           aria-label="Open certificate image"
         >
@@ -380,8 +381,18 @@ function CertificateSection() {
             width={2000}
             height={1414}
             loading="lazy"
+            onError={() => setImageMissing(true)}
             className="w-full rounded-2xl border border-white/10 bg-white/5"
           />
+          {imageMissing && (
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-sm leading-relaxed text-zinc-400">
+              <p className="text-white">Certificate image file is not published in this build.</p>
+              <p className="mt-2">
+                {c.title} — {c.subtitle}. Awarded to {c.awardedTo}, organised by {c.organizers}, dated {c.date}. The
+                certificate wording is reproduced here because the image file is currently unavailable.
+              </p>
+            </div>
+          )}
         </button>
         <div>
           <p className="text-zinc-300 leading-relaxed">{c.quote}</p>
@@ -396,17 +407,19 @@ function CertificateSection() {
               </div>
             ))}
           </dl>
-          <a
-            href={c.image}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex text-sm text-red-400 hover:text-red-300"
-          >
-            View full-resolution certificate
-          </a>
+          {!imageMissing && (
+            <a
+              href={c.image}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex text-sm text-red-400 hover:text-red-300"
+            >
+              View full-resolution certificate
+            </a>
+          )}
         </div>
       </div>
-      {open && (
+      {open && !imageMissing && (
         <div
           role="dialog"
           aria-modal="true"
