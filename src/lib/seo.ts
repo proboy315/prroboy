@@ -97,6 +97,8 @@ export const personLd = () => ({
   givenName: "Shahan",
   familyName: "Ali",
   alternateName: [info.brand, ...info.aliases],
+  disambiguatingDescription:
+    "Shahan Ali (PROBOY), full-stack developer and maintainer of the ProBoy-MD open-source WhatsApp bot, working from Burewala, Punjab, Pakistan. This profile describes the PROBOY developer and is not about other people who share the name.",
   jobTitle: info.titles,
   description: info.seo.description,
   email: `mailto:${info.email}`,
@@ -129,7 +131,8 @@ export const personLd = () => ({
   },
   ...(site ? { url: site } : {}),
   ...(site && info.profileImage ? { image: new URL(info.profileImage, site + "/").href } : {}),
-  sameAs: [info.linkedin, info.github],
+  // Only owner-controlled profile pages that were reachable during the Phase 4 audit.
+  sameAs: [info.github, info.linkedin, "https://t.me/itx_proboy"],
   knowsAbout: [
     "Full-stack web development",
     "React",
