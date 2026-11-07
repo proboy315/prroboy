@@ -6,6 +6,9 @@ import { ServicesHub, ServiceDetailPage } from "./pages/Services";
 import ProjectsPage from "./pages/ProjectsPage";
 import { ProjectPage, NotFound } from "./pages/Detail";
 import ProBoyMd from "./pages/ProBoyMd";
+import BotDocs from "./pages/BotDocs";
+import Press from "./pages/Press";
+import Mentions from "./pages/Mentions";
 import { BlogIndexPage, BlogArticlePage } from "./pages/Blog";
 import ContactPage from "./pages/Contact";
 import Demos from "./pages/Demos";
@@ -13,6 +16,7 @@ import DemosDirectory from "./pages/DemosDirectory";
 import Intro, { shouldShowIntro } from "./components/Intro";
 import { Header, Sidebar, Drawer, Footer, BackToTop, useActiveSection } from "./components/Layout";
 import { info } from "./lib/data";
+import { replayBrokenImageErrors } from "./lib/imageFallback";
 import { usePath } from "./lib/router";
 
 const HOME_SECTION_IDS = ["home", "about", "services", "projects", "demos", "certificates", "qa", "contact"];
@@ -65,6 +69,18 @@ export default function App({ initialPath }: { initialPath?: string }) {
   }, []);
 
   useEffect(() => {
+    // Recover missing assets: files that failed before hydration never fire onError.
+    const sweep = () => replayBrokenImageErrors();
+    sweep();
+    const timer = window.setTimeout(sweep, 1200);
+    window.addEventListener("load", sweep);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("load", sweep);
+    };
+  }, [path]);
+
+  useEffect(() => {
     const io = new IntersectionObserver(
       (es) =>
         es.forEach((e) => {
@@ -102,6 +118,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
   const serviceMatch = path.match(/^\/services\/([a-z0-9-]+)$/);
   const blogMatch = path.match(/^\/blog\/([a-z0-9-]+)$/);
   const demoMatch = path.match(/^\/demos\/([a-z0-9-]+)$/);
+  const docsMatch = path.match(/^\/proboy-md\/docs\/([a-z0-9-]+)$/);
 
   const page =
     path === "/" ? (
@@ -118,6 +135,14 @@ export default function App({ initialPath }: { initialPath?: string }) {
       <ProjectPage slug={projectMatch[1]} />
     ) : path === "/proboy-md" ? (
       <ProBoyMd />
+    ) : path === "/proboy-md/docs" ? (
+      <BotDocs slug="documentation-home" />
+    ) : docsMatch ? (
+      <BotDocs slug={docsMatch[1]} />
+    ) : path === "/press" ? (
+      <Press />
+    ) : path === "/mentions" ? (
+      <Mentions />
     ) : path === "/blog" ? (
       <BlogIndexPage />
     ) : blogMatch ? (
