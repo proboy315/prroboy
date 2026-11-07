@@ -13,7 +13,6 @@
 - Engineering blog: https://proboy.vercel.app/blog
 - Interactive demos: https://proboy.vercel.app/demos
 - Contact: https://proboy.vercel.app/contact
-- LinkedIn: https://pk.linkedin.com/in/shahanali687
 - GitHub: https://github.com/ProBoy315
 - Telegram: https://t.me/itx_proboy
 - Email: shahanali.dev@gmail.com
