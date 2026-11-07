@@ -50,7 +50,9 @@ function initialMessages(): ChatMessage[] {
         `• Commands backed by safe public CORS APIs (.github, .npm, .funfact) fetch live data.`,
         `• Session-dependent or owner-only commands (.pair, .ai, .sticker, .restart) show a clearly labeled simulated preview.`,
       ].join("\n"),
-      timestamp: nowTime(),
+      // A fixed placeholder keeps the server and client render identical; the real
+      // clock is applied after hydration (a live value would break hydration).
+      timestamp: "--:--",
       badgeLabel: "Playground guide",
       mode: "browser-demo",
     },
@@ -70,6 +72,14 @@ export default function ProBoyPlayground() {
   );
 
   const feedRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMessages((list) =>
+      list.map((message) =>
+        message.badgeLabel === "Playground guide" ? { ...message, timestamp: nowTime() } : message
+      )
+    );
+  }, []);
 
   useEffect(() => {
     const el = feedRef.current;
