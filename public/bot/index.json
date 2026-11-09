@@ -62,6 +62,11 @@
             "url": "https://proboy.vercel.app/bot/saqib-md",
             "expiry": "",
             "active": true
+        },
+        {
+            "url": "https://proboy.vercel.app/bot/proboy",
+            "expiry": "",
+            "active": true
         }
     ]
 }
