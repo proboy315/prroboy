@@ -10,7 +10,9 @@ import {
   putRepoFile,
 } from "../../lib/githubApi";
 import type { GitHubConfig, GitHubEntry, GitHubTreeItem } from "../../lib/githubApi";
+import infoLocal from "../../data/info.json";
 import Icon from "../Icon";
+import { LiquidButton, LiquidCard, LiquidModal, LiquidPill } from "../LiquidGlass";
 
 type Props = {
   cfg: GitHubConfig;
@@ -21,526 +23,868 @@ type Props = {
 
 const TEMPLATES: Record<string, { label: string; ext: string; code: string }> = {
   liquidHtml: {
-    label: "Styled HTML page",
+    label: "Liquid Glass HTML5 Page",
     ext: "index.html",
     code: `<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>New Public Page</title>
-<style>
-body{margin:0;min-height:100vh;display:grid;place-items:center;background:#07070a;color:#fff;font-family:Inter,system-ui,sans-serif}
-.card{max-width:620px;padding:36px;border-radius:22px;background:#10141f;border:1px solid #232c44}
-</style>
-</head>
-<body><main class="card"><h1>New public page</h1><p>Created via PROBOY Admin.</p></main></body>
-</html>`,
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PROBOY App</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        min-height: 100vh;
+        font-family: Inter, system-ui, sans-serif;
+        color: #fff;
+        background: radial-gradient(circle at 20% 20%, rgba(239, 29, 62, 0.25), transparent 45%), #07070a;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+      .liquid-glass {
+        max-width: 640px;
+        width: 100%;
+        padding: 36px;
+        border-radius: 24px;
+        background: linear-gradient(145deg, rgba(255,255,255,.1), rgba(255,255,255,.03));
+        border: 1px solid rgba(255,255,255,.2);
+        backdrop-filter: blur(22px) saturate(180%);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 24px 60px rgba(0,0,0,.65);
+      }
+      h1 { font-size: 2rem; margin-bottom: 10px; }
+      p { color: #b4b6c4; line-height: 1.6; }
+    </style>
+  </head>
+  <body>
+    <main class="liquid-glass">
+      <h1>New Public Page</h1>
+      <p>Created inside public/ via PROBOY Admin Studio.</p>
+    </main>
+  </body>
+</html>
+`,
   },
   blankHtml: {
-    label: "Blank HTML",
+    label: "Blank HTML5 Page",
     ext: "index.html",
-    code: `<!doctype html>\n<html lang="en">\n<head>\n<meta charset="UTF-8" />\n<meta name="viewport" content="width=device-width, initial-scale=1.0" />\n<title>Untitled</title>\n</head>\n<body>\n<h1>Hello</h1>\n</body>\n</html>\n`,
+    code: `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Untitled Page</title>
+  </head>
+  <body>
+    <h1>Hello from public/</h1>
+  </body>
+</html>
+`,
   },
-  js: { label: "JavaScript", ext: "app.js", code: `console.log("loaded");\n` },
-  css: { label: "CSS", ext: "style.css", code: `.box{border-radius:16px;border:1px solid #232c44;}\n` },
-  json: { label: "JSON", ext: "data.json", code: `{\n  "ok": true,\n  "items": []\n}\n` },
-  blank: { label: "Empty file", ext: "file.txt", code: "" },
+  jsModule: {
+    label: "JavaScript File",
+    ext: "app.js",
+    code: `// PROBOY Public Script\nconsole.log("Script loaded successfully");\n`,
+  },
+  cssFile: {
+    label: "Liquid Glass CSS",
+    ext: "style.css",
+    code: `.liquid-box {\n  background: linear-gradient(145deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));\n  border: 1px solid rgba(255,255,255,0.18);\n  border-radius: 20px;\n  backdrop-filter: blur(20px) saturate(180%);\n}\n`,
+  },
+  jsonFile: {
+    label: "JSON Data File",
+    ext: "data.json",
+    code: `{\n  "ok": true,\n  "author": "Shahan Ali (PROBOY)",\n  "items": []\n}\n`,
+  },
+  blank: {
+    label: "Empty File",
+    ext: "file.txt",
+    code: "",
+  },
 };
 
-const IMG = new Set(["png", "jpg", "jpeg", "webp", "gif", "avif", "ico", "svg"]);
-const extOf = (p: string) => p.split(".").pop()?.toLowerCase() || "";
-const fmtSize = (b: number) => (b < 1024 ? `${b} B` : b < 1048576 ? `${(b / 1024).toFixed(1)} KB` : `${(b / 1048576).toFixed(2)} MB`);
+const IMAGE_EXTS = new Set(["png", "jpg", "jpeg", "webp", "gif", "svg", "avif", "ico"]);
+const AUDIO_EXTS = new Set(["mp3", "wav", "ogg", "m4a"]);
+
+function extOf(path: string) {
+  return path.split(".").pop()?.toLowerCase() || "";
+}
+
+function formatSize(bytes: number) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+}
 
 export default function AdminPublicStudioTab({ cfg, connected, onToast, onRepoChange }: Props) {
   const [cwd, setCwd] = useState("public");
   const [entries, setEntries] = useState<GitHubEntry[]>([]);
   const [tree, setTree] = useState<GitHubTreeItem[]>([]);
-  const [q, setQ] = useState("");
+  const [search, setSearch] = useState("");
   const [loadingDir, setLoadingDir] = useState(false);
 
+  // Active opened file state
   const [activePath, setActivePath] = useState("");
-  const [activeSha, setActiveSha] = useState<string | undefined>();
-  const [code, setCode] = useState("");
-  const [orig, setOrig] = useState("");
-  const [dlUrl, setDlUrl] = useState<string | null>(null);
-  const [rawB64, setRawB64] = useState("");
+  const [activeSha, setActiveSha] = useState<string | undefined>(undefined);
+  const [activeCode, setActiveCode] = useState("");
+  const [originalCode, setOriginalCode] = useState("");
+  const [activeDownloadUrl, setActiveDownloadUrl] = useState<string | null>(null);
+  const [activeRawBase64, setActiveRawBase64] = useState("");
   const [loadingFile, setLoadingFile] = useState(false);
-  const [saving, setSaving] = useState(false);
+  const [savingFile, setSavingFile] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [msg, setMsg] = useState("");
-  const [preview, setPreview] = useState<"code" | "view">("code");
+  const [commitMsg, setCommitMsg] = useState("");
+  const [previewMode, setPreviewMode] = useState<"code" | "preview">("code");
 
-  const [folderOpen, setFolderOpen] = useState(false);
+  // Modals
+  const [newFolderOpen, setNewFolderOpen] = useState(false);
   const [folderName, setFolderName] = useState("");
-  const [folderFile, setFolderFile] = useState("index.html");
-  const [folderTpl, setFolderTpl] = useState("liquidHtml");
+  const [folderTemplate, setFolderTemplate] = useState<keyof typeof TEMPLATES>("liquidHtml");
+  const [folderStarterFile, setFolderStarterFile] = useState("index.html");
 
-  const [fileOpen, setFileOpen] = useState(false);
-  const [fileName, setFileName] = useState("");
-  const [fileTpl, setFileTpl] = useState("liquidHtml");
+  const [newFileOpen, setNewFileOpen] = useState(false);
+  const [newFileName, setNewFileName] = useState("");
+  const [newFileTemplate, setNewFileTemplate] = useState<keyof typeof TEMPLATES>("liquidHtml");
 
   const [moveOpen, setMoveOpen] = useState(false);
-  const [moveTo, setMoveTo] = useState("");
+  const [moveTargetPath, setMoveTargetPath] = useState("");
 
-  const loadFolder = async (dir: string) => {
+  const loadFolder = async (dirPath: string) => {
     if (!connected) return;
     setLoadingDir(true);
     try {
-      const clean = dir.replace(/^\/+|\/+$/g, "");
-      setEntries(await listDir(cfg, clean));
+      const clean = dirPath.replace(/^\/+|\/+$/g, "");
+      const list = await listDir(cfg, clean);
+      setEntries(list);
       setCwd(clean);
     } catch (e) {
-      onToast("err", e instanceof Error ? e.message : "Folder open failed.");
+      onToast("err", e instanceof Error ? e.message : `Failed to open folder ${dirPath}`);
     } finally {
       setLoadingDir(false);
     }
   };
 
-  const loadTree = async () => {
+  const loadTreeIndex = async () => {
     if (!connected) return;
     try {
-      setTree(await getRepoTree(cfg));
+      const t = await getRepoTree(cfg);
+      setTree(t);
     } catch {
-      // ignore
+      // non-fatal
     }
   };
 
   useEffect(() => {
     if (connected) {
       void loadFolder(cwd);
-      void loadTree();
+      void loadTreeIndex();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connected, cfg.owner, cfg.repo, cfg.branch]);
 
-  const openFile = async (p: string) => {
+  const openFile = async (filePath: string) => {
     if (!connected) return;
     setLoadingFile(true);
-    setPreview("code");
+    setPreviewMode("code");
     try {
-      const f = await getRepoFile(cfg, p);
+      const f = await getRepoFile(cfg, filePath);
       setActivePath(f.path);
       setActiveSha(f.sha);
-      setCode(f.content);
-      setOrig(f.content);
-      setDlUrl(f.downloadUrl);
-      setRawB64(f.rawBase64);
-      setMsg(`Update ${f.path}`);
+      setActiveCode(f.content);
+      setOriginalCode(f.content);
+      setActiveDownloadUrl(f.downloadUrl);
+      setActiveRawBase64(f.rawBase64);
+      setCommitMsg(`Update ${f.path}`);
     } catch (e) {
-      onToast("err", e instanceof Error ? e.message : "Read failed.");
+      onToast("err", e instanceof Error ? e.message : `Could not read ${filePath}`);
     } finally {
       setLoadingFile(false);
     }
   };
 
-  const saveFile = async () => {
+  const saveActiveFile = async () => {
     if (!connected || !activePath) return;
-    setSaving(true);
+    setSavingFile(true);
     try {
-      const r = await putRepoFile(cfg, activePath, code, msg || `Update ${activePath}`, { sha: activeSha });
-      setActiveSha(r.sha);
-      setOrig(code);
-      onToast("ok", `Saved ${activePath}.`);
+      const res = await putRepoFile(cfg, activePath, activeCode, commitMsg || `Update ${activePath}`, {
+        sha: activeSha,
+      });
+      setActiveSha(res.sha);
+      setOriginalCode(activeCode);
+      onToast("ok", `Saved ${activePath} to GitHub!`);
       await loadFolder(cwd);
-      await loadTree();
+      await loadTreeIndex();
       onRepoChange();
     } catch (e) {
-      onToast("err", e instanceof Error ? e.message : "Save failed.");
+      onToast("err", e instanceof Error ? e.message : `Failed to save ${activePath}`);
     } finally {
-      setSaving(false);
+      setSavingFile(false);
     }
   };
 
-  const results = useMemo(() => {
-    const s = q.trim().toLowerCase();
-    if (!s) return [];
-    return tree.filter((t) => t.path.toLowerCase().includes(s)).slice(0, 60);
-  }, [q, tree]);
+  const handleCreateFolder = async () => {
+    if (!connected) return;
+    const cleanFolder = folderName.trim().replace(/^\/+|\/+$/g, "");
+    if (!cleanFolder) {
+      onToast("err", "Enter a folder name (e.g. my-tool).");
+      return;
+    }
+    const starter = folderStarterFile.trim() || ".gitkeep";
+    const fullFolder = cwd ? `${cwd}/${cleanFolder}` : cleanFolder;
+    const targetFile = `${fullFolder}/${starter}`;
+    const tpl = starter === ".gitkeep" ? "" : TEMPLATES[folderTemplate]?.code || "";
 
+    setSavingFile(true);
+    try {
+      await putRepoFile(cfg, targetFile, tpl, `Create folder ${fullFolder} (${starter}) via Admin`);
+      setNewFolderOpen(false);
+      setFolderName("");
+      onToast("ok", `Folder ${fullFolder}/ created with ${starter}!`);
+      await loadFolder(fullFolder);
+      await loadTreeIndex();
+      if (starter !== ".gitkeep") {
+        await openFile(targetFile);
+      }
+      onRepoChange();
+    } catch (e) {
+      onToast("err", e instanceof Error ? e.message : "Failed to create folder.");
+    } finally {
+      setSavingFile(false);
+    }
+  };
+
+  const handleCreateFile = async () => {
+    if (!connected) return;
+    const cleanFile = newFileName.trim().replace(/^\/+/, "");
+    if (!cleanFile) {
+      onToast("err", "Enter a filename (e.g. index.html or tools/script.js).");
+      return;
+    }
+    const targetPath = cwd ? `${cwd}/${cleanFile}` : cleanFile;
+    const tplCode = TEMPLATES[newFileTemplate]?.code ?? "";
+
+    setSavingFile(true);
+    try {
+      await putRepoFile(cfg, targetPath, tplCode, `Create ${targetPath} via Admin`);
+      setNewFileOpen(false);
+      setNewFileName("");
+      onToast("ok", `Created ${targetPath}!`);
+      await loadFolder(cwd);
+      await loadTreeIndex();
+      await openFile(targetPath);
+      onRepoChange();
+    } catch (e) {
+      onToast("err", e instanceof Error ? e.message : "Failed to create file.");
+    } finally {
+      setSavingFile(false);
+    }
+  };
+
+  const handleUploadFiles = async (files: FileList | null) => {
+    if (!files || !files.length || !connected) return;
+    setUploading(true);
+    try {
+      let count = 0;
+      for (const file of Array.from(files)) {
+        const b64 = await fileToBase64(file);
+        const dest = cwd ? `${cwd}/${file.name}` : file.name;
+        await putRepoFile(cfg, dest, b64, `Upload ${dest} via Admin`, { isBase64: true });
+        count++;
+      }
+      onToast("ok", `Uploaded ${count} file(s) to ${cwd || "/"}/`);
+      await loadFolder(cwd);
+      await loadTreeIndex();
+      onRepoChange();
+    } catch (e) {
+      onToast("err", e instanceof Error ? e.message : "Failed to upload file(s).");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDeleteEntry = async (entry: GitHubEntry) => {
+    if (!connected) return;
+    const ok = window.confirm(
+      entry.type === "dir"
+        ? `Delete folder "${entry.path}" and ALL files inside it from GitHub?`
+        : `Delete file "${entry.path}" from GitHub?`
+    );
+    if (!ok) return;
+    setSavingFile(true);
+    try {
+      if (entry.type === "dir") {
+        const removed = await deleteRepoFolder(cfg, entry.path);
+        onToast("ok", `Deleted folder ${entry.path} (${removed} file(s)).`);
+      } else {
+        await deleteRepoFile(cfg, entry.path, entry.sha, `Delete ${entry.path} via Admin`);
+        onToast("ok", `Deleted ${entry.path}.`);
+      }
+      if (activePath === entry.path || activePath.startsWith(`${entry.path}/`)) {
+        setActivePath("");
+        setActiveCode("");
+        setOriginalCode("");
+      }
+      await loadFolder(cwd);
+      await loadTreeIndex();
+      onRepoChange();
+    } catch (e) {
+      onToast("err", e instanceof Error ? e.message : "Delete failed.");
+    } finally {
+      setSavingFile(false);
+    }
+  };
+
+  const handleMoveFile = async () => {
+    if (!connected || !activePath || !moveTargetPath.trim()) return;
+    setSavingFile(true);
+    try {
+      const nextPath = moveTargetPath.trim().replace(/^\/+/, "");
+      await moveRepoFile(cfg, activePath, nextPath, `Move ${activePath} -> ${nextPath} via Admin`);
+      setMoveOpen(false);
+      onToast("ok", `Moved to ${nextPath}`);
+      await loadFolder(cwd);
+      await loadTreeIndex();
+      await openFile(nextPath);
+      onRepoChange();
+    } catch (e) {
+      onToast("err", e instanceof Error ? e.message : "Failed to move/rename file.");
+    } finally {
+      setSavingFile(false);
+    }
+  };
+
+  const formatJson = () => {
+    try {
+      const parsed = JSON.parse(activeCode);
+      setActiveCode(JSON.stringify(parsed, null, 2) + "\n");
+      onToast("info", "Formatted JSON.");
+    } catch (e) {
+      onToast("err", e instanceof Error ? e.message : "Invalid JSON syntax.");
+    }
+  };
+
+  const searchResults = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return [];
+    return tree.filter((t) => t.path.toLowerCase().includes(q)).slice(0, 60);
+  }, [search, tree]);
+
+  const crumbs = cwd ? cwd.split("/") : [];
   const ext = extOf(activePath);
-  const isImg = IMG.has(ext) && ext !== "svg";
-  const isSvg = ext === "svg";
+  const isImage = IMAGE_EXTS.has(ext);
+  const isAudio = AUDIO_EXTS.has(ext);
   const isHtml = ext === "html" || ext === "htm";
-  const dirty = activePath !== "" && code !== orig;
-  const pubUrl = activePath.startsWith("public/") ? `/${activePath.slice(7)}` : "";
+  const isSvg = ext === "svg";
+  const isDirty = activePath && activeCode !== originalCode;
+  const publicUrl = activePath.startsWith("public/") ? `/${activePath.slice("public/".length)}` : "";
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-      <div className="ad-card">
-        <div className="ad-card-head">
-          <div>
-            <span className="ad-pill ad-pill-red">public/ · Files &amp; Code Studio</span>
-            <h2 className="ad-card-title" style={{ marginTop: 10, fontSize: 20 }}>File manager &amp; code editor</h2>
-            <p className="ad-card-sub">Create folders in <code>public/</code>, write HTML/CSS/JS/JSON, upload &amp; push to GitHub.</p>
-          </div>
-          <div className="ad-row" style={{ flexWrap: "wrap", justifyContent: "flex-end" }}>
-            <button className="ad-btn ad-btn-sm" disabled={!connected} onClick={() => setFolderOpen(true)}>
-              <Icon name="folderPlus" className="w-4 h-4" /> Folder
-            </button>
-            <button className="ad-btn ad-btn-sm" disabled={!connected} onClick={() => setFileOpen(true)}>
-              <Icon name="plus" className="w-4 h-4" /> File
-            </button>
-            <label className="ad-btn ad-btn-primary ad-btn-sm" style={{ cursor: "pointer" }}>
-              <Icon name="upload" className="w-4 h-4" /> {uploading ? "…" : "Upload"}
-              <input
-                type="file"
-                multiple
-                hidden
-                disabled={!connected || uploading}
-                onChange={async (e) => {
-                  const files = e.target.files;
-                  if (!files?.length) return;
-                  setUploading(true);
-                  try {
-                    for (const f of Array.from(files)) {
-                      const dest = cwd ? `${cwd}/${f.name}` : f.name;
-                      await putRepoFile(cfg, dest, await fileToBase64(f), `Upload ${dest}`, { isBase64: true });
-                    }
-                    onToast("ok", `Uploaded ${files.length} file(s) to ${cwd || "/"}.`);
-                    await loadFolder(cwd);
-                    await loadTree();
-                    onRepoChange();
-                  } catch (err) {
-                    onToast("err", err instanceof Error ? err.message : "Upload failed.");
-                  } finally {
-                    setUploading(false);
-                    e.target.value = "";
-                  }
-                }}
-              />
-            </label>
-          </div>
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <LiquidPill crimson>public/ Folder &amp; Full Repo Code Studio</LiquidPill>
+          <h2 className="mt-2 text-2xl font-bold text-white">File Manager, Folder Builder &amp; Code Editor</h2>
+          <p className="text-sm text-zinc-400">
+            Create folders inside <code className="text-zinc-200">public/</code>, write HTML/CSS/JS/JSON/TSX code,
+            upload images or assets, and push directly to GitHub.
+          </p>
         </div>
+        <div className="flex flex-wrap gap-2">
+          <LiquidButton onClick={() => setNewFolderOpen(true)} disabled={!connected}>
+            <Icon name="folderPlus" className="w-4 h-4 text-red-400" />
+            New Folder
+          </LiquidButton>
+          <LiquidButton onClick={() => setNewFileOpen(true)} disabled={!connected}>
+            <Icon name="plus" className="w-4 h-4 text-red-400" />
+            New File / Code
+          </LiquidButton>
+          <label className="lg-btn cursor-pointer">
+            <Icon name="upload" className="w-4 h-4" />
+            {uploading ? "Uploading..." : "Upload Files"}
+            <input
+              type="file"
+              multiple
+              className="hidden"
+              disabled={!connected || uploading}
+              onChange={(e) => {
+                void handleUploadFiles(e.target.files);
+                e.target.value = "";
+              }}
+            />
+          </label>
+        </div>
+      </div>
 
-        <div className="ad-row" style={{ flexWrap: "wrap", justifyContent: "space-between" }}>
-          <div className="ad-row" style={{ flexWrap: "wrap" }}>
+      {/* Quick Root Shortcuts + Breadcrumbs */}
+      <LiquidCard className="p-4 space-y-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap gap-2">
             {[
-              { l: "public/", p: "public" },
-              { l: "images/", p: "public/images" },
-              { l: "src/data/", p: "src/data" },
-              { l: "root /", p: "" },
-            ].map((b) => (
-              <button key={b.l} className={`ad-btn ad-btn-sm ${cwd === b.p ? "ad-btn-primary" : ""}`} disabled={!connected} onClick={() => void loadFolder(b.p)}>
-                {b.l}
+              { label: "public/", path: "public" },
+              { label: "public/images/", path: "public/images" },
+              { label: "src/", path: "src" },
+              { label: "src/data/", path: "src/data" },
+              { label: "/ (Repo Root)", path: "" },
+            ].map((q) => (
+              <button
+                key={q.label}
+                type="button"
+                onClick={() => void loadFolder(q.path)}
+                disabled={!connected}
+                className={`px-3 py-1.5 rounded-full text-xs border transition ${
+                  cwd === q.path
+                    ? "bg-red-600/25 border-red-500/60 text-white"
+                    : "bg-white/5 border-white/10 text-zinc-300 hover:bg-white/10"
+                }`}
+              >
+                {q.label}
               </button>
             ))}
           </div>
-          <input className="ad-input" style={{ maxWidth: 300 }} placeholder="Search whole repo…" value={q} onChange={(e) => setQ(e.target.value)} autoComplete="off" spellCheck={false} />
+
+          <input
+            type="search"
+            className="lg-input sm:w-72 text-xs"
+            placeholder="Search any file/folder in repo..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
 
-        <p className="ad-hint ad-mono" style={{ marginTop: 12 }}>
-          /{cwd || ""} {loadingDir ? "· loading…" : `· ${entries.length} items`}
-        </p>
-      </div>
-
-      <div className="ad-grid-2" style={{ gridTemplateColumns: "320px 1fr", alignItems: "start" }}>
-        <div className="ad-card" style={{ padding: 14 }}>
-          {q.trim() ? (
-            <div className="ad-list" style={{ maxHeight: 560, overflowY: "auto" }}>
-              {results.map((r) => (
+        {/* Breadcrumb */}
+        <div className="flex flex-wrap items-center gap-1.5 text-xs text-zinc-400 pt-1 border-t border-white/10">
+          <button
+            type="button"
+            onClick={() => void loadFolder("")}
+            className="hover:text-white font-mono"
+            disabled={!connected}
+          >
+            root
+          </button>
+          {crumbs.map((seg, i) => {
+            const pathUpTo = crumbs.slice(0, i + 1).join("/");
+            return (
+              <span key={pathUpTo} className="inline-flex items-center gap-1.5">
+                <span>/</span>
                 <button
-                  key={r.path}
-                  className="ad-item"
-                  style={{ cursor: "pointer", textAlign: "left", width: "100%" }}
-                  onClick={() => {
-                    if (r.type === "tree") void loadFolder(r.path);
-                    else {
-                      const parent = r.path.includes("/") ? r.path.slice(0, r.path.lastIndexOf("/")) : "";
-                      void loadFolder(parent);
-                      void openFile(r.path);
-                    }
-                    setQ("");
-                  }}
+                  type="button"
+                  onClick={() => void loadFolder(pathUpTo)}
+                  className="hover:text-white font-mono text-zinc-200"
                 >
-                  <Icon name={r.type === "tree" ? "folder" : "file"} className="w-4 h-4" />
-                  <span className="ad-mono" style={{ fontSize: 11.5, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{r.path}</span>
+                  {seg}
                 </button>
-              ))}
-              {!results.length && <p className="ad-hint">No matches.</p>}
+              </span>
+            );
+          })}
+          {loadingDir && <span className="ml-2 text-red-400">Loading...</span>}
+        </div>
+      </LiquidCard>
+
+      {/* Main Split: Explorer + Code Studio */}
+      <div className="grid lg:grid-cols-[330px_1fr] gap-6 items-start">
+        {/* Directory / Search Tree */}
+        <LiquidCard className="p-4">
+          {search.trim() ? (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs text-zinc-400 pb-2 border-b border-white/10">
+                <span>Search results ({searchResults.length})</span>
+                <button type="button" onClick={() => setSearch("")} className="text-red-400">
+                  Clear
+                </button>
+              </div>
+              <ul className="space-y-1 max-h-[580px] overflow-y-auto pr-1">
+                {searchResults.map((item) => (
+                  <li key={item.path}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (item.type === "tree") void loadFolder(item.path);
+                        else {
+                          const parent = item.path.includes("/")
+                            ? item.path.slice(0, item.path.lastIndexOf("/"))
+                            : "";
+                          void loadFolder(parent);
+                          void openFile(item.path);
+                        }
+                        setSearch("");
+                      }}
+                      className="w-full text-left px-2.5 py-2 rounded-lg hover:bg-white/10 text-xs flex items-center gap-2 text-zinc-200"
+                    >
+                      <Icon name={item.type === "tree" ? "folder" : "file"} className="w-4 h-4 text-red-400 shrink-0" />
+                      <span className="truncate font-mono">{item.path}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
           ) : (
-            <div className="ad-list" style={{ maxHeight: 560, overflowY: "auto" }}>
-              {cwd && (
-                <button className="ad-btn ad-btn-sm" onClick={() => void loadFolder(cwd.includes("/") ? cwd.slice(0, cwd.lastIndexOf("/")) : "")}>
-                  ↑ Up one level
-                </button>
-              )}
-              {entries.map((en) => (
-                <div key={en.path} className={`ad-item ${activePath === en.path ? "active" : ""}`}>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs text-zinc-400 pb-2 border-b border-white/10">
+                <span className="font-mono truncate">{cwd || "/"}/ ({entries.length})</span>
+                {cwd && (
                   <button
-                    style={{ flex: 1, minWidth: 0, textAlign: "left", display: "flex", gap: 10, alignItems: "center", cursor: "pointer", background: "none", border: "none", color: "inherit" }}
-                    onClick={() => (en.type === "dir" ? void loadFolder(en.path) : void openFile(en.path))}
-                  >
-                    <Icon name={en.type === "dir" ? "folder" : "file"} className="w-4 h-4" />
-                    <span className="ad-mono" style={{ fontSize: 12, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{en.name}</span>
-                    {en.type === "file" && <span style={{ marginLeft: "auto", fontSize: 10.5, color: "#7c86a3" }}>{fmtSize(en.size)}</span>}
-                  </button>
-                  <button
-                    title="Delete"
-                    style={{ background: "none", border: "none", color: "#8b93ad", cursor: "pointer" }}
-                    onClick={async () => {
-                      if (!window.confirm(en.type === "dir" ? `Delete folder ${en.path} + everything inside?` : `Delete ${en.path}?`)) return;
-                      setSaving(true);
-                      try {
-                        if (en.type === "dir") await deleteRepoFolder(cfg, en.path);
-                        else await deleteRepoFile(cfg, en.path, en.sha, `Delete ${en.path}`);
-                        if (activePath === en.path) { setActivePath(""); setCode(""); setOrig(""); }
-                        onToast("ok", `Deleted ${en.path}.`);
-                        await loadFolder(cwd);
-                        await loadTree();
-                        onRepoChange();
-                      } catch (err) {
-                        onToast("err", err instanceof Error ? err.message : "Delete failed.");
-                      } finally {
-                        setSaving(false);
-                      }
+                    type="button"
+                    onClick={() => {
+                      const parent = cwd.includes("/") ? cwd.slice(0, cwd.lastIndexOf("/")) : "";
+                      void loadFolder(parent);
                     }}
+                    className="text-red-400 hover:text-red-300 shrink-0"
                   >
-                    <Icon name="trash" className="w-4 h-4" />
+                    ↑ Up
                   </button>
-                </div>
-              ))}
-              {!entries.length && !loadingDir && <p className="ad-hint">Empty folder.</p>}
+                )}
+              </div>
+
+              <ul className="space-y-1 max-h-[580px] overflow-y-auto pr-1">
+                {entries.map((entry) => {
+                  const active = activePath === entry.path;
+                  return (
+                    <li
+                      key={entry.path}
+                      className={`group flex items-center gap-1 rounded-xl border transition ${
+                        active
+                          ? "bg-red-600/20 border-red-500/50"
+                          : "border-transparent hover:bg-white/[0.06]"
+                      }`}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (entry.type === "dir") void loadFolder(entry.path);
+                          else void openFile(entry.path);
+                        }}
+                        className="flex-1 min-w-0 text-left px-2.5 py-2 flex items-center gap-2.5 text-xs"
+                      >
+                        <Icon
+                          name={entry.type === "dir" ? "folder" : "file"}
+                          className={`w-4 h-4 shrink-0 ${
+                            entry.type === "dir" ? "text-amber-400" : "text-zinc-400"
+                          }`}
+                        />
+                        <span className="truncate font-mono text-zinc-100">{entry.name}</span>
+                        {entry.type === "file" && (
+                          <span className="ml-auto text-[10px] text-zinc-500 shrink-0">
+                            {formatSize(entry.size)}
+                          </span>
+                        )}
+                      </button>
+                      <button
+                        type="button"
+                        title={`Delete ${entry.name}`}
+                        onClick={() => void handleDeleteEntry(entry)}
+                        className="opacity-0 group-hover:opacity-100 focus:opacity-100 p-1.5 mr-1 rounded-lg hover:bg-red-500/20 text-zinc-400 hover:text-red-300 transition"
+                      >
+                        <Icon name="trash" className="w-3.5 h-3.5" />
+                      </button>
+                    </li>
+                  );
+                })}
+                {!entries.length && !loadingDir && (
+                  <li className="py-8 text-center text-xs text-zinc-500">
+                    Folder is empty or not loaded yet.
+                  </li>
+                )}
+              </ul>
             </div>
           )}
-        </div>
+        </LiquidCard>
 
-        <div className="ad-card">
+        {/* Code Editor / Preview */}
+        <LiquidCard className="p-5 sm:p-6 space-y-4">
           {!activePath ? (
-            <div style={{ textAlign: "center", padding: "56px 20px" }}>
-              <h3 className="ad-card-title" style={{ fontSize: 17 }}>Pick a file or create something new</h3>
-              <p className="ad-card-sub">HTML preview, image preview, Tab indentation, JSON formatter.</p>
-              <div className="ad-row" style={{ justifyContent: "center", marginTop: 16, flexWrap: "wrap" }}>
-                <button className="ad-btn" disabled={!connected} onClick={() => setFolderOpen(true)}>Create folder in {cwd || "root"}/</button>
-                <button className="ad-btn ad-btn-primary" disabled={!connected} onClick={() => setFileOpen(true)}>New code file</button>
+            <div className="py-16 text-center space-y-4">
+              <div className="w-14 h-14 mx-auto rounded-2xl bg-red-500/15 border border-red-400/30 grid place-items-center text-red-400">
+                <Icon name="code" className="w-7 h-7" />
+              </div>
+              <h3 className="text-lg font-semibold text-white">Select a file or create a new folder/file</h3>
+              <p className="text-sm text-zinc-400 max-w-md mx-auto">
+                Click any file on the left to edit its code, preview HTML/images, or click{" "}
+                <strong className="text-zinc-200">New Folder</strong> /{" "}
+                <strong className="text-zinc-200">New File</strong> to build inside{" "}
+                <code className="text-zinc-200">public/</code>.
+              </p>
+              <div className="flex flex-wrap justify-center gap-2.5 pt-2">
+                <LiquidButton onClick={() => setNewFolderOpen(true)} disabled={!connected}>
+                  <Icon name="folderPlus" className="w-4 h-4" /> Create Folder in {cwd || "root"}/
+                </LiquidButton>
+                <LiquidButton variant="primary" onClick={() => setNewFileOpen(true)} disabled={!connected}>
+                  <Icon name="plus" className="w-4 h-4" /> Create New Code File
+                </LiquidButton>
               </div>
             </div>
           ) : (
             <>
-              <div className="ad-card-head">
-                <div style={{ minWidth: 0 }}>
-                  <p className="ad-mono" style={{ color: "#fff", fontWeight: 700, overflowWrap: "anywhere" }}>{activePath} {dirty && <span className="ad-pill ad-pill-amber" style={{ marginLeft: 8 }}>Unsaved</span>}</p>
-                  {pubUrl && <p className="ad-hint">Public URL: <code>{pubUrl}</code></p>}
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/10">
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="font-mono text-sm font-semibold text-white break-all">{activePath}</span>
+                    {isDirty && <LiquidPill crimson>Unsaved edits</LiquidPill>}
+                  </div>
+                  {publicUrl && (
+                    <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-zinc-400">
+                      <span>
+                        Public URL: <code className="text-emerald-300">{publicUrl}</code>
+                      </span>
+                      <button
+                        type="button"
+                        className="text-red-400 hover:underline"
+                        onClick={() => {
+                          const full = `${(infoLocal.siteUrl || "").replace(/\/$/, "")}${publicUrl}`;
+                          navigator.clipboard?.writeText(full || publicUrl);
+                          onToast("info", `Copied ${full || publicUrl}`);
+                        }}
+                      >
+                        Copy Full URL
+                      </button>
+                    </div>
+                  )}
                 </div>
-                <div className="ad-row" style={{ flexWrap: "wrap" }}>
-                  {(isHtml || isSvg) && (
-                    <div className="ad-tabs">
-                      <button className={`ad-tab ${preview === "code" ? "active" : ""}`} onClick={() => setPreview("code")}>Code</button>
-                      <button className={`ad-tab ${preview === "view" ? "active" : ""}`} onClick={() => setPreview("view")}>Preview</button>
+
+                <div className="flex flex-wrap items-center gap-2">
+                  {(isHtml || isSvg || isImage) && (
+                    <div className="lg-dock p-1">
+                      <button
+                        type="button"
+                        onClick={() => setPreviewMode("code")}
+                        className={`lg-tab py-1 px-2.5 text-xs ${previewMode === "code" ? "is-active" : ""}`}
+                      >
+                        Code
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setPreviewMode("preview")}
+                        className={`lg-tab py-1 px-2.5 text-xs ${previewMode === "preview" ? "is-active" : ""}`}
+                      >
+                        Preview
+                      </button>
                     </div>
                   )}
                   {ext === "json" && (
-                    <button
-                      className="ad-btn ad-btn-sm"
-                      onClick={() => {
-                        try {
-                          setCode(JSON.stringify(JSON.parse(code), null, 2) + "\n");
-                          onToast("info", "JSON formatted.");
-                        } catch {
-                          onToast("err", "Invalid JSON.");
-                        }
-                      }}
-                    >
-                      Format
-                    </button>
+                    <LiquidButton onClick={formatJson}>Format JSON</LiquidButton>
                   )}
-                  <button className="ad-btn ad-btn-sm" onClick={() => { setMoveTo(activePath); setMoveOpen(true); }}>Move</button>
+                  <LiquidButton
+                    onClick={() => {
+                      setMoveTargetPath(activePath);
+                      setMoveOpen(true);
+                    }}
+                  >
+                    Move / Rename
+                  </LiquidButton>
+                  <LiquidButton
+                    onClick={() => {
+                      navigator.clipboard?.writeText(activeCode);
+                      onToast("info", "Copied code to clipboard.");
+                    }}
+                  >
+                    <Icon name="copy" className="w-4 h-4" />
+                  </LiquidButton>
                 </div>
               </div>
 
               {loadingFile ? (
-                <p className="ad-hint">Loading from GitHub…</p>
-              ) : isImg ? (
-                <div style={{ background: "#080c15", border: "1px solid #1c2742", borderRadius: 12, padding: 20, textAlign: "center" }}>
-                  <img src={rawB64 ? `data:image/${ext};base64,${rawB64}` : dlUrl || ""} alt={activePath} style={{ maxHeight: 420, maxWidth: "100%", borderRadius: 10 }} />
-                  <p className="ad-hint">Binary image — upload same filename to replace.</p>
+                <div className="py-16 text-center text-sm text-zinc-400">Loading file from GitHub...</div>
+              ) : isImage && previewMode === "preview" ? (
+                <div className="rounded-xl border border-white/10 bg-black/50 p-6 grid place-items-center">
+                  <img
+                    src={
+                      activeRawBase64
+                        ? `data:image/${ext === "svg" ? "svg+xml" : ext};base64,${activeRawBase64}`
+                        : activeDownloadUrl || ""
+                    }
+                    alt={activePath}
+                    className="max-h-[460px] object-contain rounded-lg"
+                  />
                 </div>
-              ) : (isHtml || isSvg) && preview === "view" ? (
-                <iframe title={activePath} srcDoc={code} sandbox="allow-scripts allow-forms" style={{ width: "100%", height: 480, borderRadius: 12, border: "1px solid #223047", background: "#fff" }} />
+              ) : isImage && !isSvg ? (
+                <div className="rounded-xl border border-white/10 bg-black/50 p-6 text-center space-y-4">
+                  <img
+                    src={
+                      activeRawBase64
+                        ? `data:image/${ext};base64,${activeRawBase64}`
+                        : activeDownloadUrl || ""
+                    }
+                    alt={activePath}
+                    className="max-h-[420px] mx-auto object-contain rounded-lg"
+                  />
+                  <p className="text-xs text-zinc-400">
+                    Binary image file. Upload a replacement in this folder using the same filename to overwrite.
+                  </p>
+                </div>
+              ) : isAudio ? (
+                <div className="rounded-xl border border-white/10 bg-black/50 p-8 text-center space-y-3">
+                  <audio controls src={activeDownloadUrl || ""} className="mx-auto" />
+                  <p className="text-xs text-zinc-400">Binary audio asset ({activePath})</p>
+                </div>
+              ) : (isHtml || isSvg) && previewMode === "preview" ? (
+                <iframe
+                  title={`Preview of ${activePath}`}
+                  srcDoc={activeCode}
+                  sandbox="allow-scripts allow-forms"
+                  className="w-full h-[500px] rounded-xl border border-white/15 bg-white"
+                />
               ) : (
-                <>
+                <div className="space-y-2">
                   <textarea
-                    className="ad-textarea"
                     rows={22}
                     spellCheck={false}
-                    value={code}
-                    onChange={(e) => setCode(e.target.value)}
+                    value={activeCode}
+                    onChange={(e) => setActiveCode(e.target.value)}
                     onKeyDown={(e) => {
                       if (e.key === "Tab") {
                         e.preventDefault();
                         const el = e.currentTarget;
-                        const s = el.selectionStart, en2 = el.selectionEnd;
-                        setCode(code.slice(0, s) + "  " + code.slice(en2));
-                        requestAnimationFrame(() => { el.selectionStart = el.selectionEnd = s + 2; });
+                        const start = el.selectionStart;
+                        const end = el.selectionEnd;
+                        const next = activeCode.slice(0, start) + "  " + activeCode.slice(end);
+                        setActiveCode(next);
+                        requestAnimationFrame(() => {
+                          el.selectionStart = el.selectionEnd = start + 2;
+                        });
                       }
                     }}
+                    className="lg-input font-mono text-xs leading-6 whitespace-pre overflow-x-auto"
                   />
-                  <p className="ad-hint">Lines {code.split("\n").length} · {code.length} chars · Tab = 2 spaces</p>
-                </>
+                  <div className="flex flex-wrap justify-between text-[11px] text-zinc-500">
+                    <span>Lines: {activeCode.split("\n").length} · Characters: {activeCode.length}</span>
+                    <span>Tip: Tab inserts 2 spaces</span>
+                  </div>
+                </div>
               )}
 
-              {!isImg && (
-                <div className="ad-row" style={{ marginTop: 14, flexWrap: "wrap" }}>
-                  <input className="ad-input ad-mono" style={{ flex: 1, minWidth: 200 }} value={msg} onChange={(e) => setMsg(e.target.value)} placeholder="Commit message" autoComplete="off" />
-                  <button className="ad-btn ad-btn-primary" onClick={saveFile} disabled={!connected || saving}>
-                    <Icon name="save" className="w-4 h-4" /> {saving ? "Pushing…" : "Commit file"}
-                  </button>
+              {(!isImage || isSvg) && !isAudio && (
+                <div className="pt-3 border-t border-white/10 flex flex-wrap items-center gap-3">
+                  <input
+                    className="lg-input flex-1 min-w-[200px]"
+                    value={commitMsg}
+                    onChange={(e) => setCommitMsg(e.target.value)}
+                    placeholder={`Commit message for ${activePath}`}
+                  />
+                  <LiquidButton variant="primary" onClick={saveActiveFile} disabled={!connected || savingFile}>
+                    <Icon name="save" className="w-4 h-4" />
+                    {savingFile ? "Pushing..." : "Commit & Save File"}
+                  </LiquidButton>
                 </div>
               )}
             </>
           )}
-        </div>
+        </LiquidCard>
       </div>
 
-      {folderOpen && (
-        <div className="ad-modal-bg" onClick={() => setFolderOpen(false)}>
-          <div className="ad-modal" onClick={(e) => e.stopPropagation()}>
-            <h3 className="ad-card-title">New folder in {cwd || "/"}/</h3>
-            <p className="ad-card-sub">Git needs a file inside — pick <code>.gitkeep</code> or a starter page.</p>
-            <div className="ad-field">
-              <label className="ad-label">Folder name (nested ok: tools/my-app)</label>
-              <input className="ad-input ad-mono" value={folderName} onChange={(e) => setFolderName(e.target.value)} placeholder="my-app" autoComplete="off" spellCheck={false} />
-            </div>
-            <div className="ad-form-grid">
-              <div>
-                <label className="ad-label">First file</label>
-                <input className="ad-input ad-mono" value={folderFile} onChange={(e) => setFolderFile(e.target.value)} />
-              </div>
-              <div>
-                <label className="ad-label">Template</label>
-                <select className="ad-select" value={folderTpl} onChange={(e) => setFolderTpl(e.target.value)}>
-                  {Object.entries(TEMPLATES).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
-                </select>
-              </div>
-            </div>
-            <div className="ad-row" style={{ justifyContent: "flex-end", marginTop: 16 }}>
-              <button className="ad-btn" onClick={() => setFolderOpen(false)}>Cancel</button>
-              <button
-                className="ad-btn ad-btn-primary"
-                disabled={saving}
-                onClick={async () => {
-                  const f = folderName.trim().replace(/^\/+|\/+$/g, "");
-                  if (!f) return onToast("err", "Enter folder name.");
-                  const starter = folderFile.trim() || ".gitkeep";
-                  const target = `${cwd ? cwd + "/" : ""}${f}/${starter}`;
-                  setSaving(true);
-                  try {
-                    await putRepoFile(cfg, target, starter === ".gitkeep" ? "" : TEMPLATES[folderTpl].code, `Create ${target}`);
-                    setFolderOpen(false);
-                    setFolderName("");
-                    onToast("ok", `Created ${target}.`);
-                    await loadFolder(`${cwd ? cwd + "/" : ""}${f}`);
-                    await loadTree();
-                    if (starter !== ".gitkeep") await openFile(target);
-                    onRepoChange();
-                  } catch (err) {
-                    onToast("err", err instanceof Error ? err.message : "Create failed.");
-                  } finally {
-                    setSaving(false);
-                  }
-                }}
-              >
-                {saving ? "Creating…" : "Create folder"}
-              </button>
-            </div>
+      {/* New Folder Modal */}
+      <LiquidModal open={newFolderOpen} onClose={() => setNewFolderOpen(false)} title="Create New Folder">
+        <div className="space-y-4">
+          <p className="text-xs text-zinc-400">
+            Creates inside <code className="text-zinc-200">{cwd || "/"}/</code>. Git stores folders when they contain a
+            file, so pick an initial file or <code className="text-zinc-200">.gitkeep</code>.
+          </p>
+          <div>
+            <label className="block text-xs text-zinc-400 mb-1.5">Folder Name (supports nested like tools/my-app)</label>
+            <input
+              className="lg-input font-mono"
+              value={folderName}
+              onChange={(e) => setFolderName(e.target.value)}
+              placeholder="my-app"
+            />
           </div>
-        </div>
-      )}
-
-      {fileOpen && (
-        <div className="ad-modal-bg" onClick={() => setFileOpen(false)}>
-          <div className="ad-modal" onClick={(e) => e.stopPropagation()}>
-            <h3 className="ad-card-title">New file in {cwd || "/"}/</h3>
-            <div className="ad-field">
-              <label className="ad-label">Filename (subpath ok: widget/app.js)</label>
-              <input className="ad-input ad-mono" value={fileName} onChange={(e) => setFileName(e.target.value)} placeholder="index.html" autoComplete="off" spellCheck={false} />
+          <div className="grid sm:grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs text-zinc-400 mb-1.5">Initial File Name</label>
+              <input
+                className="lg-input font-mono"
+                value={folderStarterFile}
+                onChange={(e) => setFolderStarterFile(e.target.value)}
+                placeholder="index.html or .gitkeep"
+              />
             </div>
-            <div className="ad-field">
-              <label className="ad-label">Template</label>
+            <div>
+              <label className="block text-xs text-zinc-400 mb-1.5">Starter Template</label>
               <select
-                className="ad-select"
-                value={fileTpl}
-                onChange={(e) => {
-                  setFileTpl(e.target.value);
-                  if (!fileName) setFileName(TEMPLATES[e.target.value].ext);
-                }}
+                className="lg-input"
+                value={folderTemplate}
+                onChange={(e) => setFolderTemplate(e.target.value as keyof typeof TEMPLATES)}
               >
-                {Object.entries(TEMPLATES).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
+                {Object.entries(TEMPLATES).map(([k, v]) => (
+                  <option key={k} value={k}>
+                    {v.label}
+                  </option>
+                ))}
               </select>
             </div>
-            <div className="ad-row" style={{ justifyContent: "flex-end", marginTop: 16 }}>
-              <button className="ad-btn" onClick={() => setFileOpen(false)}>Cancel</button>
-              <button
-                className="ad-btn ad-btn-primary"
-                disabled={saving}
-                onClick={async () => {
-                  const n = fileName.trim().replace(/^\/+/, "");
-                  if (!n) return onToast("err", "Enter filename.");
-                  const target = `${cwd ? cwd + "/" : ""}${n}`;
-                  setSaving(true);
-                  try {
-                    await putRepoFile(cfg, target, TEMPLATES[fileTpl].code, `Create ${target}`);
-                    setFileOpen(false);
-                    setFileName("");
-                    onToast("ok", `Created ${target}.`);
-                    await loadFolder(cwd);
-                    await loadTree();
-                    await openFile(target);
-                    onRepoChange();
-                  } catch (err) {
-                    onToast("err", err instanceof Error ? err.message : "Create failed.");
-                  } finally {
-                    setSaving(false);
-                  }
-                }}
-              >
-                {saving ? "Creating…" : "Create file"}
-              </button>
-            </div>
+          </div>
+          <div className="flex justify-end gap-2 pt-2">
+            <LiquidButton onClick={() => setNewFolderOpen(false)}>Cancel</LiquidButton>
+            <LiquidButton variant="primary" onClick={handleCreateFolder} disabled={savingFile}>
+              <Icon name="folderPlus" className="w-4 h-4" />
+              {savingFile ? "Creating..." : "Create Folder & Open"}
+            </LiquidButton>
           </div>
         </div>
-      )}
+      </LiquidModal>
 
-      {moveOpen && (
-        <div className="ad-modal-bg" onClick={() => setMoveOpen(false)}>
-          <div className="ad-modal" onClick={(e) => e.stopPropagation()}>
-            <h3 className="ad-card-title">Move / rename</h3>
-            <p className="ad-card-sub ad-mono">{activePath}</p>
-            <div className="ad-field">
-              <label className="ad-label">New full path</label>
-              <input className="ad-input ad-mono" value={moveTo} onChange={(e) => setMoveTo(e.target.value)} autoComplete="off" spellCheck={false} />
-            </div>
-            <div className="ad-row" style={{ justifyContent: "flex-end", marginTop: 16 }}>
-              <button className="ad-btn" onClick={() => setMoveOpen(false)}>Cancel</button>
-              <button
-                className="ad-btn ad-btn-primary"
-                disabled={saving}
-                onClick={async () => {
-                  const next = moveTo.trim().replace(/^\/+/, "");
-                  if (!next) return;
-                  setSaving(true);
-                  try {
-                    await moveRepoFile(cfg, activePath, next);
-                    setMoveOpen(false);
-                    onToast("ok", `Moved to ${next}.`);
-                    await loadFolder(cwd);
-                    await loadTree();
-                    await openFile(next);
-                    onRepoChange();
-                  } catch (err) {
-                    onToast("err", err instanceof Error ? err.message : "Move failed.");
-                  } finally {
-                    setSaving(false);
-                  }
-                }}
-              >
-                Move
-              </button>
-            </div>
+      {/* New File Modal */}
+      <LiquidModal open={newFileOpen} onClose={() => setNewFileOpen(false)} title="Create New File / Code">
+        <div className="space-y-4">
+          <p className="text-xs text-zinc-400">
+            Creates inside <code className="text-zinc-200">{cwd || "/"}/</code>
+          </p>
+          <div>
+            <label className="block text-xs text-zinc-400 mb-1.5">File Name (or subpath like widget/app.js)</label>
+            <input
+              className="lg-input font-mono"
+              value={newFileName}
+              onChange={(e) => setNewFileName(e.target.value)}
+              placeholder="index.html"
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-zinc-400 mb-1.5">Code Template</label>
+            <select
+              className="lg-input"
+              value={newFileTemplate}
+              onChange={(e) => {
+                const key = e.target.value as keyof typeof TEMPLATES;
+                setNewFileTemplate(key);
+                if (!newFileName) setNewFileName(TEMPLATES[key].ext);
+              }}
+            >
+              {Object.entries(TEMPLATES).map(([k, v]) => (
+                <option key={k} value={k}>
+                  {v.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex justify-end gap-2 pt-2">
+            <LiquidButton onClick={() => setNewFileOpen(false)}>Cancel</LiquidButton>
+            <LiquidButton variant="primary" onClick={handleCreateFile} disabled={savingFile}>
+              <Icon name="plus" className="w-4 h-4" />
+              {savingFile ? "Creating..." : "Create File"}
+            </LiquidButton>
           </div>
         </div>
-      )}
+      </LiquidModal>
+
+      {/* Move / Rename Modal */}
+      <LiquidModal open={moveOpen} onClose={() => setMoveOpen(false)} title="Move / Rename File">
+        <div className="space-y-4">
+          <p className="text-xs text-zinc-400">
+            Current path: <code className="text-zinc-200">{activePath}</code>
+          </p>
+          <div>
+            <label className="block text-xs text-zinc-400 mb-1.5">New Full Path</label>
+            <input
+              className="lg-input font-mono"
+              value={moveTargetPath}
+              onChange={(e) => setMoveTargetPath(e.target.value)}
+            />
+          </div>
+          <div className="flex justify-end gap-2">
+            <LiquidButton onClick={() => setMoveOpen(false)}>Cancel</LiquidButton>
+            <LiquidButton variant="primary" onClick={handleMoveFile} disabled={savingFile}>
+              {savingFile ? "Moving..." : "Move File"}
+            </LiquidButton>
+          </div>
+        </div>
+      </LiquidModal>
     </div>
   );
 }
