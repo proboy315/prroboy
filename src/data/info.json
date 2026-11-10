@@ -355,16 +355,7 @@
   "analytics": {
     "vercelAnalytics": true,
     "gaMeasurementId": "",
-    "clarityProjectId": "",
-    "tracking": {
-      "enabled": false,
-      "targetOwner": "proboy315",
-      "targetRepo": "prroboy",
-      "branch": "main",
-      "dataDir": "analytics/raw",
-      "writerToken": "",
-      "sampleRate": 1
-    }
+    "clarityProjectId": ""
   },
   "seo": {
     "title": "Shahan Ali | Full-Stack Developer & Bot Architect",
