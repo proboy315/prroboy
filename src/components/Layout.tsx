@@ -338,7 +338,7 @@ export function Socials() {
             aria-label={s.label}
             target={s.url.startsWith("http") ? "_blank" : undefined}
             rel="noopener noreferrer me"
-            className="w-11 h-11 grid place-items-center rounded-lg bg-white/[.04] border border-white/10 text-zinc-200 hover:bg-red-600 hover:border-red-600 hover:text-white hover:-translate-y-0.5 transition"
+            className="w-11 h-11 grid place-items-center rounded-xl bg-white/[.06] border border-white/15 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] text-zinc-200 hover:bg-red-600 hover:border-red-600 hover:text-white hover:-translate-y-0.5 transition"
           >
             <Icon name={s.id} className="w-5 h-5" />
           </a>
@@ -350,7 +350,7 @@ export function Socials() {
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-white/10 mt-24 pb-[env(safe-area-inset-bottom)]">
+    <footer className="relative border-t border-white/15 mt-24 pb-[env(safe-area-inset-bottom)] bg-white/[0.02] backdrop-blur-xl">
       <div className="page-container py-14 grid gap-10 md:grid-cols-[1.35fr_1fr_1.15fr_1fr]">
         <div>
           <Logo />
@@ -409,8 +409,15 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <div className="border-t border-white/5 py-6 text-center text-xs text-zinc-500 px-5">
-        © {new Date().getFullYear()} {info.name} · {info.brand}. Designed and engineered by {info.name} ({info.handle}).
+      <div className="border-t border-white/5 py-6 text-center text-xs text-zinc-500 px-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+        <span>© {new Date().getFullYear()} {info.name} · {info.brand}. Designed and engineered by {info.name} ({info.handle}).</span>
+        <a
+          href="/admin"
+          onClick={onLink}
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/10 text-zinc-400 hover:text-white hover:border-red-500/40 transition"
+        >
+          <Icon name="lock" className="w-3 h-3" /> Admin Panel
+        </a>
       </div>
     </footer>
   );
