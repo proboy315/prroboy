@@ -19,8 +19,8 @@ import Intro, { shouldShowIntro } from "./components/Intro";
 import { Header, Sidebar, Drawer, Footer, BackToTop, useActiveSection } from "./components/Layout";
 import { info } from "./lib/data";
 import { replayBrokenImageErrors } from "./lib/imageFallback";
+import { trackPageView } from "./lib/analytics";
 import { usePath } from "./lib/router";
-import { trackRouteChange } from "./lib/tracking";
 
 const HOME_SECTION_IDS = ["home", "about", "services", "projects", "demos", "certificates", "qa", "contact"];
 
@@ -117,10 +117,6 @@ export default function App({ initialPath }: { initialPath?: string }) {
     };
   }, [path, intro]);
 
-  useEffect(() => {
-    trackRouteChange(path);
-  }, [path]);
-
   const projectMatch = path.match(/^\/projects\/([a-z0-9-]+)$/);
   const serviceMatch = path.match(/^\/services\/([a-z0-9-]+)$/);
   const blogMatch = path.match(/^\/blog\/([a-z0-9-]+)$/);
@@ -167,6 +163,21 @@ export default function App({ initialPath }: { initialPath?: string }) {
     ) : (
       <NotFound path={path} />
     );
+
+  const isAdmin = path === "/admin";
+
+  useEffect(() => {
+    trackPageView(path);
+  }, [path]);
+
+  if (isAdmin) {
+    return (
+      <div className="min-h-screen bg-[#06080d] text-white overflow-x-clip relative">
+        <Admin />
+        <OptionalAnalytics />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#07070a] text-white overflow-x-clip relative">
