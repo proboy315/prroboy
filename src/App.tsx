@@ -13,6 +13,8 @@ import { BlogIndexPage, BlogArticlePage } from "./pages/Blog";
 import ContactPage from "./pages/Contact";
 import Demos from "./pages/Demos";
 import DemosDirectory from "./pages/DemosDirectory";
+import Admin from "./pages/Admin";
+import { LiquidAmbient } from "./components/LiquidGlass";
 import Intro, { shouldShowIntro } from "./components/Intro";
 import { Header, Sidebar, Drawer, Footer, BackToTop, useActiveSection } from "./components/Layout";
 import { info } from "./lib/data";
@@ -155,12 +157,15 @@ export default function App({ initialPath }: { initialPath?: string }) {
       <DemosDirectory initialTab="control-room" />
     ) : demoMatch ? (
       <Demos slug={demoMatch[1]} />
+    ) : path === "/admin" ? (
+      <Admin />
     ) : (
       <NotFound path={path} />
     );
 
   return (
     <div className="min-h-screen bg-[#07070a] text-white overflow-x-clip relative">
+      <LiquidAmbient />
       {intro && <Intro onDone={() => setIntro(false)} />}
       <div inert={menu || intro}>
         <a
