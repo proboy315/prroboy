@@ -3,6 +3,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/admin", "destination": "/admin/index" },
     { "source": "/blog", "destination": "/blog/index" },
     { "source": "/blog/:slug", "destination": "/blog/:slug/index" },
     { "source": "/proboy-md/docs", "destination": "/proboy-md/docs/index" },
