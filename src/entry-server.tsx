@@ -355,6 +355,14 @@ export function getPrerenderRoutes(): RouteMeta[] {
       noindex: true,
       jsonLd: [],
     },
+    {
+      path: "/admin",
+      title: `Admin Control Panel | ${info.brand}`,
+      description: "Private GitHub-backed admin panel for managing SEO, OG tags, projects, public folder code, and Liquid Glass theme.",
+      ogType: "website",
+      noindex: true,
+      jsonLd: [],
+    },
     ...demos.map((d) => ({
       path: `/demos/${d.slug}`,
       title: `${d.name} Demo | Shahan Ali (PROBOY)`,
