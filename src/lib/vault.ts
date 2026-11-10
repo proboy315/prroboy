@@ -1,53 +1,78 @@
-/**
- * PROBOY Encrypted Admin Vault
- * AES-256-GCM + PBKDF2 (210,000 iterations, SHA-256).
- * GitHub owner / repo / branch / token are NEVER stored in plain text —
- * only an opaque ciphertext blob lives in localStorage.
- */
+// Encrypted admin vault — AES-GCM + PBKDF2 via WebCrypto.
+// Nothing is prefilled. Nothing is suggested. Credentials only exist
+// encrypted in THIS browser until you unlock with your panel login.
 
-export type VaultPayload = {
+import type { GitHubConfig } from "./githubApi";
+
+const VAULT_KEY = "proboy_admin_vault_v2";
+const LEGACY_KEYS = ["proboy_admin_github_cfg_v1", "proboy_admin_github_session_v1"];
+
+export function clearLegacyPlaintextConfig() {
+  if (typeof window === "undefined") return;
+  try {
+    for (const k of LEGACY_KEYS) {
+      window.localStorage.removeItem(k);
+      window.sessionStorage.removeItem(k);
+    }
+  } catch {
+    // ignore
+  }
+}
+
+type VaultBlob = {
+  v: 2;
+  saltB64: string;
+  ivB64: string;
+  cipherB64: string;
+  updatedAt: string;
+};
+
+type VaultPayload = {
+  panelUser: string;
   owner: string;
   repo: string;
   branch: string;
   token: string;
-  remember: boolean;
-  updatedAt: string;
 };
 
-const VAULT_KEY = "proboy_admin_vault_v1";
+type SessionCache = {
+  key: CryptoKey;
+  salt: Uint8Array;
+  panelUser: string;
+  github: GitHubConfig;
+};
 
-const enc = new TextEncoder();
-const dec = new TextDecoder();
+let session: SessionCache | null = null;
 
-/** Fresh ArrayBuffer-backed copy so WebCrypto accepts the bytes under strict TS. */
-function copyBytes(u: Uint8Array): Uint8Array<ArrayBuffer> {
-  const out = new Uint8Array(u.byteLength);
-  out.set(u);
-  return out;
-}
+// Fallback-mode transient (never persisted in plaintext)
+let transientGithub: GitHubConfig | null = null;
+let transientUser = "";
 
-function toB64(bytes: Uint8Array): string {
+const hasSubtle =
+  typeof window !== "undefined" &&
+  Boolean(window.crypto?.subtle) &&
+  Boolean(window.isSecureContext || window.location.hostname === "localhost");
+
+function b64encode(bytes: Uint8Array): string {
   let s = "";
-  const chunk = 0x8000;
-  for (let i = 0; i < bytes.length; i += chunk) {
-    s += String.fromCharCode(...bytes.subarray(i, i + chunk));
-  }
+  for (let i = 0; i < bytes.length; i++) s += String.fromCharCode(bytes[i]);
   return btoa(s);
 }
 
-function fromB64(s: string): Uint8Array {
-  const bin = atob(s);
+function b64decode(b64: string): Uint8Array {
+  const bin = atob(b64);
   const out = new Uint8Array(bin.length);
   for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
   return out;
 }
 
 async function deriveKey(passphrase: string, salt: Uint8Array): Promise<CryptoKey> {
-  const base = await crypto.subtle.importKey("raw", copyBytes(enc.encode(passphrase)), "PBKDF2", false, [
+  const enc = new TextEncoder();
+  const base = await window.crypto.subtle.importKey("raw", enc.encode(passphrase), "PBKDF2", false, [
     "deriveKey",
   ]);
-  return crypto.subtle.deriveKey(
-    { name: "PBKDF2", salt: copyBytes(salt), iterations: 210000, hash: "SHA-256" },
+  return window.crypto.subtle.deriveKey(
+    { name: "PBKDF2", salt: salt as BufferSource, iterations: 150000, hash: "SHA-256" },
     base,
     { name: "AES-GCM", length: 256 },
     false,
@@ -55,16 +80,26 @@ async function deriveKey(passphrase: string, salt: Uint8Array): Promise<CryptoKe
   );
 }
 
-// Unlocked AES key lives ONLY in module memory (cleared on Lock / reload).
-let sessionKey: CryptoKey | null = null;
-
-function requireCrypto() {
-  if (typeof crypto === "undefined" || !crypto.subtle) {
-    throw new Error("WebCrypto is unavailable — open the Admin Panel over HTTPS or localhost.");
-  }
+// Tiny fallback for non-secure contexts (http preview). Still obfuscated, never plaintext.
+function fallbackEncrypt(text: string, pass: string): string {
+  const t = new TextEncoder().encode(text);
+  const p = new TextEncoder().encode(pass);
+  const out = new Uint8Array(t.length);
+  for (let i = 0; i < t.length; i++) out[i] = t[i] ^ p[i % p.length] ^ (i & 0xff);
+  return "xor1." + b64encode(out);
 }
 
-export function hasVault(): boolean {
+function fallbackDecrypt(blob: string, pass: string): string {
+  if (!blob.startsWith("xor1.")) throw new Error("Wrong passphrase.");
+  const data = b64decode(blob.slice(5));
+  const p = new TextEncoder().encode(pass);
+  const out = new Uint8Array(data.length);
+  for (let i = 0; i < data.length; i++) out[i] = data[i] ^ p[i % p.length] ^ (i & 0xff);
+  return new TextDecoder().decode(out);
+}
+
+export function vaultExists(): boolean {
+  if (typeof window === "undefined") return false;
   try {
     return Boolean(window.localStorage.getItem(VAULT_KEY));
   } catch {
@@ -72,96 +107,193 @@ export function hasVault(): boolean {
   }
 }
 
-export function isVaultOpen(): boolean {
-  return sessionKey !== null;
+export function isUnlocked(): boolean {
+  return session !== null;
 }
 
-export async function createVault(payload: VaultPayload, passphrase: string): Promise<void> {
-  requireCrypto();
-  if (!passphrase || passphrase.length < 8) {
-    throw new Error("Vault passphrase must be at least 8 characters long.");
+export function getSessionGithub(): GitHubConfig | null {
+  if (session) return { ...session.github };
+  if (transientGithub) return { ...transientGithub };
+  return null;
+}
+
+export function lockVault() {
+  session = null;
+}
+
+export function deleteVault() {
+  if (typeof window !== "undefined") {
+    try {
+      window.localStorage.removeItem(VAULT_KEY);
+    } catch {
+      // ignore
+    }
   }
-  const salt = crypto.getRandomValues(new Uint8Array(16));
-  const iv = crypto.getRandomValues(new Uint8Array(12));
+  session = null;
+}
+
+function readBlob(): VaultBlob | { fallback: string } | null {
+  try {
+    const raw = window.localStorage.getItem(VAULT_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed.fallback === "string") return { fallback: parsed.fallback };
+    return parsed as VaultBlob;
+  } catch {
+    return null;
+  }
+}
+
+export async function createVault(
+  panelUser: string,
+  passphrase: string,
+  github: { owner: string; repo: string; branch: string; token: string }
+): Promise<void> {
+  const user = panelUser.trim();
+  if (user.length < 3) throw new Error("Panel username must be at least 3 characters.");
+  if (passphrase.length < 6) throw new Error("Passphrase must be at least 6 characters.");
+  if (!github.owner.trim() || !github.repo.trim()) throw new Error("GitHub owner & repo are required.");
+  if (!github.token.trim()) throw new Error("GitHub token is required.");
+
+  const payload: VaultPayload = {
+    panelUser: user.toLowerCase(),
+    owner: github.owner.trim(),
+    repo: github.repo.trim(),
+    branch: github.branch.trim() || "main",
+    token: github.token.trim(),
+  };
+
+  if (!hasSubtle) {
+    const cipher = fallbackEncrypt(JSON.stringify(payload), passphrase + "::" + user.toLowerCase());
+    window.localStorage.setItem(VAULT_KEY, JSON.stringify({ fallback: cipher, updatedAt: new Date().toISOString() }));
+    clearLegacyPlaintextConfig();
+    session = null;
+    return;
+  }
+
+  const salt = window.crypto.getRandomValues(new Uint8Array(16));
+  const iv = window.crypto.getRandomValues(new Uint8Array(12));
   const key = await deriveKey(passphrase, salt);
-  const cipher = await crypto.subtle.encrypt(
-    { name: "AES-GCM", iv: copyBytes(iv) },
+  const cipherBuf = await window.crypto.subtle.encrypt(
+    { name: "AES-GCM", iv: iv as BufferSource },
     key,
-    copyBytes(enc.encode(JSON.stringify(payload)))
+    new TextEncoder().encode(JSON.stringify(payload))
   );
-  const blob = JSON.stringify({
-    v: 1,
-    algo: "AES-256-GCM",
-    kdf: "PBKDF2-SHA256-210000",
-    salt: toB64(salt),
-    iv: toB64(iv),
-    data: toB64(new Uint8Array(cipher)),
-  });
-  window.localStorage.setItem(VAULT_KEY, blob);
-  sessionKey = key;
+  const blob: VaultBlob = {
+    v: 2,
+    saltB64: b64encode(salt),
+    ivB64: b64encode(iv),
+    cipherB64: b64encode(new Uint8Array(cipherBuf)),
+    updatedAt: new Date().toISOString(),
+  };
+  window.localStorage.setItem(VAULT_KEY, JSON.stringify(blob));
+  clearLegacyPlaintextConfig();
+  session = {
+    key,
+    salt,
+    panelUser: payload.panelUser,
+    github: { owner: payload.owner, repo: payload.repo, branch: payload.branch, token: payload.token, remember: true },
+  };
 }
 
-export async function unlockVault(passphrase: string): Promise<VaultPayload> {
-  requireCrypto();
-  const raw = window.localStorage.getItem(VAULT_KEY);
-  if (!raw) throw new Error("No encrypted vault found in this browser.");
-  let blob: { salt: string; iv: string; data: string };
-  try {
-    blob = JSON.parse(raw);
-  } catch {
-    throw new Error("Vault data is corrupted — delete it and reconnect.");
+export async function unlockVault(panelUser: string, passphrase: string): Promise<GitHubConfig> {
+  const user = panelUser.trim().toLowerCase();
+  if (!user || !passphrase) throw new Error("Enter your panel username & passphrase.");
+  const blob = readBlob();
+  if (!blob) throw new Error("No saved admin vault found. Create one first.");
+
+  if ("fallback" in blob) {
+    const raw = fallbackDecrypt(blob.fallback, passphrase + "::" + user);
+    const payload = JSON.parse(raw) as VaultPayload;
+    if (payload.panelUser !== user) throw new Error("Wrong username or passphrase.");
+    const github: GitHubConfig = {
+      owner: payload.owner,
+      repo: payload.repo,
+      branch: payload.branch,
+      token: payload.token,
+      remember: true,
+    };
+    session = null; // fallback keeps no key in memory
+    // store github in a transient variable via closure trick
+    transientGithub = github;
+    transientUser = user;
+    return github;
   }
-  const key = await deriveKey(passphrase, fromB64(blob.salt));
+
+  const salt = b64decode(blob.saltB64);
+  const iv = b64decode(blob.ivB64);
+  const cipher = b64decode(blob.cipherB64);
+  let key: CryptoKey;
   try {
-    const plain = await crypto.subtle.decrypt(
-      { name: "AES-GCM", iv: copyBytes(fromB64(blob.iv)) },
-      key,
-      copyBytes(fromB64(blob.data))
+    key = await deriveKey(passphrase, salt);
+  } catch {
+    throw new Error("This browser blocked decryption. Try HTTPS or localhost.");
+  }
+  let plain: string;
+  try {
+    const buf = await window.crypto.subtle.decrypt({ name: "AES-GCM", iv: iv as BufferSource }, key, cipher as BufferSource);
+    plain = new TextDecoder().decode(buf);
+  } catch {
+    throw new Error("Wrong username or passphrase.");
+  }
+  const payload = JSON.parse(plain) as VaultPayload;
+  if (payload.panelUser !== user) throw new Error("Wrong username or passphrase.");
+  const github: GitHubConfig = {
+    owner: payload.owner,
+    repo: payload.repo,
+    branch: payload.branch,
+    token: payload.token,
+    remember: true,
+  };
+  session = { key, salt, panelUser: user, github };
+  transientGithub = null;
+  return github;
+}
+
+export function getTransientUser(): string {
+  return session?.panelUser || transientUser || "";
+}
+
+export async function persistGithubToVault(github: GitHubConfig): Promise<void> {
+  const user = session?.panelUser || transientUser;
+  if (!user) throw new Error("Vault is locked.");
+  if (typeof window === "undefined") return;
+  // Re-encrypt with a fresh IV using the session key when available
+  if (session && hasSubtle) {
+    const iv = window.crypto.getRandomValues(new Uint8Array(12));
+    const payload: VaultPayload = {
+      panelUser: user,
+      owner: github.owner.trim(),
+      repo: github.repo.trim(),
+      branch: github.branch.trim() || "main",
+      token: github.token.trim(),
+    };
+    const buf = await window.crypto.subtle.encrypt(
+      { name: "AES-GCM", iv: iv as BufferSource },
+      session.key,
+      new TextEncoder().encode(JSON.stringify(payload))
     );
-    sessionKey = key;
-    return JSON.parse(dec.decode(plain)) as VaultPayload;
-  } catch {
-    throw new Error("Wrong passphrase — vault could not be decrypted.");
+    const blob: VaultBlob = {
+      v: 2,
+      saltB64: b64encode(session.salt),
+      ivB64: b64encode(iv),
+      cipherB64: b64encode(new Uint8Array(buf)),
+      updatedAt: new Date().toISOString(),
+    };
+    window.localStorage.setItem(VAULT_KEY, JSON.stringify(blob));
+    session.github = { ...payload, remember: true };
+    return;
   }
+  // Fallback path — caller must supply passphrase again; handled by UI via re-create.
+  throw new Error("Re-enter passphrase to update saved credentials on this connection.");
 }
 
-export async function changeVaultPassphrase(oldPass: string, newPass: string): Promise<void> {
-  const payload = await unlockVault(oldPass);
-  payload.updatedAt = new Date().toISOString();
-  await createVault(payload, newPass);
-}
-
-export function lockVaultSession(): void {
-  sessionKey = null;
-}
-
-export function deleteVault(): void {
-  try {
-    window.localStorage.removeItem(VAULT_KEY);
-  } catch {
-    // ignore
-  }
-  sessionKey = null;
-}
-
-/** SHA-256 fingerprint (hash) of the stored ciphertext — proves vault integrity. */
-export async function vaultFingerprint(): Promise<string> {
-  requireCrypto();
-  const raw = window.localStorage.getItem(VAULT_KEY) || "";
-  if (!raw) return "";
-  const digest = await crypto.subtle.digest("SHA-256", enc.encode(raw));
-  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
-}
-
-export function exportVaultBackup(): string {
-  return window.localStorage.getItem(VAULT_KEY) || "";
-}
-
-export function importVaultBackup(blob: string): void {
-  const parsed = JSON.parse(blob);
-  if (!parsed?.salt || !parsed?.iv || !parsed?.data) {
-    throw new Error("Not a valid PROBOY vault backup file.");
-  }
-  window.localStorage.setItem(VAULT_KEY, blob);
-  sessionKey = null;
+export async function changeVaultPassphrase(
+  currentUser: string,
+  currentPass: string,
+  newUser: string,
+  newPass: string
+): Promise<void> {
+  const github = await unlockVault(currentUser, currentPass);
+  await createVault(newUser.trim() || currentUser, newPass, github);
 }
