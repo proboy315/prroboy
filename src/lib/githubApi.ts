@@ -52,9 +52,11 @@ const STORAGE_KEY = "proboy_admin_github_cfg_v1";
 const SESSION_KEY = "proboy_admin_github_session_v1";
 
 export function loadGitHubConfig(): GitHubConfig {
+  // Never prefill real owner/repo — the vault unlock supplies them.
+  // Empty defaults prevent browsers from suggesting actual values.
   const empty: GitHubConfig = {
-    owner: "proboy315",
-    repo: "prroboy",
+    owner: "",
+    repo: "",
     branch: "main",
     token: "",
     remember: true,
