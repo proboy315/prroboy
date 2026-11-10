@@ -52,11 +52,9 @@ const STORAGE_KEY = "proboy_admin_github_cfg_v1";
 const SESSION_KEY = "proboy_admin_github_session_v1";
 
 export function loadGitHubConfig(): GitHubConfig {
-  // Never prefill real owner/repo — the vault unlock supplies them.
-  // Empty defaults prevent browsers from suggesting actual values.
   const empty: GitHubConfig = {
-    owner: "",
-    repo: "",
+    owner: "proboy315",
+    repo: "prroboy",
     branch: "main",
     token: "",
     remember: true,
@@ -79,14 +77,17 @@ export function loadGitHubConfig(): GitHubConfig {
 
 export function saveGitHubConfig(cfg: GitHubConfig) {
   if (typeof window === "undefined") return;
+  // SECURITY: the Personal Access Token is NEVER written here in plain text.
+  // Only owner/repo/branch are remembered; the token lives in memory and in
+  // the AES-256 encrypted vault (src/lib/vault.ts).
+  const safe = { owner: cfg.owner, repo: cfg.repo, branch: cfg.branch, token: "", remember: cfg.remember };
   try {
     if (cfg.remember) {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg));
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(safe));
       window.sessionStorage.removeItem(SESSION_KEY);
     } else {
-      window.sessionStorage.setItem(SESSION_KEY, JSON.stringify(cfg));
-      const withoutToken = { ...cfg, token: "" };
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(withoutToken));
+      window.sessionStorage.setItem(SESSION_KEY, JSON.stringify(safe));
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(safe));
     }
   } catch {
     // ignore storage errors
