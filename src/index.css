@@ -21,10 +21,3 @@ body{font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;backgroun
 
 /* single clear control in search fields */
 input[type="search"]::-webkit-search-cancel-button{filter:invert(1);opacity:.45;-webkit-appearance:none;appearance:none;width:14px;height:14px}
-
-/* premium global chrome: buttery scroll, glow focus, crimson selection */
-html{scrollbar-color:rgba(239,68,92,.5) transparent}
-::selection{background:rgba(239,29,62,.6);color:#fff;text-shadow:none}
-:focus-visible{outline:2px solid #f43f5e;outline-offset:3px;border-radius:8px;box-shadow:0 0 0 4px rgba(244,63,94,.18)}
-img{user-select:none}
-a,button{transition-timing-function:cubic-bezier(.22,1,.36,1)}
