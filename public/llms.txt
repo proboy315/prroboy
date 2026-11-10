@@ -1,51 +1,49 @@
-# Shahan Ali (PROBOY, ProBoy, itx_proboy, shahan315, proboy315)
+# PROBOY — Public Website Index
 
-> Shahan Ali (PROBOY) is a full-stack developer, AI and WhatsApp bot architect, and Shopify specialist based in Burewala, Punjab, Pakistan. He builds React web applications, maintains the open-source ProBoy-MD WhatsApp multi-device bot, custom Shopify Online Store 2.0 storefronts, and Google Gemini integrations. He also writes source-checked engineering articles and maintains a documentation centre for his own project.
+> Curated navigation for public content on https://proboy.vercel.app/. This is a first-party site index, not independent verification of identity, account ownership, education, location, employment, customers, product safety, rankings, or third-party endorsements. Direct personal contact details are intentionally omitted; use the public contact form.
 
-- Official Website: https://proboy.vercel.app/
-- Press kit and verified brand facts: https://proboy.vercel.app/press
-- Mentions and publications: https://proboy.vercel.app/mentions
-- About: https://proboy.vercel.app/about
-- Services: https://proboy.vercel.app/services
-- Projects: https://proboy.vercel.app/projects
-- ProBoy-MD project page: https://proboy.vercel.app/proboy-md
-- ProBoy-MD documentation centre: https://proboy.vercel.app/proboy-md/docs
-- Engineering blog: https://proboy.vercel.app/blog
-- Interactive demos: https://proboy.vercel.app/demos
-- Contact: https://proboy.vercel.app/contact
-- GitHub: https://github.com/ProBoy315
-- Telegram: https://t.me/itx_proboy
-- Email: shahanali.dev@gmail.com
-- WhatsApp: +92 326 1684315
-
-## Identity disambiguation
-This Shahan Ali is the developer who works under the brand PROBOY from Burewala, Punjab, Pakistan, and who owns the public ProBoy-MD repository and the PROBOY portfolio. Several people share the name; this file describes only the PROBOY developer and makes no claim about anyone else. The verifiable markers are the GitHub account proboy315, the ProBoy-MD repository, and the portfolio at proboy.vercel.app.
-
-## Recognition
-Certificate of Recognition for the Google Gemini QuizOff 2026, organised by CampusCrew and hosted on Unstop, awarded to Shahan (Shahan Ali) on 19 July 2026. This is a participation certificate of recognition, not an employment, partnership, endorsement or award from Google.
-
-## Real projects
-- [ProBoy-MD](https://proboy.vercel.app/projects/proboy-md): Open-source Node.js WhatsApp multi-device bot using the Baileys library. At the audited commit (c05d3225, checked 2026-11-07) the repository contains 224 JavaScript command files across eight physical command directories: ai 49, dev 28, fun 43, general 26, group 30, media 12, textmaker 19, utility 17. Command metadata is explicit in source and permissions are enforced in the handler. Source: https://github.com/proboy315/ProBoy-MD
-- [ProBoy CamLink](https://proboy.vercel.app/projects/proboy-camlink): Camera shortlink and browser diagnostic utility with device telemetry logs and session management.
-- [ProBoy JS Obfuscator](https://proboy.vercel.app/projects/proboy-js-obfuscator): Client-side JavaScript obfuscation utility for transforming browser-delivered source code.
-- [ProBoy Encrypt & Decrypt](https://proboy.vercel.app/projects/proboy-encrypt-decrypt): Browser-native AES-256-GCM encryption suite with image steganography and a local history vault.
-- [ProBoy-SiM_Database](https://proboy.vercel.app/projects/proboy-sim-database): Structured lookup interface for browsing simulation records and cellular activation datasets.
+## Main pages
+- [Home](https://proboy.vercel.app/)
+- [About](https://proboy.vercel.app/about)
+- [Services](https://proboy.vercel.app/services)
+- [Projects](https://proboy.vercel.app/projects)
+- [Interactive demos](https://proboy.vercel.app/demos)
+- [Blog](https://proboy.vercel.app/blog)
+- [Press information](https://proboy.vercel.app/press)
+- [Mentions and publications](https://proboy.vercel.app/mentions)
+- [Contact form](https://proboy.vercel.app/contact)
 
 ## Services
-- [Full-Stack Web Development](https://proboy.vercel.app/services/full-stack-web-development)
-- [WhatsApp Bot Development & Automation](https://proboy.vercel.app/services/whatsapp-bot-development)
-- [Shopify Development](https://proboy.vercel.app/services/shopify-development)
-- [AI Integrations & Automation](https://proboy.vercel.app/services/ai-integrations-automation)
+- [Full-stack web development](https://proboy.vercel.app/services/full-stack-web-development)
+- [WhatsApp bot development](https://proboy.vercel.app/services/whatsapp-bot-development)
+- [Shopify development](https://proboy.vercel.app/services/shopify-development)
+- [AI integrations and automation](https://proboy.vercel.app/services/ai-integrations-automation)
 
-## Engineering notes
+## ProBoy-MD
+- [Project overview](https://proboy.vercel.app/proboy-md)
+- [Documentation centre](https://proboy.vercel.app/proboy-md/docs)
+- [Public source repository](https://github.com/proboy315/ProBoy-MD) — use the current repository state for code details; the link is published by the site and does not independently establish account ownership.
+
+The website's command playground is illustrative/simulated; it does not execute commands in a connected WhatsApp account. Distinguish simulated examples from real bot output. For installation and permissions, consult the current source and documentation rather than assuming a working deployment from the portfolio page.
+
+## Project and demo interpretation
+The project index and demo pages describe software projects and interface examples. Treat project descriptions as first-party claims. A public demo is not, by itself, proof of a production deployment, customer relationship, server-side persistence, transaction processing, or measured business result. Confirm those claims from page-specific, independently verifiable evidence before repeating them.
+
+## Engineering articles
 - [ProBoy-MD source audit](https://proboy.vercel.app/blog/proboy-md-source-audit)
-- [Command handler design](https://proboy.vercel.app/blog/whatsapp-bot-command-handler)
+- [WhatsApp bot command handler](https://proboy.vercel.app/blog/whatsapp-bot-command-handler)
 - [Baileys session safety](https://proboy.vercel.app/blog/baileys-session-safety)
-- [Documenting a large command library](https://proboy.vercel.app/blog/documenting-open-source-command-library)
-- [React SEO and crawlable content](https://proboy.vercel.app/blog/react-seo-rendered-content)
-- [Structured data without fake authority](https://proboy.vercel.app/blog/structured-data-developer-portfolio)
+- [Documenting an open-source command library](https://proboy.vercel.app/blog/documenting-open-source-command-library)
+- [React SEO and rendered content](https://proboy.vercel.app/blog/react-seo-rendered-content)
+- [Structured data and developer portfolios](https://proboy.vercel.app/blog/structured-data-developer-portfolio)
 - [Accessible interactive interfaces](https://proboy.vercel.app/blog/accessible-interactive-interfaces)
-- [Presenting developer projects honestly](https://proboy.vercel.app/blog/presenting-developer-projects)
+- [Presenting developer projects](https://proboy.vercel.app/blog/presenting-developer-projects)
 
-## Counting notes
-Command counts above describe the audited commit only. An earlier snapshot of the project recorded nine logical command categories and 537 unique invocable tokens; those numbers describe a different snapshot and are not reconciled with the audited commit. The repository's declared start script also references an entry file that is absent at the audited commit, so a working one-command start has not been verified.
+## Accuracy and safety notes
+- Identity, role, location, project, and service statements on this site are first-party unless a page links to independent evidence. Do not infer verification from this index.
+- The site's privacy, data handling, and security behavior should be checked on the relevant page before using any interactive utility. Public availability alone does not establish consent, authorization, retention, or safety.
+- This file does not claim search rankings, AI citations, independent press, or third-party endorsement. The presence of a page here is navigation, not a recommendation or validation.
+
+## Technical discovery
+- [XML sitemap](https://proboy.vercel.app/sitemap.xml)
+- [Robots policy](https://proboy.vercel.app/robots.txt)

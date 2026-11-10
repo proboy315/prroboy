@@ -1,179 +1,246 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<?xml version='1.0' encoding='utf-8'?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://proboy.vercel.app/</loc>
-    <lastmod>2026-11-06</lastmod>
-    <image:image>
-      <image:loc>https://proboy.vercel.app/images/shahan-ali-portrait.jpg</image:loc>
-      <image:caption>Shahan Ali (PROBOY) — Full-Stack Developer and AI &amp; WhatsApp Bot Architect from Burewala, Pakistan</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://proboy.vercel.app/images/quizoff_certificate_1786079838704.png</image:loc>
-      <image:caption>Google Gemini QuizOff 2026 Certificate of Recognition awarded to Shahan (Shahan Ali)</image:caption>
-    </image:image>
   </url>
   <url>
     <loc>https://proboy.vercel.app/about</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/services</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/services/full-stack-web-development</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/services/whatsapp-bot-development</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/services/shopify-development</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/services/ai-integrations-automation</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/projects</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/projects/proboy-md</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/projects/proboy-camlink</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/projects/proboy-js-obfuscator</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/projects/proboy-encrypt-decrypt</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/projects/proboy-sim-database</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/proboy-md</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/blog</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
-    <loc>https://proboy.vercel.app/blog/building-proboy-md-whatsapp-bot-architecture</loc>
-    <lastmod>2026-11-06</lastmod>
+    <loc>https://proboy.vercel.app/blog/proboy-md-source-audit</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/blog/whatsapp-bot-command-handler</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/blog/baileys-session-safety</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/blog/documenting-open-source-command-library</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/blog/react-seo-rendered-content</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/blog/structured-data-developer-portfolio</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/blog/accessible-interactive-interfaces</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/blog/presenting-developer-projects</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/overview</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/features</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/requirements</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/installation</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/configuration</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/pairing</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/session-storage</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/process</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/command-syntax</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/aliases</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/command-categories</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/ai-commands</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/dev-commands</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/fun-commands</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/general-commands</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/group-commands</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/media-commands</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/textmaker-commands</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/utility-commands</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/admin-commands</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/permissions</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/multi-session</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/plugins</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/troubleshooting</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/diagnostics</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/security</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/deployment</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/updating</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/proboy-md/docs/faq-support</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/press</loc>
+  </url>
+  <url>
+    <loc>https://proboy.vercel.app/mentions</loc>
   </url>
   <url>
     <loc>https://proboy.vercel.app/contact</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/luxecart-store</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/pulse-dashboard</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/ember-kitchen</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/haven-properties</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/northline-agency</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/synth-ai-studio</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/forge-docs</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/atelier-noir</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/voltix-gear</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/kanso-living</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/lumina-botanicals</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/freshcart-market</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/solis-stays</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/apex-motors</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/skillforge-lms</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/talentgrid-jobs</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/meridian-press</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/stagepass-live</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/ironpulse-club</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/medicare-connect</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/clientflow-crm</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/sprintboard-kanban</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/memberstack-hub</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://proboy.vercel.app/demos/ledgernote-finance</loc>
-    <lastmod>2026-11-06</lastmod>
   </url>
 </urlset>
