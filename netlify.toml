@@ -1,0 +1,74 @@
+[build]
+  publish = "public" # Apne project ka build/publish folder yahan likhein (jaise dist, build, ya public)
+
+# Clean URLs aur Trailing Slash settings
+[build.processing]
+  skip_processing = false
+
+# Rewrites (Netlify redirects with status 200)
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index"
+  status = 200
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog/index"
+  status = 200
+
+[[redirects]]
+  from = "/blog/:slug"
+  to = "/blog/:slug/index"
+  status = 200
+
+[[redirects]]
+  from = "/proboy-md/docs"
+  to = "/proboy-md/docs/index"
+  status = 200
+
+[[redirects]]
+  from = "/proboy-md/docs/:slug"
+  to = "/proboy-md/docs/:slug/index"
+  status = 200
+
+# Permanent Redirects (301)
+[[redirects]]
+  from = "/projects/camlink"
+  to = "/projects/proboy-camlink"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/js-obfuscator"
+  to = "/projects/proboy-js-obfuscator"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/sim-database"
+  to = "/projects/proboy-sim-database"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/md-pairing"
+  to = "/proboy-md"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/showcase/luxecart"
+  to = "/demos/luxecart-store"
+  status = 301
+  force = true
+
+# Custom Headers
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/intro-animation/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
