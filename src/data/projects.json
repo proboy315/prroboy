@@ -30,36 +30,6 @@
     "year": "2026"
   },
   {
-    "slug": "proboy-camlink",
-    "title": "ProBoy CamLink",
-    "featured": false,
-    "category": "Full-Stack Development",
-    "summary": "A camera shortlink and browser diagnostic utility with device telemetry logs and capture session management.",
-    "description": [
-      "ProBoy CamLink generates browser-based diagnostic shortlinks for testing camera permissions and device capabilities.",
-      "It pairs a lightweight capture frontend with a control panel for inspecting diagnostic logs and session outputs."
-    ],
-    "features": [
-      "Dynamic shortlink generation for browser permission testing",
-      "Real-time device and browser diagnostic telemetry",
-      "Session control panel and capture review",
-      "Responsive web interface"
-    ],
-    "technologies": [
-      "JavaScript",
-      "HTML5 MediaDevices API",
-      "REST API",
-      "Control Panel"
-    ],
-    "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
-    "screenshots": [],
-    "repo": "",
-    "demo": "/camera/",
-    "docs": "",
-    "creator": "Shahan Ali",
-    "year": "2026"
-  },
-  {
     "slug": "proboy-js-obfuscator",
     "title": "ProBoy JS Obfuscator",
     "featured": false,
