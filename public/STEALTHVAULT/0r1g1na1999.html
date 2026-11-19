@@ -1,11 +1,2233 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Untitled</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STEALTHVAULT — Hide Files Inside PNG Images | AES-256-GCM Steganography by PROBOY</title>
+
+<meta name="description" content="STEALTHVAULT by PROBOY hides AES-256-GCM encrypted files inside PNG images using pixel-level steganography. Free, open-in-browser, 100% local processing — no uploads, no accounts, no tracking. Created by Shahan Ali.">
+<meta name="author" content="Shahan Ali">
+<meta name="keywords" content="hide files inside images, image steganography tool, free file encryption tool, hide ZIP inside PNG, AES-256-GCM encryption online, secure file hiding tool, browser-based file encryption, extract hidden files from images, online steganography tool">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://proboy.vercel.app/projects/stealthvault">
+<meta name="theme-color" content="#1b1b21">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PROBOY">
+<meta property="og:title" content="STEALTHVAULT — Hide Encrypted Files Inside Images">
+<meta property="og:description" content="Hide AES-256-GCM encrypted files inside PNG images with pixel-level steganography. Runs entirely in your browser. No uploads. No accounts.">
+<meta property="og:url" content="https://proboy.vercel.app/projects/stealthvault">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="STEALTHVAULT — Hide Encrypted Files Inside Images">
+<meta name="twitter:description" content="Browser-based file steganography + AES-256-GCM encryption by PROBOY. Files never leave your device.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://proboy.vercel.app/projects/stealthvault#app",
+      "name": "STEALTHVAULT",
+      "alternateName": "ProBoy Secret Vault",
+      "url": "https://proboy.vercel.app/projects/stealthvault",
+      "applicationCategory": "SecurityApplication",
+      "applicationSubCategory": "Steganography",
+      "operatingSystem": "Any modern web browser (Chrome, Firefox, Safari, Edge)",
+      "browserRequirements": "Requires JavaScript and the Web Crypto API (secure context)",
+      "description": "STEALTHVAULT is a browser-based security tool that hides AES-256-GCM encrypted files inside PNG images using pixel-level least-significant-bit steganography. All processing happens locally in the browser.",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "creator": { "@id": "https://proboy.vercel.app/#shahan" },
+      "publisher": { "@id": "https://proboy.vercel.app/#org" },
+      "featureList": [
+        "Hide one or more files inside a PNG cover image",
+        "AES-256-GCM authenticated encryption",
+        "PBKDF2-HMAC-SHA256 key derivation with 310,000 iterations",
+        "Pixel-level LSB steganography (visible image unchanged)",
+        "Standalone .svlt encrypted containers",
+        "Container verification and integrity checks",
+        "Cryptographically secure password generator",
+        "100% client-side processing"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://proboy.vercel.app/#shahan",
+      "name": "Shahan Ali",
+      "url": "https://proboy.vercel.app/",
+      "jobTitle": "Developer",
+      "worksFor": { "@id": "https://proboy.vercel.app/#org" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://proboy.vercel.app/#org",
+      "name": "PROBOY",
+      "url": "https://proboy.vercel.app/",
+      "founder": { "@id": "https://proboy.vercel.app/#shahan" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://proboy.vercel.app/" },
+        { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://proboy.vercel.app/#projects" },
+        { "@type": "ListItem", "position": 3, "name": "STEALTHVAULT", "item": "https://proboy.vercel.app/projects/stealthvault" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is STEALTHVAULT?",
+          "acceptedAnswer": { "@type": "Answer", "text": "STEALTHVAULT is a free browser-based security tool by PROBOY that encrypts files with AES-256-GCM and hides them inside ordinary PNG images using pixel-level steganography. The resulting image still opens normally, but only someone with the correct password can recover the hidden files." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is image steganography?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Image steganography is the practice of storing hidden data inside an image file. STEALTHVAULT uses LSB (least-significant-bit) steganography: it replaces the lowest bit of each colour channel in fully opaque pixels with one bit of encrypted data. The change is far too small for the human eye to detect, and PNG's lossless compression preserves the bits exactly." }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I hide a ZIP file inside a PNG?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Open the Hide tab, choose a PNG or JPEG cover image, add your ZIP file as a secret file, and enter a strong password. STEALTHVAULT packs the files, encrypts them with AES-256-GCM, and writes the ciphertext into the image's pixel data. You then download a new PNG that looks identical to the original but contains the encrypted ZIP." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I recover hidden files?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Open the Extract tab and select the STEALTHVAULT image (or a .svlt container). STEALTHVAULT reads the hidden payload, asks for your password, verifies the GCM authentication tag, and then lists the recovered files with their original names, types and sizes so you can save them individually or as a ZIP." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is STEALTHVAULT safe?",
+          "acceptedAnswer": { "@type": "Answer", "text": "STEALTHVAULT uses the browser's native Web Crypto API with AES-256-GCM authenticated encryption, PBKDF2-HMAC-SHA256 key derivation at 310,000 iterations, a fresh random 16-byte salt and 12-byte IV for every operation, and the container header is authenticated as additional data. Passwords are never stored and never leave your device." }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my files uploaded to a server?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. STEALTHVAULT has no backend. Every file is read, encrypted, embedded and decoded inside your browser tab using the File API, Canvas API and Web Crypto API. You can disconnect from the internet after the page loads and it will keep working." }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I forget my password?",
+          "acceptedAnswer": { "@type": "Answer", "text": "There is no recovery. STEALTHVAULT does not store your password and contains no backdoor or master key. Without the exact password the AES-256-GCM authentication tag cannot be verified and the payload stays permanently encrypted. Always keep an independent backup of your password." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#1b1b21;
+  --sd:#0a0a0d;
+  --sl:#28282f;
+  --txt:#e8e8ee;
+  --mut:#84848f;
+  --dim:#56565f;
+  --cy:#00d4ff;
+  --pu:#7e00ff;
+  --ok:#4ade80;
+  --bad:#ff5c5c;
+  --r:16px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;min-height:100%}
+body{
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  background:var(--bg);
+  color:var(--txt);
+  padding:24px 16px 60px;
+  display:flex;justify-content:center;
+  -webkit-font-smoothing:antialiased;
+}
+svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+svg.ic-lg{width:32px;height:32px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+.wrap{width:min(820px,100%);display:flex;flex-direction:column;gap:22px}
+
+.app{
+  width:100%;
+  background:var(--bg);
+  border-radius:22px;
+  padding:28px;
+  box-shadow:
+    18px 18px 40px var(--sd),
+    -18px -18px 40px var(--sl);
+  height:fit-content;
+}
+
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.brand-icon{
+  width:38px;height:38px;border-radius:12px;
+  background:linear-gradient(135deg,var(--cy),var(--pu));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:0 4px 14px rgba(0,212,255,0.25),inset 0 1px 0 rgba(255,255,255,0.25);
+}
+.brand-icon svg{width:20px;height:20px}
+h1{margin:0;font-size:22px;font-weight:700;letter-spacing:-0.3px}
+.sub{color:var(--mut);margin:6px 0 24px;font-size:13px;line-height:1.5}
+
+/* tabs */
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:6px;border-radius:14px;
+  background:var(--bg);box-shadow:inset 5px 5px 10px var(--sd),inset -5px -5px 10px var(--sl);
+  margin-bottom:16px}
+.tabs button{
+  border:0;background:transparent;color:var(--mut);padding:12px 6px;border-radius:10px;
+  font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:7px;transition:.2s;
+}
+.tabs button.active{
+  background:var(--bg);color:var(--txt);
+  box-shadow:4px 4px 8px var(--sd),-4px -4px 8px var(--sl);
+}
+.tabs button:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+
+/* panels */
+.panel{display:flex;flex-direction:column;gap:16px}
+.hidden{display:none!important}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font-size:12px;color:var(--mut);font-weight:500;letter-spacing:.2px;text-transform:uppercase}
+textarea,input[type=text],input[type=password],input[type=number]{
+  width:100%;background:var(--bg);color:var(--txt);border:0;outline:0;
+  padding:14px 16px;border-radius:12px;font-family:inherit;font-size:14px;line-height:1.5;
+  box-shadow:inset 5px 5px 10px var(--sd),inset -5px -5px 10px var(--sl);
+  transition:box-shadow .25s;
+}
+textarea{min-height:120px;resize:vertical}
+textarea:focus,input:focus{
+  box-shadow:inset 5px 5px 10px var(--sd),inset -5px -5px 10px var(--sl),
+    0 0 0 2px rgba(0,212,255,0.35);
+}
+textarea::placeholder,input::placeholder{color:var(--dim)}
+
+/* password field */
+.pw{position:relative}
+.pw input{padding-right:48px}
+.pw-toggle{
+  position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  background:transparent;border:0;color:var(--mut);cursor:pointer;
+  padding:9px;border-radius:9px;display:grid;place-items:center;font-size:16px;
+}
+.pw-toggle:hover{color:var(--txt)}
+.pw-toggle:focus-visible{outline:2px solid var(--cy);outline-offset:-2px}
+
+/* strength */
+.strength{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--dim);min-height:16px}
+.strength .bars{display:flex;gap:4px;flex:1}
+.strength .bars i{height:5px;border-radius:3px;background:rgba(255,255,255,.07);flex:1;transition:.25s}
+.strength.l1 .bars i:nth-child(-n+1){background:#ff5c5c}
+.strength.l2 .bars i:nth-child(-n+2){background:#ffa95c}
+.strength.l3 .bars i:nth-child(-n+3){background:#ffe45c}
+.strength.l4 .bars i:nth-child(-n+4){background:var(--ok)}
+.strength.l1 .lab{color:#ff9d9d}
+.strength.l2 .lab{color:#ffc38a}
+.strength.l3 .lab{color:#ffe98a}
+.strength.l4 .lab{color:#8affb6}
+
+/* file drop */
+.drop{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  padding:24px 18px;border-radius:14px;cursor:pointer;
+  background:var(--bg);color:var(--mut);text-align:center;font-size:13px;
+  box-shadow:inset 5px 5px 10px var(--sd),inset -5px -5px 10px var(--sl);
+  transition:.25s;
+}
+.drop:hover{color:var(--txt)}
+.drop:focus-within{box-shadow:inset 5px 5px 10px var(--sd),inset -5px -5px 10px var(--sl),0 0 0 2px rgba(0,212,255,.35)}
+.drop.has-file{color:var(--cy)}
+.drop input{display:none}
+.drop .fname{word-break:break-all;max-width:100%;font-size:12px;color:var(--txt)}
+.drop .fname.empty{color:var(--mut)}
+.drop .hint{font-size:11px;color:var(--dim)}
+
+/* capacity meter */
+.cap{display:flex;flex-direction:column;gap:7px}
+.cap-bar{height:8px;border-radius:6px;background:var(--bg);overflow:hidden;
+  box-shadow:inset 2px 2px 5px var(--sd),inset -2px -2px 5px var(--sl)}
+.cap-bar i{display:block;height:100%;width:0;border-radius:6px;
+  background:linear-gradient(90deg,var(--cy),var(--pu));transition:width .3s ease}
+.cap-bar.over i{background:linear-gradient(90deg,#ff5c5c,#ff9d5c)}
+.cap-txt{font-size:11px;color:var(--mut);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.cap-txt b{color:var(--txt);font-weight:600}
+
+/* progress */
+.progress{display:none;height:10px;border-radius:6px;background:var(--bg);overflow:hidden;
+  box-shadow:inset 3px 3px 6px var(--sd),inset -3px -3px 6px var(--sl)}
+.progress.show{display:block}
+.progress > i{display:block;height:100%;width:0;border-radius:6px;
+  background:linear-gradient(90deg,var(--cy),var(--pu));transition:width .2s ease}
+
+/* buttons */
+.btn{
+  border:0;padding:14px 20px;border-radius:12px;
+  background:var(--bg);color:var(--txt);
+  font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:5px 5px 12px var(--sd),-5px -5px 12px var(--sl);
+  transition:transform .15s,box-shadow .2s;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(1px);box-shadow:inset 4px 4px 8px var(--sd),inset -4px -4px 8px var(--sl)}
+.btn:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+.btn.primary{
+  background:linear-gradient(135deg,var(--cy),var(--pu));color:#fff;
+  box-shadow:5px 5px 14px var(--sd),-5px -5px 14px var(--sl),0 8px 24px rgba(0,212,255,0.2);
+}
+.btn.primary:hover{box-shadow:5px 5px 14px var(--sd),-5px -5px 14px var(--sl),0 10px 30px rgba(0,212,255,0.35)}
+.btn.sm{padding:9px 13px;font-size:12px}
+.btn.danger:hover{color:#ff8e8e}
+.btn[disabled]{opacity:.5;cursor:not-allowed;transform:none}
+.btn .spin{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.btn-row{display:flex;gap:10px;flex-wrap:wrap}
+.btn-row .btn{flex:1;min-width:110px}
+
+/* status / result */
+.status{
+  display:none;padding:12px 14px;border-radius:10px;font-size:13px;
+  background:var(--bg);color:var(--mut);line-height:1.55;
+  box-shadow:inset 3px 3px 8px var(--sd),inset -3px -3px 8px var(--sl);
+  border-left:3px solid var(--cy);
+}
+.status.err{border-left-color:var(--bad);color:#ffb8b8}
+.status.ok{border-left-color:var(--ok);color:#b8ffc9}
+.status.warn{border-left-color:#ffc850;color:#ffe0a3}
+
+.result{
+  display:none;padding:18px;border-radius:14px;background:var(--bg);
+  box-shadow:6px 6px 16px var(--sd),-6px -6px 16px var(--sl);
+}
+.result.show{display:block;animation:fadeIn .35s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.result-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.result-head h3{margin:0;font-size:13px;color:var(--cy);display:flex;align-items:center;gap:8px;font-weight:600;letter-spacing:.3px;text-transform:uppercase}
+.chip{display:inline-block;font-size:10px;padding:3px 9px;border-radius:6px;
+  background:rgba(0,212,255,0.12);color:var(--cy);font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+.chip.pu{background:rgba(126,0,255,0.15);color:#b98cff}
+.chip.gr{background:rgba(74,222,128,0.12);color:#7dffb0}
+
+img.preview{max-width:100%;max-height:340px;border-radius:12px;display:block;margin:0 auto 14px;
+  box-shadow:6px 6px 16px var(--sd),-6px -6px 16px var(--sl)}
+a.btn{text-decoration:none;color:#fff}
+a.btn.ghost{color:var(--txt)}
+
+/* file list */
+.filelist{display:flex;flex-direction:column;gap:9px}
+.fileitem{
+  display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;font-size:12px;
+  box-shadow:inset 3px 3px 8px var(--sd),inset -3px -3px 8px var(--sl);
+}
+.fileitem .nm{flex:1;word-break:break-all;color:var(--txt);min-width:0}
+.fileitem .sz{color:var(--dim);font-variant-numeric:tabular-nums;font-size:11px;flex-shrink:0}
+.fileitem .rm{border:0;background:transparent;color:var(--dim);cursor:pointer;padding:4px;border-radius:6px;display:grid;place-items:center}
+.fileitem .rm:hover{color:#ff8e8e}
+
+/* checklist */
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;line-height:1.5;color:var(--mut)}
+.check .dot{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:10px;font-weight:700}
+.check.pass .dot{background:rgba(74,222,128,.15);color:#7dffb0}
+.check.fail .dot{background:rgba(255,92,92,.15);color:#ff9d9d}
+.check.warn .dot{background:rgba(255,200,80,.13);color:#ffd479}
+.check b{color:var(--txt);font-weight:600}
+
+/* key generator */
+.kgen{display:flex;flex-direction:column;gap:16px}
+.kout{display:flex;gap:10px;align-items:center}
+.kout input{font-family:ui-monospace,'SF Mono',Menlo,monospace;letter-spacing:.5px}
+.slider-row{display:flex;align-items:center;gap:14px}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;flex:1;height:10px;border-radius:6px;background:var(--bg);outline:0;
+  box-shadow:inset 3px 3px 6px var(--sd),inset -3px -3px 6px var(--sl);
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:22px;height:22px;border-radius:50%;cursor:pointer;
+  background:linear-gradient(135deg,var(--cy),var(--pu));
+  box-shadow:0 2px 8px rgba(0,212,255,.4);
+}
+input[type=range]::-moz-range-thumb{
+  width:22px;height:22px;border:0;border-radius:50%;cursor:pointer;
+  background:linear-gradient(135deg,var(--cy),var(--pu));
+}
+.slider-val{font-variant-numeric:tabular-nums;font-size:14px;font-weight:700;color:var(--cy);min-width:34px;text-align:right}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{
+  display:flex;align-items:center;gap:9px;padding:11px 13px;border-radius:10px;cursor:pointer;
+  font-size:12.5px;color:var(--mut);
+  box-shadow:3px 3px 7px var(--sd),-3px -3px 7px var(--sl);
+  transition:.2s;
+}
+.opt:hover{color:var(--txt)}
+.opt input{width:16px;height:16px;accent-color:#00d4ff;cursor:pointer;margin:0}
+
+.note{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.04);
+  font-size:12px;color:var(--dim);line-height:1.7}
+.note b{color:var(--mut);font-weight:600}
+.note .row{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+.note svg{margin-top:2px;color:var(--cy);opacity:.8}
+
+/* history */
+.hist{margin-top:26px;padding-top:22px;border-top:1px solid rgba(255,255,255,0.04)}
+.hist-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:10px;flex-wrap:wrap}
+.hist-head h2{margin:0;font-size:15px;display:flex;align-items:center;gap:8px;font-weight:600}
+.cnt{background:rgba(0,212,255,0.12);color:var(--cy);font-size:11px;padding:2px 9px;border-radius:10px;font-weight:700;min-width:22px;text-align:center}
+.hist-actions{display:flex;gap:8px}
+.hist-list{display:flex;flex-direction:column;gap:12px}
+.hist-item{
+  background:var(--bg);padding:14px;border-radius:12px;
+  box-shadow:5px 5px 12px var(--sd),-5px -5px 12px var(--sl);
+  animation:fadeIn .3s ease;
+}
+.hist-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.hist-tag{font-size:10px;padding:3px 9px;border-radius:6px;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+.hist-time{font-size:11px;color:var(--dim);font-variant-numeric:tabular-nums}
+.hist-desc{font-size:12px;color:#c8c8d2;line-height:1.5;word-break:break-word}
+.hist-btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.hist-btns button{
+  padding:7px 11px;font-size:11px;border:0;border-radius:8px;cursor:pointer;
+  background:var(--bg);color:var(--mut);font-family:inherit;font-weight:500;
+  display:inline-flex;align-items:center;gap:6px;
+  box-shadow:3px 3px 6px var(--sd),-3px -3px 6px var(--sl);
+  transition:.15s;
+}
+.hist-btns button:hover{color:var(--txt);transform:translateY(-1px)}
+.hist-btns button.del:hover{color:#ff8e8e}
+.hist-empty{text-align:center;padding:28px 16px;color:var(--dim);font-size:13px;
+  border-radius:12px;box-shadow:inset 4px 4px 10px var(--sd),inset -4px -4px 10px var(--sl)}
+
+/* docs / faq */
+.doc h2{font-size:16px;margin:0 0 14px;display:flex;align-items:center;gap:9px;font-weight:600}
+.doc h3{font-size:14px;margin:20px 0 10px;color:var(--cy);font-weight:600}
+.doc p{font-size:13px;line-height:1.7;color:var(--mut);margin:0 0 12px}
+.doc ul,.doc ol{font-size:13px;line-height:1.75;color:var(--mut);margin:0 0 14px;padding-left:20px}
+.doc code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;
+  background:rgba(0,212,255,.08);color:#9be8ff;padding:2px 6px;border-radius:5px}
+pre.spec{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11.5px;line-height:1.6;
+  color:#b9c7d4;background:var(--bg);border-radius:12px;padding:16px;overflow-x:auto;
+  box-shadow:inset 4px 4px 10px var(--sd),inset -4px -4px 10px var(--sl);
+  margin:0 0 14px;
+}
+details{background:var(--bg);border-radius:12px;padding:0;
+  box-shadow:5px 5px 12px var(--sd),-5px -5px 12px var(--sl);margin-bottom:10px;overflow:hidden}
+details summary{
+  cursor:pointer;font-size:13.5px;font-weight:600;list-style:none;
+  padding:15px 16px;display:flex;justify-content:space-between;gap:12px;align-items:center;
+}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";color:var(--cy);font-weight:700;font-size:16px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--mut);font-size:13px;line-height:1.7;margin:0;padding:0 16px 16px}
+footer{text-align:center;font-size:12px;color:var(--dim);line-height:1.8;padding:4px 0 0}
+footer a{color:var(--mut);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.08)}
+footer a:hover{color:var(--cy)}
+
+/* toast */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120%);
+  background:#2a2a35;color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:500;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);z-index:999;pointer-events:none;
+  transition:transform .35s cubic-bezier(.2,.9,.3,1.2);
+  display:flex;align-items:center;gap:10px;max-width:calc(100vw - 32px);
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast svg{color:var(--cy)}
+
+@media(max-width:640px){
+  .app{padding:20px}
+  h1{font-size:19px}
+  .brand-icon{width:34px;height:34px}
+  .tabs{grid-template-columns:repeat(3,1fr)}
+  .tabs button{font-size:12px;padding:11px 4px;gap:6px}
+  .btn-row .btn{min-width:0}
+  .opts{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
 </head>
 <body>
-<h1>Hello</h1>
+
+<!-- ================= ICON SPRITE ================= -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-unlock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></symbol>
+  <symbol id="i-dice" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.2"/><circle cx="15.5" cy="15.5" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="15.5" cy="8.5" r="1.2"/><circle cx="8.5" cy="15.5" r="1.2"/></symbol>
+  <symbol id="i-archive" viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+</svg>
+
+<div class="wrap">
+
+<main class="app">
+  <div class="brand">
+    <div class="brand-icon"><svg><use href="#i-shield"/></svg></div>
+    <h1>STEALTHVAULT</h1>
+  </div>
+  <p class="sub">Hide Anything. Reveal Only With Your Key. — Encrypt files with AES-256-GCM and hide them inside images. Everything runs in your browser; nothing is uploaded.</p>
+
+  <div class="tabs" role="tablist" aria-label="STEALTHVAULT modules">
+    <button id="tab-hide" class="active" role="tab" aria-selected="true" aria-controls="pane-hide"><svg class="ic"><use href="#i-lock"/></svg>Hide</button>
+    <button id="tab-extract" role="tab" aria-selected="false" aria-controls="pane-extract"><svg class="ic"><use href="#i-unlock"/></svg>Extract</button>
+    <button id="tab-encrypt" role="tab" aria-selected="false" aria-controls="pane-encrypt"><svg class="ic"><use href="#i-file"/></svg>Encrypt</button>
+    <button id="tab-verify" role="tab" aria-selected="false" aria-controls="pane-verify"><svg class="ic"><use href="#i-shield-check"/></svg>Verify</button>
+    <button id="tab-keys" role="tab" aria-selected="false" aria-controls="pane-keys"><svg class="ic"><use href="#i-key"/></svg>Keys</button>
+  </div>
+
+  <!-- ==================== HIDE ==================== -->
+  <section id="pane-hide" class="panel" role="tabpanel" aria-labelledby="tab-hide">
+    <div class="field">
+      <label for="hideCoverInput">1 · Cover image</label>
+      <label class="drop" id="hideCoverDrop">
+        <input type="file" id="hideCoverInput" accept="image/png,image/jpeg">
+        <svg class="ic-lg"><use href="#i-image"/></svg>
+        <span class="fname empty" id="hideCoverName">Choose a PNG or JPEG cover image</span>
+        <span class="hint">JPEG covers are re-encoded as lossless PNG</span>
+      </label>
+      <div class="cap">
+        <div class="cap-bar" id="hideCapBar"><i></i></div>
+        <div class="cap-txt">
+          <span id="hideCapTxt">No cover selected</span>
+          <span id="hideCapUse"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="hideFilesInput">2 · Secret files</label>
+      <label class="drop" id="hideFilesDrop">
+        <input type="file" id="hideFilesInput" multiple>
+        <svg class="ic-lg"><use href="#i-upload"/></svg>
+        <span class="fname empty" id="hideFilesName">Add one or more files to hide</span>
+        <span class="hint">ZIP · PDF · DOCX · MP3 · MP4 · TXT · anything</span>
+      </label>
+      <div class="filelist" id="hideFilesList"></div>
+    </div>
+
+    <div class="field">
+      <label for="hidePass">3 · Password</label>
+      <div class="pw"><input type="password" id="hidePass" autocomplete="new-password" placeholder="Choose a strong password"></div>
+      <div class="strength" data-strength-for="hidePass">
+        <div class="bars"><i></i><i></i><i></i><i></i></div>
+        <span class="lab">—</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="hidePass2">Confirm password</label>
+      <div class="pw"><input type="password" id="hidePass2" autocomplete="new-password" placeholder="Repeat the same password"></div>
+    </div>
+
+    <button class="btn primary" id="hideBtn">
+      <svg class="ic"><use href="#i-lock"/></svg><span>Encrypt &amp; Hide in Image</span>
+    </button>
+    <div class="progress" id="hideProg"><i></i></div>
+    <div class="status" id="hideStatus" role="status" aria-live="polite"></div>
+
+    <div class="result" id="hideResult">
+      <div class="result-head">
+        <h3><svg class="ic"><use href="#i-image"/></svg>Protected Image</h3>
+        <span class="chip">AES-256-GCM + LSB</span>
+      </div>
+      <img id="hidePreview" class="preview" alt="Preview of the generated STEALTHVAULT protected image">
+      <div class="cap-txt" style="margin-bottom:12px">
+        <span id="hideOutInfo"></span>
+        <span id="hideOutSize"></span>
+      </div>
+      <a id="hideDownload" class="btn primary" download>
+        <svg class="ic"><use href="#i-download"/></svg>Download protected image
+      </a>
+    </div>
+  </section>
+
+  <!-- ==================== EXTRACT ==================== -->
+  <section id="pane-extract" class="panel hidden" role="tabpanel" aria-labelledby="tab-extract">
+    <div class="field">
+      <label for="extractInput">1 · Vault file</label>
+      <label class="drop" id="extractDrop">
+        <input type="file" id="extractInput" accept="image/png,image/jpeg,.svlt,application/octet-stream">
+        <svg class="ic-lg"><use href="#i-upload"/></svg>
+        <span class="fname empty" id="extractName">Select a protected image or .svlt container</span>
+        <span class="hint">STEALTHVAULT output only</span>
+      </label>
+    </div>
+
+    <div class="status" id="extractInfo" role="status" aria-live="polite"></div>
+
+    <div class="field">
+      <label for="extractPass">2 · Password</label>
+      <div class="pw"><input type="password" id="extractPass" autocomplete="off" placeholder="The password used to hide the files"></div>
+    </div>
+
+    <button class="btn primary" id="extractBtn">
+      <svg class="ic"><use href="#i-unlock"/></svg><span>Extract &amp; Decrypt</span>
+    </button>
+    <div class="progress" id="extractProg"><i></i></div>
+    <div class="status" id="extractStatus" role="status" aria-live="polite"></div>
+
+    <div class="result" id="extractResult">
+      <div class="result-head">
+        <h3><svg class="ic"><use href="#i-folder"/></svg>Recovered Files</h3>
+        <span class="chip gr" id="extractChip">0 files</span>
+      </div>
+      <div class="filelist" id="extractFiles"></div>
+      <div class="btn-row" style="margin-top:14px">
+        <button class="btn sm" id="extractZip"><svg class="ic"><use href="#i-archive"/></svg>Download all as ZIP</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ENCRYPT ==================== -->
+  <section id="pane-encrypt" class="panel hidden" role="tabpanel" aria-labelledby="tab-encrypt">
+    <div class="field">
+      <label for="encInput">1 · Files to encrypt</label>
+      <label class="drop" id="encDrop">
+        <input type="file" id="encInput" multiple>
+        <svg class="ic-lg"><use href="#i-file"/></svg>
+        <span class="fname empty" id="encName">Choose one or more files</span>
+        <span class="hint">Produces a standalone .svlt container (no cover image)</span>
+      </label>
+      <div class="filelist" id="encFilesList"></div>
+    </div>
+
+    <div class="field">
+      <label for="encPass">2 · Password</label>
+      <div class="pw"><input type="password" id="encPass" autocomplete="new-password" placeholder="Choose a strong password"></div>
+      <div class="strength" data-strength-for="encPass">
+        <div class="bars"><i></i><i></i><i></i><i></i></div>
+        <span class="lab">—</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="encPass2">Confirm password</label>
+      <div class="pw"><input type="password" id="encPass2" autocomplete="new-password" placeholder="Repeat the same password"></div>
+    </div>
+
+    <button class="btn primary" id="encBtn">
+      <svg class="ic"><use href="#i-lock"/></svg><span>Encrypt to .svlt</span>
+    </button>
+    <div class="progress" id="encProg"><i></i></div>
+    <div class="status" id="encStatus" role="status" aria-live="polite"></div>
+
+    <div class="result" id="encResult">
+      <div class="result-head">
+        <h3><svg class="ic"><use href="#i-archive"/></svg>Encrypted Container</h3>
+        <span class="chip">.svlt v1</span>
+      </div>
+      <div class="cap-txt" style="margin-bottom:14px">
+        <span id="encOutInfo"></span>
+        <span id="encOutSize"></span>
+      </div>
+      <a id="encDownload" class="btn primary" download>
+        <svg class="ic"><use href="#i-download"/></svg>Download .svlt
+      </a>
+    </div>
+  </section>
+
+  <!-- ==================== VERIFY ==================== -->
+  <section id="pane-verify" class="panel hidden" role="tabpanel" aria-labelledby="tab-verify">
+    <div class="field">
+      <label for="verifyInput">1 · Container or protected image</label>
+      <label class="drop" id="verifyDrop">
+        <input type="file" id="verifyInput" accept="image/png,image/jpeg,.svlt,application/octet-stream">
+        <svg class="ic-lg"><use href="#i-shield-check"/></svg>
+        <span class="fname empty" id="verifyName">Select a file to inspect</span>
+        <span class="hint">Structural and integrity verification</span>
+      </label>
+    </div>
+
+    <div class="field">
+      <label for="verifyPass">2 · Password <span style="text-transform:none;color:var(--dim)">(optional — needed to verify authenticity)</span></label>
+      <div class="pw"><input type="password" id="verifyPass" autocomplete="off" placeholder="Leave empty for structural check only"></div>
+    </div>
+
+    <button class="btn primary" id="verifyBtn">
+      <svg class="ic"><use href="#i-shield-check"/></svg><span>Verify File</span>
+    </button>
+    <div class="status" id="verifyStatus" role="status" aria-live="polite"></div>
+
+    <div class="result" id="verifyResult">
+      <div class="result-head">
+        <h3><svg class="ic"><use href="#i-shield-check"/></svg>Verification Report</h3>
+        <span class="chip" id="verifyChip">—</span>
+      </div>
+      <div class="checklist" id="verifyList"></div>
+    </div>
+  </section>
+
+  <!-- ==================== KEYS ==================== -->
+  <section id="pane-keys" class="panel hidden" role="tabpanel" aria-labelledby="tab-keys">
+    <div class="kgen">
+      <div class="field">
+        <label for="keyLen">Password length</label>
+        <div class="slider-row">
+          <input type="range" id="keyLen" min="8" max="64" value="24" step="1">
+          <span class="slider-val" id="keyLenVal">24</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Character sets</label>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" id="keyLower" checked> lowercase (a–z)</label>
+          <label class="opt"><input type="checkbox" id="keyUpper" checked> UPPERCASE (A–Z)</label>
+          <label class="opt"><input type="checkbox" id="keyDigits" checked> digits (0–9)</label>
+          <label class="opt"><input type="checkbox" id="keySymbols" checked> symbols (!@#$…)</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="keyOut">Generated password</label>
+        <div class="kout">
+          <input type="text" id="keyOut" readonly spellcheck="false" autocomplete="off" placeholder="Press Generate">
+        </div>
+        <div class="strength" id="keyStrength">
+          <div class="bars"><i></i><i></i><i></i><i></i></div>
+          <span class="lab">—</span>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn primary" id="keyGen"><svg class="ic"><use href="#i-dice"/></svg>Generate</button>
+        <button class="btn" id="keyCopy"><svg class="ic"><use href="#i-copy"/></svg>Copy</button>
+      </div>
+
+      <div class="status" id="keyStatus" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ==================== NOTES ==================== -->
+  <div class="note">
+    <div class="row"><svg class="ic"><use href="#i-shield"/></svg><span><b>Crypto:</b> AES-256-GCM (authenticated) with PBKDF2-HMAC-SHA256, 310,000 iterations, random 16-byte salt and 12-byte IV per operation.</span></div>
+    <div class="row"><svg class="ic"><use href="#i-image"/></svg><span><b>Stego:</b> 1 bit per colour channel of fully opaque pixels (LSB). The visible image is unchanged; output is always lossless PNG.</span></div>
+    <div class="row"><svg class="ic"><use href="#i-lock"/></svg><span><b>Privacy:</b> No server, no upload, no analytics. Passwords are never stored — not in localStorage, not in IndexedDB, not in the activity log.</span></div>
+    <div class="row"><svg class="ic"><use href="#i-alert"/></svg><span><b>Warning:</b> Do not re-save, resize, crop or “optimise” a protected image with any tool — it will destroy the payload. Keep the original PNG file.</span></div>
+  </div>
+
+  <!-- ==================== HISTORY ==================== -->
+  <div class="hist">
+    <div class="hist-head">
+      <h2><svg class="ic"><use href="#i-clock"/></svg>Activity <span class="cnt" id="histCnt">0</span></h2>
+      <div class="hist-actions">
+        <button class="btn sm" id="histToggle"><svg class="ic"><use href="#i-eye-off"/></svg>Hide</button>
+        <button class="btn sm danger" id="histClear"><svg class="ic"><use href="#i-trash"/></svg>Clear</button>
+      </div>
+    </div>
+    <div id="histBody">
+      <div class="hist-list" id="histList"></div>
+      <div class="hist-empty" id="histEmpty">No activity yet. This log stores only operation type, size and time — never file names, file contents or passwords.</div>
+    </div>
+  </div>
+</main>
+
+<!-- ==================== DOCUMENTATION ==================== -->
+<section class="app doc" id="documentation">
+  <h2><svg class="ic"><use href="#i-file"/></svg>Technical Documentation</h2>
+
+  <h3>What STEALTHVAULT does</h3>
+  <p>STEALTHVAULT takes one or more files, packs them into a single archive, encrypts that archive with AES-256-GCM, and hides the resulting ciphertext inside the pixels of an ordinary image. The image still opens in any viewer and looks the same, but the ciphertext can only be recovered — and only decrypted — with the correct password.</p>
+
+  <h3>Cryptographic pipeline</h3>
+  <ol>
+    <li><b>Pack</b> — selected files become a <code>SVB1</code> bundle containing each file's name, MIME type, size and bytes.</li>
+    <li><b>Derive</b> — the password is stretched with PBKDF2-HMAC-SHA256 at 310,000 iterations using a fresh 16-byte random salt.</li>
+    <li><b>Encrypt</b> — the bundle is encrypted with AES-256-GCM using a fresh 12-byte random IV. The 44-byte container header is passed as additional authenticated data, so any header tampering causes decryption to fail.</li>
+    <li><b>Embed</b> — the container is written into the least-significant bit of the R, G and B channels of fully opaque pixels, after a 13-byte stego header (<code>SVSTG001</code> + version + payload length).</li>
+    <li><b>Export</b> — the canvas is encoded as lossless PNG, preserving every bit exactly.</li>
+  </ol>
+
+  <h3>Container format (.svlt v1)</h3>
+  <pre class="spec">offset  size  field
+0       4     magic "SVLT"
+4       1     version = 1
+5       1     kdf id  = 1 (PBKDF2-HMAC-SHA256)
+6       1     cipher  = 1 (AES-256-GCM, 128-bit tag)
+7       1     reserved = 0
+8       4     PBKDF2 iterations (uint32 big-endian)
+12      16    salt
+28      12    IV
+40      4     ciphertext length including 16-byte tag (uint32 BE)
+44      ...   ciphertext || GCM tag
+
+AAD = bytes 0..43 of the header</pre>
+
+  <h3>Bundle format (SVB1, encrypted payload)</h3>
+  <pre class="spec">0       4     magic "SVB1"
+4       1     version = 1
+5       3     reserved = 0
+8       4     file count (uint32 BE)
+per file:
+  4     name length,  name (UTF-8)
+  4     MIME length,  MIME (UTF-8)
+  4     data length (uint32 BE)
+  ...   data bytes</pre>
+
+  <h3>Steganography format (image payload)</h3>
+  <pre class="spec">0       8     magic "SVSTG001"
+8       1     version = 1
+9       4     container length (uint32 BE)
+13      ...   container bytes
+
+Capacity = floor(opaque_pixels * 3 / 8) bytes
+Bit order: R LSB, G LSB, B LSB, then next opaque pixel.</pre>
+
+  <h3>Known limitations</h3>
+  <ul>
+    <li><b>PNG only for output.</b> JPEG is lossy and re-encoding destroys LSB data. JPEG covers are accepted but always converted to PNG on output.</li>
+    <li><b>Capacity.</b> Roughly 0.375 bytes per opaque pixel. A 1920×1080 cover holds about 760 KB of ciphertext. Large videos will not fit.</li>
+    <li><b>Metadata stripping.</b> Any tool that re-saves, resizes, crops or compresses the protected image will destroy the hidden payload.</li>
+    <li><b>No password recovery.</b> There is no backdoor, hint or key escrow. A lost password means permanently lost data.</li>
+    <li><b>Transparency.</b> Pixels with alpha below 255 are skipped, because browsers may round their colour values. Heavily transparent covers have less capacity.</li>
+    <li><b>Image size.</b> Images above 16.7 megapixels are rejected to stay within browser canvas limits (especially on mobile Safari).</li>
+    <li><b>Steganography is not undetectability.</b> STEALTHVAULT hides data from casual inspection, not from statistical steganalysis. It protects confidentiality through encryption, not through invisibility.</li>
+  </ul>
+
+  <h3>How to run locally</h3>
+  <ol>
+    <li>Save the file as <code>index.html</code>.</li>
+    <li>Open it directly in Chrome, Firefox, Edge or Safari — <code>file://</code> is a secure context, so Web Crypto works.</li>
+    <li>For deployment, host it on any static host (Vercel, Netlify, GitHub Pages) over HTTPS.</li>
+  </ol>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="app doc" id="faq">
+  <h2><svg class="ic"><use href="#i-alert"/></svg>Frequently Asked Questions</h2>
+
+  <details open>
+    <summary>What is STEALTHVAULT?</summary>
+    <p>STEALTHVAULT is a free browser-based security tool by PROBOY that encrypts files with AES-256-GCM and hides them inside ordinary PNG images using pixel-level steganography. The resulting image still opens normally, but only someone with the correct password can recover the hidden files.</p>
+  </details>
+
+  <details>
+    <summary>What is image steganography?</summary>
+    <p>Image steganography is the practice of storing hidden data inside an image file. STEALTHVAULT uses LSB (least-significant-bit) steganography: it replaces the lowest bit of each colour channel in fully opaque pixels with one bit of encrypted data. The change is far too small for the human eye to detect, and PNG's lossless compression preserves the bits exactly.</p>
+  </details>
+
+  <details>
+    <summary>How can I hide a ZIP file inside a PNG?</summary>
+    <p>Open the Hide tab, choose a PNG or JPEG cover image, add your ZIP file as a secret file, and enter a strong password. STEALTHVAULT packs the files, encrypts them with AES-256-GCM, and writes the ciphertext into the image's pixel data. You then download a new PNG that looks identical to the original but contains the encrypted ZIP.</p>
+  </details>
+
+  <details>
+    <summary>How do I recover hidden files?</summary>
+    <p>Open the Extract tab and select the STEALTHVAULT image (or a .svlt container). STEALTHVAULT reads the hidden payload, asks for your password, verifies the GCM authentication tag, and then lists the recovered files with their original names, types and sizes so you can save them individually or as a ZIP.</p>
+  </details>
+
+  <details>
+    <summary>Is STEALTHVAULT safe?</summary>
+    <p>STEALTHVAULT uses the browser's native Web Crypto API with AES-256-GCM authenticated encryption, PBKDF2-HMAC-SHA256 key derivation at 310,000 iterations, a fresh random salt and IV for every operation, and the container header is authenticated as additional data. Passwords are never stored and never leave your device.</p>
+  </details>
+
+  <details>
+    <summary>Are my files uploaded to a server?</summary>
+    <p>No. STEALTHVAULT has no backend. Every file is read, encrypted, embedded and decoded inside your browser tab using the File API, Canvas API and Web Crypto API. You can disconnect from the internet after the page loads and it will keep working.</p>
+  </details>
+
+  <details>
+    <summary>What happens if I forget my password?</summary>
+    <p>There is no recovery. STEALTHVAULT does not store your password and contains no backdoor or master key. Without the exact password the AES-256-GCM authentication tag cannot be verified and the payload stays permanently encrypted. Always keep an independent backup of your password.</p>
+  </details>
+</section>
+
+<footer>
+  <p><strong>STEALTHVAULT</strong> — Secure File Hiding &amp; Encryption · Created by <a href="https://proboy.vercel.app/" rel="author">Shahan Ali</a> · Brand: <a href="https://proboy.vercel.app/">PROBOY</a></p>
+  <p>Runs entirely in your browser. No uploads. No accounts. No tracking.</p>
+</footer>
+
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><svg class="ic"><use href="#i-check"/></svg><span id="toastMsg"></span></div>
+
+<script>
+"use strict";
+/* =========================================================================
+   STEALTHVAULT — by PROBOY · Creator: Shahan Ali
+   Browser-based AES-256-GCM encryption + PNG LSB steganography.
+   No network calls. No storage of secrets.
+   ========================================================================= */
+
+/* ------------------------------------------------------------------ utils */
+const $ = id => document.getElementById(id);
+const TE = new TextEncoder();
+const TD = new TextDecoder();
+
+const STEGO_MAGIC = TE.encode("SVSTG001");      // 8 bytes
+const STEGO_HDR   = 13;                          // magic + version + len
+const CONTAINER_MAGIC = TE.encode("SVLT");       // 4 bytes
+const CONTAINER_HDR = 44;
+const BUNDLE_MAGIC = TE.encode("SVB1");          // 4 bytes
+const ITERATIONS = 310000;
+const MAX_ITERATIONS = 5000000;
+const MIN_ITERATIONS = 10000;
+const MAX_PIXELS = 16777216;                     // ~16.7 MP canvas safety cap
+const GCM_TAG = 16;
+
+function concat(...arrs){
+  let n = 0;
+  for(const a of arrs) n += a.length;
+  const out = new Uint8Array(n);
+  let p = 0;
+  for(const a of arrs){ out.set(a, p); p += a.length; }
+  return out;
+}
+function writeU32(a, o, n){
+  a[o] = (n >>> 24) & 255; a[o+1] = (n >>> 16) & 255;
+  a[o+2] = (n >>> 8) & 255; a[o+3] = n & 255;
+}
+function readU32(a, o){
+  return (((a[o] << 24) >>> 0) + (a[o+1] << 16) + (a[o+2] << 8) + a[o+3]) >>> 0;
+}
+function same(a, b){
+  if(a.length !== b.length) return false;
+  for(let i = 0; i < a.length; i++) if(a[i] !== b[i]) return false;
+  return true;
+}
+function fmtBytes(n){
+  if(n === undefined || n === null) return "—";
+  if(n < 1024) return n + " B";
+  if(n < 1048576) return (n / 1024).toFixed(1) + " KB";
+  if(n < 1073741824) return (n / 1048576).toFixed(2) + " MB";
+  return (n / 1073741824).toFixed(2) + " GB";
+}
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function safeName(n){
+  let s = String(n || "file").replace(/[\\/]+/g, "_").replace(/^\.+/, "").trim();
+  if(!s) s = "file";
+  return s.slice(0, 180);
+}
+const sleep = (ms = 0) => new Promise(r => setTimeout(r, ms));
+
+/* --------------------------------------------------------------- ui bits */
+const show = e => e.classList.add("show");
+const hide = e => e.classList.remove("show");
+const icon = (name, size = 12) =>
+  `<svg class="ic" style="width:${size}px;height:${size}px"><use href="#i-${name}"/></svg>`;
+
+function status(e, msg, kind){
+  e.style.display = "block";
+  e.textContent = msg;
+  e.className = "status" + (kind ? " " + kind : "");
+}
+function statusHide(e){ e.style.display = "none"; e.textContent = ""; }
+
+function toast(msg, ok = true){
+  const t = $("toast");
+  $("toastMsg").textContent = msg;
+  t.querySelector("use").setAttribute("href", ok ? "#i-check" : "#i-alert");
+  t.classList.add("show");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => t.classList.remove("show"), 2400);
+}
+
+function setProgress(bar, pct){
+  bar.classList.add("show");
+  bar.querySelector("i").style.width = Math.max(0, Math.min(1, pct)) * 100 + "%";
+}
+function clearProgress(bar){
+  bar.classList.remove("show");
+  bar.querySelector("i").style.width = "0%";
+}
+function busy(btn, on, label){
+  if(on){
+    if(!btn._html) btn._html = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = `<svg class="ic spin"><use href="#i-refresh"/></svg><span>${esc(label || "Working…")}</span>`;
+  } else {
+    btn.disabled = false;
+    if(btn._html){ btn.innerHTML = btn._html; btn._html = null; }
+  }
+}
+async function copyText(txt, btn){
+  if(!txt){ toast("Nothing to copy", false); return; }
+  try{
+    await navigator.clipboard.writeText(txt);
+    if(btn){
+      const old = btn.innerHTML;
+      btn.innerHTML = icon("check") + "Copied";
+      setTimeout(() => btn.innerHTML = old, 1400);
+    } else toast("Copied to clipboard");
+  }catch{
+    toast("Clipboard blocked by the browser", false);
+  }
+}
+function saveBlob(blob, name){
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = safeName(name);
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 6000);
+}
+
+/* --------------------------------------------------------------- crypto */
+async function deriveKey(pass, salt, iterations){
+  const base = await crypto.subtle.importKey(
+    "raw", TE.encode(pass), "PBKDF2", false, ["deriveKey"]
+  );
+  return crypto.subtle.deriveKey(
+    { name: "PBKDF2", salt, iterations, hash: "SHA-256" },
+    base,
+    { name: "AES-GCM", length: 256 },
+    false,
+    ["encrypt", "decrypt"]
+  );
+}
+
+/** Encrypt a bundle into a STEALTHVAULT container (header + ciphertext). */
+async function sealContainer(bundleBytes, pass){
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ctLen = bundleBytes.length + GCM_TAG;
+
+  const header = new Uint8Array(CONTAINER_HDR);
+  header.set(CONTAINER_MAGIC, 0);
+  header[4] = 1;                 // version
+  header[5] = 1;                 // kdf: PBKDF2-HMAC-SHA256
+  header[6] = 1;                 // cipher: AES-256-GCM
+  header[7] = 0;                 // reserved
+  writeU32(header, 8, ITERATIONS);
+  header.set(salt, 12);
+  header.set(iv, 28);
+  writeU32(header, 40, ctLen);
+
+  const key = await deriveKey(pass, salt, ITERATIONS);
+  const ct = new Uint8Array(await crypto.subtle.encrypt(
+    { name: "AES-GCM", iv, additionalData: header, tagLength: 128 },
+    key, bundleBytes
+  ));
+  return concat(header, ct);
+}
+
+/** Parse + validate a container header. Never throws; returns a report. */
+function inspectContainer(bytes){
+  const out = { valid: false, errors: [], info: null };
+  if(!bytes || bytes.length < CONTAINER_HDR){
+    out.errors.push("File is smaller than a STEALTHVAULT header (44 bytes).");
+    return out;
+  }
+  if(!same(bytes.subarray(0, 4), CONTAINER_MAGIC)){
+    out.errors.push("Missing STEALTHVAULT container signature.");
+    return out;
+  }
+  const version = bytes[4], kdf = bytes[5], cipher = bytes[6], reserved = bytes[7];
+  if(version !== 1) out.errors.push(`Unsupported container version ${version}.`);
+  if(kdf !== 1) out.errors.push(`Unknown key-derivation id ${kdf}.`);
+  if(cipher !== 1) out.errors.push(`Unknown cipher id ${cipher}.`);
+  if(reserved !== 0) out.errors.push("Reserved header byte is not zero.");
+
+  const iterations = readU32(bytes, 8);
+  if(iterations < MIN_ITERATIONS || iterations > MAX_ITERATIONS)
+    out.errors.push(`PBKDF2 iteration count ${iterations} is outside the accepted range.`);
+
+  const ctLen = readU32(bytes, 40);
+  if(ctLen < GCM_TAG + 12) out.errors.push("Ciphertext length is invalid.");
+  if(CONTAINER_HDR + ctLen !== bytes.length)
+    out.errors.push(`Size mismatch: header declares ${CONTAINER_HDR + ctLen} bytes, file is ${bytes.length} bytes.`);
+
+  out.info = {
+    version, kdf, cipher, iterations, ctLen,
+    total: bytes.length,
+    plainBytes: Math.max(0, ctLen - GCM_TAG)
+  };
+  out.valid = out.errors.length === 0;
+  return out;
+}
+
+/** Decrypt a container. Throws on wrong password / tampering. */
+async function openContainer(bytes, pass){
+  const rep = inspectContainer(bytes);
+  if(!rep.valid) throw new Error(rep.errors[0]);
+  const header = bytes.subarray(0, CONTAINER_HDR);
+  const salt = bytes.subarray(12, 28);
+  const iv = bytes.subarray(28, 40);
+  const ct = bytes.subarray(CONTAINER_HDR, CONTAINER_HDR + rep.info.ctLen);
+  const key = await deriveKey(pass, salt, rep.info.iterations);
+  let pt;
+  try{
+    pt = await crypto.subtle.decrypt(
+      { name: "AES-GCM", iv, additionalData: header, tagLength: 128 }, key, ct
+    );
+  }catch{
+    throw new Error("Wrong password or corrupted data — authentication failed.");
+  }
+  return new Uint8Array(pt);
+}
+
+/* --------------------------------------------------------------- bundle */
+function packBundle(files){
+  const head = new Uint8Array(12);
+  head.set(BUNDLE_MAGIC, 0);
+  head[4] = 1;
+  writeU32(head, 8, files.length);
+
+  const parts = [head];
+  for(const f of files){
+    const name = TE.encode(safeName(f.name));
+    const mime = TE.encode(f.type || "application/octet-stream");
+    const pre = new Uint8Array(4 + name.length + 4 + mime.length + 4);
+    let o = 0;
+    writeU32(pre, o, name.length); o += 4;
+    pre.set(name, o); o += name.length;
+    writeU32(pre, o, mime.length); o += 4;
+    pre.set(mime, o); o += mime.length;
+    writeU32(pre, o, f.data.length); o += 4;
+    parts.push(pre, f.data);
+  }
+  return concat(...parts);
+}
+
+function unpackBundle(b){
+  if(b.length < 12 || !same(b.subarray(0, 4), BUNDLE_MAGIC))
+    throw new Error("Decrypted data is not a STEALTHVAULT bundle.");
+  if(b[4] !== 1) throw new Error(`Unsupported bundle version ${b[4]}.`);
+  const count = readU32(b, 8);
+  if(count < 1 || count > 5000) throw new Error("Invalid file count in bundle.");
+
+  let o = 12;
+  const files = [];
+  for(let i = 0; i < count; i++){
+    if(o + 4 > b.length) throw new Error("Bundle is truncated.");
+    const nl = readU32(b, o); o += 4;
+    if(nl > 4096 || o + nl > b.length) throw new Error("Bundle is corrupted (name field).");
+    const name = TD.decode(b.subarray(o, o + nl)); o += nl;
+
+    if(o + 4 > b.length) throw new Error("Bundle is truncated.");
+    const ml = readU32(b, o); o += 4;
+    if(ml > 4096 || o + ml > b.length) throw new Error("Bundle is corrupted (type field).");
+    const type = TD.decode(b.subarray(o, o + ml)); o += ml;
+
+    if(o + 4 > b.length) throw new Error("Bundle is truncated.");
+    const sz = readU32(b, o); o += 4;
+    if(o + sz > b.length) throw new Error("Bundle is corrupted (data field).");
+
+    files.push({ name: safeName(name), type, data: b.slice(o, o + sz) });
+    o += sz;
+  }
+  if(o !== b.length) throw new Error("Bundle contains trailing data.");
+  return files;
+}
+
+/* ------------------------------------------------------------ steganography */
+function capacityOf(data){
+  let opaque = 0;
+  for(let i = 3; i < data.length; i += 4) if(data[i] === 255) opaque++;
+  return Math.floor(opaque * 3 / 8);
+}
+
+function stegoHeader(len){
+  const h = new Uint8Array(STEGO_HDR);
+  h.set(STEGO_MAGIC, 0);
+  h[8] = 1;
+  writeU32(h, 9, len);
+  return h;
+}
+
+async function embedBits(data, bytes, onProgress){
+  let bIdx = 0, bit = 0, written = 0;
+  const totalBits = bytes.length * 8;
+  const CHUNK = 4 * 250000; // pixels per yielded slice
+  for(let base = 0; base < data.length; base += CHUNK){
+    const end = Math.min(data.length, base + CHUNK);
+    for(let i = base; i < end; i += 4){
+      if(data[i+3] !== 255) continue;
+      for(let c = 0; c < 3; c++){
+        if(written >= totalBits){ onProgress(1); return; }
+        const v = (bytes[bIdx] >> (7 - bit)) & 1;
+        data[i + c] = (data[i + c] & 0xFE) | v;
+        written++; bit++;
+        if(bit === 8){ bit = 0; bIdx++; }
+      }
+    }
+    onProgress(Math.min(1, written / totalBits));
+    await sleep(0);
+  }
+  onProgress(1);
+}
+
+function extractPayload(data){
+  const cap = capacityOf(data);
+  if(cap < STEGO_HDR) throw new Error("Image is too small to contain a STEALTHVAULT payload.");
+
+  let i = 0, bit = 0;
+  function readByte(){
+    let b = 0;
+    for(let k = 0; k < 8; k++){
+      while(i < data.length && data[i + 3] !== 255) i += 4;
+      if(i >= data.length) throw new Error("Image ended unexpectedly — payload is incomplete.");
+      b = (b << 1) | (data[i + bit] & 1);
+      bit++;
+      if(bit === 3){ bit = 0; i += 4; }
+    }
+    return b;
+  }
+
+  const hdr = new Uint8Array(STEGO_HDR);
+  for(let k = 0; k < STEGO_HDR; k++) hdr[k] = readByte();
+
+  if(!same(hdr.subarray(0, 8), STEGO_MAGIC))
+    throw new Error("No STEALTHVAULT payload found in this image.");
+  if(hdr[8] !== 1) throw new Error(`Unsupported stego version ${hdr[8]}.`);
+
+  const len = readU32(hdr, 9);
+  if(len < CONTAINER_HDR + GCM_TAG) throw new Error("Embedded payload header is invalid.");
+  if(len > cap - STEGO_HDR) throw new Error("Declared payload exceeds image capacity — the image is corrupted.");
+
+  const out = new Uint8Array(len);
+  for(let k = 0; k < len; k++) out[k] = readByte();
+  return out;
+}
+
+/* ---------------------------------------------------------- image helpers */
+async function loadBitmap(file){
+  try{
+    return await createImageBitmap(file, { colorSpaceConversion: "none", premultiplyAlpha: "none" });
+  }catch(_){ /* fall through */ }
+  try{
+    return await createImageBitmap(file);
+  }catch(_){ /* fall through */ }
+  const url = URL.createObjectURL(file);
+  try{
+    return await new Promise((res, rej) => {
+      const im = new Image();
+      im.onload = () => res(im);
+      im.onerror = () => rej(new Error("The browser could not decode this image."));
+      im.src = url;
+    });
+  }finally{
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  }
+}
+
+async function fileToImageData(file){
+  const bmp = await loadBitmap(file);
+  const w = bmp.width || bmp.naturalWidth;
+  const h = bmp.height || bmp.naturalHeight;
+  if(!w || !h) throw new Error("Could not read image dimensions.");
+  if(w * h > MAX_PIXELS)
+    throw new Error(`Image is too large (${w}×${h}). The limit is ${MAX_PIXELS.toLocaleString()} pixels for browser canvas safety.`);
+
+  const cv = document.createElement("canvas");
+  cv.width = w; cv.height = h;
+  const ctx = cv.getContext("2d", { willReadFrequently: true });
+  if(!ctx) throw new Error("Canvas is not available in this browser.");
+  ctx.drawImage(bmp, 0, 0);
+  if(bmp.close) bmp.close();
+  const img = ctx.getImageData(0, 0, w, h);
+  return { canvas: cv, ctx, img, width: w, height: h };
+}
+
+function canvasToPngBlob(canvas){
+  return new Promise((res, rej) => {
+    canvas.toBlob(b => b ? res(b) : rej(new Error("PNG encoding failed — the image may be too large.")), "image/png");
+  });
+}
+
+function isPng(bytes){
+  return bytes.length > 8 &&
+    bytes[0] === 137 && bytes[1] === 80 && bytes[2] === 78 && bytes[3] === 71 &&
+    bytes[4] === 13 && bytes[5] === 10 && bytes[6] === 26 && bytes[7] === 10;
+}
+function isJpeg(bytes){
+  return bytes.length > 3 && bytes[0] === 0xFF && bytes[1] === 0xD8;
+}
+function isContainer(bytes){
+  return bytes.length >= 4 && same(bytes.subarray(0, 4), CONTAINER_MAGIC);
+}
+
+/* ------------------------------------------------------------ zip writer */
+let CRC_TABLE = null;
+function crc32(buf){
+  if(!CRC_TABLE){
+    CRC_TABLE = new Uint32Array(256);
+    for(let n = 0; n < 256; n++){
+      let c = n;
+      for(let k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+      CRC_TABLE[n] = c >>> 0;
+    }
+  }
+  let c = 0xFFFFFFFF;
+  for(let i = 0; i < buf.length; i++) c = CRC_TABLE[(c ^ buf[i]) & 255] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+
+/** Minimal STORE-only ZIP writer (no external dependencies). */
+function makeZip(entries){
+  const now = new Date();
+  const dosTime = ((now.getHours() << 11) | (now.getMinutes() << 5) | (now.getSeconds() >> 1)) & 0xFFFF;
+  const dosDate = (((now.getFullYear() - 1980) << 9) | ((now.getMonth() + 1) << 5) | now.getDate()) & 0xFFFF;
+
+  const locals = [];
+  const centrals = [];
+  let offset = 0;
+
+  for(const e of entries){
+    const name = TE.encode(safeName(e.name));
+    const crc = crc32(e.data);
+
+    const lh = new Uint8Array(30 + name.length);
+    const lv = new DataView(lh.buffer);
+    lv.setUint32(0, 0x04034B50, true);
+    lv.setUint16(4, 20, true);
+    lv.setUint16(6, 0x0800, true);
+    lv.setUint16(8, 0, true);
+    lv.setUint16(10, dosTime, true);
+    lv.setUint16(12, dosDate, true);
+    lv.setUint32(14, crc, true);
+    lv.setUint32(18, e.data.length, true);
+    lv.setUint32(22, e.data.length, true);
+    lv.setUint16(26, name.length, true);
+    lv.setUint16(28, 0, true);
+    lh.set(name, 30);
+    locals.push(lh, e.data);
+
+    const ch = new Uint8Array(46 + name.length);
+    const cv = new DataView(ch.buffer);
+    cv.setUint32(0, 0x02014B50, true);
+    cv.setUint16(4, 20, true);
+    cv.setUint16(6, 20, true);
+    cv.setUint16(8, 0x0800, true);
+    cv.setUint16(10, 0, true);
+    cv.setUint16(12, dosTime, true);
+    cv.setUint16(14, dosDate, true);
+    cv.setUint32(16, crc, true);
+    cv.setUint32(20, e.data.length, true);
+    cv.setUint32(24, e.data.length, true);
+    cv.setUint16(28, name.length, true);
+    cv.setUint16(30, 0, true);
+    cv.setUint16(32, 0, true);
+    cv.setUint16(34, 0, true);
+    cv.setUint16(36, 0, true);
+    cv.setUint32(38, 0, true);
+    cv.setUint32(42, offset, true);
+    ch.set(name, 46);
+    centrals.push(ch);
+
+    offset += lh.length + e.data.length;
+  }
+
+  let cdSize = 0;
+  for(const c of centrals) cdSize += c.length;
+
+  const eocd = new Uint8Array(22);
+  const ev = new DataView(eocd.buffer);
+  ev.setUint32(0, 0x06054B50, true);
+  ev.setUint16(4, 0, true);
+  ev.setUint16(6, 0, true);
+  ev.setUint16(8, entries.length, true);
+  ev.setUint16(10, entries.length, true);
+  ev.setUint32(12, cdSize, true);
+  ev.setUint32(16, offset, true);
+  ev.setUint16(20, 0, true);
+
+  return new Blob([...locals, ...centrals, eocd], { type: "application/zip" });
+}
+
+/* ------------------------------------------------------------- passwords */
+function estimateEntropy(pw){
+  if(!pw) return 0;
+  let pool = 0;
+  if(/[a-z]/.test(pw)) pool += 26;
+  if(/[A-Z]/.test(pw)) pool += 26;
+  if(/[0-9]/.test(pw)) pool += 10;
+  if(/[^a-zA-Z0-9]/.test(pw)) pool += 33;
+  if(!pool) return 0;
+  return Math.round(pw.length * Math.log2(pool));
+}
+function strengthLevel(entropy){
+  if(entropy < 28) return 1;
+  if(entropy < 50) return 2;
+  if(entropy < 75) return 3;
+  return 4;
+}
+const STRENGTH_LABEL = { 1: "Weak", 2: "Fair", 3: "Good", 4: "Strong" };
+
+function renderStrength(node, pw){
+  const bars = node.querySelector(".bars");
+  const lab = node.querySelector(".lab");
+  const e = estimateEntropy(pw);
+  const lvl = pw ? strengthLevel(e) : 0;
+  bars.className = "bars";
+  node.className = "strength" + (lvl ? " l" + lvl : "");
+  lab.textContent = pw ? `${STRENGTH_LABEL[lvl]} · ~${e} bits` : "—";
+}
+
+/* --------------------------------------------------------- activity log */
+const LOG_KEY = "stealthvault_activity_v1";
+const LOG_MAX = 40;
+const LOG_TAG = {
+  hide:    { t: "Hide",    c: "#00d4ff" },
+  extract: { t: "Extract", c: "#b98cff" },
+  encrypt: { t: "Encrypt", c: "#00d4ff" },
+  verify:  { t: "Verify",  c: "#7dffb0" }
+};
+const rgba = (hex, a) => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${a})`;
+};
+
+function logLoad(){
+  try{ return JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); }
+  catch{ return []; }
+}
+function logSave(list){
+  try{ localStorage.setItem(LOG_KEY, JSON.stringify(list)); }
+  catch{ toast("Browser storage is full", false); }
+}
+function logAdd(type, desc){
+  const list = logLoad();
+  list.unshift({
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    type, desc, time: Date.now()
+  });
+  if(list.length > LOG_MAX) list.length = LOG_MAX;
+  logSave(list);
+  drawLog();
+}
+function drawLog(){
+  const list = logLoad();
+  const box = $("histList");
+  $("histCnt").textContent = list.length;
+  $("histEmpty").style.display = list.length ? "none" : "block";
+  box.innerHTML = "";
+
+  for(const it of list){
+    const meta = LOG_TAG[it.type] || { t: it.type, c: "#888" };
+    const node = document.createElement("div");
+    node.className = "hist-item";
+
+    const top = document.createElement("div");
+    top.className = "hist-top";
+    const tag = document.createElement("span");
+    tag.className = "hist-tag";
+    tag.style.background = rgba(meta.c, 0.14);
+    tag.style.color = meta.c;
+    tag.textContent = meta.t;
+    const time = document.createElement("span");
+    time.className = "hist-time";
+    time.textContent = new Date(it.time).toLocaleString();
+    top.append(tag, time);
+
+    const desc = document.createElement("div");
+    desc.className = "hist-desc";
+    desc.textContent = it.desc;
+
+    const btns = document.createElement("div");
+    btns.className = "hist-btns";
+    const del = document.createElement("button");
+    del.className = "del";
+    del.innerHTML = icon("trash") + "Delete";
+    del.onclick = () => {
+      logSave(logLoad().filter(x => x.id !== it.id));
+      drawLog();
+    };
+    btns.appendChild(del);
+
+    node.append(top, desc, btns);
+    box.appendChild(node);
+  }
+}
+
+/* =========================================================================
+   TAB NAVIGATION
+   ========================================================================= */
+const PANES = ["hide", "extract", "encrypt", "verify", "keys"];
+function switchTab(name){
+  for(const p of PANES){
+    const tab = $("tab-" + p);
+    const pane = $("pane-" + p);
+    const on = p === name;
+    tab.classList.toggle("active", on);
+    tab.setAttribute("aria-selected", on ? "true" : "false");
+    pane.classList.toggle("hidden", !on);
+  }
+}
+PANES.forEach(p => { $("tab-" + p).onclick = () => switchTab(p); });
+
+/* =========================================================================
+   SHARED FILE-INPUT WIRING
+   ========================================================================= */
+function bindDrop(inputId, nameId, dropId, placeholder){
+  const inp = $(inputId), nameEl = $(nameId), dropEl = $(dropId);
+  inp.addEventListener("change", () => {
+    const files = inp.files;
+    if(files && files.length){
+      nameEl.textContent = files.length === 1
+        ? files[0].name
+        : `${files.length} files selected`;
+      nameEl.classList.remove("empty");
+      dropEl.classList.add("has-file");
+    } else {
+      nameEl.textContent = placeholder;
+      nameEl.classList.add("empty");
+      dropEl.classList.remove("has-file");
+    }
+  });
+  nameEl.textContent = placeholder;
+}
+
+/* password visibility toggles */
+document.querySelectorAll(".pw").forEach(pw => {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "pw-toggle";
+  btn.setAttribute("aria-label", "Show password");
+  btn.innerHTML = `<svg class="ic"><use href="#i-eye"/></svg>`;
+  btn.onclick = () => {
+    const inp = pw.querySelector("input");
+    const showing = inp.type === "text";
+    inp.type = showing ? "password" : "text";
+    btn.innerHTML = `<svg class="ic"><use href="#i-${showing ? "eye" : "eye-off"}"/></svg>`;
+    btn.setAttribute("aria-label", showing ? "Show password" : "Hide password");
+  };
+  pw.appendChild(btn);
+});
+
+/* strength meters */
+document.querySelectorAll("[data-strength-for]").forEach(node => {
+  const inp = $(node.dataset.strengthFor);
+  if(!inp) return;
+  const upd = () => renderStrength(node, inp.value);
+  inp.addEventListener("input", upd);
+  upd();
+});
+
+/* =========================================================================
+   MODULE 01 — HIDE FILES
+   ========================================================================= */
+const hideState = {
+  coverFile: null,
+  coverName: "",
+  coverCapacity: 0,
+  coverWidth: 0,
+  coverHeight: 0,
+  files: [],
+  lastUrl: null
+};
+
+bindDrop("hideCoverInput", "hideCoverName", "hideCoverDrop", "Choose a PNG or JPEG cover image");
+bindDrop("hideFilesInput", "hideFilesName", "hideFilesDrop", "Add one or more files to hide");
+
+function updateCapacityMeter(){
+  const bar = $("hideCapBar");
+  const txt = $("hideCapTxt");
+  const use = $("hideCapUse");
+  const total = hideState.files.reduce((a, f) => a + f.size, 0);
+
+  if(!hideState.coverCapacity){
+    txt.textContent = "No cover selected";
+    use.textContent = "";
+    bar.querySelector("i").style.width = "0%";
+    bar.classList.remove("over");
+    return;
+  }
+
+  const usable = Math.max(0, hideState.coverCapacity - STEGO_HDR - CONTAINER_HDR - GCM_TAG - 12 - hideState.files.length * 240);
+  txt.innerHTML = `Cover capacity ≈ <b>${fmtBytes(usable)}</b> · ${hideState.coverWidth}×${hideState.coverHeight}`;
+  use.innerHTML = `Selected: <b>${fmtBytes(total)}</b>`;
+
+  const ratio = usable > 0 ? total / usable : 1;
+  bar.querySelector("i").style.width = Math.min(100, ratio * 100) + "%";
+  bar.classList.toggle("over", ratio > 1);
+}
+
+function renderSecretFiles(){
+  const box = $("hideFilesList");
+  box.innerHTML = "";
+  hideState.files.forEach((f, i) => {
+    const row = document.createElement("div");
+    row.className = "fileitem";
+
+    const nm = document.createElement("span");
+    nm.className = "nm";
+    nm.textContent = f.name;
+
+    const sz = document.createElement("span");
+    sz.className = "sz";
+    sz.textContent = fmtBytes(f.size);
+
+    const rm = document.createElement("button");
+    rm.type = "button";
+    rm.className = "rm";
+    rm.setAttribute("aria-label", "Remove " + f.name);
+    rm.innerHTML = icon("x", 13);
+    rm.onclick = () => {
+      hideState.files.splice(i, 1);
+      renderSecretFiles();
+      updateCapacityMeter();
+    };
+
+    row.append(nm, sz, rm);
+    box.appendChild(row);
+  });
+  updateCapacityMeter();
+}
+
+$("hideFilesInput").addEventListener("change", e => {
+  const picked = Array.from(e.target.files || []);
+  if(!picked.length) return;
+  hideState.files = hideState.files.concat(picked);
+  e.target.value = "";
+  renderSecretFiles();
+});
+
+$("hideCoverInput").addEventListener("change", async e => {
+  const file = e.target.files && e.target.files[0];
+  if(!file) return;
+  const statusEl = $("hideStatus");
+  try{
+    statusEl.style.display = "none";
+    const head = new Uint8Array(await file.slice(0, 8).arrayBuffer());
+    if(!isPng(head) && !isJpeg(head)){
+      throw new Error("Cover must be a PNG or JPEG image.");
+    }
+    hideState.coverFile = file;
+    hideState.coverName = file.name;
+
+    const { img, width, height } = await fileToImageData(file);
+    hideState.coverWidth = width;
+    hideState.coverHeight = height;
+    hideState.coverCapacity = capacityOf(img.data);
+    updateCapacityMeter();
+
+    if(isJpeg(head)){
+      status(statusEl, "JPEG cover accepted. The output will be a lossless PNG so the payload survives.", "warn");
+    } else {
+      statusHide(statusEl);
+    }
+  }catch(err){
+    hideState.coverFile = null;
+    hideState.coverCapacity = 0;
+    status(statusEl, err.message, "err");
+    updateCapacityMeter();
+  }
+});
+
+$("hideBtn").onclick = async () => {
+  const btn = $("hideBtn");
+  const prog = $("hideProg");
+  const statusEl = $("hideStatus");
+
+  try{
+    const pass = $("hidePass").value;
+    const pass2 = $("hidePass2").value;
+
+    if(!hideState.coverFile) throw new Error("Select a cover image first.");
+    if(!hideState.files.length) throw new Error("Add at least one secret file.");
+    if(!pass) throw new Error("Enter a password.");
+    if(pass.length < 8) throw new Error("Password must be at least 8 characters.");
+    if(pass !== pass2) throw new Error("Passwords do not match.");
+
+    busy(btn, true, "Working…");
+    hide($("hideResult"));
+    status(statusEl, "Reading cover image…");
+    setProgress(prog, 0.03);
+
+    const { canvas, ctx, img } = await fileToImageData(hideState.coverFile);
+
+    const capacity = capacityOf(img.data);
+    const totalSelected = hideState.files.reduce((a, f) => a + f.size, 0);
+    const roughUsable = capacity - STEGO_HDR - CONTAINER_HDR - GCM_TAG;
+    if(totalSelected + 12 + hideState.files.length * 240 > roughUsable){
+      throw new Error(
+        `Payload too large. This cover holds about ${fmtBytes(Math.max(0, roughUsable))} but you selected ${fmtBytes(totalSelected)}. Use a larger PNG.`
+      );
+    }
+
+    setProgress(prog, 0.08);
+    status(statusEl, "Reading secret files…");
+    const files = [];
+    for(const f of hideState.files){
+      files.push({
+        name: f.name,
+        type: f.type || "application/octet-stream",
+        data: new Uint8Array(await f.arrayBuffer())
+      });
+    }
+
+    const bundle = packBundle(files);
+    if(STEGO_HDR + CONTAINER_HDR + bundle.length + GCM_TAG > capacity){
+      throw new Error(`Encrypted payload (${fmtBytes(bundle.length + 60)}) exceeds this cover's capacity (${fmtBytes(capacity - STEGO_HDR)}).`);
+    }
+
+    setProgress(prog, 0.16);
+    status(statusEl, "Deriving key — PBKDF2-HMAC-SHA256, 310,000 iterations…");
+    const container = await sealContainer(bundle, pass);
+
+    setProgress(prog, 0.32);
+    status(statusEl, "Embedding ciphertext into pixel data…");
+    const full = concat(stegoHeader(container.length), container);
+    await embedBits(img.data, full, p => {
+      setProgress(prog, 0.32 + p * 0.55);
+      status(statusEl, `Embedding… ${Math.round(p * 100)}%`);
+    });
+
+    setProgress(prog, 0.9);
+    status(statusEl, "Encoding lossless PNG…");
+    ctx.putImageData(img, 0, 0);
+    const blob = await canvasToPngBlob(canvas);
+
+    if(hideState.lastUrl) URL.revokeObjectURL(hideState.lastUrl);
+    hideState.lastUrl = URL.createObjectURL(blob);
+    const outName = safeName(hideState.coverName.replace(/\.[^.]+$/, "")) + "-stealth.png";
+
+    $("hidePreview").src = hideState.lastUrl;
+    $("hidePreview").alt = "Protected image " + outName;
+    $("hideDownload").href = hideState.lastUrl;
+    $("hideDownload").download = outName;
+    $("hideOutInfo").textContent = `${hideState.files.length} file${hideState.files.length > 1 ? "s" : ""} hidden · ${hideState.coverWidth}×${hideState.coverHeight} PNG`;
+    $("hideOutSize").textContent = "Output: " + fmtBytes(blob.size);
+
+    setProgress(prog, 1);
+    status(statusEl, "Done. Download the protected image and keep it as a PNG.", "ok");
+    show($("hideResult"));
+
+    logAdd("hide", `${hideState.files.length} file${hideState.files.length > 1 ? "s" : ""} (${fmtBytes(totalSelected)}) hidden in a ${hideState.coverWidth}×${hideState.coverHeight} PNG · output ${fmtBytes(blob.size)}`);
+    toast("Files hidden successfully");
+  }catch(err){
+    status(statusEl, err.message, "err");
+    hide($("hideResult"));
+  }finally{
+    busy(btn, false);
+    setTimeout(() => clearProgress(prog), 1200);
+  }
+};
+
+/* =========================================================================
+   MODULE 02 — EXTRACT FILES
+   ========================================================================= */
+const extractState = {
+  file: null,
+  bytes: null,
+  kind: null,        // "png" | "svlt"
+  container: null,
+  recovered: [],
+  lastZipUrl: null
+};
+
+bindDrop("extractInput", "extractName", "extractDrop", "Select a protected image or .svlt container");
+
+$("extractInput").addEventListener("change", async e => {
+  const file = e.target.files && e.target.files[0];
+  const info = $("extractInfo");
+  extractState.file = null;
+  extractState.bytes = null;
+  extractState.container = null;
+  extractState.kind = null;
+  hide($("extractResult"));
+  statusHide($("extractStatus"));
+
+  if(!file) return;
+
+  try{
+    const bytes = new Uint8Array(await file.arrayBuffer());
+    extractState.file = file;
+    extractState.bytes = bytes;
+
+    if(isContainer(bytes)){
+      extractState.kind = "svlt";
+      extractState.container = bytes;
+      const rep = inspectContainer(bytes);
+      if(!rep.valid){
+        status(info, "STEALTHVAULT container detected, but it is damaged: " + rep.errors[0], "err");
+        return;
+      }
+      status(info,
+        `Container detected · .svlt v1 · ${fmtBytes(rep.info.plainBytes)} encrypted payload · PBKDF2 ${rep.info.iterations.toLocaleString()} iterations. Enter the password to decrypt.`,
+        "ok");
+    } else if(isPng(bytes) || isJpeg(bytes)){
+      extractState.kind = "png";
+      status(info, "Image detected. Reading hidden payload…");
+      const { img } = await fileToImageData(file);
+      const cap = capacityOf(img.data);
+      let payload;
+      try{
+        payload = extractPayload(img.data);
+      }catch(err){
+        status(info, "No STEALTHVAULT payload was found in this image. (" + err.message + ")", "err");
+        return;
+      }
+      extractState.container = payload;
+      const rep = inspectContainer(payload);
+      if(!rep.valid){
+        status(info, "Hidden payload found, but its container is invalid: " + rep.errors[0], "err");
+        return;
+      }
+      const used = ((STEGO_HDR + payload.length) / cap) * 100;
+      status(info,
+        `Hidden payload detected · ${fmtBytes(payload.length)} encrypted data · ${used.toFixed(1)}% of image capacity · PBKDF2 ${rep.info.iterations.toLocaleString()} iterations. Enter the password.`,
+        "ok");
+    } else {
+      status(info, "Unsupported file. Select a STEALTHVAULT PNG image or a .svlt container.", "err");
+    }
+  }catch(err){
+    status(info, err.message, "err");
+  }
+});
+
+function renderRecovered(files){
+  const box = $("extractFiles");
+  box.innerHTML = "";
+  $("extractChip").textContent = files.length + (files.length === 1 ? " file" : " files");
+
+  files.forEach(f => {
+    const row = document.createElement("div");
+    row.className = "fileitem";
+
+    const nm = document.createElement("span");
+    nm.className = "nm";
+    nm.textContent = f.name;
+
+    const sz = document.createElement("span");
+    sz.className = "sz";
+    sz.textContent = fmtBytes(f.data.length);
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "btn sm";
+    btn.innerHTML = icon("download") + "Save";
+    btn.onclick = () => {
+      saveBlob(new Blob([f.data], { type: f.type || "application/octet-stream" }), f.name);
+      toast("Saving " + f.name);
+    };
+
+    row.append(nm, sz, btn);
+    box.appendChild(row);
+  });
+}
+
+$("extractBtn").onclick = async () => {
+  const btn = $("extractBtn");
+  const prog = $("extractProg");
+  const statusEl = $("extractStatus");
+
+  try{
+    const pass = $("extractPass").value;
+    if(!extractState.file) throw new Error("Select a protected image or .svlt container first.");
+    if(!extractState.container) throw new Error("No valid STEALTHVAULT payload was detected in this file.");
+    if(!pass) throw new Error("Enter the password.");
+
+    busy(btn, true, "Decrypting…");
+    hide($("extractResult"));
+    setProgress(prog, 0.2);
+    status(statusEl, "Verifying authentication tag…");
+
+    const bundle = await openContainer(extractState.container, pass);
+    setProgress(prog, 0.75);
+    status(statusEl, "Unpacking files…");
+
+    const files = unpackBundle(bundle);
+    extractState.recovered = files;
+    renderRecovered(files);
+
+    setProgress(prog, 1);
+    status(statusEl, `Authenticated and decrypted. ${files.length} file${files.length > 1 ? "s" : ""} recovered.`, "ok");
+    show($("extractResult"));
+
+    logAdd("extract", `${files.length} file${files.length > 1 ? "s" : ""} recovered (${fmtBytes(files.reduce((a, f) => a + f.data.length, 0))}) from ${extractState.kind === "svlt" ? "a .svlt container" : "a protected PNG"}`);
+    toast("Extraction complete");
+  }catch(err){
+    status(statusEl, err.message, "err");
+    hide($("extractResult"));
+  }finally{
+    busy(btn, false);
+    setTimeout(() => clearProgress(prog), 1200);
+  }
+};
+
+$("extractZip").onclick = () => {
+  const files = extractState.recovered;
+  if(!files.length){ toast("Nothing to download", false); return; }
+  if(files.length === 1){
+    saveBlob(new Blob([files[0].data], { type: files[0].type || "application/octet-stream" }), files[0].name);
+    return;
+  }
+  const zip = makeZip(files.map(f => ({ name: f.name, data: f.data })));
+  saveBlob(zip, "stealthvault-recovered.zip");
+  toast("ZIP created");
+};
+
+/* =========================================================================
+   MODULE 03 — ENCRYPT FILES
+   ========================================================================= */
+const encState = { files: [], lastUrl: null };
+
+bindDrop("encInput", "encName", "encDrop", "Choose one or more files");
+
+function renderEncFiles(){
+  const box = $("encFilesList");
+  box.innerHTML = "";
+  encState.files.forEach((f, i) => {
+    const row = document.createElement("div");
+    row.className = "fileitem";
+
+    const nm = document.createElement("span");
+    nm.className = "nm";
+    nm.textContent = f.name;
+
+    const sz = document.createElement("span");
+    sz.className = "sz";
+    sz.textContent = fmtBytes(f.size);
+
+    const rm = document.createElement("button");
+    rm.type = "button";
+    rm.className = "rm";
+    rm.setAttribute("aria-label", "Remove " + f.name);
+    rm.innerHTML = icon("x", 13);
+    rm.onclick = () => {
+      encState.files.splice(i, 1);
+      renderEncFiles();
+    };
+
+    row.append(nm, sz, rm);
+    box.appendChild(row);
+  });
+}
+
+$("encInput").addEventListener("change", e => {
+  const picked = Array.from(e.target.files || []);
+  if(!picked.length) return;
+  encState.files = encState.files.concat(picked);
+  e.target.value = "";
+  renderEncFiles();
+});
+
+$("encBtn").onclick = async () => {
+  const btn = $("encBtn");
+  const prog = $("encProg");
+  const statusEl = $("encStatus");
+
+  try{
+    const pass = $("encPass").value;
+    const pass2 = $("encPass2").value;
+
+    if(!encState.files.length) throw new Error("Select at least one file.");
+    if(!pass) throw new Error("Enter a password.");
+    if(pass.length < 8) throw new Error("Password must be at least 8 characters.");
+    if(pass !== pass2) throw new Error("Passwords do not match.");
+
+    busy(btn, true, "Encrypting…");
+    hide($("encResult"));
+    status(statusEl, "Reading files…");
+    setProgress(prog, 0.1);
+
+    const files = [];
+    for(const f of encState.files){
+      files.push({
+        name: f.name,
+        type: f.type || "application/octet-stream",
+        data: new Uint8Array(await f.arrayBuffer())
+      });
+    }
+
+    const bundle = packBundle(files);
+    setProgress(prog, 0.3);
+    status(statusEl, "Deriving key — PBKDF2-HMAC-SHA256, 310,000 iterations…");
+    const container = await sealContainer(bundle, pass);
+
+    setProgress(prog, 0.95);
+    status(statusEl, "Writing container…");
+    const blob = new Blob([container], { type: "application/octet-stream" });
+
+    if(encState.lastUrl) URL.revokeObjectURL(encState.lastUrl);
+    encState.lastUrl = URL.createObjectURL(blob);
+
+    const base = encState.files.length === 1
+      ? safeName(encState.files[0].name.replace(/\.[^.]+$/, ""))
+      : "vault-bundle";
+    const outName = base + ".svlt";
+
+    $("encDownload").href = encState.lastUrl;
+    $("encDownload").download = outName;
+    $("encOutInfo").textContent = `${files.length} file${files.length > 1 ? "s" : ""} · AES-256-GCM · PBKDF2 310,000`;
+    $("encOutSize").textContent = "Container: " + fmtBytes(blob.size);
+
+    setProgress(prog, 1);
+    status(statusEl, "Encrypted. Keep the .svlt file and your password safe — neither can be recovered.", "ok");
+    show($("encResult"));
+
+    logAdd("encrypt", `${files.length} file${files.length > 1 ? "s" : ""} (${fmtBytes(files.reduce((a, f) => a + f.data.length, 0))}) encrypted into a ${fmtBytes(blob.size)} .svlt container`);
+    toast("Encrypted");
+  }catch(err){
+    status(statusEl, err.message, "err");
+    hide($("encResult"));
+  }finally{
+    busy(btn, false);
+    setTimeout(() => clearProgress(prog), 1200);
+  }
+};
+
+/* =========================================================================
+   MODULE 04 — VERIFY FILES
+   ========================================================================= */
+const verifyState = { file: null, bytes: null };
+
+bindDrop("verifyInput", "verifyName", "verifyDrop", "Select a file to inspect");
+
+$("verifyInput").addEventListener("change", e => {
+  const file = e.target.files && e.target.files[0];
+  verifyState.file = file || null;
+  verifyState.bytes = null;
+  hide($("verifyResult"));
+  statusHide($("verifyStatus"));
+});
+
+function addCheck(list, kind, title, detail){
+  const row = document.createElement("div");
+  row.className = "check " + kind;
+  const dot = document.createElement("span");
+  dot.className = "dot";
+  dot.textContent = kind === "pass" ? "✓" : kind === "fail" ? "✕" : "!";
+  const body = document.createElement("span");
+  const b = document.createElement("b");
+  b.textContent = title + " — ";
+  body.appendChild(b);
+  body.appendChild(document.createTextNode(detail));
+  row.append(dot, body);
+  list.appendChild(row);
+}
+
+$("verifyBtn").onclick = async () => {
+  const btn = $("verifyBtn");
+  const statusEl = $("verifyStatus");
+  const list = $("verifyList");
+  const chip = $("verifyChip");
+
+  try{
+    if(!verifyState.file) throw new Error("Select a file first.");
+    busy(btn, true, "Inspecting…");
+    hide($("verifyResult"));
+    list.innerHTML = "";
+
+    const bytes = verifyState.bytes || new Uint8Array(await verifyState.file.arrayBuffer());
+    verifyState.bytes = bytes;
+
+    let container = null;
+    let overall = "warn";
+
+    /* --- determine what we are looking at --- */
+    if(isContainer(bytes)){
+      container = bytes;
+      addCheck(list, "pass", "Container signature", "STEALTHVAULT .svlt magic bytes found at offset 0.");
+    } else if(isPng(bytes) || isJpeg(bytes)){
+      addCheck(list, "pass", "Image format", isPng(bytes) ? "Valid PNG signature." : "Valid JPEG signature.");
+      status(statusEl, "Reading pixel data…");
+      const { img } = await fileToImageData(verifyState.file);
+      const cap = capacityOf(img.data);
+      addCheck(list, "pass", "Steganographic capacity", `${fmtBytes(cap)} across ${fmtBytes(0).length ? "" : ""}${(cap * 8 / 3).toLocaleString()} usable channels.`);
+      try{
+        container = extractPayload(img.data);
+        addCheck(list, "pass", "Stego header", `"SVSTG001" v1 found · declared payload ${fmtBytes(container.length)}.`);
+      }catch(err){
+        addCheck(list, "fail", "Stego payload", err.message);
+        finish("fail");
+        return;
+      }
+    } else {
+      addCheck(list, "fail", "File type", "This file is neither a STEALTHVAULT image nor a .svlt container.");
+      finish("fail");
+      return;
+    }
+
+    /* --- structural validation --- */
+    const rep = inspectContainer(container);
+    if(rep.valid){
+      addCheck(list, "pass", "Container structure", `Version ${rep.info.version} · KDF id ${rep.info.kdf} · cipher id ${rep.info.cipher} · lengths consistent.`);
+      addCheck(list, "pass", "KDF parameters", `PBKDF2-HMAC-SHA256 · ${rep.info.iterations.toLocaleString()} iterations (within accepted range).`);
+      addCheck(list, "pass", "Ciphertext size", `${fmtBytes(rep.info.ctLen)} including a ${GCM_TAG}-byte authentication tag.`);
+    } else {
+      for(const e of rep.errors) addCheck(list, "fail", "Structure error", e);
+      finish("fail");
+      return;
+    }
+
+    /* --- optional authenticity check --- */
+    const pass = $("verifyPass").value;
+    if(pass){
+      status(statusEl, "Verifying authentication tag…");
+      try{
+        const bundle = await openContainer(container, pass);
+        const files = unpackBundle(bundle);
+        addCheck(list, "pass", "Authenticity", "AES-256-GCM tag verified — the payload is intact and the password is correct.");
+        addCheck(list, "pass", "Bundle contents", `${files.length} file${files.length > 1 ? "s" : ""}: ${files.map(f => f.name).join(", ").slice(0, 160)}`);
+        overall = "pass";
+      }catch(err){
+        addCheck(list, "fail", "Authenticity", err.message);
+        overall = "fail";
+      }
+    } else {
+      addCheck(list, "warn", "Authenticity", "Not verified. The structure is valid, but integrity can only be proven by supplying the password (AES-256-GCM tag check).");
+      overall = "warn";
+    }
+
+    finish(overall);
+
+    function finish(kind){
+      if(kind === "pass"){
+        chip.textContent = "Verified";
+        chip.className = "chip gr";
+        status(statusEl, "Verification passed. The container is structurally valid and authenticated.", "ok");
+      } else if(kind === "warn"){
+        chip.textContent = "Partial";
+        chip.className = "chip pu";
+        status(statusEl, "Structural verification passed. Supply the password to also verify authenticity.", "warn");
+      } else {
+        chip.textContent = "Failed";
+        chip.className = "chip";
+        chip.style.background = "rgba(255,92,92,.14)";
+        chip.style.color = "#ff9d9d";
+        status(statusEl, "Verification failed. See the report below.", "err");
+      }
+      show($("verifyResult"));
+      logAdd("verify", `Verification ${kind === "pass" ? "passed" : kind === "warn" ? "partially passed" : "failed"} for a ${fmtBytes(bytes.length)} file`);
+    }
+  }catch(err){
+    status(statusEl, err.message, "err");
+    hide($("verifyResult"));
+  }finally{
+    busy(btn, false);
+  }
+};
+
+/* =========================================================================
+   MODULE 05 — KEY GENERATOR
+   ========================================================================= */
+const CHARSETS = {
+  lower: "abcdefghijklmnopqrstuvwxyz",
+  upper: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  digits: "0123456789",
+  symbols: "!@#$%^&*()-_=+[]{};:,.<>?/~"
+};
+
+function randInt(max){
+  if(max <= 0) return 0;
+  const limit = Math.floor(0x100000000 / max) * max;
+  const buf = new Uint32Array(1);
+  let v;
+  do { crypto.getRandomValues(buf); v = buf[0]; } while(v >= limit);
+  return v % max;
+}
+
+function generatePassword(){
+  const sets = [];
+  if($("keyLower").checked) sets.push(CHARSETS.lower);
+  if($("keyUpper").checked) sets.push(CHARSETS.upper);
+  if($("keyDigits").checked) sets.push(CHARSETS.digits);
+  if($("keySymbols").checked) sets.push(CHARSETS.symbols);
+
+  if(!sets.length) throw new Error("Select at least one character set.");
+
+  const len = parseInt($("keyLen").value, 10) || 24;
+  const pool = sets.join("");
+  const chars = [];
+
+  // guarantee at least one character from every selected set
+  for(const s of sets) chars.push(s[randInt(s.length)]);
+  while(chars.length < len) chars.push(pool[randInt(pool.length)]);
+
+  // Fisher–Yates shuffle using a CSPRNG
+  for(let i = chars.length - 1; i > 0; i--){
+    const j = randInt(i + 1);
+    [chars[i], chars[j]] = [chars[j], chars[i]];
+  }
+  return chars.slice(0, len).join("");
+}
+
+$("keyLen").addEventListener("input", () => {
+  $("keyLenVal").textContent = $("keyLen").value;
+});
+
+$("keyGen").onclick = () => {
+  const statusEl = $("keyStatus");
+  try{
+    const pw = generatePassword();
+    $("keyOut").value = pw;
+    const node = $("keyStrength");
+    renderStrength(node, pw);
+    const e = estimateEntropy(pw);
+    status(statusEl, `Generated ${pw.length} characters from a pool of ${(() => {
+      let n = 0;
+      if($("keyLower").checked) n += 26;
+      if($("keyUpper").checked) n += 26;
+      if($("keyDigits").checked) n += 10;
+      if($("keySymbols").checked) n += 33;
+      return n;
+    })()} symbols · ≈${e} bits of entropy.`, "ok");
+    toast("Password generated");
+  }catch(err){
+    status(statusEl, err.message, "err");
+  }
+};
+
+$("keyCopy").onclick = () => copyText($("keyOut").value, $("keyCopy"));
+
+/* =========================================================================
+   ACTIVITY LOG CONTROLS
+   ========================================================================= */
+$("histClear").onclick = () => {
+  if(!confirm("Clear the local activity log? This cannot be undone.")) return;
+  localStorage.removeItem(LOG_KEY);
+  drawLog();
+  toast("Activity log cleared");
+};
+
+$("histToggle").onclick = () => {
+  const body = $("histBody");
+  const hidden = body.style.display === "none";
+  body.style.display = hidden ? "block" : "none";
+  $("histToggle").innerHTML = hidden
+    ? icon("eye-off") + "Hide"
+    : icon("eye") + "Show";
+};
+
+/* =========================================================================
+   BOOT
+   ========================================================================= */
+(function boot(){
+  if(!window.crypto || !window.crypto.subtle){
+    alert("STEALTHVAULT requires the Web Crypto API. Open it over HTTPS or from a local file in a modern browser.");
+  }
+  switchTab("hide");
+  renderSecretFiles();
+  renderEncFiles();
+  drawLog();
+})();
+</script>
 </body>
 </html>
