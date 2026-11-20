@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import Home from "./pages/Home";
 import AboutPage from "./pages/About";
@@ -14,21 +14,32 @@ import ContactPage from "./pages/Contact";
 import Demos from "./pages/Demos";
 import DemosDirectory from "./pages/DemosDirectory";
 import Admin from "./pages/Admin";
+import Privacy from "./pages/Privacy";
 import { LiquidAmbient } from "./components/LiquidGlass";
 import Intro, { shouldShowIntro } from "./components/Intro";
 import { Header, Sidebar, Drawer, Footer, BackToTop, useActiveSection } from "./components/Layout";
 import { info } from "./lib/data";
 import { replayBrokenImageErrors } from "./lib/imageFallback";
 import { trackPageView } from "./lib/analytics";
+import { analyticsAllowed, getConsent, sendPageView, subscribeConsent } from "./lib/collector";
+import { getCachedConfig, isPreviewMode, useSiteConfig } from "./lib/siteConfig";
+import { playPageTransition } from "./lib/effects";
+import { AnnouncementPill, MaintenanceOverlay, PreviewBadge, PrivacyNotice, ScrollProgress } from "./components/SiteShell";
 import { usePath } from "./lib/router";
 
 const HOME_SECTION_IDS = ["home", "about", "services", "projects", "demos", "certificates", "qa", "contact"];
 
 function OptionalAnalytics() {
   const [mounted, setMounted] = useState(false);
+  const cfg = useSiteConfig();
+  useSyncExternalStore(subscribeConsent, getConsent, () => "unset");
+  const allowed = analyticsAllowed(cfg);
 
   useEffect(() => {
     setMounted(true);
+    // Third-party tags (Vercel Analytics, GA4, Clarity) load ONLY while the owner's master switch is ON
+    // and the visitor has not opted out / sent a privacy signal.
+    if (!allowed) return;
 
     const gaId = (import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined) || info.analytics?.gaMeasurementId || "";
     if (gaId && !document.getElementById("ga4-script")) {
@@ -52,9 +63,9 @@ function OptionalAnalytics() {
       inline.textContent = `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",${JSON.stringify(clarityId)});`;
       document.head.appendChild(inline);
     }
-  }, []);
+  }, [allowed]);
 
-  if (!mounted) return null;
+  if (!mounted || !allowed) return null;
   return info.analytics?.vercelAnalytics !== false ? <Analytics /> : null;
 }
 
@@ -66,7 +77,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
   const activeSection = useActiveSection(path === "/" ? HOME_SECTION_IDS : []);
 
   useEffect(() => {
-    if (path === "/" && shouldShowIntro()) {
+    if (path === "/" && getCachedConfig()?.features.intro !== false && shouldShowIntro()) {
       setIntro(true);
     }
   }, []);
@@ -158,6 +169,8 @@ export default function App({ initialPath }: { initialPath?: string }) {
       <DemosDirectory initialTab="control-room" />
     ) : demoMatch ? (
       <Demos slug={demoMatch[1]} />
+    ) : path === "/privacy" ? (
+      <Privacy />
     ) : path === "/admin" ? (
       <Admin />
     ) : (
@@ -166,9 +179,16 @@ export default function App({ initialPath }: { initialPath?: string }) {
 
   const isAdmin = path === "/admin";
 
+  const firstPath = useRef(true);
   useEffect(() => {
-    trackPageView(path);
+    if (analyticsAllowed()) trackPageView(path); // legacy on-device counter, only while analytics is ON
+    void sendPageView(path); // first-party collector: waits for config, no-op unless allowed
+    if (firstPath.current) firstPath.current = false;
+    else playPageTransition();
   }, [path]);
+
+  const siteCfg = useSiteConfig();
+  const maintenance = siteCfg.maintenance.enabled && !isPreviewMode() && !isAdmin;
 
   if (isAdmin) {
     return (
@@ -183,7 +203,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
     <div className="min-h-screen bg-[#07070a] text-white overflow-x-clip relative">
       <LiquidAmbient />
       {intro && <Intro onDone={() => setIntro(false)} />}
-      <div inert={menu || intro}>
+      <div inert={menu || intro || maintenance}>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[70] bg-red-600 px-4 py-2 rounded"
@@ -199,6 +219,11 @@ export default function App({ initialPath }: { initialPath?: string }) {
         <BackToTop />
       </div>
       <Drawer open={menu} setOpen={setMenu} currentPath={path} />
+      <ScrollProgress />
+      <AnnouncementPill />
+      <PrivacyNotice />
+      <PreviewBadge />
+      <MaintenanceOverlay path={path} />
       <OptionalAnalytics />
     </div>
   );
