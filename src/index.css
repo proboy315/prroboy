@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./styles/liquid-glass.css";
+@import "./styles/proboy-ui.css";
 :root { --header-height: 96px; --page-gutter: clamp(72px, 5.7vw, 90px); color-scheme: dark; }
 * { box-sizing: border-box; }
 .page-container { width: min(1488px, calc(100% - var(--page-gutter) * 2)); margin-inline: auto; }
