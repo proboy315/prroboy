@@ -116,8 +116,8 @@ function Portrait() {
 function HeroArt() {
   return (
     <div className="hero-visual">
-      <div className="hero-light" aria-hidden="true" />
-      <svg viewBox="0 0 800 850" className="hero-orbits" aria-hidden="true">
+      <div className="hero-light" data-parallax aria-hidden="true" />
+      <svg viewBox="0 0 800 850" className="hero-orbits" data-parallax aria-hidden="true">
         <defs>
           <linearGradient id="orbit-light" x1="0" y1="0" x2="1" y2="1">
             <stop stopColor="#fb153d" stopOpacity="0.1" />
