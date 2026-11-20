@@ -4,6 +4,7 @@ import AdminProjectsTab from "../components/admin/AdminProjectsTab";
 import AdminPublicStudioTab from "../components/admin/AdminPublicStudioTab";
 import AdminSeoTab from "../components/admin/AdminSeoTab";
 import AdminThemeTab from "../components/admin/AdminThemeTab";
+import { AnalyticsTab, ControlCenterTab, SecurityTab } from "../components/admin/AdminControlCenter";
 import Icon from "../components/Icon";
 import { demos, gallery, info, projects } from "../lib/data";
 import {
@@ -31,7 +32,7 @@ import {
 } from "../lib/vault";
 import "../styles/admin.css";
 
-type TabId = "dashboard" | "seo" | "projects" | "files" | "content" | "theme" | "settings";
+type TabId = "dashboard" | "seo" | "projects" | "files" | "content" | "theme" | "settings" | "control" | "analytics" | "security";
 type Toast = { id: number; type: "ok" | "err" | "info"; msg: string };
 
 const TAB_META: Record<TabId, { title: string; sub: string }> = {
@@ -41,6 +42,9 @@ const TAB_META: Record<TabId, { title: string; sub: string }> = {
   files: { title: "Files & Public Studio", sub: "Folders, code & uploads in public/" },
   content: { title: "Site Content", sub: "Profile, services, gallery, demos, blog" },
   theme: { title: "Theme Studio", sub: "Public site glass tuning" },
+  control: { title: "Control Center", sub: "Appearance, motion, features, announcements & publishing" },
+  analytics: { title: "Analytics", sub: "Server-side first-party reports and the ON/OFF switch" },
+  security: { title: "Security", sub: "Trusted devices, bot API keys & audit log" },
   settings: { title: "Control Settings", sub: "Connection, analytics, vault & security" },
 };
 
@@ -437,6 +441,12 @@ export default function Admin() {
                 {typeof n.count === "number" && <span className="ad-count">{n.count}</span>}
               </button>
             ))}
+            <p className="ad-side-section">Control Center</p>
+            {([["control", "Site Controls", "sliders"], ["analytics", "Analytics", "chart"], ["security", "Security", "shield"]] as const).map(([id, label, icon]) => (
+              <button key={id} className={`ad-side-link ${tab === id ? "active" : ""}`} onClick={() => { setTab(id as TabId); setSideOpen(false); }}>
+                <Icon name={icon} className="w-4 h-4" /> {label}
+              </button>
+            ))}
             <p className="ad-side-section">System</p>
             <button className={`ad-side-link ${tab === "settings" ? "active" : ""}`} onClick={() => { setTab("settings"); setSideOpen(false); }}>
               <Icon name="sliders" className="w-4 h-4" /> Settings
@@ -628,6 +638,9 @@ export default function Admin() {
               </>
             )}
 
+            {tab === "control" && <ControlCenterTab onToast={pushToast} goTo={(t) => setTab(t as TabId)} />}
+            {tab === "analytics" && <AnalyticsTab onToast={pushToast} goTo={(t) => setTab(t as TabId)} />}
+            {tab === "security" && <SecurityTab onToast={pushToast} goTo={(t) => setTab(t as TabId)} />}
             {tab === "seo" && <AdminSeoTab cfg={cfg} connected={connected} onToast={pushToast} onRepoChange={() => void refreshCommits(cfg)} />}
             {tab === "projects" && <AdminProjectsTab cfg={cfg} connected={connected} onToast={pushToast} onRepoChange={() => void refreshCommits(cfg)} />}
             {tab === "files" && <AdminPublicStudioTab cfg={cfg} connected={connected} onToast={pushToast} onRepoChange={() => void refreshCommits(cfg)} />}
