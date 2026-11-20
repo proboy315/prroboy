@@ -46,7 +46,7 @@ export function useSeo(o: SeoConfig) {
     meta("property", "og:title", o.title);
     meta("property", "og:description", o.description);
     meta("property", "og:type", o.ogType || "website");
-    meta("property", "og:site_name", `${info.name} / ${info.brand}`);
+    meta("property", "og:site_name", "ProBoy");
     meta("property", "og:locale", "en_US");
     meta("name", "geo.region", info.geo.region);
     meta("name", "geo.placename", info.geo.placename);
@@ -154,7 +154,9 @@ export const websiteLd = () => ({
   "@type": "WebSite",
   "@id": site ? `${site}/#website` : undefined,
   url: site,
-  name: `${info.name} (${info.brand}) — Portfolio`,
+  name: "ProBoy",
+  alternateName: ["Shahan Ali", "PROBOY"],
+  inLanguage: "en",
   description: info.seo.description,
   publisher: site ? { "@id": `${site}/#person` } : undefined,
 });
