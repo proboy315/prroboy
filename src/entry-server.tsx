@@ -348,6 +348,27 @@ export function getPrerenderRoutes(): RouteMeta[] {
       ],
     },
     {
+      path: "/privacy",
+      title: "Privacy & Analytics | ProBoy — Shahan Ali",
+      description:
+        "How ProBoy (Shahan Ali) handles visitor data: cookie-free, aggregate first-party analytics with opt-out, no IP storage and no advertising trackers.",
+      ogType: "website",
+      jsonLd: [
+        breadcrumbLd([
+          ["Home", "/"],
+          ["Privacy & analytics", "/privacy"],
+        ]),
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: "Privacy & Analytics — ProBoy",
+          url: `${site}/privacy`,
+          isPartOf: { "@id": `${site}/#website` },
+          about: { "@id": `${site}/#person` },
+        },
+      ],
+    },
+    {
       path: "/demos/control-room",
       title: `Demo Control Room | Shahan Ali (PROBOY)`,
       description: "Local browser sandbox to customize, reorder, hide/show, and preview interactive demo cards built by Shahan Ali (PROBOY).",
