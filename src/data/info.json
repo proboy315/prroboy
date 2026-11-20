@@ -128,6 +128,11 @@
       "id": "mail",
       "label": "Email",
       "url": "mailto:shahanali.dev@gmail.com"
+    },
+    {
+      "id": "tiktok",
+      "label": "tiktok",
+      "url": "https://www.tiktok.com/@itx_proboy"
     }
   ],
   "stats": [
