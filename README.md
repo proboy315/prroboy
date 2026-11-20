@@ -101,3 +101,31 @@ Results live in `.work/*-results.json`.
 
 ## Portrait picker behaviour
 When `profileImage` points to a real file in `public/`, the hero renders it and the "Select portrait", "Change photo" and "Publish this image" controls disappear automatically — a published portrait always wins over any browser-only preview.
+
+---
+
+## ProBoy platform upgrade (Control Center, first-party analytics, hosting)
+
+**Project root:** the app runs from the repository root (`npm install` → `npm run dev` / `npm run build` → `dist/`).
+
+### Design system
+`src/styles/proboy-ui.css` is loaded on every page. It defines tokens (`--pb-accent`, `--pb-radius`, `--pb-motion`, …), the iridescent ring component (`<RingIcon>` in `src/components/SiteShell.tsx`), glass-pill navigation, 3D tilt cards (`src/lib/effects.ts`), scroll-driven reveals and parallax (CSS `animation-timeline`, transform/opacity only). Nothing loops forever; `prefers-reduced-motion` and the admin "Animations" switch turn everything static.
+
+### Serverless API (`/api/*`)
+Platform-neutral core in `server/` (standard `Request → Response`), with thin wrappers: `api/[...path].mjs` (Vercel) and `netlify/functions/api.mjs` (Netlify). Storage is Upstash Redis over REST (TLS in transit, encrypted at rest by the provider; sensitive records additionally AES-256-GCM encrypted by the app).
+
+| Variable | Purpose |
+|---|---|
+| `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` (or `KV_REST_API_URL/TOKEN`) | private storage |
+| `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH` | owner login (hash from `npm run admin:setup`) |
+| `ADMIN_TOTP_SECRET` | authenticator-app verification + "remember this device" |
+| `SESSION_SECRET` (≥32 chars), `DATA_ENCRYPTION_KEY` (optional) | signing / encryption keys |
+| `SITE_URL` | origin allowed to send analytics |
+
+Set them in the host dashboard only — never in `public/`, never with a `VITE_` prefix. `PROBOY_SPLIT_ASSETS=1` (already set in `vercel.json`/`netlify.toml`) ships cacheable `/assets` instead of inlining the bundle into every page.
+
+### Admin → Control Center
+`/admin` → **Site Controls** (appearance, motion, sections, announcement, maintenance; draft → preview → publish → restore previous), **Analytics** (master ON/OFF, reports, export, delete), **Security** (trusted devices, scoped bot API keys, audit log). These tabs use a separate server session (HttpOnly cookie). Content/SEO/project editing continues through the existing GitHub-backed tabs.
+
+### Checks
+`npm run test:server` (API/auth/analytics tests, in-memory store) · `npm run build && PROBOY_SPLIT_ASSETS=1 npm run build && node scripts/audit-site.mjs` (crawl of the built site → `docs/SEO-AUDIT.md`).
