@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "./Icon";
+import { RingIcon } from "./SiteShell";
 import { info, services, socials } from "../lib/data";
 import { onLink } from "../lib/router";
 import "../styles/navigation.css";
@@ -130,7 +131,10 @@ export function Header({
             })}
         </nav>
         <a href="/contact" onClick={onLink} className="header-contact">
-          Let&apos;s Talk <Icon name="arrow" className="w-4 h-4" />
+          <RingIcon>
+            <Icon name="arrow" className="w-4 h-4" />
+          </RingIcon>
+          Let&apos;s Talk
         </a>
         <button
           className="header-menu"
@@ -193,7 +197,9 @@ export function Sidebar({ active }: { active: string }) {
               onFocus={(event) => showHint(event.currentTarget, item.label)}
               onBlur={() => setHint(null)}
             >
-              <Icon name={item.icon} className="w-[18px] h-[18px] shrink-0" />
+              <RingIcon active={active === item.id}>
+                <Icon name={item.icon} className="w-[18px] h-[18px] shrink-0" />
+              </RingIcon>
               <span className="rail-label" aria-hidden={!expanded}>
                 {item.label}
               </span>
@@ -410,9 +416,11 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-white/5 py-6 text-center text-xs text-zinc-500 px-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+        <a href="/privacy" onClick={onLink} className="hover:text-white transition">Privacy &amp; analytics</a>
         <span>© {new Date().getFullYear()} {info.name} · {info.brand}. Designed and engineered by {info.name} ({info.handle}).</span>
         <a
           href="/admin"
+          rel="nofollow"
           onClick={onLink}
           className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/10 text-zinc-400 hover:text-white hover:border-red-500/40 transition"
         >
