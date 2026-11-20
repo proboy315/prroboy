@@ -77,7 +77,7 @@ function prerenderRoutesPlugin(): Plugin {
               ? `<link rel="preload" as="image" href="/images/shahan-ali-portrait.jpg" fetchpriority="high" />`
               : "",
             `<meta property="og:type" content="${route.ogType}" />`,
-            `<meta property="og:site_name" content="Shahan Ali / PROBOY" />`,
+            `<meta property="og:site_name" content="ProBoy" />`,
             `<meta property="og:title" content="${escapeHtml(route.title)}" />`,
             `<meta property="og:description" content="${escapeHtml(route.description)}" />`,
             `<meta property="og:url" content="${escapeHtml(canonicalUrl)}" />`,
@@ -132,7 +132,15 @@ function prerenderRoutesPlugin(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), viteSingleFile(), prerenderRoutesPlugin()],
+  // Single-file output (everything inlined) is the default so the build is self-contained for previews.
+  // Production hosts set PROBOY_SPLIT_ASSETS=1 (see vercel.json / netlify.toml) to emit hashed, cacheable
+  // JS/CSS under /assets instead of inlining ~1 MB into every prerendered page.
+  plugins: [
+    react(),
+    tailwindcss(),
+    ...(process.env.PROBOY_SPLIT_ASSETS === "1" ? [] : [viteSingleFile()]),
+    prerenderRoutesPlugin(),
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
