@@ -1,0 +1,19 @@
+{
+    "ownerNumber": [
+        "923114063519"
+    ],
+    "ownerName": [
+        "RANA USMAN"
+    ],
+    "botName": "TEAM ZERO-MD",
+    "botimg": "https://proboy.vercel.app/bot/team-zero-trace-intelligence/bot_image.jpg",
+    "version": "1.0.0",
+    "prefix": ".",
+    "sessionName": "session",
+    "sessionID": "",
+    "newsletterJid": "120363406203875411@newsletter",
+    "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+    "packname": "TEAM ZERO-MD",
+    "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/team-zero-trace-intelligence/connect.json",
+    "REMOTE_SESSIONS_URL": "https://proboy.vercel.app/bot/team-zero-trace-intelligence/sessions.json"
+}

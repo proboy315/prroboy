@@ -1,0 +1,49 @@
+[
+  {
+    "slug": "building-proboy-md-whatsapp-bot-architecture",
+    "title": "How ProBoy-MD Works: Modular WhatsApp Multi-Device Bot Architecture in Node.js",
+    "summary": "See how ProBoy-MD organizes 224 command files with Node.js and Baileys, a library for WhatsApp's multi-device connection.",
+    "publishedAt": "2026-11-05",
+    "updatedAt": "2026-11-06",
+    "category": "Bot Architecture",
+    "readingTime": "6 min read",
+    "author": "Shahan Ali",
+    "tags": [
+      "ProBoy-MD",
+      "Node.js",
+      "Baileys",
+      "WhatsApp Bot",
+      "Architecture"
+    ],
+    "sections": [
+      {
+        "heading": "Why Modularity Matters in a Multi-Command Bot",
+        "paragraphs": [
+          "When a WhatsApp automation bot grows beyond a handful of commands, putting every handler inside a single switch statement quickly becomes impossible to debug or extend. When designing ProBoy-MD (github.com/ProBoy315/ProBoy-MD), the primary engineering goal was keeping every command self-contained so individual modules can be inspected, updated, or disabled without breaking the core session loop.",
+          "In the current repository source, ProBoy-MD structures 224 verified command files (220 unique primary command names) across nine functional directories: general, ai, group, dev, media, fun, utility, textmaker, and admin."
+        ]
+      },
+      {
+        "heading": "Message Lifecycle: From Socket Event to Reply",
+        "paragraphs": [
+          "ProBoy-MD runs on Node.js using the Baileys WhatsApp Multi-Device library. Instead of browser automation overhead, Baileys communicates over WhatsApp's multi-device WebSocket protocol.",
+          "Each incoming message passes through four predictable stages: (1) connection and session state verification, (2) message event normalization and deduplication so retried packets do not trigger duplicate actions, (3) prefix checking (using the '.' prefix by default) and command/alias resolution with role/permission checks, and (4) isolated command execution that formats and sends the response."
+        ]
+      },
+      {
+        "heading": "Pairing-Code Authentication vs. QR Scanning",
+        "paragraphs": [
+          "Many users deploy WhatsApp bots from mobile devices or cloud hosts where scanning a terminal QR code with a second camera is inconvenient. ProBoy-MD supports WhatsApp's phone-number pairing-code flow via a dedicated pairing service (proboy-md.gt.tc).",
+          "Users enter their phone number with country code, receive a short pairing code, and enter it directly inside WhatsApp under Linked Devices. Session credentials remain isolated from public frontend portfolios and should never be committed to version control."
+        ]
+      },
+      {
+        "heading": "Practical Lessons & Security Guardrails",
+        "paragraphs": [
+          "Building and maintaining an open-source bot highlights two critical realities: external third-party APIs can change or rate-limit at any time, and administrative commands require strict owner/group-admin permission boundaries.",
+          "Keeping command metadata explicit (exposing name, aliases, category, description, and usage in each file) also allowed the command directory on this site to be parsed directly from verified repository files rather than relying on static guesswork."
+        ]
+      }
+    ]
+  }
+]

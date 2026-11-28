@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JS Obfuscator Pro</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #e0e0e0;
+    }
+    .container {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 35px 30px;
+      width: 100%;
+      max-width: 680px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.45);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, #f7971e, #ffd200);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .mode-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.04);
+      cursor: pointer;
+      font-weight: 600;
+      color: #ccc;
+      transition: 0.25s;
+      text-align: center;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #f7971e, #ffd200);
+      color: #1a1a2e;
+      border-color: transparent;
+      box-shadow: 0 10px 20px rgba(247,151,30,0.25);
+    }
+    .tab-panel {
+      display: none;
+      animation: fade 0.3s ease;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+    @keyframes fade {
+      from { opacity: 0.3; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .upload-area {
+      border: 2px dashed rgba(255,255,255,0.3);
+      border-radius: 16px;
+      padding: 30px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s;
+      background: rgba(255,255,255,0.03);
+      margin-bottom: 15px;
+    }
+    .upload-area:hover {
+      border-color: #f7971e;
+      background: rgba(247,151,30,0.07);
+    }
+    .upload-area.dragover {
+      border-color: #ffd200;
+      background: rgba(255,210,0,0.1);
+    }
+    .upload-area input { display: none; }
+    .upload-icon { font-size: 2.6rem; margin-bottom: 6px; }
+    .file-name {
+      font-size: 0.9rem;
+      color: #bbb;
+      margin-top: 8px;
+      word-break: break-all;
+    }
+    textarea.code-input {
+      width: 100%;
+      height: 200px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 14px;
+      color: #fff;
+      padding: 14px;
+      font-family: 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.9rem;
+      resize: vertical;
+      outline: none;
+      margin-bottom: 15px;
+      transition: 0.2s;
+    }
+    textarea.code-input:focus {
+      border-color: #f7971e;
+    }
+    .meta-inputs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 18px;
+    }
+    .input-group {
+      flex: 1 1 45%;
+      min-width: 200px;
+    }
+    .input-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #ffd200;
+    }
+    .input-group input,
+    .input-group textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      color: #fff;
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: 0.2s;
+    }
+    .input-group input:focus,
+    .input-group textarea:focus {
+      border-color: #f7971e;
+    }
+    .options-section {
+      background: rgba(0,0,0,0.25);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 20px;
+    }
+    .options-section h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: #ffd200;
+    }
+    .toggle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px 16px;
+    }
+    .toggle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .toggle-label {
+      font-size: 0.85rem;
+      color: #ddd;
+    }
+    /* Toggle switch style */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 24px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #444;
+      transition: 0.3s;
+      border-radius: 24px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.3s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background: linear-gradient(135deg, #f7971e, #ffd200);
+    }
+    input:checked + .slider:before {
+      transform: translateX(18px);
+    }
+    button.obfuscate-btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: linear-gradient(135deg, #f7971e, #ffd200);
+      color: #1a1a2e;
+      transition: 0.3s;
+      letter-spacing: 0.4px;
+      margin-top: 5px;
+    }
+    button.obfuscate-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(247,151,30,0.35);
+    }
+    button.obfuscate-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .status {
+      margin-top: 18px;
+      min-height: 40px;
+      text-align: center;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      padding: 10px;
+    }
+    .status.error {
+      color: #ff6b6b;
+      background: rgba(255,107,107,0.1);
+    }
+    .status.success {
+      color: #51cf66;
+      background: rgba(81,207,102,0.1);
+    }
+    .limits-note {
+      font-size: 0.78rem;
+      color: #aaa;
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>⚡ JS Obfuscator</h1>
+
+    <!-- Upload / Paste Toggle -->
+    <div class="mode-tabs">
+      <button class="tab-btn active" data-mode="upload">📁 Upload File</button>
+      <button class="tab-btn" data-mode="paste">📝 Paste Code</button>
+    </div>
+
+    <!-- Upload Panel -->
+    <div class="tab-panel active" id="panel-upload">
+      <div class="upload-area" id="dropArea">
+        <div class="upload-icon">⬆️</div>
+        <p><strong>Choose a .js file</strong> or drag & drop</p>
+        <input type="file" id="fileInput" accept=".js,.mjs,.txt" />
+        <div class="file-name" id="fileNameDisplay"></div>
+      </div>
+    </div>
+
+    <!-- Paste Panel -->
+    <div class="tab-panel" id="panel-paste">
+      <textarea class="code-input" id="codeTextarea" placeholder="Paste your JavaScript code here..."></textarea>
+    </div>
+
+    <!-- File name & Comment inputs -->
+    <div class="meta-inputs">
+      <div class="input-group">
+        <label>📄 Output File Name</label>
+        <input type="text" id="outputFileName" value="obfuscated.js" placeholder="obfuscated.js" />
+      </div>
+      <div class="input-group">
+        <label>💬 Top Comment (optional)</label>
+        <input type="text" id="topComment" placeholder="e.g., Obfuscated for client X" />
+      </div>
+    </div>
+
+    <!-- Custom Obfuscation Toggles -->
+    <div class="options-section">
+      <h3>🛠 Obfuscation Options</h3>
+      <div class="toggle-grid">
+        <div class="toggle-item">
+          <span class="toggle-label">Control Flow Flatten</span>
+          <label class="switch">
+            <input type="checkbox" id="optControlFlow" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="toggle-item">
+          <span class="toggle-label">String Array</span>
+          <label class="switch">
+            <input type="checkbox" id="optStringArray" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="toggle-item">
+          <span class="toggle-label">Self Defending</span>
+          <label class="switch">
+            <input type="checkbox" id="optSelfDefending" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="toggle-item">
+          <span class="toggle-label">Debug Protection</span>
+          <label class="switch">
+            <input type="checkbox" id="optDebugProtection" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="toggle-item">
+          <span class="toggle-label">Dead Code Injection</span>
+          <label class="switch">
+            <input type="checkbox" id="optDeadCode" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <small style="color:#aaa; display:block; margin-top:12px;">
+        🔹 Unchecked options = default (usually heavy). Check to explicitly enable.
+      </small>
+    </div>
+
+    <button class="obfuscate-btn" id="obfuscateBtn">🔒 Obfuscate & Download</button>
+
+    <div class="status" id="statusMessage"></div>
+    <div class="limits-note">⚠️ Max 4.5 MB • Heavy options may cause timeout</div>
+  </div>
+
+  <script>
+    const API_URL = 'https://proboy-obf.vercel.app';
+
+    // UI elements
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const panelUpload = document.getElementById('panel-upload');
+    const panelPaste = document.getElementById('panel-paste');
+    const dropArea = document.getElementById('dropArea');
+    const fileInput = document.getElementById('fileInput');
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    const codeTextarea = document.getElementById('codeTextarea');
+    const outputFileName = document.getElementById('outputFileName');
+    const topCommentInput = document.getElementById('topComment');
+    const obfuscateBtn = document.getElementById('obfuscateBtn');
+    const statusDiv = document.getElementById('statusMessage');
+
+    // Mode tracking
+    let activeMode = 'upload'; // 'upload' or 'paste'
+    let selectedFile = null;
+
+    // --- Mode Toggle Logic ---
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeMode = btn.dataset.mode;
+
+        if (activeMode === 'upload') {
+          panelUpload.classList.add('active');
+          panelPaste.classList.remove('active');
+        } else {
+          panelPaste.classList.add('active');
+          panelUpload.classList.remove('active');
+          // Clear file selection when switching
+          selectedFile = null;
+          fileNameDisplay.textContent = '';
+          fileInput.value = '';
+        }
+        clearStatus();
+      });
+    });
+
+    // --- File Upload Handling (click + drag/drop) ---
+    dropArea.addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', (e) => {
+      handleFileSelection(e.target.files[0]);
+    });
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      dropArea.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropArea.addEventListener(eventName, () => dropArea.classList.add('dragover'));
+    });
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropArea.addEventListener(eventName, () => dropArea.classList.remove('dragover'));
+    });
+
+    dropArea.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      if (dt.files && dt.files.length) {
+        handleFileSelection(dt.files[0]);
+      }
+    });
+
+    function handleFileSelection(file) {
+      if (!file) return;
+      const ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+      if (!['.js', '.mjs', '.txt'].includes(ext)) {
+        showStatus('Please select a .js, .mjs, or .txt file', 'error');
+        return;
+      }
+      if (file.size > 4.5 * 1024 * 1024) {
+        showStatus('File size exceeds 4.5 MB limit', 'error');
+        return;
+      }
+      selectedFile = file;
+      fileNameDisplay.textContent = `📄 ${file.name} (${(file.size/1024).toFixed(1)} KB)`;
+      clearStatus();
+    }
+
+    // --- Main Obfuscation Logic ---
+    obfuscateBtn.addEventListener('click', async () => {
+      let codeToObfuscate = '';
+
+      // Gather code based on active mode
+      if (activeMode === 'upload') {
+        if (!selectedFile) {
+          showStatus('Please select a file first', 'error');
+          return;
+        }
+        try {
+          codeToObfuscate = await readFileAsText(selectedFile);
+        } catch (err) {
+          showStatus('Failed to read file', 'error');
+          return;
+        }
+      } else { // paste mode
+        codeToObfuscate = codeTextarea.value.trim();
+        if (!codeToObfuscate) {
+          showStatus('Please paste some JavaScript code', 'error');
+          return;
+        }
+      }
+
+      // Build options from toggles
+      const options = {};
+      const toggles = {
+        controlFlowFlattening: document.getElementById('optControlFlow').checked,
+        stringArray: document.getElementById('optStringArray').checked,
+        selfDefending: document.getElementById('optSelfDefending').checked,
+        debugProtection: document.getElementById('optDebugProtection').checked,
+        deadCodeInjection: document.getElementById('optDeadCode').checked,
+      };
+
+      // Only include options if at least one is true
+      const hasAnyOption = Object.values(toggles).some(val => val === true);
+      if (hasAnyOption) {
+        for (const [key, val] of Object.entries(toggles)) {
+          if (val) options[key] = true;
+        }
+      }
+
+      // Prepare payload
+      const payload = { code: codeToObfuscate };
+      if (Object.keys(options).length > 0) {
+        payload.options = options;
+      }
+
+      // UI feedback
+      obfuscateBtn.disabled = true;
+      obfuscateBtn.textContent = '⏳ Obfuscating...';
+      clearStatus();
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Server error (${response.status}): ${errorText}`);
+        }
+
+        const data = await response.json();
+        if (!data.obfuscatedCode) {
+          throw new Error('Response missing "obfuscatedCode"');
+        }
+
+        // Add user comment at the top if provided
+        let finalCode = data.obfuscatedCode;
+        const comment = topCommentInput.value.trim();
+        if (comment) {
+          finalCode = `// ${comment}\n${finalCode}`;
+        }
+
+        // Download with custom filename
+        const filename = outputFileName.value.trim() || 'obfuscated.js';
+        downloadFile(finalCode, filename);
+
+        showStatus('✅ Obfuscation complete! File downloaded.', 'success');
+      } catch (error) {
+        console.error(error);
+        let msg = error.message;
+        if (msg.includes('Failed to fetch') || msg.includes('NetworkError')) {
+          msg = 'Network error. Check internet or API availability.';
+        } else if (msg.includes('timeout')) {
+          msg = 'Request timed out. Try lighter options or smaller code.';
+        }
+        showStatus(`❌ ${msg}`, 'error');
+      } finally {
+        obfuscateBtn.disabled = false;
+        obfuscateBtn.textContent = '🔒 Obfuscate & Download';
+      }
+    });
+
+    // --- Helper Functions ---
+    function readFileAsText(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.onerror = () => reject(new Error('Read error'));
+        reader.readAsText(file);
+      });
+    }
+
+    function downloadFile(content, filename) {
+      const blob = new Blob([content], { type: 'application/javascript' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function showStatus(message, type) {
+      statusDiv.textContent = message;
+      statusDiv.className = `status ${type}`;
+    }
+
+    function clearStatus() {
+      statusDiv.textContent = '';
+      statusDiv.className = 'status';
+    }
+  </script>
+</body>
+</html>

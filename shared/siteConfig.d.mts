@@ -1,0 +1,51 @@
+export type SiteConfig = {
+  ui: {
+    theme: "obsidian" | "crimson" | "aurora" | "iridescent";
+    accent: string;
+    accent2: string;
+    background: string;
+    fontFamily: "inter" | "system" | "serif" | "mono";
+    fontScale: number;
+    radius: number;
+    cardStyle: "glass" | "solid" | "outline";
+    buttonStyle: "pill" | "rounded" | "sharp";
+    spacing: "compact" | "comfortable" | "spacious";
+    headerStyle: "glass" | "solid" | "transparent";
+    glow: number;
+    ringGlow: number;
+    showHeader: boolean;
+    showFooter: boolean;
+  };
+  motion: {
+    enabled: boolean;
+    intensity: number;
+    tilt3d: number;
+    parallax: boolean;
+    reveal: boolean;
+    hover: boolean;
+    scrollProgress: boolean;
+    smoothScroll: boolean;
+    ambientBackground: boolean;
+  };
+  sections: Record<"about" | "services" | "projects" | "demos" | "certificates" | "qa" | "contact", boolean>;
+  features: { intro: boolean; backToTop: boolean; privacyNotice: boolean };
+  maintenance: { enabled: boolean; title: string; message: string };
+  announcement: { enabled: boolean; text: string; link: string; linkLabel: string; tone: "info" | "success" | "warning" };
+  analytics: { enabled: boolean; consentMode: "notice" | "optin"; retentionDays: number; trackEvents: boolean };
+  security: { trustedDeviceDays: number };
+};
+export type PublicSiteConfig = Omit<SiteConfig, "security" | "analytics"> & {
+  analytics: { enabled: boolean; consentMode: "notice" | "optin"; trackEvents: boolean };
+};
+export const THEMES: string[];
+export const FONTS: string[];
+export const CARD_STYLES: string[];
+export const BUTTON_STYLES: string[];
+export const SPACINGS: string[];
+export const HEADER_STYLES: string[];
+export const ANNOUNCEMENT_TONES: string[];
+export const CONSENT_MODES: string[];
+export const HOME_SECTIONS: string[];
+export const DEFAULT_CONFIG: SiteConfig;
+export function sanitizeConfig(input: unknown, base?: SiteConfig): SiteConfig;
+export function publicConfig(cfg: SiteConfig): PublicSiteConfig;

@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProBoy JS Obfuscator - Protect Your Source Code</title>
+    <meta name="description" content="Secure, high-performance client-side JavaScript obfuscator tool to compile, safeguard, and optimize your production source files.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Ambient Background Orbs */
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -20px) scale(1.08); }
+        }
+        .orb-blur {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.12;
+            animation: drift 18s infinite ease-in-out alternate;
+        }
+
+        /* Interactive Shimmer Button effect */
+        .btn-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shimmer::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            transform: translateX(-100%) skewX(-15deg);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: transform 0.6s;
+        }
+        .btn-shimmer:hover::after {
+            transform: translateX(100%) skewX(-15deg);
+            transition: transform 0.75s ease-in-out;
+        }
+
+        /* Visual carbon mesh background */
+        .tech-grid {
+            background-color: #030508;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(30, 41, 59, 0.45) 0%, transparent 55%),
+                radial-gradient(circle at 85% 80%, rgba(15, 23, 42, 0.6) 0%, transparent 60%),
+                linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 12px 12px, 12px 12px, 4px 4px, 4px 4px;
+        }
+
+        /* Smooth UI entry animations */
+        .fade-in {
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Customized dark scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(245, 158, 11, 0.25);
+            border-radius: 99px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(245, 158, 11, 0.45);
+        }
+    </style>
+</head>
+<body class="bg-[#02040a] text-slate-100 font-sans min-h-screen flex flex-col justify-between overflow-x-hidden relative tech-grid selection:bg-amber-500/30 selection:text-white">
+
+    <!-- Glowing Background Atmosphere -->
+    <div class="orb-blur w-[450px] h-[450px] bg-amber-500/10 top-[-80px] left-[-80px]"></div>
+    <div class="orb-blur w-[500px] h-[500px] bg-purple-500/5 bottom-[-150px] right-[-100px]" style="animation-delay: -6s;"></div>
+    <div class="orb-blur w-[380px] h-[380px] bg-cyan-500/5 top-[35%] left-[25%]" style="animation-delay: -12s;"></div>
+
+    <!-- Header Navigation -->
+    <header class="w-full z-20 border-b border-white/5 backdrop-blur-md bg-slate-950/60 sticky top-0">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-purple-500 flex items-center justify-center font-black text-slate-950 text-sm tracking-tighter group-hover:scale-105 transition-all duration-300 shadow-lg shadow-amber-500/10">
+                    SA
+                </div>
+                <div>
+                    <h1 class="text-sm font-black tracking-tight text-white flex items-center gap-1.5 leading-none">
+                        Shahan Ali <span class="text-[9px] font-mono text-amber-400 bg-amber-950/60 border border-amber-800/40 px-1.5 py-0.5 rounded-md uppercase tracking-wider font-extrabold">Obfuscator</span>
+                    </h1>
+                    <p class="text-[9px] text-slate-400 font-mono mt-0.5">Burewala, Pakistan</p>
+                </div>
+            </a>
+            <div class="flex items-center gap-3">
+                <a href="/" class="text-xs font-bold text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 bg-white/5 px-3.5 py-1.5 rounded-full border border-white/5 hover:border-white/10">
+                    <i class="fas fa-arrow-left text-[10px] text-amber-400"></i> Back to Portfolio
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 w-full max-w-2xl mx-auto px-4 py-12 flex flex-col justify-center z-10 relative">
+        
+        <div class="backdrop-blur-xl bg-slate-900/40 border border-white/5 rounded-[32px] p-6 sm:p-8 shadow-2xl relative overflow-hidden transition-all duration-300 fade-in">
+            <!-- Neon Accent Banner Top Border -->
+            <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-amber-500 via-purple-500 to-cyan-500"></div>
+
+            <!-- Page Title -->
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-[10px] text-amber-400 font-mono tracking-wider uppercase font-bold mb-3">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
+                    <span>Pro Protection Suite</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
+                    JS Source <span class="bg-gradient-to-r from-amber-400 to-purple-400 bg-clip-text text-transparent">Obfuscator</span>
+                </h2>
+                <p class="text-slate-400 text-xs mt-1.5 max-w-md mx-auto leading-relaxed">
+                    Safeguard your script variables, strings, and logical flow structures from inspection, reverse engineering, and structural cloning instantly.
+                </p>
+            </div>
+
+            <!-- Input Tabs Selector -->
+            <div id="tabsSelector" class="flex gap-2 p-1 bg-slate-950 rounded-2xl border border-white/5 mb-6">
+                <button class="tab-btn flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer text-amber-400 bg-white/[0.03] border border-white/5" id="tab-upload" data-mode="upload">
+                    <i class="fas fa-file-code mr-1.5 text-[11px]"></i> Upload File
+                </button>
+                <button class="tab-btn flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer text-slate-400 hover:text-slate-200" id="tab-paste" data-mode="paste">
+                    <i class="fas fa-edit mr-1.5 text-[11px]"></i> Paste Code
+                </button>
+            </div>
+
+            <!-- Panel 1: File Selection with Drag & Drop Area -->
+            <div class="tab-panel active space-y-4" id="panel-upload">
+                <div class="border-2 border-dashed border-white/10 hover:border-amber-500/40 bg-slate-950/40 rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 group relative overflow-hidden" id="dropArea">
+                    <div class="absolute inset-0 bg-amber-500/[0.01] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <div class="w-14 h-14 bg-amber-500/5 border border-amber-500/10 rounded-2xl flex items-center justify-center mx-auto text-amber-400 text-xl mb-4 group-hover:scale-110 group-hover:border-amber-400/30 transition-all duration-300">
+                        <i class="fas fa-cloud-arrow-up"></i>
+                    </div>
+                    
+                    <p class="text-sm font-bold text-slate-200">Drag & drop your script here</p>
+                    <p class="text-xs text-slate-500 mt-1">or click to browse local files (.js, .mjs, .txt)</p>
+                    
+                    <input type="file" id="fileInput" accept=".js,.mjs,.txt" class="hidden" />
+                    <div class="text-xs font-mono text-amber-400 mt-4 bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-lg inline-block hidden" id="fileNameDisplay"></div>
+                </div>
+            </div>
+
+            <!-- Panel 2: Manual Code Textarea input (Hidden by default) -->
+            <div class="tab-panel hidden space-y-4" id="panel-paste">
+                <div class="space-y-2">
+                    <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">Input JavaScript Code</label>
+                    <textarea 
+                        id="codeTextarea" 
+                        placeholder="Paste your raw JavaScript function or script modules here..." 
+                        class="w-full h-48 bg-slate-950/80 border border-white/5 focus:border-amber-400/50 rounded-2xl p-4 text-white font-mono text-xs focus:outline-none transition-all duration-300 resize-y"
+                    ></textarea>
+                </div>
+            </div>
+
+            <!-- Output Filename & Top Header Comment Input Group -->
+            <div id="metaInputs" class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">📄 Output File Name</label>
+                    <input 
+                        type="text" 
+                        id="outputFileName" 
+                        value="obfuscated.js" 
+                        placeholder="obfuscated.js" 
+                        class="w-full bg-slate-950 border border-white/5 rounded-xl px-4 py-3 text-white font-mono text-xs focus:border-amber-400/50 focus:outline-none transition-all duration-300"
+                    />
+                </div>
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">💬 Top Comment Header</label>
+                    <input 
+                        type="text" 
+                        id="topComment" 
+                        placeholder="e.g. Protected by ProBoy MD Obfuscator" 
+                        class="w-full bg-slate-950 border border-white/5 rounded-xl px-4 py-3 text-white font-mono text-xs focus:border-amber-400/50 focus:outline-none transition-all duration-300"
+                    />
+                </div>
+            </div>
+
+            <!-- Options Toggles Settings -->
+            <div id="optionsSection" class="bg-slate-950/60 border border-white/5 rounded-2xl p-5 mb-6 space-y-4">
+                <h3 class="text-xs font-mono uppercase tracking-wider text-amber-400 font-black flex items-center gap-2">
+                    <i class="fas fa-sliders-h text-[11px]"></i> Custom Obfuscation Options
+                </h3>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <!-- Toggle item 1 -->
+                    <div class="flex items-center justify-between gap-4 p-2.5 rounded-xl bg-slate-900/30 border border-white/[0.02]">
+                        <span class="text-xs text-slate-300">Control Flow Flattening</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="optControlFlow" class="sr-only peer">
+                            <div class="w-9 h-5 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-amber-500 peer-checked:to-purple-500"></div>
+                        </label>
+                    </div>
+
+                    <!-- Toggle item 2 -->
+                    <div class="flex items-center justify-between gap-4 p-2.5 rounded-xl bg-slate-900/30 border border-white/[0.02]">
+                        <span class="text-xs text-slate-300">String Encryption Array</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="optStringArray" class="sr-only peer" checked>
+                            <div class="w-9 h-5 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-amber-500 peer-checked:to-purple-500"></div>
+                        </label>
+                    </div>
+
+                    <!-- Toggle item 3 -->
+                    <div class="flex items-center justify-between gap-4 p-2.5 rounded-xl bg-slate-900/30 border border-white/[0.02]">
+                        <span class="text-xs text-slate-300">Self Defending Shield</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="optSelfDefending" class="sr-only peer">
+                            <div class="w-9 h-5 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-amber-500 peer-checked:to-purple-500"></div>
+                        </label>
+                    </div>
+
+                    <!-- Toggle item 4 -->
+                    <div class="flex items-center justify-between gap-4 p-2.5 rounded-xl bg-slate-900/30 border border-white/[0.02]">
+                        <span class="text-xs text-slate-300">Debug Execution Lock</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="optDebugProtection" class="sr-only peer">
+                            <div class="w-9 h-5 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-amber-500 peer-checked:to-purple-500"></div>
+                        </label>
+                    </div>
+
+                    <!-- Toggle item 5 -->
+                    <div class="flex items-center justify-between gap-4 p-2.5 rounded-xl bg-slate-900/30 border border-white/[0.02] sm:col-span-2">
+                        <span class="text-xs text-slate-300">Dead Code Injection Layer</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="optDeadCode" class="sr-only peer">
+                            <div class="w-9 h-5 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-amber-500 peer-checked:to-purple-500"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 3: Success Results (Hidden by default) -->
+            <div class="hidden space-y-4 fade-in" id="panel-result">
+                <div class="bg-slate-950/80 border border-emerald-500/30 rounded-2xl p-5 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-3 text-[10px] text-emerald-400 font-mono flex items-center gap-1.5 bg-emerald-950/60 border-l border-b border-emerald-800/40 rounded-bl-xl uppercase tracking-wider font-extrabold">
+                        <i class="fas fa-check-circle"></i> Securely Compiled
+                    </div>
+                    <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 font-bold mb-2">⚡ Secured Output Preview</label>
+                    <textarea 
+                        id="resultPreview" 
+                        readonly 
+                        class="w-full h-40 bg-slate-950/90 border border-white/5 rounded-xl p-4 text-emerald-400 font-mono text-[11px] focus:outline-none resize-none leading-relaxed"
+                    ></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button id="btnCopyCode" class="w-full py-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 border border-white/5 hover:border-white/10 cursor-pointer">
+                        <i class="fas fa-copy text-amber-400"></i> Copy Secured Code
+                    </button>
+                    <button id="btnDownloadCode" class="w-full py-4 rounded-xl bg-gradient-to-tr from-amber-500 to-purple-500 text-slate-950 font-black text-xs uppercase tracking-wider hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fas fa-download"></i> Download Script File
+                    </button>
+                </div>
+
+                <button id="btnResetObf" class="w-full py-3.5 rounded-xl bg-slate-950 hover:bg-slate-900 text-slate-400 hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 border border-white/5 cursor-pointer">
+                    <i class="fas fa-undo text-amber-400"></i> Secure Another Script
+                </button>
+            </div>
+
+            <!-- Action obfuscate Trigger button -->
+            <button id="obfuscateBtn" class="btn-shimmer w-full py-4 rounded-2xl bg-gradient-to-tr from-amber-500 to-purple-500 text-slate-950 font-black text-xs uppercase tracking-wider hover:shadow-lg hover:shadow-amber-500/20 active:scale-98 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2">
+                <i class="fas fa-lock"></i> Obfuscate & Download Script
+            </button>
+
+            <!-- Status Alerts Feedback Wrapper -->
+            <div id="statusMessage" class="hidden text-xs p-3.5 rounded-xl font-mono mt-4 leading-relaxed"></div>
+
+            <div class="mt-4 text-center">
+                <p class="text-[10px] text-slate-500 font-mono uppercase tracking-wider">⚠️ Max File Limit: 4.5 MB | Complex structures might take a few moments</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Area -->
+    <footer class="w-full py-6 border-t border-white/5 text-center text-slate-500 text-[11px] font-mono z-20">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 ProBoy MD. Designed & Engineered in Pakistan by Shahan Ali.</p>
+            <div class="flex items-center gap-4">
+                <span class="text-slate-600">v1.1.0 Stable</span>
+                <a href="/" class="hover:text-amber-400 transition-colors">Portfolio</a>
+                <a href="https://github.com/ProBoy315" target="_blank" rel="noopener noreferrer" class="hover:text-amber-400 transition-colors">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JS Obfuscation Engine Logic -->
+    <script>
+        const API_URL = 'https://proboy-obf.vercel.app';
+
+        // Fetch DOM references
+        const tabsSelector = document.getElementById('tabsSelector');
+        const tabUpload = document.getElementById('tab-upload');
+        const tabPaste = document.getElementById('tab-paste');
+        const panelUpload = document.getElementById('panel-upload');
+        const panelPaste = document.getElementById('panel-paste');
+        const dropArea = document.getElementById('dropArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+        const codeTextarea = document.getElementById('codeTextarea');
+        const metaInputs = document.getElementById('metaInputs');
+        const outputFileName = document.getElementById('outputFileName');
+        const topCommentInput = document.getElementById('topComment');
+        const optionsSection = document.getElementById('optionsSection');
+        const obfuscateBtn = document.getElementById('obfuscateBtn');
+        const statusDiv = document.getElementById('statusMessage');
+
+        // Results elements
+        const panelResult = document.getElementById('panel-result');
+        const resultPreview = document.getElementById('resultPreview');
+        const btnCopyCode = document.getElementById('btnCopyCode');
+        const btnDownloadCode = document.getElementById('btnDownloadCode');
+        const btnResetObf = document.getElementById('btnResetObf');
+
+        let activeMode = 'upload';
+        let selectedFile = null;
+        let obfuscatedOutputResult = '';
+        let obfuscatedFilename = '';
+
+        // Tabs switching controller
+        tabUpload.addEventListener('click', () => switchTab('upload'));
+        tabPaste.addEventListener('click', () => switchTab('paste'));
+
+        function switchTab(mode) {
+            activeMode = mode;
+            if (mode === 'upload') {
+                tabUpload.classList.add('text-amber-400', 'bg-white/[0.03]', 'border-white/5');
+                tabUpload.classList.remove('text-slate-400', 'hover:text-slate-200');
+                
+                tabPaste.classList.remove('text-amber-400', 'bg-white/[0.03]', 'border-white/5');
+                tabPaste.classList.add('text-slate-400', 'hover:text-slate-200');
+
+                panelUpload.classList.remove('hidden');
+                panelPaste.classList.add('hidden');
+                
+                selectedFile = null;
+                fileNameDisplay.textContent = '';
+                fileNameDisplay.classList.add('hidden');
+                fileInput.value = '';
+            } else {
+                tabPaste.classList.add('text-amber-400', 'bg-white/[0.03]', 'border-white/5');
+                tabPaste.classList.remove('text-slate-400', 'hover:text-slate-200');
+
+                tabUpload.classList.remove('text-amber-400', 'bg-white/[0.03]', 'border-white/5');
+                tabUpload.classList.add('text-slate-400', 'hover:text-slate-200');
+
+                panelPaste.classList.remove('hidden');
+                panelUpload.classList.add('hidden');
+            }
+            clearStatus();
+        }
+
+        // Drop Zone Handler configuration
+        dropArea.addEventListener('click', () => fileInput.click());
+        
+        fileInput.addEventListener('change', (e) => {
+            handleFileSelection(e.target.files[0]);
+        });
+
+        // Prevention of standard drag-drop interrupts
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.add('border-amber-500/60', 'bg-amber-500/[0.04]'));
+        });
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.remove('border-amber-500/60', 'bg-amber-500/[0.04]'));
+        });
+
+        dropArea.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            if (dt.files && dt.files.length) {
+                handleFileSelection(dt.files[0]);
+            }
+        });
+
+        function handleFileSelection(file) {
+            if (!file) return;
+            const ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+            if (!['.js', '.mjs', '.txt'].includes(ext)) {
+                showStatus('🚫 Invalid file type. Please upload a .js, .mjs, or .txt script.', 'error');
+                return;
+            }
+            if (file.size > 4.5 * 1024 * 1024) {
+                showStatus('🚫 File size exceeds standard 4.5 MB cloud limit.', 'error');
+                return;
+            }
+            selectedFile = file;
+            fileNameDisplay.textContent = `📄 ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+            fileNameDisplay.classList.remove('hidden');
+            clearStatus();
+        }
+
+        // Reading file contents helper
+        function readFileAsText(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.onerror = () => reject(new Error('Failed to read the input file stream.'));
+                reader.readAsText(file);
+            });
+        }
+
+        // File download utility
+        function downloadFile(content, filename) {
+            const blob = new Blob([content], { type: 'application/javascript' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Clipboard copier
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                return true;
+            } catch (e) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                const successful = document.execCommand('copy');
+                document.body.removeChild(textarea);
+                return successful;
+            }
+        }
+
+        // Clean feedback status lines
+        function showStatus(message, type) {
+            statusDiv.textContent = message;
+            statusDiv.classList.remove('hidden');
+            if (type === 'error') {
+                statusDiv.className = 'text-red-400 bg-red-500/10 border border-red-500/20 text-xs p-3.5 rounded-xl font-mono mt-4 leading-relaxed';
+            } else if (type === 'success') {
+                statusDiv.className = 'text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 text-xs p-3.5 rounded-xl font-mono mt-4 leading-relaxed';
+            } else {
+                statusDiv.className = 'text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 text-xs p-3.5 rounded-xl font-mono mt-4 leading-relaxed animate-pulse';
+            }
+        }
+
+        function clearStatus() {
+            statusDiv.textContent = '';
+            statusDiv.classList.add('hidden');
+        }
+
+        // Main Obfuscator Dispatch Trigger
+        obfuscateBtn.addEventListener('click', async () => {
+            let codeToObfuscate = '';
+
+            if (activeMode === 'upload') {
+                if (!selectedFile) {
+                    showStatus('⚠️ Please drag & drop or choose a JavaScript file first.', 'error');
+                    return;
+                }
+                try {
+                    codeToObfuscate = await readFileAsText(selectedFile);
+                } catch (err) {
+                    showStatus('🚫 Error reading input script: ' + err.message, 'error');
+                    return;
+                }
+            } else {
+                codeToObfuscate = codeTextarea.value.trim();
+                if (!codeToObfuscate) {
+                    showStatus('⚠️ Please write or paste some JavaScript code inside the editor first.', 'error');
+                    return;
+                }
+            }
+
+            // Gather checkbox options
+            const options = {};
+            const toggles = {
+                controlFlowFlattening: document.getElementById('optControlFlow').checked,
+                stringArray: document.getElementById('optStringArray').checked,
+                selfDefending: document.getElementById('optSelfDefending').checked,
+                debugProtection: document.getElementById('optDebugProtection').checked,
+                deadCodeInjection: document.getElementById('optDeadCode').checked,
+            };
+
+            const hasActiveToggles = Object.values(toggles).some(v => v === true);
+            if (hasActiveToggles) {
+                for (const [key, val] of Object.entries(toggles)) {
+                    if (val) options[key] = true;
+                }
+            }
+
+            const payload = { code: codeToObfuscate };
+            if (Object.keys(options).length > 0) {
+                payload.options = options;
+            }
+
+            // Enter active loading state
+            obfuscateBtn.disabled = true;
+            obfuscateBtn.innerHTML = '<i class="fas fa-spinner animate-spin"></i> Obfuscating Source Code...';
+            showStatus('⚡ Connecting with obfuscation nodes... please hold on.', 'loading');
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errBody = await response.text();
+                    throw new Error(`Server returned code ${response.status}: ${errBody}`);
+                }
+
+                const data = await response.json();
+                if (!data || !data.obfuscatedCode) {
+                    throw new Error('Server processed script but returned empty code bytes.');
+                }
+
+                // Add comment headers if specified
+                let finalCodeResult = data.obfuscatedCode;
+                const topComment = topCommentInput.value.trim();
+                if (topComment) {
+                    finalCodeResult = `// ${topComment}\n${finalCodeResult}`;
+                }
+
+                const downloadName = outputFileName.value.trim() || 'obfuscated.js';
+
+                // Save to state
+                obfuscatedOutputResult = finalCodeResult;
+                obfuscatedFilename = downloadName;
+
+                // Show in preview
+                resultPreview.value = finalCodeResult;
+
+                showStatus('🎉 Obfuscation successful! Your secured script has been compiled and is ready for use.', 'success');
+
+                // HIDE INPUT VIEWS & BUTTONS AS REQUESTED
+                tabsSelector.classList.add('hidden');
+                panelUpload.classList.add('hidden');
+                panelPaste.classList.add('hidden');
+                metaInputs.classList.add('hidden');
+                optionsSection.classList.add('hidden');
+                obfuscateBtn.classList.add('hidden');
+
+                // SHOW RESULTS
+                panelResult.classList.remove('hidden');
+
+            } catch (err) {
+                console.error(err);
+                let displayMsg = err.message;
+                if (displayMsg.includes('Failed to fetch') || displayMsg.includes('NetworkError')) {
+                    displayMsg = 'Failed to connect to the obfuscator network nodes. Please check your internet connection.';
+                }
+                showStatus(`❌ Obfuscation Failed: ${displayMsg}`, 'error');
+            } finally {
+                obfuscateBtn.disabled = false;
+                obfuscateBtn.innerHTML = '<i class="fas fa-lock"></i> Obfuscate & Download Script';
+            }
+        });
+
+        // Copy button handler inside success view
+        btnCopyCode.addEventListener('click', async () => {
+            if (!obfuscatedOutputResult) return;
+            const copied = await copyToClipboard(obfuscatedOutputResult);
+            if (copied) {
+                const originalText = btnCopyCode.innerHTML;
+                btnCopyCode.innerHTML = '<i class="fas fa-check text-emerald-400"></i> Copied to Clipboard!';
+                setTimeout(() => {
+                    btnCopyCode.innerHTML = originalText;
+                }, 3000);
+            }
+        });
+
+        // Download button handler inside success view
+        btnDownloadCode.addEventListener('click', () => {
+            if (!obfuscatedOutputResult || !obfuscatedFilename) return;
+            downloadFile(obfuscatedOutputResult, obfuscatedFilename);
+        });
+
+        // Reset button handler to obfuscate another file
+        btnResetObf.addEventListener('click', () => {
+            // Reset state
+            obfuscatedOutputResult = '';
+            obfuscatedFilename = '';
+            resultPreview.value = '';
+
+            // Reset UI components back to default
+            tabsSelector.classList.remove('hidden');
+            if (activeMode === 'upload') {
+                panelUpload.classList.remove('hidden');
+            } else {
+                panelPaste.classList.remove('hidden');
+            }
+            metaInputs.classList.remove('hidden');
+            optionsSection.classList.remove('hidden');
+            obfuscateBtn.classList.remove('hidden');
+            
+            panelResult.classList.add('hidden');
+
+            clearStatus();
+        });
+    </script>
+</body>
+</html>

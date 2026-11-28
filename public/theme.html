@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProBoy Theme Sample</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root {
+            --bg: #060712;
+            --surface: rgba(14, 18, 34, 0.84);
+            --card-bg: rgba(13, 17, 31, 0.84);
+            --text: #f0f0ff;
+            --text-secondary: #b9c2d8;
+            --muted: #7f8aa3;
+            --cyan: #24f2ff;
+            --green: #8cffd2;
+            --purple: #9b5cff;
+            --pink: #ff4fb8;
+            --gold: #ffd36e;
+            --orange: #ff8a5c;
+            --border: rgba(255,255,255,0.14);
+            --glow: 0 24px 80px rgba(36,242,255,0.22);
+            --radius: 18px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { background: var(--bg); scroll-behavior: smooth; }
+        body {
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background:
+                linear-gradient(115deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 100%),
+                radial-gradient(circle at 12% 18%, rgba(36,242,255,0.20), transparent 28rem),
+                radial-gradient(circle at 78% 14%, rgba(255,79,184,0.14), transparent 24rem),
+                radial-gradient(circle at 60% 76%, rgba(255,211,110,0.09), transparent 28rem),
+                linear-gradient(180deg, #060712 0%, #081222 46%, #050713 100%);
+            overflow-x: hidden;
+        }
+
+        .orb {
+            position: fixed;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.16;
+            pointer-events: none;
+            animation: orbDrift 18s ease-in-out infinite alternate;
+        }
+        .orb.one { background: var(--cyan); top: -120px; left: -120px; }
+        .orb.two { background: var(--pink); right: -130px; bottom: -120px; animation-delay: -7s; }
+
+        .page { position: relative; z-index: 1; }
+        .container { width: min(1180px, calc(100% - 40px)); max-width: 100%; margin: 0 auto; }
+
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(6,7,18,0.76);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 14px 0;
+        }
+        .brand {
+            font-size: 1.55rem;
+            font-weight: 900;
+            text-decoration: none;
+            background: linear-gradient(90deg, var(--cyan), var(--green), var(--gold));
+            background-size: 220% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 12px rgba(36,242,255,0.42));
+            animation: gradientSweep 6s ease-in-out infinite;
+        }
+        .nav-links { display: flex; align-items: center; gap: 20px; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 650; }
+        .nav-links a:hover { color: white; text-shadow: 0 0 14px rgba(36,242,255,0.5); }
+
+        .hero {
+            padding: 86px 0 46px;
+            text-align: center;
+        }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--cyan);
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 18px rgba(36,242,255,0.36);
+            margin-bottom: 14px;
+        }
+        h1 {
+            font-size: clamp(2.5rem, 7vw, 5.2rem);
+            line-height: 1.02;
+            font-weight: 950;
+            margin-bottom: 18px;
+            overflow-wrap: anywhere;
+        }
+        .gradient-text {
+            background: linear-gradient(100deg, var(--cyan), var(--green), var(--gold), var(--pink), var(--cyan));
+            background-size: 260% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 18px rgba(36,242,255,0.30));
+            animation: gradientSweep 7s ease-in-out infinite;
+        }
+        .lead {
+            max-width: 720px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+            font-size: 1.08rem;
+            overflow-wrap: anywhere;
+        }
+
+        .section { padding: 54px 0; }
+        .section-head { margin-bottom: 24px; }
+        .section-title {
+            font-size: clamp(1.85rem, 4vw, 3rem);
+            line-height: 1.1;
+            font-weight: 900;
+            margin-top: 6px;
+        }
+        .section-desc { color: var(--text-secondary); max-width: 680px; margin-top: 12px; }
+
+        .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+        .two-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.026)), var(--card-bg);
+            box-shadow: 0 18px 54px rgba(0,0,0,0.22);
+            padding: 24px;
+            transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+        }
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(36,242,255,0.12), transparent 42%, rgba(255,79,184,0.12));
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.24s ease;
+        }
+        .card:hover { transform: translateY(-6px); border-color: rgba(36,242,255,0.45); box-shadow: var(--glow); }
+        .card:hover::before { opacity: 1; }
+        .card > * { position: relative; z-index: 1; }
+        .card-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 14px;
+            color: #061016;
+            background: linear-gradient(135deg, var(--cyan), var(--green), var(--gold));
+            box-shadow: 0 14px 34px rgba(36,242,255,0.18);
+        }
+        .card h3 { font-size: 1.25rem; margin-bottom: 8px; }
+        .card p { color: var(--text-secondary); }
+        .card h3, .card p { overflow-wrap: anywhere; }
+
+        .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+        .btn {
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 48px;
+            padding: 13px 24px;
+            border-radius: 999px;
+            border: 0;
+            font: inherit;
+            font-weight: 850;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .btn::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            transform: translateX(-120%) skewX(-18deg);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.34), transparent);
+            animation: buttonShine 5.5s ease-in-out infinite;
+        }
+        .btn-primary {
+            color: #031014;
+            background: linear-gradient(135deg, var(--cyan), var(--green), var(--gold));
+            box-shadow: 0 18px 46px rgba(36,242,255,0.28);
+        }
+        .btn-secondary {
+            color: white;
+            background: linear-gradient(135deg, var(--purple), var(--pink), var(--orange));
+            box-shadow: 0 18px 46px rgba(255,79,184,0.22);
+        }
+        .btn-outline {
+            color: white;
+            border: 1px solid rgba(255,255,255,0.22);
+            background: rgba(255,255,255,0.045);
+        }
+        .btn:hover { transform: translateY(-3px); }
+
+        .field-group { display: grid; gap: 8px; margin-bottom: 16px; }
+        label { color: var(--text); font-weight: 750; }
+        input, select, textarea {
+            width: 100%;
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.055);
+            color: var(--text);
+            padding: 14px 15px;
+            font: inherit;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+        textarea { min-height: 128px; resize: vertical; }
+        input::placeholder, textarea::placeholder { color: rgba(185,194,216,0.62); }
+        input:focus, select:focus, textarea:focus {
+            border-color: rgba(36,242,255,0.72);
+            background: rgba(255,255,255,0.075);
+            box-shadow: 0 0 0 4px rgba(36,242,255,0.12);
+        }
+
+        .output-box {
+            min-height: 190px;
+            border-radius: var(--radius);
+            border: 1px solid rgba(36,242,255,0.22);
+            background:
+                linear-gradient(145deg, rgba(36,242,255,0.08), rgba(255,79,184,0.06)),
+                rgba(4, 8, 18, 0.78);
+            padding: 18px;
+            color: var(--text-secondary);
+            box-shadow: inset 0 0 28px rgba(36,242,255,0.055);
+        }
+        .output-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            color: var(--text);
+            font-weight: 850;
+            margin-bottom: 12px;
+        }
+        .code-box {
+            overflow: auto;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.10);
+            background: rgba(0,0,0,0.28);
+            color: #d7faff;
+            padding: 16px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.9rem;
+        }
+
+        .badge-row { display: flex; flex-wrap: wrap; gap: 10px; }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            border: 1px solid rgba(36,242,255,0.22);
+            border-radius: 999px;
+            background: rgba(36,242,255,0.10);
+            color: var(--cyan);
+            padding: 7px 12px;
+            font-size: 0.82rem;
+            font-weight: 750;
+        }
+        .alert {
+            border-radius: var(--radius);
+            padding: 18px;
+            border: 1px solid rgba(255,211,110,0.24);
+            background: linear-gradient(135deg, rgba(255,211,110,0.12), rgba(255,79,184,0.08));
+            color: var(--text-secondary);
+        }
+        .alert strong { color: var(--gold); }
+
+        .project-strip {
+            display: flex;
+            gap: 18px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 8px 4px 20px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(36,242,255,0.55) rgba(255,255,255,0.08);
+        }
+        .project-tile {
+            flex: 0 0 min(330px, calc(100vw - 56px));
+            scroll-snap-align: start;
+            overflow: hidden;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)), var(--card-bg);
+            box-shadow: 0 18px 54px rgba(0,0,0,0.22);
+            transition: transform 0.24s ease, box-shadow 0.24s ease;
+        }
+        .project-tile:hover { transform: translateY(-8px) scale(1.015); box-shadow: 0 28px 80px rgba(36,242,255,0.18); }
+        .project-art {
+            height: 178px;
+            position: relative;
+            background:
+                linear-gradient(135deg, rgba(36,242,255,0.24), rgba(255,79,184,0.20), rgba(255,211,110,0.14)),
+                radial-gradient(circle at 24% 20%, rgba(140,255,210,0.52), transparent 26%),
+                #0b1325;
+        }
+        .project-art::after {
+            content: attr(data-title);
+            position: absolute;
+            left: 22px;
+            right: 22px;
+            bottom: 20px;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 900;
+            line-height: 1.15;
+        }
+        .project-body { padding: 20px; }
+        .project-body h3 { margin-bottom: 8px; }
+        .project-body p { color: var(--text-secondary); margin-bottom: 14px; }
+
+        @keyframes gradientSweep {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        @keyframes buttonShine {
+            0%, 58% { transform: translateX(-120%) skewX(-18deg); }
+            78%, 100% { transform: translateX(135%) skewX(-18deg); }
+        }
+        @keyframes orbDrift {
+            from { transform: translate3d(0,0,0) scale(1); }
+            to { transform: translate3d(32px,-24px,0) scale(1.08); }
+        }
+
+        @media (max-width: 780px) {
+            .container { width: calc(100% - 32px); }
+            .nav-links { display: none; }
+            .hero { padding-top: 62px; text-align: left; }
+            h1 { font-size: 2.16rem; }
+            .lead { margin: 0; }
+            .grid, .two-grid { grid-template-columns: 1fr; }
+            .btn-row { display: grid; }
+            .btn { width: 100%; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+
+    <div class="page">
+        <nav class="nav">
+            <div class="container nav-inner">
+                <a href="#" class="brand">ProBoy</a>
+                <ul class="nav-links">
+                    <li><a href="#buttons">Buttons</a></li>
+                    <li><a href="#forms">Forms</a></li>
+                    <li><a href="#cards">Cards</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <div class="container">
+                <span class="eyebrow"><i class="fas fa-wand-magic-sparkles"></i> Theme Reference</span>
+                <h1>Use This Look For <span class="gradient-text">Every New Page</span></h1>
+                <p class="lead">This file is a design sample for future AI prompts. Match the colors, spacing, borders, cards, buttons, inputs, output boxes, and project tiles shown here.</p>
+                <div class="btn-row">
+                    <a class="btn btn-primary" href="#forms"><i class="fas fa-rocket"></i> Primary Action</a>
+                    <a class="btn btn-secondary" href="#projects"><i class="fas fa-link"></i> Secondary Action</a>
+                    <a class="btn btn-outline" href="#cards"><i class="fas fa-paper-plane"></i> Outline Action</a>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="section" id="cards">
+                <div class="container">
+                    <div class="section-head">
+                        <span class="eyebrow"><i class="fas fa-layer-group"></i> Cards</span>
+                        <h2 class="section-title">Glass Cards & Feature Blocks</h2>
+                        <p class="section-desc">Use these cards for stats, services, features, profile sections, and dashboard items.</p>
+                    </div>
+                    <div class="grid">
+                        <article class="card">
+                            <div class="card-icon"><i class="fas fa-bolt"></i></div>
+                            <h3>Fast Layout</h3>
+                            <p>Dark glass surface, glowing hover border, soft shadow, and readable spacing.</p>
+                        </article>
+                        <article class="card">
+                            <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
+                            <h3>Trusted Style</h3>
+                            <p>Use clear headings, short body copy, and simple icons in each block.</p>
+                        </article>
+                        <article class="card">
+                            <div class="card-icon"><i class="fas fa-gem"></i></div>
+                            <h3>Premium Feel</h3>
+                            <p>Keep the neon controlled: glow on interaction, not on every word.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="buttons">
+                <div class="container">
+                    <div class="section-head">
+                        <span class="eyebrow"><i class="fas fa-toggle-on"></i> Buttons & Badges</span>
+                        <h2 class="section-title">Actions, Tags, And Alerts</h2>
+                    </div>
+                    <div class="two-grid">
+                        <div class="card">
+                            <h3>Buttons</h3>
+                            <p>Primary for main actions, secondary for special links, outline for quieter actions.</p>
+                            <div class="btn-row">
+                                <button class="btn btn-primary"><i class="fas fa-check"></i> Save</button>
+                                <button class="btn btn-secondary"><i class="fas fa-star"></i> Upgrade</button>
+                                <button class="btn btn-outline"><i class="fas fa-xmark"></i> Cancel</button>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h3>Badges</h3>
+                            <div class="badge-row" style="margin-top: 14px;">
+                                <span class="badge"><i class="fab fa-html5"></i> HTML</span>
+                                <span class="badge"><i class="fab fa-js"></i> JavaScript</span>
+                                <span class="badge"><i class="fas fa-robot"></i> AI Bots</span>
+                                <span class="badge"><i class="fas fa-mobile-screen"></i> Mobile</span>
+                            </div>
+                            <div class="alert" style="margin-top: 18px;"><strong>Alert style:</strong> use this for warnings, tips, or important notices.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="forms">
+                <div class="container">
+                    <div class="section-head">
+                        <span class="eyebrow"><i class="fas fa-keyboard"></i> Inputs</span>
+                        <h2 class="section-title">Forms And Output Boxes</h2>
+                        <p class="section-desc">Use this style for contact pages, AI tools, generators, dashboards, and admin forms.</p>
+                    </div>
+                    <div class="two-grid">
+                        <form class="card">
+                            <div class="field-group">
+                                <label for="name">Input Box</label>
+                                <input id="name" type="text" placeholder="Write your name or prompt">
+                            </div>
+                            <div class="field-group">
+                                <label for="type">Select Box</label>
+                                <select id="type">
+                                    <option>Portfolio Page</option>
+                                    <option>AI Tool</option>
+                                    <option>Contact Form</option>
+                                </select>
+                            </div>
+                            <div class="field-group">
+                                <label for="message">Textarea</label>
+                                <textarea id="message" placeholder="Write longer text here..."></textarea>
+                            </div>
+                            <button class="btn btn-primary" type="button"><i class="fas fa-paper-plane"></i> Submit</button>
+                        </form>
+                        <div class="output-box">
+                            <div class="output-title">
+                                <span><i class="fas fa-terminal"></i> Output Box</span>
+                                <span class="badge">Ready</span>
+                            </div>
+                            <p>This is how generated output, API responses, summaries, logs, or result previews should look.</p>
+                            <pre class="code-box" style="margin-top: 14px;">{
+  "status": "success",
+  "theme": "ProBoy Premium Neon",
+  "layout": "responsive"
+}</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="projects">
+                <div class="container">
+                    <div class="section-head">
+                        <span class="eyebrow"><i class="fas fa-folder-open"></i> Projects</span>
+                        <h2 class="section-title">Horizontal Project Tiles</h2>
+                        <p class="section-desc">Use this scrollable tile style for projects, services, products, templates, or portfolio items.</p>
+                    </div>
+                    <div class="project-strip">
+                        <article class="project-tile">
+                            <div class="project-art" data-title="Project One"></div>
+                            <div class="project-body">
+                                <h3>Project One</h3>
+                                <p>Short project description with clear tags and action buttons.</p>
+                                <div class="badge-row">
+                                    <span class="badge">Nodejs</span>
+                                    <span class="badge">API</span>
+                                </div>
+                                <div class="btn-row">
+                                    <a class="btn btn-primary" href="#">Live</a>
+                                    <a class="btn btn-outline" href="#">GitHub</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project-tile">
+                            <div class="project-art" data-title="AI Tool"></div>
+                            <div class="project-body">
+                                <h3>AI Tool</h3>
+                                <p>Use same card sizing and horizontal scrolling on mobile and desktop.</p>
+                                <div class="badge-row">
+                                    <span class="badge">AI</span>
+                                    <span class="badge">Frontend</span>
+                                </div>
+                                <div class="btn-row">
+                                    <a class="btn btn-primary" href="#">Open</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project-tile">
+                            <div class="project-art" data-title="Dashboard"></div>
+                            <div class="project-body">
+                                <h3>Dashboard</h3>
+                                <p>Good for admin pages, analytics cards, and management screens.</p>
+                                <div class="badge-row">
+                                    <span class="badge">UI</span>
+                                    <span class="badge">Data</span>
+                                </div>
+                                <div class="btn-row">
+                                    <a class="btn btn-secondary" href="#">Preview</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+    "_comment": "Notification config. Edit from user admin panel. Supported placeholders: {{botName}}, {{prefix}}, {{botNumber}}, {{ownerName}}, {{time}}, {{date}}",
+    "By": "TEAMZERO-MD",
+    "messages": "",
+    "send": "false",
+    "to": "self",
+    "join": "https://chat.whatsapp.com/GEospcS7pLFA0ptzB2ynXd?s=cl&p=a&mlu=4&iam=2",
+    "command": ""
+}

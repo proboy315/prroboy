@@ -1,0 +1,202 @@
+/* ==========================================================================
+   ProBoy UI — shared design system (loaded for EVERY page).
+   Direction: near-black "obsidian" surfaces, soft glass pills, and the signature iridescent
+   ring (a conic spectrum around a dark circular icon well) with a warm top glow.
+   Every value below is a token; the admin Control Center rewrites the tokens at runtime
+   (src/lib/siteConfig.ts), so nothing here is hard-wired to one look.
+   Performance rules: only transform/opacity are animated, scroll effects use CSS
+   scroll-driven animations (compositor), nothing loops forever, reduced-motion = static.
+   ========================================================================== */
+
+@property --pb-ring-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+
+:root {
+  /* tokens (defaults; overridden at runtime from the published site config) */
+  --pb-accent: #ef1d3e;
+  --pb-accent-2: #38bdf8;
+  --pb-bg: #050507;
+  --pb-radius: 22px;
+  --pb-glow: 0.55;
+  --pb-ring: 0.7;
+  --pb-font-scale: 1;
+  --pb-motion: 0.6;
+  --pb-tilt: 5deg;
+  --pb-font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pb-dist: calc(26px * var(--pb-motion));
+  --pb-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --pb-surface: rgba(255, 255, 255, 0.045);
+  --pb-surface-strong: rgba(255, 255, 255, 0.085);
+  --pb-border: rgba(255, 255, 255, 0.12);
+  --pb-border-strong: rgba(255, 255, 255, 0.24);
+  --pb-ring-gradient: conic-gradient(from var(--pb-ring-angle), #ffd98a 0deg, #ff8a2a 38deg, #1a1a21 92deg, #2f6bff 138deg, #38c6ff 168deg, #1a1a21 214deg, #ff3d81 262deg, #ffb347 318deg, #ffd98a 360deg);
+  --pb-ring-warm: 255, 170, 60;
+
+  /* the existing UI is written with Tailwind's red scale: route it through the accent token */
+  --color-red-400: color-mix(in srgb, var(--pb-accent) 70%, white);
+  --color-red-500: color-mix(in srgb, var(--pb-accent) 88%, white);
+  --color-red-600: var(--pb-accent);
+  --color-red-700: color-mix(in srgb, var(--pb-accent) 82%, black);
+  --color-red-800: color-mix(in srgb, var(--pb-accent) 64%, black);
+  --lg-crimson: var(--pb-accent);
+  --lg-radius: var(--pb-radius);
+}
+
+html[data-theme="obsidian"] { --pb-ring-gradient: conic-gradient(from var(--pb-ring-angle), #fff 0deg, #8a8a96 80deg, #1a1a21 150deg, #c8c8d2 230deg, #fff 360deg); --pb-ring-warm: 230, 230, 240; }
+html[data-theme="crimson"] { --pb-ring-gradient: conic-gradient(from var(--pb-ring-angle), #ffb36b 0deg, #ff3b4f 70deg, #2a0b10 140deg, #ff5a3d 230deg, #ffb36b 360deg); --pb-ring-warm: 255, 80, 70; }
+html[data-theme="aurora"] { --pb-ring-gradient: conic-gradient(from var(--pb-ring-angle), #7cf5c8 0deg, #38bdf8 70deg, #12121a 140deg, #a78bfa 220deg, #7cf5c8 360deg); --pb-ring-warm: 100, 220, 220; }
+
+html { font-size: calc(16px * var(--pb-font-scale)); scroll-padding-top: calc(var(--header-height) + 12px); }
+html, body { background: var(--pb-bg); }
+body { font-family: var(--pb-font) !important; }
+#root > .bg-\[\#07070a\] { background-color: var(--pb-bg); }
+html[data-smooth="on"] { scroll-behavior: smooth; }
+html[data-smooth="off"] { scroll-behavior: auto; }
+main h1, main h2 { text-wrap: balance; }
+main h1 { letter-spacing: -0.02em; }
+
+/* ---------- ring icon (signature component) ---------- */
+.pb-ring-icon {
+  --d: 28px;
+  position: relative; flex: none; isolation: isolate;
+  display: inline-grid; place-items: center;
+  width: var(--d); height: var(--d); border-radius: 50%;
+  color: #ececf1;
+  background: radial-gradient(120% 120% at 50% 18%, #2c2c33 0%, #141418 72%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.55);
+}
+.pb-ring-icon > svg, .pb-ring-icon > img { width: 55%; height: 55%; border-radius: 50%; }
+.pb-ring-icon > img { width: 100%; height: 100%; object-fit: cover; }
+.pb-ring-icon::before, .pb-ring-icon::after {
+  content: ""; position: absolute; border-radius: 50%; pointer-events: none;
+  background: var(--pb-ring-gradient); opacity: 0;
+  transition: opacity 0.35s var(--pb-ease), transform 0.35s var(--pb-ease);
+}
+.pb-ring-icon::before { /* the ring itself */
+  inset: -2.5px; padding: 2.5px; z-index: -1; transform: scale(0.94);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.pb-ring-icon::after { /* soft warm halo */
+  inset: -7px; z-index: -2; filter: blur(11px); transform: scale(0.9);
+}
+.pb-ring-icon.is-active::before,
+:is(a, button):is(:hover, :focus-visible) > .pb-ring-icon::before { opacity: calc(0.4 + var(--pb-ring) * 0.6); transform: none; }
+.pb-ring-icon.is-active::after,
+:is(a, button):is(:hover, :focus-visible) > .pb-ring-icon::after { opacity: calc(var(--pb-ring) * 0.5); transform: none; }
+html[data-motion="on"] :is(a, button):is(:hover, :focus-visible) > .pb-ring-icon::before { animation: pb-spin 1.4s var(--pb-ease) 1 both; }
+@keyframes pb-spin { to { --pb-ring-angle: 360deg; } }
+.pb-ring-lg { --d: 76px; }
+
+/* ---------- header / navigation: glass pills ---------- */
+html body .site-header { transition: transform 0.28s var(--pb-ease), background 0.3s; }
+html[data-header="solid"] body .site-header { background: #08080b !important; backdrop-filter: none !important; }
+html[data-header="transparent"] body .site-header { background: transparent !important; backdrop-filter: none !important; border-bottom-color: transparent !important; box-shadow: none !important; }
+html[data-show-header="no"] .site-header { display: none !important; }
+html[data-show-footer="no"] #root footer.mt-24 { display: none !important; }
+html[data-backtotop="off"] button[aria-label="Back to top"] { display: none !important; }
+
+.header-nav { gap: 4px !important; padding: 5px; border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025)); border: 1px solid var(--pb-border); box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), 0 10px 30px -14px #000; }
+.header-nav a { padding: 0.5rem 0.95rem !important; border-radius: 999px; transition: background 0.25s, color 0.25s, transform 0.25s var(--pb-ease); }
+.header-nav a::after { display: none !important; }
+.header-nav a:hover { background: rgba(255,255,255,0.07); color: #fff !important; }
+.header-nav a[aria-current="page"] { background: rgba(255,255,255,0.12); color: #fff !important; box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 0 calc(18px * var(--pb-glow)) -4px var(--pb-accent); }
+
+.header-contact { display: inline-flex; align-items: center; gap: 10px; padding: 5px 16px 5px 6px !important; border-radius: 999px; color: #fff; transition: transform 0.3s var(--pb-ease), box-shadow 0.3s; }
+.header-contact:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 10px 26px -10px rgba(var(--pb-ring-warm), calc(var(--pb-glow) * 0.7)); }
+.header-contact .pb-ring-icon { --d: 30px; }
+
+.rail-link .pb-ring-icon { --d: 26px; margin-left: -4px; }
+.rail-link.is-active { background: linear-gradient(90deg, rgba(255,255,255,0.09), transparent) !important; color: #fff !important; }
+.rail-link.is-active::before { display: none; }
+.rail-link.is-active .pb-ring-icon { color: #fff; }
+
+/* ---------- surfaces, cards, 3D ---------- */
+.glass, .lg-card { border-radius: var(--pb-radius); }
+html[data-card="solid"] :is(.glass, .lg-card, .card3d, .lg-surface) { background: #0d0d12 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+html[data-card="outline"] :is(.glass, .lg-card, .card3d, .lg-surface) { background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-color: rgba(255,255,255,0.3) !important; }
+
+[data-tilt], .card3d, .lg-card {
+  transform: perspective(900px) translateY(0) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.45s var(--pb-ease), border-color 0.3s, box-shadow 0.3s;
+}
+[data-tilt].is-tilting, .card3d.is-tilting, .lg-card.is-tilting { transition: transform 0.09s linear, border-color 0.3s, box-shadow 0.3s; will-change: transform; }
+html body :is([data-tilt], .card3d, .lg-card):hover {
+  transform: perspective(900px) translateY(-4px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  border-color: color-mix(in srgb, var(--pb-accent) 55%, transparent);
+  box-shadow: 0 26px 50px -26px rgba(var(--pb-ring-warm), calc(var(--pb-glow) * 0.55)), 0 18px 40px -22px #000;
+}
+html[data-hover="off"] body :is([data-tilt], .card3d, .lg-card):hover { transform: none; box-shadow: none; }
+html[data-motion="off"] :is([data-tilt], .card3d, .lg-card) { transform: none !important; }
+
+html[data-ambient="off"] .liquid-orb { animation: none !important; }
+.liquid-orb { opacity: calc(0.18 + var(--pb-glow) * 0.3); }
+
+/* ---------- buttons ---------- */
+.pb-btn-solid, .pb-btn-ghost { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 18px; border-radius: 999px; font-size: 13px; font-weight: 600; border: 1px solid var(--pb-border-strong); transition: transform 0.25s var(--pb-ease), background 0.25s, box-shadow 0.25s; cursor: pointer; }
+.pb-btn-solid { color: #fff; background: linear-gradient(180deg, color-mix(in srgb, var(--pb-accent) 92%, white), var(--pb-accent)); border-color: transparent; box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 8px 22px -10px var(--pb-accent); }
+.pb-btn-ghost { color: #e8e8ee; background: rgba(255,255,255,0.05); }
+.pb-btn-solid:hover, .pb-btn-ghost:hover { transform: translateY(-1px); }
+html[data-btn="rounded"] :is(.header-contact, .pb-btn-solid, .pb-btn-ghost, .lg-btn, .lg-btn-primary, .header-nav, .header-nav a) { border-radius: 14px !important; }
+html[data-btn="sharp"] :is(.header-contact, .pb-btn-solid, .pb-btn-ghost, .lg-btn, .lg-btn-primary, .header-nav, .header-nav a) { border-radius: 4px !important; }
+html[data-btn="rounded"] :is(a, button)[class*="rounded-full"][class*="px-"] { border-radius: 14px !important; }
+html[data-btn="sharp"] :is(a, button)[class*="rounded-full"][class*="px-"] { border-radius: 4px !important; }
+
+/* ---------- spacing density ---------- */
+html[data-spacing="compact"] { --page-gutter: clamp(18px, 3.5vw, 56px); }
+html[data-spacing="spacious"] { --page-gutter: clamp(28px, 7vw, 120px); }
+html[data-spacing="compact"] main > * + * { margin-top: -0.5rem; }
+html[data-spacing="spacious"] main > * + * { margin-top: 1.25rem; }
+
+/* ---------- scroll + reveal motion ---------- */
+html[data-motion="on"][data-reveal="on"] .reveal.in { animation: pb-reveal .48s var(--pb-ease) both; }
+@keyframes pb-reveal { from { opacity: .84; transform: translate3d(0, var(--pb-dist), 0); } to { opacity: 1; transform: none; } }
+html[data-reveal="off"] .reveal { opacity: 1; transform: none; transition: none; }
+.pb-enter { animation: pb-enter 0.5s var(--pb-ease) both; }
+@keyframes pb-enter { from { opacity: 0; transform: translate3d(0, calc(12px * var(--pb-motion)), 0); } to { opacity: 1; transform: none; } }
+
+.pb-progress { position: fixed; z-index: 90; inset: 0 0 auto 0; height: 3px; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, var(--pb-accent), #ffb347, var(--pb-accent-2)); pointer-events: none; display: none; }
+@supports (animation-timeline: scroll()) {
+  .pb-progress { display: block; animation: pb-prog linear both; animation-timeline: scroll(root); }
+  html[data-motion="on"][data-reveal="on"] main :is(h1, h2):not([data-nofx]) { animation: pb-head linear both; animation-timeline: view(); animation-range: entry 0% entry 60%; }
+  html[data-motion="on"][data-reveal="on"] main img:not(.hero-portrait):not([data-nofx]):not(.pb-ring-icon img) { animation: pb-img linear both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+  html[data-motion="on"][data-parallax="on"] [data-parallax] { animation: pb-par linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+}
+@keyframes pb-prog { to { transform: scaleX(1); } }
+@keyframes pb-head { from { opacity: 0; transform: translate3d(0, calc(20px * var(--pb-motion)), 0); clip-path: inset(0 0 100% 0); } to { opacity: 1; transform: none; clip-path: inset(0 0 -15% 0); } }
+@keyframes pb-img { from { opacity: 0.001; transform: scale(calc(1 + 0.05 * var(--pb-motion))); } to { opacity: 1; transform: none; } }
+@keyframes pb-par { to { transform: translate3d(0, calc(-46px * var(--pb-motion)), 0); } }
+
+/* ---------- shell components ---------- */
+.pb-announce { position: fixed; z-index: 60; left: 50%; transform: translateX(-50%); bottom: max(18px, env(safe-area-inset-bottom)); display: flex; align-items: center; gap: 10px; max-width: min(640px, calc(100vw - 24px)); padding: 8px 8px 8px 14px; border-radius: 999px; font-size: 13px; color: #f1f1f5; background: linear-gradient(180deg, rgba(40,40,48,0.82), rgba(16,16,20,0.9)); border: 1px solid var(--pb-border-strong); backdrop-filter: blur(18px) saturate(170%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 18px 40px -16px #000; animation: pb-enter 0.6s var(--pb-ease) both; }
+.pb-announce-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pb-accent-2); box-shadow: 0 0 10px var(--pb-accent-2); flex: none; }
+.pb-announce.is-success .pb-announce-dot { background: #34d399; box-shadow: 0 0 10px #34d399; }
+.pb-announce.is-warning .pb-announce-dot { background: #fbbf24; box-shadow: 0 0 10px #fbbf24; }
+.pb-announce-text { min-width: 0; overflow-wrap: anywhere; }
+.pb-announce-link { flex: none; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,0.12); font-weight: 600; }
+.pb-announce-x { flex: none; width: 28px; height: 28px; border-radius: 50%; color: #aaa; font-size: 18px; line-height: 1; }
+.pb-announce-x:hover { color: #fff; background: rgba(255,255,255,0.1); }
+@media (max-width: 640px) { .pb-announce { border-radius: 18px; bottom: calc(max(18px, env(safe-area-inset-bottom)) + 4px); } }
+
+.pb-consent { position: fixed; z-index: 70; left: max(12px, env(safe-area-inset-left)); bottom: max(12px, env(safe-area-inset-bottom)); width: min(420px, calc(100vw - 24px)); padding: 14px 16px; border-radius: 20px; font-size: 13px; line-height: 1.5; color: #d9d9e0; background: linear-gradient(180deg, rgba(34,34,42,0.9), rgba(14,14,18,0.94)); border: 1px solid var(--pb-border-strong); backdrop-filter: blur(18px) saturate(170%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 24px 50px -18px #000; animation: pb-enter 0.6s var(--pb-ease) both; }
+.pb-consent strong { color: #fff; }
+.pb-consent a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.pb-consent > div { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10px; }
+.pb-consent .pb-btn-solid, .pb-consent .pb-btn-ghost { min-height: 36px; }
+
+.pb-maint { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 24px; background: radial-gradient(60% 50% at 50% 30%, rgba(var(--pb-ring-warm), 0.14), transparent 70%), var(--pb-bg); }
+.pb-maint-card { max-width: 480px; text-align: center; display: grid; justify-items: center; gap: 14px; }
+.pb-maint-card h1 { font-size: clamp(28px, 6vw, 44px); font-weight: 800; }
+.pb-maint-card p { color: #a6a6b2; line-height: 1.6; }
+.pb-maint-meta { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #6b6b78 !important; }
+
+.pb-preview { position: fixed; z-index: 95; top: 10px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; padding: 6px 8px 6px 16px; border-radius: 999px; font-size: 12px; font-weight: 600; color: #111; background: #fbbf24; box-shadow: 0 10px 30px -10px #000; }
+.pb-preview button { padding: 4px 12px; border-radius: 999px; background: #111; color: #fff; }
+
+/* ---------- accessibility ---------- */
+html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="off"] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+@media (prefers-reduced-motion: reduce) {
+  .pb-ring-icon::before, .pb-ring-icon::after, .pb-announce, .pb-consent, .pb-enter { animation: none !important; transition: none !important; }
+  html[data-reveal] .reveal { opacity: 1 !important; transform: none !important; }
+  main :is(h1, h2, img) { animation: none !important; }
+  .pb-progress { display: none !important; }
+}

@@ -1,0 +1,443 @@
+{
+  "name": "Shahan Ali",
+  "handle": "shahan315",
+  "brand": "PROBOY",
+  "aliases": [
+    "ProBoy",
+    "itx_proboy",
+    "shahan315",
+    "proboy315"
+  ],
+  "siteUrl": "https://proboy.vercel.app",
+  "greeting": "Hi, I'm",
+  "role": "Full-Stack Developer",
+  "titles": [
+    "Full-Stack Developer",
+    "Frontend Developer",
+    "AI & WhatsApp Bot Architect",
+    "Shopify Expert",
+    "Automation Developer"
+  ],
+  "subtitles": [
+    "Frontend Developer",
+    "WhatsApp Bot & Shopify Specialist"
+  ],
+  "typewriter": [
+    "Full-Stack Developer",
+    "Frontend Developer",
+    "AI & WhatsApp Bot Architect",
+    "Shopify Expert"
+  ],
+  "intro": "I build React & Node.js full-stack web applications, responsive frontend interfaces, the ProBoy-MD WhatsApp bot, Shopify Liquid storefronts, and Gemini AI automations.",
+  "introEmphasis": "Engineering reliable software from Burewala, Punjab, Pakistan.",
+  "heroDescription": "Full-Stack Developer & Frontend Engineer building React & Node.js apps, Shopify Liquid stores, WhatsApp bots and Gemini AI tools.",
+  "heroEmphasis": "Based in Burewala, Punjab, Pakistan. Let's build something reliable.",
+  "availability": "Available for freelance projects & technical collaborations",
+  "about": [
+    "Shahan Ali (PROBOY) is a Full-Stack Developer and Frontend Engineer based in Burewala, Punjab, Pakistan. He builds React and Node.js applications, responsive UIs, Shopify Liquid storefronts, WhatsApp automation bots, and Google Gemini AI integrations.",
+    "He is currently an ICS student at Govt Graduate College Burewala and maintains ProBoy-MD, an open-source Node.js WhatsApp Multi-Device bot built with Baileys. His technical focus spans frontend engineering, REST APIs, database modeling, technical SEO/AEO, and web performance optimization."
+  ],
+  "chapters": [
+    {
+      "n": "01",
+      "title": "Who I Am",
+      "text": "I am based in Burewala, Punjab, Pakistan and study ICS at Govt Graduate College Burewala. Online I publish under PROBOY (proboy315, shahan315, itx_proboy)."
+    },
+    {
+      "n": "02",
+      "title": "What I Build",
+      "text": "My primary work is Full-Stack React & Node.js applications alongside Frontend UI engineering, plus ProBoy-MD (Baileys WhatsApp bot), Shopify Liquid stores, and Gemini AI workflows."
+    },
+    {
+      "n": "03",
+      "title": "How I Work",
+      "text": "I separate real software proofs from sample demos, document architecture and constraints honestly, and verify responsive UX, accessibility fundamentals, and metadata before handoff."
+    }
+  ],
+  "education": "ICS Student — Govt Graduate College Burewala, Punjab, Pakistan",
+  "institution": {
+    "name": "Govt Graduate College Burewala",
+    "program": "Intermediate in Computer Science (ICS)",
+    "status": "Current Student",
+    "city": "Burewala",
+    "region": "Punjab",
+    "country": "PK"
+  },
+  "location": "Burewala, Punjab, Pakistan",
+  "email": "shahanali.dev@gmail.com",
+  "phone": "+92 326 1684315",
+  "phoneTel": "+923261684315",
+  "whatsapp": "https://wa.me/923261684315",
+  "whatsappChannel": "https://whatsapp.com/channel/0029Vb8yiOF42DcjDYgq5g0Q",
+  "linkedin": "",
+  "github": "https://github.com/ProBoy315",
+  "geo": {
+    "lat": 30.1667,
+    "lng": 72.6833,
+    "region": "PK-PB",
+    "placename": "Burewala"
+  },
+  "profileImage": "/images/shahan-ali-portrait.jpg",
+  "portrait": {
+    "alt": "Shahan Ali (PROBOY) — Full-Stack Developer and Frontend Engineer from Burewala, Punjab, Pakistan",
+    "width": 1696,
+    "height": 2528,
+    "objectPosition": "50% 50%",
+    "emptyTitle": "Portrait of Shahan Ali (PROBOY)",
+    "emptyDescription": "Official portrait of Shahan Ali.",
+    "chooseLabel": "Select portrait",
+    "localNotice": "Local preview only."
+  },
+  "resume": "",
+  "tagline": [
+    "Better Code",
+    "Bigger Dreams"
+  ],
+  "motto": [
+    "Dream",
+    "Code",
+    "Build"
+  ],
+  "socials": [
+    {
+      "id": "github",
+      "label": "GitHub",
+      "url": "https://github.com/ProBoy315"
+    },
+    {
+      "id": "whatsapp",
+      "label": "WhatsApp",
+      "url": "https://wa.me/923261684315"
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "url": "https://instagram.com/itx___proboy"
+    },
+    {
+      "id": "telegram",
+      "label": "Telegram",
+      "url": "https://t.me/itx_proboy"
+    },
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "url": "https://www.facebook.com/profile.php?id=100093176537267"
+    },
+    {
+      "id": "mail",
+      "label": "Email",
+      "url": "mailto:shahanali.dev@gmail.com"
+    },
+    {
+      "id": "tiktok",
+      "label": "TikTok",
+      "url": "https://www.tiktok.com/@itx_proboy"
+    }
+  ],
+  "stats": [
+    {
+      "value": "4",
+      "label": "Real Projects"
+    },
+    {
+      "value": "224",
+      "label": "Bot Commands"
+    },
+    {
+      "value": "4",
+      "label": "Core Services"
+    },
+    {
+      "value": "24",
+      "label": "Live UI Demos"
+    }
+  ],
+  "heroServices": [
+    "code",
+    "bot",
+    "bag",
+    "spark"
+  ],
+  "services": [
+    {
+      "slug": "full-stack-web-development",
+      "icon": "code",
+      "heroLabel": "Full-Stack Dev",
+      "heroMeta": "React / Node / DB",
+      "title": "React & Node.js Full-Stack Development",
+      "meta": "React • TypeScript • Node.js • REST APIs • Databases",
+      "text": "End-to-end web applications, REST APIs, database modeling (MySQL, Firestore, Upstash Redis), auth, and admin dashboards built with React, TypeScript, and Node.js.",
+      "cta": "Explore full-stack service"
+    },
+    {
+      "slug": "shopify-development",
+      "icon": "bag",
+      "heroLabel": "Shopify Liquid",
+      "heroMeta": "OS 2.0 / Storefront",
+      "title": "Shopify Liquid & E-commerce Development",
+      "meta": "Online Store 2.0 • Liquid • AJAX Cart API",
+      "text": "Custom Shopify Online Store 2.0 sections, Liquid theme customization, variant selectors, AJAX cart drawers, collection filters, and storefront performance.",
+      "cta": "Explore Shopify service"
+    },
+    {
+      "slug": "whatsapp-bot-development",
+      "icon": "bot",
+      "heroLabel": "WhatsApp Bots",
+      "heroMeta": "Baileys / Node.js",
+      "title": "WhatsApp Bot Development",
+      "meta": "Node.js • Baileys • Pairing Code • Automation",
+      "text": "Modular Node.js + Baileys multi-device WhatsApp bots with pairing-code login, role permissions, group moderation, media utilities, and webhook workflows.",
+      "cta": "Explore bot service"
+    },
+    {
+      "slug": "ai-integrations-automation",
+      "icon": "spark",
+      "heroLabel": "Gemini AI & APIs",
+      "heroMeta": "AI / Workflows",
+      "title": "Gemini AI & API Automation",
+      "meta": "Google Gemini API • Webhooks • Automation",
+      "text": "Server-side Google Gemini API integrations, structured JSON response validation, prompt pipelines, and multi-step business workflow automation.",
+      "cta": "Explore AI automation"
+    }
+  ],
+  "skills": [
+    {
+      "icon": "react",
+      "label": "React / TypeScript"
+    },
+    {
+      "icon": "node",
+      "label": "Node.js & REST APIs"
+    },
+    {
+      "icon": "db",
+      "label": "MySQL / Redis / Firestore"
+    },
+    {
+      "icon": "bag",
+      "label": "Shopify Liquid"
+    },
+    {
+      "icon": "whatsapp",
+      "label": "Baileys Bots"
+    },
+    {
+      "icon": "spark",
+      "label": "Gemini AI"
+    }
+  ],
+  "skillGroups": [
+    {
+      "title": "Full-Stack & Backend Engineering",
+      "items": [
+        "React & TypeScript",
+        "Node.js & Serverless APIs",
+        "REST Contracts & Webhooks",
+        "Auth, Sessions & Rate Limiting",
+        "Input Validation & Error Handling",
+        "SaaS & MVP Architecture"
+      ]
+    },
+    {
+      "title": "Frontend UI/UX & Interactive Apps",
+      "items": [
+        "HTML5, CSS3 & Tailwind CSS",
+        "Vite & Code Splitting",
+        "Responsive & Dark UI Systems",
+        "Keyboard & A11y Fundamentals",
+        "360° Viewers, Kanban & Charts",
+        "Core Web Vitals Optimization"
+      ]
+    },
+    {
+      "title": "WhatsApp Bots & Messaging",
+      "items": [
+        "ProBoy-MD (224 Commands)",
+        "Baileys Multi-Device",
+        "Pairing-Code & Multi-Session",
+        "Modular Command Routing",
+        "Role Gates & Moderation",
+        "Notification Workflows"
+      ]
+    },
+    {
+      "title": "Shopify & E-Commerce",
+      "items": [
+        "Shopify Online Store 2.0",
+        "Liquid Sections & Schemas",
+        "Shopify AJAX Cart API",
+        "Variant & Collection Filters",
+        "Storefront Speed Tuning",
+        "Order/Webhook Sync"
+      ]
+    },
+    {
+      "title": "AI, Automation & Search (SEO/AEO/GEO)",
+      "items": [
+        "Google Gemini API & Prompts",
+        "Structured AI Validation",
+        "Workflow Automation Pipelines",
+        "Technical SEO, Canonical & Schema",
+        "AEO Direct Answers & FAQs",
+        "GEO & LLMO Entity Hygiene"
+      ]
+    },
+    {
+      "title": "Databases, Security, Linux & Hosting",
+      "items": [
+        "MySQL, Firestore & Upstash Redis",
+        "Web Crypto AES-256-GCM",
+        "JS Obfuscation Boundaries",
+        "Linux CLI & PM2 Setup",
+        "Git, GitHub, Vercel, Netlify, Render",
+        "Privacy-First Analytics & Audits"
+      ]
+    }
+  ],
+  "nav": [
+    {
+      "id": "home",
+      "label": "Home",
+      "icon": "home",
+      "href": "/",
+      "header": true
+    },
+    {
+      "id": "about",
+      "label": "About",
+      "icon": "user",
+      "href": "/about",
+      "header": true
+    },
+    {
+      "id": "services",
+      "label": "Services",
+      "icon": "layers",
+      "href": "/services",
+      "header": true
+    },
+    {
+      "id": "projects",
+      "label": "Projects",
+      "icon": "folder",
+      "href": "/projects",
+      "header": true
+    },
+    {
+      "id": "demos",
+      "label": "Demos",
+      "icon": "grid",
+      "href": "/demos",
+      "header": true
+    },
+    {
+      "id": "proboy-md",
+      "label": "ProBoy-MD",
+      "icon": "bot",
+      "href": "/proboy-md",
+      "header": true
+    },
+    {
+      "id": "blog",
+      "label": "Blog",
+      "icon": "type",
+      "href": "/blog",
+      "header": true
+    },
+    {
+      "id": "contact",
+      "label": "Contact",
+      "icon": "mail",
+      "href": "/contact",
+      "header": true
+    }
+  ],
+  "contactForm": {
+    "provider": "proboy-contact",
+    "endpoint": "https://proboy-contact.vercel.app/"
+  },
+  "analytics": {
+    "vercelAnalytics": true,
+    "gaMeasurementId": "",
+    "clarityProjectId": ""
+  },
+  "seo": {
+    "title": "Shahan Ali (PROBOY) | Full-Stack & Frontend Developer",
+    "description": "Shahan Ali (PROBOY) is a Full-Stack and Frontend Developer in Burewala, Pakistan building React & Node.js apps, Shopify Liquid themes, ProBoy-MD, and Gemini AI tools.",
+    "ogImage": "/images/og-shahan-ali.jpg"
+  },
+  "introAnimation": {
+    "enabled": true,
+    "directory": "/intro-animation/",
+    "framePrefix": "progress-",
+    "frameExtension": ".png",
+    "frameCount": 300,
+    "fps": 30,
+    "audio": "audio.mp3",
+    "policy": "session",
+    "maxWaitMs": 8000
+  },
+  "certificate": {
+    "title": "Google Gemini QuizOff 2026",
+    "subtitle": "Certificate of Recognition — India's Biggest AI Quiz",
+    "organizers": "CampusCrew and Unstop, in connection with Google Gemini AI initiatives",
+    "awardedTo": "Shahan (Shahan Ali)",
+    "date": "19 July 2026",
+    "image": "/images/quizoff_certificate_1786079838704.png",
+    "previewImage": "/images/quizoff-certificate-1000.jpg",
+    "quote": "Received a Certificate of Recognition for Google Gemini QuizOff 2026, organised by CampusCrew and hosted on Unstop, a nationwide AI competition with 5,25,000+ student participants across 48,500+ institutions and 35+ countries.",
+    "facts": [
+      [
+        "Awarded to",
+        "Shahan (Shahan Ali)"
+      ],
+      [
+        "Credential",
+        "Certificate of Recognition"
+      ],
+      [
+        "Organisers",
+        "CampusCrew & Unstop"
+      ],
+      [
+        "Date",
+        "19 July 2026"
+      ],
+      [
+        "Scale",
+        "5,25,000+ participants"
+      ],
+      [
+        "Institutions",
+        "48,500+ across 35+ countries"
+      ]
+    ]
+  },
+  "faq": [
+    {
+      "q": "Who is Shahan Ali (PROBOY)?",
+      "a": "Shahan Ali (PROBOY, proboy315, shahan315, itx_proboy) is a Full-Stack Developer and Frontend Engineer from Burewala, Punjab, Pakistan. He currently studies ICS at Govt Graduate College Burewala and builds React & Node.js web apps, the open-source ProBoy-MD WhatsApp bot, Shopify Liquid themes, and Gemini AI tools."
+    },
+    {
+      "q": "Is this Shahan Ali the same person as Shahan Ali Mohsin or Shahan Ali Jamil?",
+      "a": "No. This website belongs solely to Shahan Ali (PROBOY / proboy315 / shahan315), the software developer and ICS student in Burewala, Punjab, Pakistan. He is unrelated to Shahan Ali Mohsin (motorsport driver), Shahan Ali Jamil (EcoPack executive), or other professionals sharing the name."
+    },
+    {
+      "q": "What services does Shahan Ali (PROBOY) offer?",
+      "a": "Four primary commercial services: React & Node.js Full-Stack Development, Shopify Liquid & E-commerce Development, WhatsApp Bot Development (Node.js & Baileys), and Gemini AI & API Automation — supported by dedicated Frontend Engineering (React, TypeScript, Tailwind CSS, accessibility, and Web Performance optimization)."
+    },
+    {
+      "q": "What is ProBoy-MD and how is it built?",
+      "a": "ProBoy-MD is an open-source WhatsApp Multi-Device bot by Shahan Ali built on Node.js and Baileys (unofficial WhatsApp Web protocol, separate from the official WhatsApp Business Platform). Source inspection confirms 224 JavaScript command files, pairing-code login, role gates, and modular command loading."
+    },
+    {
+      "q": "What credential did Shahan Ali earn in 2026?",
+      "a": "Shahan Ali earned a Certificate of Recognition for Google Gemini QuizOff 2026 (dated 19 July 2026), organised by CampusCrew and hosted on Unstop. It recognizes participation in the AI competition and does not imply employment or endorsement by Google."
+    },
+    {
+      "q": "How can I contact or hire Shahan Ali?",
+      "a": "Use the inquiry options at https://proboy.vercel.app/contact (choose Email relay, Email without phone, or direct WhatsApp), email shahanali.dev@gmail.com, or message +92 326 1684315 on WhatsApp."
+    }
+  ]
+}

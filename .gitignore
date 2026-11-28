@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.work/
+.DS_Store
+# secrets & host state — never commit
+.env
+.env.*
+!.env.example
+.vercel/
+.netlify/

@@ -1,0 +1,3 @@
+# Local-only preserved data is never part of the deployable site.
+preserved-data
+.work

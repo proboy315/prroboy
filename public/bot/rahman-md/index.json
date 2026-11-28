@@ -1,0 +1,19 @@
+{
+    "ownerNumber": [
+        "923015954782"
+    ],
+    "ownerName": [
+        "RAHMAN TECH"
+    ],
+    "botName": "RAHMAN-MD",
+    "botimg": "https://proboy.vercel.app/bot/rahman-md/bot_image.jpg",
+    "version": "1.0.0",
+    "prefix": ".",
+    "sessionName": "session",
+    "sessionID": "",
+    "newsletterJid": "120363410287735062@newsletter",
+    "updateZipUrl": "https://github.com/proboy315/ProBoy-MD/archive/refs/heads/main.zip",
+    "packname": "RAHMAN-MD",
+    "CONNECT_JSON_URL": "https://proboy.vercel.app/bot/rahman-md/connect.json",
+    "REMOTE_SESSIONS_URL": "https://proboy.vercel.app/bot/rahman-md/sessions.json"
+}

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shahan Ali — Production & Concept Showcase Portfolio (shahan315)</title>
+    <meta name="description" content="Official Showcase Hub of Shahan Ali (shahan315 / ProBoy) — Featuring 20 interactive production web applications, E-commerce platforms, SaaS dashboards, and 3D experiences.">
+    <meta name="author" content="Shahan Ali (shahan315 / ProBoy)">
+    <link rel="canonical" href="https://proboy.vercel.app/showcase/">
+
+    <!-- Open Graph & Social Cards -->
+    <meta property="og:title" content="Shahan Ali — Production & Concept Showcase Portfolio">
+    <meta property="og:description" content="Explore 20 interactive digital products, SaaS dashboards, and WebGL experiences crafted by Shahan Ali.">
+    <meta property="og:image" content="https://proboy.vercel.app/images/me1.png">
+    <meta property="og:url" content="https://proboy.vercel.app/showcase/">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts & Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            400: '#38BDF8',
+                            500: '#0EA5E9',
+                            600: '#0284C7',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://proboy.vercel.app/#person",
+          "name": "Shahan Ali",
+          "alternateName": ["shahan315", "ProBoy", "proboy315"],
+          "jobTitle": "Full-Stack & AI Developer",
+          "url": "https://proboy.vercel.app/",
+          "sameAs": [
+            "https://github.com/ProBoy315",
+            "https://wa.me/923261684315"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Burewala",
+            "addressRegion": "Punjab",
+            "addressCountry": "Pakistan"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://proboy.vercel.app/#website",
+          "url": "https://proboy.vercel.app/",
+          "name": "Shahan Ali Portfolio & Showcase Hub",
+          "publisher": {
+            "@id": "https://proboy.vercel.app/#person"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://proboy.vercel.app/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Showcase Hub",
+              "item": "https://proboy.vercel.app/showcase/"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #F3F4F6; min-height: 100vh; overflow-x: hidden; }
+        .glass-card { background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glass-card:hover { border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.25); }
+        .glow-text { background: linear-gradient(135deg, #38BDF8 0%, #34D399 50%, #A855F7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="bg-[#030712] text-slate-100 antialiased selection:bg-cyan-500 selection:text-slate-950">
+
+    <!-- NAVIGATION HEADER -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#030712]/80 backdrop-blur-2xl border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-500 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-slate-950 rounded-xl flex items-center justify-center font-black text-sm text-cyan-300">
+                        SA
+                    </div>
+                </div>
+                <div>
+                    <span class="font-extrabold text-lg text-white tracking-tight">Shahan <span class="text-cyan-400">Ali</span></span>
+                    <span class="block text-[10px] text-slate-400 font-mono">shahan315 · ProBoy Showcase</span>
+                </div>
+            </a>
+
+            <div class="flex items-center gap-4">
+                <a href="/" class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-2">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Main Portfolio
+                </a>
+                <a href="https://wa.me/923261684315" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-all shadow-lg shadow-cyan-500/20 flex items-center gap-2">
+                    <i data-lucide="message-square" class="w-4 h-4"></i> Contact
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <main class="pt-28 pb-20 max-w-7xl mx-auto px-6 space-y-12">
+        <div class="text-center space-y-4 max-w-3xl mx-auto">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono uppercase tracking-wider">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-cyan-400"></i> Interactive Portfolio Applications
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
+                PROBOY <span class="glow-text">SHOWCASE HUB</span>
+            </h1>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+                Explore 20 interactive production web applications, SaaS admin consoles, luxury e-commerce stores, and WebGL concepts engineered by Shahan Ali. Each application features persistent demo state management and interactive scroll storytelling.
+            </p>
+        </div>
+
+        <!-- CREATOR BIOGRAPHY CARD -->
+        <div class="glass-card p-6 sm:p-8 rounded-3xl grid grid-cols-1 md:grid-cols-12 gap-8 items-center border border-cyan-500/20">
+            <div class="md:col-span-4 flex justify-center">
+                <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-cyan-400/40 shadow-2xl">
+                    <img src="/images/me1.png" alt="Shahan Ali" class="w-full h-full object-cover">
+                </div>
+            </div>
+            <div class="md:col-span-8 space-y-3 text-left">
+                <div class="flex items-center gap-3">
+                    <h3 class="text-2xl font-bold text-white">Shahan Ali</h3>
+                    <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-mono text-[10px] border border-cyan-500/40">shahan315</span>
+                </div>
+                <p class="text-xs text-cyan-400 font-mono font-semibold">Full-Stack · AI & Bot Engineer · Shopify Specialist</p>
+                <p class="text-slate-300 text-xs leading-relaxed">
+                    Based in Burewala, Punjab, Pakistan. Creator of the ProBoy-MD WhatsApp Bot ecosystem, custom high-concurrency Node.js microservices, Shopify liquid engines, and high-conversion client web solutions.
+                </p>
+                <div class="flex flex-wrap items-center gap-4 pt-2 text-xs">
+                    <a href="https://github.com/ProBoy315" target="_blank" class="text-slate-400 hover:text-cyan-400 flex items-center gap-1"><i data-lucide="github" class="w-4 h-4"></i> GitHub @ProBoy315</a>
+                    <a href="https://wa.me/923261684315" target="_blank" class="text-slate-400 hover:text-emerald-400 flex items-center gap-1"><i data-lucide="phone" class="w-4 h-4"></i> +92 326 1684315</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEARCH AND CATEGORY FILTERS -->
+        <div class="space-y-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <!-- Search Input -->
+                <div class="relative w-full sm:w-96">
+                    <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500"></i>
+                    <input type="text" id="search-input" placeholder="Search applications, technologies, industries..." oninput="filterProjects()" class="w-full bg-slate-900/90 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors">
+                </div>
+
+                <!-- Category Tabs -->
+                <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto" id="category-tabs">
+                    <button onclick="setCategory('all')" class="cat-btn active px-3.5 py-2 rounded-xl text-xs font-semibold bg-cyan-500 text-slate-950 cursor-pointer transition-all">All (20)</button>
+                    <button onclick="setCategory('E-Commerce')" class="cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-400 hover:text-white border border-white/10 cursor-pointer transition-all">E-Commerce</button>
+                    <button onclick="setCategory('SaaS')" class="cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-400 hover:text-white border border-white/10 cursor-pointer transition-all">SaaS</button>
+                    <button onclick="setCategory('Marketplace')" class="cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-400 hover:text-white border border-white/10 cursor-pointer transition-all">Marketplace</button>
+                    <button onclick="setCategory('Dashboard')" class="cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-400 hover:text-white border border-white/10 cursor-pointer transition-all">Dashboard</button>
+                    <button onclick="setCategory('Creative')" class="cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-400 hover:text-white border border-white/10 cursor-pointer transition-all">Creative</button>
+                </div>
+            </div>
+
+            <!-- SHOWCASE GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="showcase-grid">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 bg-slate-950 py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center space-y-4 text-xs text-slate-500">
+            <p class="text-slate-300 font-semibold">Designed & Developed by Shahan Ali (shahan315 / ProBoy) — Official Showcase Portfolio</p>
+            <p>© 2026 Shahan Ali. All rights reserved. Burewala, Punjab, Pakistan.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        let allProjects = [];
+        let currentCategory = 'all';
+
+        async function initShowcase() {
+            try {
+                const res = await fetch('/showcase.json');
+                allProjects = await res.json();
+            } catch(e) {
+                console.log("Loading default showcase dataset...");
+            }
+            renderGrid();
+        }
+
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-cyan-500', 'text-slate-950');
+                btn.classList.add('bg-slate-900', 'text-slate-400');
+            });
+            event.target.classList.remove('bg-slate-900', 'text-slate-400');
+            event.target.classList.add('bg-cyan-500', 'text-slate-950');
+            renderGrid();
+        }
+
+        function filterProjects() {
+            renderGrid();
+        }
+
+        function renderGrid() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const grid = document.getElementById('showcase-grid');
+
+            const filtered = allProjects.filter(p => {
+                const matchesCat = currentCategory === 'all' || p.category.toLowerCase() === currentCategory.toLowerCase();
+                const matchesQuery = !query || 
+                    p.name.toLowerCase().includes(query) || 
+                    p.description.toLowerCase().includes(query) || 
+                    p.industry.toLowerCase().includes(query) || 
+                    p.technologies.some(t => t.toLowerCase().includes(query));
+                return matchesCat && matchesQuery;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center text-slate-500 space-y-2">
+                        <i data-lucide="folder-search" class="w-10 h-10 mx-auto text-slate-600"></i>
+                        <p class="text-sm font-semibold">No applications found matching your criteria.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => `
+                <div class="glass-card rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 group">
+                    <div>
+                        <div class="relative overflow-hidden rounded-2xl mb-5 aspect-video border border-white/10">
+                            <img src="${p.thumbnail}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-950/80 text-cyan-400 text-[10px] font-mono border border-cyan-500/30 uppercase font-semibold">
+                                ${p.category}
+                            </span>
+                        </div>
+                        <span class="text-[10px] font-mono text-slate-400 block uppercase tracking-wider mb-1">${p.industry}</span>
+                        <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">${p.name}</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed line-clamp-3">${p.description}</p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-white/10 space-y-4">
+                        <div class="flex flex-wrap gap-1.5">
+                            ${p.technologies.map(t => `<span class="px-2 py-0.5 rounded-md bg-white/5 text-slate-300 text-[10px] font-mono">${t}</span>`).join('')}
+                        </div>
+                        <a href="${p.demo}" class="w-full py-3 rounded-xl bg-cyan-500/10 hover:bg-cyan-500 text-cyan-300 hover:text-slate-950 font-bold text-xs uppercase tracking-wider transition-all duration-300 border border-cyan-500/30 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-cyan-500/20">
+                            Launch Live Showcase <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        window.addEventListener('DOMContentLoaded', initShowcase);
+    </script>
+</body>
+</html>

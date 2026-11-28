@@ -1,0 +1,121 @@
+[
+  {
+    "slug": "proboy-md",
+    "title": "ProBoy-MD",
+    "featured": true,
+    "category": "WhatsApp Bot",
+    "summary": "Open-source Node.js WhatsApp Multi-Device bot built by Shahan Ali (PROBOY) on Baileys, with 224 verified command files, pairing-code auth, and role-gated dispatch.",
+    "description": [
+      "ProBoy-MD is a modular Node.js WhatsApp Multi-Device automation bot built with @whiskeysockets/baileys (7.0.0-rc.9 declared) by Shahan Ali (PROBOY / proboy315).",
+      "At audited commit c05d3225, the repository holds 224 JavaScript command modules across eight physical folders (ai: 49, dev: 28, fun: 43, general: 26, group: 30, media: 12, textmaker: 19, utility: 17). Commands are loaded by utils/commandLoader.js and gated in handler.js across owner, sudo, moderator, group-admin, and bot-admin permission tiers.",
+      "Connection uses WhatsApp's phone-number pairing code flow (via proboy-md.gt.tc or terminal prompt) with per-session settings directories. Note that ProBoy-MD uses the unofficial Baileys library rather than the official Meta WhatsApp Business Platform API, and at commit c05d3225 the declared package.json start file index.js is absent in the repository tree."
+    ],
+    "features": [
+      "Baileys Multi-Device WebSocket session handling with pairing-code authentication",
+      "224 verified JavaScript command modules with alias collision handling",
+      "Owner, sudo, moderator, group-admin, and bot-admin permission gates",
+      "Interactive button layer (gifted-btns), media utilities, and Gemini/AI proxy helpers"
+    ],
+    "technologies": [
+      "Node.js",
+      "JavaScript",
+      "Baileys Multi-Device",
+      "REST Webhooks",
+      "Linux / PM2"
+    ],
+    "image": "/images/proboy-md-cover-1000.jpg",
+    "screenshots": [],
+    "repo": "https://github.com/ProBoy315/ProBoy-MD",
+    "demo": "https://proboy-md.gt.tc/",
+    "docs": "/proboy-md/docs",
+    "creator": "Shahan Ali",
+    "year": "2026"
+  },
+  {
+    "slug": "proboy-encrypt-decrypt",
+    "title": "ProBoy Encrypt & Decrypt",
+    "featured": false,
+    "category": "Security & Privacy",
+    "summary": "Browser-native Web Crypto AES-256-GCM encryption suite with PBKDF2 key derivation, PNG LSB image steganography, and local encrypted history vault.",
+    "description": [
+      "ProBoy Encrypt & Decrypt runs encryption and decryption completely inside your browser via the native Web Crypto API (crypto.subtle) using AES-256-GCM authenticated encryption, without uploading plaintext messages or passphrases to any server.",
+      "It also supports Least Significant Bit (LSB) PNG image steganography to embed cipher payloads inside PNG pixel data alongside a local browser history vault.",
+      "Security model & threat boundaries: All cryptographic operations run client-side and depend on browser trust and host device integrity (if a device is compromised or untrusted scripts are injected, browser memory cannot protect secrets). Steganography conceals payload presence inside PNGs rather than adding cryptographic strength on its own — always pair it with strong AES-256-GCM passphrases. This tool is a privacy utility, not a third-party security audit or certification."
+    ],
+    "features": [
+      "Client-side AES-256-GCM authenticated encryption via Web Crypto API",
+      "PNG LSB image steganography payload embedding and extraction",
+      "Zero server-side payload or passphrase transmission",
+      "Local browser encrypted vault with inspectable threat assumptions"
+    ],
+    "technologies": [
+      "Web Crypto API",
+      "AES-256-GCM",
+      "Canvas LSB Steganography",
+      "JavaScript"
+    ],
+    "image": "/images/proboy-encrypt-decrypt-1000.jpg",
+    "screenshots": [],
+    "repo": "",
+    "demo": "/encrypt&decrypt.html",
+    "docs": "",
+    "creator": "Shahan Ali",
+    "year": "2026"
+  },
+  {
+    "slug": "proboy-js-obfuscator",
+    "title": "ProBoy JS Obfuscator",
+    "featured": false,
+    "category": "Developer Tools",
+    "summary": "Client-side JavaScript code transformation utility for identifier mangling, string encoding, and local download without uploading source files.",
+    "description": [
+      "ProBoy JS Obfuscator is a browser-based JavaScript transformation tool that renames identifiers, transforms literals, and formats compact output locally in the browser without uploading source files to an external backend.",
+      "Important engineering boundary: JavaScript obfuscation only raises casual reverse-engineering friction and reduces readability. It is NOT encryption, NOT access control, and NOT a security guarantee — never ship API keys, database credentials, or secret business logic in client-delivered JavaScript."
+    ],
+    "features": [
+      "100% browser-side JavaScript AST / string transformation",
+      "Configurable identifier mangling and literal encoding",
+      "Instant side-by-side preview, copy, and .js file export",
+      "Honest documentation distinguishing obfuscation from real security"
+    ],
+    "technologies": [
+      "JavaScript",
+      "AST / Code Transform",
+      "Browser Developer Utility",
+      "HTML5 / CSS3"
+    ],
+    "image": "/images/proboy-js-obfuscator-1000.jpg",
+    "screenshots": [],
+    "repo": "",
+    "demo": "/obfuscator/",
+    "docs": "",
+    "creator": "Shahan Ali",
+    "year": "2026"
+  },
+  {
+    "slug": "proboy-sim-database",
+    "title": "ProBoy-SiM_Database",
+    "featured": false,
+    "category": "Legacy Browser Tool",
+    "summary": "Archived notes about a lookup concept. It is not used as proof of a working database, backend, or third-party data access.",
+    "description": [
+      "The legacy page describes a telecom lookup concept. It does not contain a verifiable MySQL schema or an auditable database implementation. No live lookup is offered on this project page.",
+      "For full-stack proof, see the portfolio architecture case study and its public source."
+    ],
+    "features": [
+      "Legacy frontend concept, not a supported data service",
+      "No claim of ownership, authorized access, or database integration"
+    ],
+    "technologies": [
+      "HTML",
+      "CSS"
+    ],
+    "image": "/images/proboy-sim-database-1000.jpg",
+    "screenshots": [],
+    "repo": "",
+    "demo": "/sim.html",
+    "docs": "",
+    "creator": "Shahan Ali",
+    "year": "2026"
+  }
+]

@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProBoy-PANEL</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #080b12;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .loading {
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+
+    .dot {
+      display: inline-block;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loading">Loading<span class="dot">...</span></div>
+
+  <script>
+    (async function () {
+      const API_URL =
+        "https://ubiquitous-succotash-omega.vercel.app/";
+
+      try {
+        const response = await fetch(API_URL, {
+          cache: "no-store"
+        });
+
+        if (!response.ok) throw new Error("API error");
+
+        const data = await response.json();
+
+        if (
+          data.success === true &&
+          typeof data.link === "string" &&
+          /^https?:\/\//i.test(data.link)
+        ) {
+          window.location.replace(data.link);
+        }
+      } catch (error) {
+        console.error("Redirect failed:", error);
+      }
+    })();
+  </script>
+
+</body>
+</html>

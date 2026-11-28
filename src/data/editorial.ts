@@ -1,0 +1,188 @@
+// Public articles are curated separately from the unpublished 30-topic roadmap.
+export type Article = {
+  slug: string; title: string; category: string; summary: string; answer: string;
+  audience: string; publishedAt: string; updatedAt: string; tags: string[];
+  sections: { heading: string; paragraphs: string[]; code?: string }[];
+  sources: { label: string; href: string }[]; relatedDocs?: string;
+};
+
+const date = "2026-11-07";
+const repo = "https://github.com/proboy315/ProBoy-MD";
+export const articles: Article[] = [
+  {
+    slug: "proboy-md-source-audit", title: "ProBoy-MD: A Source-First Guide to the Bot and Its Limits", category: "ProBoy-MD",
+    summary: "How to explore the current ProBoy-MD source, command loader and pairing flow without confusing repository metadata with a working deployment.",
+    answer: "ProBoy-MD is a Node.js WhatsApp bot project built around Baileys and modular command files. Its repository contains a message handler, configuration, pairing guidance and commands organized by category. The checked revision also has a missing startup file, so read the source and verify your deployment before assuming the README setup commands work unchanged.",
+    audience: "For developers evaluating the project. You will learn which files to inspect, how commands are dispatched and which claims need verification.",
+    publishedAt: date, updatedAt: date, tags: ["Baileys", "Node.js", "Source audit"], relatedDocs: "overview",
+    sections: [
+      { heading: "Start with the executable path", paragraphs: ["At commit c05d3225, package.json declares npm start as node index.js, but the checked repository does not contain index.js. proboy.js and handler.js exist. Do not rename or execute a different file based solely on a guess; ask the maintainer which entry point and deployment revision are supported.", "The README advertises Node.js 20+ and Baileys 7.0.0-rc.9. package.json declares a prerelease Baileys dependency. Treat these as repository declarations, not proof of runtime compatibility on every host."] },
+      { heading: "Follow a command through the source", paragraphs: ["utils/commandLoader.js scans commands/<category>/*.js and registers names and aliases, with a first-loaded-wins rule unless override is explicitly enabled. handler.js checks the configured prefix, resolves the token and applies command flags before calling execute. Some commands enforce extra restrictions inside execute; inspect both layers.", "The current tree has 224 JavaScript command files in eight physical folders. The site's older commands.json snapshot also names an admin category; its figures must not be conflated with this revision. See the documentation audit for the separate counts."], code: "# Read these files in the repository (not commands to run on a server):\npackage.json\nconfig.js\nutils/commandLoader.js\nhandler.js\ncommands/group/kick.js" },
+      { heading: "Pairing is not a public demo", paragraphs: ["The README links a separate pairing site and documents phone-number linking. This portfolio's command playground illustrates selected command behavior; it cannot connect a visitor to a live WhatsApp session. Keep authentication state and session strings private.", "Before hosting, check the actual entry point, process persistence, configuration defaults and permissions. Do not copy a public example session into configuration."] }
+    ], sources: [{ label: "ProBoy-MD source and README", href: repo }, { label: "Baileys upstream repository", href: "https://github.com/WhiskeySockets/Baileys" }]
+  },
+  {
+    slug: "whatsapp-bot-command-handler", title: "Designing a WhatsApp Bot Command Handler", category: "Bot Architecture",
+    summary: "A practical trace from incoming message to command execution, with permission checks that can be verified in ProBoy-MD.",
+    answer: "A command handler turns an incoming message into a safe, authorized action. It should normalize the message, check a configured prefix, resolve a registered name or alias, validate context and permissions, then execute with explicit error handling. ProBoy-MD's handler.js and commandLoader.js show these stages, though individual commands may add their own checks.",
+    audience: "For Node.js bot maintainers. You will learn where to place validation and why command metadata alone is not enough to prove access rights.",
+    publishedAt: date, updatedAt: date, tags: ["Commands", "Permissions", "Node.js"], relatedDocs: "command-syntax",
+    sections: [
+      { heading: "Parse before you dispatch", paragraphs: ["In the checked handler.js, the command path exits when a message does not start with config.prefix. It removes the prefix, splits on whitespace and lowercases the first token before looking up a registered command. This means multi-word arguments stay in the remaining args array; a command must validate its own expected inputs.", "utils/commandLoader.js reads JavaScript modules from commands category directories. It maps declared aliases to the same command object, but a collision can cause an alias to be skipped. Never assume every declared alias wins at runtime."], code: "// Simplified illustration, not a drop-in ProBoy-MD patch\nif (!body.startsWith(config.prefix)) return;\nconst [token, ...args] = body.slice(config.prefix.length).trim().split(/\\s+/);\nconst command = commands.get(token.toLowerCase());\nif (!command) return;" },
+      { heading: "Enforce context and authority", paragraphs: ["The handler checks ownerOnly, modOnly, groupOnly, privateOnly, adminOnly and botAdminNeeded flags. senderIsPrivileged combines owner and sudo for some handler checks. A flagged command can still impose stricter rules inside execute: commands/dev/connect.js additionally requires the primary owner.", "Do not infer authority solely from a category name. commands/group/kick.js declares groupOnly, adminOnly and botAdminNeeded and requires a mentioned or replied-to member. The bot checks for self-kick attempts as well. That is a concrete example of context validation after permission gating."], code: "// Metadata excerpt from commands/group/kick.js\nname: 'kick', aliases: ['remove'], category: 'group',\nusage: '.kick @user', groupOnly: true,\nadminOnly: true, botAdminNeeded: true" },
+      { heading: "Test failure paths", paragraphs: ["Test an unknown command, a missing argument, a private chat using a group-only command, a non-admin sender, and a bot without group-admin rights. Log errors without recording session credentials or private message content. Never offer real moderation execution from a public website."] }
+    ], sources: [{ label: "ProBoy-MD handler and loader", href: `${repo}/tree/main` }, { label: "Baileys upstream repository", href: "https://github.com/WhiskeySockets/Baileys" }]
+  },
+  {
+    slug: "baileys-session-safety", title: "Baileys Sessions: Authentication State and Safe Handling", category: "Bot Architecture",
+    summary: "How to reason about WhatsApp bot credentials, pairing, backups and recovery without putting a session into a public site.",
+    answer: "A Baileys session holds authentication state for a linked WhatsApp device. Treat it as a credential: keep it out of Git, client bundles, logs and shared screenshots. Pairing creates or restores device state, but a pairing code is not a long-term backup. Recover by restoring protected state or re-linking, according to the bot's supported flow.",
+    audience: "For people operating their own bot instance. This guide explains trust boundaries and what to verify before backup or migration.",
+    publishedAt: date, updatedAt: date, tags: ["Baileys", "Security", "Sessions"], relatedDocs: "session-storage",
+    sections: [
+      { heading: "Where credentials appear", paragraphs: ["The ProBoy-MD README describes linking through a separate pairing service, terminal pairing and a legacy SESSION_ID environment variable. config.js reads process.env.SESSION_ID. None of those secrets belongs in this portfolio's frontend or a published documentation example.", "The README describes per-session settings and multiple linked numbers. Distinguish settings from authentication files: either may be sensitive, and the exact persistence layout must be checked against the deployment revision before restoring." ] },
+      { heading: "A safe recovery checklist", paragraphs: ["First confirm you control the WhatsApp account and the deployment. Then stop the process before moving protected state; preserve file permissions and use encrypted backups. Test a restoration in a private environment, or use the documented pairing flow to link again. Revoke unwanted linked devices in WhatsApp if state might have leaked.", "Avoid sharing a session string in support chats. If a bot sends a status output containing phone numbers, redact it before creating an issue. A public command playground is only a simulation." ] },
+      { heading: "Upstream compatibility matters", paragraphs: ["Baileys' socket configuration guide says auth state includes credentials and Signal key storage. Its multi-file helper is for development; a production adapter must persist key updates, not just the initial credentials. Follow that guidance for the Baileys version you deploy. Do not assume a file layout from a different version will be accepted automatically.", "The upstream pairing guide checks whether credentials are registered before requesting a new code. A re-link is not a routine restart procedure: protect persisted auth state and investigate why it was lost."] }
+    ], sources: [{ label: "Baileys authentication state guidance", href: "https://baileys.wiki/concepts/socket-config" }, { label: "Baileys pairing code flow", href: "https://baileys.wiki/authentication/pairing-code" }, { label: "ProBoy-MD pairing README", href: `${repo}#-connect-your-number-pairing` }]
+  },
+  {
+    slug: "documenting-open-source-command-library", title: "How to Document a Large Open-Source Bot Command Library", category: "ProBoy-MD",
+    summary: "A source-first way to document aliases, permissions and mismatched command counts without inventing behavior.",
+    answer: "Document a command library from executable source, not a menu headline. Record the file, exported name, aliases, usage, flags and input checks separately. Count files, distinct names and callable tokens as different things; report collisions and failures rather than inflating totals. Recheck each claim when the repository changes.",
+    audience: "For maintainers of plugin-based applications. You will learn to build a traceable reference that remains honest about uncertainty.",
+    publishedAt: date, updatedAt: date, tags: ["Documentation", "Commands", "Open source"], relatedDocs: "command-categories",
+    sections: [
+      { heading: "Decide what you are counting", paragraphs: ["At the checked ProBoy-MD commit, find commands -name '*.js' returns 224 files in eight directories. The older site snapshot records 224 files, 220 unique primary names, 537 unique invocable tokens and a menu reporting 531 commands but only 219 listed entries. The numbers describe different units and different snapshots; they do not reconcile into a single verified total.", "A file may export multiple names, an alias may collide, and a loader may reject a module. A static parser count is not necessarily a runtime registration count." ] },
+      { heading: "Document from the command contract", paragraphs: ["The exported fields name, aliases, description, usage and category make a useful index. Then inspect groupOnly, ownerOnly and other flags in handler.js, followed by checks inside execute. For example, connect.js declares ownerOnly but also explicitly checks for the primary owner.", "Do not publish a permission level for an entire category. Even a general command might rely on a quoted message, URL or remote API. Link to a source file for behavior that could change."], code: "# Inspect source without executing a bot session\nfind commands -type f -name '*.js' | wc -l\n# Then read each exported object and its execute function." },
+      { heading: "Keep a changelog of uncertainty", paragraphs: ["Record the commit, checked date and known mismatches next to the docs. If an exported flag is absent, say 'not verified' rather than 'public'. Never include real phone numbers, session IDs or API keys in sample output." ] }
+    ], sources: [{ label: "ProBoy-MD command loader", href: `${repo}/blob/main/utils/commandLoader.js` }, { label: "ProBoy-MD handler", href: `${repo}/blob/main/handler.js` }]
+  },
+  {
+    slug: "react-seo-rendered-content", title: "React SEO: Rendering, Metadata and Crawlable Content", category: "Web Engineering",
+    summary: "How this Vite portfolio serves article HTML and page-specific metadata without relying on a crawler to run the browser app.",
+    answer: "A React route is more reliably crawlable when its important text, links, title and metadata arrive in the HTTP response. Client-side rendering can work for Google, but it adds a rendering step and is not identical across crawlers. This portfolio uses build-time React server rendering for route HTML, then hydrates interactive controls in the browser.",
+    audience: "For developers shipping React content sites. You will learn what to inspect in built HTML and how to avoid metadata duplication.",
+    publishedAt: date, updatedAt: date, tags: ["React", "SEO", "Vite"], relatedDocs: "documentation-home",
+    sections: [
+      { heading: "Check the HTTP response, not only DevTools", paragraphs: ["This project's entry-server.tsx enumerates known routes and renders App with renderToString. A Vite build plugin writes dist/<route>/index.html with the rendered body and route metadata. Browser-side useSeo keeps metadata synchronized after in-app navigation.", "Inspect the response with curl or view-source. Confirm the article text and a single title, description, canonical and JSON-LD block appear before JavaScript runs. A client-only route may show content in the browser but still return a generic HTML shell."], code: "npm run build\n# Verify the generated page, not only the root template:\ngrep -o '<title>[^<]*</title>' dist/blog/react-seo-rendered-content/index.html" },
+      { heading: "Keep URLs and sitemap aligned", paragraphs: ["Use one canonical URL per public article, exclude drafts and noindex utilities, and ensure published routes respond successfully on the deployed host. A sitemap is an inventory for discovery, not an indexing guarantee.", "The site's static hosting and rewrite behavior should be tested against real deployment responses. A custom 404 body is not proof of a 404 HTTP status for arbitrary routes." ] },
+      { heading: "Measure actual results separately", paragraphs: ["The owner-reported analyzer score of 94% is a tooling signal, not a Google ranking. Search Console can show impressions and clicks after verification; neither content nor schema guarantees inclusion in search features." ] }
+    ], sources: [{ label: "Google: JavaScript SEO basics", href: "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics" }, { label: "React renderToString", href: "https://react.dev/reference/react-dom/server/renderToString" }, { label: "Google sitemap guidance", href: "https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview" }]
+  },
+  {
+    slug: "structured-data-developer-portfolio", title: "Portfolio Structured Data Without Fake Authority", category: "Web Engineering",
+    summary: "A practical guide to Person, BreadcrumbList and BlogPosting markup tied to visible pages and real evidence.",
+    answer: "Structured data should describe what a page actually presents. A developer portfolio can describe its real author as a Person, its navigational path as BreadcrumbList, and a published article as BlogPosting with genuine dates. It cannot substitute for quality content, prove third-party recognition, or guarantee a search feature or AI citation.",
+    audience: "For portfolio owners and SEO implementers. You will learn how to scope entities to a page and avoid unsupported claims.",
+    publishedAt: date, updatedAt: date, tags: ["JSON-LD", "SEO", "Content"], relatedDocs: "documentation-home",
+    sections: [
+      { heading: "Match visible content", paragraphs: ["The site uses a real Shahan Ali author identity and links to existing social profiles. An article's title, summary and dates should match its visible page. A breadcrumb list should name and link only real routes. Do not add fabricated reviews, client endorsements or ratings.", "For docs, TechArticle can describe a technical guide; it does not imply the software is production-certified. Link to the code repository as an external source, not an invented independent citation." ] },
+      { heading: "Keep entities stable", paragraphs: ["Use the canonical page URL as the article URL. Keep the author identity consistent across pages, and avoid injecting a second copy of the same schema during hydration. Validate JSON syntax and check what the server sends, not only what a browser eventually shows."], code: "// Illustrative page-specific JSON-LD fields\n{ '@type': 'BlogPosting', headline: title,\n  datePublished: publishedAt, dateModified: updatedAt,\n  author: { '@type': 'Person', name: 'Shahan Ali' } }" },
+      { heading: "Validate without overpromising", paragraphs: ["The Schema Markup Validator checks syntax and vocabulary; Google's Rich Results Test checks supported result eligibility. Neither tool measures rankings, citations, trust or traffic. Review the page again after changing dates or routes." ] }
+    ], sources: [{ label: "Google structured data policies", href: "https://developers.google.com/search/docs/appearance/structured-data/sd-policies" }, { label: "Schema.org TechArticle", href: "https://schema.org/TechArticle" }]
+  },
+  {
+    slug: "accessible-interactive-interfaces", title: "Accessible Interactive Interfaces: Focus, Forms and Motion", category: "Web Engineering",
+    summary: "A checklist for keyboard use, labeled search, dialog focus and reduced motion in interactive React sites.",
+    answer: "An accessible interface remains usable without a mouse. Give every control a name, keep focus visible, use native buttons and links, and return focus when a modal closes. Search should report results and have a meaningful empty state. Honor reduced-motion preferences and test real keyboard flows rather than relying on visual appearance alone.",
+    audience: "For developers building portfolios and tools. You will learn what to test on navigation, search and interactive content.",
+    publishedAt: date, updatedAt: date, tags: ["Accessibility", "React", "UX"], relatedDocs: "documentation-home",
+    sections: [
+      { heading: "Start with semantic controls", paragraphs: ["Use a link when navigation changes the URL and a button for an action like copying code. Label search inputs with visible text or a programmatic label. A heading should describe the section, not replace an accessible name for its input.", "After filtering a list, update a polite status region with the result count. Provide a reset path when nothing matches. Do not trap focus in an ordinary sidebar." ] },
+      { heading: "Test the complete keyboard journey", paragraphs: ["Tab from the skip link into the site header, then into article controls, table-of-contents links and copy buttons. Test Enter and Space on buttons, Escape on an opened mobile navigation, and focus restoration to its opener. Verify headings and landmarks in a screen reader as well as with the keyboard.", "Native details/summary can be an accessible lightweight disclosure for a mobile documentation index. Use ordinary links inside it so SSR still exposes destinations." ] },
+      { heading: "Motion and feedback", paragraphs: ["Avoid scroll-triggered fades that hide essential text until JavaScript runs. Respect prefers-reduced-motion and ensure a copied-code confirmation is announced as text. Error feedback should not rely on color alone."] }
+    ], sources: [{ label: "W3C WCAG 2.2", href: "https://www.w3.org/TR/WCAG22/" }, { label: "WAI keyboard accessibility", href: "https://www.w3.org/WAI/WCAG21/Understanding/keyboard.html" }]
+  },
+  {
+    slug: "presenting-developer-projects", title: "How to Present Developer Projects Without Inventing Results", category: "Project Practice",
+    summary: "A trustworthy project-page outline that separates implemented functionality, demos, limitations and measured outcomes.",
+    answer: "A useful project page explains the problem, the intended user, what was built, how to try it and what remains unverified. Link to code or a working demo when available. Separate sample-data demonstrations from deployed products, and describe outcomes only when you have measurements or client permission to share them.",
+    audience: "For students and independent developers. You will learn how to turn implementation details into an understandable, evidence-based case study.",
+    publishedAt: date, updatedAt: date, tags: ["Portfolio", "Projects", "Communication"], relatedDocs: "overview",
+    sections: [
+      { heading: "Lead with the user's task", paragraphs: ["Explain who the software is for and what task it supports. A project titled 'WhatsApp bot' becomes clearer when it says how commands are loaded, how pairing is described and which actions require a real session. Avoid claiming users or reliability metrics you have not measured.", "Use a short walkthrough with real screenshots or links to actual routes. This site's interactive demos use illustrative data and are not presented as paid client work." ] },
+      { heading: "Show implementation and limitations together", paragraphs: ["List a few verifiable technical decisions and link to the relevant source. Then state the limits: does it require an authenticated account, third-party service, or unavailable entry point? For ProBoy-MD the checked bot commit lacks index.js despite package.json pointing to it, an important deployment caveat.", "For a client-facing page, translate implementation into practical implications without promising a particular revenue or ranking lift." ] },
+      { heading: "Keep evidence maintainable", paragraphs: ["Link to a repository commit or file and review the page when code changes. Give demos clear sample-data labels, verify calls to action, and provide a contact path for questions. If a metric is not collected, omit it rather than substituting an analyzer score." ] }
+    ], sources: [{ label: "ProBoy-MD repository", href: repo }, { label: "Project pages on this site", href: "/projects" }]
+  },
+  {
+    slug: "proboy-technical-seo-performance-audit",
+    title: "ProBoy Technical SEO, AEO & Performance Case Study",
+    category: "SEO & Performance",
+    summary: "Dated 2026-11-27 audit of proboy.vercel.app: fixing 404 OG/favicon assets, duplicate preloads, hidden FAQ answers, 806 KB JS splitting, and image payloads.",
+    answer: "Using the Issue -> Evidence -> Impact -> Fix -> Retest diagnostic loop on 2026-11-27, the local candidate adds valid card and icon files for production URLs that were returning HTTP 404, removed React 19 duplicate portrait preload tags inside #root, rendered all FAQ answers in initial SSR HTML for AEO crawlability, compressed multi-megabyte project images to responsive AVIF/WebP, split route-level JS/CSS bundles, and configured immutable caching for fingerprinted assets. Local fixes do not change the live deployment.",
+    audience: "For engineering reviewers, technical buyers, and search auditors inspecting real before-and-after changes on proboy.vercel.app.",
+    publishedAt: "2026-11-27",
+    updatedAt: "2026-11-27",
+    tags: ["Technical SEO", "AEO", "Core Web Vitals", "Vite"],
+    relatedDocs: "documentation-home",
+    sections: [
+      {
+        heading: "1. Broken OG Card, Favicons & Metadata (P0 Fix)",
+        paragraphs: [
+          "Evidence: Inspecting live HTTP responses on 2026-11-27 confirmed https://proboy.vercel.app/images/og-shahan-ali.jpg and /favicon.ico returned HTTP 404. scripts/audit-site.mjs also flagged title lengths over 70 chars on two blog articles, a 185-char description on /mentions, and 0 <h1> elements during SSR checking state on /admin.",
+          "Fix & Retest: Generated a 1200x630 JPEG Open Graph card (92 KB) from Shahan Ali's official portrait alongside a full 16/32/48/180/192/512 favicon and PWA icon set, shortened metadata within safe SERP bounds, and added an accessible <h1> to /admin's SSR checking phase."
+        ]
+      },
+      {
+        heading: "2. Duplicate Preload Tags & Initial HTML AEO Answers",
+        paragraphs: [
+          "Evidence: React 19 renderToString emitted a second <link rel=\"preload\" as=\"image\"> inside <div id=\"root\"> alongside the <head> preload tag, and Home.tsx gated FAQ answers 2-6 behind JavaScript click state ({open === i && ...}).",
+          "Fix & Retest: Wrapping the responsive portrait in <picture> with AVIF/WebP <source> elements and emitting one matching imagesrcset preload in <head> eliminated duplicate preload tags. Rendering all FAQ answers and service buyer FAQs directly in initial SSR HTML ensures crawlers and answer engines receive complete answers without JavaScript execution. No featured-snippet placement is guaranteed."
+        ]
+      },
+      {
+        heading: "3. Image Payloads, Route Code Splitting & Caching Policy",
+        paragraphs: [
+          "Evidence: Baseline split build produced a single 805.83 KB JS chunk (228.44 KB gzip) and 205.58 KB CSS file (37.28 KB gzip) because App.tsx eagerly imported all 17 pages including DemosWorkspaces, DemosCommerce, commands.json, and Admin. Heavy PNGs (botimg.png at 1.97 MB, encrypt&decrypt.png at 1.72 MB, certificate at 1.12 MB) and uncached /assets/* headers (max-age=0, must-revalidate) inflated repeat load cost.",
+          "Fix & Retest: Generated responsive 640w/1000w AVIF (4-46 KB) and WebP (5-64 KB) variants, split secondary routes and demos into on-demand Vite chunks with build manifest CSS injection on prerendered routes, and configured Cache-Control: public, max-age=31536000, immutable strictly for content-hashed /assets/* in vercel.json and netlify.toml. Note: Laboratory bundle/build measurements are reported separately from field Core Web Vitals (CrUX / Search Console), which require property verification access."
+        ],
+        code: "# Reproducible verification commands\nnpm run build\nnode scripts/audit-site.mjs\nnpm run test:server"
+      }
+    ],
+    sources: [
+      { label: "Services & Diagnostic Framework", href: "/services" },
+      { label: "Frontend Performance & State Proof", href: "/services/frontend-development" },
+      { label: "Press Kit & Asset Status", href: "/press" }
+    ]
+  },
+  {
+    slug: "geo-llmo-ai-visibility-baseline",
+    title: "GEO & LLMO Baseline: AI Visibility & Disambiguation",
+    category: "SEO & AI Visibility",
+    summary: "Dated 2026-11-27 baseline recording real search disambiguation, unbranded competitor gaps, crawler policies, and evidence gaps without fabricated AI citations.",
+    answer: "Tested on 2026-11-27: branded web search surfaces proboy.vercel.app and GitHub proboy315/ProBoy-MD, alongside name collisions with unrelated Shahan Ali profiles. Unbranded searches for React/Node.js developers in Pakistan, Baileys bots, Shopify Liquid, and Gemini integrations reveal concrete proof gaps rather than guaranteed citations. This portfolio separates real source proofs from sample demos and keeps crawler policies transparent.",
+    audience: "For evaluators reviewing Shahan Ali's entity hygiene, disambiguation, and honest GEO/LLMO baseline.",
+    publishedAt: "2026-11-27",
+    updatedAt: "2026-11-27",
+    tags: ["GEO", "LLMO", "Disambiguation", "AEO"],
+    relatedDocs: "overview",
+    sections: [
+      {
+        heading: "1. Branded Disambiguation & Entity Hygiene (2026-11-27)",
+        paragraphs: [
+          "Real web search observations on 2026-11-27 showed proboy.vercel.app appearing in generic web-search results for branded queries alongside an older cached keyword-stuffed copy and name collisions (Shahan Ali Mohsin, Shahan Ali Pranto at shahan23.com, another developer at shahanali.netlify.app, and a Karachi medical entry on ZoomInfo).",
+          "Action implemented: Standardized one factual identity — Shahan Ali (PROBOY), Full-Stack Developer (primary) and Frontend Engineer (secondary), Burewala, Punjab, Pakistan — across JSON-LD Person/ProfilePage, visible disambiguation FAQs, /about, and /press, and removed fabricated review data from info.json."
+        ]
+      },
+      {
+        heading: "2. Unbranded Search Benchmarking & Remaining Proof Gaps",
+        paragraphs: [
+          "Testing unbranded developer queries on 2026-11-27 confirmed why evidence matters more than claims: React/Node.js Pakistan talent pages, Baileys GitHub Topic directories, Shopify Liquid specialists (such as moeedbuilds.dev with public Liquid service breakdowns), and Gemini API GitHub topic repositories appeared alongside source listings and profiles in the available web-search results. This is not a location-controlled ranking test.",
+          "Honest gap status: Live interactive sessions on ChatGPT Search, Perplexity, Gemini web UI, and Microsoft Copilot were not available in this sandboxed build environment and remain marked as untested/blocked until logged manually in docs/ai-visibility/tracker.csv. Additionally, Shopify production proof remains a documented gap (no paid client store URL yet)."
+        ]
+      },
+      {
+        heading: "3. Crawling Policy & No Overpromises",
+        paragraphs: [
+          "public/robots.txt permits indexing of public routes and declares the XML sitemap (https://proboy.vercel.app/sitemap.xml), while utility HTMLs and /admin carry X-Robots-Tag noindex headers. Search crawling, user-triggered page fetching, and model training are distinct mechanisms: neither JSON-LD nor llms.txt guarantees AI training inclusion or assistant recommendations."
+        ]
+      }
+    ],
+    sources: [
+      { label: "Mentions & Independent Coverage Policy", href: "/mentions" },
+      { label: "About & Identity Disambiguation", href: "/about#disambiguation" },
+      { label: "Technical SEO & Performance Audit", href: "/blog/proboy-technical-seo-performance-audit" }
+    ]
+  }
+];

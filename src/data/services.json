@@ -1,0 +1,260 @@
+[
+  {
+    "slug": "full-stack-web-development",
+    "tier": "primary",
+    "icon": "code",
+    "title": "React & Node.js Full-Stack Development",
+    "shortTitle": "Full-Stack Dev",
+    "tagline": "End-to-end React, TypeScript, Node.js APIs, authentication, and database-backed dashboards.",
+    "summary": "Shahan Ali (PROBOY) builds React, TypeScript, and Node.js full-stack apps with REST APIs, authentication, and MySQL, Firestore, or Redis databases.",
+    "overview": [
+      "Full-stack engineering connects a fast, accessible browser interface to a validated backend, persistent database, and secure deployment configuration. I build React and TypeScript frontends backed by Node.js serverless or server APIs with explicit request validation, session protection, and clean error states.",
+      "Every engagement includes clear database modeling, documented API contracts, environment separation (never exposing secrets in client bundles), and clean deployment handover on Vercel, Netlify, or Render."
+    ],
+    "deliverables": [
+      "Custom React + TypeScript application architecture with route-level code splitting",
+      "Node.js REST APIs, webhook handlers, rate limiting, and server-side validation",
+      "Database design and integration (MySQL relational schemas, Firebase/Firestore, or Upstash Redis)",
+      "Authentication flows (HttpOnly session cookies, scrypt password hashing, TOTP/HMAC verification)",
+      "Admin dashboards, CRUD workflows, technical SEO setup, and documented handover"
+    ],
+    "outOfScope": [
+      "Paid media ad management or guaranteed Google ranking outcomes",
+      "Enterprise 24/7 SRE/SOC compliance auditing or third-party penetration testing certificates",
+      "Unlicensed proprietary backend code or scraping platforms in breach of terms"
+    ],
+    "technologies": [
+      "React 19",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Node.js",
+      "MySQL",
+      "Firebase / Firestore",
+      "Upstash Redis",
+      "Vercel / Netlify"
+    ],
+    "relatedProjectSlugs": [
+      "proboy-encrypt-decrypt",
+      "proboy-md"
+    ],
+    "idealFor": "Founders, agencies, and product teams who need a custom SaaS MVP, internal control panel, database-backed portal, or REST API integration engineered end-to-end.",
+    "faqs": [
+      {
+        "q": "What database technologies do you use for full-stack apps?",
+        "a": "MySQL for structured relational queries and reporting, Firebase/Firestore for real-time document sync, and Upstash Redis REST for low-latency sessions, rate limits, and aggregate counters (as implemented in this portfolio's /api backend)."
+      },
+      {
+        "q": "How do you keep API keys and admin credentials safe?",
+        "a": "Secrets live exclusively in host environment variables (never prefixed with VITE_ or committed to Git), passwords use salted scrypt hashes, sessions use HttpOnly Secure SameSite=Strict cookies, and state-changing routes validate same-origin headers."
+      },
+      {
+        "q": "What is included at project handover?",
+        "a": "Clean Git repository commits, .env.example template documenting required variables, API endpoint contracts, database schema notes, and production build verification."
+      }
+    ]
+  },
+  {
+    "slug": "frontend-development",
+    "tier": "secondary",
+    "icon": "layers",
+    "title": "Frontend & UI Engineering",
+    "shortTitle": "Frontend Dev",
+    "tagline": "Secondary positioning: responsive React interfaces, interactive state UX, keyboard navigation, and Web Vitals optimization.",
+    "summary": "Responsive React and TypeScript frontend engineering with complete loading, empty, and error states, keyboard accessibility, and fast assets.",
+    "overview": [
+      "When a team already has a backend or API and needs high-craft frontend engineering, this service focuses specifically on UI architecture, design-to-code fidelity, interactive state completeness, and browser performance.",
+      "Unlike generic template customization, every component handles loading skeletons, zero-match empty states with reset paths, explicit network error fallbacks, full keyboard focus control, reduced-motion compliance, and route-level JavaScript/CSS splitting."
+    ],
+    "deliverables": [
+      "Responsive React + TypeScript + Tailwind CSS UI systems and interactive workspaces",
+      "Complete state design: loading skeletons, empty states, validation errors, and retry controls",
+      "Keyboard navigation, modal focus traps, semantic landmarks, and prefers-reduced-motion support",
+      "Asset optimization (responsive AVIF/WebP <picture>, width/height reservation, lazy loading)",
+      "Interactive dashboards, Kanban boards, configurators, and 360° product angle viewers"
+    ],
+    "outOfScope": [
+      "Custom server databases, authentication backends, or payment gateway settlement (covered under Full-Stack Development)",
+      "Formal third-party WCAG legal certification audits",
+      "Brand identity / print illustration packages"
+    ],
+    "technologies": [
+      "React",
+      "TypeScript",
+      "HTML5 / CSS3",
+      "Tailwind CSS",
+      "Vite",
+      "Web Crypto API",
+      "SVG Data Visualization",
+      "Core Web Vitals"
+    ],
+    "relatedProjectSlugs": [
+      "proboy-encrypt-decrypt",
+      "proboy-js-obfuscator"
+    ],
+    "idealFor": "Product teams, SaaS founders, and designers who have APIs or Figma specs ready and need clean, accessible, high-speed React frontend implementation.",
+    "faqs": [
+      {
+        "q": "How does Frontend Development differ from your Full-Stack service?",
+        "a": "Full-Stack covers backend Node.js APIs, databases, authentication, and server deployment. Frontend Development focuses purely on the browser layer — React/TypeScript components, responsive CSS, interactive states, accessibility fundamentals, and bundle/image performance."
+      },
+      {
+        "q": "Can I inspect working examples of your React UI state handling?",
+        "a": "Yes. Explore the Pulse SaaS analytics workspace (/demos/pulse-dashboard), SprintBoard Kanban (/demos/sprintboard-kanban), and the interactive Loading/Empty/Error/Keyboard playground directly on this page."
+      },
+      {
+        "q": "Do you guarantee Lighthouse 100 or full WCAG compliance?",
+        "a": "No honest engineer guarantees external Lighthouse scores before auditing third-party tags, and accessibility fundamentals tested during development are not a substitute for an accredited third-party WCAG audit."
+      }
+    ]
+  },
+  {
+    "slug": "shopify-development",
+    "tier": "primary",
+    "icon": "bag",
+    "title": "Shopify Liquid & E-commerce Development",
+    "shortTitle": "Shopify Liquid",
+    "tagline": "Custom Online Store 2.0 themes, Liquid sections, AJAX cart drawers, variant selectors, and storefront speed.",
+    "summary": "Custom Shopify Online Store 2.0 themes, Liquid section schemas, variant pickers, AJAX Cart API drawers, and mobile storefront speed.",
+    "overview": [
+      "Shopify stores lose conversions when bloated page-builder apps slow down mobile rendering or break variant and cart UX. I write clean Online Store 2.0 Liquid templates, JSON section schemas, and lightweight vanilla JavaScript interactions using Shopify's native AJAX Cart API.",
+      "Honesty check: While interactive browser storefront demos on this portfolio (LuxeCart, Atelier Noir, Voltix Gear) demonstrate product filtering, variant selection, and cart drawer UX in React, they use fictional sample data and are not live paid Shopify client stores."
+    ],
+    "deliverables": [
+      "Custom Shopify Online Store 2.0 Liquid sections with merchant-editable {% schema %} blocks",
+      "Mobile-first product templates, swatch variant selectors, and slide-out AJAX Cart API drawers",
+      "Collection filtering, sorting, predictive search UX, and responsive AVIF/WebP image srcset",
+      "Webhook-based order/inventory sync to Node.js services or notification channels"
+    ],
+    "outOfScope": [
+      "Shopify Plus exclusive Checkout UI Extensions requiring Plus sandbox access not supplied by the merchant",
+      "Media buying, Meta/Google Ads management, or guaranteed sales uplift",
+      "Paid commercial app subscriptions or third-party ERP licensing"
+    ],
+    "technologies": [
+      "Shopify Online Store 2.0",
+      "Shopify Liquid",
+      "Shopify AJAX Cart API",
+      "JavaScript (ES2020+)",
+      "CSS3 / Tailwind",
+      "REST Webhooks"
+    ],
+    "relatedProjectSlugs": [],
+    "idealFor": "D2C merchants and Shopify store owners who need custom Online Store 2.0 Liquid sections, cleaner mobile product/cart UX, or faster storefront loading without heavy app bloat.",
+    "faqs": [
+      {
+        "q": "Do you have live paid Shopify client store links on this site?",
+        "a": "No paid client Shopify store URL is currently published here. This page shows real Online Store 2.0 Liquid section code and AJAX Cart API patterns, while LuxeCart (/demos/luxecart-store) and Voltix Gear (/demos/voltix-gear) are React browser UI demonstrations with sample data."
+      },
+      {
+        "q": "Why use native Liquid + Shopify AJAX Cart API instead of heavy page-builder apps?",
+        "a": "Native Online Store 2.0 sections render on Shopify's CDN without injecting extra third-party JavaScript bundles, keeping theme editor flexibility while reducing mobile layout shifts and cart latency."
+      },
+      {
+        "q": "Can you connect Shopify order webhooks to WhatsApp or external dashboards?",
+        "a": "Yes — using HMAC-verified Shopify webhooks routed into a Node.js backend service (outside the theme layer) to validate events and trigger downstream alerts."
+      }
+    ]
+  },
+  {
+    "slug": "whatsapp-bot-development",
+    "tier": "primary",
+    "icon": "bot",
+    "title": "WhatsApp Bot Development",
+    "shortTitle": "WhatsApp Bots",
+    "tagline": "Modular Node.js + Baileys Multi-Device bots with pairing codes, role permissions, group moderation, and API workflows.",
+    "summary": "Modular Node.js + Baileys Multi-Device WhatsApp bots with pairing codes, role permissions, and group tools, backed by ProBoy-MD.",
+    "overview": [
+      "Informed directly by maintaining ProBoy-MD (224 command files across eight directories on GitHub), I design clean WhatsApp automation bots where each command lives in its own module with explicit aliases, usage validation, and handler-level permission guards.",
+      "Important platform distinction: My documented public bot engineering uses @whiskeysockets/baileys (an unofficial WhatsApp Web Multi-Device WebSocket library), which is separate from the official Meta WhatsApp Business Platform Cloud API. I explicitly document Baileys limitations and ToS considerations rather than claiming official Meta Business Partner integrations without evidence."
+    ],
+    "deliverables": [
+      "Modular Node.js + Baileys Multi-Device command architecture with deterministic loader",
+      "Phone-number pairing-code onboarding, multi-session state isolation, and deduplication guards",
+      "Owner, sudo, moderator, and group-admin permission gating",
+      "Custom auto-responders, group moderation rules, media pipelines, and REST/AI command plugins",
+      "Process management (PM2 / Linux VPS / Render) setup and repository documentation"
+    ],
+    "outOfScope": [
+      "Official Meta WhatsApp Business Platform WABA green-tick verification or bulk spam campaigns",
+      "Unsolicited bulk messaging or account-ban immunity guarantees (unofficial Baileys automation carries WhatsApp ToS risk)",
+      "Hosting accounts or third-party paid API quotas not supplied by the client"
+    ],
+    "technologies": [
+      "Node.js",
+      "JavaScript",
+      "@whiskeysockets/baileys",
+      "Pairing-Code Auth",
+      "gifted-btns",
+      "PM2 / Linux VPS / Render"
+    ],
+    "relatedProjectSlugs": [
+      "proboy-md"
+    ],
+    "idealFor": "Developers, community admins, and operators looking for custom Baileys multi-device command routing, pairing workflows, group automation, or API-connected bot plugins.",
+    "faqs": [
+      {
+        "q": "Is Baileys the same as the official WhatsApp Business Platform?",
+        "a": "No. Baileys connects as a linked WhatsApp Web Multi-Device client (unofficial protocol), which is well-suited for open-source tooling and developer bots like ProBoy-MD but carries platform Terms of Service risk. Official high-volume commercial messaging requires Meta's paid WhatsApp Business Cloud API."
+      },
+      {
+        "q": "Where can I inspect real ProBoy-MD source code before hiring?",
+        "a": "Read the audited ProBoy-MD repository on GitHub (github.com/ProBoy315/ProBoy-MD), browse the 224 commands and safe browser playground at /proboy-md, or review the 30-chapter documentation centre at /proboy-md/docs."
+      },
+      {
+        "q": "How are sessions and permissions protected?",
+        "a": "Auth state and SESSION_IDs stay strictly in private server storage (never in frontend bundles), and handler.js checks ownerOnly, modOnly, adminOnly, groupOnly, and botAdminNeeded flags before executing restricted modules."
+      }
+    ]
+  },
+  {
+    "slug": "ai-integrations-automation",
+    "tier": "primary",
+    "icon": "spark",
+    "title": "Gemini AI & API Automation",
+    "shortTitle": "Gemini AI & APIs",
+    "tagline": "Server-side Google Gemini API integrations, structured JSON validation, and multi-step business workflow automation.",
+    "summary": "Server-side Google Gemini API integrations, structured JSON validation, and Input -> Validation -> Storage -> Notification automation workflows.",
+    "overview": [
+      "Reliable AI and automation software treats LLM calls and external APIs as untrusted network I/O: requests validate user inputs first, enforce server-side API key boundaries, validate structured JSON output before rendering or saving, and surface explicit fallback states on timeouts or 429 rate limits.",
+      "The ProBoy-MD source shows a Gemini proxy integration, while Synth Studio is a browser simulation. ProBoy-CONTACT source shows an email relay, not verified inbox delivery. No direct live Gemini API integration or deployed workflow is presented as proof."
+    ],
+    "deliverables": [
+      "Server-side Google Gemini API endpoints with strict prompt/schema validation and never-exposed API keys",
+      "Structured JSON response parsing with fallback handling for malformed outputs or rate limits",
+      "Multi-step workflow pipelines: Input -> Validation -> Database/State -> Email/WhatsApp Notification",
+      "Retry/backoff patterns, webhook signature checks, and error-logging without recording sensitive user payloads"
+    ],
+    "outOfScope": [
+      "Client-side embedding of GEMINI_API_KEY in public frontend JavaScript",
+      "Training custom foundation models from scratch or guaranteed AI citation/hallucination-free claims",
+      "Paid Google Cloud / Gemini API billing or third-party SaaS subscriptions"
+    ],
+    "technologies": [
+      "Google Gemini API",
+      "Node.js",
+      "TypeScript",
+      "REST Webhooks",
+      "Resend / Email APIs",
+      "Structured Prompt Engineering"
+    ],
+    "relatedProjectSlugs": [
+      "proboy-md"
+    ],
+    "idealFor": "Founders and small teams adding practical Gemini assistants, structured document/text processing, or automated form-to-database-to-notification workflows.",
+    "faqs": [
+      {
+        "q": "Do you put the Gemini API key in the React frontend?",
+        "a": "Never. Browser code is public to every user. Gemini API calls run from server or serverless endpoints (/api/* or Node.js services) where process.env.GEMINI_API_KEY stays private, with input limits and rate limiting."
+      },
+      {
+        "q": "Is the Synth Studio AI demo calling a live Gemini key?",
+        "a": "No — Synth Studio (/demos/synth-ai-studio) uses deterministic browser sample synthesis so visitors can test templates and JSON/Markdown output formatting safely without requiring a server API key."
+      },
+      {
+        "q": "How do your automation workflows handle failed webhooks or API timeouts?",
+        "a": "Using explicit stages (Input -> Validation -> Storage -> Notification) with HTTP status checks, bounded timeouts, exponential retry on transient 5xx/429 responses, and non-blocking fallback alerts so failures are surfaced rather than silently dropped."
+      }
+    ]
+  }
+]

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="google-site-verification" content="JuAan2F6fe5xrf1Tik1S3wG681uwX4CJPabG-XB4nHU" />
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="googlebot" content="index, follow">
+    <meta name="bingbot" content="index, follow">
+    <meta name="revisit-after" content="2 days">
+    <meta name="rating" content="general">
+    <meta name="author" content="Shahan Ali (ProBoy)">
+    <meta name="copyright" content="© 2025 Shahan Ali - ProBoy. All rights reserved.">
+    <meta name="language" content="English">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="geo.region" content="PK-PB">
+    <meta name="geo.placename" content="Burewala, Punjab, Pakistan">
+    <meta name="theme-color" content="#060712">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="canonical" href="https://proboy.vercel.app/sim">
+    
+    <title>ProBoy SIM Lookup – SIM Database Tool Generator | Free SIM Info & CNIC Tool by Shahan Ali (itx_proboy)</title>
+    <meta name="description" content="Free SIM Database Generator Tool by Shahan Ali (ProBoy). Generate SIM lookup tool, check SIM owner details, CNIC to SIM number, Pakistani SIM information. Easy to host & download.">
+    <meta name="keywords" content="SIM database, SIM lookup tool, Pakistani SIM info, SIM owner details, CNIC to SIM number, SIM database generator, ProBoy SIM, itx_proboy tools, SIM data Pakistan, PTA SIM information, Jazz SIM, Zong SIM, Telenor SIM, Ufone SIM, Warid SIM, SIM owner name, SIM number tracker, SIM database 2026, free SIM lookup, SIM info tool">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://proboy.vercel.app/sim-lookup-docs">
+    <meta property="og:title" content="ProBoy SIM Lookup – SIM Database & CNIC Tool Generator">
+    <meta property="og:description" content="Generate SIM database tool with ease. Check SIM owner details, CNIC information, and host your own SIM lookup system.">
+    <meta property="og:image" content="/img.png">
+    <meta property="og:site_name" content="ProBoy Official Tools">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ProBoy SIM Lookup – SIM Database Generator">
+    <meta name="twitter:description" content="Create your own SIM database tool. Free lookup, CNIC to SIM, owner details – made by Shahan Ali (itx_proboy).">
+    <meta name="twitter:image" content="/img.png">
+    <meta name="twitter:creator" content="@itx_proboy">
+
+    <!-- Schema.org / JSON-LD for WebApplication and Person -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ProBoy SIM Lookup Generator",
+      "description": "Generate a complete SIM database tool that allows users to check SIM owner details, CNIC to SIM mapping, Pakistani telecom data. Customizable and easy to host.",
+      "url": "https://proboy.vercel.app/sim-lookup-docs",
+      "author": {
+        "@type": "Person",
+        "name": "Shahan Ali",
+        "alternateName": ["ProBoy", "itx_proboy", "ProBoy315"],
+        "url": "https://proboy.vercel.app",
+        "sameAs": [
+          "https://github.com/ProBoy315",
+          "https://instagram.com/itx___proboy",
+          "https://tiktok.com/@itx_proboy",
+          "https://wa.me/923261684315"
+        ]
+      },
+      "applicationCategory": "Utility",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "featureList": "SIM database generation, CNIC to SIM number, SIM owner details lookup, Pakistani mobile networks (Jazz, Zong, Telenor, Ufone), free & open-source tool"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is SIM Database Generator by ProBoy?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It is a tool that lets you generate a complete SIM lookup system. You can enter a CNIC or phone number and get SIM owner details, network operator, and registration info. Created by Shahan Ali (itx_proboy)." }
+        },
+        {
+          "@type": "Question",
+          "name": "How to use the SIM Lookup generator?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Click 'Open Generator', then follow the instructions to generate your own SIM database tool. You can download and host it instantly." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is SIM database lookup legal in Pakistan?",
+          "acceptedAnswer": { "@type": "Answer", "text": "This tool is for educational and authorized use. Always comply with PTA regulations. ProBoy SIM tool is a demo generator for developers." }
+        }
+      ]
+    }
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root {
+            --bg: #060712; 
+            --surface: rgba(14, 18, 34, 0.84); 
+            --card-bg: rgba(13, 17, 31, 0.84);
+            --text: #f0f0ff; 
+            --text-secondary: #b9c2d8; 
+            --cyan: #24f2ff; 
+            --green: #8cffd2;
+            --pink: #ff4fb8; 
+            --gold: #ffd36e; 
+            --border: rgba(255,255,255,0.14); 
+            --radius: 18px;
+        }
+        *{ box-sizing: border-box; margin: 0; padding: 0; }
+        html{ scroll-behavior: smooth; }
+        body{
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            background: linear-gradient(115deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 100%),
+                        radial-gradient(circle at 12% 18%, rgba(36,242,255,0.20), transparent 28rem),
+                        radial-gradient(circle at 78% 14%, rgba(255,79,184,0.14), transparent 24rem),
+                        linear-gradient(180deg, #060712 0%, #081222 46%, #050713 100%);
+        }
+        .orb{ position: fixed; width: 420px; height: 420px; border-radius: 50%; filter: blur(90px); opacity: 0.16; pointer-events: none; z-index: 0; }
+        .orb.one{ background: var(--cyan); top: -120px; left: -120px; }
+        .orb.two{ background: var(--pink); right: -130px; bottom: -120px; }
+        .container{ width: min(1180px, calc(100% - 40px)); margin: 0 auto; position: relative; z-index: 1; }
+
+        /* navigation */
+        .nav{
+            position: sticky; top: 0; z-index: 10; background: rgba(6,7,18,0.76);
+            backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+        }
+        .nav-inner{ display: flex; align-items: center; justify-content: space-between; padding: 14px 0; flex-wrap: wrap; gap: 12px; }
+        .brand{
+            font-size: 1.55rem; font-weight: 900; text-decoration: none;
+            background: linear-gradient(90deg, var(--cyan), var(--green), var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .nav-links{ display: flex; gap: 20px; list-style: none; }
+        .nav-links a{ color: var(--text-secondary); text-decoration: none; font-weight: 650; transition: 0.2s; }
+        .nav-links a:hover{ color: white; text-shadow: 0 0 14px rgba(36,242,255,0.5); }
+
+        /* hero */
+        .hero{ padding: 70px 0 40px; text-align: center; }
+        .eyebrow{ display: inline-flex; align-items: center; gap: 8px; color: var(--cyan); font-size: 0.82rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; }
+        h1{ font-size: clamp(2.5rem, 7vw, 5rem); line-height: 1.02; font-weight: 950; margin: 18px 0; }
+        .gradient-text{ background: linear-gradient(100deg, var(--cyan), var(--green), var(--gold), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .lead{ max-width: 720px; margin: 0 auto; color: var(--text-secondary); font-size: 1.08rem; }
+
+        .btn{
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            min-height: 48px; padding: 13px 28px; border-radius: 999px; border: 0; font-weight: 850;
+            cursor: pointer; transition: transform 0.2s ease; text-decoration: none; background: rgba(255,255,255,0.05);
+            color: var(--text); border: 1px solid var(--border);
+        }
+        .btn:hover{ transform: translateY(-3px); background: rgba(36,242,255,0.1); }
+        .btn-primary{
+            background: linear-gradient(135deg, var(--cyan), var(--green), var(--gold));
+            color: #031014; border: none; box-shadow: 0 18px 46px rgba(36,242,255,0.28);
+        }
+        /* sections */
+        .section{ padding: 60px 0 40px; border-top: 1px solid var(--border); }
+        .section-title{ font-size: 2.2rem; font-weight: 800; margin-bottom: 28px; background: linear-gradient(120deg, #fff, var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .cards{ display: flex; flex-wrap: wrap; gap: 26px; justify-content: center; }
+        .card{ background: var(--card-bg); backdrop-filter: blur(8px); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; flex: 1 1 280px; transition: 0.2s; }
+        .card i{ font-size: 2.4rem; color: var(--cyan); margin-bottom: 16px; }
+        .card h3{ font-size: 1.5rem; margin-bottom: 12px; }
+        .card p{ color: var(--text-secondary); line-height: 1.5; }
+        .code-block{ background: #0a0c18; border-radius: 20px; padding: 18px; border-left: 4px solid var(--cyan); font-family: monospace; overflow-x: auto; margin: 24px 0; }
+        .footer{ margin-top: 60px; padding: 30px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-secondary); font-size: 0.85rem; }
+
+        .ad-section { text-align: center; margin: 2rem auto; max-width: 100%; overflow-x: auto; background: transparent; }
+        .ad-container { display: inline-block; margin: 0 auto; }
+
+        @media (max-width: 780px){
+            .nav-links{ display: none; }
+            .hero{ padding-top: 50px; text-align: center; }
+            .section-title{ font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="orb one"></div>
+<div class="orb two"></div>
+
+<nav class="nav">
+    <div class="container nav-inner">
+        <a href="/" class="brand">ProBoy SIM Docs</a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#sim-database">SIM DB Info</a></li>
+            <li><a href="#usage">How to Use</a></li>
+            <li><a href="#setup">Setup</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="container">
+        <span class="eyebrow"><i class="fas fa-database"></i> SIM DATABASE TOOL</span>
+        <h1>SIM Lookup <span class="gradient-text">Generator</span></h1>
+        <p class="lead">Generate a complete SIM database tool in seconds. Check SIM owner details, CNIC info, network operator (Jazz, Zong, Telenor, Ufone). Download & host on your own server.</p>
+        <div style="margin-top: 32px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="redirectToGenerator()">
+                <i class="fas fa-rocket"></i> Open Generator Now
+            </button>
+            <a href="#sim-database" class="btn"><i class="fas fa-info-circle"></i> Learn SIM Database</a>
+        </div>
+    </div>
+</header>
+
+<!-- Features Section -->
+<section id="features" class="section">
+    <div class="container">
+        <h2 class="section-title"><i class="fas fa-star" style="color: var(--gold);"></i> Key Features – SIM Lookup Tool</h2>
+        <div class="cards">
+            <div class="card"><i class="fas fa-id-card"></i><h3>CNIC to SIM</h3><p>Enter CNIC number and get all registered SIMs (Jazz, Zong, Telenor, Ufone).</p></div>
+            <div class="card"><i class="fas fa-phone-alt"></i><h3>SIM Owner Name</h3><p>Find owner name, address, activation date using mobile number.</p></div>
+            <div class="card"><i class="fas fa-network-wired"></i><h3>Network Operator</h3><p>Detect operator: Mobilink Jazz, Zong, Telenor, Ufone, Warid/PTCL.</p></div>
+            <div class="card"><i class="fas fa-file-export"></i><h3>One-Click Generator</h3><p>Generate full SIM database PHP/HTML tool and host immediately.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- SIM Database Info (rich content) -->
+<section id="sim-database" class="section">
+    <div class="container">
+        <h2 class="section-title"><i class="fas fa-chart-line"></i> SIM Database Pakistan – What is it?</h2>
+        <p style="font-size: 1.05rem; margin-bottom: 20px;">The SIM Database (also known as SIM Information System) is a record of all mobile SIMs issued in Pakistan by PTA (Pakistan Telecommunication Authority). Our <strong>ProBoy SIM Lookup Generator</strong> helps developers create a tool that mimics official SIM data lookup – ideal for education, verification systems, and authorized use. With this generator you can build a web app that shows:</p>
+        <ul style="margin-left: 28px; color: var(--text-secondary); display: flex; flex-direction: column; gap: 8px;">
+            <li><i class="fas fa-check-circle" style="color: var(--green);"></i> SIM owner full name & father's name</li>
+            <li><i class="fas fa-check-circle" style="color: var(--green);"></i> CNIC/NIC number associated with SIM</li>
+            <li><i class="fas fa-check-circle" style="color: var(--green);"></i> Mobile network operator (Jazz, Zong, Telenor, Ufone, Warid)</li>
+            <li><i class="fas fa-check-circle" style="color: var(--green);"></i> SIM activation date & status (active/inactive)</li>
+        </ul>
+        <div class="code-block">
+            <i class="fas fa-code"></i> Example API concept: <strong>SIM Lookup</strong> – input 923xxxxxxxxx → returns operator, owner name, CNIC masked.
+        </div>
+        <p>Our generator creates a complete front-end + back-end skeleton. <strong>itx_proboy (Shahan Ali)</strong> built this tool for developers & security researchers.</p>
+    </div>
+</section>
+
+<!-- Usage Section -->
+<section id="usage" class="section">
+    <div class="container">
+        <h2 class="section-title"><i class="fas fa-cogs"></i> How to Use SIM Database Generator</h2>
+        <div class="cards">
+            <div class="card"><i class="fas fa-mouse-pointer"></i><h3>1. Click "Open Generator"</h3><p>Redirects to the SIM Lookup generator interface by ProBoy.</p></div>
+            <div class="card"><i class="fas fa-sliders-h"></i><h3>2. Configure Options</h3><p>Choose database format (JSON/MySQL), design, and features.</p></div>
+            <div class="card"><i class="fas fa-download"></i><h3>3. Download Code</h3><p>Get full source code + installation guide, ready to deploy.</p></div>
+            <div class="card"><i class="fas fa-server"></i><h3>4. Host & Lookup</h3><p>Upload to your server & start checking SIM owner details instantly.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- Setup / Hosting -->
+<section id="setup" class="section">
+    <div class="container">
+        <h2 class="section-title"><i class="fas fa-terminal"></i> Host Your Own SIM Lookup Tool</h2>
+        <p>After generating your SIM database tool, follow these easy steps:</p>
+        <div class="code-block">
+            <pre style="background: transparent; color: var(--cyan);">1. Upload all files to your web host (Apache/Nginx).
+2. Configure the database connection (if any).
+3. Access index.php or index.html.
+4. Start searching SIM numbers & CNIC records.</pre>
+        </div>
+        <p>Need help? Contact <strong>Shahan Ali (itx_proboy)</strong> via WhatsApp: <a href="https://wa.me/923261684315" style="color: var(--cyan);">+923261684315</a> or check <a href="https://github.com/ProBoy315" style="color: var(--green);">GitHub/ProBoy315</a>.</p>
+    </div>
+</section>
+
+<!-- AD BLOCKS (sari scripts add ki gayi) -->
+<div class="ad-section">
+    <div class="ad-container">
+        <script>
+            atOptions = {
+                'key' : 'f5f96524f1d727a4af1abc9352c44df5',
+                'format' : 'iframe',
+                'height' : 60,
+                'width' : 468,
+                'params' : {}
+            };
+        </script>
+        <script src="https://www.highperformanceformat.com/f5f96524f1d727a4af1abc9352c44df5/invoke.js"></script>
+    </div>
+</div>
+
+<div class="ad-section">
+    <div class="ad-container">
+        <script src="https://pl29588704.effectivecpmnetwork.com/19/c8/73/19c8736edfa0b38cb1b3581f5687f321.js"></script>
+    </div>
+</div>
+
+<div class="ad-section">
+    <div class="ad-container">
+        <script src="https://www.effectivecpmnetwork.com/qh0tdzrqqs?key=68481c323c3954a976890daaff7d7e7f"></script>
+    </div>
+</div>
+
+<div class="ad-section">
+    <div class="ad-container">
+        <script async="async" data-cfasync="false" src="https://pl29588706.effectivecpmnetwork.com/5e5e3d1ed4a14a5cee3f81159a362567/invoke.js"></script>
+        <div id="container-5e5e3d1ed4a14a5cee3f81159a362567"></div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <p><i class="fas fa-copyright"></i> 2025 Shahan Ali (itx_proboy) – ProBoy SIM Tools. All rights reserved.</p>
+        <p style="margin-top: 12px;">
+            <a href="https://github.com/ProBoy315" style="color: var(--text-secondary); margin: 0 10px;"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://wa.me/923261684315" style="color: var(--text-secondary); margin: 0 10px;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="https://instagram.com/itx___proboy" style="color: var(--text-secondary); margin: 0 10px;"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="/" style="color: var(--text-secondary); margin: 0 10px;"><i class="fas fa-globe"></i> ProBoy Portfolio</a>
+        </p>
+        <p style="font-size: 0.7rem; margin-top: 16px;">Disclaimer: SIM Database tool for educational & authorized usage. Comply with PTA regulations.</p>
+    </div>
+</footer>
+
+<script>
+    // Generator URL – same as provided original
+    const generatorURL = "https://ProBoy-MD.gt.tc/o/sim.php";
+    function redirectToGenerator(){
+        window.location.href = generatorURL;
+    }
+</script>
+
+<!-- ========== SEO HIDDEN KEYWORD BLOCK (SIM Database + Brand) ========== -->
+<div class="seo-hidden" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none;" aria-hidden="true">
+    <div>
+        <p><strong>SIM Database Pakistan</strong> – Complete SIM information system by PTA, SIM owner details, CNIC to SIM number lookup.</p>
+        <p><strong>SIM Lookup Tool ProBoy</strong> – Free generator created by Shahan Ali (itx_proboy). Check Jazz, Zong, Telenor, Ufone numbers.</p>
+        <p><strong>SIM Database 2026</strong> – Latest sim data tool with owner name, address, activation date.</p>
+        <p><strong>CNIC to SIM Number</strong> – Get all mobile numbers registered against a CNIC. Useful for biometric verification.</p>
+        <p><strong>itx_proboy SIM Tool</strong> – Developed by Shahan Ali (ProBoy315). WhatsApp +923261684315 for custom bots.</p>
+        <p><strong>Pakistani SIM Database</strong> – Online SIM information system, owner name checker, SIM database generator free.</p>
+        <p><strong>How to check SIM owner details</strong> – Use ProBoy SIM lookup tool. Fast, accurate, demo source code.</p>
+        <p><strong>Jazz SIM owner name</strong> – Find Jazz/Zong/Telenor SIM registration info. Database tool for developers.</p>
+        <p><strong>ProBoy MD SIM Lookup</strong> – Part of ProBoy WhatsApp bot ecosystem. SIM info via API.</p>
+        <p><strong>SIM database download</strong> – Generate your own SIM information system with one click. Host locally.</p>
+        <p><strong>PTA SIM info system</strong> – Alternative SIM database tool for educational use. Authorized for researchers.</p>
+        <p><strong>Shahan Ali SIM generator</strong> – Full-stack developer from Burewala, Pakistan. Expert in bot creation & SIM utilities.</p>
+        <p><strong>923261684315 SIM tool contact</strong> – Direct WhatsApp number for queries about SIM database generator.</p>
+        <p><strong>CNIC number sim information</strong> – Retrieve all SIMs on a CNIC using generated tool. Privacy-focused demo.</p>
+        <p><strong>SIM database API Pakistan</strong> – Build your own API with ProBoy generator. Supports JSON output.</p>
+        <p><strong>itx_proboy GitHub SIM</strong> – Open source contributions for SIM lookup, WhatsApp bot, and web tools.</p>
+        <p><strong>Free SIM database script</strong> – PHP/HTML script to display SIM owner, network, and activation.</p>
+        <p><strong>Zong SIM owner name check</strong> – Using our SIM lookup tool, get Zong SIM registration details.</p>
+        <p><strong>Telenor SIM information system</strong> – Telenor number details, owner name, CNIC verification.</p>
+        <p><strong>Ufone SIM owner lookup</strong> – Fast search for Ufone SIM data. Demo system by ProBoy.</p>
+        <p><strong>Pakistan SIM database 2025-2026</strong> – Updated tool with all major operators: Jazz, Zong, Telenor, Ufone, Warid.</p>
+        <p><strong>How to create SIM database tool</strong> – Step by step guide by Shahan Ali. Use generator link above.</p>
+        <p><strong>SIM owner details script</strong> – Download ready-to-use code. Mobile number input returns owner info.</p>
+        <p><strong>ProBoy315 SIM utilities</strong> – Developer portfolio includes SIM lookup, WhatsApp bot, Shopify solutions.</p>
+        <p><strong>Burewala developer SIM tool</strong> – Local Pakistani developer Shahan Ali provides free SIM database generator.</p>
+        <p><strong>SIM information by CNIC without PTA</strong> – Educational demo tool; for legal use only.</p>
+        <p><strong>itx_proboy documentation SIM</strong> – Official docs for SIM lookup generator. Easy setup and deploy.</p>
+        <p><strong>+92 326 1684315 SIM database help</strong> – Contact Shahan for custom SIM database projects and WhatsApp bots.</p>
+        <p><strong>Mobile number owner details Pakistan</strong> – Find name and network using ProBoy SIM Lookup.</p>
+        <p><strong>CNIC SIM check online</strong> – Generate your own online checking tool with our generator.</p>
+        <p><strong>Open source SIM database</strong> – GitHub repository style. ProBoy SIM generator open for learning.</p>
+        <p><strong>Shahan Ali CNIC to SIM tool</strong> – Trusted by developers. Download the generator now.</p>
+        <p><strong>SIM information script free download</strong> – No payment required. Pure educational resource.</p>
+        <p><strong>itx_proboy portfolio SIM lookup</strong> – Additional tool from the creator of ProBoy MD WhatsApp bot.</p>
+        <p><strong>Real time SIM owner name finder</strong> – Demo by ProBoy, works with sample database structure.</p>
+        <p><strong>Pakistan mobile SIM database script PHP</strong> – Full source after clicking generator.</p>
+        <p><strong>Jazz SIM number details</strong> – Check any Jazz number's registered owner using the system.</p>
+        <p><strong>Zong mobile SIM info</strong> – Fast lookup tool included in generator package.</p>
+        <p><strong>Telenor owner name by number</strong> – Feature of ProBoy SIM Database system.</p>
+        <p><strong>Ufone SIM data check</strong> – Included network detection.</p>
+        <p><strong>Warid/PTCL SIM details</strong> – Complete coverage of all Pakistani operators.</p>
+        <p><strong>SIM database vs PTA complaint</strong> – For learning and compliance.</p>
+        <p><strong>How to host SIM lookup tool</strong> – Free hosting guide within documentation.</p>
+        <p><strong>ProBoy MD bot SIM feature</strong> – WhatsApp bot can integrate SIM database commands.</p>
+        <p><strong>Shahan Ali full-stack dev SIM</strong> – Extra utility showcasing coding skills.</p>
+        <p><strong>SIM lookup tutorial 2026</strong> – Latest update by itx_proboy.</p>
+        <p><strong>pakistani sim database site:proboy.vercel.app</strong> – Indexed documentation.</p>
+        <p><strong>sim database generator link active</strong> – Click Open Generator to access sim.php tool.</p>
+        <p><strong>itx_proboy official website SIM tools</strong> – One stop for developer utilities.</p>
+        <p><strong>CNIC number se SIM maloom karein</strong> – Urdu support in generated tool.</p>
+        <p><strong>free mein SIM database kaise banayein</strong> – Use ProBoy generator aasan steps.</p>
+        <p><strong>ProBoy SIM owner lookup demo</strong> – Live working model after generation.</p>
+        <p><strong>SIM Database API key generator</strong> – Included in the package.</p>
+        <p><strong>verify SIM owner name by number</strong> – Educational simulation by ProBoy.</p>
+        <p><strong>mobile number tracker Pakistan SIM</strong> – Owner details utility for developers.</p>
+        <p><strong>Shahan Ali projects SIM database</strong> – Part of portfolio of proboy315.</p>
+        <p><strong>SIM database WhatsApp bot integration</strong> – Contact +923261684315 for custom bots.</p>
+        <p><strong>Jazz Zong Telenor Ufone SIM lookup</strong> – All networks in one generator.</p>
+        <p><strong>proboy315 sim database generator</strong> – GitHub repo available upon request.</p>
+        <p><strong>SIM information system code</strong> – Fully responsive and mobile-friendly design.</p>
+        <p><strong>how to get SIM owner details using CNIC</strong> – Step-by-step inside tool.</p>
+        <p><strong>itx_proboy contact for sim tool</strong> – WhatsApp +923261684315, Instagram @itx___proboy.</p>
+        <p><strong>Pakistan SIM data 2026 latest</strong> – Regular updates by ProBoy team.</p>
+        <p><strong>SIM lookup tool without ads</strong> – clean interface, generator yields ad-free version.</p>
+        <p><strong>Shahan Ali Burewala SIM tool developer</strong> – Local expert in telecom utilities.</p>
+        <p><strong>sim database free code download</strong> – Click Open Generator and get full package.</p>
+        <p><strong>ProBoy MD bot sim command</strong> – Ask developer for details.</p>
+        <p><strong>itx*_proboy sim database project</strong> – Recognized by portfolio.</p>
+        <p><strong>SIM owner check via mobile number Pakistan</strong> – Accurate demo system.</p>
+        <p><strong>CNIC to SIM number list generator</strong> – Generate php script to fetch records.</p>
+        <p><strong>SIM database Pakistan free for developers</strong> – ProBoy initiative.</p>
+        <p><strong>total sims on a cnic</strong> – Tool shows count and network list.</p>
+        <p><strong>open source sim information system</strong> – Host your own version now.</p>
+        <p><strong>ProBoy SIM generator reliability</strong> – Trusted by 1000+ users.</p>
+        <p><strong>how to install sim lookup script</strong> – Video tutorial available on request.</p>
+        <p><strong>latest sim database 2026 by itx_proboy</strong> – Complete package with documentation.</p>
+    </div>
+</div>
+</body>
+</html>
